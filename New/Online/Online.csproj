@@ -1,0 +1,1498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{70360F72-A110-4A95-80E6-ED28DA683297}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Online</RootNamespace>
+    <AssemblyName>Online</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Sharepoint.2013.Client.16.1.0.0\lib\Microsoft.SharePoint.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Sharepoint.2013.Client.16.1.0.0\lib\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Administration\CodeBuilder.aspx" />
+    <Content Include="Administration\CodeBuilder.css" />
+    <Content Include="Administration\CodeGenerator.aspx" />
+    <Content Include="Administration\ImportExcel.aspx" />
+    <Content Include="Cemetery\Archive\Entry.aspx" />
+    <Content Include="Cemetery\Data.asmx" />
+    <Content Include="Cemetery\DataMatching\reports.aspx" />
+    <Content Include="Cemetery\DataMatching\SextonPlots.aspx" />
+    <Content Include="CommunityContract\Application.aspx" />
+    <Content Include="CommunityContract\ApplicationHelp.html" />
+    <Content Include="CommunityContract\ApplicationList.aspx" />
+    <Content Include="CommunityContract\data.aspx" />
+    <Content Include="CommunityContract\ApplicationEmail.html" />
+    <Content Include="CommunityContract\ApplicationScreen.html" />
+    <Content Include="CommunityContract\loginassistancehelp.html" />
+    <Content Include="CommunityContract\LoginAssistancePasswordResetEmail.html" />
+    <Content Include="CommunityContract\LoginAssistanceSendUsernameEmail.html" />
+    <Content Include="CommunityContract\GroupDetailsEmail.html" />
+    <Content Include="CommunityContract\GroupDetailsScreen.html" />
+    <Content Include="CommunityContract\LoginAssistance.aspx" />
+    <Content Include="CommunityContract\default.aspx" />
+    <Content Include="CommunityContract\DefaultHelp.html" />
+    <Content Include="CommunityContract\GroupDetailsHelp.html" />
+    <Content Include="CommunityContract\GroupDetails.aspx" />
+    <Content Include="CommunityContract\login.aspx" />
+    <Content Include="CommunityContract\logout.aspx" />
+    <Content Include="CommunityContract\Posts.asmx" />
+    <Content Include="CommunityContract\register.aspx" />
+    <Content Include="CommunityContract\RegisterHelp.html" />
+    <Content Include="CommunityContract\ResetPassword.aspx" />
+    <Content Include="CommunityContract\review.aspx" />
+    <Content Include="EmailTemplate\wmc_Standard.html" />
+    <Content Include="Entity\account.aspx" />
+    <Content Include="Entity\login.aspx" />
+    <Content Include="FCP\FoodBusinessRegistrationEmail.html" />
+    <Content Include="FCP\FoodBusinessRegistration.aspx" />
+    <Content Include="FCP\FoodBusinessRegistration.html" />
+    <Content Include="FCP\FoodBusinessRegistrationScreen.html" />
+    <Content Include="General\FireSafetyReferral.html" />
+    <Content Include="General\FireSafetyReferral.aspx" />
+    <Content Include="General\FireSafetyReferralEmail.html" />
+    <Content Include="General\FireSafetyReferralScreen.html" />
+    <Content Include="General\StockGrazing.aspx" />
+    <Content Include="General\StockGrazingEmail.html" />
+    <Content Include="General\StockGrazingHelp.html" />
+    <Content Include="General\StockGrazingScreen.html" />
+    <Content Include="HealthPremiseRegistration\HealthPremiseRegistrationEmail.html" />
+    <Content Include="HealthPremiseRegistration\HealthPremiseRegistrationHelp.html" />
+    <Content Include="HealthPremiseRegistration\HealthPremiseRegistrationScreen.html" />
+    <Content Include="HealthPremiseRegistration\HealthPremiseRegistration.aspx" />
+    <Content Include="Images\processing_16x16.gif" />
+    <Content Include="Images\Question.png" />
+    <Content Include="Images\QuestionOriginal.png" />
+    <Content Include="Images\QuestionNavBar.png" />
+    <Content Include="Images\QuestionSmall.png" />
+    <Content Include="Images\questionX.png" />
+    <Content Include="Images\questionsmallX.png" />
+    <Content Include="LIM\LIMRequestHelp.html" />
+    <Content Include="LIM\LimRequestScreen.html" />
+    <Content Include="LIM\LIMRequest.aspx" />
+    <Content Include="LIM\LimRequestEmail.html" />
+    <Content Include="Mapping\ShowFile.aspx" />
+    <Content Include="MarketFoodStallLicence\MarketFoodStallLicence.aspx" />
+    <Content Include="MarketFoodStallLicence\MarketFoodStallLicenceEmail.html" />
+    <Content Include="MarketFoodStallLicence\MarketFoodStallLicenceHelp.html" />
+    <Content Include="MarketFoodStallLicence\MarketFoodStallLicenceScreen.html" />
+    <Content Include="message.aspx" />
+    <Content Include="MobileShopLicence\fields.xlsx" />
+    <Content Include="MobileShopLicence\MobileShopLicenceEmail_13Sep2016.html" />
+    <Content Include="MobileShopLicence\MobileShopLicenceScreen_13Sep2016.html" />
+    <Content Include="MobileShopLicence\MobileShopLicence_13Sep2016.aspx" />
+    <Content Include="Payment\Complete.aspx" />
+    <Content Include="RID\RID.aspx" />
+    <Content Include="ruth.aspx" />
+    <Content Include="Scripts\Autosize\autosize.js" />
+    <Content Include="Scripts\Autosize\autosize.min.js" />
+    <Content Include="Scripts\Autosize\index.html" />
+    <Content Include="Scripts\CascadingDropdown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Scripts\fullcalendar\CHANGELOG.txt" />
+    <Content Include="Scripts\fullcalendar\CONTRIBUTING.txt" />
+    <Content Include="Scripts\fullcalendar\datePicker\css\datepicker.css" />
+    <Content Include="Scripts\fullcalendar\datePicker\css\datepicker.min.css" />
+    <Content Include="Scripts\fullcalendar\datePicker\css\demo.css" />
+    <Content Include="Scripts\fullcalendar\datePicker\index.html" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\datepicker.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\datepicker.min.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\ar.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\cs.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\da.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\de.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\en-US.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\en.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\eo.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\es-MX.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\es.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\et.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\fi.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\fr.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\he.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\hu.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\id.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\it.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\kr.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\lt.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\lv.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\nl.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\no.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\pl.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\pt-br.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\pt.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\ru.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\se.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\si.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\sk.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\th.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\tr.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\zh.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\language\index.html" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-cursor.jpg" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-disabled.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-focused.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-gradient.gif" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-normal.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-selected.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-sprite.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-today.gif" />
+    <Content Include="Scripts\fullcalendar\datePicker\README.txt" />
+    <Content Include="Scripts\fullcalendar\demos\agenda-views.html" />
+    <Content Include="Scripts\fullcalendar\demos\background-events.html" />
+    <Content Include="Scripts\fullcalendar\demos\basic-views.html" />
+    <Content Include="Scripts\fullcalendar\demos\default.html" />
+    <Content Include="Scripts\fullcalendar\demos\external-dragging.html" />
+    <Content Include="Scripts\fullcalendar\demos\gcal.html" />
+    <Content Include="Scripts\fullcalendar\demos\json.html" />
+    <Content Include="Scripts\fullcalendar\demos\jsonGreg.html" />
+    <Content Include="Scripts\fullcalendar\demos\languages.html" />
+    <Content Include="Scripts\fullcalendar\demos\selectable.html" />
+    <Content Include="Scripts\fullcalendar\demos\theme.html" />
+    <Content Include="Scripts\fullcalendar\demos\timezones.html" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Scripts\fullcalendar\gcal.js" />
+    <Content Include="Scripts\fullcalendar\lang-all.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-tn.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar.js" />
+    <Content Include="Scripts\fullcalendar\lang\bg.js" />
+    <Content Include="Scripts\fullcalendar\lang\ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\cs.js" />
+    <Content Include="Scripts\fullcalendar\lang\da.js" />
+    <Content Include="Scripts\fullcalendar\lang\de-at.js" />
+    <Content Include="Scripts\fullcalendar\lang\de.js" />
+    <Content Include="Scripts\fullcalendar\lang\el.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-au.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-gb.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-ie.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-nz.js" />
+    <Content Include="Scripts\fullcalendar\lang\es.js" />
+    <Content Include="Scripts\fullcalendar\lang\fa.js" />
+    <Content Include="Scripts\fullcalendar\lang\fi.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr-ch.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr.js" />
+    <Content Include="Scripts\fullcalendar\lang\he.js" />
+    <Content Include="Scripts\fullcalendar\lang\hi.js" />
+    <Content Include="Scripts\fullcalendar\lang\hr.js" />
+    <Content Include="Scripts\fullcalendar\lang\hu.js" />
+    <Content Include="Scripts\fullcalendar\lang\id.js" />
+    <Content Include="Scripts\fullcalendar\lang\is.js" />
+    <Content Include="Scripts\fullcalendar\lang\it.js" />
+    <Content Include="Scripts\fullcalendar\lang\ja.js" />
+    <Content Include="Scripts\fullcalendar\lang\ko.js" />
+    <Content Include="Scripts\fullcalendar\lang\lt.js" />
+    <Content Include="Scripts\fullcalendar\lang\lv.js" />
+    <Content Include="Scripts\fullcalendar\lang\nb.js" />
+    <Content Include="Scripts\fullcalendar\lang\nl.js" />
+    <Content Include="Scripts\fullcalendar\lang\pl.js" />
+    <Content Include="Scripts\fullcalendar\lang\pt-br.js" />
+    <Content Include="Scripts\fullcalendar\lang\pt.js" />
+    <Content Include="Scripts\fullcalendar\lang\ro.js" />
+    <Content Include="Scripts\fullcalendar\lang\ru.js" />
+    <Content Include="Scripts\fullcalendar\lang\sk.js" />
+    <Content Include="Scripts\fullcalendar\lang\sl.js" />
+    <Content Include="Scripts\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Scripts\fullcalendar\lang\sr.js" />
+    <Content Include="Scripts\fullcalendar\lang\sv.js" />
+    <Content Include="Scripts\fullcalendar\lang\th.js" />
+    <Content Include="Scripts\fullcalendar\lang\uk.js" />
+    <Content Include="Scripts\fullcalendar\lang\vi.js" />
+    <Content Include="Scripts\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Scripts\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Scripts\fullcalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\moment.min.js" />
+    <Content Include="Scripts\fullcalendar\LICENSE.txt" />
+    <Content Include="Scripts\IFrameResizer\iframeResizer.contentWindow.min.js" />
+    <Content Include="Scripts\IFrameResizer\iframeResizer.min.js" />
+    <Content Include="Scripts\MaxLengthKW\jquery.maxlength-fr.js" />
+    <Content Include="Scripts\MaxLengthKW\jquery.maxlength.css" />
+    <Content Include="Scripts\MaxLengthKW\jquery.maxlength.js" />
+    <Content Include="Scripts\MaxLengthKW\jquery.maxlength.min.js" />
+    <Content Include="Scripts\MaxLengthKW\jquery.plugin.js" />
+    <Content Include="Scripts\MaxLengthKW\jquery.plugin.min.js" />
+    <Content Include="Scripts\MaxLengthKW\maxlengthBasic.html" />
+    <Content Include="Scripts\MaxLength\Example\index.html" />
+    <Content Include="Scripts\MaxLength\Example\main.css" />
+    <Content Include="Scripts\MaxLength\Example\main.js" />
+    <Content Include="Scripts\MaxLength\MaxLength.js" />
+    <Content Include="Scripts\numeric\Example.html" />
+    <Content Include="Scripts\numeric\numeric.js" />
+    <Content Include="Scripts\odatajs\odatajs-4.0.0.js" />
+    <Content Include="Scripts\odatajs\odatajs-4.0.0.min.js" />
+    <Content Include="Scripts\pwstrength-bootstrap.min.js" />
+    <Content Include="Scripts\snippets.js" />
+    <Content Include="Scripts\wdc.js" />
+    <Content Include="Scripts\WDC\populate.js" />
+    <Content Include="Scripts\WDC\showfields.js" />
+    <Content Include="SQL\Permissions.sql" />
+    <Content Include="SQL\Get_WMC_Calendar.sql" />
+    <Content Include="SQL\SQLLogQuery.sql" />
+    <Content Include="SQL\SQLLogRebuidSP.SQL" />
+    <Content Include="SQL\WS\Update_WMC_Booking.sql" />
+    <Content Include="SQL\XMLTesting.sql" />
+    <Content Include="TestAndPlay\ajax-mocks.js" />
+    <Content Include="TestAndPlay\bar1.aspx" />
+    <Content Include="TestAndPlay\bar2.aspx" />
+    <Content Include="TestAndPlay\bar3.aspx" />
+    <Content Include="TestAndPlay\BC1.aspx" />
+    <Content Include="TestAndPlay\BootStrapAccordian1.aspx" />
+    <Content Include="TestAndPlay\C1.aspx" />
+    <Content Include="TestAndPlay\c2.aspx" />
+    <Content Include="TestAndPlay\c99.aspx" />
+    <Content Include="TestAndPlay\cascadinggropdown1.html" />
+    <Content Include="TestAndPlay\cascadinggropdown2.aspx" />
+    <Content Include="TestAndPlay\Charities1.aspx" />
+    <Content Include="TestAndPlay\Charities2.aspx" />
+    <Content Include="TestAndPlay\css1.html" />
+    <Content Include="TestAndPlay\DatePicker5.aspx" />
+    <Content Include="TestAndPlay\DatePickerTable1.aspx" />
+    <Content Include="TestAndPlay\dialogmodal1.aspx" />
+    <Content Include="TestAndPlay\dialogmodal2.aspx" />
+    <Content Include="TestAndPlay\documentfill1.aspx" />
+    <Content Include="TestAndPlay\documentfill1.html" />
+    <Content Include="TestAndPlay\FileUpload1.aspx" />
+    <Content Include="TestAndPlay\FullCalendar1.html" />
+    <Content Include="TestAndPlay\HtmlPage1.html" />
+    <Content Include="TestAndPlay\inlinefunction1.aspx" />
+    <Content Include="TestAndPlay\json1.aspx" />
+    <Content Include="TestAndPlay\listtodict1.aspx" />
+    <Content Include="TestAndPlay\MaxLength1.aspx" />
+    <Content Include="TestAndPlay\nestedclass1.aspx" />
+    <Content Include="TestAndPlay\NestedList2.aspx" />
+    <Content Include="TestAndPlay\PassHTML1.aspx" />
+    <Content Include="TestAndPlay\processing1.aspx" />
+    <Content Include="TestAndPlay\propertyselect1.aspx" />
+    <Content Include="TestAndPlay\pwstrength1.aspx" />
+    <Content Include="TestAndPlay\Repeater1.aspx" />
+    <Content Include="TestAndPlay\RepeaterDocument1.aspx" />
+    <Content Include="TestAndPlay\slider1.aspx" />
+    <Content Include="TestAndPlay\topright1.aspx" />
+    <Content Include="TestAndPlay\Upload2.aspx" />
+    <Content Include="TestAndPlay\validatedynamicgroup.aspx" />
+    <Content Include="TestAndPlay\validation2.aspx" />
+    <Content Include="TestAndPlay\WebForm1.aspx" />
+    <Content Include="TestAndPlay\xml1.aspx" />
+    <Content Include="User\Login.aspx" />
+    <Content Include="WMC\banner-image.png" />
+    <Content Include="WMC\BookingEnquiry.aspx" />
+    <Content Include="WMC\FeedbackHelp.html" />
+    <Content Include="WMC\BookingEnquiryHelp.html" />
+    <Content Include="WMC\bootstrap.js" />
+    <Content Include="WMC\Calendar.aspx" />
+    <Content Include="WMC\completed.aspx" />
+    <Content Include="WMC\favicon.ico" />
+    <Content Include="WMC\BookingEmail.html" />
+    <Content Include="WMC\BookingScreen.html" />
+    <Content Include="WMC\Feedback.aspx" />
+    <Content Include="WMC\FeedbackSlider.aspx" />
+    <Content Include="WMC\Home.aspx" />
+    <Content Include="WMC\jcarousel.js" />
+    <Content Include="WMC\jquery.js" />
+    <Content Include="WMC\modernizr.js" />
+    <Content Include="WMC\styling.css" />
+    <Content Include="WMC\TermsandConditions.html" />
+    <Content Include="WMC\warmemorial.js" />
+    <Content Include="WMF\WMF.aspx" />
+    <Content Include="Administration\fields.xlsx" />
+    <Content Include="Documentation\Status.xlsx" />
+    <None Include="Properties\PublishProfiles\LocalHostProduction.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalHost.pubxml" />
+    <None Include="Properties\PublishProfiles\ProductionServer.pubxml" />
+    <None Include="Properties\PublishProfiles\ProductionServerTEST.pubxml" />
+    <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="TestAndPlay\bootstrapdatepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="TestAndPlay\bootstrapdatepicker\moment.js" />
+    <Content Include="TestAndPlay\datepicker2.aspx" />
+    <Content Include="TestAndPlay\fm.datetator.jquery.css" />
+    <Content Include="TestAndPlay\bootstrapdatepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\fullcalendar\demos\json\events.json" />
+    <Content Include="Scripts\fullcalendar\demos\php\calendar.json" />
+    <Content Include="Scripts\fullcalendar\demos\php\get-events.php" />
+    <Content Include="Scripts\fullcalendar\demos\php\get-timezones.php" />
+    <Content Include="Scripts\fullcalendar\demos\php\utils.php" />
+    <Content Include="Scripts\odatajs\odatajs-4.0.0.map" />
+    <Content Include="Scripts\CascadingDropdown\jquery.cascadingdropdown.min.js.map" />
+    <None Include="Web.LocalHost.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.ProductionServer.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.ProductionServerTEST.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Completed\default.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="EmailTemplate\Standard.html" />
+    <Content Include="Entity\body.html" />
+    <Content Include="Entity\Entity.aspx" />
+    <Content Include="Entity\EntityHelp.html" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Functions\Data.asmx" />
+    <Content Include="Functions\Posts.asmx" />
+    <Content Include="Functions\PropertySelect.aspx" />
+    <Content Include="Scripts\datepicker\calendar-blue.gif" />
+    <Content Include="Scripts\datepicker\calendar-green.gif" />
+    <Content Include="Scripts\datepicker\calendar.gif" />
+    <Content Include="Scripts\datepicker\datepickBasic.html" />
+    <Content Include="Scripts\datepicker\flora.datepick.css" />
+    <Content Include="Scripts\datepicker\humanity.datepick.css" />
+    <Content Include="Scripts\datepicker\jquery.datepick-af.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-am.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ar-DZ.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ar-EG.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ar.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-az.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-bg.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-bs.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ca.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-cs.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-da.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-de-CH.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-de.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-el.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-en-AU.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-en-GB.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-en-NZ.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-eo.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-es-AR.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-es-PE.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-es.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-et.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-eu.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fa.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fi.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fo.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fr-CH.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-gl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-gu.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-he.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hi-IN.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hi.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hu.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hy.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-id.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-is.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-it.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ja.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ka.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-km.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ko.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-lt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-lv.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-me-ME.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-me.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-mk.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ml.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ms.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-mt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-nl-BE.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-nl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-no.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-pl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-pt-BR.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-pt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-rm.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ro.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ru.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sk.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sq.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sr-SR.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sv.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ta.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-th.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-tr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-tt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-uk.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ur.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-vi.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-zh-CN.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-zh-HK.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-zh-TW.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.css" />
+    <Content Include="Scripts\datepicker\jquery.datepick.ext.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.ext.min.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.lang.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.lang.min.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.min.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.validation.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.validation.min.js" />
+    <Content Include="Scripts\datepicker\jquery.plugin.js" />
+    <Content Include="Scripts\datepicker\jquery.plugin.min.js" />
+    <Content Include="Scripts\datepicker\redmond.datepick.css" />
+    <Content Include="Scripts\datepicker\smoothness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-black-tie.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-blitzer.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-cupertino.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-dark-hive.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-dot-luv.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-eggplant.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-excite-bike.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-flick.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-hot-sneaks.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-humanity.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-le-frog.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-mint-choc.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-overcast.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-pepper-grinder.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-redmond.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-smoothness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-south-street.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-start.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-sunny.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-swanky-purse.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-trontastic.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-ui-darkness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-ui-lightness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-vader.datepick.css" />
+    <Content Include="Scripts\datepicker\ui.datepick.css" />
+    <Content Include="Test.aspx" />
+    <Content Include="Home.aspx" />
+    <Content Include="Images\calendar.png" />
+    <Content Include="Images\WDClogo.png" />
+    <Content Include="InvoicePayment\InvoicePayment.aspx" />
+    <Content Include="InvoicePayment\InvoicePaymentEmail.html" />
+    <Content Include="InvoicePayment\InvoicePaymentHelp.html" />
+    <Content Include="InvoicePayment\InvoicePaymentScreen.html" />
+    <Content Include="Mapping\GetLocation.aspx" />
+    <Content Include="Mapping\GetLocationHelp.html" />
+    <Content Include="Mapping\ShowLocation.aspx" />
+    <Content Include="MobileShopLicence\MobileShopLicence.aspx" />
+    <Content Include="MobileShopLicence\MobileShopLicenceEmail.html" />
+    <Content Include="MobileShopLicence\MobileShopLicenceHelp.html" />
+    <Content Include="MobileShopLicence\MobileShopLicenceScreen.html" />
+    <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Payment\default.aspx" />
+    <Content Include="Payment\Failure.html" />
+    <Content Include="Payment\General.aspx" />
+    <Content Include="Payment\Invoice.html" />
+    <Content Include="Payment\Maintain.aspx" />
+    <Content Include="Payment\MaintainHelp.html" />
+    <Content Include="Payment\Success.html" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\colorbox\Images\Thumbs.db" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Scripts\colorbox\colorbox.css" />
+    <Content Include="Scripts\colorbox\Images\border.png" />
+    <Content Include="Scripts\colorbox\Images\controls.png" />
+    <Content Include="Scripts\colorbox\Images\loading.gif" />
+    <Content Include="Scripts\colorbox\Images\loading_background.png" />
+    <Content Include="Scripts\colorbox\Images\overlay.png" />
+    <Content Include="Scripts\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-light.css" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-noir.css" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-punk.css" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-shadow.css" />
+    <Content Include="Scripts\ToolTipster\css\tooltipster.css" />
+    <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.js" />
+    <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.min.js" />
+    <Content Include="TestAndPlay\AJAXGetPost1.aspx" />
+    <Content Include="TestAndPlay\ajaxpost2.aspx" />
+    <Content Include="TestAndPlay\calendar1.aspx" />
+    <Content Include="TestAndPlay\datepicker1.aspx" />
+    <Content Include="TestAndPlay\DatePicker3.aspx" />
+    <Content Include="TestAndPlay\DatePicker4.aspx" />
+    <Content Include="TestAndPlay\domSaveRestore.aspx" />
+    <Content Include="TestAndPlay\dummy.aspx" />
+    <Content Include="TestAndPlay\ajaxpost1.aspx" />
+    <Content Include="TestAndPlay\fm.datetator.jquery.js" />
+    <Content Include="TestAndPlay\Functions\Data1.asmx" />
+    <Content Include="TestAndPlay\Functions\DataTest.asmx" />
+    <Content Include="TestAndPlay\NZPost1.aspx" />
+    <Content Include="TestAndPlay\passvariable1.aspx" />
+    <Content Include="TestAndPlay\RelativeFolders1.aspx" />
+    <Content Include="TestAndPlay\servermap1.aspx" />
+    <Content Include="TestAndPlay\SPA1.aspx" />
+    <Content Include="TestAndPlay\SPA2.aspx" />
+    <Content Include="TestAndPlay\SPA3.aspx" />
+    <Content Include="TestAndPlay\SPA4.aspx" />
+    <Content Include="TestAndPlay\SPA4A.html" />
+    <Content Include="TestAndPlay\SPA4B.html" />
+    <Content Include="TestAndPlay\SPA5.aspx" />
+    <Content Include="TestAndPlay\SPA5.html" />
+    <Content Include="TestAndPlay\Upload1.aspx" />
+    <Content Include="TestAndPlay\Validation1.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administration\CodeBuilder.aspx.cs">
+      <DependentUpon>CodeBuilder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\CodeBuilder.aspx.designer.cs">
+      <DependentUpon>CodeBuilder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\CodeGenerator.aspx.cs">
+      <DependentUpon>CodeGenerator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\CodeGenerator.aspx.designer.cs">
+      <DependentUpon>CodeGenerator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\ImportExcel.aspx.cs">
+      <DependentUpon>ImportExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\ImportExcel.aspx.designer.cs">
+      <DependentUpon>ImportExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cemetery\Archive\Entry.aspx.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cemetery\Archive\Entry.aspx.designer.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cemetery\Data.asmx.cs">
+      <DependentUpon>Data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Cemetery\DataMatching\reports.aspx.cs">
+      <DependentUpon>reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cemetery\DataMatching\reports.aspx.designer.cs">
+      <DependentUpon>reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cemetery\DataMatching\SextonPlots.aspx.cs">
+      <DependentUpon>SextonPlots.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cemetery\DataMatching\SextonPlots.aspx.designer.cs">
+      <DependentUpon>SextonPlots.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\Application.aspx.cs">
+      <DependentUpon>Application.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\Application.aspx.designer.cs">
+      <DependentUpon>Application.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\ApplicationList.aspx.cs">
+      <DependentUpon>ApplicationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\ApplicationList.aspx.designer.cs">
+      <DependentUpon>ApplicationList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\LoginAssistance.aspx.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\LoginAssistance.aspx.designer.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\GroupDetails.aspx.cs">
+      <DependentUpon>GroupDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\GroupDetails.aspx.designer.cs">
+      <DependentUpon>GroupDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CommunityContract\review.aspx.cs">
+      <DependentUpon>review.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommunityContract\review.aspx.designer.cs">
+      <DependentUpon>review.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Completed\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Completed\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\account.aspx.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\account.aspx.designer.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Entity.aspx.cs">
+      <DependentUpon>Entity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\Entity.aspx.designer.cs">
+      <DependentUpon>Entity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FCP\FoodBusinessRegistration.aspx.cs">
+      <DependentUpon>FoodBusinessRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FCP\FoodBusinessRegistration.aspx.designer.cs">
+      <DependentUpon>FoodBusinessRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\Data.asmx.cs">
+      <DependentUpon>Data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Functions\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Functions\PropertySelect.aspx.cs">
+      <DependentUpon>PropertySelect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\PropertySelect.aspx.designer.cs">
+      <DependentUpon>PropertySelect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\FireSafetyReferral.aspx.cs">
+      <DependentUpon>FireSafetyReferral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FireSafetyReferral.aspx.designer.cs">
+      <DependentUpon>FireSafetyReferral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\StockGrazing.aspx.cs">
+      <DependentUpon>StockGrazing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\StockGrazing.aspx.designer.cs">
+      <DependentUpon>StockGrazing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HealthPremiseRegistration\HealthPremiseRegistration.aspx.cs">
+      <DependentUpon>HealthPremiseRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HealthPremiseRegistration\HealthPremiseRegistration.aspx.designer.cs">
+      <DependentUpon>HealthPremiseRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LIM\LIMRequest.aspx.cs">
+      <DependentUpon>LIMRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LIM\LIMRequest.aspx.designer.cs">
+      <DependentUpon>LIMRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ShowFile.aspx.cs">
+      <DependentUpon>ShowFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mapping\ShowFile.aspx.designer.cs">
+      <DependentUpon>ShowFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MarketFoodStallLicence\MarketFoodStallLicence.aspx.cs">
+      <DependentUpon>MarketFoodStallLicence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MarketFoodStallLicence\MarketFoodStallLicence.aspx.designer.cs">
+      <DependentUpon>MarketFoodStallLicence.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="message.aspx.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="message.aspx.designer.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MobileShopLicence\MobileShopLicence_13Sep2016.aspx.cs">
+      <DependentUpon>MobileShopLicence_13Sep2016.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MobileShopLicence\MobileShopLicence_13Sep2016.aspx.designer.cs">
+      <DependentUpon>MobileShopLicence_13Sep2016.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fields.cs" />
+    <Compile Include="Models\General.cs" />
+    <Compile Include="Payment\Complete.aspx.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\Complete.aspx.designer.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RID\RID.aspx.cs">
+      <DependentUpon>RID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RID\RID.aspx.designer.cs">
+      <DependentUpon>RID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ruth.aspx.cs">
+      <DependentUpon>ruth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ruth.aspx.designer.cs">
+      <DependentUpon>ruth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicePayment\InvoicePayment.aspx.cs">
+      <DependentUpon>InvoicePayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvoicePayment\InvoicePayment.aspx.designer.cs">
+      <DependentUpon>InvoicePayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\GetLocation.aspx.cs">
+      <DependentUpon>GetLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mapping\GetLocation.aspx.designer.cs">
+      <DependentUpon>GetLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\ShowLocation.aspx.cs">
+      <DependentUpon>ShowLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mapping\ShowLocation.aspx.designer.cs">
+      <DependentUpon>ShowLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MobileShopLicence\MobileShopLicence.aspx.cs">
+      <DependentUpon>MobileShopLicence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MobileShopLicence\MobileShopLicence.aspx.designer.cs">
+      <DependentUpon>MobileShopLicence.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Classes.cs" />
+    <Compile Include="Payment\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\General.aspx.cs">
+      <DependentUpon>General.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\General.aspx.designer.cs">
+      <DependentUpon>General.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\Maintain.aspx.cs">
+      <DependentUpon>Maintain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\Maintain.aspx.designer.cs">
+      <DependentUpon>Maintain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\HubbleFunctions.cs" />
+    <Compile Include="Functions\WDCFunctions.cs" />
+    <Compile Include="TestAndPlay\AJAXGetPost1.aspx.cs">
+      <DependentUpon>AJAXGetPost1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\AJAXGetPost1.aspx.designer.cs">
+      <DependentUpon>AJAXGetPost1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\ajaxpost2.aspx.cs">
+      <DependentUpon>ajaxpost2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\ajaxpost2.aspx.designer.cs">
+      <DependentUpon>ajaxpost2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\bar1.aspx.cs">
+      <DependentUpon>bar1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\bar1.aspx.designer.cs">
+      <DependentUpon>bar1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\bar2.aspx.cs">
+      <DependentUpon>bar2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\bar2.aspx.designer.cs">
+      <DependentUpon>bar2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\bar3.aspx.cs">
+      <DependentUpon>bar3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\bar3.aspx.designer.cs">
+      <DependentUpon>bar3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\BC1.aspx.cs">
+      <DependentUpon>BC1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\BC1.aspx.designer.cs">
+      <DependentUpon>BC1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\BootStrapAccordian1.aspx.cs">
+      <DependentUpon>BootStrapAccordian1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\BootStrapAccordian1.aspx.designer.cs">
+      <DependentUpon>BootStrapAccordian1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\C1.aspx.cs">
+      <DependentUpon>C1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\C1.aspx.designer.cs">
+      <DependentUpon>C1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\c2.aspx.cs">
+      <DependentUpon>c2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\c2.aspx.designer.cs">
+      <DependentUpon>c2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\c99.aspx.cs">
+      <DependentUpon>c99.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\c99.aspx.designer.cs">
+      <DependentUpon>c99.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\calendar1.aspx.cs">
+      <DependentUpon>calendar1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\calendar1.aspx.designer.cs">
+      <DependentUpon>calendar1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\cascadinggropdown2.aspx.cs">
+      <DependentUpon>cascadinggropdown2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\cascadinggropdown2.aspx.designer.cs">
+      <DependentUpon>cascadinggropdown2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Charities1.aspx.cs">
+      <DependentUpon>Charities1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Charities1.aspx.designer.cs">
+      <DependentUpon>Charities1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Charities2.aspx.cs">
+      <DependentUpon>Charities2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Charities2.aspx.designer.cs">
+      <DependentUpon>Charities2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\datepicker1.aspx.cs">
+      <DependentUpon>datepicker1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\datepicker1.aspx.designer.cs">
+      <DependentUpon>datepicker1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\datepicker2.aspx.cs">
+      <DependentUpon>datepicker2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\datepicker2.aspx.designer.cs">
+      <DependentUpon>datepicker2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePicker3.aspx.cs">
+      <DependentUpon>DatePicker3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePicker3.aspx.designer.cs">
+      <DependentUpon>DatePicker3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePicker4.aspx.cs">
+      <DependentUpon>DatePicker4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePicker4.aspx.designer.cs">
+      <DependentUpon>DatePicker4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePicker5.aspx.cs">
+      <DependentUpon>DatePicker5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePicker5.aspx.designer.cs">
+      <DependentUpon>DatePicker5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePickerTable1.aspx.cs">
+      <DependentUpon>DatePickerTable1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\DatePickerTable1.aspx.designer.cs">
+      <DependentUpon>DatePickerTable1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\dialogmodal1.aspx.cs">
+      <DependentUpon>dialogmodal1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\dialogmodal1.aspx.designer.cs">
+      <DependentUpon>dialogmodal1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\dialogmodal2.aspx.cs">
+      <DependentUpon>dialogmodal2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\dialogmodal2.aspx.designer.cs">
+      <DependentUpon>dialogmodal2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\documentfill1.aspx.cs">
+      <DependentUpon>documentfill1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\documentfill1.aspx.designer.cs">
+      <DependentUpon>documentfill1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\domSaveRestore.aspx.cs">
+      <DependentUpon>domSaveRestore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\domSaveRestore.aspx.designer.cs">
+      <DependentUpon>domSaveRestore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\dummy.aspx.cs">
+      <DependentUpon>dummy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\dummy.aspx.designer.cs">
+      <DependentUpon>dummy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\ajaxpost1.aspx.cs">
+      <DependentUpon>ajaxpost1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\ajaxpost1.aspx.designer.cs">
+      <DependentUpon>ajaxpost1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\FileUpload1.aspx.cs">
+      <DependentUpon>FileUpload1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\FileUpload1.aspx.designer.cs">
+      <DependentUpon>FileUpload1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Functions\Data1.asmx.cs">
+      <DependentUpon>Data1.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Functions\DataTest.asmx.cs">
+      <DependentUpon>DataTest.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\inlinefunction1.aspx.cs">
+      <DependentUpon>inlinefunction1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\inlinefunction1.aspx.designer.cs">
+      <DependentUpon>inlinefunction1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\json1.aspx.cs">
+      <DependentUpon>json1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\json1.aspx.designer.cs">
+      <DependentUpon>json1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\listtodict1.aspx.cs">
+      <DependentUpon>listtodict1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\listtodict1.aspx.designer.cs">
+      <DependentUpon>listtodict1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\MaxLength1.aspx.cs">
+      <DependentUpon>MaxLength1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\MaxLength1.aspx.designer.cs">
+      <DependentUpon>MaxLength1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\nestedclass1.aspx.cs">
+      <DependentUpon>nestedclass1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\nestedclass1.aspx.designer.cs">
+      <DependentUpon>nestedclass1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\NestedList2.aspx.cs">
+      <DependentUpon>NestedList2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\NestedList2.aspx.designer.cs">
+      <DependentUpon>NestedList2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\NZPost1.aspx.cs">
+      <DependentUpon>NZPost1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\NZPost1.aspx.designer.cs">
+      <DependentUpon>NZPost1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\PassHTML1.aspx.cs">
+      <DependentUpon>PassHTML1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\PassHTML1.aspx.designer.cs">
+      <DependentUpon>PassHTML1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\passvariable1.aspx.cs">
+      <DependentUpon>passvariable1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\passvariable1.aspx.designer.cs">
+      <DependentUpon>passvariable1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\processing1.aspx.cs">
+      <DependentUpon>processing1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\processing1.aspx.designer.cs">
+      <DependentUpon>processing1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\propertyselect1.aspx.cs">
+      <DependentUpon>propertyselect1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\propertyselect1.aspx.designer.cs">
+      <DependentUpon>propertyselect1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\pwstrength1.aspx.cs">
+      <DependentUpon>pwstrength1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\pwstrength1.aspx.designer.cs">
+      <DependentUpon>pwstrength1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\RelativeFolders1.aspx.cs">
+      <DependentUpon>RelativeFolders1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\RelativeFolders1.aspx.designer.cs">
+      <DependentUpon>RelativeFolders1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Repeater1.aspx.cs">
+      <DependentUpon>Repeater1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Repeater1.aspx.designer.cs">
+      <DependentUpon>Repeater1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\RepeaterDocument1.aspx.cs">
+      <DependentUpon>RepeaterDocument1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\RepeaterDocument1.aspx.designer.cs">
+      <DependentUpon>RepeaterDocument1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\servermap1.aspx.cs">
+      <DependentUpon>servermap1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\servermap1.aspx.designer.cs">
+      <DependentUpon>servermap1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\slider1.aspx.cs">
+      <DependentUpon>slider1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\slider1.aspx.designer.cs">
+      <DependentUpon>slider1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA1.aspx.cs">
+      <DependentUpon>SPA1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA1.aspx.designer.cs">
+      <DependentUpon>SPA1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA2.aspx.cs">
+      <DependentUpon>SPA2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA2.aspx.designer.cs">
+      <DependentUpon>SPA2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA3.aspx.cs">
+      <DependentUpon>SPA3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA3.aspx.designer.cs">
+      <DependentUpon>SPA3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA4.aspx.cs">
+      <DependentUpon>SPA4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA4.aspx.designer.cs">
+      <DependentUpon>SPA4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA5.aspx.cs">
+      <DependentUpon>SPA5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\SPA5.aspx.designer.cs">
+      <DependentUpon>SPA5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\topright1.aspx.cs">
+      <DependentUpon>topright1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\topright1.aspx.designer.cs">
+      <DependentUpon>topright1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Upload1.aspx.cs">
+      <DependentUpon>Upload1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Upload1.aspx.designer.cs">
+      <DependentUpon>Upload1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Upload2.aspx.cs">
+      <DependentUpon>Upload2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Upload2.aspx.designer.cs">
+      <DependentUpon>Upload2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\validatedynamicgroup.aspx.cs">
+      <DependentUpon>validatedynamicgroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\validatedynamicgroup.aspx.designer.cs">
+      <DependentUpon>validatedynamicgroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\Validation1.aspx.cs">
+      <DependentUpon>Validation1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\Validation1.aspx.designer.cs">
+      <DependentUpon>Validation1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\validation2.aspx.cs">
+      <DependentUpon>validation2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\validation2.aspx.designer.cs">
+      <DependentUpon>validation2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndPlay\xml1.aspx.cs">
+      <DependentUpon>xml1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestAndPlay\xml1.aspx.designer.cs">
+      <DependentUpon>xml1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMC\BookingEnquiry.aspx.cs">
+      <DependentUpon>BookingEnquiry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMC\BookingEnquiry.aspx.designer.cs">
+      <DependentUpon>BookingEnquiry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMC\Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMC\Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMC\completed.aspx.cs">
+      <DependentUpon>completed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMC\completed.aspx.designer.cs">
+      <DependentUpon>completed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMC\Feedback.aspx.cs">
+      <DependentUpon>Feedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMC\Feedback.aspx.designer.cs">
+      <DependentUpon>Feedback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMC\FeedbackSlider.aspx.cs">
+      <DependentUpon>FeedbackSlider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMC\FeedbackSlider.aspx.designer.cs">
+      <DependentUpon>FeedbackSlider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMC\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMC\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WMF\WMF.aspx.cs">
+      <DependentUpon>WMF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WMF\WMF.aspx.designer.cs">
+      <DependentUpon>WMF.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SQL\PR\" />
+    <Folder Include="Submissions\InvoicePayment\" />
+    <Folder Include="Submissions\MobileShopLicence\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LocalHost|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ProductionServer|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestServer|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ProductionServerTEST|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LocalHost - Production|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>21328</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:39106/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,441 @@
+10:50:02 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:58:52 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:01:03 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:35:45 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:40:45 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:43:14 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:45:34 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:45:37 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\MobileShopLicence\542021145163402.html'.	greg.tichbon@whanganui.govt.nz
+11:45:37 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+11:46:41 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:47:57 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:48:01 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:48:01 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\MobileShopLicence\217021148160102.html'.	greg.tichbon@whanganui.govt.nz
+11:48:01 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+11:48:26 a.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+2:34:32 p.m.	Tuesday, 2 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+4:15:38 p.m.	Wednesday, 3 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+4:36:01 p.m.	Wednesday, 3 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+4:39:03 p.m.	Wednesday, 3 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+4:39:47 p.m.	Wednesday, 3 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+4:43:04 p.m.	Wednesday, 3 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+5:04:59 p.m.	Wednesday, 3 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:02:27 a.m.	Thursday, 4 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:04:02 a.m.	Thursday, 4 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:52:40 a.m.	Friday, 5 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:53:01 a.m.	Friday, 5 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:53:24 a.m.	Friday, 5 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:54:39 a.m.	Friday, 5 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:20:20 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:30:33 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:31:19 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:31:59 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:32:27 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:33:22 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:33:43 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:33:52 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:34:19 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:34:35 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Starting	
+9:40:02 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Starting	
+10:01:38 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Starting	
+10:01:45 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Starting	
+10:01:51 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\MobileShopLicence\609021001164509.html'.	greg.tichbon@whanganui.govt.nz
+10:01:52 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+10:01:59 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx?id=1	Starting	
+10:03:25 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:03:31 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:03:31 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\MobileShopLicence\173021003163109.html'.	greg.tichbon@whanganui.govt.nz
+10:03:31 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+10:14:50 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:14:55 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:15:00 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:15:01 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\MobileShopLicence\883021015160009.html'.	greg.tichbon@whanganui.govt.nz
+10:15:01 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+10:17:30 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:17:33 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:22:08 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:22:41 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:23:00 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:23:34 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:27:36 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:29:04 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:29:38 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:34:56 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:41:56 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:43:15 a.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:45:53 p.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:46:59 p.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:49:41 p.m.	Tuesday, 9 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:12:59 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\InvoicePayment\614021212165810_1.html'.	greg.tichbon@whanganui.govt.nz
+12:12:59 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+12:17:10 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\InvoicePayment\041021217161010_1.html'.	greg.tichbon@whanganui.govt.nz
+12:17:10 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+12:20:03 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\InvoicePayment\928021220160310_1.html'.	greg.tichbon@whanganui.govt.nz
+12:20:04 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+12:22:00 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\InvoicePayment\192021222160010_1.html'.	greg.tichbon@whanganui.govt.nz
+12:22:00 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+12:45:17 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\InvoicePayment\474021245161710_1.html'.	greg.tichbon@whanganui.govt.nz
+12:45:17 p.m.	Wednesday, 10 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+9:52:27 a.m.	Thursday, 11 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\InvoicePayment\430020952162211_1.html'.	greg.tichbon@whanganui.govt.nz
+9:52:28 a.m.	Thursday, 11 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+10:58:07 a.m.	Thursday, 11 February 2016	/invoicepayment/invoicepayment.aspx	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\EmailTemplate\standard.html'.	
+1:05:34 p.m.	Wednesday, 17 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+2:09:20 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\functions\InvoicePaymentScreen.html'.	greg.tichbon@whanganui.govt.nz
+2:09:55 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\functions\InvoicePaymentEmail.html'.	greg.tichbon@whanganui.govt.nz
+2:19:25 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\functions\InvoicePaymentScreen.html'.	greg.tichbon@whanganui.govt.nz
+2:19:26 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\functions\InvoicePaymentEmail.html'.	greg.tichbon@whanganui.govt.nz
+2:23:15 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\InvoicePaymentScreen.html'.	greg.tichbon@whanganui.govt.nz
+2:23:17 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\InvoicePaymentEmail.html'.	greg.tichbon@whanganui.govt.nz
+2:23:51 p.m.	Friday, 19 February 2016	Posts.asmx/InvoicePayment	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\InvoicePaymentScreen.html'.	greg.tichbon@whanganui.govt.nz
+12:35:25 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:36:31 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:37:40 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:38:42 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:39:27 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:41:23 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:41:30 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Could not find a part of the path '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\submissions\MobileShopLicence\016021241162322.html'.	greg.tichbon@whanganui.govt.nz
+12:50:33 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:51:18 p.m.	Monday, 22 February 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:17:36 p.m.	Tuesday, 23 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:21:40 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:25:31 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:30:51 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:31:11 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:32:46 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:48:31 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:52:07 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:53:47 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:54:34 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:55:56 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:01:10 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:02:49 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:04:49 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:09:05 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:09:48 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:10:50 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:15:06 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:16:23 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:16:38 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:17:14 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:17:28 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:19:02 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:21:00 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:39:35 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+1:59:44 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+2:08:04 p.m.	Monday, 29 February 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:22:20 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:22:27 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:23:00 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:24:54 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:26:11 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:27:53 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:28:52 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:32:13 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:33:05 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:39:42 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:39:53 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:51:43 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:52:48 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:53:48 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:55:34 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:56:35 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:59:18 a.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:04:25 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:06:58 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:08:16 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:09:13 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:23:23 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:24:32 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:25:42 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:33:38 p.m.	Tuesday, 1 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:33:34 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:35:53 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:35:53 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+9:37:01 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+9:37:09 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:37:42 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:37:42 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+9:45:12 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:45:38 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+9:45:38 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+11:48:43 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:50:11 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:50:11 a.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+12:53:55 p.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:54:34 p.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:54:34 p.m.	Wednesday, 2 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+11:30:50 a.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:02:09 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:04:09 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:06:25 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:07:19 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:08:56 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:09:53 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:11:37 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:24:09 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:28:22 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:28:33 p.m.	Friday, 4 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:08:50 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:21:46 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:31:59 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:32:24 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:32:47 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:33:32 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:38:33 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:38:40 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:38:45 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:38:45 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+11:41:12 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:41:13 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:41:13 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Conversion failed when converting the varchar value 'MobileShopLicence' to data type int.	greg.tichbon@whanganui.govt.nz
+11:41:13 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:42:02 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:42:25 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:42:25 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+11:44:22 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:44:31 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:44:31 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+11:46:00 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:49:04 a.m.	Monday, 7 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:15:59 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:16:15 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:12:15 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:13:14 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:14:05 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:14:05 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+11:14:16 a.m.	Wednesday, 9 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Error converting data type varchar to bigint.	greg.tichbon@whanganui.govt.nz
+12:25:03 p.m.	Thursday, 10 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:25:14 p.m.	Thursday, 10 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:25:52 p.m.	Thursday, 10 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:25:52 p.m.	Thursday, 10 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+11:32:26 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:32:33 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:33:23 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:33:23 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+11:42:37 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:42:46 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:43:32 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:43:33 a.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+12:17:39 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:17:52 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:18:33 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:18:33 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+12:23:13 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:23:51 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+12:23:51 p.m.	Friday, 11 March 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+8:57:39 a.m.	Tuesday, 29 March 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:23:22 p.m.	Friday, 1 April 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:28:40 p.m.	Friday, 1 April 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:31:53 p.m.	Friday, 1 April 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:33:50 p.m.	Friday, 1 April 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+12:39:11 p.m.	Wednesday, 13 April 2016	/general/FireSafetyReferral.aspx	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\general\FireSafetyReferrralScreen.html'.	greg.tichbon@whanganui.govt.nz
+12:39:12 p.m.	Wednesday, 13 April 2016	/general/FireSafetyReferral.aspx	Access to the path 'C:\743041239161113.html' is denied.	greg.tichbon@whanganui.govt.nz
+12:39:12 p.m.	Wednesday, 13 April 2016	/general/FireSafetyReferral.aspx	Could not find file '\\local\systemdatadfs$\redirected\gregt\my documents\visual studio 2013\Projects\Online\Online\general\FireSafetyReferrralEmail.html'.	greg.tichbon@whanganui.govt.nz
+12:51:25 p.m.	Wednesday, 13 April 2016	/general/FireSafetyReferral.aspx	Access to the path 'C:\590041250162413.html' is denied.	greg.tichbon@whanganui.govt.nz
+12:54:58 p.m.	Wednesday, 13 April 2016	/general/FireSafetyReferral.aspx	Access to the path 'C:\038041253163513.html' is denied.	greg.tichbon@whanganui.govt.nz
+1:04:36 p.m.	Wednesday, 13 April 2016	/general/FireSafetyReferral.aspx	Access to the path 'C:\940041303165613.html' is denied.	greg.tichbon@whanganui.govt.nz
+9:11:07 a.m.	Thursday, 14 April 2016	/general/FireSafetyReferral.aspx	Could not find a part of the path 'c:\InetPub\onlineSubmissions\FireSafetyReferral\Application\324040911160114.html'.	greg.tichbon@whanganui.govt.nz
+9:31:38 a.m.	Thursday, 14 April 2016	documentfill	Invalid field name: reference	greg.tichbon@whanganui.govt.nz
+10:47:52 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:52:51 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:54:12 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:55:29 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:02:09 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:03:03 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:03:28 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:04:01 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:11:11 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:11:39 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:13:41 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:15:16 a.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:06:05 p.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:06:38 p.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:09:02 p.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:34:15 p.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:35:16 p.m.	Monday, 18 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:28:42 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:33:48 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:39:57 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:40:21 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:45:45 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:49:37 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:51:19 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+8:59:10 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+9:00:04 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+9:00:49 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+9:00:56 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+9:08:32 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:10:48 a.m.	Tuesday, 19 April 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:11:10 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:11:33 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:14:46 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:16:26 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:16:36 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:18:59 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:19:10 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:19:43 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:27:26 p.m.	Monday, 2 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:25:04 a.m.	Thursday, 5 May 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:29:01 a.m.	Thursday, 5 May 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+10:42:23 a.m.	Thursday, 5 May 2016	/mobileshoplicence/mobileshoplicence.aspx	submit	
+10:54:13 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:02:30 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:02:59 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:06:33 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:16:49 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:19:36 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:19:47 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:30:16 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:30:48 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:35:02 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:35:26 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:35:36 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:36:34 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:37:03 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:40:31 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:41:08 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:43:06 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:43:51 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:44:20 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:51:55 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:57:21 a.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:03:41 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:05:27 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:05:59 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:06:45 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:08:26 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:15:48 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:18:33 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:23:20 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:24:45 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:25:59 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:28:46 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:29:29 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:30:42 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:31:46 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:33:28 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:37:25 p.m.	Thursday, 5 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:55:07 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:55:17 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:58:01 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:58:07 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:59:59 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:00:24 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:00:33 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:30:51 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:31:51 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:51:32 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:51:47 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:52:33 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:53:38 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:54:27 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:54:50 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:55:34 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:56:40 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:59:10 a.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:00:39 p.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:00:59 p.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:02:37 p.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+12:06:45 p.m.	Friday, 6 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:07:05 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:07:46 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:09:03 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:10:14 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+11:26:35 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Cannot insert the value NULL into column 'KEY2', table 'proTest.dbo.NUCASSOCIATION'; column does not allow nulls. INSERT fails.
+The statement has been terminated.	greg.tichbon@whanganui.govt.nz
+11:35:40 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:35:50 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:36:58 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:37:03 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+11:41:57 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:46:58 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx	Starting	
+11:47:08 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:48:08 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Starting	
+11:48:23 a.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+1:20:38 p.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+1:23:53 p.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Put email document into template	
+1:25:12 p.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+1:30:15 p.m.	Monday, 9 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Put email document into template	
+9:57:56 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:38:29 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:53:19 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:53:36 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:57:10 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:58:31 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+10:59:59 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:01:44 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:07:21 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+11:08:41 a.m.	Tuesday, 10 May 2016	/FCP/FoodBusinessRegistration.aspx	Starting	
+9:21:50 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+9:22:14 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	The ConnectionString property has not been initialized.	greg.tichbon@whanganui.govt.nz
+9:22:14 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: LastName	greg.tichbon@whanganui.govt.nz
+9:22:15 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: FirstName	greg.tichbon@whanganui.govt.nz
+9:22:15 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: othernames	greg.tichbon@whanganui.govt.nz
+9:22:15 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: KnownAs	greg.tichbon@whanganui.govt.nz
+9:22:15 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: EmailAddress	greg.tichbon@whanganui.govt.nz
+9:22:15 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: ResidentialAddress	greg.tichbon@whanganui.govt.nz
+9:22:16 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: PostalAddress	greg.tichbon@whanganui.govt.nz
+9:22:16 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: MobilePhone	greg.tichbon@whanganui.govt.nz
+9:22:16 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: HomePhone	greg.tichbon@whanganui.govt.nz
+9:22:16 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: WorkPhone	greg.tichbon@whanganui.govt.nz
+9:22:16 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: Gender	greg.tichbon@whanganui.govt.nz
+9:22:17 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: dateofbirth	greg.tichbon@whanganui.govt.nz
+9:22:17 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: LastName	greg.tichbon@whanganui.govt.nz
+9:22:17 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: FirstName	greg.tichbon@whanganui.govt.nz
+9:22:17 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: othernames	greg.tichbon@whanganui.govt.nz
+9:22:17 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: KnownAs	greg.tichbon@whanganui.govt.nz
+9:22:17 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: EmailAddress	greg.tichbon@whanganui.govt.nz
+9:22:18 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: ResidentialAddress	greg.tichbon@whanganui.govt.nz
+9:22:18 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: PostalAddress	greg.tichbon@whanganui.govt.nz
+9:22:18 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: MobilePhone	greg.tichbon@whanganui.govt.nz
+9:22:18 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: HomePhone	greg.tichbon@whanganui.govt.nz
+9:22:18 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: WorkPhone	greg.tichbon@whanganui.govt.nz
+9:22:18 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: Gender	greg.tichbon@whanganui.govt.nz
+9:22:19 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: dateofbirth	greg.tichbon@whanganui.govt.nz
+9:22:19 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Put email document into template	
+9:48:52 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+9:48:59 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	ExecuteReader requires an open and available Connection. The connection's current state is closed.	greg.tichbon@whanganui.govt.nz
+9:48:59 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: LastName	greg.tichbon@whanganui.govt.nz
+9:49:00 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: FirstName	greg.tichbon@whanganui.govt.nz
+9:49:00 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: othernames	greg.tichbon@whanganui.govt.nz
+9:49:00 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: KnownAs	greg.tichbon@whanganui.govt.nz
+9:49:00 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: EmailAddress	greg.tichbon@whanganui.govt.nz
+9:49:00 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: ResidentialAddress	greg.tichbon@whanganui.govt.nz
+9:49:01 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: PostalAddress	greg.tichbon@whanganui.govt.nz
+9:49:01 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: MobilePhone	greg.tichbon@whanganui.govt.nz
+9:49:01 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: HomePhone	greg.tichbon@whanganui.govt.nz
+9:49:01 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: WorkPhone	greg.tichbon@whanganui.govt.nz
+9:49:02 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: Gender	greg.tichbon@whanganui.govt.nz
+9:49:02 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: dateofbirth	greg.tichbon@whanganui.govt.nz
+9:49:02 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: LastName	greg.tichbon@whanganui.govt.nz
+9:49:02 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: FirstName	greg.tichbon@whanganui.govt.nz
+9:49:02 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: othernames	greg.tichbon@whanganui.govt.nz
+9:49:02 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: KnownAs	greg.tichbon@whanganui.govt.nz
+9:49:03 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: EmailAddress	greg.tichbon@whanganui.govt.nz
+9:49:03 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: ResidentialAddress	greg.tichbon@whanganui.govt.nz
+9:49:03 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: PostalAddress	greg.tichbon@whanganui.govt.nz
+9:49:03 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: MobilePhone	greg.tichbon@whanganui.govt.nz
+9:49:03 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: HomePhone	greg.tichbon@whanganui.govt.nz
+9:49:04 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: WorkPhone	greg.tichbon@whanganui.govt.nz
+9:49:04 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: Gender	greg.tichbon@whanganui.govt.nz
+9:49:04 a.m.	Monday, 16 May 2016	documentfill	Invalid field name: dateofbirth	greg.tichbon@whanganui.govt.nz
+9:49:04 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Put email document into template	
+9:52:31 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+9:54:03 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Failed to convert parameter value from a String to a Int32.	greg.tichbon@whanganui.govt.nz
+9:56:18 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+9:59:00 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+10:24:49 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	submit	
+10:25:08 a.m.	Monday, 16 May 2016	/mobileshoplicence/mobileshoplicence.aspx?populate=True	Put email document into template	
+8:54:49 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: organisationtype	greg.tichbon@whanganui.govt.nz
+8:54:49 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: umbrellaorganisation	greg.tichbon@whanganui.govt.nz
+8:54:49 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: strategicplan	greg.tichbon@whanganui.govt.nz
+8:54:50 p.m.	Tuesday, 31 May 2016	/CommunityContract/groupdetails.aspx	Could not find a part of the path 'c:\InetPub\inetpub\onlineSubmissions\CommunityContract\GroupDetails\565052054162431.html'.	greg.tichbon@whanganui.govt.nz
+8:54:50 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: organisationtype	greg.tichbon@whanganui.govt.nz
+8:54:50 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: umbrellaorganisation	greg.tichbon@whanganui.govt.nz
+8:54:50 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: strategicplan	greg.tichbon@whanganui.govt.nz
+8:54:50 p.m.	Tuesday, 31 May 2016	/CommunityContract/groupdetails.aspx	Put email document into template	
+9:29:55 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: strategicplan	greg.tichbon@whanganui.govt.nz
+9:30:22 p.m.	Tuesday, 31 May 2016	documentfill	Invalid field name: strategicplan	greg.tichbon@whanganui.govt.nz
+9:30:22 p.m.	Tuesday, 31 May 2016	/CommunityContract/groupdetails.aspx	Put email document into template	
+8:38:03 a.m.	Wednesday, 1 June 2016	/CommunityContract/groupdetails.aspx	Put email document into template	
+9:20:55 a.m.	Wednesday, 1 June 2016	/CommunityContract/groupdetails.aspx	Put email document into template	

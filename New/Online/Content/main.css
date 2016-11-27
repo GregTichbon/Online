@@ -1,0 +1,140 @@
+﻿/* To display readonly controls as standard text :ie: without frame */
+
+[readonly="readonly"],
+[readonly="readonly"]:focus,
+select[readonly="readonly"],
+select[readonly="readonly"]:focus,
+input[readonly="readonly"],
+input[readonly="readonly"]:focus,
+.content input[type="text"][readonly]:focus,
+textarea[readonly]:focus,
+select[readonly]:focus {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none !important;
+    color: #000000;
+}
+
+/* Jquery UI Auto complete */
+
+.ui-autocomplete-loading {
+    background: white url("http://wdc.whanganui.govt.nz/online/images/processing_16x16.gif") right center no-repeat;
+}
+
+.ui-menu-item a {
+    font-size: 10px;
+}
+
+/*Jquery UI validation error format*/
+
+.error {
+    color: red;
+}
+
+/*Jquery UI tooltips */
+.ui-tooltip {
+    position:fixed;
+    color: blue;
+  }
+
+/*Terms and conditions scrolling frame*/
+
+#div_termsconditions {
+    border: solid grey 1px;
+    padding: 5px;
+    overflow: scroll;
+    height: 400px;
+}
+
+/*submission page*/
+
+.submissiontable {
+    width: 90%;
+    border: none;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 20px;
+}
+
+.submissiontable > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+
+.submissiontable > tbody > tr > td {
+    padding: 10px;
+    width: 50%;
+    border: none;
+}
+
+.submissiontable > tbody > tr > td:nth-child(1) {
+    text-align: right;
+    font-weight: bold;
+}
+
+.submissiontable > tbody > tr > td.heading {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.submissionhead {
+    width: 90%;
+    border: none;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.submissionhead > tbody > tr > td {
+    padding: 10px;
+}
+
+/*bootstrap overrides*/
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: black;
+  background-color: #eee;
+
+}
+
+/*help icon*/
+#helpicon {
+    border-style: none; 
+    border-color: inherit; 
+    border-width: 0; 
+    position: fixed; 
+    top: 5px; 
+    right: 15px; 
+    z-index: 9999;
+}
+/*page help*/
+#pagehelp {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.required {
+    border: 1px solid red;
+}
+
+.dependantrequired {
+    border: 1px solid red;
+}
+
+#div_processing
+{
+    display : block;
+    position : fixed;
+    z-index: 100;
+    background-image : url('http://loadinggif.com/images/image-selection/3.gif');
+    background-color:#666;
+    opacity : 0.4;
+    background-repeat : no-repeat;
+    background-position : center;
+    left : 0;
+    bottom : 0;
+    right : 0;
+    top : 0;
+}
+
+.numeric {text-align: right;}

@@ -1,0 +1,50 @@
+﻿.StripedTable { 
+	width:100%; 
+}
+ 
+table.StripedTable > tbody > tr:first-child > td {
+	background-color:green;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+}
+ 
+table.StripedTable > tbody > tr:nth-child(2n+0) { /*(even) or (2n 0)*/
+	background-color:white;  
+	font-size: 12px; 
+}
+table.StripedTable > tbody > tr:nth-child(2n+3) { /*(odd) or (2n 1)*/
+	background-color:lightgray;
+	font-size: 12px; 
+}
+table.StripedTable > tbody > tr > td { 
+	padding:8px; 
+	border:#999 1px solid;
+	text-align:left;
+}
+
+table.subtable tbody > tr:first-child > td {
+
+	background-color:#FBCDA8;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+}
+table.subtable tr:nth-child(2n+0) { /*(even) or (2n 0)*/
+	background-color:#FCDDC5;
+}
+table.subtable tr:nth-child(2n+3) { /*(odd) or (2n 1)*/
+	background-color:#FBCDA8;
+}
+table.time tbody > tr:first-child > td {
+
+	background-color:transparent;
+	border:none;
+	padding:0;
+	width:60px;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: right;
+}
+-->
+</style>
