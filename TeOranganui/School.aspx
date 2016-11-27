@@ -133,8 +133,8 @@
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     async: false,
-                    contentType: "text/json charset=utf-8",
-                    url: 'functions/posts.asmx/update_schooltest', // the url where we want to POST
+                    contentType: "application/json; charset=utf-8",
+                    url: 'functions/posts.asmx/update_school', // the url where we want to POST
                     data: formData,
                     //data: "<test></test>",
                     dataType: 'json', // what type of data do we expect back from the server

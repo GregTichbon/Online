@@ -833,9 +833,15 @@ namespace TeOranganui.Functions
             repeatertable.Columns.Add("Index", typeof(int));
             repeatertable.Columns.Add("Field", typeof(string));
             repeatertable.Columns.Add("Value", typeof(string));
-            /*
-            foreach (string key in form.Form)
+           
+            //foreach (string key in form)
+            //   string value = form[key];
+
+            foreach (var obj in form)
             {
+                string key = obj.name; // Used for NameValue[] rather than NameValueCollection
+                string value = obj.value; // Used for NameValue[] rather than NameValueCollection
+
                 if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
                 {
                     if (key.Substring(0, 7) == "repeat_")
@@ -853,15 +859,15 @@ namespace TeOranganui.Functions
                             keypartsdelim = "_";
                         }
 
-                        repeatertable.Rows.Add(keypartname, keypartindex, keypartfield, form[key]);
+                        repeatertable.Rows.Add(keypartname, keypartindex, keypartfield, value);
                     }
                     else
                     {
-                        rootXml.Add(new XElement(key, form[key]));
+                        rootXml.Add(new XElement(key, value));
                     }
                 }
             }
-             * */
+
         }
 
         public void populateXML(DataTable repeatertable, XElement rootXml)
@@ -949,11 +955,12 @@ namespace TeOranganui.Functions
             return words;
         }
 
+
         public static string[] populatelist(string grouptype, string dataxx)
         {
-            string[] activities = new string[4] { "Hairdresser", "Camping ground", "Funeral home", "Offensive trade"}; //, "Other preparation / manufacture" 
+            string[] list = new string[4] { "Hairdresser", "Camping ground", "Funeral home", "Offensive trade"}; //, "Other preparation / manufacture" 
 
-            return activities;
+            return list;
         }
     }
 
