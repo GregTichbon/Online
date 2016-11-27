@@ -951,7 +951,9 @@ namespace TeOranganui.Functions
 
         public static string[] populatelist(string grouptype, string dataxx)
         {
-            return "xxx";
+            string[] activities = new string[4] { "Hairdresser", "Camping ground", "Funeral home", "Offensive trade"}; //, "Other preparation / manufacture" 
+
+            return activities;
         }
     }
 
