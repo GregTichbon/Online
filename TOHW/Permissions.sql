@@ -5,3 +5,4 @@ Grant EXECUTE on Get_Encounters to onlineservices
 Grant EXECUTE on Pickups_Update to onlineservices
 Grant EXECUTE on pickup_checkforupdates to onlineservices
 
+--Greg was here
