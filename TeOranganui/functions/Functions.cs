@@ -694,12 +694,16 @@ namespace TeOranganui.Functions
             if (firstoption != "None")
             {
                 html = html + ("<option>" + firstoption + "</option>");
-
             }
-
+            string value = "";
             foreach (string option in options)
             {
-                if (option == selectedoption)
+                string[] parts = (option + "\x00FD").Split('\x00FD');
+                if (parts[1] != "")
+                {
+                    value = " value=\"" + parts[1] + "\"";
+                }
+                if (parts[0] == selectedoption)
                 {
                     selected = " selected";
                 }
@@ -707,7 +711,7 @@ namespace TeOranganui.Functions
                 {
                     selected = "";
                 }
-                html = html + ("<option" + selected + ">" + option + "</option>");
+                html = html + ("<option" + value + selected + ">" + parts[0] + "</option>");
             }
             return html;
         }
@@ -732,7 +736,6 @@ namespace TeOranganui.Functions
             {
                 options[i] = (thisyear + i).ToString();
             }
-
 
             return populateselect(options, selectedoption, firstoption);
         }
@@ -955,12 +958,43 @@ namespace TeOranganui.Functions
             return words;
         }
 
-
-        public static string[] populatelist(string grouptype, string dataxx)
+        public static string[] populatelist(string grouptype_description, string list_name)
         {
-            string[] list = new string[4] { "Hairdresser", "Camping ground", "Funeral home", "Offensive trade"}; //, "Other preparation / manufacture" 
+            string liststring = "";
+            string delim = "";
+            //string[] list; // = new string[4] { "Hairdresser", "Camping ground", "Funeral home", "Offensive trade"}; //, "Other preparation / manufacture" 
 
-            return list;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("PopulateList", con);
+            cmd.Parameters.Add("@grouptype_description", SqlDbType.NVarChar).Value = grouptype_description;
+            cmd.Parameters.Add("@list_name", SqlDbType.NVarChar).Value = list_name;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        liststring += delim + dr["label"].ToString() + "\x00FD" + dr["list_item_id"].ToString();
+                        delim = "\x00FE";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            return liststring.Split('\x00FE');
         }
     }
 
