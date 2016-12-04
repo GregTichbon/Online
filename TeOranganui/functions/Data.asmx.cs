@@ -365,7 +365,7 @@ namespace TeOranganui.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_person(string group_id)
+        public void get_group_persons(string group_id)
         {
             List<GroupPerson> GroupPersonList = new List<GroupPerson>();
 
@@ -373,7 +373,7 @@ namespace TeOranganui.data
             string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
-            SqlCommand cmd = new SqlCommand("get_person", con);
+            SqlCommand cmd = new SqlCommand("get_group_persons", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
@@ -412,6 +412,57 @@ namespace TeOranganui.data
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(GroupPersonList));
         }
+
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_school(string group_id)
+        {
+            List<schoolClass> SchoolList = new List<schoolClass>();
+
+            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_school", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                { 
+                    dr.Read();
+                    SchoolList.Add(new schoolClass
+                    {
+                        gendertype = dr["gendertype"].ToString(),
+                        authority = dr["authority"].ToString(),
+                        decile = dr["decile"].ToString(),
+                        moenumber = dr["moenumber"].ToString(),
+                        type = dr["type"].ToString(),
+                        startyear = dr["startyear"].ToString(),
+                        endyear = dr["endyear"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(SchoolList));
+        }
     }
     #region classes
  
@@ -448,7 +499,16 @@ namespace TeOranganui.data
         public string label;
         public string value;
         public string count;
-
+    }
+    public class schoolClass
+    {
+        public string gendertype;
+        public string authority;
+        public string decile;
+        public string moenumber;
+        public string type;
+        public string startyear;
+        public string endyear;
     }
 
     public class standardResponseClass

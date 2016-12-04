@@ -75,20 +75,30 @@ namespace TeOranganui.posts
             #endregion //setup specific data
 
             #region BuildXML
-            XElement rootXml = new XElement("root");
-            DataTable repeatertable = new DataTable("Repeater");
+            //XElement rootXml = new XElement("root");
+            //DataTable repeatertable = new DataTable("Repeater");
 
             //Functions.createXMLStructure(repeatertable, Request.Form, rootXml);
-            Functions.createXMLStructure(repeatertable, formVars, rootXml);
+            //Functions.createXMLStructure(repeatertable, formVars, rootXml);
 
-            Functions.populateXML(repeatertable, rootXml);
+            //Functions.populateXML(repeatertable, rootXml);
             #endregion //BuildXML
 
-            cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
+            //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
+            cmd.Parameters.Add("@group_id", SqlDbType.VarChar).Value = formVars.Form("hf_groupid");
+            cmd.Parameters.Add("@groupname", SqlDbType.VarChar).Value = formVars.Form("tb_groupname");
+            cmd.Parameters.Add("@gendertype", SqlDbType.VarChar).Value = formVars.Form("dd_gendertype");
+            cmd.Parameters.Add("@authority", SqlDbType.VarChar).Value = formVars.Form("dd_authority");
+            cmd.Parameters.Add("@decile", SqlDbType.VarChar).Value = formVars.Form("dd_decile");
+            cmd.Parameters.Add("@moenumber", SqlDbType.VarChar).Value = formVars.Form("tb_moenumber");
+            cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = formVars.Form("dd_type");
+            cmd.Parameters.Add("@startyear", SqlDbType.VarChar).Value = formVars.Form("dd_startyear");
+            cmd.Parameters.Add("@endyear", SqlDbType.VarChar).Value = formVars.Form("dd_endyear");
 
+            
             #region save data (Standard)
             Int32 ctr = 0;
-            string RAM_ID = "";
+            //string RAM_ID = "";
 
             cmd.Connection = con;
             try
@@ -99,14 +109,14 @@ namespace TeOranganui.posts
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    ctr = Convert.ToInt32(dr["ctr"].ToString());
+                    //ctr = Convert.ToInt32(dr["ctr"].ToString());
                     //RAM_ID = dr["RAM_ID"].ToString();
  
                 }
             }
             catch (Exception ex)
             {
-                Functions.Log("", "", "");
+                Functions.Log("", ex.InnerException.ToString(), "");
             }
             finally
             {

@@ -11,50 +11,40 @@ using System.Configuration;
 
 using System.IO;
 using System.Web.Configuration;
-
 namespace TeOranganui
 {
-    public partial class School : System.Web.UI.Page
+    public partial class SchoolNEW : System.Web.UI.Page
     {
         #region Class Parameters
         public string none = "none";
         public string selected = " selected";
 
         public string[] yesno_values = new string[2] { "Yes", "No" };
+        public string[] dd_groupname_values;
         public string[] dd_gendertype_values; // = new string[3] { "Co-ed", "Female", "Male" };
         public string[] dd_authority_values;
         public string[] dd_type_values;
         public string[] dd_decile_values = new string[10] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-        public string[] dd_startyear_values = new string[13] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13" };
-        public string[] dd_endyear_values = new string[13] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13" };
-
+        public string[] dd_startyear_values = new string[13] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
+        public string[] dd_endyear_values = new string[13] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
 
         #endregion
 
         #region fields
-        public int hf_groupid;
-        public string tb_groupname;
-        public string tb_moenumber;
-        public string dd_gendertype;
-        public string dd_authority;
-        public string dd_type;
-        public string dd_decile;
-        public string dd_startyear;
-        public string dd_endyear;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hf_groupid = 1;
-
             dd_gendertype_values = Functions.Functions.populatelist("School", "GenderType");
             dd_authority_values = Functions.Functions.populatelist("School", "Authority");
             dd_type_values = Functions.Functions.populatelist("School", "Type");
 
+            string liststring = "";
+            string delim = "";
+
             string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_School", con);
-            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = hf_groupid;
+            SqlCommand cmd = new SqlCommand("Get_Schools", con);
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = con;
@@ -64,15 +54,11 @@ namespace TeOranganui
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
-                    dr.Read();
-                    tb_groupname = dr["name"].ToString();
-                    dd_gendertype = dr["gendertype"].ToString();
-                    dd_authority = dr["authority"].ToString();
-                    dd_decile = dr["decile"].ToString();
-                    tb_moenumber = dr["moenumber"].ToString();
-                    dd_type = dr["type"].ToString();
-                    dd_startyear = dr["startyear"].ToString();
-                    dd_endyear = dr["endyear"].ToString();
+                    while (dr.Read())
+                    {
+                        liststring += delim + dr["name"].ToString() + "\x00FD" + dr["group_id"].ToString();
+                        delim = "\x00FE";
+                    }
                 }
             }
             catch (Exception ex)
@@ -84,6 +70,7 @@ namespace TeOranganui
                 con.Close();
                 con.Dispose();
             }
+            dd_groupname_values = liststring.Split('\x00FE');
         }
     }
 }

@@ -408,12 +408,15 @@ namespace TeOranganui.Functions
 
         public void Log(string location, string logMessage, string EmailAddress)
         {
-            String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
+            if (location != "")
+            {
+                String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
 
-            StreamWriter w = File.AppendText(LogFileLocation);
-            w.WriteLine("{0}", DateTime.Now.ToLongTimeString() + "\t" + DateTime.Now.ToLongDateString() + "\t" + location + "\t" + logMessage + "\t" + EmailAddress);
-            w.Flush();
-            w.Close();
+                StreamWriter w = File.AppendText(LogFileLocation);
+                w.WriteLine("{0}", DateTime.Now.ToLongTimeString() + "\t" + DateTime.Now.ToLongDateString() + "\t" + location + "\t" + logMessage + "\t" + EmailAddress);
+                w.Flush();
+                w.Close();
+            }
             if (EmailAddress != "")
             {
                 sendemail("Online Applications Error", location + "<br>" + logMessage, EmailAddress, "");
@@ -699,11 +702,13 @@ namespace TeOranganui.Functions
             foreach (string option in options)
             {
                 string[] parts = (option + "\x00FD").Split('\x00FD');
+                string selvalue = parts[0];
                 if (parts[1] != "")
                 {
                     value = " value=\"" + parts[1] + "\"";
+                    selvalue = parts[1];
                 }
-                if (parts[0] == selectedoption)
+                if (selvalue == selectedoption)
                 {
                     selected = " selected";
                 }
@@ -830,13 +835,12 @@ namespace TeOranganui.Functions
 
         //public void createXMLStructure(DataTable repeatertable, NameValueCollection form, XElement rootXml)
         public void createXMLStructure(DataTable repeatertable, NameValue[] form, XElement rootXml)
-
         {
             repeatertable.Columns.Add("Name", typeof(string));
             repeatertable.Columns.Add("Index", typeof(int));
             repeatertable.Columns.Add("Field", typeof(string));
             repeatertable.Columns.Add("Value", typeof(string));
-           
+
             //foreach (string key in form)
             //   string value = form[key];
 

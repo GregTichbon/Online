@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TeOranganui.Master" AutoEventWireup="true" CodeBehind="School.aspx.cs" Inherits="TeOranganui.School" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TeOranganui.Master" AutoEventWireup="true" CodeBehind="SchoolNEW.aspx.cs" Inherits="TeOranganui.SchoolNEW" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Content/datagrid.css" rel="stylesheet" />
@@ -13,26 +13,45 @@
                 }
             });
 
-            $.getJSON("../functions/data.asmx/get_system?group_id=" + $("#hf_groupid").val(), function (data) {
-                $.each(data, function (i, item) {
-                    del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                    var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
-                        $('<td style="text-align:center">').html(''),
-                        $('<td>').html('<input name="systemname_' + item.group_system_id + '|' + item.system_id + '" class="grid_select" type="text" value="' + item.systemname + '" />'),
-                        $('<td style="text-align:center">').html(del)
-                    ).appendTo('#tbl_systems');
-                });
-            });
+            $("#dd_groupname").change(function () {
+                group_id = $(this).val();
+                $("#hf_group_id").val(group_id);
 
-            $.getJSON("../functions/data.asmx/get_school_persons?group_id=" + $("#hf_groupid").val(), function (data) {
-                $.each(data, function (i, item) {
-                    del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                    var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
-                        $('<td style="text-align:center">').html(''),
-                        $('<td>').html('<input name="personname_' + item.group_person_id + '|' + item.group_person_id_id + '" class="grid_select person" type="text" value="' + item.personname + '" />'),
-                        $('<td>').html('<input name="roledescription_' + item.List_item_ID + '" class="grid_select" type="text" value="' + item.roledescription + '" />'),
-                        $('<td style="text-align:center">').html(del)
-                    ).appendTo('#tbl_people');
+                $.ajax({
+                    async: false,
+                    url: "../functions/data.asmx/get_school?group_id=" + group_id, success: function (result) {
+                        item = $.parseJSON(result);
+                        $("#dd_gendertype").val(item[0]['gendertype']);
+                        $("#dd_authority").val(item[0]['authority']);
+                        $("#dd_decile").val(item[0]['decile']);
+                        $("#tb_moenumber").val(item[0]['moenumber']);
+                        $("#dd_type").val(item[0]['type']);
+                        $("#dd_startyear").val(item[0]['startyear']);
+                        $("#dd_endyear").val(item[0]['endyear']);
+                    }
+                });
+
+                $.getJSON("../functions/data.asmx/get_system?group_id=" + group_id, function (data) {
+                    $.each(data, function (i, item) {
+                        del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                        var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<input name="systemname_' + item.group_system_id + '|' + item.system_id + '" class="grid_select" type="text" value="' + item.systemname + '" />'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_systems');
+                    });
+                });
+
+                $.getJSON("../functions/data.asmx/get_school_persons?group_id=" + group_id, function (data) {
+                    $.each(data, function (i, item) {
+                        del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                        var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<input name="personname_' + item.group_person_id + '|' + item.group_person_id_id + '" class="grid_select person" type="text" value="' + item.personname + '" />'),
+                            $('<td>').html('<input name="roledescription_' + item.List_item_ID + '" class="grid_select" type="text" value="' + item.roledescription + '" />'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_people');
+                    });
                 });
             });
 
@@ -122,10 +141,13 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <input id="hf_groupid" name="hf_groupid" type="hidden" value="<%: hf_groupid %>" />
+    <input id="hf_groupid" name="hf_groupid" type="hidden" />
     <div class="form-group">
         <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
-            <input id="tb_groupname" name="tb_groupname" type="text" class="form-control" value="<%: tb_groupname %>" />
+            <select id="dd_groupname" name="dd_groupname" class="form-control" required>
+                <option></option>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_groupname_values, "", "None")%>
+            </select>
         </div>
     </div>
 
@@ -133,7 +155,7 @@
         <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
             <select id="dd_gendertype" name="dd_gendertype" class="form-control" required>
                 <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, dd_gendertype, "None")%>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, "", "None")%>
             </select>
         </div>
     </div>
@@ -142,7 +164,7 @@
         <label class="control-label col-sm-4" for="dd_authority">Authority</label><div class="col-sm-8">
             <select id="dd_authority" name="dd_authority" class="form-control">
                 <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, dd_authority, "None")%>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, "", "None")%>
             </select>
         </div>
     </div>
@@ -151,14 +173,14 @@
         <label class="control-label col-sm-4" for="dd_decile">Decile</label><div class="col-sm-8">
             <select id="dd_decile" name="dd_decile" class="form-control">
                 <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, dd_decile, "None")%>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, "", "None")%>
             </select>
         </div>
     </div>
 
     <div class="form-group">
         <label class="control-label col-sm-4" for="tb_moenumber">MOE Number</label><div class="col-sm-8">
-            <input id="tb_moenumber" name="tb_moenumber" type="text" class="form-control" value="<%: tb_moenumber %>" />
+            <input id="tb_moenumber" name="tb_moenumber" type="text" class="form-control" />
         </div>
     </div>
 
@@ -166,7 +188,7 @@
         <label class="control-label col-sm-4" for="dd_type">Type</label><div class="col-sm-8">
             <select id="dd_type" name="dd_type" class="form-control">
                 <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, dd_type, "None")%>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, "", "None")%>
             </select>
         </div>
     </div>
@@ -175,7 +197,7 @@
         <label class="control-label col-sm-4" for="dd_startyear">Start Year</label><div class="col-sm-8">
             <select id="dd_startyear" name="dd_startyear" class="form-control">
                 <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, dd_startyear, "None")%>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, "", "None")%>
             </select>
         </div>
     </div>
@@ -184,7 +206,7 @@
         <label class="control-label col-sm-4" for="dd_endyear">End Year</label><div class="col-sm-8">
             <select id="dd_endyear" name="dd_endyear" class="form-control">
                 <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, dd_endyear, "None")%>
+                <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, "", "None")%>
             </select>
         </div>
     </div>
