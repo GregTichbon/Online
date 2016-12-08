@@ -13,63 +13,145 @@
                 }
             });
 
-            $("#dd_groupname").change(function () {
-                group_id = $(this).val();
-                $("#hf_group_id").val(group_id);
-
-                $.ajax({
-                    async: false,
-                    url: "../functions/data.asmx/get_school?group_id=" + group_id, success: function (result) {
-                        item = $.parseJSON(result);
-                        $("#dd_gendertype").val(item[0]['gendertype']);
-                        $("#dd_authority").val(item[0]['authority']);
-                        $("#dd_decile").val(item[0]['decile']);
-                        $("#tb_moenumber").val(item[0]['moenumber']);
-                        $("#dd_type").val(item[0]['type']);
-                        $("#dd_startyear").val(item[0]['startyear']);
-                        $("#dd_endyear").val(item[0]['endyear']);
-                    }
-                });
-
-                $.getJSON("../functions/data.asmx/get_system?group_id=" + group_id, function (data) {
-                    $.each(data, function (i, item) {
-                        del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                        var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
-                            $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="systemname_' + item.group_system_id + '|' + item.system_id + '" class="grid_select" type="text" value="' + item.systemname + '" />'),
-                            $('<td style="text-align:center">').html(del)
-                        ).appendTo('#tbl_systems');
-                    });
-                });
-
-                $.getJSON("../functions/data.asmx/get_school_persons?group_id=" + group_id, function (data) {
-                    $.each(data, function (i, item) {
-                        del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                        var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
-                            $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="personname_' + item.group_person_id + '|' + item.group_person_id_id + '" class="grid_select person" type="text" value="' + item.personname + '" />'),
-                            $('<td>').html('<input name="roledescription_' + item.List_item_ID + '" class="grid_select" type="text" value="' + item.roledescription + '" />'),
-                            $('<td style="text-align:center">').html(del)
-                        ).appendTo('#tbl_people');
-                    });
+            //Drop Down Lists
+            var person_options = '<option value="0"></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=person&param1=", function (data) {
+                $.each(data, function (i, item) {
+                    person_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
+            var user_options = '<option value="0"></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=userinitials&param1=", function (data) {
+                $.each(data, function (i, item) {
+                    user_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var role_options = '<option value="0"></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=role&param1=1", function (data) {
+                $.each(data, function (i, item) {
+                    role_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var system_options = '<option value="0"></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=system&param1=1", function (data) {
+                $.each(data, function (i, item) {
+                    system_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            //Get Record
+            $("#dd_groupname").change(function () {
+                $("#dd_gendertype")[0].selectedIndex = 0;
+                $("#dd_authority")[0].selectedIndex = 0;
+                $("#dd_decile")[0].selectedIndex = 0;
+                $("#tb_moenumber").val('');
+                $("#dd_type")[0].selectedIndex = 0;
+                $("#dd_startyear")[0].selectedIndex = 0;
+                $("#dd_endyear")[0].selectedIndex = 0;
+                $(".rowdata").remove();
+
+                group_id = $(this).val();
+                if (group_id != '') {
+                    $("#hf_group_id").val(group_id);
+
+                    $.ajax({
+                        async: false,
+                        url: "../functions/data.asmx/get_school?group_id=" + group_id, success: function (result) {
+                            item = $.parseJSON(result);
+                            $("#dd_gendertype").val(item[0]['gendertype']);
+                            $("#dd_authority").val(item[0]['authority']);
+                            $("#dd_decile").val(item[0]['decile']);
+                            $("#tb_moenumber").val(item[0]['moenumber']);
+                            $("#dd_type").val(item[0]['type']);
+                            $("#dd_startyear").val(item[0]['startyear']);
+                            $("#dd_endyear").val(item[0]['endyear']);
+                        }
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_system?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = item.system_id + "_" + group_id;
+                            populate_system(id);
+                            $("#personname_" + id).val(item.person_id);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_group_persons?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = item.group_person_id + "_" + group_id;
+                            populate_people(id);
+                            $("#personname_" + id).val(item.person_id);
+                            $("#roledescription_" + id).val(item.role_id);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_narrative?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = item.narrative_id + "_" + group_id;
+                            populate_narrative(id);
+                            $("#narrativewho_" + id).val(item.user_id);
+                            $("#narrativeactionwho_" + id).val(item.action_user_id);
+                        });
+                    });
+                }
+            });
+
+            function populate_system(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                    $('<td style="text-align:center">').html(''),
+                    $('<td>').html('<select name="systemname_' + id + '" id="systemname_' + id + '" class="grid_select systemname">' + system_options + '</select>'),
+                    $('<td style="text-align:center">').html(del)
+                ).appendTo('#tbl_systems');
+            }
+
+            function populate_people(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<select name="personname_' + id + '" id="personname_' + id + '" class="grid_select person">' + person_options + '</select>'),
+                            $('<td>').html('<select name="roledescription_' + id + '" id="roledescription_' + id + '" class="grid_select role">' + role_options + '</select>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_people');
+            }
+
+            function populate_narrative(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<input name="narrativedate_' + id + '" id="narrativedate_' + id + '" type="text" />'),
+                            $('<td>').html('<textarea name="narrative_' + id + '" id="narrative_' + id + '"></textarea>'),
+                            $('<td>').html('<select name="narrativewho_' + id + '" id="narrativewho_' + id + '" class="grid_select narrativewho">' + user_options + '</select>'),
+                            $('<td>').html('<textarea name="narrativeaction_' + id + '" id="narrativeaction_' + id + '"></textarea>'),
+                            $('<td>').html('<input name="narrativefollowupdate_' + id + '" id="narrativefollowupdate_' + id + '" type="text" />'),
+                            $('<td>').html('<select name="narrativefollowupwho_' + id + '" id="narrativefollowupwho_' + id + '" class="grid_select narrativewho">' + user_options + '</select>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_narrative');
+            }
+
 
             $(".a_add").click(function () {
-                if ($("#dd_list").val() != "") {
-                    var $tr = $('<tr data-id="0" class="rowdata">').append(
-                        $('<td style="text-align:center">').html(''),
-                        $('<td>').html('<input class="grid_select" type="text" value="" />'),
-                        $('<td style="text-align:right">').text(0),
-                    $('<td style="text-align:center">').html('Delete')
-                    ).appendTo('#tbl_items');
+                tbl = $(this).closest('table').attr('id');
+                switch (tbl) {
+                    case 'tbl_people':
+                        populate_people('New_' + 0);
+                        break;
+                    case 'tbl_systems':
+                        populate_system('New_' + 0);
+                        break;
+                    case 'tbl_narrative':
+                        populate_narrative('New_' + 0);
+                        break;
+                    case 'tbl_communications':
+                        populate_communications('New_' + 0);
+                        break;
                 }
             });
 
             $('body').on('click', '.a_delete', function () {
-                //var trid = $(this).closest('tr').data('id');
-                //var trid = $(this).parents('tr').data('id');
                 mode = $(this).text();
                 if (mode == 'Delete') {
                     $('td:first', $(this).parents('tr')).html('<img src="images/delete.png">');
@@ -104,13 +186,7 @@
                     //.not("[id^='cb_deletefile_additional_']")
                     .serializeArray();
 
-
                 var formData = JSON.stringify({ formVars: arForm });
-                //var formData = JSON.stringify(arForm);
-
-                //var formData = arForm;
-                //alert(formData);
-                console.log(formData);
 
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -118,13 +194,8 @@
                     contentType: "application/json; charset=utf-8",
                     url: 'functions/posts.asmx/update_school', // the url where we want to POST
                     data: formData,
-                    //data: "<test></test>",
                     dataType: 'json', // what type of data do we expect back from the server
                     success: function (result) {
-                        //alert(result);
-                        //$('.form_result').html('Saved');
-                        //details = $.parseJSON(result.d);
-                        //alert(details.status);
                         alert('Saved');
                         //loaditems();
                     },
@@ -141,7 +212,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <input id="hf_groupid" name="hf_groupid" type="hidden" />
+    <input id="hf_group_id" name="hf_group_id" type="hidden" />
     <div class="form-group">
         <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
             <select id="dd_groupname" name="dd_groupname" class="form-control" required>
@@ -216,29 +287,32 @@
 
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#div_systems">Systems</a></li>
+        <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
         <li><a data-toggle="tab" href="#div_people">People</a></li>
         <li><a data-toggle="tab" href="#div_programs">Programs</a></li>
         <li><a data-toggle="tab" href="#div_policies">Policies</a></li>
         <li><a data-toggle="tab" href="#div_accreditation">Accreditation</a></li>
+        <li><a data-toggle="tab" href="#div_narrative">Narrative</a></li>
+        <li><a data-toggle="tab" href="#div_systems">Systems</a></li>
+
     </ul>
     <!------------------------------------------------------------------------------------------------------>
     <div class="tab-content">
-        <div id="div_systems" class="tab-pane fade in active">
-            <h3>Systems</h3>
 
+
+        <div id="div_communications" class="tab-pane fade in active">
+            <h3>Communications</h3>
             <div class="datagrid">
-                <table id="tbl_systems">
+                <table id="tbl_communications">
                     <tr>
                         <td style="width: 50px; text-align: right"></td>
-                        <td>System</td>
+                        <td>Type</td>
+                        <td>Detail</td>
+                        <td>Note</td>
                         <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
                     </tr>
                 </table>
             </div>
-
-
-
         </div>
 
         <div id="div_people" class="tab-pane fade">
@@ -249,6 +323,24 @@
                         <td style="width: 50px; text-align: right"></td>
                         <td>Name</td>
                         <td>Role</td>
+                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="div_narrative" class="tab-pane fade">
+            <h3>Narrative</h3>
+            <div class="datagrid">
+                <table id="tbl_narrative">
+                    <tr>
+                        <td style="width: 50px; text-align: right"></td>
+                        <td>Date</td>
+                        <td>Narrative</td>
+                        <td>Who</td>
+                        <td>Action</td>
+                        <td>Date</td>
+                        <td>Who</td>
                         <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
                     </tr>
                 </table>
@@ -269,10 +361,20 @@
             <h3>Accreditation</h3>
             <div id="grid_accreditation"></div>
         </div>
-        <div id="div_test" class="tab-pane fade">
-            <h3>Test</h3>
-            <div id="jsGrid"></div>
+
+        <div id="div_systems" class="tab-pane fade">
+            <h3>Systems</h3>
+            <div class="datagrid">
+                <table id="tbl_systems">
+                    <tr>
+                        <td style="width: 50px; text-align: right"></td>
+                        <td>System</td>
+                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                    </tr>
+                </table>
+            </div>
         </div>
+
     </div>
     <input id="btn_Save" type="button" value="Save" />
 

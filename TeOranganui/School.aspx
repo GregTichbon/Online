@@ -84,30 +84,16 @@
                     .not("[id^='__']")
                     //.not("[id^='cb_deletefile_additional_']")
                     .serializeArray();
-
-
                 var formData = JSON.stringify({ formVars: arForm });
-                //var formData = JSON.stringify(arForm);
-
-                //var formData = arForm;
-                //alert(formData);
-                console.log(formData);
-
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     async: false,
                     contentType: "application/json; charset=utf-8",
                     url: 'functions/posts.asmx/update_school', // the url where we want to POST
                     data: formData,
-                    //data: "<test></test>",
                     dataType: 'json', // what type of data do we expect back from the server
                     success: function (result) {
-                        //alert(result);
-                        //$('.form_result').html('Saved');
-                        //details = $.parseJSON(result.d);
-                        //alert(details.status);
                         alert('Saved');
-                        //loaditems();
                     },
                     error: function (xhr, status) {
                         alert("An error occurred: " + status);

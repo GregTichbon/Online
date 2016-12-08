@@ -22,6 +22,8 @@ namespace TeOranganui
 
         public string[] yesno_values = new string[2] { "Yes", "No" };
         public string[] dd_gender_values = new string[3] { "Female", "Male", "Gender Diverse" };
+        public string[] dd_selectperson_values;
+
         #endregion
 
         #region fields
@@ -42,11 +44,51 @@ namespace TeOranganui
             id = Convert.ToInt16(Session["IDS"]);
             */
 
-            hf_person_id = 1;
+            string liststring = "";
+            string delim = "";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Person", con);
+            SqlConnection con;
+            SqlCommand cmd;
+
+            con = new SqlConnection(strConnString);
+            cmd = new SqlCommand("Get_dropdown", con);
+            cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = "person";
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        liststring += delim + dr["label"].ToString() + "\x00FD" + dr["value"].ToString();
+                        delim = "\x00FE";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            dd_selectperson_values = liststring.Split('\x00FE');
+
+/*
+            hf_person_id = 1;
+
+            liststring = "";
+            delim = "";
+
+            con = new SqlConnection(strConnString);
+            cmd = new SqlCommand("Get_Person", con);
             cmd.Parameters.Add("@person_id", SqlDbType.Int).Value = hf_person_id;
 
             cmd.CommandType = CommandType.StoredProcedure;
@@ -74,6 +116,7 @@ namespace TeOranganui
                 con.Close();
                 con.Dispose();
             }
+ */
         }
     }
 }

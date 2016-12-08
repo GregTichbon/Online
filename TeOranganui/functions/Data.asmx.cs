@@ -413,6 +413,151 @@ namespace TeOranganui.data
             Context.Response.Write(JS.Serialize(GroupPersonList));
         }
 
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_person(string person_id)
+        {
+            List<personClass> personList = new List<personClass>();
+
+            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_person", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@person_id", SqlDbType.Int).Value = person_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        personList.Add(new personClass
+                        {
+                            lastname = dr["lastname"].ToString(),
+                            firstname = dr["firstname"].ToString(),
+                            gender = dr["gender"].ToString(),
+                            notes = dr["notes"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(personList));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_person_addresses(string person_id)
+        {
+            List<personaddressClass> personaddressList = new List<personaddressClass>();
+
+            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_person_addresses", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@person_id", SqlDbType.Int).Value = person_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        personaddressList.Add(new personaddressClass
+                        {
+                            personaddress_id = dr["personaddress_id"].ToString(),
+                            addresstype_id = dr["addresstype_id"].ToString(),
+                            detail = dr["detail"].ToString(),
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(personaddressList));
+        }
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_dropdown(string type, string param1 = "")
+        {
+            List<dropdownClass> DropDownList = new List<dropdownClass>();
+
+            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_dropdown", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = type;
+            cmd.Parameters.Add("@param1", SqlDbType.VarChar).Value = param1;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        DropDownList.Add(new dropdownClass
+                        {
+                            label = dr["label"].ToString(),
+                            value = dr["value"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(DropDownList));
+        }
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -509,6 +654,23 @@ namespace TeOranganui.data
         public string type;
         public string startyear;
         public string endyear;
+    }
+
+    public class personClass
+    {
+        public string lastname;
+        public string firstname;
+        public string gender;
+        public string notes;
+    }
+
+    public class personaddressClass
+    {
+        public string personaddress_id;
+        public string addresstype_id;
+        public string detail;
+        public string note;
+        public string current;
     }
 
     public class standardResponseClass
