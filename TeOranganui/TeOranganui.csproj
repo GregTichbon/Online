@@ -147,8 +147,10 @@
     <Content Include="Main2.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Person.aspx" />
+    <Content Include="QS1.html" />
+    <Content Include="QS2.aspx" />
+    <Content Include="QS3.aspx" />
     <Content Include="School.aspx" />
-    <Content Include="SchoolNEW.aspx" />
     <Content Include="Scripts\addclear.min.js" />
     <Content Include="Scripts\additional-methods.js" />
     <Content Include="Scripts\additional-methods.min.js" />
@@ -457,6 +459,7 @@
     <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.js" />
     <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.min.js" />
     <Content Include="Search.aspx" />
+    <Content Include="test1.aspx" />
     <Content Include="ToDo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -536,19 +539,26 @@
       <DependentUpon>Person.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QS2.aspx.cs">
+      <DependentUpon>QS2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QS2.aspx.designer.cs">
+      <DependentUpon>QS2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QS3.aspx.cs">
+      <DependentUpon>QS3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QS3.aspx.designer.cs">
+      <DependentUpon>QS3.aspx</DependentUpon>
+    </Compile>
     <Compile Include="School.aspx.cs">
       <DependentUpon>School.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="School.aspx.designer.cs">
       <DependentUpon>School.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SchoolNEW.aspx.cs">
-      <DependentUpon>SchoolNEW.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SchoolNEW.aspx.designer.cs">
-      <DependentUpon>SchoolNEW.aspx</DependentUpon>
     </Compile>
     <Compile Include="Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>
@@ -563,6 +573,13 @@
     </Compile>
     <Compile Include="TeOranganui.Master.designer.cs">
       <DependentUpon>TeOranganui.Master</DependentUpon>
+    </Compile>
+    <Compile Include="test1.aspx.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test1.aspx.designer.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
     </Compile>
     <Compile Include="ToDo.aspx.cs">
       <DependentUpon>ToDo.aspx</DependentUpon>

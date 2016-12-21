@@ -10,7 +10,6 @@ using System.Configuration;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 
-
 namespace TOHW.Pickups
 {
     /// <summary>
@@ -21,10 +20,6 @@ namespace TOHW.Pickups
     /// GREG [System.ComponentModel.ToolboxItem(false)]
     /// To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     /// GREG [System.Web.Script.Services.ScriptService]    //GREG  - NOT NEEDED FOR GETS
-
-
-
-
 
     public class data : System.Web.Services.WebService
     {

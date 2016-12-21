@@ -66,6 +66,18 @@
                             $("#addresscurrent_" + id).val(item.current);
                         });
                     });
+
+                    $.getJSON("../functions/data.asmx/get_group_person_links?person_id=" + person_id, function (data) {
+                        $.each(data, function (i, item) {
+                            var $tr = $('<tr class="rowdata">').append(
+                            $('<td>').html(item.Group),
+                            $('<td>').html(item.Role)
+                        ).appendTo('#tbl_links');
+
+                        });
+                    });
+
+
                 }
             });
 
@@ -195,7 +207,7 @@
         </div>
     </div>
 
-      <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#div_addresses">Addresses</a></li>
         <li><a data-toggle="tab" href="#div_communications">Communications</a></li>
         <li><a data-toggle="tab" href="#div_links">Links</a></li>
@@ -231,14 +243,13 @@
             </div>
         </div>
 
-               <div id="div_links" class="tab-pane fade">
+        <div id="div_links" class="tab-pane fade">
             <h3>Links</h3>
             <div class="datagrid">
                 <table id="tbl_links">
                     <tr>
-                        <td style="width: 50px; text-align: right"></td>
-                        <td>Link</td>
-                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        <td>Group</td>
+                        <td>Role</td>
                     </tr>
                 </table>
             </div>

@@ -833,7 +833,51 @@ namespace TeOranganui.Functions
 
         }
 
-        //public void createXMLStructure(DataTable repeatertable, NameValueCollection form, XElement rootXml)
+        //public void BuildSubTables(DataTable subtables, NameValueCollection form)
+        public void BuildSubTables(DataTable subtables, NameValue[] form)
+        {
+            subtables.Columns.Add("Name", typeof(string));
+            subtables.Columns.Add("Index", typeof(int));
+            subtables.Columns.Add("Field", typeof(string));
+            subtables.Columns.Add("Value", typeof(string));
+
+            //foreach (string key in form)
+            //   string value = form[key];
+
+            foreach (var obj in form)
+            {
+                string key = obj.name; // Used for NameValue[] rather than NameValueCollection
+                string value = obj.value; // Used for NameValue[] rather than NameValueCollection
+
+                if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
+                {
+                    if (key.Substring(0, 4) == "sub-")
+                    {
+                        string[] keyparts = key.Split('-');
+                        string keypartname = keyparts[1];
+
+                        string keypartindex = keyparts[keyparts.Length - 1];
+                        string keypartfield = "";
+                        string keypartsdelim = "";
+
+                        for (int i = 3; i <= keyparts.Length - 2; i++)
+                        {
+                            keypartfield += keypartsdelim + keyparts[i];
+                            keypartsdelim = "_";
+                        }
+
+                        subtables.Rows.Add(keypartname, keypartindex, keypartfield, value);
+                    }
+                    else
+                    {
+                        //rootXml.Add(new XElement(key, value));
+                    }
+                }
+            }
+
+        }
+
+
         public void createXMLStructure(DataTable repeatertable, NameValue[] form, XElement rootXml)
         {
             repeatertable.Columns.Add("Name", typeof(string));

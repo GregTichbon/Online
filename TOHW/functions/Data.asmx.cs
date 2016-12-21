@@ -4,20 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 
-//using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-//using Newtonsoft.Json;
-//using System.Web.Script.Services;
 using System.Web.Script.Serialization;
-//using System.Text;
-
-//using System.Web.Script.Services;
-
-//using System.Net;
-//using System.Net.Http;
-//using System.Net.Http.Formatting;
 
 namespace TOHW.data
 {
@@ -32,7 +22,18 @@ namespace TOHW.data
 
     public class Data : System.Web.Services.WebService
     {
-
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void test(string myvalue)
+        {
+            standardResponseClass standardResponse = new standardResponseClass();
+            standardResponse.created_id = "created_id";
+            standardResponse.status = "whanganui.teorahou.org.nz";
+            standardResponse.message = myvalue;
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(standardResponse));
+        }
+        
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void TestMethodGet(string mode, string param1)
@@ -854,6 +855,12 @@ namespace TOHW.data
         public string notes;
         public string publicdescription;
         public string url;
+    }
+    public class standardResponseClass
+    {
+        public string created_id;
+        public string status;
+        public string message;
     }
 
     #endregion
