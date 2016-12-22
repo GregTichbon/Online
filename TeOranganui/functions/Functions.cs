@@ -837,7 +837,7 @@ namespace TeOranganui.Functions
         public void BuildSubTables(DataTable subtables, NameValue[] form)
         {
             subtables.Columns.Add("Name", typeof(string));
-            subtables.Columns.Add("Index", typeof(int));
+            subtables.Columns.Add("Index", typeof(string));
             subtables.Columns.Add("Field", typeof(string));
             subtables.Columns.Add("Value", typeof(string));
 
@@ -854,27 +854,90 @@ namespace TeOranganui.Functions
                     if (key.Substring(0, 4) == "sub-")
                     {
                         string[] keyparts = key.Split('-');
-                        string keypartname = keyparts[1];
+                        string tablename = keyparts[1];
+                        string id = keyparts[2];
+                        string fieldname = keyparts[3];
 
-                        string keypartindex = keyparts[keyparts.Length - 1];
-                        string keypartfield = "";
-                        string keypartsdelim = "";
-
-                        for (int i = 3; i <= keyparts.Length - 2; i++)
-                        {
-                            keypartfield += keypartsdelim + keyparts[i];
-                            keypartsdelim = "_";
-                        }
-
-                        subtables.Rows.Add(keypartname, keypartindex, keypartfield, value);
+                        subtables.Rows.Add(tablename, id, fieldname, value);
                     }
-                    else
-                    {
-                        //rootXml.Add(new XElement(key, value));
-                    }
+                    //else
+                    //{
+                    //rootXml.Add(new XElement(key, value));
+                    //}
                 }
             }
 
+        }
+
+        public void updateSubTables(DataTable subtables, string parent_id)
+        {
+            string tablename;
+            string id;
+            string field;
+            string value;
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            DataView dv2 = new DataView(subtables);
+            DataTable dvSites = dv2.ToTable(true, "Name");
+            foreach (DataRow siterow in dvSites.Rows)
+            {
+
+                tablename = siterow["Name"].ToString();
+                string sel = "[Name] = '" + siterow["Name"] + "'";
+                DataView dv3 = new DataView(subtables, sel, "", DataViewRowState.CurrentRows);
+                DataTable dvindexess = dv3.ToTable(true, "Index");
+                foreach (DataRow indexrow in dvindexess.Rows)
+                {
+                    id = indexrow["Index"].ToString();
+
+                    SqlConnection con = new SqlConnection(strConnString);
+
+                    tablename = siterow["Name"].ToString();
+                    con = new SqlConnection(strConnString);
+                    SqlCommand cmd = new SqlCommand("Update_" + tablename, con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Clear();
+
+
+                    cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+                    cmd.Parameters.Add("@parent_id", SqlDbType.VarChar).Value = parent_id;
+                    sel = "[Name] = '" + siterow["Name"] + "' AND [Index] = '" + indexrow["Index"] + "'";
+                    DataView dv4 = new DataView(subtables, sel, "", DataViewRowState.CurrentRows);
+                    DataTable dvfields = dv4.ToTable();
+                    foreach (DataRow fieldrow in dvfields.Rows)
+                    {
+                        field = fieldrow["Field"].ToString();
+                        value = fieldrow["Value"].ToString();
+                        cmd.Parameters.Add("@" + field, SqlDbType.VarChar).Value = value;
+                    }
+
+                    cmd.Connection = con;
+                    try
+                    {
+                        con.Open();
+                        SqlDataReader dr = cmd.ExecuteReader();
+
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+                            //ctr = Convert.ToInt32(dr["ctr"].ToString());
+                            //RAM_ID = dr["RAM_ID"].ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //Log("", ex.InnerException.ToString(), "");
+                    }
+                    finally
+                    {
+                        con.Close();
+                        con.Dispose();
+                    }
+                }
+
+            }
         }
 
 
@@ -923,7 +986,6 @@ namespace TeOranganui.Functions
 
         public void populateXML(DataTable repeatertable, XElement rootXml)
         {
-
             DataView dv2 = new DataView(repeatertable);
             DataTable dvSites = dv2.ToTable(true, "Name");
             foreach (DataRow siterow in dvSites.Rows)

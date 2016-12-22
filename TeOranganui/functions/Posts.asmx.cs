@@ -84,10 +84,11 @@ namespace TeOranganui.posts
             //Functions.populateXML(repeatertable, rootXml);
             #endregion //BuildXML
 
-            #region Build Sub Tables
+            #region Process Sub Tables
             DataTable subtables = new DataTable("SubTables");
             Functions.BuildSubTables(subtables, formVars);
-            #endregion Build Sub Tables
+            Functions.updateSubTables(subtables, formVars.Form("hf_group_id"));
+            #endregion Process Sub Tables
 
             //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
             cmd.Parameters.Add("@group_id", SqlDbType.VarChar).Value = formVars.Form("hf_group_id");

@@ -17,6 +17,10 @@
             });
 
             //Drop Down Lists
+            var yesno_options = '<option value="0"></option>';
+            yesno_options += '<option value="Yes">Yes</option>';
+            yesno_options += '<option value="No">No</option>';
+
             var person_options = '<option value="0"></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=person&param1=", function (data) {
                 $.each(data, function (i, item) {
@@ -105,6 +109,7 @@
                             $("#" + id + "-communicationtype_id").val(item.communicationtype_id);
                             $("#" + id + "-detail").val(item.detail);
                             $("#" + id + "-note").val(item.note);
+                            $("#" + id + "-current").val(item.current);
                         });
                     });
 
@@ -163,9 +168,10 @@
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<select name="' + id + '-communicationtype" id="' + id + '-communicationtype" class="grid_select">' + communicationtype_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-communicationtype_id" id="' + id + '-communicationtype_id" class="grid_select">' + communicationtype_options + '</select>'),
                             $('<td>').html('<input name="' + id + '-detail" id="' + id + '-detail" type="text" />'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note"></textarea>'),
+                            $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select">' + yesno_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_communications');
             }
@@ -347,6 +353,7 @@
                         <td>Type</td>
                         <td>Detail</td>
                         <td>Note</td>
+                        <td>Current</td>
                         <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
                     </tr>
                 </table>

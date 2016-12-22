@@ -450,7 +450,9 @@ namespace TeOranganui.data
                             group_id = dr["group_id"].ToString(),
                             communicationtype_id = dr["communicationtype_id"].ToString(),
                             detail = dr["detail"].ToString(),
-                            note = dr["note"].ToString()
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+
                         });
                     }
                 }
@@ -852,6 +854,7 @@ namespace TeOranganui.data
         public string communicationtype_id;
         public string detail;
         public string note;
+        public string current;
     }
 
     
