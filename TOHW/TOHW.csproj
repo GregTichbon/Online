@@ -366,6 +366,7 @@
     <Content Include="Scripts\jquery.ui.autocomplete.scroll.min.js" />
     <Content Include="Scripts\Moment\moment.js" />
     <Content Include="test1.aspx" />
+    <Content Include="TestandPlay\Format.html" />
     <Content Include="TESTQS.html" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />

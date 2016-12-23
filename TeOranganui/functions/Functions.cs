@@ -890,53 +890,54 @@ namespace TeOranganui.Functions
                 foreach (DataRow indexrow in dvindexess.Rows)
                 {
                     id = indexrow["Index"].ToString();
+                    if ((id + " ").Substring(0, 2) != "DN") {
 
-                    SqlConnection con = new SqlConnection(strConnString);
+                        SqlConnection con = new SqlConnection(strConnString);
 
-                    tablename = siterow["Name"].ToString();
-                    con = new SqlConnection(strConnString);
-                    SqlCommand cmd = new SqlCommand("Update_" + tablename, con);
+                        tablename = siterow["Name"].ToString();
+                        con = new SqlConnection(strConnString);
+                        SqlCommand cmd = new SqlCommand("Update_" + tablename, con);
 
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Clear();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Clear();
 
 
-                    cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
-                    cmd.Parameters.Add("@parent_id", SqlDbType.VarChar).Value = parent_id;
-                    sel = "[Name] = '" + siterow["Name"] + "' AND [Index] = '" + indexrow["Index"] + "'";
-                    DataView dv4 = new DataView(subtables, sel, "", DataViewRowState.CurrentRows);
-                    DataTable dvfields = dv4.ToTable();
-                    foreach (DataRow fieldrow in dvfields.Rows)
-                    {
-                        field = fieldrow["Field"].ToString();
-                        value = fieldrow["Value"].ToString();
-                        cmd.Parameters.Add("@" + field, SqlDbType.VarChar).Value = value;
-                    }
-
-                    cmd.Connection = con;
-                    try
-                    {
-                        con.Open();
-                        SqlDataReader dr = cmd.ExecuteReader();
-
-                        if (dr.HasRows)
+                        cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+                        cmd.Parameters.Add("@parent_id", SqlDbType.VarChar).Value = parent_id;
+                        sel = "[Name] = '" + siterow["Name"] + "' AND [Index] = '" + indexrow["Index"] + "'";
+                        DataView dv4 = new DataView(subtables, sel, "", DataViewRowState.CurrentRows);
+                        DataTable dvfields = dv4.ToTable();
+                        foreach (DataRow fieldrow in dvfields.Rows)
                         {
-                            dr.Read();
-                            //ctr = Convert.ToInt32(dr["ctr"].ToString());
-                            //RAM_ID = dr["RAM_ID"].ToString();
+                            field = fieldrow["Field"].ToString();
+                            value = fieldrow["Value"].ToString();
+                            cmd.Parameters.Add("@" + field, SqlDbType.VarChar).Value = value;
+                        }
+
+                        cmd.Connection = con;
+                        try
+                        {
+                            con.Open();
+                            SqlDataReader dr = cmd.ExecuteReader();
+
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                //ctr = Convert.ToInt32(dr["ctr"].ToString());
+                                //RAM_ID = dr["RAM_ID"].ToString();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            //Log("", ex.InnerException.ToString(), "");
+                        }
+                        finally
+                        {
+                            con.Close();
+                            con.Dispose();
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        //Log("", ex.InnerException.ToString(), "");
-                    }
-                    finally
-                    {
-                        con.Close();
-                        con.Dispose();
-                    }
                 }
-
             }
         }
 

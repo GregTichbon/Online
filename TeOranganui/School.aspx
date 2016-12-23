@@ -166,7 +166,7 @@
             }
             function populate_communications(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-communicationtype_id" id="' + id + '-communicationtype_id" class="grid_select">' + communicationtype_options + '</select>'),
                             $('<td>').html('<input name="' + id + '-detail" id="' + id + '-detail" type="text" />'),
@@ -179,6 +179,7 @@
 
             $(".a_add").click(function () {
                 tbl = $(this).closest('table').attr('id');
+                nextnewkey();
                 switch (tbl) {
                     case 'tbl_people':
                         populate_people('New_' + 0);
@@ -190,7 +191,7 @@
                         populate_narrative('New_' + 0);
                         break;
                     case 'tbl_communications':
-                        populate_communications("sub-GroupCommunication-N" + nextnewkey());
+                        populate_communications("sub-GroupCommunication-N" + newkey);
                         break;
                 }
             });
@@ -200,12 +201,27 @@
                 if (mode == 'Delete') {
                     $('td:first', $(this).parents('tr')).html('<img src="images/delete.png">');
                     $(this).text('Restore');
+                    prefix = 'D';
                 } else {
-                    var a = $('td:first', $(this).parents('tr')).html('');
+                    $('td:first', $(this).parents('tr')).html('');
                     $(this).text('Delete');
+                    prefix = '';
                 }
-                id = -$(this).parents('tr').data('id');
-                $(this).parents('tr').data('id', id);
+                tr = $(this).parents('tr');
+                tr.toggleClass( "deleterow" )
+                dataid = tr.attr("id");
+                $('[name^=' + dataid + ']').each(function (i, obj) {
+                    inputid = $(this).attr('id');
+                    nameparts = inputid.split('-');
+                    newname = nameparts[0] + "-" + nameparts[1] + "-" + prefix + nameparts[2] + "-" + nameparts[3];
+                    $(this).attr('name',newname);
+                });
+                dataidparts = dataid.split('-');
+                if (dataidparts[2].substring(0,1) == 'D') {
+                    dataidparts[2] = dataidparts[2].substring(1);
+                }
+                newdataid = dataidparts[0] + "-" + dataidparts[1] + "-" + prefix + dataidparts[2];
+                tr.attr('id', newdataid);
             });
 
             $('body').on('dblclick', '.person', function () {
@@ -240,8 +256,11 @@
                     data: formData,
                     dataType: 'json', // what type of data do we expect back from the server
                     success: function (result) {
+                        $('.deleterow').remove();
+
+
+
                         alert('Saved');
-                        //loaditems();
                     },
                     error: function (xhr, status) {
                         alert("An error occurred: " + status);
