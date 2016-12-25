@@ -57,7 +57,8 @@
             });
 
             //Get Record
-            $("#dd_groupname").change(function () {
+            $("#dd_search").change(function () {
+                $("#tb_groupname").val('');
                 $("#dd_gendertype")[0].selectedIndex = 0;
                 $("#dd_authority")[0].selectedIndex = 0;
                 $("#dd_decile")[0].selectedIndex = 0;
@@ -68,13 +69,16 @@
                 $(".rowdata").remove();
 
                 group_id = $(this).val();
-                if (group_id != '') {
+                if (group_id == 'Create') {
+                    $("#hf_group_id").val(0);
+                } else if (group_id != '') {
                     $("#hf_group_id").val(group_id);
 
                     $.ajax({
                         async: false,
                         url: "../functions/data.asmx/get_school?group_id=" + group_id, success: function (result) {
                             item = $.parseJSON(result);
+                            $("#tb_groupname").val(item[0]['groupname']);
                             $("#dd_gendertype").val(item[0]['gendertype']);
                             $("#dd_authority").val(item[0]['authority']);
                             $("#dd_decile").val(item[0]['decile']);
@@ -277,11 +281,18 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input id="hf_group_id" name="hf_group_id" type="hidden" />
     <div class="form-group">
-        <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
-            <select id="dd_groupname" name="dd_groupname" class="form-control" required>
+        <label class="control-label col-sm-4" for="dd_search">Search</label><div class="col-sm-8">
+            <select id="dd_search" class="form-control" required>
                 <option></option>
+                <option value="Create">Create</option>
                 <%=TeOranganui.Functions.Functions.populateselect(dd_groupname_values, "", "None")%>
             </select>
+        </div>
+    </div>
+
+       <div class="form-group">
+        <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
+            <input id="tb_groupname" name="tb_groupname" type="text" class="form-control" />
         </div>
     </div>
 

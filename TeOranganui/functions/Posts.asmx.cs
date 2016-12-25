@@ -84,12 +84,6 @@ namespace TeOranganui.posts
             //Functions.populateXML(repeatertable, rootXml);
             #endregion //BuildXML
 
-            #region Process Sub Tables
-            DataTable subtables = new DataTable("SubTables");
-            Functions.BuildSubTables(subtables, formVars);
-            Functions.updateSubTables(subtables, formVars.Form("hf_group_id"));
-            #endregion Process Sub Tables
-
             //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
             cmd.Parameters.Add("@group_id", SqlDbType.VarChar).Value = formVars.Form("hf_group_id");
             cmd.Parameters.Add("@groupname", SqlDbType.VarChar).Value = formVars.Form("tb_groupname");
@@ -100,7 +94,6 @@ namespace TeOranganui.posts
             cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = formVars.Form("dd_type");
             cmd.Parameters.Add("@startyear", SqlDbType.VarChar).Value = formVars.Form("dd_startyear");
             cmd.Parameters.Add("@endyear", SqlDbType.VarChar).Value = formVars.Form("dd_endyear");
-
             
             #region save data (Standard)
             Int32 ctr = 0;
@@ -130,6 +123,12 @@ namespace TeOranganui.posts
                 con.Dispose();
             }
             #endregion
+
+            #region Process Sub Tables
+            DataTable subtables = new DataTable("SubTables");
+            Functions.BuildSubTables(subtables, formVars);
+            Functions.updateSubTables(subtables, formVars.Form("hf_group_id"));
+            #endregion Process Sub Tables
 
             standardResponse resultclass = new standardResponse();
             resultclass.status = "Saved";

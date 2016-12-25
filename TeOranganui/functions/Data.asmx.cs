@@ -741,6 +741,7 @@ namespace TeOranganui.data
                     dr.Read();
                     SchoolList.Add(new schoolClass
                     {
+                        groupname = dr["groupname"].ToString(),
                         gendertype = dr["gendertype"].ToString(),
                         authority = dr["authority"].ToString(),
                         decile = dr["decile"].ToString(),
@@ -803,6 +804,7 @@ namespace TeOranganui.data
     }
     public class schoolClass
     {
+        public string groupname;
         public string gendertype;
         public string authority;
         public string decile;
