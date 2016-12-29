@@ -21,6 +21,7 @@ using System.Configuration;
 
 using System.Collections.Specialized;
 using System.Xml.Linq;
+using System.Web.Script.Serialization;
 
 namespace TeOranganui.Functions
 {
@@ -869,14 +870,19 @@ namespace TeOranganui.Functions
 
         }
 
-        public void updateSubTables(DataTable subtables, string parent_id)
+        public string updateSubTables(DataTable subtables, string parent_id)
         {
+            //string created_id = "";
+
             string tablename;
             string id;
             string field;
             string value;
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            List<Created_IDs_Class> list_Created_IDs = new List<Created_IDs_Class>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             DataView dv2 = new DataView(subtables);
             DataTable dvSites = dv2.ToTable(true, "Name");
@@ -894,7 +900,7 @@ namespace TeOranganui.Functions
 
                         SqlConnection con = new SqlConnection(strConnString);
 
-                        tablename = siterow["Name"].ToString();
+                        //tablename = siterow["Name"].ToString();
                         con = new SqlConnection(strConnString);
                         SqlCommand cmd = new SqlCommand("Update_" + tablename, con);
 
@@ -923,8 +929,14 @@ namespace TeOranganui.Functions
                             if (dr.HasRows)
                             {
                                 dr.Read();
-                                //ctr = Convert.ToInt32(dr["ctr"].ToString());
-                                //RAM_ID = dr["RAM_ID"].ToString();
+                                if (dr["created_id"].ToString() != "") {
+                                    list_Created_IDs.Add(new Created_IDs_Class
+                                    {
+                                        table = tablename,
+                                        created_id = dr["created_id"].ToString(),
+                                        original_id = dr["original_id"].ToString()
+                                    });
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -939,6 +951,8 @@ namespace TeOranganui.Functions
                     }
                 }
             }
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            return JS.Serialize(list_Created_IDs);
         }
 
 
@@ -1075,7 +1089,8 @@ namespace TeOranganui.Functions
             string delim = "";
             //string[] list; // = new string[4] { "Hairdresser", "Camping ground", "Funeral home", "Offensive trade"}; //, "Other preparation / manufacture" 
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("PopulateList", con);
             cmd.Parameters.Add("@grouptype_description", SqlDbType.NVarChar).Value = grouptype_description;
@@ -1108,5 +1123,12 @@ namespace TeOranganui.Functions
             return liststring.Split('\x00FE');
         }
     }
-
+    #region classes
+    public class Created_IDs_Class
+    {
+        public string table;
+        public string created_id;
+        public string original_id;
+    }
+    #endregion
 }

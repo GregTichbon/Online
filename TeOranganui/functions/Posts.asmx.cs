@@ -56,11 +56,10 @@ namespace TeOranganui.posts
         public string update_school(NameValue[] formVars)    //you can't pass any querystring params
          {
 
-            #region fields
-            #endregion
-
+            string group_id;
             #region setup for database (Standard)
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+             String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+             //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             con = new SqlConnection(strConnString);
@@ -83,9 +82,9 @@ namespace TeOranganui.posts
 
             //Functions.populateXML(repeatertable, rootXml);
             #endregion //BuildXML
-
+            group_id = formVars.Form("hf_group_id");
             //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
-            cmd.Parameters.Add("@group_id", SqlDbType.VarChar).Value = formVars.Form("hf_group_id");
+            cmd.Parameters.Add("@group_id", SqlDbType.VarChar).Value = group_id;
             cmd.Parameters.Add("@groupname", SqlDbType.VarChar).Value = formVars.Form("tb_groupname");
             cmd.Parameters.Add("@gendertype", SqlDbType.VarChar).Value = formVars.Form("dd_gendertype");
             cmd.Parameters.Add("@authority", SqlDbType.VarChar).Value = formVars.Form("dd_authority");
@@ -96,8 +95,6 @@ namespace TeOranganui.posts
             cmd.Parameters.Add("@endyear", SqlDbType.VarChar).Value = formVars.Form("dd_endyear");
             
             #region save data (Standard)
-            Int32 ctr = 0;
-            //string RAM_ID = "";
 
             cmd.Connection = con;
             try
@@ -105,13 +102,11 @@ namespace TeOranganui.posts
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
 
-                if (dr.HasRows)
-                {
+                //if (dr.HasRows)
+                //{
                     dr.Read();
-                    //ctr = Convert.ToInt32(dr["ctr"].ToString());
-                    //RAM_ID = dr["RAM_ID"].ToString();
- 
-                }
+                    group_id = dr["group_id"].ToString();
+                //}
             }
             catch (Exception ex)
             {
@@ -127,12 +122,14 @@ namespace TeOranganui.posts
             #region Process Sub Tables
             DataTable subtables = new DataTable("SubTables");
             Functions.BuildSubTables(subtables, formVars);
-            Functions.updateSubTables(subtables, formVars.Form("hf_group_id"));
+            string subtable_ids = Functions.updateSubTables(subtables, group_id);
             #endregion Process Sub Tables
 
             standardResponse resultclass = new standardResponse();
             resultclass.status = "Saved";
-            resultclass.message = "Test";
+            resultclass.message = "";
+            resultclass.id = group_id;
+            resultclass.subtable_ids = subtable_ids;
             JavaScriptSerializer JS = new JavaScriptSerializer();
             string passresult = JS.Serialize(resultclass);
             return (passresult);
@@ -147,6 +144,8 @@ namespace TeOranganui.posts
     {
         public string status;
         public string message;
+        public string id;
+        public string subtable_ids;
     }
 
     #endregion

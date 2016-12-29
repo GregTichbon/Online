@@ -39,8 +39,8 @@ namespace TeOranganui.data
         public void updatelistitem(string list_item_id, string list_id, string label, string value)   
         {
             standardResponseClass standardResponse = new standardResponseClass();
-
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("update_list_item", con);
@@ -82,8 +82,8 @@ namespace TeOranganui.data
         {
             List<GroupRecord> GroupRecordList = new List<GroupRecord>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("Search_Groups", con);
@@ -133,8 +133,8 @@ namespace TeOranganui.data
         {
             List<GroupRecord> GroupRecordList = new List<GroupRecord>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("GroupAutoComplete", con);
@@ -182,8 +182,8 @@ namespace TeOranganui.data
         {
             List<dropdownClass> dropdownlist = new List<dropdownClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_grouptype", con);
@@ -227,8 +227,8 @@ namespace TeOranganui.data
         {
             List<dropdownClass> dropdownlist = new List<dropdownClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_list", con);
@@ -274,8 +274,8 @@ namespace TeOranganui.data
         {
             List<list_itemClass> list_itemlist = new List<list_itemClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_list_item", con);
@@ -319,19 +319,19 @@ namespace TeOranganui.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_narrative(int id, string type)
+        public void get_groupnarrative(int group_id)
         {
             List<narrativeClass> narrativelist = new List<narrativeClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
-            SqlCommand cmd = new SqlCommand("get_narrative", con);
+            SqlCommand cmd = new SqlCommand("get_groupnarrative", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
-            cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = type;
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+            //cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = type;
 
             cmd.Connection = con;
             try
@@ -345,7 +345,7 @@ namespace TeOranganui.data
                     {
                         narrativelist.Add(new narrativeClass
                         {
-                            narrative_id = dr["narrative_id"].ToString(),
+                            groupnarrative_id = dr["groupnarrative_id"].ToString(),
                             group_id = dr["group_id"].ToString(),
                             date = dr["date"].ToString(),
                             user_id = dr["user_id"].ToString(),
@@ -377,8 +377,8 @@ namespace TeOranganui.data
         {
             List<GroupSystem> GroupSystemList = new List<GroupSystem>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_system", con);
@@ -399,8 +399,7 @@ namespace TeOranganui.data
                         GroupSystemList.Add(new GroupSystem
                         {
                             group_system_id = dr["group_system_id"].ToString(),
-                            system_id = dr["system_id"].ToString(),
-                            systemname = dr["systemname"].ToString()
+                            system_id = dr["system_id"].ToString()
                         });
                     }
                 }
@@ -425,8 +424,8 @@ namespace TeOranganui.data
         {
             List<GroupCommunicationsClass> GroupCommunicationsList = new List<GroupCommunicationsClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_group_communications", con);
@@ -477,8 +476,8 @@ namespace TeOranganui.data
         {
             List<GroupPerson> GroupPersonList = new List<GroupPerson>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_group_persons", con);
@@ -500,9 +499,7 @@ namespace TeOranganui.data
                         {
                             group_person_id = dr["group_person_id"].ToString(),
                             person_id = dr["person_id"].ToString(),
-                            personname = dr["personname"].ToString(),
-                            role_id = dr["role_id"].ToString(),
-                            roledescription = dr["roledescription"].ToString()
+                            role_id = dr["role_id"].ToString()
                         });
                     }
                 }
@@ -527,8 +524,8 @@ namespace TeOranganui.data
         {
             List<personClass> personList = new List<personClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_person", con);
@@ -576,8 +573,8 @@ namespace TeOranganui.data
         {
             List<personaddressClass> personaddressList = new List<personaddressClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_person_addresses", con);
@@ -626,8 +623,8 @@ namespace TeOranganui.data
         {
             List<grouppersonlinkClass> grouppersonlinksList = new List<grouppersonlinkClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_group_person_links", con);
@@ -673,8 +670,8 @@ namespace TeOranganui.data
         {
             List<dropdownClass> DropDownList = new List<dropdownClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_dropdown", con);
@@ -721,8 +718,8 @@ namespace TeOranganui.data
         {
             List<schoolClass> SchoolList = new List<schoolClass>();
 
-            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
-            string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
             SqlCommand cmd = new SqlCommand("get_school", con);
@@ -780,15 +777,12 @@ namespace TeOranganui.data
     {
         public string group_system_id;
         public string system_id;
-        public string systemname;
     }
     public class GroupPerson
     {
         public string group_person_id;
         public string person_id;
-        public string personname;
         public string role_id;
-        public string roledescription;
     }
     public class dropdownClass
     {
@@ -839,7 +833,7 @@ namespace TeOranganui.data
 
     public class narrativeClass
     {
-        public string narrative_id;
+        public string groupnarrative_id;
         public string group_id;
         public string date;
         public string user_id;

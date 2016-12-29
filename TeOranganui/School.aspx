@@ -91,18 +91,18 @@
 
                     $.getJSON("../functions/data.asmx/get_system?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = item.system_id + "_" + group_id;
+                            id = "sub-group_system-" + item.group_system_id;
                             populate_system(id);
-                            $("#systemname_" + id).val(item.system_id);
+                            $("#" + id + "-system_id").val(item.system_id);
                         });
                     });
 
                     $.getJSON("../functions/data.asmx/get_group_persons?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = item.group_person_id + "_" + group_id;
+                            id = "sub-group_person-" + item.group_person_id;
                             populate_people(id);
-                            $("#personname_" + id).val(item.person_id);
-                            $("#roledescription_" + id).val(item.role_id);
+                            $("#" + id + "-person_id").val(item.person_id);
+                            $("#" + id + "-role_id").val(item.role_id);
                         });
                     });
 
@@ -117,54 +117,55 @@
                         });
                     });
 
-                    $.getJSON("../functions/data.asmx/get_narrative?type=group&id=" + group_id, function (data) {
+                    $.getJSON("../functions/data.asmx/get_groupnarrative?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = item.narrative_id + "_" + group_id;
+                            id = "sub-groupnarrative-" + item.groupnarrative_id;
                             populate_narrative(id);
-                            $("#narrativedate_" + id).val(item.date);
-                            $("#narrative_" + id).val(item.narrative);
-                            $("#narrativewho_" + id).val(item.user_id);
-                            $("#narrativeaction_" + id).val(item.action);
-                            $("#narrativeactiondate_" + id).val(item.action_date);
-                            $("#narrativeactionwho_" + id).val(item.action_user_id);
+                            $("#" + id + "-date").val(item.date);
+                            $("#" + id + "-narrative").val(item.narrative);
+                            $("#" + id + "-user_id").val(item.user_id);
+                            $("#" + id + "-action").val(item.action);
+                            $("#" + id + "-action_date").val(item.action_date);
+                            $("#" + id + "-action_user_id").val(item.action_user_id);
                         });
                     });
                 }
+                $(this).prop('selectedIndex', 0);
             });
 
             function nextnewkey() {
-                newkey ++;
+                newkey++;
             }
 
             function populate_system(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
-                    $('<td>').html('<select name="systemname_' + id + '" id="systemname_' + id + '" class="grid_select systemname">' + system_options + '</select>'),
+                    $('<td>').html('<select name="' + id + '-system_id" id="' + id + '-system_id" class="grid_select">' + system_options + '</select>'),
                     $('<td style="text-align:center">').html(del)
                 ).appendTo('#tbl_systems');
             }
 
             function populate_people(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                var $tr = $('<tr id="' + id + '" class="rowdata person">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<select name="personname_' + id + '" id="personname_' + id + '" class="grid_select person">' + person_options + '</select>'),
-                            $('<td>').html('<select name="roledescription_' + id + '" id="roledescription_' + id + '" class="grid_select role">' + role_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-person_id" id="' + id + '-person_id" class="grid_select">' + person_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-role_id" id="' + id + '-role_id" class="grid_select">' + role_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_people');
             }
 
             function populate_narrative(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                var $tr = $('<tr data-id="' + id + '" class="rowdata">').append(
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="narrativedate_' + id + '" id="narrativedate_' + id + '" type="text" />'),
-                            $('<td>').html('<textarea name="narrative_' + id + '" id="narrative_' + id + '"></textarea>'),
-                            $('<td>').html('<select name="narrativewho_' + id + '" id="narrativewho_' + id + '" class="grid_select narrativewho">' + user_options + '</select>'),
-                            $('<td>').html('<textarea name="narrativeaction_' + id + '" id="narrativeaction_' + id + '"></textarea>'),
-                            $('<td>').html('<input name="narrativeactiondate_' + id + '" id="narrativeactiondate_' + id + '" type="text" />'),
-                            $('<td>').html('<select name="narrativeactionwho_' + id + '" id="narrativeactionwho_' + id + '" class="grid_select narrativewho">' + user_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" />'),
+                            $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative"></textarea>'),
+                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" class="grid_select">' + user_options + '</select>'),
+                            $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action"></textarea>'),
+                            $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" />'),
+                            $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select">' + user_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_narrative');
             }
@@ -186,13 +187,13 @@
                 nextnewkey();
                 switch (tbl) {
                     case 'tbl_people':
-                        populate_people('New_' + 0);
+                        populate_people('sub-group_person-N' + newkey);
                         break;
                     case 'tbl_systems':
-                        populate_system('New_' + 0);
+                        populate_system('sub-group_system-N' + newkey);
                         break;
                     case 'tbl_narrative':
-                        populate_narrative('New_' + 0);
+                        populate_narrative('sub-groupnarrative-N' + newkey);
                         break;
                     case 'tbl_communications':
                         populate_communications("sub-GroupCommunication-N" + newkey);
@@ -234,7 +235,6 @@
 
             $('.nav-tabs a').on('shown.bs.tab', function (event) {
                 var mytab = $(event.target).text();         // active tab
-                //alert(mytab);
                 $("#grid_" + mytab.toLowerCase()).jsGrid("refresh");
                 //var y = $(event.relatedTarget).text();  // previous tab
             });
@@ -261,9 +261,16 @@
                     dataType: 'json', // what type of data do we expect back from the server
                     success: function (result) {
                         $('.deleterow').remove();
-
-
-
+                        item = $.parseJSON(result.d);
+                        subtable_ids = $.parseJSON(item.subtable_ids);
+                        $.each(subtable_ids, function (key, value) {
+                            $('[id^=sub-' + value.table + '-' + value.original_id + ']').each(function (index) {
+                                $(this).attr('id', $(this).attr('id').replace(value.original_id, value.created_id));
+                            });
+                            $('[name^=sub-' + value.table + '-' + value.original_id + ']').each(function (index) {
+                                $(this).attr('name', $(this).attr('name').replace(value.original_id, value.created_id));
+                            });
+                        });
                         alert('Saved');
                     },
                     error: function (xhr, status) {
