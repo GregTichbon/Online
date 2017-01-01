@@ -135,7 +135,139 @@ namespace TeOranganui.posts
             return (passresult);
         }
 
-  
+        [WebMethod]
+        public string update_person(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string person_id;
+            #region setup for database (Standard)
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Update_Person", con);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Clear();
+            #endregion
+
+            #region setup specific data
+            //cmd.Parameters.Add("@links", SqlDbType.VarChar).Value = links;  //Standard
+            #endregion //setup specific data
+
+            #region BuildXML
+            //XElement rootXml = new XElement("root");
+            //DataTable repeatertable = new DataTable("Repeater");
+
+            //Functions.createXMLStructure(repeatertable, Request.Form, rootXml);
+            //Functions.createXMLStructure(repeatertable, formVars, rootXml);
+
+            //Functions.populateXML(repeatertable, rootXml);
+            #endregion //BuildXML
+            person_id = formVars.Form("hf_person_id");
+            //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+
+            cmd.Parameters.Add("@lastname", SqlDbType.VarChar).Value = formVars.Form("tb_lastname");
+            cmd.Parameters.Add("@firstname", SqlDbType.VarChar).Value = formVars.Form("tb_firstname");
+            cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = formVars.Form("dd_gender");
+            cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = formVars.Form("tb_notes");
+
+            #region save data (Standard)
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                //if (dr.HasRows)
+                //{
+                dr.Read();
+                person_id = dr["person_id"].ToString();
+                //}
+            }
+            catch (Exception ex)
+            {
+                Functions.Log("", ex.InnerException.ToString(), "");
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            #endregion
+
+            #region Process Sub Tables
+            DataTable subtables = new DataTable("SubTables");
+            Functions.BuildSubTables(subtables, formVars);
+            string subtable_ids = Functions.updateSubTables(subtables, person_id);
+            #endregion Process Sub Tables
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Saved";
+            resultclass.message = "";
+            resultclass.id = person_id;
+            resultclass.subtable_ids = subtable_ids;
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string login(NameValue[] formVars)    //you can't pass any querystring params
+        {
+
+            string user_id = "";
+            string name = "";
+            string initials = "";
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("login", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@login_name", SqlDbType.VarChar).Value = formVars.Form("tb_login_name").Trim();
+            cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = formVars.Form("tb_password").Trim();
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+
+                    user_id = dr["user_id"].ToString();
+                    name = dr["name"].ToString();
+                    initials = dr["initials"].ToString();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            Session["user_id"] = user_id;
+            Session["user_name"] = name;
+            Session["user_initials"] = initials;
+
+            loginClass login = new loginClass();
+            login.user_id = user_id;
+            login.user_name = name;
+            login.user_initials = initials;
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(login);
+            return (passresult);
+        }
     }
     #region classes
  
@@ -146,6 +278,12 @@ namespace TeOranganui.posts
         public string message;
         public string id;
         public string subtable_ids;
+    }
+    public class loginClass
+    {
+        public string user_id;
+        public string user_name;
+        public string user_initials;
     }
 
     #endregion

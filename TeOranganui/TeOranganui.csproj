@@ -459,6 +459,7 @@
     <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.js" />
     <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.min.js" />
     <Content Include="Search.aspx" />
+    <Content Include="login.aspx" />
     <Content Include="test1.aspx" />
     <Content Include="ToDo.aspx" />
     <Content Include="Web.config" />
@@ -566,6 +567,13 @@
     </Compile>
     <Compile Include="Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeOranganui.Master.cs">
       <DependentUpon>TeOranganui.Master</DependentUpon>

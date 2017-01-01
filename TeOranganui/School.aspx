@@ -7,6 +7,7 @@
     <script type="text/javascript">
 
         var newkey = 0;
+        var inputfields_disabled = true;
 
         $(document).ready(function () {
             $(document).uitooltip({
@@ -16,41 +17,52 @@
                 }
             });
 
+            $("#form1").validate();
+
+            $("#inputfields :input").prop("disabled", inputfields_disabled)
+
             //Drop Down Lists
-            var yesno_options = '<option value="0"></option>';
+            var yesno_options = '<option value=""></option>';
             yesno_options += '<option value="Yes">Yes</option>';
             yesno_options += '<option value="No">No</option>';
 
-            var person_options = '<option value="0"></option>';
+            var person_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=person&param1=", function (data) {
                 $.each(data, function (i, item) {
                     person_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
-            var user_options = '<option value="0"></option>';
+            var user_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=userinitials&param1=", function (data) {
                 $.each(data, function (i, item) {
                     user_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
-            var role_options = '<option value="0"></option>';
+            var role_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=role&param1=1", function (data) {
                 $.each(data, function (i, item) {
                     role_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
-            var system_options = '<option value="0"></option>';
-            $.getJSON("../functions/data.asmx/get_dropdown?type=system&param1=1", function (data) {
+            var programme_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=5", function (data) {
+                $.each(data, function (i, item) {
+                    programme_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var system_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=system&param1=", function (data) {
                 $.each(data, function (i, item) {
                     system_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
-            var communicationtype_options = '<option value="0"></option>';
-            $.getJSON("../functions/data.asmx/get_dropdown?type=communicationtype&param1=1", function (data) {
+            var communicationtype_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=communicationtype&param1=", function (data) {
                 $.each(data, function (i, item) {
                     communicationtype_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
@@ -58,6 +70,8 @@
 
             //Get Record
             $("#dd_search").change(function () {
+                inputfields_disabled = false;
+                $("#inputfields :input").prop("disabled", inputfields_disabled)
                 $("#tb_groupname").val('');
                 $("#dd_gendertype")[0].selectedIndex = 0;
                 $("#dd_authority")[0].selectedIndex = 0;
@@ -89,14 +103,6 @@
                         }
                     });
 
-                    $.getJSON("../functions/data.asmx/get_system?group_id=" + group_id, function (data) {
-                        $.each(data, function (i, item) {
-                            id = "sub-group_system-" + item.group_system_id;
-                            populate_system(id);
-                            $("#" + id + "-system_id").val(item.system_id);
-                        });
-                    });
-
                     $.getJSON("../functions/data.asmx/get_group_persons?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
                             id = "sub-group_person-" + item.group_person_id;
@@ -106,14 +112,33 @@
                         });
                     });
 
-                    $.getJSON("../functions/data.asmx/get_group_communications?group_id=" + group_id, function (data) {
+                    $.getJSON("../functions/data.asmx/get_groupcommunication?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-GroupCommunication-" + item.groupcommunication_id;
+                            id = "sub-GroupCommunication-" + item.communication_id;
                             populate_communications(id);
                             $("#" + id + "-communicationtype_id").val(item.communicationtype_id);
                             $("#" + id + "-detail").val(item.detail);
                             $("#" + id + "-note").val(item.note);
                             $("#" + id + "-current").val(item.current);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_school_programme?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-School_Programme-" + item.School_Programme_ID;
+                            populate_programme(id);
+                            $("#" + id + "-list_item_id").val(item.list_item_id);
+                            $("#" + id + "-startdate").val(item.startdate);
+                            $("#" + id + "-enddate").val(item.enddate);
+                            $("#" + id + "-note").val(item.note);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_group_system?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-group_system-" + item.group_system_id;
+                            populate_system(id);
+                            $("#" + id + "-system_id").val(item.system_id);
                         });
                     });
 
@@ -137,67 +162,89 @@
                 newkey++;
             }
 
-            function populate_system(id) {
+            function populate_communications(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
-                    $('<td style="text-align:center">').html(''),
-                    $('<td>').html('<select name="' + id + '-system_id" id="' + id + '-system_id" class="grid_select">' + system_options + '</select>'),
-                    $('<td style="text-align:center">').html(del)
-                ).appendTo('#tbl_systems');
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<select name="' + id + '-communicationtype_id" id="' + id + '-communicationtype_id" class="grid_select form-control" required>' + communicationtype_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-detail" id="' + id + '-detail" type="text" class="form-control" required />'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                            $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_communications');
             }
 
             function populate_people(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata person">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<select name="' + id + '-person_id" id="' + id + '-person_id" class="grid_select">' + person_options + '</select>'),
-                            $('<td>').html('<select name="' + id + '-role_id" id="' + id + '-role_id" class="grid_select">' + role_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-person_id" id="' + id + '-person_id" class="grid_select form-control" required>' + person_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-role_id" id="' + id + '-role_id" class="grid_select form-control">' + role_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_people');
             }
+
+            function populate_programme(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                    $('<td style="text-align:center">').html(''),
+                    $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control">' + programme_options + '</select>'),
+                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control" required />'),
+                    $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control" />'),
+                    $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                    $('<td style="text-align:center">').html(del)
+                ).appendTo('#tbl_programmes');
+            }
+
+            function populate_system(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                    $('<td style="text-align:center">').html(''),
+                    $('<td>').html('<select name="' + id + '-system_id" id="' + id + '-system_id" class="grid_select form-control">' + system_options + '</select>'),
+                    $('<td style="text-align:center">').html(del)
+                ).appendTo('#tbl_systems');
+            }
+
+
 
             function populate_narrative(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" />'),
-                            $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative"></textarea>'),
-                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" class="grid_select">' + user_options + '</select>'),
-                            $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action"></textarea>'),
-                            $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" />'),
-                            $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select">' + user_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" />'),
+                            $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative" class="form-control"></textarea>'),
+                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" class="grid_select form-control">' + user_options + '</select>'),
+                            $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action" class="form-control"></textarea>'),
+                            $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" class="form-control" />'),
+                            $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select form-control">' + user_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_narrative');
             }
-            function populate_communications(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
-                            $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<select name="' + id + '-communicationtype_id" id="' + id + '-communicationtype_id" class="grid_select">' + communicationtype_options + '</select>'),
-                            $('<td>').html('<input name="' + id + '-detail" id="' + id + '-detail" type="text" />'),
-                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note"></textarea>'),
-                            $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select">' + yesno_options + '</select>'),
-                            $('<td style="text-align:center">').html(del)
-                        ).appendTo('#tbl_communications');
-            }
+
 
 
             $(".a_add").click(function () {
-                tbl = $(this).closest('table').attr('id');
-                nextnewkey();
-                switch (tbl) {
-                    case 'tbl_people':
-                        populate_people('sub-group_person-N' + newkey);
-                        break;
-                    case 'tbl_systems':
-                        populate_system('sub-group_system-N' + newkey);
-                        break;
-                    case 'tbl_narrative':
-                        populate_narrative('sub-groupnarrative-N' + newkey);
-                        break;
-                    case 'tbl_communications':
-                        populate_communications("sub-GroupCommunication-N" + newkey);
-                        break;
+                if (!inputfields_disabled) {
+                    tbl = $(this).closest('table').attr('id');
+                    nextnewkey();
+                    switch (tbl) {
+                        case 'tbl_communications':
+                            populate_communications("sub-GroupCommunication-N" + newkey);
+                            break;
+                        case 'tbl_people':
+                            populate_people('sub-group_person-N' + newkey);
+                            break;
+                        case 'tbl_programmes':
+                            populate_programme('sub-school_programme-N' + newkey);
+                            break;
+                        case 'tbl_systems':
+                            populate_system('sub-group_system-N' + newkey);
+                            break;
+                        case 'tbl_narrative':
+                            populate_narrative('sub-groupnarrative-N' + newkey);
+                            break;
+
+                    }
                 }
             });
 
@@ -213,16 +260,16 @@
                     prefix = '';
                 }
                 tr = $(this).parents('tr');
-                tr.toggleClass( "deleterow" )
+                tr.toggleClass("deleterow")
                 dataid = tr.attr("id");
                 $('[name^=' + dataid + ']').each(function (i, obj) {
                     inputid = $(this).attr('id');
                     nameparts = inputid.split('-');
                     newname = nameparts[0] + "-" + nameparts[1] + "-" + prefix + nameparts[2] + "-" + nameparts[3];
-                    $(this).attr('name',newname);
+                    $(this).attr('name', newname);
                 });
                 dataidparts = dataid.split('-');
-                if (dataidparts[2].substring(0,1) == 'D') {
+                if (dataidparts[2].substring(0, 1) == 'D') {
                     dataidparts[2] = dataidparts[2].substring(1);
                 }
                 newdataid = dataidparts[0] + "-" + dataidparts[1] + "-" + prefix + dataidparts[2];
@@ -230,7 +277,15 @@
             });
 
             $('body').on('dblclick', '.person', function () {
-                alert('here');
+                idparts = $(this).attr('id').split('-');
+                tbl = idparts[1];
+                id = idparts[2];
+                switch (tbl) {
+                    case 'group_person':
+                        alert('Person: ' + id);
+                        break;
+                }
+
             });
 
             $('.nav-tabs a').on('shown.bs.tab', function (event) {
@@ -240,45 +295,42 @@
             });
 
             $("#btn_Save").click(function () {
-                savefields();
-            });
+                if ($("#form1").valid()) {
+                    var arForm = $("#form1")
+                        .find("input,textarea,select,hidden")
+                        .not("[id^='__']")
+                        //.not("[id^='cb_deletefile_additional_']")
+                        .serializeArray();
 
-            function savefields() {
-                var arForm = $("#form1")
-                    .find("input,textarea,select,hidden")
-                    .not("[id^='__']")
-                    //.not("[id^='cb_deletefile_additional_']")
-                    .serializeArray();
+                    var formData = JSON.stringify({ formVars: arForm });
 
-                var formData = JSON.stringify({ formVars: arForm });
-
-                $.ajax({
-                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                    async: false,
-                    contentType: "application/json; charset=utf-8",
-                    url: 'functions/posts.asmx/update_school', // the url where we want to POST
-                    data: formData,
-                    dataType: 'json', // what type of data do we expect back from the server
-                    success: function (result) {
-                        $('.deleterow').remove();
-                        item = $.parseJSON(result.d);
-                        subtable_ids = $.parseJSON(item.subtable_ids);
-                        $.each(subtable_ids, function (key, value) {
-                            $('[id^=sub-' + value.table + '-' + value.original_id + ']').each(function (index) {
-                                $(this).attr('id', $(this).attr('id').replace(value.original_id, value.created_id));
+                    $.ajax({
+                        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                        async: false,
+                        contentType: "application/json; charset=utf-8",
+                        url: 'functions/posts.asmx/update_school', // the url where we want to POST
+                        data: formData,
+                        dataType: 'json', // what type of data do we expect back from the server
+                        success: function (result) {
+                            $('.deleterow').remove();
+                            item = $.parseJSON(result.d);
+                            subtable_ids = $.parseJSON(item.subtable_ids);
+                            $.each(subtable_ids, function (key, value) {
+                                $('[id^=sub-' + value.table + '-' + value.original_id + ']').each(function (index) {
+                                    $(this).attr('id', $(this).attr('id').replace(value.original_id, value.created_id));
+                                });
+                                $('[name^=sub-' + value.table + '-' + value.original_id + ']').each(function (index) {
+                                    $(this).attr('name', $(this).attr('name').replace(value.original_id, value.created_id));
+                                });
                             });
-                            $('[name^=sub-' + value.table + '-' + value.original_id + ']').each(function (index) {
-                                $(this).attr('name', $(this).attr('name').replace(value.original_id, value.created_id));
-                            });
-                        });
-                        alert('Saved');
-                    },
-                    error: function (xhr, status) {
-                        alert("An error occurred: " + status);
-                    }
-                })
-            }
-
+                            alert('Saved');
+                        },
+                        error: function (xhr, status) {
+                            alert("An error occurred: " + status);
+                        }
+                    })
+                }
+            })
         });
 
     </script>
@@ -289,177 +341,191 @@
     <input id="hf_group_id" name="hf_group_id" type="hidden" />
     <div class="form-group">
         <label class="control-label col-sm-4" for="dd_search">Search</label><div class="col-sm-8">
-            <select id="dd_search" class="form-control" required>
+            <select id="dd_search" class="form-control">
                 <option></option>
                 <option value="Create">Create</option>
                 <%=TeOranganui.Functions.Functions.populateselect(dd_groupname_values, "", "None")%>
             </select>
         </div>
     </div>
+    <div id="inputfields">
 
-       <div class="form-group">
-        <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
-            <input id="tb_groupname" name="tb_groupname" type="text" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
-            <select id="dd_gendertype" name="dd_gendertype" class="form-control" required>
-                <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, "", "None")%>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="dd_authority">Authority</label><div class="col-sm-8">
-            <select id="dd_authority" name="dd_authority" class="form-control">
-                <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, "", "None")%>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="dd_decile">Decile</label><div class="col-sm-8">
-            <select id="dd_decile" name="dd_decile" class="form-control">
-                <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, "", "None")%>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="tb_moenumber">MOE Number</label><div class="col-sm-8">
-            <input id="tb_moenumber" name="tb_moenumber" type="text" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="dd_type">Type</label><div class="col-sm-8">
-            <select id="dd_type" name="dd_type" class="form-control">
-                <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, "", "None")%>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="dd_startyear">Start Year</label><div class="col-sm-8">
-            <select id="dd_startyear" name="dd_startyear" class="form-control">
-                <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, "", "None")%>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="dd_endyear">End Year</label><div class="col-sm-8">
-            <select id="dd_endyear" name="dd_endyear" class="form-control">
-                <option></option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, "", "None")%>
-            </select>
-        </div>
-    </div>
-
-
-
-
-
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
-        <li><a data-toggle="tab" href="#div_people">People</a></li>
-        <li><a data-toggle="tab" href="#div_programs">Programs</a></li>
-        <li><a data-toggle="tab" href="#div_policies">Policies</a></li>
-        <li><a data-toggle="tab" href="#div_accreditation">Accreditation</a></li>
-        <li><a data-toggle="tab" href="#div_narrative">Narrative</a></li>
-        <li><a data-toggle="tab" href="#div_systems">Systems</a></li>
-
-    </ul>
-    <!------------------------------------------------------------------------------------------------------>
-    <div class="tab-content">
-
-
-        <div id="div_communications" class="tab-pane fade in active">
-            <h3>Communications</h3>
-            <div class="datagrid">
-                <table id="tbl_communications">
-                    <tr>
-                        <td style="width: 50px; text-align: right"></td>
-                        <td>Type</td>
-                        <td>Detail</td>
-                        <td>Note</td>
-                        <td>Current</td>
-                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
-                    </tr>
-                </table>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
+                <input id="tb_groupname" name="tb_groupname" type="text" class="form-control" required />
             </div>
         </div>
 
-        <div id="div_people" class="tab-pane fade">
-            <h3>People</h3>
-            <div class="datagrid">
-                <table id="tbl_people">
-                    <tr>
-                        <td style="width: 50px; text-align: right"></td>
-                        <td>Name</td>
-                        <td>Role</td>
-                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
-                    </tr>
-                </table>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
+                <select id="dd_gendertype" name="dd_gendertype" class="form-control">
+                    <option></option>
+                    <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, "", "None")%>
+                </select>
             </div>
         </div>
 
-        <div id="div_narrative" class="tab-pane fade">
-            <h3>Narrative</h3>
-            <div class="datagrid">
-                <table id="tbl_narrative">
-                    <tr>
-                        <td style="width: 50px; text-align: right"></td>
-                        <td>Date</td>
-                        <td>Narrative</td>
-                        <td>Who</td>
-                        <td>Action</td>
-                        <td>Date</td>
-                        <td>Who</td>
-                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
-                    </tr>
-                </table>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_authority">Authority</label><div class="col-sm-8">
+                <select id="dd_authority" name="dd_authority" class="form-control">
+                    <option></option>
+                    <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, "", "None")%>
+                </select>
             </div>
         </div>
 
-        <div id="div_programs" class="tab-pane fade">
-            <h3>Programs</h3>
-            <div id="grid_programs"></div>
-        </div>
-
-        <div id="div_policies" class="tab-pane fade">
-            <h3>Policies</h3>
-            <div id="grid_policies"></div>
-        </div>
-
-        <div id="div_accreditation" class="tab-pane fade">
-            <h3>Accreditation</h3>
-            <div id="grid_accreditation"></div>
-        </div>
-
-        <div id="div_systems" class="tab-pane fade">
-            <h3>Systems</h3>
-            <div class="datagrid">
-                <table id="tbl_systems">
-                    <tr>
-                        <td style="width: 50px; text-align: right"></td>
-                        <td>System</td>
-                        <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
-                    </tr>
-                </table>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_decile">Decile</label><div class="col-sm-8">
+                <select id="dd_decile" name="dd_decile" class="form-control">
+                    <option></option>
+                    <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, "", "None")%>
+                </select>
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_moenumber">MOE Number</label><div class="col-sm-8">
+                <input id="tb_moenumber" name="tb_moenumber" type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_type">Type</label><div class="col-sm-8">
+                <select id="dd_type" name="dd_type" class="form-control">
+                    <option></option>
+                    <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, "", "None")%>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_startyear">Start Year</label><div class="col-sm-8">
+                <select id="dd_startyear" name="dd_startyear" class="form-control">
+                    <option></option>
+                    <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, "", "None")%>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_endyear">End Year</label><div class="col-sm-8">
+                <select id="dd_endyear" name="dd_endyear" class="form-control">
+                    <option></option>
+                    <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, "", "None")%>
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
+            <li><a data-toggle="tab" href="#div_people">People</a></li>
+            <li><a data-toggle="tab" href="#div_programmes">Programmes</a></li>
+            <li><a data-toggle="tab" href="#div_policies">Policies</a></li>
+            <li><a data-toggle="tab" href="#div_accreditation">Accreditation</a></li>
+            <li><a data-toggle="tab" href="#div_narrative">Narrative</a></li>
+            <li><a data-toggle="tab" href="#div_systems">Systems</a></li>
+
+        </ul>
+        <!------------------------------------------------------------------------------------------------------>
+        <div class="tab-content">
+
+
+            <div id="div_communications" class="tab-pane fade in active">
+                <h3>Communications</h3>
+                <div class="datagrid">
+                    <table id="tbl_communications">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Type</td>
+                            <td>Detail</td>
+                            <td>Note</td>
+                            <td>Current</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="div_people" class="tab-pane fade">
+                <h3>People</h3>
+                <div class="datagrid">
+                    <table id="tbl_people">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Name</td>
+                            <td>Role</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="div_programmes" class="tab-pane fade">
+                <h3>Programmes</h3>
+                <div class="datagrid">
+                    <table id="tbl_programmes">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Programme</td>
+                            <td>Start</td>
+                            <td>End</td>
+                            <td>Note</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="div_narrative" class="tab-pane fade">
+                <h3>Narrative</h3>
+                <div class="datagrid">
+                    <table id="tbl_narrative">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Date</td>
+                            <td>Narrative</td>
+                            <td>Who</td>
+                            <td>Action</td>
+                            <td>Date</td>
+                            <td>Who</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div id="div_policies" class="tab-pane fade">
+                <h3>Policies</h3>
+                <div class="datagrid"></div>
+            </div>
+
+            <div id="div_accreditation" class="tab-pane fade">
+                <h3>Accreditation</h3>
+                <div id="grid_accreditation"></div>
+            </div>
+
+            <div id="div_systems" class="tab-pane fade">
+                <h3>Systems</h3>
+                <div class="datagrid">
+                    <table id="tbl_systems">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>System</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <input id="btn_Save" type="button" value="Save" />
     </div>
-    <input id="btn_Save" type="button" value="Save" />
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 </asp:Content>

@@ -373,7 +373,7 @@ namespace TeOranganui.data
         
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_system(string group_id)
+        public void get_group_system(string group_id)
         {
             List<GroupSystem> GroupSystemList = new List<GroupSystem>();
 
@@ -381,7 +381,7 @@ namespace TeOranganui.data
             //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
-            SqlCommand cmd = new SqlCommand("get_system", con);
+            SqlCommand cmd = new SqlCommand("get_group_system", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
@@ -418,17 +418,18 @@ namespace TeOranganui.data
             Context.Response.Write(JS.Serialize(GroupSystemList));
         }
 
+        
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_group_communications(string group_id)
+        public void get_school_programme(string group_id)
         {
-            List<GroupCommunicationsClass> GroupCommunicationsList = new List<GroupCommunicationsClass>();
+            List<SchoolProgramClass> school_programmeList = new List<SchoolProgramClass>();
 
             String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
             //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
-            SqlCommand cmd = new SqlCommand("get_group_communications", con);
+            SqlCommand cmd = new SqlCommand("get_school_programme", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
@@ -443,10 +444,61 @@ namespace TeOranganui.data
                 {
                     while (dr.Read())
                     {
-                        GroupCommunicationsList.Add(new GroupCommunicationsClass
+                        school_programmeList.Add(new SchoolProgramClass
                         {
-                            groupcommunication_id = dr["groupcommunication_id"].ToString(),
+                            School_Programme_ID = dr["School_Programme_ID"].ToString(),
                             group_id = dr["group_id"].ToString(),
+                            list_item_id = dr["list_item_id"].ToString(),
+                            startdate = dr["startdate"].ToString(),
+                            enddate = dr["enddate"].ToString(),
+                            note = dr["note"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(school_programmeList));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_groupcommunication(string group_id)
+        {
+            List<CommunicationClass> GroupCommunicationsList = new List<CommunicationClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_groupcommunication", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        GroupCommunicationsList.Add(new CommunicationClass
+                        {
+                            communication_id = dr["groupcommunication_id"].ToString(),
+                            parent_id = dr["group_id"].ToString(),
                             communicationtype_id = dr["communicationtype_id"].ToString(),
                             detail = dr["detail"].ToString(),
                             note = dr["note"].ToString(),
@@ -569,7 +621,7 @@ namespace TeOranganui.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_person_addresses(string person_id)
+        public void get_personaddress(string person_id)
         {
             List<personaddressClass> personaddressList = new List<personaddressClass>();
 
@@ -577,7 +629,7 @@ namespace TeOranganui.data
             //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
-            SqlCommand cmd = new SqlCommand("get_person_addresses", con);
+            SqlCommand cmd = new SqlCommand("get_personaddress", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add("@person_id", SqlDbType.Int).Value = person_id;
@@ -617,6 +669,58 @@ namespace TeOranganui.data
             Context.Response.Write(JS.Serialize(personaddressList));
         }
 
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_personcommunication(string person_id)
+        {
+            List<CommunicationClass> personCommunicationsList = new List<CommunicationClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_personcommunication", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@person_id", SqlDbType.Int).Value = person_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        personCommunicationsList.Add(new CommunicationClass
+                        {
+                            communication_id = dr["personcommunication_id"].ToString(),
+                            parent_id = dr["person_id"].ToString(),
+                            communicationtype_id = dr["communicationtype_id"].ToString(),
+                            detail = dr["detail"].ToString(),
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(personCommunicationsList));
+        }
+        
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void get_group_person_links(string person_id)
@@ -843,17 +947,25 @@ namespace TeOranganui.data
         public string action_date;
     }
 
-    public class GroupCommunicationsClass
+    public class CommunicationClass
     {
-        public string groupcommunication_id;
-        public string group_id;
+        public string communication_id;
+        public string parent_id;
         public string communicationtype_id;
         public string detail;
         public string note;
         public string current;
     }
 
-    
+    public class SchoolProgramClass
+    {
+        public string School_Programme_ID;
+        public string group_id;
+        public string list_item_id;
+        public string startdate;
+        public string enddate;
+        public string note;
+    }
 
     public class standardResponseClass
     {

@@ -79,8 +79,8 @@
                 </div>
             </noscript>
 
-            <div class="jumbotron" style="background-color: white">
-                    <img src="images/HFNZHeader.png" />               <br />
+            <div class="jumbotron" style="background-color: white"><a href="default.aspx">
+                    <img src="images/HFNZHeader.png" /></a>               <br />
 
                 <%: webconfig %>
             </div>

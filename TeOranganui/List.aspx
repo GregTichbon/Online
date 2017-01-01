@@ -14,6 +14,7 @@
                 }
             });
 
+            $("#form1").validate();
 
             $('#ccdd_grouptype_list').cascadingDropdown({
                 selectBoxes: [

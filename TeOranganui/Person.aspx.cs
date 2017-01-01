@@ -22,7 +22,7 @@ namespace TeOranganui
 
         public string[] yesno_values = new string[2] { "Yes", "No" };
         public string[] dd_gender_values = new string[3] { "Female", "Male", "Gender Diverse" };
-        public string[] dd_selectperson_values;
+        public string[] dd_person_values;
 
         #endregion
 
@@ -43,6 +43,10 @@ namespace TeOranganui
             }
             id = Convert.ToInt16(Session["IDS"]);
             */
+            if (Session["user_id"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
 
             string liststring = "";
             string delim = "";
@@ -80,7 +84,7 @@ namespace TeOranganui
                 con.Close();
                 con.Dispose();
             }
-            dd_selectperson_values = liststring.Split('\x00FE');
+            dd_person_values = liststring.Split('\x00FE');
 
 /*
             hf_person_id = 1;

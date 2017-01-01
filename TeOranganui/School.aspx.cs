@@ -35,6 +35,10 @@ namespace TeOranganui
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user_id"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
             dd_gendertype_values = Functions.Functions.populatelist("School", "GenderType");
             dd_authority_values = Functions.Functions.populatelist("School", "Authority");
             dd_type_values = Functions.Functions.populatelist("School", "Type");
