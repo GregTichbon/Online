@@ -17,7 +17,9 @@
                 }
             });
 
-            $("#form1").validate();
+            $("#form1").validate({
+                ignore: []
+            });
 
             $("#inputfields :input").prop("disabled", inputfields_disabled)
 
@@ -51,6 +53,20 @@
             $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=5", function (data) {
                 $.each(data, function (i, item) {
                     programme_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var policy_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=7", function (data) {
+                $.each(data, function (i, item) {
+                    policy_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var accreditation_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=6", function (data) {
+                $.each(data, function (i, item) {
+                    accreditation_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
@@ -134,6 +150,30 @@
                         });
                     });
 
+                    $.getJSON("../functions/data.asmx/get_school_policy?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-School_Policy-" + item.School_Policy_ID;
+                            populate_policy(id);
+                            $("#" + id + "-list_item_id").val(item.list_item_id);
+                            $("#" + id + "-dateimplemented").val(item.DateImplemented);
+                            $("#" + id + "-datereview").val(item.datereview);
+                            $("#" + id + "-reviewdone").val(item.reviewdone);
+                            $("#" + id + "-note").val(item.note);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_school_accreditation?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-School_Accreditation-" + item.School_accreditation_ID;
+                            populate_accreditation(id);
+                            $("#" + id + "-list_item_id").val(item.list_item_id);
+                            $("#" + id + "-dateaccredited").val(item.dateaccredited);
+                            $("#" + id + "-datereview").val(item.datereview);
+                            $("#" + id + "-reviewdone").val(item.reviewdone);
+                            $("#" + id + "-note").val(item.note);
+                        });
+                    });
+
                     $.getJSON("../functions/data.asmx/get_group_system?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
                             id = "sub-group_system-" + item.group_system_id;
@@ -188,40 +228,62 @@
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
-                    $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control">' + programme_options + '</select>'),
+                    $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + programme_options + '</select>'),
                     $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control" required />'),
                     $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control" />'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
-                ).appendTo('#tbl_programmes');
+                ).appendTo('#tbl_programme');
+            }
+
+            function populate_policy(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                    $('<td style="text-align:center">').html(''),
+                    $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + policy_options + '</select>'),
+                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="text" class="form-control" required />'),
+                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control" />'),
+                    $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
+                    $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                    $('<td style="text-align:center">').html(del)
+                ).appendTo('#tbl_policy');
+            }
+
+            function populate_accreditation(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                    $('<td style="text-align:center">').html(''),
+                    $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + accreditation_options + '</select>'),
+                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="text" class="form-control" required />'),
+                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control" />'),
+                    $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
+                    $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                    $('<td style="text-align:center">').html(del)
+                ).appendTo('#tbl_accreditation');
             }
 
             function populate_system(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
-                    $('<td>').html('<select name="' + id + '-system_id" id="' + id + '-system_id" class="grid_select form-control">' + system_options + '</select>'),
+                    $('<td>').html('<select name="' + id + '-system_id" id="' + id + '-system_id" class="grid_select form-control" required>' + system_options + '</select>'),
                     $('<td style="text-align:center">').html(del)
                 ).appendTo('#tbl_systems');
             }
-
-
 
             function populate_narrative(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" />'),
-                            $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative" class="form-control"></textarea>'),
-                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" class="grid_select form-control">' + user_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" required />'),
+                            $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative" class="form-control" required></textarea>'),
+                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" class="grid_select form-control" required>' + user_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action" class="form-control"></textarea>'),
                             $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" class="form-control" />'),
                             $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select form-control">' + user_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_narrative');
             }
-
-
 
             $(".a_add").click(function () {
                 if (!inputfields_disabled) {
@@ -234,16 +296,21 @@
                         case 'tbl_people':
                             populate_people('sub-group_person-N' + newkey);
                             break;
-                        case 'tbl_programmes':
+                        case 'tbl_programme':
                             populate_programme('sub-school_programme-N' + newkey);
+                            break;
+                        case 'tbl_policy':
+                            populate_policy('sub-school_policy-N' + newkey);
+                            break;
+                        case 'tbl_accreditation':
+                            populate_accreditation('sub-school_accreditation-N' + newkey);
+                            break;
+                          case 'tbl_narrative':
+                            populate_narrative('sub-groupnarrative-N' + newkey);
                             break;
                         case 'tbl_systems':
                             populate_system('sub-group_system-N' + newkey);
                             break;
-                        case 'tbl_narrative':
-                            populate_narrative('sub-groupnarrative-N' + newkey);
-                            break;
-
                     }
                 }
             });
@@ -467,7 +534,7 @@
             <div id="div_programmes" class="tab-pane fade">
                 <h3>Programmes</h3>
                 <div class="datagrid">
-                    <table id="tbl_programmes">
+                    <table id="tbl_programme">
                         <tr>
                             <td style="width: 50px; text-align: right"></td>
                             <td>Programme</td>
@@ -479,6 +546,39 @@
                     </table>
                 </div>
             </div>
+
+            <div id="div_policies" class="tab-pane fade">
+                <h3>Policies</h3>
+                <div class="datagrid">
+                    <table id="tbl_policy">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Policy</td>
+                            <td>Implemented</td>
+                            <td>Review</td>
+                            <td>Review done</td>
+                            <td>Note</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="div_accreditation" class="tab-pane fade">
+                <h3>Accreditation</h3>
+               <div class="datagrid">
+                    <table id="tbl_accreditation">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Accreditation</td>
+                            <td>Accredited</td>
+                            <td>Review</td>
+                            <td>Review done</td>
+                            <td>Note</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>            </div>
 
             <div id="div_narrative" class="tab-pane fade">
                 <h3>Narrative</h3>
@@ -496,18 +596,6 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-
-
-
-            <div id="div_policies" class="tab-pane fade">
-                <h3>Policies</h3>
-                <div class="datagrid"></div>
-            </div>
-
-            <div id="div_accreditation" class="tab-pane fade">
-                <h3>Accreditation</h3>
-                <div id="grid_accreditation"></div>
             </div>
 
             <div id="div_systems" class="tab-pane fade">

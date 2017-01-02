@@ -941,7 +941,7 @@ namespace TeOranganui.Functions
                         }
                         catch (Exception ex)
                         {
-                            //Log("", ex.InnerException.ToString(), "");
+                            Log("", ex.Message, "");
                         }
                         finally
                         {
@@ -954,7 +954,6 @@ namespace TeOranganui.Functions
             JavaScriptSerializer JS = new JavaScriptSerializer();
             return JS.Serialize(list_Created_IDs);
         }
-
 
         public void createXMLStructure(DataTable repeatertable, NameValue[] form, XElement rootXml)
         {
@@ -1123,6 +1122,7 @@ namespace TeOranganui.Functions
             return liststring.Split('\x00FE');
         }
     }
+
     #region classes
     public class Created_IDs_Class
     {

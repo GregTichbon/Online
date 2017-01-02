@@ -423,7 +423,7 @@ namespace TeOranganui.data
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void get_school_programme(string group_id)
         {
-            List<SchoolProgramClass> school_programmeList = new List<SchoolProgramClass>();
+            List<SchoolProgrammeClass> school_programmeList = new List<SchoolProgrammeClass>();
 
             String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
             //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -444,7 +444,7 @@ namespace TeOranganui.data
                 {
                     while (dr.Read())
                     {
-                        school_programmeList.Add(new SchoolProgramClass
+                        school_programmeList.Add(new SchoolProgrammeClass
                         {
                             School_Programme_ID = dr["School_Programme_ID"].ToString(),
                             group_id = dr["group_id"].ToString(),
@@ -720,6 +720,110 @@ namespace TeOranganui.data
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(personCommunicationsList));
         }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_school_policy(string group_id)
+        {
+            List<SchoolPolicyClass> school_policyList = new List<SchoolPolicyClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_school_policy", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        school_policyList.Add(new SchoolPolicyClass
+                        {
+                            School_Policy_ID = dr["School_policy_ID"].ToString(),
+                            group_id = dr["group_id"].ToString(),
+                            list_item_id = dr["list_item_id"].ToString(),
+                            DateImplemented = dr["DateImplemented"].ToString(),
+                            DateReview = dr["DateReview"].ToString(),
+                            ReviewDone = dr["ReviewDone"].ToString(),
+                            note = dr["note"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(school_policyList));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_school_accreditation(string group_id)
+        {
+            List<SchoolAccreditationClass> school_AccreditationList = new List<SchoolAccreditationClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_school_Accreditation", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        school_AccreditationList.Add(new SchoolAccreditationClass
+                        {
+                            School_Accreditation_ID = dr["School_Accreditation_ID"].ToString(),
+                            group_id = dr["group_id"].ToString(),
+                            list_item_id = dr["list_item_id"].ToString(),
+                            DateAccredited = dr["DateAccredited"].ToString(),
+                            DateReview = dr["DateReview"].ToString(),
+                            ReviewDone = dr["ReviewDone"].ToString(),
+                            note = dr["note"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(school_AccreditationList));
+        }
         
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -957,13 +1061,35 @@ namespace TeOranganui.data
         public string current;
     }
 
-    public class SchoolProgramClass
+    public class SchoolProgrammeClass
     {
         public string School_Programme_ID;
         public string group_id;
         public string list_item_id;
         public string startdate;
         public string enddate;
+        public string note;
+    }
+
+    public class SchoolPolicyClass
+    {
+        public string School_Policy_ID;
+        public string group_id;
+        public string list_item_id;
+        public string DateImplemented;
+        public string DateReview;
+        public string ReviewDone;
+        public string note;
+    }
+
+    public class SchoolAccreditationClass
+    {
+        public string School_Accreditation_ID;
+        public string group_id;
+        public string list_item_id;
+        public string DateAccredited;
+        public string DateReview;
+        public string ReviewDone;
         public string note;
     }
 
