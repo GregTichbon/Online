@@ -124,9 +124,9 @@
                         } else {
                             del = "";
                         }
-                        var $tr = $('<tr data-id="' + item.List_item_ID + '" class="rowdata">').append(
+                        var $tr = $('<tr data-id="' + item.list_item_id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="label_' + item.List_item_ID + '" class="grid_select" type="text" value="' + item.label + '" />'),
+                            $('<td>').html('<input name="label_' + item.list_item_id + '" class="grid_select" type="text" value="' + item.label + '" />'),
                             $('<td style="text-align:right">').text(item.count),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_items');

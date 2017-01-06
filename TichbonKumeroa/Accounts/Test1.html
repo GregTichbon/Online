@@ -1,0 +1,450 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Costings</title>
+    <script type="text/javascript" src="ajax.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/datePicker/js/lang/en.js"></script>
+    <script type="text/javascript" src="javascript/datePicker/js/datepicker.min.js">{"describedby":"fd-dp-aria-describedby"}</script>
+    <script src="javascript/colorbox/jquery.colorbox-min.js"></script>
+    <script src="../scripts/multiple-select/multiple-select.js"></script>
+    <link rel="stylesheet" href="colorbox/colorbox.css">
+    <link href="javascript/datePicker/css/datepicker.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../scripts/Multiple-Select/multiple-select.css">
+    <style type="text/css">
+        <!--
+        body, td, th {
+            font-size: 10px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+        }
+
+        .newrecurring {
+            background-color: #00CC00;
+        }
+
+        .greg {
+            background-color: #00FFFF;
+        }
+
+        .jude {
+            background-color: #FF66CC;
+        }
+        -->
+    </style>
+</head>
+<body>
+
+
+
+    <form name="frmMain" id="frmMain" method="post" action="transactions.asp" onsubmit="disableBeforeUnload();" style="display: block;">
+        <input name="dirty" id="dirty" value="No" type="hidden">
+        Account
+        <select name="account" size="1" id="account">
+            <option value="">--- Select ---</option>
+            <option value="All">All</option>
+            <option value="06-0583-0966770-00">06-0583-0966770-00</option>
+            <option value="06-0996-0956968-00" selected="">06-0996-0956968-00</option>
+            <option value="06-0996-0956968-01">06-0996-0956968-01</option>
+            <option value="06-0996-0956968-03">06-0996-0956968-03</option>
+            <option value="06-0996-0956968-04">06-0996-0956968-04</option>
+            <option value="06-0996-0956968-05">06-0996-0956968-05</option>
+            <option value="4367-****-****-7610">4367-****-****-7610</option>
+
+        </select>
+        Credit Card
+        <select name="creditcard" size="1" id="creditcard">
+            <option value="">Either</option>
+            <option value="7433">7433 - Jude</option>
+            <option value="8457">8457 - Greg</option>
+        </select>
+        <input name="uncoded" id="uncoded" value="yes" type="checkbox">
+        Show only uncoded
+        From
+        <input name="fromdate" id="fromdate" value="23/12/2016" type="text"><a href="#fromdate" class="date-picker-control date-picker-dateval" title="Open Calendar" id="fd-but-fromdate" role="button" aria-haspopup="true" tabindex="0"><span>&nbsp;</span><span class="fd-screen-reader">Open Calendar</span></a>
+        <script>
+
+				datePickerController.createDatePicker({	formElements:{"fromdate":"%d/%m/%Y"}	});
+        </script>
+        To
+        <input name="todate" id="todate" value="23/12/2016" type="text"><a href="#todate" class="date-picker-control date-picker-dateval" title="Open Calendar" id="fd-but-todate" role="button" aria-haspopup="true" tabindex="0"><span>&nbsp;</span><span class="fd-screen-reader">Open Calendar</span></a>
+        <script>
+
+				datePickerController.createDatePicker({	formElements:{"todate":"%d/%m/%Y"}	});
+        </script>
+        Search
+        <input name="search" id="search" value="" type="text">
+        Coded
+        <select name="coded" size="1" multiple="multiple" id="coded" style="display: none;">
+            <option value="5">EFAs - Family Trust - Assets</option>
+            <option value="4">EFMi - Family Trust - Miscellaneous</option>
+            <option value="3">EFPr - Family Trust - Property Insurance</option>
+            <option value="2">EFRa - Family Trust - Rates</option>
+            <option value="1">EFRe - Family Trust - Repairs and Maintenance</option>
+            <option value="16">EGAc - General - Accounting Fees</option>
+            <option value="27">EGFe - General - Fees</option>
+            <option value="28">EGIn - General - Interest / Dividends</option>
+            <option value="38">EGLo - General - Loan</option>
+            <option value="33">EGWi - General - Withholding Tax</option>
+            <option value="42">EPCh - Personal - Childcare (Tax deductible?)</option>
+            <option value="11">EPCo - Personal - Communications</option>
+            <option value="17">EPDo - Personal - Donations</option>
+            <option value="36">EPDo - Personal - Donations - Tax Deductible</option>
+            <option value="26">EPIn - Personal - Insurance / Retirement</option>
+            <option value="20">EPMi - Personal - Miscellaneous</option>
+            <option value="12">EPPo - Personal - Power</option>
+            <option value="14">EPPr - Personal - Property Insurance</option>
+            <option value="15">EPPr - Personal - Property Repairs and Maintenance</option>
+            <option value="13">EPRa - Personal - Rates</option>
+            <option value="40">EPTr - Personal - Transport</option>
+            <option value="44">ERDa - Reimbursement - Data Innovations</option>
+            <option value="41">ERIn - Reimbursement - Incedo</option>
+            <option value="39">EROt - Reimbursement - Other</option>
+            <option value="19">ERTe - Reimbursement - Te Ora Hou Whanganui</option>
+            <option value="10">ETAs - Totara Property Rentals - Assets</option>
+            <option value="9">ETMi - Totara Property Rentals - Miscellaneous</option>
+            <option value="18">ETMo - Totara Property Rentals - Mortgage</option>
+            <option value="8">ETPr - Totara Property Rentals - Property Insurance</option>
+            <option value="7">ETRa - Totara Property Rentals - Rates</option>
+            <option value="6">ETRe - Totara Property Rentals - Repairs and Maintenance</option>
+            <option value="21">IFIn - Family Trust - Income</option>
+            <option value="29">IGIn - General - Interest / Dividends</option>
+            <option value="35">IGLo - General - Loan Repayment</option>
+            <option value="43">IGMi - General - Miscelaneous</option>
+            <option value="32">IGTa - General - Tax Refund</option>
+            <option value="45">IPGr - Personal - Grace - Disability Allowance</option>
+            <option value="23">IPGr - Personal - Greg</option>
+            <option value="30">IPGr - Personal - Greg Board Honararium</option>
+            <option value="22">IPJu - Personal - Judy</option>
+            <option value="31">IPJu - Personal - Judy Board Honararium</option>
+            <option value="25">IRRe - Reimbursment - Received</option>
+            <option value="24">ITIn - Totara Property Rentals - Income</option>
+            <option value="37">TT - Transfer</option>
+        </select><div class="ms-parent" style="width: 391px;"><button type="button" class="ms-choice"><span class="placeholder"></span><div></div></button><div class="ms-drop bottom"><ul style="max-height: 250px;"><li class="ms-select-all"><label><input name="selectAllcoded" type="checkbox"> [Select all]</label></li><li><label><input name="selectItemcoded" value="5" type="checkbox"> EFAs - Family Trust - Assets</label></li><li><label><input name="selectItemcoded" value="4" type="checkbox"> EFMi - Family Trust - Miscellaneous</label></li><li><label><input name="selectItemcoded" value="3" type="checkbox"> EFPr - Family Trust - Property Insurance</label></li><li><label><input name="selectItemcoded" value="2" type="checkbox"> EFRa - Family Trust - Rates</label></li><li><label><input name="selectItemcoded" value="1" type="checkbox"> EFRe - Family Trust - Repairs and Maintenance</label></li><li><label><input name="selectItemcoded" value="16" type="checkbox"> EGAc - General - Accounting Fees</label></li><li><label><input name="selectItemcoded" value="27" type="checkbox"> EGFe - General - Fees</label></li><li><label><input name="selectItemcoded" value="28" type="checkbox"> EGIn - General - Interest / Dividends</label></li><li><label><input name="selectItemcoded" value="38" type="checkbox"> EGLo - General - Loan</label></li><li><label><input name="selectItemcoded" value="33" type="checkbox"> EGWi - General - Withholding Tax</label></li><li><label><input name="selectItemcoded" value="42" type="checkbox"> EPCh - Personal - Childcare (Tax deductible?)</label></li><li><label><input name="selectItemcoded" value="11" type="checkbox"> EPCo - Personal - Communications</label></li><li><label><input name="selectItemcoded" value="17" type="checkbox"> EPDo - Personal - Donations</label></li><li><label><input name="selectItemcoded" value="36" type="checkbox"> EPDo - Personal - Donations - Tax Deductible</label></li><li><label><input name="selectItemcoded" value="26" type="checkbox"> EPIn - Personal - Insurance / Retirement</label></li><li><label><input name="selectItemcoded" value="20" type="checkbox"> EPMi - Personal - Miscellaneous</label></li><li><label><input name="selectItemcoded" value="12" type="checkbox"> EPPo - Personal - Power</label></li><li><label><input name="selectItemcoded" value="14" type="checkbox"> EPPr - Personal - Property Insurance</label></li><li><label><input name="selectItemcoded" value="15" type="checkbox"> EPPr - Personal - Property Repairs and Maintenance</label></li><li><label><input name="selectItemcoded" value="13" type="checkbox"> EPRa - Personal - Rates</label></li><li><label><input name="selectItemcoded" value="40" type="checkbox"> EPTr - Personal - Transport</label></li><li><label><input name="selectItemcoded" value="44" type="checkbox"> ERDa - Reimbursement - Data Innovations</label></li><li><label><input name="selectItemcoded" value="41" type="checkbox"> ERIn - Reimbursement - Incedo</label></li><li><label><input name="selectItemcoded" value="39" type="checkbox"> EROt - Reimbursement - Other</label></li><li><label><input name="selectItemcoded" value="19" type="checkbox"> ERTe - Reimbursement - Te Ora Hou Whanganui</label></li><li><label><input name="selectItemcoded" value="10" type="checkbox"> ETAs - Totara Property Rentals - Assets</label></li><li><label><input name="selectItemcoded" value="9" type="checkbox"> ETMi - Totara Property Rentals - Miscellaneous</label></li><li><label><input name="selectItemcoded" value="18" type="checkbox"> ETMo - Totara Property Rentals - Mortgage</label></li><li><label><input name="selectItemcoded" value="8" type="checkbox"> ETPr - Totara Property Rentals - Property Insurance</label></li><li><label><input name="selectItemcoded" value="7" type="checkbox"> ETRa - Totara Property Rentals - Rates</label></li><li><label><input name="selectItemcoded" value="6" type="checkbox"> ETRe - Totara Property Rentals - Repairs and Maintenance</label></li><li><label><input name="selectItemcoded" value="21" type="checkbox"> IFIn - Family Trust - Income</label></li><li><label><input name="selectItemcoded" value="29" type="checkbox"> IGIn - General - Interest / Dividends</label></li><li><label><input name="selectItemcoded" value="35" type="checkbox"> IGLo - General - Loan Repayment</label></li><li><label><input name="selectItemcoded" value="43" type="checkbox"> IGMi - General - Miscelaneous</label></li><li><label><input name="selectItemcoded" value="32" type="checkbox"> IGTa - General - Tax Refund</label></li><li><label><input name="selectItemcoded" value="45" type="checkbox"> IPGr - Personal - Grace - Disability Allowance</label></li><li><label><input name="selectItemcoded" value="23" type="checkbox"> IPGr - Personal - Greg</label></li><li><label><input name="selectItemcoded" value="30" type="checkbox"> IPGr - Personal - Greg Board Honararium</label></li><li><label><input name="selectItemcoded" value="22" type="checkbox"> IPJu - Personal - Judy</label></li><li><label><input name="selectItemcoded" value="31" type="checkbox"> IPJu - Personal - Judy Board Honararium</label></li><li><label><input name="selectItemcoded" value="25" type="checkbox"> IRRe - Reimbursment - Received</label></li><li><label><input name="selectItemcoded" value="24" type="checkbox"> ITIn - Totara Property Rentals - Income</label></li><li><label><input name="selectItemcoded" value="37" type="checkbox"> TT - Transfer</label></li><li class="ms-no-results">No matches found</li></ul></div></div>
+        <input name="inhibitupdate" id="inhibitupdate" value="yes" type="checkbox">
+        Inhibit update
+        <input name="Submit" value="Submit" type="submit">
+        <a href="upload.asp">Upload</a>&nbsp;<a href="javascript:void(0);" onclick="javascript:latest();">Latest</a>
+        Updated:  Created:  Deleted:
+        <span id="showdirty"></span>
+        <hr>
+
+        <table cellspacing="0" cellpadding="3" bordercolor="#999999" border="1">
+            <tbody>
+                <tr style="font-weight:bold">
+
+
+                    <td>Type</td>
+                    <td>Date Posted</td>
+                    <td align="right">Amount</td>
+                    <td>Name</td>
+                    <td>Memo</td>
+                    <td>Add</td>
+                    <td>Coding</td>
+                    <td>Recuring</td>
+
+                </tr>
+
+                <tr><td>ATM</td><td>Fri 23/12/2016</td><td nowrap="" align="right"><input name="amt_8474" id="amt_8474" value="-100" type="hidden">-$100.00</td><td>Anz S3A6839 Gonville</td><td>Atm Debit Anz  S3A6839 Gonville       183854 </td><td class="add" id="row_8474" bgcolor="red"></td><td><table class="coding" id="items_8474"><tbody><tr class="item"><td><input transactionid="8474.1" id="invoice_new8474" name="invoice_new8474" value="" type="hidden"><input transactionid="8474.1" id="invoicenarr_new8474" name="invoicenarr_new8474" value="" type="hidden"><img class="edititem" id="edititem_new8474.1" transactionid="8474" src="add.jpg"></td><td><select transactionid="8474.1" class="codingoptions" name="code_new8474" id="code_new8474" size="1"><option value="">Please Select</option><option value="Delete">Delete</option><option value="5">EFAs - Family Trust - Assets</option><option value="4">EFMi - Family Trust - Miscellaneous</option><option value="3">EFPr - Family Trust - Property Insurance</option><option value="2">EFRa - Family Trust - Rates</option><option value="1">EFRe - Family Trust - Repairs and Maintenance</option><option value="16">EGAc - General - Accounting Fees</option><option value="27">EGFe - General - Fees</option><option value="28">EGIn - General - Interest / Dividends</option><option value="38">EGLo - General - Loan</option><option value="33">EGWi - General - Withholding Tax</option><option value="42">EPCh - Personal - Childcare (Tax deductible?)</option><option value="11">EPCo - Personal - Communications</option><option value="17">EPDo - Personal - Donations</option><option value="36">EPDo - Personal - Donations - Tax Deductible</option><option value="26">EPIn - Personal - Insurance / Retirement</option><option value="20">EPMi - Personal - Miscellaneous</option><option value="12">EPPo - Personal - Power</option><option value="14">EPPr - Personal - Property Insurance</option><option value="15">EPPr - Personal - Property Repairs and Maintenance</option><option value="13">EPRa - Personal - Rates</option><option value="40">EPTr - Personal - Transport</option><option value="44">ERDa - Reimbursement - Data Innovations</option><option value="41">ERIn - Reimbursement - Incedo</option><option value="39">EROt - Reimbursement - Other</option><option value="19">ERTe - Reimbursement - Te Ora Hou Whanganui</option><option value="10">ETAs - Totara Property Rentals - Assets</option><option value="9">ETMi - Totara Property Rentals - Miscellaneous</option><option value="18">ETMo - Totara Property Rentals - Mortgage</option><option value="8">ETPr - Totara Property Rentals - Property Insurance</option><option value="7">ETRa - Totara Property Rentals - Rates</option><option value="6">ETRe - Totara Property Rentals - Repairs and Maintenance</option><option value="21">IFIn - Family Trust - Income</option><option value="29">IGIn - General - Interest / Dividends</option><option value="35">IGLo - General - Loan Repayment</option><option value="43">IGMi - General - Miscelaneous</option><option value="32">IGTa - General - Tax Refund</option><option value="45">IPGr - Personal - Grace - Disability Allowance</option><option value="23">IPGr - Personal - Greg</option><option value="30">IPGr - Personal - Greg Board Honararium</option><option value="22">IPJu - Personal - Judy</option><option value="31">IPJu - Personal - Judy Board Honararium</option><option value="25">IRRe - Reimbursment - Received</option><option value="24">ITIn - Totara Property Rentals - Income</option><option value="37">TT - Transfer</option></select></td><td><input transactionid="8474.1" class="narrative" size="50" id="narr_new8474" name="narr_new8474" value="" type="text"></td><td><input transactionid="8474.1" class="amount" size="10" id="amount_new8474" name="amount_new8474" value="" type="text"></td></tr></tbody></table></td><td><div id="x8474"><a href="javascript:void(0);" onclick="javascript:recordrecurring('x8474', 8474);">Create</a></div></td></tr>
+            </tbody>
+        </table>
+        1
+    </form>
+
+
+    <div style="display:none;">
+        <div id="itementry">
+            <h1>Item Entry</h1>
+            <input name="entryid" id="entryid" type="hidden">
+            <input name="entrytransactionid" id="entrytransactionid" type="hidden">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td width="49%" valign="top">
+                            <table width="200" cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Expenses</td>
+                                        <td>Income</td>
+                                        <td>Other</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Personal</td>
+                                        <td><input name="radiobutton" value="radiobutton" type="radio"></td>
+                                        <td><input name="radiobutton" value="radiobutton" type="radio"></td>
+                                        <td><input name="radiobutton" value="radiobutton" type="radio"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td width="50%" valign="top">
+                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>Narrative </td>
+                                        <td><input name="entrynarr" id="entrynarr" style="Width:99%" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Query</td>
+                                        <td><input name="entryquery" id="entryquery" style="Width:99%" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount </td>
+                                        <td><input name="entryamount" id="entryamount" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td><input name="Submit" value="Submit" onclick="javascript:entryupdate();" type="submit"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>
+                                <br>
+                                <br>
+                            </p>
+                        </td>
+                        <td width="1%" valign="top">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Invoice
+                            <select name="entryinvoiceid" size="1" id="entryinvoiceid"></select>
+
+
+                            Narrative
+                            <input name="entryinvoicenarr" id="entryinvoicenarr" size="75" type="text">
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>&nbsp;        </p>
+        </div>
+    </div>
+    <div id="debug"></div>
+
+    <select name="coded" multiple="multiple" id="coded">
+        <optgroup label="Expense">
+            <option value="5">Family Trust - Assets</option><option value="4">Family Trust - Miscellaneous</option>
+            <option value="3">Family Trust - Property Insurance</option><option value="2">Family Trust - Rates</option>
+            <option value="1">Family Trust - Repairs and Maintenance</option>
+        </optgroup>
+        
+        
+        <optgroup label="General"><option value="16">General - Accounting Fees</option><option value="27">General - Fees</option>
+        <option value="28">General - Interest / Dividends</option><option value="38">General - Loan</option>
+        <option value="33">General - Withholding Tax</option></optgroup>
+        <optgroup label="Personal"><option value="42">Personal - Childcare (Tax deductible?)</option><option value="11">Personal - Communications</option><option value="17">Personal - Donations</option><option value="36">Personal - Donations - Tax Deductible</option><option value="26">Personal - Insurance / Retirement</option><option value="20">Personal - Miscellaneous</option><option value="12">Personal - Power</option><option value="14">Personal - Property Insurance</option><option value="15">Personal - Property Repairs and Maintenance</option><option value="13">Personal - Rates</option><option value="40">Personal - Transport</option></optgroup>
+        <optgroup label="Reimbursement"><option value="44">Reimbursement - Data Innovations</option><option value="41">Reimbursement - Incedo</option><option value="39">Reimbursement - Other</option><option value="19">Reimbursement - Te Ora Hou Whanganui</option></optgroup>
+        <optgroup label="Totara Property Rentals"><option value="10">Totara Property Rentals - Assets</option><option value="9">Totara Property Rentals - Miscellaneous</option><option value="18">Totara Property Rentals - Mortgage</option><option value="8">Totara Property Rentals - Property Insurance</option><option value="7">Totara Property Rentals - Rates</option><option value="6">Totara Property Rentals - Repairs and Maintenance</option></optgroup>
+        <optgroup label="Income"><option value="21">Family Trust - Income</option></optgroup>
+        <optgroup label="General"><option value="29">General - Interest / Dividends</option><option value="35">General - Loan Repayment</option><option value="43">General - Miscelaneous</option><option value="32">General - Tax Refund</option></optgroup>
+        <optgroup label="Personal"><option value="45">Personal - Grace - Disability Allowance</option><option value="23">Personal - Greg</option><option value="30">Personal - Greg Board Honararium</option><option value="22">Personal - Judy</option><option value="31">Personal - Judy Board Honararium</option></optgroup>
+        <optgroup label="Reimbursment"><option value="25">Reimbursment - Received</option></optgroup>
+        <optgroup label="Totara Property Rentals"><option value="24">Totara Property Rentals - Income</option></optgroup>
+        <optgroup label="Transfer"><option value="37">Transfer - </option></optgroup>
+    </select>
+
+
+
+    <script>
+	$('#coded').multipleSelect();
+
+	$('.codingoptions').append('<option value="">Please Select</option><option value="Delete">Delete</option><option value="5">EFAs - Family Trust - Assets</option><option value="4">EFMi - Family Trust - Miscellaneous</option><option value="3">EFPr - Family Trust - Property Insurance</option><option value="2">EFRa - Family Trust - Rates</option><option value="1">EFRe - Family Trust - Repairs and Maintenance</option><option value="16">EGAc - General - Accounting Fees</option><option value="27">EGFe - General - Fees</option><option value="28">EGIn - General - Interest / Dividends</option><option value="38">EGLo - General - Loan</option><option value="33">EGWi - General - Withholding Tax</option><option value="42">EPCh - Personal - Childcare (Tax deductible?)</option><option value="11">EPCo - Personal - Communications</option><option value="17">EPDo - Personal - Donations</option><option value="36">EPDo - Personal - Donations - Tax Deductible</option><option value="26">EPIn - Personal - Insurance / Retirement</option><option value="20">EPMi - Personal - Miscellaneous</option><option value="12">EPPo - Personal - Power</option><option value="14">EPPr - Personal - Property Insurance</option><option value="15">EPPr - Personal - Property Repairs and Maintenance</option><option value="13">EPRa - Personal - Rates</option><option value="40">EPTr - Personal - Transport</option><option value="44">ERDa - Reimbursement - Data Innovations</option><option value="41">ERIn - Reimbursement - Incedo</option><option value="39">EROt - Reimbursement - Other</option><option value="19">ERTe - Reimbursement - Te Ora Hou Whanganui</option><option value="10">ETAs - Totara Property Rentals - Assets</option><option value="9">ETMi - Totara Property Rentals - Miscellaneous</option><option value="18">ETMo - Totara Property Rentals - Mortgage</option><option value="8">ETPr - Totara Property Rentals - Property Insurance</option><option value="7">ETRa - Totara Property Rentals - Rates</option><option value="6">ETRe - Totara Property Rentals - Repairs and Maintenance</option><option value="21">IFIn - Family Trust - Income</option><option value="29">IGIn - General - Interest / Dividends</option><option value="35">IGLo - General - Loan Repayment</option><option value="43">IGMi - General - Miscelaneous</option><option value="32">IGTa - General - Tax Refund</option><option value="45">IPGr - Personal - Grace - Disability Allowance</option><option value="23">IPGr - Personal - Greg</option><option value="30">IPGr - Personal - Greg Board Honararium</option><option value="22">IPJu - Personal - Judy</option><option value="31">IPJu - Personal - Judy Board Honararium</option><option value="25">IRRe - Reimbursment - Received</option><option value="24">ITIn - Totara Property Rentals - Income</option><option value="37">TT - Transfer</option>');
+
+	/*
+	$('.codingoptions').click(function() {
+		//var id = $(this).children(":selected").attr("id");
+		var id = $(this).attr('id');
+		alert(id);
+	});
+	*/
+	$('.codingoptions').each(function(i, obj) {
+    	//alert(obj.id + '=' + $(obj).attr('selvalue'));
+		var selvalue = $(obj).attr('selvalue');
+		if(selvalue != '') {
+			$(obj).val(selvalue);
+		}
+
+	});
+	$('.codingoptions').change(function() {
+		var id = $(this).attr('id');
+		flagdirty(id);
+	});
+
+	$('.narrative').keyup(function() {
+		var id = $(this).attr('id');
+		flagdirty(id);
+	});
+	$('.amount').keypress(function() {
+		var id = $(this).attr('id');
+		flagdirty(id);
+	});
+	$('.amount').keyup(function() {
+		var id = $(this).attr('id');
+		flagdirty(id);
+	});
+	$('.amount').focusin(function() {
+		var id = $(this).attr('id');
+		if($(this).val() == '' && id.indexOf("_new") > -1) {    //only doing new because the id will be the item not the transaction
+			var id = id.match(/\d+/)[0];
+			//alert(id);
+			myval = $('#amt_' + id).val();
+			$(this).val(myval)
+			id = $(this).attr('transactionid');
+			flagdirty(id);
+		}
+	});
+	$('.amount').dblclick(function() {
+		var tid = $(this).attr('transactionid');
+		var splittid = tid.split('.',1);
+		tid = splittid[0];
+		debug('tid=' + tid);
+		myval = $('#amt_' + tid).val();
+		$(this).val(myval)
+		var id = $(this).attr('id');
+		var splitid = id.split('.',1);
+		id = splitid[0];
+		debug('dblclick ' + id);
+		flagdirty(id);
+	});
+	$('.add').click(function() {
+		var id = 'items' + $(this).attr('id').substring(3);
+		var rowCount = $('#' + id + ' tr:last').index() + 1
+		var newid = id.substring(6) + '.' + rowCount;
+		//alert(rowCount);
+		//alert("add item: " + id + ' ' + newid);
+		var newrow = '';
+		newrow = '<tr class="item">'
+			+ '<td>'
+			+ '<input transactionid=' + newid + '" type="hidden" id="invoice_new' + newid + '" name="invoice_new' + newid + '" value="">'
+			+ '<input transactionid=' + newid + '" type="hidden" id="invoicenarr_new' + newid + '" name="invoicenarr_new' + newid + '" value="">'
+			+ '<img id="edititem_new' + newid + '" src="add.jpg">'
+			+ '</td>'
+			+ '<td><select transactionid=' + newid + '" class="codingoptions" id="code_new' + newid + '" name="code_new' + newid + '" size="1"><option value="">Please Select</option><option value="Delete">Delete</option><option value="5">EFAs - Family Trust - Assets</option><option value="4">EFMi - Family Trust - Miscellaneous</option><option value="3">EFPr - Family Trust - Property Insurance</option><option value="2">EFRa - Family Trust - Rates</option><option value="1">EFRe - Family Trust - Repairs and Maintenance</option><option value="16">EGAc - General - Accounting Fees</option><option value="27">EGFe - General - Fees</option><option value="28">EGIn - General - Interest / Dividends</option><option value="38">EGLo - General - Loan</option><option value="33">EGWi - General - Withholding Tax</option><option value="42">EPCh - Personal - Childcare (Tax deductible?)</option><option value="11">EPCo - Personal - Communications</option><option value="17">EPDo - Personal - Donations</option><option value="36">EPDo - Personal - Donations - Tax Deductible</option><option value="26">EPIn - Personal - Insurance / Retirement</option><option value="20">EPMi - Personal - Miscellaneous</option><option value="12">EPPo - Personal - Power</option><option value="14">EPPr - Personal - Property Insurance</option><option value="15">EPPr - Personal - Property Repairs and Maintenance</option><option value="13">EPRa - Personal - Rates</option><option value="40">EPTr - Personal - Transport</option><option value="44">ERDa - Reimbursement - Data Innovations</option><option value="41">ERIn - Reimbursement - Incedo</option><option value="39">EROt - Reimbursement - Other</option><option value="19">ERTe - Reimbursement - Te Ora Hou Whanganui</option><option value="10">ETAs - Totara Property Rentals - Assets</option><option value="9">ETMi - Totara Property Rentals - Miscellaneous</option><option value="18">ETMo - Totara Property Rentals - Mortgage</option><option value="8">ETPr - Totara Property Rentals - Property Insurance</option><option value="7">ETRa - Totara Property Rentals - Rates</option><option value="6">ETRe - Totara Property Rentals - Repairs and Maintenance</option><option value="21">IFIn - Family Trust - Income</option><option value="29">IGIn - General - Interest / Dividends</option><option value="35">IGLo - General - Loan Repayment</option><option value="43">IGMi - General - Miscelaneous</option><option value="32">IGTa - General - Tax Refund</option><option value="45">IPGr - Personal - Grace - Disability Allowance</option><option value="23">IPGr - Personal - Greg</option><option value="30">IPGr - Personal - Greg Board Honararium</option><option value="22">IPJu - Personal - Judy</option><option value="31">IPJu - Personal - Judy Board Honararium</option><option value="25">IRRe - Reimbursment - Received</option><option value="24">ITIn - Totara Property Rentals - Income</option><option value="37">TT - Transfer</option></select></td><td><input class="narrative" type="text" size="50" id="narr_new' + newid + '" name="narr_new' + newid + '" value=""></td>'
+			+ '<td><input transactionid=' + newid + '" class="amount" type="text" size="10" id="amount_new' + newid + '" name="amount_new' + newid + '" value=""></td>'
+			+ '</tr>'
+		$('#' + id + ' tr:last').after(newrow);
+	});
+
+function flagdirty (id) {
+/*
+	if(id.indexOf("_new") > -1) {
+		mynew = "new"
+	}
+	else {
+		mynew = ""
+	}
+	id = 'changed_' + mynew + id.match(/\d+/)[0];
+*/
+	debug('flagdirty ' + id);
+	if(id.indexOf("_new") == -1) {
+		debug('here');
+		id = 'changed_' + id.match(/\d+/)[0];
+		//alert(id);
+		if($('#' + id).length == 0 ) {
+			//alert('Adding ' + id);
+			$('<input>').attr({
+				type: 'hidden',
+				id: id,
+				name: id
+			}).appendTo('form');
+		}
+	}
+	$('#dirty').val('Yes');
+	$('#showdirty').html('Dirty');
+}
+window.onbeforeunload = function() {
+	if($('#dirty').val() == 'Yes') {
+		return "There may have been some changes made.  Are you sure you want to navigate away from this page?";
+	}
+}
+
+function disableBeforeUnload() {
+	//alert(document.getElementById('dirty').value);
+    window.onbeforeunload = null;
+}
+
+/*
+        $('.codingoptions').multipleSelect({
+            single: true,
+			filter: true
+        });
+*/
+//$(".edititem").colorbox({width:"60%", height:"300px", inline:true, href:"#itementry"});
+$(".edititem").click(function() {
+	var id = $(this).attr('id').substring(8);
+	//alert(id);
+	$("#entryid").val(id);
+	var tid =  $(this).attr('transactionid');
+	//alert('Transaction ID: ' + tid);
+	$("#entrytransactionid").val(tid);
+
+	var narr = $('#narr_' + id).val();
+	$("#entrynarr").val(narr);
+	var amount = $('#amount_' + id).val();
+	$("#entryamount").val(amount);
+	var invoicenarr = $('#invoicenarr_' + id).val();
+	$("#entryinvoicenarr").val(invoicenarr);
+
+	var invoiceid = $('#invoice_' + id).val();
+	getinvoices(invoiceid);
+	$('#entryinvoiceid')
+		.find('option')
+		.remove()
+		.end()
+		.append(response)
+		.val(invoiceid)
+	;
+	//can add .val('the selected value') to set selected value after the .append above
+
+
+	$(".edititem").colorbox({width:"60%", height:"300px", inline:true, href:"#itementry", overlayClose:false});
+});
+
+function entryupdate() {
+	var id=($("#entryid").val());
+	alert('updating: ' + id);
+	$('#narr_' + id).val($("#entrynarr").val());
+	$('#amount_' + id).val($("#entryamount").val());
+	$('#invoicenarr_' + id).val($("#entryinvoicenarr").val());
+	var tid=($("#entrytransactionid").val());
+	alert('flagging dirty: ' + tid);
+	flagdirty(tid);
+	//alert("Need to flag the TRANSACTION as dirty");
+	var entryinvoiceid = $("#entryinvoiceid").val()
+	if(entryinvoiceid == 'new') {
+		alert('New invoice, need to get entity.  Could be when "New" is selected, show entity dropdown.');
+	}
+	$(".edititem").colorbox.close();
+
+}
+
+function latest() {
+	$('#account').val('All');
+	$('#uncoded').prop('checked', true);
+	var now = new Date();
+	now.setDate(now.getDate()-14);
+	var d = now.getDate();
+	var m =  now.getMonth() + 1;
+	var y = now.getFullYear();
+	$('#fromdate').val(d + "/" + m + "/" + y);
+	$('#todate').val('');
+}
+function debug(msg) {
+	if(1==2) {
+		$('#debug').append(msg + "<br>");
+	}
+}
+debug('');
+    $(function() {
+        $('#ms').change(function() {
+            console.log($(this).val());
+        }).multipleSelect({
+            width: '100%'
+        });
+    });
+    </script><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div>
+</body>
+</html>

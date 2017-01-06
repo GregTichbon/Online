@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TichbonKumeroa.master.cs" Inherits="TichbonKumeroa.TichbonKumeroa" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+       <!-- Style Sheets -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Scripts/jquery-ui/jquery-ui.css")%>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Scripts/colorbox/colorbox.css")%>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Scripts/multiple-select/multiple-select.css")%>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
+    <link href="Content/main.css" rel="stylesheet" />
+
+
+    <!-- Javascript -->
+    <script src="<%: ResolveUrl("~/Scripts/jquery-2.2.0.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/jquery-ui/jquery-ui.min.js")%>"></script>
+
+    <script type="text/javascript">
+        // Change JQueryUI plugin names to fix name collision with Bootstrap.
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
+    <script src="<%: ResolveUrl("~/Scripts/bootstrap.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/colorbox/jquery.colorbox-min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/multiple-select/multiple-select.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/jquery.validate.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/additional-methods.js")%>"></script>
+    <!--additional-methods.min.js-->
+
+    <script src="<%: ResolveUrl("~/Scripts/moment/moment.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js")%>"></script>
+
+    <script src="<%: ResolveUrl("~/Scripts/generic.js")%>"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).uitooltip({
+                position: {
+                    my: "right center",
+                    at: "left center"
+                }
+            });
+
+
+            $('.inhibitcutcopypaste').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+            //$('[required]').css('border', '1px solid red');
+            $('[required]').addClass('required');
+        });
+
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

@@ -141,7 +141,7 @@
 
                     $.getJSON("../functions/data.asmx/get_school_programme?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-School_Programme-" + item.School_Programme_ID;
+                            id = "sub-School_Programme-" + item.school_programme_id;
                             populate_programme(id);
                             $("#" + id + "-list_item_id").val(item.list_item_id);
                             $("#" + id + "-startdate").val(item.startdate);
@@ -152,10 +152,10 @@
 
                     $.getJSON("../functions/data.asmx/get_school_policy?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-School_Policy-" + item.School_Policy_ID;
+                            id = "sub-School_Policy-" + item.school_policy_id;
                             populate_policy(id);
                             $("#" + id + "-list_item_id").val(item.list_item_id);
-                            $("#" + id + "-dateimplemented").val(item.DateImplemented);
+                            $("#" + id + "-dateimplemented").val(item.dateimplemented);
                             $("#" + id + "-datereview").val(item.datereview);
                             $("#" + id + "-reviewdone").val(item.reviewdone);
                             $("#" + id + "-note").val(item.note);
@@ -164,7 +164,7 @@
 
                     $.getJSON("../functions/data.asmx/get_school_accreditation?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-School_Accreditation-" + item.School_accreditation_ID;
+                            id = "sub-School_Accreditation-" + item.school_accreditation_id;
                             populate_accreditation(id);
                             $("#" + id + "-list_item_id").val(item.list_item_id);
                             $("#" + id + "-dateaccredited").val(item.dateaccredited);
@@ -305,7 +305,7 @@
                         case 'tbl_accreditation':
                             populate_accreditation('sub-school_accreditation-N' + newkey);
                             break;
-                          case 'tbl_narrative':
+                        case 'tbl_narrative':
                             populate_narrative('sub-groupnarrative-N' + newkey);
                             break;
                         case 'tbl_systems':

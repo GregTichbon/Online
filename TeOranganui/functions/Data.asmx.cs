@@ -295,7 +295,7 @@ namespace TeOranganui.data
                     {
                         list_itemlist.Add(new list_itemClass
                         {
-                            List_item_ID = Convert.ToInt32(dr["List_item_ID"]),
+                            list_item_id = Convert.ToInt32(dr["List_item_ID"]),
                             label = dr["label"].ToString(),
                             value = dr["value"].ToString(),
                             count = "23"
@@ -417,8 +417,7 @@ namespace TeOranganui.data
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(GroupSystemList));
         }
-
-        
+   
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void get_school_programme(string group_id)
@@ -446,7 +445,7 @@ namespace TeOranganui.data
                     {
                         school_programmeList.Add(new SchoolProgrammeClass
                         {
-                            School_Programme_ID = dr["School_Programme_ID"].ToString(),
+                            school_programme_id = dr["School_Programme_ID"].ToString(),
                             group_id = dr["group_id"].ToString(),
                             list_item_id = dr["list_item_id"].ToString(),
                             startdate = dr["startdate"].ToString(),
@@ -748,12 +747,12 @@ namespace TeOranganui.data
                     {
                         school_policyList.Add(new SchoolPolicyClass
                         {
-                            School_Policy_ID = dr["School_policy_ID"].ToString(),
+                            school_policy_id = dr["School_policy_ID"].ToString(),
                             group_id = dr["group_id"].ToString(),
                             list_item_id = dr["list_item_id"].ToString(),
-                            DateImplemented = dr["DateImplemented"].ToString(),
-                            DateReview = dr["DateReview"].ToString(),
-                            ReviewDone = dr["ReviewDone"].ToString(),
+                            dateimplemented = dr["DateImplemented"].ToString(),
+                            datereview = dr["DateReview"].ToString(),
+                            reviewdone = dr["ReviewDone"].ToString(),
                             note = dr["note"].ToString()
                         });
                     }
@@ -800,12 +799,12 @@ namespace TeOranganui.data
                     {
                         school_AccreditationList.Add(new SchoolAccreditationClass
                         {
-                            School_Accreditation_ID = dr["School_Accreditation_ID"].ToString(),
+                            school_accreditation_id = dr["School_Accreditation_ID"].ToString(),
                             group_id = dr["group_id"].ToString(),
                             list_item_id = dr["list_item_id"].ToString(),
-                            DateAccredited = dr["DateAccredited"].ToString(),
-                            DateReview = dr["DateReview"].ToString(),
-                            ReviewDone = dr["ReviewDone"].ToString(),
+                            dateaccredited = dr["DateAccredited"].ToString(),
+                            datereview = dr["DateReview"].ToString(),
+                            reviewdone = dr["ReviewDone"].ToString(),
                             note = dr["note"].ToString()
                         });
                     }
@@ -852,8 +851,8 @@ namespace TeOranganui.data
                     {
                         grouppersonlinksList.Add(new grouppersonlinkClass
                         {
-                            Group = dr["Group"].ToString(),
-                            Role = dr["Role"].ToString()
+                            group = dr["Group"].ToString(),
+                            role = dr["Role"].ToString()
                         });
                     }
                 }
@@ -999,7 +998,7 @@ namespace TeOranganui.data
     }
     public class list_itemClass
     {
-        public int List_item_ID;
+        public int list_item_id;
         public string label;
         public string value;
         public string count;
@@ -1035,8 +1034,8 @@ namespace TeOranganui.data
 
     public class grouppersonlinkClass
     {
-        public string Group;
-        public string Role;
+        public string group;
+        public string role;
     }
 
     public class narrativeClass
@@ -1063,7 +1062,7 @@ namespace TeOranganui.data
 
     public class SchoolProgrammeClass
     {
-        public string School_Programme_ID;
+        public string school_programme_id;
         public string group_id;
         public string list_item_id;
         public string startdate;
@@ -1073,23 +1072,23 @@ namespace TeOranganui.data
 
     public class SchoolPolicyClass
     {
-        public string School_Policy_ID;
+        public string school_policy_id;
         public string group_id;
         public string list_item_id;
-        public string DateImplemented;
-        public string DateReview;
-        public string ReviewDone;
+        public string dateimplemented;
+        public string datereview;
+        public string reviewdone;
         public string note;
     }
 
     public class SchoolAccreditationClass
     {
-        public string School_Accreditation_ID;
+        public string school_accreditation_id;
         public string group_id;
         public string list_item_id;
-        public string DateAccredited;
-        public string DateReview;
-        public string ReviewDone;
+        public string dateaccredited;
+        public string datereview;
+        public string reviewdone;
         public string note;
     }
 
