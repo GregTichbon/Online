@@ -210,7 +210,8 @@ namespace TichbonKumeroa.Accounts
                             query = dr["query"].ToString(),
                             invoice = dr["invoice"].ToString(),
                             invoicenarrative = dr["invoicenarrative"].ToString(),
-                            invoicenotes = dr["invoicenotes"].ToString()
+                            invoicenotes = dr["invoicenotes"].ToString(),
+                            recurringitemid = dr["recurringitemid"].ToString()
                         });
                     }
                 }
@@ -269,6 +270,7 @@ namespace TichbonKumeroa.Accounts
         public string invoice;
         public string invoicenarrative;
         public string invoicenotes;
+        public string recurringitemid;
     }
 
     #endregion classes

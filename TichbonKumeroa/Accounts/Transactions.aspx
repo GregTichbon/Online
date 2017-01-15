@@ -8,8 +8,9 @@
             font-family: Verdana, Arial, Helvetica, sans-serif;
         }
 
-        .newrecurring {
+        .recurring td {
             background-color: #00CC00;
+            border-color: #00CC00; 
         }
 
         .transactionamount {
@@ -43,36 +44,39 @@
             border-collapse: collapse;
         }
 
-            .datagrid th {
-                font-size: 8px;
-                background-color: #acc8cc;
-                border-width: 1px;
-                padding: 4px;
-                border-style: solid;
-                border-color: #729ea5;
-                text-align: left;
-            }
+        .datagrid th {
+            font-size: 8px;
+            background-color: #acc8cc;
+            border-width: 1px;
+            padding: 2px;
+            border-style: solid;
+            border-color: #729ea5;
+            text-align: left;
+        }
 
-            .datagrid tr {
-                background-color: #d4e3e5;
-            }
+        .datagrid tr {
+            background-color: #d4e3e5;
+        }
 
-            .datagrid td {
-                font-size: 8px;
-                border-width: 1px;
-                padding: 4px;
-                border-style: solid;
-                border-color: #729ea5;
-            }
+        .datagrid td {
+            font-size: 8px;
+            border-width: 1px;
+            padding: 2px;
+            border-style: solid;
+            border-color: #729ea5;
+        }
 
-            .datagrid tr:hover {
-                background-color: #ffffff;
-            }
-        -->
+        .datagrid tr:hover {
+            background-color: #ffffff;
+        }
+-->
     </style>
     <script type="text/javascript">
         var tbl_items = "";
+        var codingsearch_options = "";
         var coding_options = "";
+        var recurring = "";
+        var newkey = 0;
 
 
         $(document).ready(function () {
@@ -103,28 +107,36 @@
                     $.each(codingarray, function (i, item) {
 
                         if (item.type != lasttype) {
-                            if (coding_options != '') {
+                            if (codingsearch_options != '') {
+                                codingsearch_options += '</optgroup>';
+                                codingsearch_options += '</optgroup>';
                                 coding_options += '</optgroup>';
                                 coding_options += '</optgroup>';
                             }
+                            codingsearch_options += '<optgroup disabled="disabled" label="&nbsp;' + item.type + '">';
+                            codingsearch_options += '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' + item.area + '">';
                             coding_options += '<optgroup disabled="disabled" label="&nbsp;' + item.type + '">';
-                            coding_options += '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' + item.area + '">';
-                            lasttype = item.type;
+                            coding_options += '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' + item.area + '">'; lasttype = item.type;
                             lastarea = item.area;
                         } else {
                             if (item.area != lastarea) {
-                                if (coding_options != '') {
+                                if (codingsearch_options != '') {
+                                    codingsearch_options += '</optgroup>';
                                     coding_options += '</optgroup>';
                                 }
+                                codingsearch_options += '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' + item.area + '">';
                                 coding_options += '<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;' + item.area + '">';
                                 lastarea = item.area;
                             }
                         }
-                        coding_options += '<option value="' + item.codeid + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + item.detail + '</option>';
+                        codingsearch_options += '<option value="' + item.codeid + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + item.detail + '</option>';
+                        coding_options += '<option value="' + item.codeid + '">' + item.type.substring(0, 1) + item.area.substring(0, 1) + item.detail.substring(0, 3) + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + item.detail + '</option>';
                     });
+                    codingsearch_options += '</optgroup>';
+                    codingsearch_options += '</optgroup>';
                     coding_options += '</optgroup>';
                     coding_options += '</optgroup>';
-                    $('#coded').append(coding_options);
+                    $('#coded').append(codingsearch_options);
                     $('#coded').multipleSelect({
                         selectAll: false,
                         intcountSelected: 1
@@ -144,12 +156,26 @@
                 $('#todate').val('');
             });
 
+            $('body').on('click', '.additem', function () {
+                transactionid = $(this).attr('id').substring(8);
+                //alert(transactionid);
+                tbl_item = newitem(transactionid);
+                //alert(tbl_item);
+                $('#tbl_tran_' + transactionid).append(tbl_item);
+                
+
+            });
+
             $("#submit").click(function () {
                 alert('Save any changed records and load according to specified params');
                 getdata();
             });
 
         });
+
+        function nextnewkey() {
+            newkey++;
+        }
 
         function getdata() {
             $(".rowdata").remove();
@@ -162,24 +188,22 @@
                         $.ajax({
                             async: false,
                             url: "data.asmx/get_items?transactionid=" + transaction.transactionid, success: function (result) {
-                                //console.log(result);
                                 itemarray = $.parseJSON(result);
                                 $.each(itemarray, function (i, item) {
-                                    id = "item_" + item.itemid;
-                                    tbl_items = tbl_items + '<tr id="' + id + '">';
-                                    tbl_items = tbl_items + '<td><select data-selectvalue="' + item.code + '" id="itemcode_"' + item.itemid + '">' + coding_options + '</option></td>';
-                                    tbl_items = tbl_items + '<td><input class="itemnarrative" value="' + item.narrative + '" /></td>';
-                                    tbl_items = tbl_items + '<td><input class="itemamount" value="' + item.amount + '" /></td>';
+                                    if (item.RecurringItemID != 0) {
+                                        recurring = ' recurring';
+                                    } else {
+                                        recurring = '';
+                                    }
+                                    tbl_items = tbl_items + '<tr id="' + "item_" + item.itemid + '">';
+                                    tbl_items = tbl_items + '<td><select data-selectvalue="' + item.code + '" id="itemcode_' + item.itemid + '">' + coding_options + '</select></td>';
+                                    tbl_items = tbl_items + '<td><input class="itemnarrative" id="itemnarrative_' + item.itemid + ' value="' + item.narrative + '" /></td>';
+                                    tbl_items = tbl_items + '<td><input class="itemamount" id="itemamount_' + item.itemid + ' value="' + item.amount + '" /></td>';
                                     tbl_items = tbl_items + '</tr>';
                                 });
-                                //itemid, narrative, code, amount, query, invoice, invoicenarrative, invoicenotes
+                                //itemid, narrative, code, amount, query, invoice, invoicenarrative, invoicenotes, RecurringItemID
                                 if (tbl_items == "") {
-                                    id = "item_" + 0;
-                                    tbl_items = tbl_items + '<tr id="' + id + '">';
-                                    tbl_items = tbl_items + '<td><select>' + coding_options + '</select></td>';
-                                    tbl_items = tbl_items + '<td><input class="itemnarrative" /></td>';
-                                    tbl_items = tbl_items + '<td><input class="itemamount" /></td>';
-                                    tbl_items = tbl_items + '</tr>';
+                                    tbl_items = newitem(transaction.transactionid);
                                 }
                                 id = "tran_" + transaction.transactionid;
                                 switch (transaction.account) {
@@ -217,8 +241,8 @@
                                     $('<td class="transactionamount">').html(transaction.amount),
                                     $('<td>').html(transaction.name),
                                     $('<td>').html(memo),
-                                    $('<td>').html("Add"),
-                                    $('<td>').html('<table class="datagrid coding">' + tbl_items + '</table>'),
+                                    $('<td class="additem" id="additem_' + transaction.transactionid + '">').html("Add"),
+                                    $('<td>').html('<table id="tbl_' + id + '" class="coding' + recurring + '">' + tbl_items + '</table>'),
                                     $('<td>').html("Recurring")
                                 ).appendTo('#tbl_transactions');
                             }
@@ -226,10 +250,11 @@
                     });
                 }
             });
-            alert(1);
-            $(":data(selectvalue)").html('Test');
-            $(":data(selectvalue)").each(function () {
-                alert(2);
+
+
+            $('[data-selectvalue]').each(function () {
+                //alert( $(this).attr("id") + ":" +                         $(this).data("selectvalue") );
+                $(this).val($(this).data("selectvalue"));
             });
             /*
 	xtra = ""
@@ -388,6 +413,19 @@
     */
         }
 
+        
+
+        function newitem(transactionid) {
+            nextnewkey();
+            id = 'new_' + transactionid + '_' + newkey;
+            tbl_item = '<tr id="item_' + id + '">';
+            tbl_item = tbl_item + '<td><select id="itemcode_' + id + '"><option></option>' + coding_options + '</select></td>';
+            tbl_item = tbl_item + '<td><input class="itemnarrative" id="itemnarrative_' + id + '" /></td>';
+            tbl_item = tbl_item + '<td><input class="itemamount" id="itemamount_' + id + '" /></td>';
+            tbl_item = tbl_item + '</tr>';
+            return tbl_item;
+        }
+
         function savedata() {
 
         }
@@ -412,9 +450,9 @@
             <td>Uncoded only:    
             <input name="uncoded" type="checkbox" id="uncoded" value="yes" /></td>
             <td>From:
-            <input name="datefrom" type="text" id="datefrom" /></td>
+            <input name="datefrom" type="text" id="datefrom" value="1 Oct 2016" /></td>
             <td>To:
-            <input name="dateto" type="text" id="dateto" /></td>
+            <input name="dateto" type="text" id="dateto" value="31 Oct 2016" /></td>
             <td>Search:
             <input name="search" type="text" id="search" /></td>
             <td>Coded:
