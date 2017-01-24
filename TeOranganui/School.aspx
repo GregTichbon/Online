@@ -84,6 +84,28 @@
                 });
             });
 
+            var addresstype_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=addresstype&param1=", function (data) {
+                $.each(data, function (i, item) {
+                    addresstype_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var engagementlevel_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=engagementlevel&param1=", function (data) {
+                $.each(data, function (i, item) {
+                    engagementlevel_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+            var rollclassification_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=rollclassification&param1=", function (data) {
+                $.each(data, function (i, item) {
+                    rollclassification_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
+
             //Get Record
             $("#dd_search").change(function () {
                 inputfields_disabled = false;
@@ -125,6 +147,7 @@
                             populate_people(id);
                             $("#" + id + "-person_id").val(item.person_id);
                             $("#" + id + "-role_id").val(item.role_id);
+                            $("#" + id + "-note").val(item.note);
                         });
                     });
 
@@ -136,6 +159,37 @@
                             $("#" + id + "-detail").val(item.detail);
                             $("#" + id + "-note").val(item.note);
                             $("#" + id + "-current").val(item.current);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_groupaddress?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-groupaddress-" + item.address_id;
+                            populate_addresses(id);
+                            $("#" + id + "-addresstype_id").val(item.addresstype_id);
+                            $("#" + id + "-detail").val(item.detail);
+                            $("#" + id + "-note").val(item.note);
+                            $("#" + id + "-current").val(item.current);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_grouproll?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-grouproll" + item.roll_id;
+                            populate_roll(id);
+                            $("#" + id + "-rollclassification_id").val(item.rollclassification_id);
+                            $("#" + id + "-number").val(item.number);
+                            $("#" + id + "-note").val(item.note);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_groupengagement?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-groupengagement" + item.engagement_id;
+                            populate_engagement(id);
+                            $("#" + id + "-engagementlevel_id").val(item.engagementlevel_id);
+                            $("#" + id + "-date").val(item.number);
+                            $("#" + id + "-note").val(item.note);
                         });
                     });
 
@@ -214,12 +268,47 @@
                         ).appendTo('#tbl_communications');
             }
 
+            function populate_addresses(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<select name="' + id + '-addresstype_id" id="' + id + '-addresstype_id" class="grid_select form-control" required>' + addresstype_options + '</select>'),
+                            $('<td>').html('<textarea name="' + id + '-detail" id="' + id + '-detail" class="form-control" required></textarea>'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                            $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_addresses');
+            }
+
+            function populate_roll(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<select name="' + id + '-rollclassification_id" id="' + id + '-rollclassification_id" class="grid_select form-control" required>' + rollclassification_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-number" id="' + id + '-number" type="text" class="form-control" required/>'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_roll');
+            }
+
+            function populate_engagement(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" required />'),
+                            $('<td>').html('<select name="' + id + '-engagementlevel_id" id="' + id + '-engagementlevel_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_engagement');
+            }
+
             function populate_people(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata person">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-person_id" id="' + id + '-person_id" class="grid_select form-control" required>' + person_options + '</select>'),
                             $('<td>').html('<select name="' + id + '-role_id" id="' + id + '-role_id" class="grid_select form-control">' + role_options + '</select>'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_people');
             }
@@ -229,7 +318,7 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + programme_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control" required />'),
+                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control" />'),
                     $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control" />'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
@@ -241,7 +330,7 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + policy_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="text" class="form-control" required />'),
+                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="text" class="form-control" />'),
                     $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
@@ -254,7 +343,7 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + accreditation_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="text" class="form-control" required />'),
+                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="text" class="form-control" />'),
                     $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
@@ -292,6 +381,15 @@
                     switch (tbl) {
                         case 'tbl_communications':
                             populate_communications("sub-GroupCommunication-N" + newkey);
+                            break;
+                        case 'tbl_addresses':
+                            populate_addresses("sub-GroupAddresses-N" + newkey);
+                            break;
+                        case 'tbl_roll':
+                            populate_roll("sub-GroupRoll-N" + newkey);
+                            break;
+                        case 'tbl_engagement':
+                            populate_engagement("sub-GroupEngagement-N" + newkey);
                             break;
                         case 'tbl_people':
                             populate_people('sub-group_person-N' + newkey);
@@ -423,72 +521,93 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
-                <select id="dd_gendertype" name="dd_gendertype" class="form-control">
-                    <option></option>
-                    <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, "", "None")%>
-                </select>
+        <!-- Accordian header start -->
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" href="#header">
+                        <h4 class="panel-title">Show/Hide</h4>
+                    </a>
+                </div>
+                <div id="header" class="panel-collapse collapse in">
+                    <div class="panel-body" style="position: relative">
+                        <!-- added relative for datetimepicker -->
+                        <!-- Accordian header end -->
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
+                                <select id="dd_gendertype" name="dd_gendertype" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_authority">Authority</label><div class="col-sm-8">
+                                <select id="dd_authority" name="dd_authority" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_decile">Decile</label><div class="col-sm-8">
+                                <select id="dd_decile" name="dd_decile" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_moenumber">MOE Number</label><div class="col-sm-8">
+                                <input id="tb_moenumber" name="tb_moenumber" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_type">Type</label><div class="col-sm-8">
+                                <select id="dd_type" name="dd_type" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_startyear">Start Year</label><div class="col-sm-8">
+                                <select id="dd_startyear" name="dd_startyear" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_endyear">End Year</label><div class="col-sm-8">
+                                <select id="dd_endyear" name="dd_endyear" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Accordian footer start -->
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_authority">Authority</label><div class="col-sm-8">
-                <select id="dd_authority" name="dd_authority" class="form-control">
-                    <option></option>
-                    <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, "", "None")%>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_decile">Decile</label><div class="col-sm-8">
-                <select id="dd_decile" name="dd_decile" class="form-control">
-                    <option></option>
-                    <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, "", "None")%>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_moenumber">MOE Number</label><div class="col-sm-8">
-                <input id="tb_moenumber" name="tb_moenumber" type="text" class="form-control" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_type">Type</label><div class="col-sm-8">
-                <select id="dd_type" name="dd_type" class="form-control">
-                    <option></option>
-                    <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, "", "None")%>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_startyear">Start Year</label><div class="col-sm-8">
-                <select id="dd_startyear" name="dd_startyear" class="form-control">
-                    <option></option>
-                    <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, "", "None")%>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_endyear">End Year</label><div class="col-sm-8">
-                <select id="dd_endyear" name="dd_endyear" class="form-control">
-                    <option></option>
-                    <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, "", "None")%>
-                </select>
-            </div>
-        </div>
-
-
+        <!-- Accordian footer end -->
 
 
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
+            <li><a data-toggle="tab" href="#div_addresses">Addresses</a></li>
+            <li><a data-toggle="tab" href="#div_engagement">Engagement</a></li>
+            <li><a data-toggle="tab" href="#div_roll">Roll</a></li>
             <li><a data-toggle="tab" href="#div_people">People</a></li>
             <li><a data-toggle="tab" href="#div_programmes">Programmes</a></li>
             <li><a data-toggle="tab" href="#div_policies">Policies</a></li>
@@ -517,6 +636,53 @@
                 </div>
             </div>
 
+            <div id="div_addresses" class="tab-pane fade">
+                <h3>Addresses</h3>
+                <div class="datagrid">
+                    <table id="tbl_addresses">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Type</td>
+                            <td>Address</td>
+                            <td>Note</td>
+                            <td>Current</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            
+            <div id="div_engagement" class="tab-pane fade">
+                <h3>Engagement</h3>
+                <div class="datagrid">
+                    <table id="tbl_engagement">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Date</td>
+                            <td>Level</td>
+                            <td>Note</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="div_roll" class="tab-pane fade">
+                <h3>Roll</h3>
+                <div class="datagrid">
+                    <table id="tbl_roll">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Classification</td>
+                            <td>Number</td>
+                            <td>Note</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
             <div id="div_people" class="tab-pane fade">
                 <h3>People</h3>
                 <div class="datagrid">
@@ -525,6 +691,7 @@
                             <td style="width: 50px; text-align: right"></td>
                             <td>Name</td>
                             <td>Role</td>
+                            <td>Note</td>
                             <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
                         </tr>
                     </table>
@@ -566,7 +733,7 @@
 
             <div id="div_accreditation" class="tab-pane fade">
                 <h3>Accreditation</h3>
-               <div class="datagrid">
+                <div class="datagrid">
                     <table id="tbl_accreditation">
                         <tr>
                             <td style="width: 50px; text-align: right"></td>
@@ -578,7 +745,8 @@
                             <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
                         </tr>
                     </table>
-                </div>            </div>
+                </div>
+            </div>
 
             <div id="div_narrative" class="tab-pane fade">
                 <h3>Narrative</h3>

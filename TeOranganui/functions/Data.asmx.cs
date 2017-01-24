@@ -550,7 +550,8 @@ namespace TeOranganui.data
                         {
                             group_person_id = dr["group_person_id"].ToString(),
                             person_id = dr["person_id"].ToString(),
-                            role_id = dr["role_id"].ToString()
+                            role_id = dr["role_id"].ToString(),
+                            note = dr["note"].ToString()
                         });
                     }
                 }
@@ -667,6 +668,211 @@ namespace TeOranganui.data
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(personaddressList));
         }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_groupaddress(string group_id)
+        {
+            List<groupaddressClass> groupaddressList = new List<groupaddressClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_groupaddress", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        groupaddressList.Add(new groupaddressClass
+                        {
+                            groupaddress_id = dr["groupaddress_id"].ToString(),
+                            addresstype_id = dr["addresstype_id"].ToString(),
+                            detail = dr["detail"].ToString(),
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(groupaddressList));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_groupaddress(string group_id)
+        {
+            List<groupaddressClass> groupaddressList = new List<groupaddressClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_groupaddress", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        groupaddressList.Add(new groupaddressClass
+                        {
+                            groupaddress_id = dr["groupaddress_id"].ToString(),
+                            addresstype_id = dr["addresstype_id"].ToString(),
+                            detail = dr["detail"].ToString(),
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(groupaddressList));
+        }
+
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_schoolroll(string school_id)
+        {
+            List<schoolrollClass> schoolrollList = new List<schoolrollClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_schoolroll", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@school_id", SqlDbType.Int).Value = school_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        schoolrollList.Add(new schoolrollClass
+                        {
+                            schoolroll_id = dr["schoolroll_id"].ToString(),
+                            rolltype_id = dr["rolltype_id"].ToString(),
+                            detail = dr["detail"].ToString(),
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(schoolrollList));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_groupengagement(string group_id)
+        {
+            List<groupengagementClass> groupengagementList = new List<groupengagementClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_groupengagement", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        groupengagementList.Add(new groupengagementClass
+                        {
+                            groupengagement_id = dr["groupengagement_id"].ToString(),
+                            engagementtype_id = dr["engagementtype_id"].ToString(),
+                            detail = dr["detail"].ToString(),
+                            note = dr["note"].ToString(),
+                            current = dr["current"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(groupengagementList));
+        }
+
+
+
+
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -990,6 +1196,7 @@ namespace TeOranganui.data
         public string group_person_id;
         public string person_id;
         public string role_id;
+        public string note;
     }
     public class dropdownClass
     {
@@ -1026,6 +1233,15 @@ namespace TeOranganui.data
     public class personaddressClass
     {
         public string personaddress_id;
+        public string addresstype_id;
+        public string detail;
+        public string note;
+        public string current;
+    }
+
+    public class groupaddressClass
+    {
+        public string groupaddress_id;
         public string addresstype_id;
         public string detail;
         public string note;

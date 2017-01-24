@@ -66,12 +66,13 @@
                 ]
             });
 
-            $("#a_add").click(function () {
+            //$("#a_add").click(function () {
+            $('body').on('click', '#a_add', function () {
                 if ($("#dd_list").val() != "") {
                     var $tr = $('<tr data-id="0" class="rowdata">').append(
                         $('<td style="text-align:center">').html(''),
                         $('<td>').html('<input class="grid_select" type="text" value="" />'),
-                        $('<td style="text-align:right">').text(0),
+                        //$('<td style="text-align:right">').text(0),
                     $('<td style="text-align:center">').html('Delete')
                     ).appendTo('#tbl_items');
                 }
@@ -110,13 +111,23 @@
 
 
             function loaditems() {
-                $('table tr.rowdata').remove();
+                //$('table tr.rowdata').remove();
+                $('table tr').remove();
                 /*
                 var $tr = $('<tr>').append(
+                    $('<th style="width: 50px; text-align: right">').text(''),
                     $('<th>').text('Label'),
-                    $('<th>').text('Count')
+                    //$('<th style="width: 50px; text-align: right">').text('Count'),
+                    $('<th style="width: 100px; text-align: center">').html('Action / <a id="a_add" href="javascript:void(0)">Add</a>')
                 ).appendTo('#tbl_items');
                 */
+                var table_head = '<tr><th style="width: 50px; text-align: right"></th><th>Label</th>';
+                //table_head += '<th style="width: 50px; text-align: right">Count</th>';
+                table_head += '<th style="width: 100px; text-align: center">Action / <a id="a_add" href="javascript:void(0)">Add</a></th></tr>';
+
+                $('#tbl_items').append(table_head);
+
+
                 $.getJSON("../functions/data.asmx/get_list_item?list_id=" + $("#dd_list").val(), function (data) {
                     $.each(data, function (i, item) {
                         if (item.count == 0 || 1 == 1) {
@@ -124,12 +135,22 @@
                         } else {
                             del = "";
                         }
+                        /*
                         var $tr = $('<tr data-id="' + item.list_item_id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="label_' + item.list_item_id + '" class="grid_select" type="text" value="' + item.label + '" />'),
-                            $('<td style="text-align:right">').text(item.count),
+                            //$('<td style="text-align:right">').text(item.count),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_items');
+                        */
+                        var table_row = '<tr data-id="' + item.list_item_id + '" class="rowdata">';
+                        table_row += '<td style="text-align:center"></td>';
+                        table_row += '<td><input name="label_' + item.list_item_id + '" class="grid_select" type="text" value="' + item.label + '" /></td>';
+                        //table_row += '<td style="text-align:right">' + item.count + '</td>';
+                        table_row += '<td style="text-align:center">' + del + '</td></tr>';
+
+                        $('#tbl_items').append(table_row);
+
                     });
                 });
             }
@@ -181,12 +202,14 @@
 
     <div class="datagrid">
         <table id="tbl_items">
+            <!--
             <tr>
                 <td style="width: 50px; text-align: right"></td>
                 <td>Label</td>
                 <td style="width: 50px; text-align: right">Count</td>
                 <td style="width: 100px; text-align: center">Action / <a id="a_add" href="javascript:void(0)">Add</a></td>
             </tr>
+            -->
         </table>
     </div>
 

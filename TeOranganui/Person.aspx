@@ -75,7 +75,6 @@
                     });
 
                     $.getJSON("../functions/data.asmx/get_personaddress?person_id=" + person_id, function (data) {
-
                         $.each(data, function (i, item) {
                             id = "sub-personaddress-" + item.personaddress_id;
                             populate_address(id);
@@ -118,7 +117,7 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-addresstype_id" id="' + id + '-addresstype_id" class="grid_select form-control" required>' + addresstype_options + '</select>'),
-                            $('<td>').html('<input name="' + id + '-detail" id="' + id + '-detail" type="text" class="form-control" required />'),
+                            $('<td>').html('<textarea name="' + id + '-detail" id="' + id + '-detail" class="form-control" required></textarea>'),
                             $('<td>').html('<input name="' + id + '-note" id="' + id + '-note" type="text" class="form-control" />'),
                             $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
