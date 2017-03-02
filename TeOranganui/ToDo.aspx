@@ -13,7 +13,7 @@
         <p>School - Add address tab</p>
         
         
-        <p>School | People - Role (currently in Role Table, should it be in the list table? Should it be categorissed by group type?&nbsp; Requires making ....)</p>
+        <p>School | People - Role (currently in Role Table, should it be in the list table? Should it be categorised by group type?&nbsp; Requires making ....)</p>
         
         <ul>
             <li>New Table List_Field - Defines fields: Text1, DateTime1, Number1 ....... in List_Items</li>
@@ -38,6 +38,7 @@
             <li>Simple criteria</li>
             <li>Define routines to show associated data</li>
             <li>Maybe use BRIT - need to access MSSQL DB remotely</li>
+            <li>Reporting Services</li>
         </ul>
         
         

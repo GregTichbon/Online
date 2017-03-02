@@ -215,9 +215,9 @@
                     $.each(result, function (i, field) {
                         //$("#debug").text("");
                         myid = field.enrolementid;
-                        //debugtxt = "update: " + field.enrolementid + " address=" + field.address + " status=" + field.status + " assignedto=" + field.assignedto + " version_ctr=" + field.version_ctr;
+                        debugtxt = "update: " + field.enrolementid + " address=" + field.address + " status=" + field.status + " assignedto=" + field.assignedto + " version_ctr=" + field.version_ctr;
                         //$("#debug").append();
-                        //console.log(debugtxt);
+                        console.log(debugtxt);
                         $("#tr_" + myid).data("version", field.version_ctr);
                         $("#name_" + myid).css('background-color', 'red');
                         //address_cnt = $("#address_" + myid).data("count");

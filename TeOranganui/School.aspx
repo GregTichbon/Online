@@ -92,14 +92,14 @@
             });
 
             var engagementlevel_options = '<option value=""></option>';
-            $.getJSON("../functions/data.asmx/get_dropdown?type=engagementlevel&param1=", function (data) {
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_Item&param1=12", function (data) {
                 $.each(data, function (i, item) {
                     engagementlevel_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
 
             var rollclassification_options = '<option value=""></option>';
-            $.getJSON("../functions/data.asmx/get_dropdown?type=rollclassification&param1=", function (data) {
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=8", function (data) {
                 $.each(data, function (i, item) {
                     rollclassification_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
@@ -468,7 +468,6 @@
                         .serializeArray();
 
                     var formData = JSON.stringify({ formVars: arForm });
-
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                         async: false,

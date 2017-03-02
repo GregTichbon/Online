@@ -721,7 +721,7 @@ namespace TeOranganui.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_groupaddress(string group_id)
+        public void get_groupaddressXXXX(string group_id)
         {
             List<groupaddressClass> groupaddressList = new List<groupaddressClass>();
 
@@ -772,18 +772,18 @@ namespace TeOranganui.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_schoolroll(string school_id)
+        public void get_grouproll(string school_id)
         {
-            List<schoolrollClass> schoolrollList = new List<schoolrollClass>();
+            List<grouprollClass> grouprollList = new List<grouprollClass>();
 
             String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
             //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
-            SqlCommand cmd = new SqlCommand("get_schoolroll", con);
+            SqlCommand cmd = new SqlCommand("get_grouproll", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@school_id", SqlDbType.Int).Value = school_id;
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = school_id;
 
             cmd.Connection = con;
             try
@@ -795,9 +795,9 @@ namespace TeOranganui.data
                 {
                     while (dr.Read())
                     {
-                        schoolrollList.Add(new schoolrollClass
+                        grouprollList.Add(new grouprollClass
                         {
-                            schoolroll_id = dr["schoolroll_id"].ToString(),
+                            grouproll_id = dr["grouproll_id"].ToString(),
                             rolltype_id = dr["rolltype_id"].ToString(),
                             detail = dr["detail"].ToString(),
                             note = dr["note"].ToString(),
@@ -817,7 +817,7 @@ namespace TeOranganui.data
             }
 
             JavaScriptSerializer JS = new JavaScriptSerializer();
-            Context.Response.Write(JS.Serialize(schoolrollList));
+            Context.Response.Write(JS.Serialize(grouprollList));
         }
 
         [WebMethod]
@@ -869,10 +869,6 @@ namespace TeOranganui.data
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(groupengagementList));
         }
-
-
-
-
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -1176,9 +1172,8 @@ namespace TeOranganui.data
             Context.Response.Write(JS.Serialize(SchoolList));
         }
     }
-    #region classes
  
-
+    #region classes
     public class GroupRecord
     {
         public string name;
@@ -1314,5 +1309,24 @@ namespace TeOranganui.data
         public string status;
         public string message;
     }
+
+    public class grouprollClass
+    {
+        public string grouproll_id;
+        public string rolltype_id;
+        public string detail;
+        public string note;
+        public string current;
+    }
+
+    public class groupengagementClass
+    {
+        public string groupengagement_id;
+        public string engagementtype_id;
+        public string detail;
+        public string note;
+        public string current;
+    }
+
     #endregion
 }

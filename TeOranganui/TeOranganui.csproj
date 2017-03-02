@@ -133,6 +133,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataGrid.css" />
     <Content Include="Content\main.css" />
+    <Content Include="favicon.ico" />
     <Content Include="functions\Posts.asmx" />
     <Content Include="functions\Posts2.asmx" />
     <Content Include="Images\delete.png" />
