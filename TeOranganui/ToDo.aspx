@@ -23,6 +23,10 @@
         </ul>
         
         
+        <p>
+            School | Roll - I&#39;ve added a &quot;Roll Group&quot; to the table as a seperate field.&nbsp; It would be better if it was actually a field against the classification</p>
+        
+        
         <p>Get double click on person working </p>
         
         <p>School | Add Tab - Engagement - Date and level (0-3) maybe need description</p>
@@ -52,9 +56,9 @@
         
         <p>Make each user signon with there own SQL user account</p>
         <p>Audit Log (Ensure unchanged data not saved)</p>
-        
-        
-&nbsp;&nbsp;&nbsp;
+        <p>Where there is a validation error in a tab that is hidden there could be a better message</p>
+        <p>Date format needs to be stipulated (dd mmm yyyy)</p>
+        Deleting a newly added row&nbsp;requires validation which it shouldn&#39;t.&nbsp; Either set a class or actually delete it.&nbsp;
     
     </div>
     </form>

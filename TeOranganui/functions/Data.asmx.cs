@@ -772,7 +772,7 @@ namespace TeOranganui.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void get_grouproll(string school_id)
+        public void get_grouproll(string group_id)
         {
             List<grouprollClass> grouprollList = new List<grouprollClass>();
 
@@ -783,7 +783,7 @@ namespace TeOranganui.data
             SqlCommand cmd = new SqlCommand("get_grouproll", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = school_id;
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
 
             cmd.Connection = con;
             try
@@ -798,10 +798,11 @@ namespace TeOranganui.data
                         grouprollList.Add(new grouprollClass
                         {
                             grouproll_id = dr["grouproll_id"].ToString(),
-                            rolltype_id = dr["rolltype_id"].ToString(),
-                            detail = dr["detail"].ToString(),
-                            note = dr["note"].ToString(),
-                            current = dr["current"].ToString()
+                            date = dr["date"].ToString(),
+                            type_id = dr["type_id"].ToString(),
+                            classification_id = dr["classification_id"].ToString(),
+                            roll = dr["roll"].ToString(),
+                            note = dr["note"].ToString()
                         });
                     }
                 }
@@ -848,10 +849,9 @@ namespace TeOranganui.data
                         groupengagementList.Add(new groupengagementClass
                         {
                             groupengagement_id = dr["groupengagement_id"].ToString(),
-                            engagementtype_id = dr["engagementtype_id"].ToString(),
-                            detail = dr["detail"].ToString(),
-                            note = dr["note"].ToString(),
-                            current = dr["current"].ToString()
+                            date = dr["date"].ToString(),
+                            level_id = dr["engagementtype_id"].ToString(),
+                            note = dr["note"].ToString()
                         });
                     }
                 }
@@ -1313,19 +1313,19 @@ namespace TeOranganui.data
     public class grouprollClass
     {
         public string grouproll_id;
-        public string rolltype_id;
-        public string detail;
+        public string date;
+        public string type_id;
+        public string classification_id;
+        public string roll;
         public string note;
-        public string current;
     }
 
     public class groupengagementClass
     {
         public string groupengagement_id;
-        public string engagementtype_id;
-        public string detail;
+        public string date;
+        public string level_id;
         public string note;
-        public string current;
     }
 
     #endregion

@@ -860,6 +860,7 @@ namespace TeOranganui.Functions
                         string fieldname = keyparts[3];
 
                         subtables.Rows.Add(tablename, id, fieldname, value);
+                        
                     }
                     //else
                     //{

@@ -17,7 +17,7 @@
                 }
             });
 
-            $("#form1").validate({
+            var validator = $("#form1").validate({
                 ignore: []
             });
 
@@ -98,13 +98,19 @@
                 });
             });
 
+            var rolltype_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=13", function (data) {
+                $.each(data, function (i, item) {
+                    rolltype_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
             var rollclassification_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=8", function (data) {
                 $.each(data, function (i, item) {
                     rollclassification_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
-
 
             //Get Record
             $("#dd_search").change(function () {
@@ -164,8 +170,8 @@
 
                     $.getJSON("../functions/data.asmx/get_groupaddress?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-groupaddress-" + item.address_id;
-                            populate_addresses(id);
+                            id = "sub-groupaddress-" + item.groupaddress_id;
+                            populate_address(id);
                             $("#" + id + "-addresstype_id").val(item.addresstype_id);
                             $("#" + id + "-detail").val(item.detail);
                             $("#" + id + "-note").val(item.note);
@@ -175,20 +181,22 @@
 
                     $.getJSON("../functions/data.asmx/get_grouproll?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-grouproll" + item.roll_id;
+                            id = "sub-grouproll-" + item.grouproll_id;
                             populate_roll(id);
-                            $("#" + id + "-rollclassification_id").val(item.rollclassification_id);
-                            $("#" + id + "-number").val(item.number);
+                            $("#" + id + "-date").val(item.date);
+                            $("#" + id + "-type_id").val(item.type_id);
+                            $("#" + id + "-classification_id").val(item.classification_id);
+                            $("#" + id + "-roll").val(item.roll);
                             $("#" + id + "-note").val(item.note);
                         });
                     });
 
                     $.getJSON("../functions/data.asmx/get_groupengagement?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-groupengagement" + item.engagement_id;
+                            id = "sub-groupengagement-" + item.engagement_id;
                             populate_engagement(id);
-                            $("#" + id + "-engagementlevel_id").val(item.engagementlevel_id);
-                            $("#" + id + "-date").val(item.number);
+                            $("#" + id + "-level_id").val(item.level_id);
+                            $("#" + id + "-date").val(item.date);
                             $("#" + id + "-note").val(item.note);
                         });
                     });
@@ -268,7 +276,7 @@
                         ).appendTo('#tbl_communications');
             }
 
-            function populate_addresses(id) {
+            function populate_address(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
@@ -277,15 +285,17 @@
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
-                        ).appendTo('#tbl_addresses');
+                        ).appendTo('#tbl_address');
             }
 
             function populate_roll(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<select name="' + id + '-rollclassification_id" id="' + id + '-rollclassification_id" class="grid_select form-control" required>' + rollclassification_options + '</select>'),
-                            $('<td>').html('<input name="' + id + '-number" id="' + id + '-number" type="text" class="form-control" required/>'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="date" class="form-control" required/>'),
+                            $('<td>').html('<select name="' + id + '-type_id" id="' + id + '-type_id" class="grid_select form-control" required>' + rolltype_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-classification_id" id="' + id + '-classification_id" class="grid_select form-control" required>' + rollclassification_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-roll" id="' + id + '-roll" type="text" class="form-control" required/>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_roll');
@@ -295,8 +305,8 @@
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" required />'),
-                            $('<td>').html('<select name="' + id + '-engagementlevel_id" id="' + id + '-engagementlevel_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="date" class="form-control" required />'),
+                            $('<td>').html('<select name="' + id + '-level_id" id="' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_engagement');
@@ -318,8 +328,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + programme_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control" />'),
-                    $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="date" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="date" class="form-control" />'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
                 ).appendTo('#tbl_programme');
@@ -330,8 +340,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + policy_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="text" class="form-control" />'),
-                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="date" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="date" class="form-control" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
@@ -343,8 +353,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + accreditation_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="text" class="form-control" />'),
-                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="date" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="date" class="form-control" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
@@ -366,7 +376,7 @@
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" required />'),
                             $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative" class="form-control" required></textarea>'),
-                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" class="grid_select form-control" required>' + user_options + '</select>'),
+                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" Adclass="grid_select form-control" required>' + user_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action" class="form-control"></textarea>'),
                             $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" class="form-control" />'),
                             $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select form-control">' + user_options + '</select>'),
@@ -382,8 +392,8 @@
                         case 'tbl_communications':
                             populate_communications("sub-GroupCommunication-N" + newkey);
                             break;
-                        case 'tbl_addresses':
-                            populate_addresses("sub-GroupAddresses-N" + newkey);
+                        case 'tbl_address':
+                            populate_address("sub-GroupAddress-N" + newkey);
                             break;
                         case 'tbl_roll':
                             populate_roll("sub-GroupRoll-N" + newkey);
@@ -468,6 +478,7 @@
                         .serializeArray();
 
                     var formData = JSON.stringify({ formVars: arForm });
+
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                         async: false,
@@ -493,6 +504,14 @@
                             alert("An error occurred: " + status);
                         }
                     })
+                } else {
+                    //alert('There is a validation error');
+                    //console.log(validator.errorList);
+                    msg = "";
+                    for (var i = 0; i < validator.errorList.length; i++) {
+                        msg += validator.errorList[i].element.name + "\n";
+                    }
+                    alert(msg);
                 }
             })
         });
@@ -604,7 +623,7 @@
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
-            <li><a data-toggle="tab" href="#div_addresses">Addresses</a></li>
+            <li><a data-toggle="tab" href="#div_address">Addresses</a></li>
             <li><a data-toggle="tab" href="#div_engagement">Engagement</a></li>
             <li><a data-toggle="tab" href="#div_roll">Roll</a></li>
             <li><a data-toggle="tab" href="#div_people">People</a></li>
@@ -635,10 +654,10 @@
                 </div>
             </div>
 
-            <div id="div_addresses" class="tab-pane fade">
-                <h3>Addresses</h3>
+            <div id="div_address" class="tab-pane fade">
+                <h3>Address</h3>
                 <div class="datagrid">
-                    <table id="tbl_addresses">
+                    <table id="tbl_address">
                         <tr>
                             <td style="width: 50px; text-align: right"></td>
                             <td>Type</td>
@@ -673,8 +692,10 @@
                     <table id="tbl_roll">
                         <tr>
                             <td style="width: 50px; text-align: right"></td>
+                            <td>Date</td>
+                            <td>Type</td>
                             <td>Classification</td>
-                            <td>Number</td>
+                            <td>Roll</td>
                             <td>Note</td>
                             <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
                         </tr>
