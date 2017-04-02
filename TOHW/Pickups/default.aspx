@@ -314,6 +314,7 @@
             });
 
             $(".status").change(function () {
+                //alert('Status Change');
                 id = $(this).parents('tr').attr("id").substring(3);
                 version_ctr = $(this).parents('tr').data("version");
                 if ($(this).val() == 'Picked up from another address') {
@@ -405,6 +406,13 @@
                     todo = "|Coming|No Response|Call in|Will make their own way|";
                 } else if ($('#dd_status').val() == "Came") {
                     todo = "|Picked up|Picked up from another address|Made own way|";
+                } else if ($('#dd_status').val() == "Attendance") {
+                    todo = "|Coming|Picked up|Picked up from another address|Will make their own way|Made own way|";
+                } else if ($('#dd_status').val() == "Unknown") {
+                    todo = "||No Response|Call in|";
+
+
+
                 } else {
                     todo = "";
                 }
@@ -603,6 +611,8 @@
     <select id="dd_status">
         <option>All</option>
         <option>To do</option>
+        <option>Attendance</option>
+        <option>Unknown</option>
         <option>Came</option>
     </select>
 

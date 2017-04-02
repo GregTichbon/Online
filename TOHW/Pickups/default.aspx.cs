@@ -15,7 +15,6 @@ using System.Web.Configuration;
 using System.Web.Script.Serialization;
 
 
-
 namespace TOHW.Pickups
 {
     public partial class _default : System.Web.UI.Page
@@ -74,6 +73,7 @@ namespace TOHW.Pickups
                 string icon;
                 string delim = "";
 
+ 
                 foreach (string assigned in assignedto_values.Split(','))
                 {
                     icon = "http://whanganui.teorahou.org.nz/pickups/icons/" + assigned + ".png";

@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
+using System.Net.NetworkInformation;
 
 namespace TOHW.Pickups
 {
@@ -23,12 +24,28 @@ namespace TOHW.Pickups
 
     public class data : System.Web.Services.WebService
     {
-
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void pickups_update(Int32 id, Int32 version, string address, string status, string assignedto, string date)
         {
+            /*
+            //get all nics
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            //display the physical address of the first nic in the array,
+            //which should correspond to our mac address
+            string MACAddress = nics[0].GetPhysicalAddress().ToString();
 
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+
+            string debug = "Browser Capabilities\n"
+                + "Type = " + browser.Type + "\n"
+                + "Name = " + browser.Browser + "\n"
+                + "Version = " + browser.Version + "\n"
+                + "Major Version = " + browser.MajorVersion + "\n"
+                + "Minor Version = " + browser.MinorVersion + "\n"
+                + "Platform = " + browser.Platform + "\n"
+                + "MAC Address = " + MACAddress + "\n";
+   */
             List<pickups_update> pickups_updateList = new List<pickups_update>();
 
             String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
@@ -41,6 +58,8 @@ namespace TOHW.Pickups
             cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = status;
             cmd.Parameters.Add("@assignedto", SqlDbType.VarChar).Value = assignedto;
             cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = null;
+            cmd.Parameters.Add("@debug", SqlDbType.VarChar).Value = Session["pickups_name"].ToString();
+
             cmd.Connection = con;
             try
             {
@@ -74,10 +93,29 @@ namespace TOHW.Pickups
 
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void pickup_checkforupdates(string data)
         {
+            /*
+            //get all nics
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            //display the physical address of the first nic in the array,
+            //which should correspond to our mac address
+            string MACAddress = nics[0].GetPhysicalAddress().ToString();
+
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+
+            string debug = "Browser Capabilities\n"
+                + "Type = " + browser.Type + "\n"
+                + "Name = " + browser.Browser + "\n"
+                + "Version = " + browser.Version + "\n"
+                + "Major Version = " + browser.MajorVersion + "\n"
+                + "Minor Version = " + browser.MinorVersion + "\n"
+                + "Platform = " + browser.Platform + "\n"
+                + "MAC Address = " + MACAddress + "\n";
+            */
+
             List<PickupUpdates> PickupUpdatesList = new List<PickupUpdates>();
 
 
@@ -87,6 +125,7 @@ namespace TOHW.Pickups
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = null ;
             cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = data;
+            cmd.Parameters.Add("@debug", SqlDbType.VarChar).Value = Session["pickups_name"].ToString();
 
             cmd.Connection = con;
             try
@@ -127,7 +166,6 @@ namespace TOHW.Pickups
     {
         public string result;
     }
-
     public class PickupUpdates
     {
         public string enrolementid;

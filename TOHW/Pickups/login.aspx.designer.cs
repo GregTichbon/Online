@@ -13,6 +13,15 @@ namespace TOHW.Pickups {
     public partial class login {
         
         /// <summary>
+        /// tb_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_name;
+        
+        /// <summary>
         /// tb_password control.
         /// </summary>
         /// <remarks>
@@ -22,12 +31,12 @@ namespace TOHW.Pickups {
         protected global::System.Web.UI.WebControls.TextBox tb_password;
         
         /// <summary>
-        /// btn_submit control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_submit;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }
