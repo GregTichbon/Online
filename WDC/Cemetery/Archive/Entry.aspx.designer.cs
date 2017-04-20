@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TOHW
+namespace Online.Cemetery.Archive
 {
 
 
-    public partial class _default
+    public partial class Entry
     {
     }
 }
