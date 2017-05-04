@@ -21,6 +21,7 @@ namespace TeOranganui
 
         public string[] yesno_values = new string[2] { "Yes", "No" };
         public string[] dd_groupname_values;
+        public string[] dd_location_values; // = new string[3] { "Co-ed", "Female", "Male" };
         public string[] dd_gendertype_values; // = new string[3] { "Co-ed", "Female", "Male" };
         public string[] dd_authority_values;
         public string[] dd_type_values;
@@ -39,6 +40,7 @@ namespace TeOranganui
             {
                 Response.Redirect("login.aspx");
             }
+            dd_location_values = Functions.Functions.populatelist("School", "Location");
             dd_gendertype_values = Functions.Functions.populatelist("School", "GenderType");
             dd_authority_values = Functions.Functions.populatelist("School", "Authority");
             dd_type_values = Functions.Functions.populatelist("School", "Type");

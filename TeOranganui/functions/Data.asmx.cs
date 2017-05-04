@@ -848,9 +848,9 @@ namespace TeOranganui.data
                     {
                         groupengagementList.Add(new groupengagementClass
                         {
-                            groupengagement_id = dr["groupengagement_id"].ToString(),
+                            groupengagement_id = dr["GroupEngagement_ID"].ToString(),
                             date = dr["date"].ToString(),
-                            level_id = dr["engagementtype_id"].ToString(),
+                            level_id = dr["level_id"].ToString(),
                             note = dr["note"].ToString()
                         });
                     }

@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Auction\Page.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -75,6 +76,7 @@
     <Content Include="images\KeeganEaston.jpg" />
     <Content Include="images\LeoneandMellisa.jpg" />
     <Content Include="images\MahangaWilliams.jpg" />
+    <Content Include="Index.aspx" />
     <Content Include="Pickups\Admin.aspx" />
     <Content Include="Pickups\data.asmx" />
     <Content Include="Pickups\GoogleMaps1.aspx" />
@@ -102,6 +104,7 @@
     <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\BPopup.js" />
     <Content Include="Scripts\colorbox\colorbox.css" />
     <Content Include="Scripts\colorbox\images\border.png" />
     <Content Include="Scripts\colorbox\images\controls.png" />
@@ -373,6 +376,9 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\jquery.ui.autocomplete.scroll.min.js" />
     <Content Include="Scripts\Moment\moment.js" />
+    <Content Include="Scripts\PopupOverlay\index.html" />
+    <Content Include="Scripts\PopupOverlay\index.js" />
+    <Content Include="Scripts\PopupOverlay\jquery.popupoverlay.js" />
     <Content Include="test1.aspx" />
     <Content Include="TestandPlay\Format.html" />
     <Content Include="TESTQS.html" />
@@ -397,6 +403,7 @@
     <Content Include="images\pic05.jpg" />
     <Content Include="images\pic06.jpg" />
     <Content Include="index.html" />
+    <Content Include="_TEST\Popup1.aspx" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -461,6 +468,13 @@
     <Content Include="images\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auction\Page.aspx.cs">
+      <DependentUpon>Page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Page.aspx.designer.cs">
+      <DependentUpon>Page.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Database\Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -487,6 +501,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="functions\functions.cs" />
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DPS Result.cs" />
     <Compile Include="Pickups\Admin.aspx.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
@@ -569,6 +590,13 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_TEST\Popup1.aspx.cs">
+      <DependentUpon>Popup1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_TEST\Popup1.aspx.designer.cs">
+      <DependentUpon>Popup1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

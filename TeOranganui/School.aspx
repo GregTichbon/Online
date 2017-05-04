@@ -117,6 +117,7 @@
                 inputfields_disabled = false;
                 $("#inputfields :input").prop("disabled", inputfields_disabled)
                 $("#tb_groupname").val('');
+                $("#dd_location")[0].selectedIndex = 0;
                 $("#dd_gendertype")[0].selectedIndex = 0;
                 $("#dd_authority")[0].selectedIndex = 0;
                 $("#dd_decile")[0].selectedIndex = 0;
@@ -137,6 +138,7 @@
                         url: "../functions/data.asmx/get_school?group_id=" + group_id, success: function (result) {
                             item = $.parseJSON(result);
                             $("#tb_groupname").val(item[0]['groupname']);
+                            $("#dd_location").val(item[0]['location']);
                             $("#dd_gendertype").val(item[0]['gendertype']);
                             $("#dd_authority").val(item[0]['authority']);
                             $("#dd_decile").val(item[0]['decile']);
@@ -196,7 +198,8 @@
                             id = "sub-groupengagement-" + item.engagement_id;
                             populate_engagement(id);
                             $("#" + id + "-level_id").val(item.level_id);
-                            $("#" + id + "-date").val(item.date);
+                            $("#" + id + "-date").val('05/07/1963');
+                            alert(item.date);
                             $("#" + id + "-note").val(item.note);
                         });
                     });
@@ -551,6 +554,15 @@
                     <div class="panel-body" style="position: relative">
                         <!-- added relative for datetimepicker -->
                         <!-- Accordian header end -->
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="dd_location">Location</label><div class="col-sm-8">
+                                <select id="dd_location" name="dd_location" class="form-control">
+                                    <option></option>
+                                    <%=TeOranganui.Functions.Functions.populateselect(dd_location_values, "", "None")%>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
