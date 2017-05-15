@@ -133,6 +133,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataGrid.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Date1.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="functions\Posts.asmx" />
     <Content Include="functions\Posts2.asmx" />
@@ -484,6 +485,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Date1.aspx.cs">
+      <DependentUpon>Date1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Date1.aspx.designer.cs">
+      <DependentUpon>Date1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="functions\Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
       <SubType>Component</SubType>

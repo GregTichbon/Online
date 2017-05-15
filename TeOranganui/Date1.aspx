@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TeOranganui.Master" AutoEventWireup="true" CodeBehind="School.aspx.cs" Inherits="TeOranganui.School" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TeOranganui.Master" AutoEventWireup="true" CodeBehind="Date1.aspx.cs" Inherits="TeOranganui.Date1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Content/datagrid.css" rel="stylesheet" />
@@ -518,9 +518,14 @@
                 }
             })
 
-            $('.greg').datetimepicker();
+            //$('.greg').datetimepicker();
+
+            $('body').on('focus', ".greg", function () {
+                $(this).datetimepicker();
+            });
         });
 
+        
  
 
 
@@ -535,18 +540,13 @@
             <select id="dd_search" class="form-control">
                 <option></option>
                 <option value="Create">Create</option>
-                <%=TeOranganui.Functions.Functions.populateselect(dd_groupname_values, "", "None")%>
             </select>
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="xxxx">Test Date</label>
-        <div class="col-sm-8">
-            <input type='text' class="form-control greg" id='xxxx' />
-        </div>
-    </div>
 
+
+ 
     <div id="inputfields">
 
         <div class="form-group">
@@ -554,6 +554,8 @@
                 <input id="tb_groupname" name="tb_groupname" type="text" class="form-control" required />
             </div>
         </div>
+
+
 
         <!-- Accordian header start -->
         <div class="panel-group">
@@ -569,12 +571,16 @@
                         <!-- Accordian header end -->
 
 
-
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="xxxx">Test Date</label>
+        <div class="col-sm-8">
+            <input type='text' class="form-control greg" id='xxxx' />
+        </div>
+    </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="dd_location">Location</label><div class="col-sm-8">
                                 <select id="dd_location" name="dd_location" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_location_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -583,7 +589,6 @@
                             <label class="control-label col-sm-4" for="dd_gendertype">Gender</label><div class="col-sm-8">
                                 <select id="dd_gendertype" name="dd_gendertype" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_gendertype_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -592,7 +597,6 @@
                             <label class="control-label col-sm-4" for="dd_authority">Authority</label><div class="col-sm-8">
                                 <select id="dd_authority" name="dd_authority" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_authority_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -601,7 +605,6 @@
                             <label class="control-label col-sm-4" for="dd_decile">Decile</label><div class="col-sm-8">
                                 <select id="dd_decile" name="dd_decile" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_decile_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -616,7 +619,6 @@
                             <label class="control-label col-sm-4" for="dd_type">Type</label><div class="col-sm-8">
                                 <select id="dd_type" name="dd_type" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_type_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -625,7 +627,6 @@
                             <label class="control-label col-sm-4" for="dd_startyear">Start Year</label><div class="col-sm-8">
                                 <select id="dd_startyear" name="dd_startyear" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_startyear_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -634,7 +635,6 @@
                             <label class="control-label col-sm-4" for="dd_endyear">End Year</label><div class="col-sm-8">
                                 <select id="dd_endyear" name="dd_endyear" class="form-control">
                                     <option></option>
-                                    <%=TeOranganui.Functions.Functions.populateselect(dd_endyear_values, "", "None")%>
                                 </select>
                             </div>
                         </div>
@@ -832,3 +832,4 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 </asp:Content>
+

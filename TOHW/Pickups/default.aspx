@@ -195,7 +195,12 @@
             function checkforupdates() {
 
                 //$("#span_status").html("Updated:" + moment().format('hh:mm:ss'));
-                updating = true;
+                while (updating == true) {
+
+                }
+                if (updating == true) {
+                    alert('Tell Greg: How can I be here if updating is true');
+                }
                 //$("#debug").text(Date);
                 versions = "";
                 versionsdelim = "";
@@ -239,7 +244,6 @@
                         showhideclasses();
                     }
                 });
-                updating = false;
 
                 //$("#span_status").text("xxx");
 
@@ -370,9 +374,7 @@
             };
 
             function update() {
-                while (updating == true) {
-
-                }
+                updating = true;
                 address = $("#address_" + id).val();
                 status = $("#status_" + id).val();
                 assignedto = $("#assignedto_" + id).val();
@@ -383,10 +385,14 @@
                 $.getJSON(param, function (result) {
                     $.each(result, function (i, field) {
                         //alert(id + ", " + field.version_ctr);
+                        if (field.message != 'Updated') {
+                            alert(field.message);
+                        }
                         $("#tr_" + id).data("version", field.version_ctr);
                         //$("#span_" + id).text(field.version_ctr);
                     });
                 });
+                updating = false;
             }
 
             function showhideclasses() {

@@ -38,7 +38,7 @@
     <!--additional-methods.min.js-->
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-    <!--<script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js")%>"></script>-->
+    <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js")%>"></script>
 
     <script src="<%: ResolveUrl("~/Scripts/generic.js")%>"></script>
 

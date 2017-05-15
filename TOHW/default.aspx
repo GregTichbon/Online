@@ -1,12 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TOHW.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="TOHW.Index" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TOHW.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="TOHW._default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!--
     Hyperspace by HTML5 UP
     html5up.net | @ajlkn
     Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-    <title>Whanganui Te Ora Hou</title>
+    <title>Te Ora Hou Whanganui</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -16,7 +15,7 @@
 
     <style>
         .b-popup {
-            background-color: #f5f5f5;
+            background-color: #fff;
             border-radius: 10px 10px 10px 10px;
             box-shadow: 0 0 25px 5px #999;
             color: #111;
@@ -123,8 +122,8 @@
         <!-- Intro -->
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
-                <h1>Whanganui Te Ora Hou</h1>
-                <p>Welcome to Whanganui Te Ora Hou</p>
+                <h1>Te Ora Hou Whanganui</h1>
+                <p>Welcome to Te Ora Hou Whanganui</p>
                 <ul class="actions">
                     <li><a href="#one" class="button scrolly">Learn more</a> </li>
                 </ul>
@@ -290,11 +289,10 @@
                         <span class="icon major fa-code"></span>
                         <h3>Senior Club</h3>
                         <p>Senior Club is a youth programme that is run on a Monday night from 6.45pm-9.30pm (this is dependant on the actual activity each week). We just ask for a koha, and the best thing is – every young person are picked up and dropped off before and after the programme.</p>
-                        <p>The purpose of Clubs is to engage young people and allow them the opportunity to meet new people. They will experience different activities ranging from food olympics, re-creating film scenes, pamper evenings to storm the heights, raft racing and multi-sport challenges. With a programme that has numerous opportunities, all young people are guaranteed to have a great time, be fed and feel loved.</p>
-                        <p>Every young person who takes part in this programme has a youth leader who journeys alongside them, not only through their time with Clubs, but through this thing called Life.</p>
-                        <p>Throughout the year, during the school holidays, the youth workers deliver several holiday programmes which is open to all young people who attend Monday Night Clubs. The Southern EasterCamp is amongst these, for every year Te Ora Hou offer the opportunity to their young people to experience the big camp under the TOH umbrella. There is also a bi-annual national camp called Tautoko, where young people get the opportunity to attend the week long camp in one of the TOH centres cities/towns.</p>
+                        <p>The purpose is to engage young people and allow them the opportunity to meet new people. They will experience different activities ranging from food olympics, re-creating film scenes, pamper evenings to storm the heights, raft racing and multi-sport challenges. With a programme that has numerous opportunities, all young people are guaranteed to have a great time, be fed and feel loved.</p>
+                        <p>Throughout the year, during the school holidays, the youth workers deliver holiday programmes which is open to all young people who attend Monday Night Clubs. The Southern EasterCamp is amongst these, for every year Te Ora Hou offer the opportunity to their young people to experience the big camp under the TOH umbrella. There is also a bi-annual national camp called Tautoko, where young people get the opportunity to attend the week long camp in one of the TOH centres cities/towns.</p>
                         <p>Young people who participate in Monday Night Clubs and show promise in leadership are offered the opportunity to join the Whakapakari Leadership Programme.</p>
-                        <p>Senior Club is delivered by experienced, trained and qualified youth workers and supported with volunteers. If you are interested in getting involved, visit the volunteers page for details.</p>
+                        <p>Senior Club is delivered by experienced, trained and qualified youth workers and supported with volunteers. If you are interested in getting involved, check out the information for volunteers.</p>
                     </section>
                     <section>
                         <span class="icon major fa-code"></span>

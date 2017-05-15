@@ -58,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Auction\Page.aspx" />
+    <Content Include="BpopUp1.aspx" />
+    <Content Include="Bpopup2.aspx" />
+    <Content Include="Bpop\assets\jquery.bpopup-0.11.0.min.js" />
+    <Content Include="Bpop\assets\test.html" />
+    <Content Include="Bpop\Test1.aspx" />
+    <Content Include="Bpop\Test2.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -66,6 +72,7 @@
     <Content Include="Database\Main.aspx" />
     <Content Include="Database\Main2.aspx" />
     <Content Include="Database\Search.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="functions\Data.asmx" />
     <Content Include="images\aimeeMatthews.jpg" />
     <Content Include="images\Charlie-BoyWilliams.jpg" />
@@ -404,6 +411,9 @@
     <Content Include="images\pic06.jpg" />
     <Content Include="index.html" />
     <Content Include="_TEST\Popup1.aspx" />
+    <Content Include="Bpop\assets\style.min.css" />
+    <Content Include="Bpop\assets\jquery.easing.1.3.js" />
+    <Content Include="Bpop\assets\scripting.min.js" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -475,6 +485,34 @@
     <Compile Include="Auction\Page.aspx.designer.cs">
       <DependentUpon>Page.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BpopUp1.aspx.cs">
+      <DependentUpon>BpopUp1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BpopUp1.aspx.designer.cs">
+      <DependentUpon>BpopUp1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bpopup2.aspx.cs">
+      <DependentUpon>Bpopup2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bpopup2.aspx.designer.cs">
+      <DependentUpon>Bpopup2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bpop\Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bpop\Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bpop\Test2.aspx.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bpop\Test2.aspx.designer.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Database\Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -495,6 +533,13 @@
     </Compile>
     <Compile Include="Database\Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="functions\Data.asmx.cs">
       <DependentUpon>Data.asmx</DependentUpon>
