@@ -25,6 +25,7 @@ namespace TeOranganui
         public string[] dd_gendertype_values; // = new string[3] { "Co-ed", "Female", "Male" };
         public string[] dd_authority_values;
         public string[] dd_type_values;
+        public string[] dd_activitytype_values;
         public string[] dd_decile_values = new string[10] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
         public string[] dd_startyear_values = new string[13] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
         public string[] dd_endyear_values = new string[13] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
@@ -44,6 +45,8 @@ namespace TeOranganui
             dd_gendertype_values = Functions.Functions.populatelist("School", "GenderType");
             dd_authority_values = Functions.Functions.populatelist("School", "Authority");
             dd_type_values = Functions.Functions.populatelist("School", "Type");
+            dd_activitytype_values = Functions.Functions.populatelist("School", "ActivityType");
+
 
             string liststring = "";
             string delim = "";

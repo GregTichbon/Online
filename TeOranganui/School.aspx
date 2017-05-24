@@ -85,6 +85,13 @@
                 });
             });
 
+            var activitytype_options = '<option value=""></option>';
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=15", function (data) {
+                $.each(data, function (i, item) {
+                    activitytype_options += '<option value="' + item.value + '">' + item.label + '</option>';
+                });
+            });
+
             var addresstype_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=addresstype&param1=", function (data) {
                 $.each(data, function (i, item) {
@@ -168,6 +175,17 @@
                             $("#" + id + "-detail").val(item.detail);
                             $("#" + id + "-note").val(item.note);
                             $("#" + id + "-current").val(item.current);
+                        });
+                    });
+
+                    $.getJSON("../functions/data.asmx/get_groupactivity?group_id=" + group_id, function (data) {
+                        $.each(data, function (i, item) {
+                            id = "sub-Groupactivity-" + item.activity_id;
+                            populate_activity(id);
+                            $("#" + id + "-activitytype_id").val(item.activitytype_id);
+                            $("#" + id + "-startdate").val(item.startdate);
+                            $("#" + id + "-enddate").val(item.enddate);
+                            $("#" + id + "-note").val(item.note);
                         });
                     });
 
@@ -277,6 +295,18 @@
                             $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_communications');
+            }
+
+            function populate_activity(id) {
+                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                var $tr = $('<tr id="' + id + '" class="rowdata">').append(
+                            $('<td style="text-align:center">').html(''),
+                            $('<td>').html('<select name="' + id + '-activitytype_id" id="' + id + '-activitytype_id" class="grid_select form-control" required>' + activitytype_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="date" class="form-control" required/>'),
+                            $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="date" class="form-control" />'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                            $('<td style="text-align:center">').html(del)
+                        ).appendTo('#tbl_activity');
             }
 
             function populate_address(id) {
@@ -403,6 +433,9 @@
                             break;
                         case 'tbl_engagement':
                             populate_engagement("sub-GroupEngagement-N" + newkey);
+                            break;
+                        case 'tbl_activity':
+                            populate_activity("sub-GroupActivity-N" + newkey);
                             break;
                         case 'tbl_people':
                             populate_people('sub-group_person-N' + newkey);
@@ -652,6 +685,7 @@
             <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
             <li><a data-toggle="tab" href="#div_address">Addresses</a></li>
             <li><a data-toggle="tab" href="#div_engagement">Engagement</a></li>
+            <li><a data-toggle="tab" href="#div_activity">Activities</a></li>
             <li><a data-toggle="tab" href="#div_roll">Roll</a></li>
             <li><a data-toggle="tab" href="#div_people">People</a></li>
             <li><a data-toggle="tab" href="#div_programmes">Programmes</a></li>
@@ -713,6 +747,22 @@
                 </div>
             </div>
 
+            <div id="div_activity" class="tab-pane fade">
+                <h3>Activity</h3>
+                <div class="datagrid">
+                    <table id="tbl_activity">
+                        <tr>
+                            <td style="width: 50px; text-align: right"></td>
+                            <td>Activity</td>
+                            <td>Start</td>
+                            <td>End</td>
+                            <td>Note</td>
+                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
             <div id="div_roll" class="tab-pane fade">
                 <h3>Roll</h3>
                 <div class="datagrid">

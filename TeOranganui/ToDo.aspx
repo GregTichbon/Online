@@ -80,7 +80,7 @@
                 <tr>
                     <td>&nbsp;</td>
                     <td>School | Add Tab - Key Priority (Description, Start Date, End Date, Notes) Make Narrative field to link to this. </td>
-                    <td>&nbsp;</td>
+                    <td>Done, Still need to add narrative to this</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -164,12 +164,8 @@
                 </tr>
                 <tr>
                     <td>4/5/17</td>
-                    <td>Add a new tab: Priority.&nbsp; Date, Activity(DD), Note, and Status(DD) but ...... I&#39;m wondering if we actually need to create a new screen for &quot;visits&quot; which would include Engagement and Priority<br />
-                        <ul>
-                            <li>See Key Priority in a task above</li>
-                        </ul>
-                    </td>
-                    <td>&nbsp;</td>
+                    <td>Add a new tab: Priority.&nbsp; Date, Activity(DD), Note, and Status(DD) but ...... I&#39;m wondering if we actually need to create a new screen for &quot;visits&quot; which would include Engagement and Priority</td>
+                    <td>See Key Priority in a task above.&nbsp; I think the former was a better way</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>

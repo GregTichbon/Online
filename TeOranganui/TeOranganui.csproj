@@ -152,6 +152,7 @@
     <Content Include="QS1.html" />
     <Content Include="QS2.aspx" />
     <Content Include="QS3.aspx" />
+    <Content Include="Query.aspx" />
     <Content Include="School.aspx" />
     <Content Include="Scripts\addclear.min.js" />
     <Content Include="Scripts\additional-methods.js" />
@@ -453,6 +454,38 @@
     <Content Include="Scripts\Moment\moment-with-locales.min.js" />
     <Content Include="Scripts\Moment\moment.min.js" />
     <Content Include="Scripts\pwstrength-bootstrap.min.js" />
+    <Content Include="Scripts\QueryBuilder\css\query-builder.dark.css" />
+    <Content Include="Scripts\QueryBuilder\css\query-builder.dark.min.css" />
+    <Content Include="Scripts\QueryBuilder\css\query-builder.default.css" />
+    <Content Include="Scripts\QueryBuilder\css\query-builder.default.min.css" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.ar.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.az.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.bg.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.cs.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.da.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.de.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.el.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.en.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.es.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.fa-IR.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.fr.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.he.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.it.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.nl.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.no.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.pl.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.pt-BR.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.pt-PT.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.ro.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.ru.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.sq.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.tr.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.ua.js" />
+    <Content Include="Scripts\QueryBuilder\i18n\query-builder.zh-CN.js" />
+    <Content Include="Scripts\QueryBuilder\js\query-builder.js" />
+    <Content Include="Scripts\QueryBuilder\js\query-builder.min.js" />
+    <Content Include="Scripts\QueryBuilder\js\query-builder.standalone.js" />
+    <Content Include="Scripts\QueryBuilder\js\query-builder.standalone.min.js" />
     <Content Include="Scripts\snippets.js" />
     <Content Include="Scripts\ToolTipster\css\themes\tooltipster-light.css" />
     <Content Include="Scripts\ToolTipster\css\themes\tooltipster-noir.css" />
@@ -477,6 +510,17 @@
     <Content Include="Scripts\fullcalendar\demos\php\get-timezones.php" />
     <Content Include="Scripts\fullcalendar\demos\php\utils.php" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
+    <Content Include="Scripts\QueryBuilder\sccs\dark.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\default.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\bt-tooltip-errors.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\filter-description.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\invert.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\sortable.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\_bt-checkbox.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\_bt-tooltip-errors.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\_filter-description.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\_invert.scss" />
+    <Content Include="Scripts\QueryBuilder\sccs\plugins\_sortable.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -563,6 +607,13 @@
     </Compile>
     <Compile Include="QS3.aspx.designer.cs">
       <DependentUpon>QS3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Query.aspx.cs">
+      <DependentUpon>Query.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Query.aspx.designer.cs">
+      <DependentUpon>Query.aspx</DependentUpon>
     </Compile>
     <Compile Include="School.aspx.cs">
       <DependentUpon>School.aspx</DependentUpon>

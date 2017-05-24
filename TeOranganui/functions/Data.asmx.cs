@@ -520,6 +520,56 @@ namespace TeOranganui.data
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(GroupCommunicationsList));
         }
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_groupactivity(string group_id)
+        {
+            List<activityClass> GroupactivitysList = new List<activityClass>();
+
+            String strConnString = ConfigurationManager.ConnectionStrings["HFConnectionString"].ConnectionString;
+            //string strConnString = "Data Source=toh-app;Initial Catalog=TOIHA;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_groupactivity", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@group_id", SqlDbType.Int).Value = group_id;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        GroupactivitysList.Add(new activityClass
+                        {
+                            activity_id = dr["groupactivity_id"].ToString(),
+                            group_id = dr["group_id"].ToString(),
+                            activitytype_id = dr["activitytype_id"].ToString(),
+                            startdate = dr["startdate"].ToString(),
+                            enddate = dr["enddate"].ToString(),
+                            note = dr["note"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(GroupactivitysList));
+        }
         
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -1269,6 +1319,16 @@ namespace TeOranganui.data
         public string detail;
         public string note;
         public string current;
+    }
+
+    public class activityClass
+    {
+        public string activity_id;
+        public string group_id;
+        public string activitytype_id;
+        public string startdate;
+        public string enddate;
+        public string note;
     }
 
     public class SchoolProgrammeClass

@@ -73,6 +73,7 @@
     <Content Include="Database\Main2.aspx" />
     <Content Include="Database\Search.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="Evaluation\default.aspx" />
     <Content Include="functions\Data.asmx" />
     <Content Include="images\aimeeMatthews.jpg" />
     <Content Include="images\Charlie-BoyWilliams.jpg" />
@@ -539,6 +540,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="functions\Data.asmx.cs">
