@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TOHW.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="TOHW._default" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!--
     Hyperspace by HTML5 UP
@@ -36,30 +37,30 @@
             text-decoration: none;
         }
 
-        .b-button.small {
-            border-radius: 15px;
-            float: right;
-            margin: 22px 5px 0;
-            padding: 6px 15px;
-        }
+            .b-button.small {
+                border-radius: 15px;
+                float: right;
+                margin: 22px 5px 0;
+                padding: 6px 15px;
+            }
 
-        .b-button:hover {
-            background-color: #1e1e1e;
-        }
+            .b-button:hover {
+                background-color: #1e1e1e;
+            }
 
-        .b-button > span {
-            font-size: 84%;
-        }
+            .b-button > span {
+                font-size: 84%;
+            }
 
-        .b-button.b-close {
-            border-radius: 7px 7px 7px 7px;
-            box-shadow: none;
-            font: bold 131% sans-serif;
-            padding: 0 6px 2px;
-            position: absolute;
-            right: -7px;
-            top: -7px;
-        }
+            .b-button.b-close {
+                border-radius: 7px 7px 7px 7px;
+                box-shadow: none;
+                font: bold 131% sans-serif;
+                padding: 0 6px 2px;
+                position: absolute;
+                right: -7px;
+                top: -7px;
+            }
     </style>
 
     <!-- Scripts -->
@@ -273,6 +274,7 @@
                     </div>
                 </div>
             </section>
+
         </section>
         <!-- Two -->
         <section id="two" class="wrapper style3 fade-up">
@@ -415,7 +417,17 @@
                                     <td></td>
                                 </tr>
                                 <tr>
+                                    <td>Emma Eyes</td>
+                                    <td>USA</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <td>PK</td>
+                                    <td>USA</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Caroline</td>
                                     <td>USA</td>
                                     <td></td>
                                 </tr>
@@ -475,33 +487,31 @@
                 <p>We'd love to hear from you.</p>
                 <div class="split style1">
                     <section>
-                        
-                            <div class="field half first">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" />
-                                >
-                            </div>
-                            <div class="field half">
-                                <label for="email">Email</label>
-                                <input type="text" name="email" id="email" />
-                                >
-                            </div>
-                            <div class="field">
-                                <label for="message">Message</label>
-                                <textarea name="message" id="message" rows="5"> </textarea>
-                            </div>
-                            <ul class="actions">
-                                <li><a href="" class="button submit">Send Message</a> </li>
-                            </ul>
-                        
+
+                        <div class="field half first">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" />
+                        </div>
+                        <div class="field half">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" />
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="5"> </textarea>
+                        </div>
+                        <ul class="actions">
+                            <li><a href="" class="button submit">Send Message</a> </li>
+                        </ul>
+
                     </section>
                     <section>
                         <ul class="contact">
                             <li>
                                 <h3>Address</h3>
                                 <span>32 Totara Street<br />
-                                    > Tawhero<br />
-                                    > Whanganui 4501 </span></li>
+                                    Tawhero<br />
+                                    Whanganui 4501 </span></li>
                             <li>
                                 <h3>Email</h3>
                                 <a href="#">whanganui@teorahou.org.nz</a> </li>

@@ -18,6 +18,7 @@ namespace TOHW.Auction
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region ASP CODE
             /*
               <%
   	dim id()
@@ -95,14 +96,14 @@ namespace TOHW.Auction
 	
 	for f1=1 to c1 step 3
 		if f1 <> 1 then
-			response.write "<hr />" & vbcrlf
+			response.write "<hr />"; //& vbcrlf
 		end if
-		response.write "<div class=""row"">" & vbcrlf
+		response.write "<div class=""row"">"; //& vbcrlf
 		for f2=0 to 2
-			response.write "<div class=""col-sm-4"" >" & vbcrlf
+			response.write "<div class=""col-sm-4"" >"; //& vbcrlf
 			if f1+f2 <= realc1 then
-				response.write "<div class=""mycentered"">" & vbcrlf
-				response.write "<div style=""height: 50px""><h3>" & seq(f1 + f2) & ". " & title(f1 + f2) & "</h3></div>" & vbcrlf
+				response.write "<div class=""mycentered"">"; //& vbcrlf
+				response.write "<div style=""height: 50px""><h3>" & seq(f1 + f2) & ". " & title(f1 + f2) & "</h3></div>"; //& vbcrlf
 if auctiontype = 1 then
 	canclick = " canclick"
 else
@@ -124,13 +125,13 @@ end if
 	%>
   </div>			
 <%
-				response.write "</div>" & vbcrlf
-				response.write "<div style=""text-align: justify; text-justify: inter-word;"">" & description(f1 + f2) & "</div>" & vbcrlf
-				response.write "<div class=""mycentered"">" & vbcrlf
+				response.write "</div>"; //& vbcrlf
+				response.write "<div style=""text-align: justify; text-justify: inter-word;"">" & description(f1 + f2) & "</div>"; //& vbcrlf
+				response.write "<div class=""mycentered"">"; //& vbcrlf
 				if auctiontype = 1 then
 					response.write "<img class=""showitem"" id=""showitem" & id(f1 + f2) & """ src=""bidnow.png"">"
 				end if
-				response.write "<h3>Generously donated by</h3>" & vbcrlf
+				response.write "<h3>Generously donated by</h3>"; //& vbcrlf
 %>
 				<div class="slideshow" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>
 <%			
@@ -144,14 +145,14 @@ end if
 				</div>
 <%					
 				for f3=1 to donors_cnt(f1 + f2)
-					response.write "<p>" & donors_Title(f1 + f2,f3) & "</p>" & vbcrlf
+					response.write "<p>" & donors_Title(f1 + f2,f3) & "</p>"; //& vbcrlf
 				next
-				response.write "</div>" & vbcrlf
+				response.write "</div>"; //& vbcrlf
 			end if
-			response.write "</div>" & vbcrlf
+			response.write "</div>"; //& vbcrlf
 		next
 
-		response.write "</div>" & vbcrlf
+		response.write "</div>"; //& vbcrlf
 	next
 	set rsid = nothing	
 	set rs = nothing	
@@ -159,25 +160,36 @@ end if
 	set db = nothing
 	%>
 */
+            #endregion
 
             string[] id = new string[100];
             string[] seq = new string[100];
             string[] title = new string[100];
             string[] description = new string[100];
-            string[,] donors_cnt = new string[10, 2];
+            int[] donors_cnt = new int[100];
             string[,] donors_ID = new string[10, 2];
             string[,] donors_Title = new string[10, 2];
             string[,] donors_Images = new string[10, 2];
 
             int c1 = 0;
+            int auctiontype = 1;
+            string canclick = "";
+            if (auctiontype == 1)
+            {
+                canclick = " canclick";
+            }
+            else
+            {
+                canclick = "";
+            }
+            string imagefolder = HttpContext.Current.Request.PhysicalApplicationPath + "Auction\\images\\items";
 
-
-            String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
+            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("Get_Items", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
-            cmd.Parameters.Add("@auctiontype_ctr", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@auctiontype_ctr", SqlDbType.Int).Value = auctiontype;
             cmd.Connection = con;
             try
             {
@@ -193,6 +205,8 @@ end if
                         title[c1] = dr["title"].ToString();
                         description[c1] = dr["description"].ToString();
 
+                        //Lit_Items.Text += title[c1] + " - " + description[c1] + "<br />";
+
                         //Get code from WDC for delimited data from SP in a column.  This is for the potential of multiple donors
                     }
                 }
@@ -205,6 +219,70 @@ end if
             {
                 con.Close();
                 con.Dispose();
+            }
+
+            int realc1 = 0;
+
+            for (int f1 = 1; f1 < c1; f1 += 3)
+            {
+                if (f1 != 1)
+                {
+                    Lit_Items.Text += "<hr />";
+                }
+                Lit_Items.Text += "<div class=\"row\">"; //; //& vbcrlf
+                for (int f2 = 0; f2 < 2; f2++)
+                {
+                    Lit_Items.Text += "<div class=\"col-sm-4\" >"; //; //& vbcrlf
+                    if (f1 + f2 <= realc1)
+                    {
+                        Lit_Items.Text += "<div class=\"mycentered\">"; //& vbcrlf
+                        Lit_Items.Text += "<div style=\"height: 50px\"><h3>" + seq[f1 + f2] + ". " + title[f1 + f2] + "</h3></div>"; //& vbcrlf
+                    }
+                    Lit_Items.Text += "<div class=\"slideshow " + canclick + " id=\"viewitem" + id[f1 + f2] + " data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
+                    string thisimagefolder = imagefolder + "\\" + id[f1 + f2];
+                    Lit_Items.Text += thisimagefolder;
+                    if (Directory.Exists(thisimagefolder))
+                    {
+                        string[] files = Directory.GetFiles(thisimagefolder, "*.*", SearchOption.TopDirectoryOnly);
+                        foreach (string filename in files)
+                        {
+                            string justfilename = System.IO.Path.GetFileName(filename);
+                            //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
+                            //{
+                                Lit_Items.Text += "<img src=\"images/items/" + id[f1 + f2] + "/" + justfilename + "\" height=\"160\" border=\"0\" alt=\"" + filename + "\">";
+                            //}
+                        }
+                    }
+
+                    Lit_Items.Text += "</div>";
+                    Lit_Items.Text += "</div>"; //& vbcrlf
+                    Lit_Items.Text += "<div style=\"text-align: justify; text-justify: inter-word;\">" + description[f1 + f2] + "</div>"; //& vbcrlf
+                    Lit_Items.Text += "<div class=\"mycentered\">"; //& vbcrlf
+                    if (auctiontype == 1)
+                    {
+                        Lit_Items.Text += "<img class=\"showitem\" id=\"showitem" + id[f1 + f2] + "\" src=\"bidnow.png\">";
+                    }
+                    Lit_Items.Text += "<h3>Generously donated by</h3>"; //& vbcrlf
+                    Lit_Items.Text += "<div class=\"slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
+                    for (int f3 = 1; f3 < donors_cnt[f1 + f2]; f3++)
+                    {
+                        {
+                            string[] a = donors_Images[f1 + f2, f3].Split('|');
+                            foreach (string x in a)
+                            {
+                                Lit_Items.Text += x;
+                            }
+                        }
+                    }
+                    Lit_Items.Text += "</div>";
+                    for (int f3 = 1; f3 < donors_cnt[f1 + f2]; f3++)
+                    {
+                        Lit_Items.Text += "<p>" + donors_Title[f1 + f2, f3] + "</p>"; //& vbcrlf
+                    }
+                    Lit_Items.Text += "</div>"; //& vbcrlf
+                    Lit_Items.Text += "</div>"; //& vbcrlf
+                }
+                Lit_Items.Text += "</div>"; //& vbcrlf
             }
         }
     }
