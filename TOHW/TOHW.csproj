@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,6 +58,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="2Talk\default.asp" />
+    <Content Include="Auction\Admin\Default.aspx" />
+    <Content Include="Auction\Admin\donor.aspx" />
+    <Content Include="Auction\Admin\DonorList.aspx" />
+    <Content Include="Auction\Admin\ItemList.aspx" />
     <Content Include="Auction\Page.aspx" />
     <Content Include="BpopUp1.aspx" />
     <Content Include="Bpopup2.aspx" />
@@ -479,6 +485,34 @@
     <Content Include="images\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auction\Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Admin\donor.aspx.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\donor.aspx.designer.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Admin\DonorList.aspx.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\DonorList.aspx.designer.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Admin\ItemList.aspx.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\ItemList.aspx.designer.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Auction\Page.aspx.cs">
       <DependentUpon>Page.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

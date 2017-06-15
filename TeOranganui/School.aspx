@@ -302,8 +302,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-activitytype_id" id="' + id + '-activitytype_id" class="grid_select form-control" required>' + activitytype_options + '</select>'),
-                            $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="date" class="form-control" required/>'),
-                            $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="date" class="form-control" />'),
+                            $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control dtp" required/>'),
+                            $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control dtp" />'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_activity');
@@ -325,7 +325,7 @@
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="date" class="form-control" required/>'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required/>'),
                             $('<td>').html('<select name="' + id + '-type_id" id="' + id + '-type_id" class="grid_select form-control" required>' + rolltype_options + '</select>'),
                             $('<td>').html('<select name="' + id + '-classification_id" id="' + id + '-classification_id" class="grid_select form-control" required>' + rollclassification_options + '</select>'),
                             $('<td>').html('<input name="' + id + '-roll" id="' + id + '-roll" type="text" class="form-control" required/>'),
@@ -338,7 +338,7 @@
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control greg" required />'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required />'),
                             $('<td>').html('<select name="' + id + '-level_id" id="' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td style="text-align:center">').html(del)
@@ -361,8 +361,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + programme_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="date" class="form-control" />'),
-                    $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="date" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control dtp" />'),
+                    $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control dtp" />'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
                 ).appendTo('#tbl_programme');
@@ -373,8 +373,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + policy_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="date" class="form-control" />'),
-                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="date" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-dateimplemented" id="' + id + '-dateimplemented" type="text" class="form-control dtp" />'),
+                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control dtp" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
@@ -386,8 +386,8 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + accreditation_options + '</select>'),
-                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="date" class="form-control" />'),
-                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="date" class="form-control" />'),
+                    $('<td>').html('<input name="' + id + '-dateaccredited" id="' + id + '-dateaccredited" type="text" class="form-control dtp" />'),
+                    $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control dtp" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                     $('<td style="text-align:center">').html(del)
@@ -407,11 +407,11 @@
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
-                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control" required />'),
+                            $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required />'),
                             $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative" class="form-control" required></textarea>'),
                             $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" Adclass="grid_select form-control" required>' + user_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action" class="form-control"></textarea>'),
-                            $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" class="form-control" />'),
+                            $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" class="form-control dtp" />'),
                             $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select form-control">' + user_options + '</select>'),
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_narrative');
@@ -551,7 +551,13 @@
                 }
             })
 
-            $('.greg').datetimepicker();
+            //$('.dtp').datetimepicker();
+            $(document).on('focus', ".dtp", function () {
+                $(this).datepicker({
+                        dateFormat: "dd M yy"
+                    }
+                );
+            });
         });
 
  
@@ -573,12 +579,7 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="control-label col-sm-4" for="xxxx">Test Date</label>
-        <div class="col-sm-8">
-            <input type='text' class="form-control greg" id='xxxx' />
-        </div>
-    </div>
+
 
     <div id="inputfields">
 

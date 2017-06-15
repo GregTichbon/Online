@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24TestAndPlay\Date1.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -529,6 +531,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="%24TestAndPlay\Date1.aspx.cs">
+      <DependentUpon>Date1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="%24TestAndPlay\Date1.aspx.designer.cs">
+      <DependentUpon>Date1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Date1.aspx.cs">
       <DependentUpon>Date1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

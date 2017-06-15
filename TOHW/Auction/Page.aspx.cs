@@ -270,7 +270,7 @@ end if
                             string[] a = donors_Images[f1 + f2, f3].Split('|');
                             foreach (string x in a)
                             {
-                                Lit_Items.Text += x;
+                                Lit_Items.Text += "Test: " + x;
                             }
                         }
                     }

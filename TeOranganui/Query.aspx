@@ -10,19 +10,19 @@
     var rules_basic = {
         condition: 'AND',
         rules: [{
-            id: 'price',
-            operator: 'less',
-            value: 10.25
+            id: 'location',
+            operator: 'equal',
+            value: 1
         }, {
             condition: 'OR',
             rules: [{
-                id: 'category',
-                operator: 'equal',
-                value: 2
-            }, {
-                id: 'category',
+                id: 'gender',
                 operator: 'equal',
                 value: 1
+            }, {
+                id: 'gender',
+                operator: 'equal',
+                value: 3
             }]
         }]
     };
@@ -31,50 +31,43 @@
         plugins: ['bt-tooltip-errors'],
 
         filters: [{
-            id: 'name',
-            label: 'Name',
+            id: 'moenumber',
+            label: 'MOE Number',
             type: 'string'
         }, {
-            id: 'category',
-            label: 'Category',
+            id: 'gender',
+            label: 'Gender',
             type: 'integer',
             input: 'select',
             values: {
-                1: 'Books',
-                2: 'Movies',
-                3: 'Music',
-                4: 'Tools',
-                5: 'Goodies',
-                6: 'Clothes'
+                1: 'Female',
+                2: 'Male',
+                3: 'Co-ed'
             },
             operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
         }, {
-            id: 'in_stock',
-            label: 'In stock',
+            id: 'authority',
+            label: 'Authority',
             type: 'integer',
             input: 'radio',
             values: {
-                1: 'Yes',
-                0: 'No'
+                1: 'Private',
+                0: 'State',
+                2: 'Integrated'
             },
             operators: ['equal']
         }, {
-            id: 'price',
-            label: 'Price',
-            type: 'double',
-            validation: {
-                min: 0,
-                step: 0.01
-            }
-        }, {
-            id: 'id',
-            label: 'Identifier',
-            type: 'string',
-            placeholder: '____-____-____',
-            operators: ['equal', 'not_equal'],
-            validation: {
-                format: /^.{4}-.{4}-.{4}$/
-            }
+            id: 'location',
+            label: 'Location',
+            type: 'integer',
+            input: 'select',
+            values: {
+                1: 'Whanganui',
+                2: 'Marton',
+                3: 'Bulls',
+                4: 'Taihape'
+            },
+            operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
         }],
 
         rules: rules_basic
