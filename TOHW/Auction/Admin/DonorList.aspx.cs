@@ -74,17 +74,21 @@ namespace TOHW.Auction.Admin
                             con2.Close();
                         }
 
-                        images = "<div class=\"slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
 
-                        string path = Server.MapPath("..\\images\\donor\\" + donor_ctr);
-                        foreach (string dirFile in Directory.GetDirectories(path))
+                        string path = Server.MapPath("..\\images\\donors\\" + donor_ctr);
+                        if (Directory.Exists(path))
                         {
-                            foreach (string fileName in Directory.GetFiles(dirFile))
+                            images = "<div class=\"slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
+
+                            foreach (string dirFile in Directory.GetDirectories(path))
                             {
-                                images += "<img src=\"../images/donor/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"80\" border=\"0\">";
+                                foreach (string fileName in Directory.GetFiles(dirFile))
+                                {
+                                    images += "<img src=\"../images/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"80\" border=\"0\">";
+                                }
                             }
+                            images += "</div>";
                         }
-                        images += "</div>";
                         html += "<tr><td><a href=donor.aspx?id=" + donor_ctr + ">" + donorname + "</a><td>" + items + "</td><td>" + images + "</td></tr>";
                     }
                 }

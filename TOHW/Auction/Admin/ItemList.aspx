@@ -62,9 +62,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <a href="item.asp">Create</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="default.asp">Menu</a>
+    <a href="item.aspx">Create</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="default.aspx">Menu</a>
   <table>
-          <asp:Literal ID="Lit_Items" runat="server"></asp:Literal>
+          <%=html%> 
   </table>
-  <a href="default.asp">Menu</a>
+  <a href="default.aspx">Menu</a>
 </asp:Content>

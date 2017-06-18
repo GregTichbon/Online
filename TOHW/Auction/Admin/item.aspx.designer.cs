@@ -10,6 +10,6 @@
 namespace TOHW.Auction.Admin {
     
     
-    public partial class ItemList {
+    public partial class item {
     }
 }

@@ -12,6 +12,7 @@ namespace TOHW.Auction.Admin
 {
     public partial class ItemList : System.Web.UI.Page
     {
+        public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             #region ASP CODE
@@ -71,6 +72,9 @@ namespace TOHW.Auction.Admin
             string seq;
             string title;
             string donorname;
+            string donors = "";
+            string delim = "";
+            string images = "";
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
@@ -105,6 +109,9 @@ namespace TOHW.Auction.Admin
                                 while (dr2.Read())
                                 {
                                     donorname = dr2["donorname"].ToString();
+
+                                    donors += delim + donorname;
+                                    delim = "<br />";
                                 }
                             }
                         }
@@ -116,6 +123,9 @@ namespace TOHW.Auction.Admin
                         {
                             con2.Close();
                         }
+                        images = "";
+                        html += "<tr><td><a href=item.aspx?id=" + item_ctr + ">" + title + "</a><td>" + donors + "</td><td>" + images + "</td></tr>";
+
                     }
                 }
             }

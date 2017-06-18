@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online", "Online\Online.csproj", "{70360F72-A110-4A95-80E6-ED28DA683297}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generic", "Generic\Generic.csproj", "{790FA8DC-F11C-41DE-B52B-23C61A41C2F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TichbonKumeroa", "TichbonKumeroa\TichbonKumeroa.csproj", "{BC223ACB-7E15-4AC9-B743-1E3745B158AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingApp", "..\MessagingApp\MessagingApp\MessagingApp.csproj", "{D7945DF2-0C15-4637-B905-E914B3448FBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,18 @@ Global
 		{BC223ACB-7E15-4AC9-B743-1E3745B158AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC223ACB-7E15-4AC9-B743-1E3745B158AA}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
 		{BC223ACB-7E15-4AC9-B743-1E3745B158AA}.TestServer|Any CPU.Build.0 = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.LocalHost|Any CPU.ActiveCfg = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.LocalHost|Any CPU.Build.0 = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.ProductionServer|Any CPU.ActiveCfg = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.ProductionServer|Any CPU.Build.0 = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.ProductionServerTEST|Any CPU.ActiveCfg = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.ProductionServerTEST|Any CPU.Build.0 = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
+		{D7945DF2-0C15-4637-B905-E914B3448FBD}.TestServer|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

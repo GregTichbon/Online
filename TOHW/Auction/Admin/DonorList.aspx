@@ -63,9 +63,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <a href="donor.asp">Create</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="default.asp">Menu</a>
+    <a href="donor.aspx">Create</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="default.aspx">Menu</a>
     <table width="75%" border="1" cellspacing="0" cellpadding="5">
         <%=html%>
     </table>
-    <a href="default.asp">Menu</a>
+    <a href="default.aspx">Menu</a>
 </asp:Content>
