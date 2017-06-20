@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TichbonKumeroa", "TichbonKu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingApp", "..\MessagingApp\MessagingApp\MessagingApp.csproj", "{D7945DF2-0C15-4637-B905-E914B3448FBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction", "Auction\Auction.csproj", "{33008459-999B-4E81-8773-395C0523297D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{D7945DF2-0C15-4637-B905-E914B3448FBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7945DF2-0C15-4637-B905-E914B3448FBD}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
 		{D7945DF2-0C15-4637-B905-E914B3448FBD}.TestServer|Any CPU.Build.0 = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.LocalHost|Any CPU.ActiveCfg = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.LocalHost|Any CPU.Build.0 = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.ProductionServer|Any CPU.ActiveCfg = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.ProductionServer|Any CPU.Build.0 = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.ProductionServerTEST|Any CPU.ActiveCfg = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.ProductionServerTEST|Any CPU.Build.0 = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
+		{33008459-999B-4E81-8773-395C0523297D}.TestServer|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,774 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{33008459-999B-4E81-8773-395C0523297D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Auction</RootNamespace>
+    <AssemblyName>Auction</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Auction.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="_Includes\Scripts\colorbox\images\Thumbs.db" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\json\events.json" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\php\calendar.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Administration\Default.aspx" />
+    <Content Include="Administration\Donor.aspx" />
+    <Content Include="Administration\DonorList.aspx" />
+    <Content Include="Administration\ItemList.aspx" />
+    <Content Include="Administration\Item.aspx" />
+    <Content Include="Images\Auction\Donors\10\Edmonds Painting 2016 logo - with service list.jpg" />
+    <Content Include="Images\Auction\Donors\10\Original\Edmonds Painting 2016 logo - with service list.jpg" />
+    <Content Include="Images\Auction\Donors\11\Dulux paint logo.png" />
+    <Content Include="Images\Auction\Donors\11\Original\Dulux paint logo.png" />
+    <Content Include="Images\Auction\Donors\12\Big Orange Ceramic Logo.jpg" />
+    <Content Include="Images\Auction\Donors\12\Original\Big Orange Ceramic Logo.jpg" />
+    <Content Include="Images\Auction\Donors\13\Rutland Arms Email Banners.jpg" />
+    <Content Include="Images\Auction\Donors\14\The Red Lion.jpg" />
+    <Content Include="Images\Auction\Donors\15\carolines-boatshed-black-large.png" />
+    <Content Include="Images\Auction\Donors\15\Original\carolines-boatshed-black-large.png" />
+    <Content Include="Images\Auction\Donors\16\16.jpg" />
+    <Content Include="Images\Auction\Donors\16\Original\16.jpg" />
+    <Content Include="Images\Auction\Donors\17\17.jpg" />
+    <Content Include="Images\Auction\Donors\17\Original\17.jpg" />
+    <Content Include="Images\Auction\Donors\18\Original\TV Business card.jpg" />
+    <Content Include="Images\Auction\Donors\18\TV Business card.jpg" />
+    <Content Include="Images\Auction\Donors\19\Original\Weta Workshop.jpg" />
+    <Content Include="Images\Auction\Donors\19\Weta Workshop.jpg" />
+    <Content Include="Images\Auction\Donors\1\1.jpg" />
+    <Content Include="Images\Auction\Donors\1\Original\1.jpg" />
+    <Content Include="Images\Auction\Donors\20\Bolton Hotel.jpg" />
+    <Content Include="Images\Auction\Donors\20\Original\Bolton Hotel.jpg" />
+    <Content Include="Images\Auction\Donors\21\Mercedes Logo.png" />
+    <Content Include="Images\Auction\Donors\23\HURRICANES LOGO.jpg" />
+    <Content Include="Images\Auction\Donors\23\Original\HURRICANES LOGO.jpg" />
+    <Content Include="Images\Auction\Donors\24\Logan Brown Logo.jpg" />
+    <Content Include="Images\Auction\Donors\24\Original\Logan Brown Logo.jpg" />
+    <Content Include="Images\Auction\Donors\27\Earl Bamber Image.jpg" />
+    <Content Include="Images\Auction\Donors\27\original\Earl Bamber Image.png" />
+    <Content Include="Images\Auction\Donors\28\Michael Hill Logo.png" />
+    <Content Include="Images\Auction\Donors\29\Eyes on Victoria .jpg" />
+    <Content Include="Images\Auction\Donors\29\original\Eyes on Victoria .jpg" />
+    <Content Include="Images\Auction\Donors\2\Coutts Newmarket.jpg" />
+    <Content Include="Images\Auction\Donors\2\Original\Coutts Newmarket.jpg" />
+    <Content Include="Images\Auction\Donors\30\original\Victoria Dental .jpg" />
+    <Content Include="Images\Auction\Donors\30\Victoria Dental .jpg" />
+    <Content Include="Images\Auction\Donors\31\Mitre 10 MEGA Wanganui.jpg" />
+    <Content Include="Images\Auction\Donors\31\original\Mitre 10 MEGA Wanganui.jpg" />
+    <Content Include="Images\Auction\Donors\32\32.jpg" />
+    <Content Include="Images\Auction\Donors\32\Original\32.jpg" />
+    <Content Include="Images\Auction\Donors\34\34.jpg" />
+    <Content Include="Images\Auction\Donors\34\Original\34.jpg" />
+    <Content Include="Images\Auction\Donors\35\Crossroads Wine.jpg" />
+    <Content Include="Images\Auction\Donors\35\original\Crossroads Wine.jpg" />
+    <Content Include="Images\Auction\Donors\36\Original\Springvale Garden Centre Logo.jpg" />
+    <Content Include="Images\Auction\Donors\36\Springvale Garden Centre Logo.jpg" />
+    <Content Include="Images\Auction\Donors\37\original\The Edge Logo.jpg" />
+    <Content Include="Images\Auction\Donors\37\The Edge Logo.jpg" />
+    <Content Include="Images\Auction\Donors\38\38.jpg" />
+    <Content Include="Images\Auction\Donors\38\original\38.jpg" />
+    <Content Include="Images\Auction\Donors\3\Original\The Sugar Club logo - black.jpg" />
+    <Content Include="Images\Auction\Donors\3\The Sugar Club logo - black.jpg" />
+    <Content Include="Images\Auction\Donors\42\Museum Hotel Portrait Black.jpg" />
+    <Content Include="Images\Auction\Donors\42\original\Museum Hotel Portrait Black.jpg" />
+    <Content Include="Images\Auction\Donors\45\Air Chathams Black.jpg" />
+    <Content Include="Images\Auction\Donors\45\original\Air Chathams Black.jpg" />
+    <Content Include="Images\Auction\Donors\46\original\Take It Easy Tours.jpg" />
+    <Content Include="Images\Auction\Donors\46\Take It Easy Tours.jpg" />
+    <Content Include="Images\Auction\Donors\47\Japanese Kitchen.jpg" />
+    <Content Include="Images\Auction\Donors\47\Original\Japanese Kitchen.jpg" />
+    <Content Include="Images\Auction\Donors\48\MINT Logo Specs.jpg" />
+    <Content Include="Images\Auction\Donors\48\original\MINT Logo Specs.jpg" />
+    <Content Include="Images\Auction\Donors\49\NZR_logo_WHT.jpg" />
+    <Content Include="Images\Auction\Donors\49\original\NZR_logo_WHT.jpg" />
+    <Content Include="Images\Auction\Donors\4\Original\Sky City Hotel.jpg" />
+    <Content Include="Images\Auction\Donors\4\Sky City Hotel.jpg" />
+    <Content Include="Images\Auction\Donors\50\original\Parapara Deer Hunt.jpg" />
+    <Content Include="Images\Auction\Donors\50\Parapara Deer Hunt.jpg" />
+    <Content Include="Images\Auction\Donors\51\original\WOW-Awards-Show-Logo.jpg" />
+    <Content Include="Images\Auction\Donors\51\WOW-Awards-Show-Logo.jpg" />
+    <Content Include="Images\Auction\Donors\52\Morrie Gibbons Signs.jpg" />
+    <Content Include="Images\Auction\Donors\52\original\Morrie Gibbons Signs.jpg" />
+    <Content Include="Images\Auction\Donors\53\Chester Borrows.jpg" />
+    <Content Include="Images\Auction\Donors\53\original\Chester Borrows.jpg" />
+    <Content Include="Images\Auction\Donors\54\original\Wanganui Rugby.png" />
+    <Content Include="Images\Auction\Donors\54\Wanganui Rugby.png" />
+    <Content Include="Images\Auction\Donors\55\Cooks Gardens.jpg" />
+    <Content Include="Images\Auction\Donors\55\original\Cooks Gardens.jpg" />
+    <Content Include="Images\Auction\Donors\56\original\Rachel Brandon logo.png" />
+    <Content Include="Images\Auction\Donors\56\Rachel Brandon logo.png" />
+    <Content Include="Images\Auction\Donors\57\Wanganuim Events Trust Logo FINAL_cmyk.png" />
+    <Content Include="Images\Auction\Donors\58\Element Logo.png" />
+    <Content Include="Images\Auction\Donors\59\hammond pantone no shadow 600Low Res.jpg" />
+    <Content Include="Images\Auction\Donors\59\Original\hammond pantone no shadow 600Low Res.jpg" />
+    <Content Include="Images\Auction\Donors\5\David Jones logo Red Blue.jpg" />
+    <Content Include="Images\Auction\Donors\5\Original\David Jones logo Red Blue.jpg" />
+    <Content Include="Images\Auction\Donors\60\original\Quilt.jpg" />
+    <Content Include="Images\Auction\Donors\60\Quilt.jpg" />
+    <Content Include="Images\Auction\Donors\6\Original\Suzuki logo 2.jpg" />
+    <Content Include="Images\Auction\Donors\6\Suzuki logo 2.jpg" />
+    <Content Include="Images\Auction\Donors\7\7.jpg" />
+    <Content Include="Images\Auction\Donors\7\Original\7.jpg" />
+    <Content Include="Images\Auction\Donors\8\8.jpg" />
+    <Content Include="Images\Auction\Donors\8\Original\8.jpg" />
+    <Content Include="Images\Auction\Donors\9\DML Construction Logo %28Large%29_001.png" />
+    <Content Include="Images\Auction\Donors\9\Original\DML Construction Logo %28Large%29_001.png" />
+    <Content Include="Images\Auction\Donors\RAW\ATEED Logo.png" />
+    <Content Include="Images\Auction\Donors\RAW\ATTEED LOGO LARGE.png" />
+    <Content Include="Images\Auction\Donors\RAW\Mellonsfolly Ranch Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Mercedes Logo.jpg" />
+    <Content Include="Images\Auction\Donors\RAW\original\ATEED Logo.png" />
+    <Content Include="Images\Auction\Donors\RAW\original\ATTEED LOGO LARGE.png" />
+    <Content Include="Images\Auction\Donors\RAW\original\Mellonsfolly Ranch Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Mercedes Logo.jpg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Partridge Jewellers Med Ldscape Blue jpg.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Partridge Jewellers Med Portrait Blue copy.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Rivercity Trees Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Springvale Garden Centre Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Stellar 1.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Stellar 2.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\The Edge Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Top Draw_Logo details.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\Top Draw_Logo only.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\original\yellowhouselogo.png" />
+    <Content Include="Images\Auction\Donors\RAW\Partridge Jewellers Med Ldscape Blue jpg.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Partridge Jewellers Med Portrait Blue copy.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Rivercity Trees Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Springvale Garden Centre Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Stellar 1.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Stellar 2.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\The Edge Logo.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Top Draw_Logo details.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\Top Draw_Logo only.jpeg" />
+    <Content Include="Images\Auction\Donors\RAW\yellowhouselogo.png" />
+    <Content Include="Images\Auction\Items\10\Earl Bamber Image.jpg" />
+    <Content Include="Images\Auction\Items\10\original\Earl Bamber Image.png" />
+    <Content Include="Images\Auction\Items\11\original\Weta Vouchers.jpg" />
+    <Content Include="Images\Auction\Items\11\Weta Vouchers.jpg" />
+    <Content Include="Images\Auction\Items\12\Men%27s Gold Watch.jpg" />
+    <Content Include="Images\Auction\Items\12\original\Men%27s Gold Watch.jpg" />
+    <Content Include="Images\Auction\Items\13\Eyes on Victoria RAYBAN IMAGE.jpg" />
+    <Content Include="Images\Auction\Items\13\original\Eyes on Victoria RAYBAN IMAGE.jpg" />
+    <Content Include="Images\Auction\Items\14\IMG_2594.jpg" />
+    <Content Include="Images\Auction\Items\14\original\IMG_2594.jpg" />
+    <Content Include="Images\Auction\Items\14\original\Victoria Dental .jpg" />
+    <Content Include="Images\Auction\Items\14\Victoria Dental .jpg" />
+    <Content Include="Images\Auction\Items\15\original\Outdoor Furniture Cool Stool.jpg" />
+    <Content Include="Images\Auction\Items\15\original\Outdoor Furniture Jersey Setting.jpg" />
+    <Content Include="Images\Auction\Items\15\Outdoor Furniture Cool Stool.jpg" />
+    <Content Include="Images\Auction\Items\15\Outdoor Furniture Jersey Setting.jpg" />
+    <Content Include="Images\Auction\Items\16\original\Rivercity Trees.jpg" />
+    <Content Include="Images\Auction\Items\16\Rivercity Trees.jpg" />
+    <Content Include="Images\Auction\Items\17\original\Top Drawer Package.jpg" />
+    <Content Include="Images\Auction\Items\17\Top Drawer Package.jpg" />
+    <Content Include="Images\Auction\Items\18\original\The Edge Package.jpg" />
+    <Content Include="Images\Auction\Items\18\The Edge Package.jpg" />
+    <Content Include="Images\Auction\Items\19\Crossroads Wine.jpg" />
+    <Content Include="Images\Auction\Items\19\original\Crossroads Wine.jpg" />
+    <Content Include="Images\Auction\Items\1\Mellonsfolly 3.jpg" />
+    <Content Include="Images\Auction\Items\1\Mellonsfolly Old West Town.jpg" />
+    <Content Include="Images\Auction\Items\1\original\Mellonsfolly 3.jpg" />
+    <Content Include="Images\Auction\Items\1\original\Mellonsfolly Old West Town.jpg" />
+    <Content Include="Images\Auction\Items\20\original\Springvale Landscape Package.jpg" />
+    <Content Include="Images\Auction\Items\20\Springvale Landscape Package.jpg" />
+    <Content Include="Images\Auction\Items\21\original\Rachel Brandon Voucher.jpg" />
+    <Content Include="Images\Auction\Items\21\Rachel Brandon Voucher.jpg" />
+    <Content Include="Images\Auction\Items\22\Morrie Gibbons Signs promotion.jpg" />
+    <Content Include="Images\Auction\Items\22\original\Morrie Gibbons Signs promotion.jpg" />
+    <Content Include="Images\Auction\Items\2\original\Partridge Jeweller Pendant Photo 2.jpg" />
+    <Content Include="Images\Auction\Items\2\original\Partridge Jeweller Pendant.jpg" />
+    <Content Include="Images\Auction\Items\2\Partridge Jeweller Pendant Photo 2.jpg" />
+    <Content Include="Images\Auction\Items\2\Partridge Jeweller Pendant.jpg" />
+    <Content Include="Images\Auction\Items\30\Cook%27s Gardens.jpg" />
+    <Content Include="Images\Auction\Items\30\original\Cook%27s Gardens.jpg" />
+    <Content Include="Images\Auction\Items\39\Kim Kardashian Ring.jpg" />
+    <Content Include="Images\Auction\Items\39\original\Kim Kardashian Ring.jpg" />
+    <Content Include="Images\Auction\Items\3\original\Villa 1.jpg" />
+    <Content Include="Images\Auction\Items\3\Villa 1.jpg" />
+    <Content Include="Images\Auction\Items\43\All Black%27s Jersey.jpg" />
+    <Content Include="Images\Auction\Items\43\original\All Black%27s Jersey.jpg" />
+    <Content Include="Images\Auction\Items\44\Auckland Experience Package Mercedes.jpg" />
+    <Content Include="Images\Auction\Items\44\Auckland Experience Package Sky City Hotel.jpg" />
+    <Content Include="Images\Auction\Items\44\Auckland Experience Package The Sugar Club.jpg" />
+    <Content Include="Images\Auction\Items\44\original\Auckland Experience Package Mercedes.png" />
+    <Content Include="Images\Auction\Items\44\original\Auckland Experience Package Sky City Hotel.jpg" />
+    <Content Include="Images\Auction\Items\44\original\Auckland Experience Package The Sugar Club.jpg" />
+    <Content Include="Images\Auction\Items\45\original\Swift Red Front retouched.jpg" />
+    <Content Include="Images\Auction\Items\45\Swift Red Front retouched.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package and Auckland Experience Package Air Chathams.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package EcoZip.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package Fullers Ferry.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package Mudbrick 2.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package Mudbrick Restaurant.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package The Oyster Inn 2.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package The Oyster Inn 3..jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package The Oyster Inn 4.jpg" />
+    <Content Include="Images\Auction\Items\46\original\Waiheke Package The Oyster Inn.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package and Auckland Experience Package Air Chathams.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package EcoZip.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package Fullers Ferry.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package Mudbrick 2.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package Mudbrick Restaurant.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package The Oyster Inn 2.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package The Oyster Inn 3..jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package The Oyster Inn 4.jpg" />
+    <Content Include="Images\Auction\Items\46\Waiheke Package The Oyster Inn.jpg" />
+    <Content Include="Images\Auction\Items\49\Bellamy%27s voucher.jpg" />
+    <Content Include="Images\Auction\Items\49\original\Bellamy%27s voucher.jpg" />
+    <Content Include="Images\Auction\Items\49\original\Wow Tickets.jpg" />
+    <Content Include="Images\Auction\Items\49\Wow Tickets.jpg" />
+    <Content Include="Images\Auction\Items\4\Big Orange Ceramic Logo.jpg" />
+    <Content Include="Images\Auction\Items\4\carolines-boatshed-black-large.png" />
+    <Content Include="Images\Auction\Items\4\Element Logo.png" />
+    <Content Include="Images\Auction\Items\4\Japanese Kitchen.png" />
+    <Content Include="Images\Auction\Items\4\MINT Logo Specs.jpg" />
+    <Content Include="Images\Auction\Items\4\original\carolines-boatshed-black-large.png" />
+    <Content Include="Images\Auction\Items\4\original\Japanese Kitchen.png" />
+    <Content Include="Images\Auction\Items\4\original\Stellar 1.jpg" />
+    <Content Include="Images\Auction\Items\4\original\TV Business card.jpg" />
+    <Content Include="Images\Auction\Items\4\original\yellowhouselogo.png" />
+    <Content Include="Images\Auction\Items\4\Rutland Arms Email Banners.jpg" />
+    <Content Include="Images\Auction\Items\4\Stellar 1.jpg" />
+    <Content Include="Images\Auction\Items\4\The Red Lion.jpg" />
+    <Content Include="Images\Auction\Items\4\TV Business card.jpg" />
+    <Content Include="Images\Auction\Items\4\yellowhouselogo.png" />
+    <Content Include="Images\Auction\Items\54\original\Quilt.jpg" />
+    <Content Include="Images\Auction\Items\54\Quilt.jpg" />
+    <Content Include="Images\Auction\Items\5\original\Wellington_NZ-cablecar-topview.jpg" />
+    <Content Include="Images\Auction\Items\5\Wellington_NZ-cablecar-topview.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Package 2017 Lounge.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Package Logan Brown Photo.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Package Logan Brown Restaurant 2.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Package Museum Hotel 2.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Package Museum Hotel 3.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Package Museum Hotel.jpg" />
+    <Content Include="Images\Auction\Items\7\Hurricanes Photo.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Package 2017 Lounge.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Package Logan Brown Photo.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Package Logan Brown Restaurant 2.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Package Museum Hotel 2.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Package Museum Hotel 3.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Package Museum Hotel.jpg" />
+    <Content Include="Images\Auction\Items\7\original\Hurricanes Photo.jpg" />
+    <Content Include="Images\Auction\Items\8\Heartland Rugby season passes.jpg" />
+    <Content Include="Images\Auction\Items\8\original\Heartland Rugby season passes.jpg" />
+    <Content Include="Images\Auction\Items\8\original\Wanganui Rugby Jersey.jpg" />
+    <Content Include="Images\Auction\Items\8\Wanganui Rugby Jersey.jpg" />
+    <Content Include="Images\Auction\Items\9\original\Parapara Deer Hunt.jpg" />
+    <Content Include="Images\Auction\Items\9\Parapara Deer Hunt.jpg" />
+    <Content Include="Images\TOHAuction.png" />
+    <Content Include="Web.config" />
+    <Content Include="_Includes\Content\bootstrap-theme.css" />
+    <Content Include="_Includes\Content\bootstrap-theme.min.css" />
+    <Content Include="_Includes\Content\bootstrap.css" />
+    <Content Include="_Includes\Content\bootstrap.min.css" />
+    <Content Include="_Includes\Content\main.css" />
+    <Content Include="_Includes\Scripts\addclear.min.js" />
+    <Content Include="_Includes\Scripts\additional-methods.js" />
+    <Content Include="_Includes\Scripts\additional-methods.min.js" />
+    <Content Include="_Includes\Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="_Includes\Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="_Includes\Scripts\bootstrap.js" />
+    <Content Include="_Includes\Scripts\bootstrap.min.js" />
+    <Content Include="_Includes\Scripts\BPopup.js" />
+    <Content Include="_Includes\Scripts\colorbox\colorbox.css" />
+    <Content Include="_Includes\Scripts\colorbox\images\border.png" />
+    <Content Include="_Includes\Scripts\colorbox\images\controls.png" />
+    <Content Include="_Includes\Scripts\colorbox\images\loading.gif" />
+    <Content Include="_Includes\Scripts\colorbox\images\loading_background.png" />
+    <Content Include="_Includes\Scripts\colorbox\images\overlay.png" />
+    <Content Include="_Includes\Scripts\colorbox\jquery.colorbox-min.js" />
+    <Content Include="_Includes\Scripts\Cycle2\Default.css" />
+    <Content Include="_Includes\Scripts\datepicker\calendar-blue.gif" />
+    <Content Include="_Includes\Scripts\datepicker\calendar-green.gif" />
+    <Content Include="_Includes\Scripts\datepicker\calendar.gif" />
+    <Content Include="_Includes\Scripts\datepicker\datepickBasic.html" />
+    <Content Include="_Includes\Scripts\datepicker\flora.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\humanity.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-af.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-am.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ar-DZ.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ar-EG.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ar.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-az.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-bg.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-bs.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ca.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-cs.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-da.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-de-CH.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-de.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-el.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-en-AU.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-en-GB.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-en-NZ.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-eo.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-es-AR.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-es-PE.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-es.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-et.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-eu.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-fa.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-fi.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-fo.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-fr-CH.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-fr.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-gl.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-gu.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-he.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-hi-IN.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-hi.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-hr.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-hu.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-hy.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-id.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-is.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-it.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ja.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ka.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-km.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ko.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-lt.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-lv.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-me-ME.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-me.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-mk.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ml.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ms.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-mt.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-nl-BE.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-nl.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-no.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-pl.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-pt-BR.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-pt.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-rm.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ro.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ru.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-sk.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-sl.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-sq.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-sr-SR.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-sr.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-sv.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ta.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-th.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-tr.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-tt.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-uk.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-ur.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-vi.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-zh-CN.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-zh-HK.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick-zh-TW.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.ext.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.ext.min.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.lang.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.lang.min.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.min.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.validation.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.datepick.validation.min.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.plugin.js" />
+    <Content Include="_Includes\Scripts\datepicker\jquery.plugin.min.js" />
+    <Content Include="_Includes\Scripts\datepicker\redmond.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\smoothness.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-black-tie.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-blitzer.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-cupertino.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-dark-hive.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-dot-luv.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-eggplant.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-excite-bike.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-flick.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-hot-sneaks.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-humanity.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-le-frog.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-mint-choc.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-overcast.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-pepper-grinder.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-redmond.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-smoothness.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-south-street.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-start.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-sunny.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-swanky-purse.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-trontastic.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-ui-darkness.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-ui-lightness.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui-vader.datepick.css" />
+    <Content Include="_Includes\Scripts\datepicker\ui.datepick.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\CHANGELOG.txt" />
+    <Content Include="_Includes\Scripts\fullcalendar\CONTRIBUTING.txt" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\css\datepicker.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\css\datepicker.min.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\css\demo.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\index.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\datepicker.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\datepicker.min.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\ar.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\cs.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\da.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\de.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\en-US.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\en.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\eo.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\es-MX.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\es.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\et.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\fi.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\fr.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\he.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\hu.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\id.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\it.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\kr.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\lt.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\lv.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\nl.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\no.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\pl.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\pt-br.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\pt.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\ru.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\se.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\si.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\sk.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\th.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\tr.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\js\lang\zh.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\language\index.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-cursor.jpg" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-disabled.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-focused.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-gradient.gif" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-normal.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-selected.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-sprite.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\media\datepicker-today.gif" />
+    <Content Include="_Includes\Scripts\fullcalendar\datePicker\README.txt" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\agenda-views.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\background-events.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\basic-views.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\default.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\external-dragging.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\gcal.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\json.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\jsonGreg.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\languages.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\php\get-events.php" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\php\get-timezones.php" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\php\utils.php" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\selectable.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\theme.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\demos\timezones.html" />
+    <Content Include="_Includes\Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\fullcalendar.min.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\gcal.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang-all.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ar-ma.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ar-sa.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ar-tn.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ar.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\bg.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ca.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\cs.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\da.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\de-at.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\de.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\el.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\en-au.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\en-ca.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\en-gb.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\en-ie.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\en-nz.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\es.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\fa.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\fi.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\fr-ca.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\fr-ch.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\fr.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\he.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\hi.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\hr.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\hu.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\id.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\is.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\it.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ja.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ko.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\lt.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\lv.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\nb.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\nl.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\pl.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\pt-br.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\pt.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ro.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\ru.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\sk.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\sl.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\sr.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\sv.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\th.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\uk.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\vi.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\zh-cn.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lang\zh-tw.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\jquery.min.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\lib\moment.min.js" />
+    <Content Include="_Includes\Scripts\fullcalendar\LICENSE.txt" />
+    <Content Include="_Includes\Scripts\generic.js" />
+    <Content Include="_Includes\Scripts\grid\css\dialog.css" />
+    <Content Include="_Includes\Scripts\grid\css\dialog.min.css" />
+    <Content Include="_Includes\Scripts\grid\css\grid.css" />
+    <Content Include="_Includes\Scripts\grid\css\grid.min.css" />
+    <Content Include="_Includes\Scripts\grid\js\dialog.js" />
+    <Content Include="_Includes\Scripts\grid\js\dialog.min.js" />
+    <Content Include="_Includes\Scripts\grid\js\draggable.js" />
+    <Content Include="_Includes\Scripts\grid\js\draggable.min.js" />
+    <Content Include="_Includes\Scripts\grid\js\grid.js" />
+    <Content Include="_Includes\Scripts\grid\js\grid.min.js" />
+    <Content Include="_Includes\Scripts\init.js" />
+    <Content Include="_Includes\Scripts\jquery-2.2.0.js" />
+    <Content Include="_Includes\Scripts\jquery-2.2.0.min.js" />
+    <Content Include="_Includes\Scripts\jquery.ui.autocomplete.scroll.min.js" />
+    <Content Include="_Includes\Scripts\jquery.validate.js" />
+    <Content Include="_Includes\Scripts\jquery.validate.min.js" />
+    <Content Include="_Includes\Scripts\Moment\moment.js" />
+    <Content Include="_Includes\Scripts\PopupOverlay\index.html" />
+    <Content Include="_Includes\Scripts\PopupOverlay\index.js" />
+    <Content Include="_Includes\Scripts\PopupOverlay\jquery.popupoverlay.js" />
+    <Content Include="_Includes\Scripts\pwstrength-bootstrap.min.js" />
+    <Content Include="_Includes\Scripts\snippets.js" />
+    <Content Include="_Includes\Scripts\ToolTipster\css\themes\tooltipster-light.css" />
+    <Content Include="_Includes\Scripts\ToolTipster\css\themes\tooltipster-noir.css" />
+    <Content Include="_Includes\Scripts\ToolTipster\css\themes\tooltipster-punk.css" />
+    <Content Include="_Includes\Scripts\ToolTipster\css\themes\tooltipster-shadow.css" />
+    <Content Include="_Includes\Scripts\ToolTipster\css\tooltipster.css" />
+    <Content Include="_Includes\Scripts\ToolTipster\js\jquery.tooltipster.js" />
+    <Content Include="_Includes\Scripts\ToolTipster\js\jquery.tooltipster.min.js" />
+    <Content Include="_Includes\Content\bootstrap-theme.css.map" />
+    <Content Include="_Includes\Content\bootstrap-theme.min.css.map" />
+    <Content Include="_Includes\Content\bootstrap.css.map" />
+    <Content Include="_Includes\Content\bootstrap.min.css.map" />
+    <Content Include="Images\Auction\Donors\13\Original\Rutland Arms Email Banners.pdf" />
+    <Content Include="Images\Auction\Donors\13\Rutland Arms Email Banners.pdf" />
+    <Content Include="Images\Auction\Donors\14\Original\The Red Lion.pdf" />
+    <Content Include="Images\Auction\Donors\21\Original\Mercedes Logo.pdf" />
+    <Content Include="Images\Auction\Donors\28\original\Michael Hill Logo.pdf" />
+    <Content Include="Images\Auction\Donors\47\Original\Japanese Kitchen.pdf" />
+    <Content Include="Images\Auction\Donors\5\Original\David Jones logo Red Blue.pdf" />
+    <Content Include="Images\Auction\Donors\57\Original\Wanganuim Events Trust Logo FINAL_cmyk.pdf" />
+    <Content Include="Images\Auction\Donors\58\Original\Element Logo.pdf" />
+    <Content Include="Images\Auction\Donors\RAW\Mercedes Logo.pdf" />
+    <Content Include="Images\Auction\Donors\RAW\original\Mercedes Logo.pdf" />
+    <Content Include="Images\Auction\Donors\RAW\original\The Edge Logo Final %28Colour%29.pdf" />
+    <Content Include="Images\Auction\Donors\RAW\The Edge Logo Final %28Colour%29.pdf" />
+    <Content Include="Images\Auction\Items\4\original\Big Orange Ceramic Logo.pdf" />
+    <Content Include="Images\Auction\Items\4\original\Element Logo.pdf" />
+    <Content Include="Images\Auction\Items\4\original\MINT Logo Specs.pdf" />
+    <Content Include="Images\Auction\Items\4\original\Rutland Arms Email Banners.pdf" />
+    <Content Include="Images\Auction\Items\4\original\The Red Lion.pdf" />
+    <None Include="_Includes\Scripts\jquery.validate-vsdoc.js" />
+    <None Include="_Includes\Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="_Includes\Scripts\jquery-2.2.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administration\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Donor.aspx.cs">
+      <DependentUpon>Donor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Donor.aspx.designer.cs">
+      <DependentUpon>Donor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\DonorList.aspx.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\DonorList.aspx.designer.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\ItemList.aspx.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\ItemList.aspx.designer.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Item.aspx.cs">
+      <DependentUpon>Item.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Item.aspx.designer.cs">
+      <DependentUpon>Item.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction.Master.cs">
+      <DependentUpon>Auction.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction.Master.designer.cs">
+      <DependentUpon>Auction.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Includes\Functions\functions.cs" />
+    <Compile Include="_Includes\Models\models.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Auction\Donors\22\original\" />
+    <Folder Include="Images\Auction\Donors\25\original\" />
+    <Folder Include="Images\Auction\Donors\39\original\" />
+    <Folder Include="Images\Auction\Donors\40\original\" />
+    <Folder Include="Images\Auction\Donors\41\original\" />
+    <Folder Include="Images\Auction\Donors\43\original\" />
+    <Folder Include="Images\Auction\Donors\44\original\" />
+    <Folder Include="Images\Auction\Donors\61\Original\" />
+    <Folder Include="Images\Auction\Donors\Thumbnail\" />
+    <Folder Include="Images\Auction\Donors\Uploaded\" />
+    <Folder Include="Images\Auction\Items\40\original\" />
+    <Folder Include="Images\Auction\Items\41\original\" />
+    <Folder Include="Images\Auction\Items\42\original\" />
+    <Folder Include="Images\Auction\Items\47\original\" />
+    <Folder Include="Images\Auction\Items\48\original\" />
+    <Folder Include="Images\Auction\Items\50\original\" />
+    <Folder Include="Images\Auction\Items\51\original\" />
+    <Folder Include="Images\Auction\Items\52\original\" />
+    <Folder Include="Images\Auction\Items\53\original\" />
+    <Folder Include="Images\Auction\Items\55\original\" />
+    <Folder Include="Images\Auction\Items\6\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50459</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50459/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

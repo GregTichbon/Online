@@ -11,10 +11,13 @@ using System.Web.UI.WebControls;
 
 namespace TOHW.Auction.Admin
 {
-    public partial class DonorList : System.Web.UI.Page
+    public partial class donorlist : System.Web.UI.Page
     {
-        public string html = "";
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        public static string get_donorlist(string path)
         {
             string donor_ctr;
             string donorname;
@@ -23,6 +26,7 @@ namespace TOHW.Auction.Admin
             string items = "";
             string delim = "";
             string images = "";
+            string html = "";
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
@@ -46,7 +50,7 @@ namespace TOHW.Auction.Admin
 
                         cmd = new SqlCommand("Get_Donor_Items", con2);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@donor_ctr",SqlDbType.Int).Value = donor_ctr;
+                        cmd.Parameters.Add("@donor_ctr", SqlDbType.Int).Value = donor_ctr;
                         cmd.Connection = con2;
                         try
                         {
@@ -74,13 +78,12 @@ namespace TOHW.Auction.Admin
                             con2.Close();
                         }
 
-
-                        string path = Server.MapPath("..\\images\\donors\\" + donor_ctr);
-                        if (Directory.Exists(path))
+                        string imagepath = path + "\\donors\\" + donor_ctr;
+                        if (Directory.Exists(imagepath))
                         {
                             images = "<div class=\"slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
 
-                            foreach (string dirFile in Directory.GetDirectories(path))
+                            foreach (string dirFile in Directory.GetDirectories(imagepath))
                             {
                                 foreach (string fileName in Directory.GetFiles(dirFile))
                                 {
@@ -103,6 +106,7 @@ namespace TOHW.Auction.Admin
                 con.Close();
                 con.Dispose();
             }
+            return html;
         }
     }
 }

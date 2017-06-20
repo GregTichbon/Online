@@ -60,10 +60,12 @@
   <ItemGroup>
     <Content Include="2Talk\default.asp" />
     <Content Include="Auction\Admin\Default.aspx" />
-    <Content Include="Auction\Admin\item.aspx" />
+    <Content Include="Auction\%24OLD\item.aspx" />
+    <Content Include="Auction\%24OLD\donor.aspx" />
+    <Content Include="Auction\%24OLD\DonorList.aspx" />
+    <Content Include="Auction\%24OLD\ItemList.aspx" />
     <Content Include="Auction\Admin\donor.aspx" />
-    <Content Include="Auction\Admin\DonorList.aspx" />
-    <Content Include="Auction\Admin\ItemList.aspx" />
+    <Content Include="Auction\Admin\donorlist.aspx" />
     <Content Include="Auction\Images\Donors\10\Edmonds Painting 2016 logo - with service list.jpg" />
     <Content Include="Auction\Images\Donors\10\Original\Edmonds Painting 2016 logo - with service list.jpg" />
     <Content Include="Auction\Images\Donors\11\Dulux paint logo.png" />
@@ -679,6 +681,7 @@
     <Content Include="Auction\Images\Items\4\original\MINT Logo Specs.pdf" />
     <Content Include="Auction\Images\Items\4\original\Rutland Arms Email Banners.pdf" />
     <Content Include="Auction\Images\Items\4\original\The Red Lion.pdf" />
+    <Content Include="Auction.Master" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -743,6 +746,13 @@
     <Content Include="images\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auction.Master.cs">
+      <DependentUpon>Auction.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction.Master.designer.cs">
+      <DependentUpon>Auction.Master</DependentUpon>
+    </Compile>
     <Compile Include="Auction\Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -750,12 +760,33 @@
     <Compile Include="Auction\Admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Auction\Admin\item.aspx.cs">
+    <Compile Include="Auction\%24OLD\item.aspx.cs">
       <DependentUpon>item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Auction\Admin\item.aspx.designer.cs">
+    <Compile Include="Auction\%24OLD\item.aspx.designer.cs">
       <DependentUpon>item.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\donor.aspx.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\donor.aspx.designer.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\DonorList.aspx.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\DonorList.aspx.designer.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\ItemList.aspx.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\ItemList.aspx.designer.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Auction\Admin\donor.aspx.cs">
       <DependentUpon>donor.aspx</DependentUpon>
@@ -764,19 +795,12 @@
     <Compile Include="Auction\Admin\donor.aspx.designer.cs">
       <DependentUpon>donor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Auction\Admin\DonorList.aspx.cs">
-      <DependentUpon>DonorList.aspx</DependentUpon>
+    <Compile Include="Auction\Admin\donorlist.aspx.cs">
+      <DependentUpon>donorlist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Auction\Admin\DonorList.aspx.designer.cs">
-      <DependentUpon>DonorList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Auction\Admin\ItemList.aspx.cs">
-      <DependentUpon>ItemList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Auction\Admin\ItemList.aspx.designer.cs">
-      <DependentUpon>ItemList.aspx</DependentUpon>
+    <Compile Include="Auction\Admin\donorlist.aspx.designer.cs">
+      <DependentUpon>donorlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Auction\Page.aspx.cs">
       <DependentUpon>Page.aspx</DependentUpon>

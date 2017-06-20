@@ -11,7 +11,7 @@ namespace TOHW.Auction.Admin
 {
 
 
-    public partial class DonorList
+    public partial class donorlist
     {
     }
 }
