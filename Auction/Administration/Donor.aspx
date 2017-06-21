@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Auction.Master" AutoEventWireup="true" CodeBehind="Donor.aspx.cs" Inherits="Auction.Administration.Donor" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
@@ -24,7 +25,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <input name="id" id="id" type="hidden" value="<%=donor_ctr%>" />
+    <input name="donor_ctr" id="donor_ctr" type="hidden" value="<%=donor_ctr%>" />
     <input name="_all" id="_all" type="hidden" value="ALL" />
     <table class="table">
         <tr>
@@ -36,6 +37,8 @@
             <td>Description</td>
             <td>
                 <textarea name="Description" id="Description"><%=description%></textarea>
+                <code style="width: 400px"><%=description%></code>
+
             </td>
         </tr>
 
@@ -47,7 +50,11 @@
         <tr>
             <td>Image(s)</td>
             <td>
-                <input type="file" multiple="multiple" name="file" /></td>
+                <asp:FileUpload ID="fu_images" name="fu_images" runat="server" AllowMultiple="true" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><%=images %></td>
         </tr>
         <tr>
             <td>Sequence</td>
@@ -57,13 +64,17 @@
         <tr>
             <td>Hide</td>
             <td>
-                <input type="text" name="hide" id="hide" value="<%=hide%>" /></td>
+                <select name="hide" id="hide" size="1">
+                    <option value="">Please Select</option>
+                    <%=General.Functions.Functions.populateselect(yesno_values, hide, "None")%>
+                </select>
+            </td>
         </tr>
-
         <tr>
             <td>&nbsp;</td>
             <td>
-                <input type="submit" name="_Submit" value="Submit" /></td>
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+            </td>
         </tr>
 
     </table>

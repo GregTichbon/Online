@@ -22,7 +22,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <a href="Item.aspx" class="btn btn-info" role="button">Create</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="default.aspx" class="btn btn-info" role="button">Menu</a><br />
     <table class="table">
-        <tr><th>Item</th><th>Donor(s)</th><th>Images(s)</th></tr>
+        <tr><th>Item</th><th>Seq</th><th>Hide</th><th>Donor(s)</th><th>Images(s)</th></tr>
         <%=html%>
     </table>
 <br />

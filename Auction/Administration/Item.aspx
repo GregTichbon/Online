@@ -36,13 +36,15 @@
                     $(this).width($originals.eq(index).width())
                 });
                 return $helper;
-            },
-                updateIndex = function (e, ui) {
-                    //$('td.index', ui.item.parent()).each(function (i) {
+            }
+
+            updateIndex = function (e, ui) {
+                $('.index', ui.item.parent()).each(function (i) {
                     //alert($(this).attr("id"));
-                    //$(this).html(i + 1);
-                    //});
-                };
+                    //alert($(this).get(0).tagName);
+                    $(this).val(i + 1);
+                });
+            };
 
             $("#table_donor tbody").sortable({
                 helper: fixHelperModified,
@@ -82,7 +84,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <input name="id" id="id" type="hidden" value="<%=item_ctr%>" />
+    <input name="item_ctr" id="item_ctr" type="hidden" value="<%=item_ctr%>" />
     <input name="_all" id="_all" type="hidden" value="All" />
     <table class="table">
         <tr>
@@ -122,9 +124,10 @@
         <tr>
             <td>Image(s)</td>
             <td>
-                <input type="file" multiple="multiple" name="file" /></td>
+            <asp:FileUpload ID="fu_images" name="fu_images" runat="server" AllowMultiple="true" /></td>
         </tr>
-                <%=images %>
+        <tr><td></td><td> <%=images %></td></tr>
+               
 
         <tr>
             <td>Sequence</td>
@@ -157,12 +160,9 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <input type="submit" id="submit" name="_Submit" value="Submit" /></td>
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
         </tr>
     </table>
-
-
-
 
     <%
 /*
@@ -185,9 +185,10 @@ Set fsoFolder=nothing
 
     <table id="table_template" style="display: none">
         <tr>
-            <td class="index">
-                <input id="_itemdonor_ctr_" name="_itemdonor_ctr_" type="hidden" value="0" />
-                <select id="_itemdonor_donor_ctr_" name="_itemdonor_donor_ctr_" size="1">
+            <td>
+                <input id="_itemdonor_ctr_" type="hidden" value="0" />
+                <input class="index" id="_itemdonor_index_" type="hidden" value="0" />
+                <select id="_itemdonor_donor_ctr_" size="1">
                     <option value="">Please Select</option>
                     <%
                         int c1 = 0;
@@ -195,25 +196,16 @@ Set fsoFolder=nothing
                         {
                             Response.Write("<option value=\"" + donor_ctr + "\">" + donornames[c1] + "</option>");
                             c1++;
-
                         }
                     %>
                 </select>
             </td>
             <td>
                 <input type="text" id="_itemdonor_amount_" name="_itemdonor_amount_" value="0" /></td>
-            <td>Delete</td>
+            <td></td>
         </tr>
     </table>
 
-
-    <%
-        /*
-        set rs = nothing	
-        db.close	
-        set db = nothing
-        */
-    %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 </asp:Content>

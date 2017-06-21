@@ -118,15 +118,15 @@ namespace Auction.Administration
                 string path = Server.MapPath("..\\images\\auction\\items\\" + item_ctr);
                 if (Directory.Exists(path))
                 {
-                    images = "<tr><td><table><tr>";
-                    foreach (string dirFile in Directory.GetDirectories(path))
-                    {
-                        foreach (string fileName in Directory.GetFiles(dirFile))
+                    images = "<table><tr>";
+                    //foreach (string dirFile in Directory.GetDirectories(path))
+                    //{
+                        foreach (string fileName in Directory.GetFiles(path))
                         {
-                            images += "<td><img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br />Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
+                            images += "<td><img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br /> Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
                         }
-                    }
-                    images += "</tr></table></td></tr>";
+                    //}
+                    images += "</tr></table>";
                 }
             }
         }
@@ -205,8 +205,11 @@ end if
                         donorctr++;
 
                         html += "<tr>";
-                        html += "<td class=\"index\"><input id=\"_itemdonor_ctr_" + donorctr + "\" name=\"_itemdonor_ctr_" + donorctr + "\" type=\"hidden\" value=\"" + itemdonor_ctr + "\">";
-                        html += "<select id=\"_itemdonor_donor_ctr_" + donorctr + "\" name=\"_itemdonor_donor_ctr_" + donorctr + "\" size=\"1\" required>" + selectdonor + "</select></td>";
+                        html += "<td>";
+                        html += "<input id=\"_itemdonor_ctr_" + donorctr + "\" name=\"_itemdonor_ctr_" + donorctr + "\" type=\"hidden\" value=\"" + itemdonor_ctr + "\">";
+                        html += "<input class=\"index\" id=\"_itemdonor_index_" + donorctr + "\" name=\"_itemdonor_index_" + donorctr + "\" type=\"hidden\" value=\"" + donorctr + "\">";
+                        html += "<select id=\"_itemdonor_donor_ctr_" + donorctr + "\" name=\"_itemdonor_donor_ctr_" + donorctr + "\" size=\"1\" required>" + selectdonor + "</select>";
+                        html += "</td>";
                         html += "<td><input id=\"_itemdonor_amount_" + donorctr + "\" name=\"_itemdonor_amount_" + donorctr + "\" type=\"text\" value=\"" + amount + "\"></td>";
                         //html += "<td><a class=""delete"">Delete</a></td>"
                         html += "<td><input type=\"checkbox\" id=\"_itemdonor_delete_" + donorctr + "\" name=\"_itemdonor_delete_" + donorctr + "\" value=\"yes\">Delete</td>";
@@ -225,6 +228,198 @@ end if
                 con.Dispose();
             }
             return html;
+        }
+
+        protected void btn_submit_Click(object sender, EventArgs e)
+        {
+            string item_ctr = Request.Form["item_ctr"];
+            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.CommandText = "Update_item";
+            cmd.Parameters.Add("@item_ctr", SqlDbType.VarChar).Value = item_ctr;
+            cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["title"];
+            cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["description"];
+            cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];
+            cmd.Parameters.Add("@reserve", SqlDbType.VarChar).Value = Request.Form["reserve"];
+            cmd.Parameters.Add("@retailprice", SqlDbType.VarChar).Value = Request.Form["retailprice"];
+            cmd.Parameters.Add("@seq", SqlDbType.VarChar).Value = Request.Form["seq"];
+            cmd.Parameters.Add("@hide", SqlDbType.VarChar).Value = Request.Form["hide"];
+            cmd.Parameters.Add("@auction", SqlDbType.VarChar).Value = 1;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    item_ctr = dr["item_ctr"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                General.Functions.Functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            foreach (string fld in Request.Form)
+            {
+                if (fld.StartsWith("_itemdonor_ctr_"))
+                {
+                    string line = fld.Substring(15);
+                    string id = Request.Form[fld];
+                    string donordelete = Request.Form["_itemdonor_delete_" + line];
+
+                    if (donordelete == "yes" && id == "0") //have added line but not put in donor, should be client side validation
+                    {
+
+                    } else
+                    {
+                        con = new SqlConnection(strConnString);
+                        cmd = new SqlCommand();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "update_item_donor";
+                        cmd.Parameters.Add("@itemdonor_ctr", SqlDbType.VarChar).Value = id;
+                        cmd.Parameters.Add("@delete", SqlDbType.VarChar).Value = donordelete;
+                        cmd.Parameters.Add("@item_ctr", SqlDbType.VarChar).Value = item_ctr;
+                        cmd.Parameters.Add("@donor_ctr", SqlDbType.VarChar).Value = Request.Form["_itemdonor_donor_ctr_" + line];
+                        cmd.Parameters.Add("@amount", SqlDbType.VarChar).Value = Request.Form["_itemdonor_amount_ctr_" + line];
+                        cmd.Parameters.Add("@seq", SqlDbType.VarChar).Value = Request.Form["_itemdonor_index_" + line]; ;
+                        cmd.Connection = con;
+                        try
+                        {
+                            con.Open();
+                            SqlDataReader dr = cmd.ExecuteReader();
+
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                //itemdonor_ctr = dr["itemdonor_ctr"].ToString();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            General.Functions.Functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                        }
+                        finally
+                        {
+                            con.Close();
+                            con.Dispose();
+                        }
+                    }
+                }
+            }       
+            #region aspcode
+                    /*
+                rs.Open "[itemdonor]", db, 1, 2
+                with rs
+                    for f1 = 1 to sc.forms.count
+                        key = sc.forms(f1).name
+                        if left(key,15) = "_itemdonor_ctr_" then
+                            line = mid(key,16)
+                            idid = sc.Form(key)
+                            'response.write key & "," & line & "," & idid & "," & id & "<br />"
+                            donordelete = sc.form("_itemdonor_delete_" + line)
+                            if donordelete = "yes" and idid = 0 then
+
+                            else
+
+                                if idid = 0 then
+                                    .AddNew
+                                else
+                                    'response.write "idid=" & idid & "<br />"
+                                    .filter = "itemdonor_ctr = " & idid
+                                end if
+                                if donordelete = "yes" then
+                                    'response.write "Delete<br />"
+                                    .delete
+                                else
+                                    .fields("item_ctr") = id
+                                    .fields("donor_ctr") = sc.Form("_itemdonor_donor_ctr_" & line)
+                                    .fields("amount") = sc.Form("_itemdonor_amount_" & line)
+                                    .fields("seq") = line
+                                    .update
+                                end if
+                            end if
+                        end if
+                    next
+                    .close
+                end with
+                     */
+                    #endregion
+            //don't need to go through here if it's a new item - will fix sometime
+            string path = Server.MapPath("..\\images\\auction\\items\\" + item_ctr);
+            string deletepath = Server.MapPath("..\\images\\auction\\items\\" + item_ctr + "\\deleted");
+
+            foreach (string fld in Request.Form)
+            {
+                if (fld.StartsWith("_imgdelete_"))
+                {
+                    string filename = fld.Substring(11);
+                    if (!Directory.Exists(deletepath))
+                    {
+                        Directory.CreateDirectory(deletepath);
+                    }
+                    int c1 = 0;
+                    string newfilename = "";
+                    string wpextension = System.IO.Path.GetExtension(filename);
+                    string wpfilename = System.IO.Path.GetFileNameWithoutExtension(filename);
+
+                    do
+                    {
+                        c1++;
+                        newfilename = wpfilename + "_" + c1.ToString("000") + wpextension;
+                    } while (File.Exists(deletepath + "\\" + newfilename));
+                    File.Move(path + "\\" + filename, deletepath + "\\" + newfilename);
+                }
+            }
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string originalpath = Server.MapPath("..\\images\\auction\\items\\" + item_ctr + "\\originals");
+            if (!Directory.Exists(originalpath))
+            {
+                Directory.CreateDirectory(originalpath);
+            }
+
+            foreach (HttpPostedFile postedFile in fu_images.PostedFiles)
+            {
+                if (postedFile.FileName != "")
+                {
+                    int c1 = 0;
+                    string newfilename = "";
+                    string wpextension = System.IO.Path.GetExtension(postedFile.FileName);
+                    string wpfilename = System.IO.Path.GetFileNameWithoutExtension(postedFile.FileName);
+
+                    do
+                    {
+                        c1++;
+                        newfilename = wpfilename + "_" + c1.ToString("000") + wpextension;
+                    } while (File.Exists(newfilename));
+
+                    postedFile.SaveAs(path + "\\" + newfilename);
+                    postedFile.SaveAs(originalpath + "\\" + newfilename);
+                }
+            }
+            /*
+           if all <> "" then
+               response.redirect "item.asp?all=true&id=" & id
+           else
+               response.redirect "itemlist.asp"
+           end if		
+           */
+            Response.Redirect("ItemList.aspx");
         }
     }
 }

@@ -70,8 +70,9 @@ namespace Auction.Administration
             #endregion
 
             string item_ctr;
-            string seq;
             string title;
+            string seq;
+            string hide;
             string donorname;
             string donors = "";
             string delim = "";
@@ -96,8 +97,9 @@ namespace Auction.Administration
                     {
                         //Item.Item_CTR, Item.seq, Item.Title, AuctionType.AuctionType
                         item_ctr = dr["item_ctr"].ToString();
-                        seq = dr["seq"].ToString();
                         title = dr["title"].ToString();
+                        seq = dr["seq"].ToString();
+                        hide = dr["hide"].ToString();
                         donors = "";
                         delim = "";
 
@@ -136,19 +138,20 @@ namespace Auction.Administration
                             //images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true data-cycle-log=false>";
                             images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>";
 
-                            foreach (string dirFile in Directory.GetDirectories(path))
-                            {
-                                foreach (string fileName in Directory.GetFiles(dirFile))
+                            //foreach (string dirFile in Directory.GetDirectories(path))
+                            //{
+                                foreach (string fileName in Directory.GetFiles(path))
                                 {
                                     if (validimages.Contains(Path.GetExtension(fileName)))
                                     {
                                         images += "<img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"80\" border=\"0\" />";
                                     }
                                 }
-                            }
-                            images += "</div>";
+                            //}
+
+                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>" + images + "</div>";
                         }
-                        html += "<tr><td><a href=item.aspx?id=" + item_ctr + ">" + title + "</a><td>" + donors + "</td><td>" + images + "</td></tr>";
+                        html += "<tr><td><a href=item.aspx?id=" + item_ctr + ">" + title + "</a><td>" + seq + "</td><td>" + hide + "</td><td>" + donors + "</td><td>" + images + "</td></tr>";
                     }
                 }
             }

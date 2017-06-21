@@ -18,7 +18,8 @@ $.fn.repeater_changer = function (new_id) {
         $(this).find('input, textarea, select').each(function () {
             var ob = $(this);
             ob.attr('id', this.id + new_id);
-            ob.attr('name', this.name + new_id);
+            ob.attr('name', ob.attr('id'));
+            //ob.attr('name', this.name + new_id);
             //ob.attr('id', this.id.replace(/_\d$/, '_' + new_id));
             //ob.attr('name', this.name.replace(/_\d$/, '_' + new_id));
         });

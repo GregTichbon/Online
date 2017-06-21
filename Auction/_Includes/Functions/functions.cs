@@ -154,15 +154,15 @@ namespace General.Functions
 
         public static void Log(string location, string logMessage, string EmailAddress)
         {
-            String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
-
+            //String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
+            String LogFileLocation = "logfile.txt";
             StreamWriter w = File.AppendText(LogFileLocation);
             w.WriteLine("{0}", DateTime.Now.ToLongTimeString() + "\t" + DateTime.Now.ToLongDateString() + "\t" + location + "\t" + logMessage + "\t" + EmailAddress);
             w.Flush();
             w.Close();
             if (EmailAddress != "")
             {
-                sendemail("Online Applications Error", location + "<br>" + logMessage, EmailAddress, "");
+                sendemail("Auction Error", location + "<br>" + logMessage, EmailAddress, "");
             }
         }
 

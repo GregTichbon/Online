@@ -21,6 +21,8 @@ namespace Auction.Administration
         {
             string donor_ctr;
             string donorname;
+            string seq;
+            string hide;
             string item_ctr;
             string title;
             string items = "";
@@ -48,6 +50,8 @@ namespace Auction.Administration
                     {
                         donor_ctr = dr["donor_ctr"].ToString();
                         donorname = dr["donorname"].ToString();
+                        seq = dr["seq"].ToString();
+                        hide = dr["hide"].ToString();
                         items = "";
                         delim = "";
 
@@ -80,26 +84,23 @@ namespace Auction.Administration
                         {
                             con2.Close();
                         }
-
+                        images = "";
                         string imagepath = path + "\\auction\\donors\\" + donor_ctr;
                         if (Directory.Exists(imagepath))
                         {
-                            //images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true data-cycle-log=false>";
-                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>";
-
-                            foreach (string dirFile in Directory.GetDirectories(imagepath))
-                            {
-                                foreach (string fileName in Directory.GetFiles(dirFile))
+                            //foreach (string dirFile in Directory.GetDirectories(imagepath))
+                            //{
+                                foreach (string fileName in Directory.GetFiles(imagepath))
                                 {
                                     if (validimages.Contains(Path.GetExtension(fileName)))
                                     {
                                         images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"80\" border=\"0\" />";
                                     }
                                 }
-                            }
-                            images += "</div>";
+                            //}
+                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>" + images + "</div>";
                         }
-                        html += "<tr><td><a href=donor.aspx?id=" + donor_ctr + ">" + donorname + "</a><td>" + items + "</td><td>" + images + "</td></tr>";
+                        html += "<tr><td><a href=donor.aspx?id=" + donor_ctr + ">" + donorname + "</a><td>" + seq + "</td><td>" + hide + "</td><td>" + items + "</td><td>" + images + "</td></tr>";
                     }
                 }
             }
