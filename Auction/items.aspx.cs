@@ -160,6 +160,8 @@ end if
 */
             #endregion
 
+            #region 3 column
+            /*
             string[] id = new string[100];
             string[] seq = new string[100];
             string[] title = new string[100];
@@ -180,7 +182,9 @@ end if
             {
                 canclick = "";
             }
-            string imagefolder = HttpContext.Current.Request.PhysicalApplicationPath + "Auction\\images\\items";
+            //string imagefolder = HttpContext.Current.Request.PhysicalApplicationPath + "auction\\images\\auction\\items";
+            string imagefolder = Server.MapPath("images\\auction\\items");
+
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
@@ -202,6 +206,10 @@ end if
                         seq[c1] = dr["seq"].ToString();
                         title[c1] = dr["title"].ToString();
                         description[c1] = dr["description"].ToString();
+
+                        if(c1 == 3) { 
+                        break;
+                        }
 
                         //html += title[c1] + " - " + description[c1] + "<br />";
 
@@ -283,5 +291,165 @@ end if
                 html += "</div>"; //& vbcrlf
             }
         }
+        */
+            #endregion
+
+            string id = "";
+            string seq = "";
+            string title = "";
+            string description = "";
+
+            string hide = "";
+            string donor_ctr;
+            string donors = "";
+            string delim = "";
+            string donorimages = "";
+
+
+            int[] donors_cnt = new int[100];
+            string[,] donors_ID = new string[10, 2];
+            string[,] donors_Title = new string[10, 2];
+            string[,] donors_Images = new string[10, 2];
+
+            int auctiontype = 1;
+            string canclick = "";
+            if (auctiontype == 1)
+            {
+                canclick = " canclick";
+            }
+            else
+            {
+                canclick = "";
+            }
+            //string imagefolder = HttpContext.Current.Request.PhysicalApplicationPath + "auction\\images\\auction\\items";
+            string imagefolder = Server.MapPath("images\\auction\\items");
+            string donorimagefolder = Server.MapPath("images\\auction\\donors");
+
+
+            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlConnection con2 = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Get_Items", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@auctiontype_ctr", SqlDbType.Int).Value = auctiontype;
+            cmd.Connection = con;
+            int c1 = 0;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        c1++;
+                        if (c1 < 30000)
+                        {
+                            id = dr["item_ctr"].ToString();
+                            seq = dr["seq"].ToString();
+                            title = dr["title"].ToString();
+                            description = dr["description"].ToString();
+                            hide = dr["hide"].ToString();
+                            donors = "";
+                            delim = "";
+
+                            cmd = new SqlCommand("Get_Item_Donors", con);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@item_ctr", SqlDbType.Int).Value = id;
+                            cmd.Connection = con2;
+                            try
+                            {
+                                con2.Open();
+                                SqlDataReader dr2 = cmd.ExecuteReader();
+                                if (dr2.HasRows)
+                                {
+                                    while (dr2.Read())
+                                    {
+                                        donor_ctr = dr2["donor_ctr"].ToString();
+                                        donors += delim + "<a href=\"javascript:void(0)\" class=\"donor-link\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>" + System.Environment.NewLine;
+                                        delim = "<br />";
+                                        donorimages = "";
+
+                                        string thisdonorimagefolder = donorimagefolder + "\\" + id;
+                                        if (Directory.Exists(thisdonorimagefolder))
+                                        {
+                                            string[] files = Directory.GetFiles(thisdonorimagefolder, "*.*", SearchOption.TopDirectoryOnly);
+                                            foreach (string filename in files)
+                                            {
+                                                string justfilename = System.IO.Path.GetFileName(filename);
+                                                //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
+                                                //{
+                                                donorimages += "<img class=\"donor-link\" data-id=\"" + id + "\" src=\"images/auction/donors/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                                                //}
+                                            }
+                                        }
+                                      }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
+                            finally
+                            {
+                                con2.Close();
+                            }
+                            //html += "<div class=\"row\">"; //; //& vbcrlf
+                            //html += "<div class=\"mycentered\">"; //& vbcrlf
+                            html += "<div style=\"height: 50px\"><h3>" + title + "</h3></div>" + System.Environment.NewLine;
+                            html += "<div style=\"height: 50px\">" + description + "</div>" + System.Environment.NewLine;
+
+                            //html += "<div class=\"cycle-slideshow " + canclick + " id=\"viewitem" + id + " data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
+
+                            string images = "";
+
+                            string thisimagefolder = imagefolder + "\\" + id;
+                            if (Directory.Exists(thisimagefolder))
+                            {
+                                string[] files = Directory.GetFiles(thisimagefolder, "*.*", SearchOption.TopDirectoryOnly);
+                                foreach (string filename in files)
+                                {
+                                    string justfilename = System.IO.Path.GetFileName(filename);
+                                    //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
+                                    //{
+                                    images += "<img src=\"images/auction/items/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                                    //}
+                                }
+                            }
+                            if(images != "")
+                            {
+                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine;
+                                html += images;
+                                html += "</div>" + System.Environment.NewLine; //slideshow
+                            }
+                            //html += "</div>"; //mycentered
+                            //html += "</div>"; //row
+
+                            html += "<h3>Generously Donated by</h3>" + System.Environment.NewLine;
+                            html += donors;
+                            if (donorimages != "")
+                            {
+                                html += "<div class=\"cycle-slideshow donor-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine;
+                                html += donorimages;
+                                html += "</div>" + System.Environment.NewLine; //slideshow
+                            }
+
+                            html += "<hr />";
+                        }
+                    }
+                    con2.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+         }
     }
 }

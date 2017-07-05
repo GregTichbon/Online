@@ -94,11 +94,11 @@ namespace Auction.Administration
                                 {
                                     if (validimages.Contains(Path.GetExtension(fileName)))
                                     {
-                                        images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"80\" border=\"0\" />";
+                                        images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" border=\"0\" />";
                                     }
                                 }
                             //}
-                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>" + images + "</div>";
+                            images = "<div class=\"cycle-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + images + "</div>";
                         }
                         html += "<tr><td><a href=donor.aspx?id=" + donor_ctr + ">" + donorname + "</a><td>" + seq + "</td><td>" + hide + "</td><td>" + items + "</td><td>" + images + "</td></tr>";
                     }

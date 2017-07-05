@@ -136,7 +136,7 @@ namespace Auction.Administration
                         if (Directory.Exists(path))
                         {
                             //images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true data-cycle-log=false>";
-                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>";
+                            images = "<div class=\"cycle-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>";
 
                             //foreach (string dirFile in Directory.GetDirectories(path))
                             //{
@@ -144,12 +144,12 @@ namespace Auction.Administration
                                 {
                                     if (validimages.Contains(Path.GetExtension(fileName)))
                                     {
-                                        images += "<img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"80\" border=\"0\" />";
+                                        images += "<img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" border=\"0\" />";
                                     }
                                 }
                             //}
 
-                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>" + images + "</div>";
+                            images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-log=false>" + images + "</div>";
                         }
                         html += "<tr><td><a href=item.aspx?id=" + item_ctr + ">" + title + "</a><td>" + seq + "</td><td>" + hide + "</td><td>" + donors + "</td><td>" + images + "</td></tr>";
                     }

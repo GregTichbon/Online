@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TOHWAuction.Master.cs" Inherits="TOHW.TOHWAuction" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Style Sheets -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Scripts/colorbox/colorbox.css")%>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css" />
+    <link href="Content/main.css" rel="stylesheet" />
+
+
+    <!-- Javascript -->
+    <script src="<%: ResolveUrl("~/Scripts/jquery-2.2.0.min.js")%>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.js"></script>
+
+    <script type="text/javascript">
+        // Change JQueryUI plugin names to fix name collision with Bootstrap.
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
+    <script src="<%: ResolveUrl("~/Scripts/bootstrap.min.js")%>"></script>
+    <!--<script src="https://eservices.wanganui.govt.nz/scripts/init.js" type="text/javascript"></script>-->
+    <script src="<%: ResolveUrl("~/Scripts/colorbox/jquery.colorbox-min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/jquery.validate.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Scripts/additional-methods.js")%>"></script>
+    <!--additional-methods.min.js-->
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js")%>"></script>
+
+    <script src="<%: ResolveUrl("~/Scripts/generic.js")%>"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).uitooltip({
+                position: {
+                    my: "right center",
+                    at: "left center"
+                }
+            });
+
+
+            $('.inhibitcutcopypaste').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+            //$('[required]').css('border', '1px solid red');
+            $('[required]').addClass('required');
+        });
+
+    </script>
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <div class="container" style="background-color: #FCF7EA">
+        <form runat="server" id="form1" class="form-horizontal" role="form">
+            <div id="upgrade-browser" style="display: none">
+                <p><strong>Attention:</strong> This site may not function correctly with your current browser. We recommend using IE 8+, Chrome or Firefox.</p>
+            </div>
+            <noscript>
+                <div id="noscript-browser">
+                    <p><strong>Attention:</strong> This site requires that Javascript be enabled.</p>
+                </div>
+            </noscript>
+
+            <div class="jumbotron" style="background-color: white"><a href="default.aspx">
+                    <img src="images/HFNZHeader.png" /></a>               <br />
+
+                <%: webconfig %>
+            </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </form>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <%--    useful for another form--%>
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

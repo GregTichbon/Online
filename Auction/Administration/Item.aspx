@@ -60,7 +60,7 @@
             //window.addEventListener("beforeunload", function(event) {
             //	alert("Write something clever here..");
             //});
-        });
+        });  //document.ready
 
         function checkform() {
             var msg = ''

@@ -148,7 +148,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/aimeeMatthews.jpg" alt="" data-position="top center" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Aimee Matthews</h2>
@@ -163,7 +163,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/JordinHaami-Rerekura.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Jordin Haami-Rerekura</h2>
@@ -177,7 +177,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/KeeganEaston.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Keegan Easton</h2>
@@ -191,7 +191,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Charlie-Boy Williams</h2>
@@ -205,7 +205,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/KathParnell.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Kathy Parnell</h2>
@@ -219,7 +219,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/MahangaWilliams.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Mahanga Williams</h2>
@@ -232,8 +232,8 @@
             </section>
             <section>
                 <a href="#" class="image">
-                    <img src="images/pic03.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                    <img src="images/DolzHadfield.jpg" alt="" data-position="25% 25%" />
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Dolz Hadfield</h2>
@@ -247,7 +247,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/GregTichbon.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Greg Tichbon</h2>
@@ -262,7 +262,7 @@
             <section>
                 <a href="#" class="image">
                     <img src="images/LeoneandMellisa.jpg" alt="" data-position="25% 25%" />
-                    > </a>
+                </a>
                 <div class="content">
                     <div class="inner">
                         <h2>Leonie de Vries & Melissa van Soest</h2>
@@ -385,10 +385,20 @@
                         <h3>Our Funders</h3>
                         <p></p>
                     </section>
-                    <section>
-                        <span class="icon major fa-cog"></span>
-                        <h3>Our Interns</h3>
-                        <p>The following are the interns that we have had over the years</p>
+ 
+                </div>
+                <ul class="actions">
+                    <li><a href="#" class="button">Learn more</a> </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Four -->
+        <section id="four" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h2>Interns</h2>
+                <p>We have been priveledged over the years to host a number of interns.</p>
+<p>The following are the interns that we have had over the years</p>
                         <table>
                             <tbody>
                                 <tr>
@@ -397,22 +407,22 @@
                                     <th>Year</th>
                                 </tr>
                                 <tr>
-                                    <td>Sarah</td>
+                                    <td>Sarah Ware</td>
                                     <td>USA</td>
                                     <td>2009</td>
                                 </tr>
                                 <tr>
-                                    <td>Tiffany</td>
+                                    <td>Tiffany Schmmitz</td>
                                     <td>USA</td>
                                     <td>2009</td>
                                 </tr>
                                 <tr>
-                                    <td>Marlieke</td>
+                                    <td>Marlieke Mols</td>
                                     <td>Netherlands</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>Isa</td>
+                                    <td>Isa Wrntjs</td>
                                     <td>Netherlands</td>
                                     <td></td>
                                 </tr>
@@ -422,7 +432,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>PK</td>
+                                    <td>PK Thao</td>
                                     <td>USA</td>
                                     <td></td>
                                 </tr>
@@ -473,13 +483,15 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </section>
-                </div>
+
                 <ul class="actions">
-                    <li><a href="#" class="button">Learn more</a> </li>
+                    <li><a href="#one" class="button scrolly">Learn more</a> </li>
                 </ul>
             </div>
         </section>
+
+
+
         <!-- Five -->
         <section id="five" class="wrapper style1 fade-up">
             <div class="inner">
