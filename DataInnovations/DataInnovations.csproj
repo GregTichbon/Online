@@ -83,6 +83,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="greg.aspx" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
@@ -94,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.aspx" />
+    <Content Include="Test.asp" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +105,14 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Functions.cs" />
+    <Compile Include="greg.aspx.cs">
+      <DependentUpon>greg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="greg.aspx.designer.cs">
+      <DependentUpon>greg.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model\BaseMessage.cs" />
     <Compile Include="Model\BaseResponse.cs" />

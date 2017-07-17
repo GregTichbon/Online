@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction", "Auction\Auction.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataInnovations", "DataInnovations\DataInnovations.csproj", "{4FA4EC39-5836-4B0A-B64C-435CF3B6490C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSCheck", "SMSCheck\SMSCheck.csproj", "{97761C22-B87A-4DEA-860D-7A235F58BE99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{4FA4EC39-5836-4B0A-B64C-435CF3B6490C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FA4EC39-5836-4B0A-B64C-435CF3B6490C}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
 		{4FA4EC39-5836-4B0A-B64C-435CF3B6490C}.TestServer|Any CPU.Build.0 = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.LocalHost|Any CPU.ActiveCfg = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.LocalHost|Any CPU.Build.0 = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.ProductionServer|Any CPU.ActiveCfg = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.ProductionServer|Any CPU.Build.0 = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.ProductionServerTEST|Any CPU.ActiveCfg = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.ProductionServerTEST|Any CPU.Build.0 = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
+		{97761C22-B87A-4DEA-860D-7A235F58BE99}.TestServer|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
