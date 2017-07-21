@@ -1,18 +1,20 @@
-﻿using SMSChecker;
-using MessagingApp.Model;
+﻿using MessagingApp.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SMSChecker
 {
-    class Program
+    public partial class SMSChecker : ServiceBase
     {
         private const string NetworkInfoUrlPath = "services/api/status/network";
         private const string BatteryInfoUrlPath = "services/api/status/battery";
@@ -24,12 +26,19 @@ namespace SMSChecker
         public static string UserName = "";
         public static string Password = "";
 
-        static void Main(string[] args)
+        public SMSChecker()
         {
-            RetrieveNewMessages();
-            Console.ReadKey();
+            InitializeComponent();
         }
 
+        protected override void OnStart(string[] args)
+        {
+            RetrieveNewMessages();
+        }
+
+        protected override void OnStop()
+        {
+        }
         static async void RetrieveNewMessages()
         {
             Functions a = new Functions();
@@ -42,11 +51,11 @@ namespace SMSChecker
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    if (UserName != "" && Password !="")
+                    if (UserName != "" && Password != "")
                     {
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                                     "Basic",
-                                     Convert.ToBase64String( 
+                                     Convert.ToBase64String(
                                      ASCIIEncoding.ASCII.GetBytes(
                                      string.Format("{0}:{1}", UserName, Password))));
                     }
@@ -57,7 +66,7 @@ namespace SMSChecker
                     {
                         GetMessageResponse result = await response.Content.ReadAsAsync<GetMessageResponse>();
                         if (result.IsSuccessful)
-                        { 
+                        {
                             String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
                             SqlConnection con = new SqlConnection(strConnString);
 
@@ -108,14 +117,15 @@ namespace SMSChecker
                                 if (msg.MessageType == "MESSAGE_TYPE_INBOX")
                                 {
 
-                                    if(msg.Message.Substring(0,1) == "@")
+                                    if (msg.Message.Substring(0, 1) == "@")
                                     {
                                         int nextat = msg.Message.IndexOf('@', 1);
-                                        if(nextat != -1)
+                                        if (nextat != -1)
                                         {
                                             string word = msg.Message.Substring(1, nextat - 1);
                                             string message = msg.Message.Substring(nextat + 1);
-                                        } else
+                                        }
+                                        else
                                         {
                                             // there is no message
                                         }
@@ -141,7 +151,7 @@ namespace SMSChecker
                                                 parts[2] = parts[2] ?? "";
                                                 //update status for parts[2] on database record datetime ie: last updated: xxxx
                                                 parts[3] = parts[3] ?? "";
-                                                if(parts[3] != "")
+                                                if (parts[3] != "")
                                                 {
                                                     //send out the status message to every one in parts[2]
                                                 }
@@ -174,6 +184,5 @@ namespace SMSChecker
             UriBuilder uriBuilder = new UriBuilder("http", IPAddress, Convert.ToInt32(Port));
             return uriBuilder.ToString();
         }
-
     }
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-namespace DataInnovations
+namespace SMSChecker
 {
     public partial class greg : System.Web.UI.Page
     {

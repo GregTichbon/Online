@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true"  Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="DataInnovations._default" %>
+﻿<%@ Page Async="true"  Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="SMSChecker._default" %>
 
 <!DOCTYPE html>
 

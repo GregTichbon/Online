@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataInnovations {
+namespace SMSChecker {
     
     
     public partial class greg {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="greg.aspx.cs" Inherits="DataInnovations.greg" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="greg.aspx.cs" Inherits="SMSChecker.greg" %>
 
 <!DOCTYPE html>
 
@@ -23,7 +23,7 @@
                 <asp:ListItem Value="0223505170">Nate Haami-Rerekura - 0223505170</asp:ListItem>
                 <asp:ListItem Value="0273746182">Keith Ramage - 0273746182</asp:ListItem>
                 <asp:ListItem Value="0211342167">Watson Matthews - 0211342167</asp:ListItem>
-                <asp:ListItem Value="027 xxx">X Mary Tafilipepe - xx</asp:ListItem>
+                <asp:ListItem Value="0284056828">Mary Tafilipepe - 0284056828</asp:ListItem>
                 <asp:ListItem Value="0273977501">Dan Chadfield - 0273977501</asp:ListItem>
                 <asp:ListItem Value="0211328295">Jeida Matthews - 0211328295</asp:ListItem>
                 <asp:ListItem Value="0226266166">Corey-Lee Robertson - 0226266166</asp:ListItem>
