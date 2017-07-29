@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSCheck", "SMSCheck\SMSChe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSChecker", "SMSChecker\SMSChecker.csproj", "{2178880E-CABA-48DA-BCEA-475B83A2F5D5}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{8673150B-08E5-407A-9362-E303568CC387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,12 @@ Global
 		{2178880E-CABA-48DA-BCEA-475B83A2F5D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2178880E-CABA-48DA-BCEA-475B83A2F5D5}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
 		{2178880E-CABA-48DA-BCEA-475B83A2F5D5}.TestServer|Any CPU.Build.0 = Release|Any CPU
+		{8673150B-08E5-407A-9362-E303568CC387}.Debug|Any CPU.ActiveCfg = Debug
+		{8673150B-08E5-407A-9362-E303568CC387}.LocalHost|Any CPU.ActiveCfg = Release
+		{8673150B-08E5-407A-9362-E303568CC387}.ProductionServer|Any CPU.ActiveCfg = Release
+		{8673150B-08E5-407A-9362-E303568CC387}.ProductionServerTEST|Any CPU.ActiveCfg = Release
+		{8673150B-08E5-407A-9362-E303568CC387}.Release|Any CPU.ActiveCfg = Release
+		{8673150B-08E5-407A-9362-E303568CC387}.TestServer|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

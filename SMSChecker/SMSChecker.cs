@@ -11,11 +11,14 @@ using System.Net.Http.Headers;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace SMSChecker
 {
     public partial class SMSChecker : ServiceBase
     {
+        private Timer timer1 = null;
+
         private const string NetworkInfoUrlPath = "services/api/status/network";
         private const string BatteryInfoUrlPath = "services/api/status/battery";
         private const string MessagesUrlPath = "services/api/messaging";
@@ -33,15 +36,24 @@ namespace SMSChecker
 
         protected override void OnStart(string[] args)
         {
+            timer1 = new Timer();
+            this.timer1.Interval = 5000;
+            this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
+            timer1.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, ElapsedEventArgs e)
+        {
             RetrieveNewMessages();
         }
 
         protected override void OnStop()
         {
+            timer1.Enabled = false;
         }
         static async void RetrieveNewMessages()
         {
-            Functions a = new Functions();
+            //Functions func = new Functions();
             try
             {
                 using (var client = new HttpClient())
@@ -61,7 +73,7 @@ namespace SMSChecker
                     }
 
 
-                    HttpResponseMessage response = await client.GetAsync(MessagesUrlPath + "?lastmessageid=742");
+                    HttpResponseMessage response = await client.GetAsync(MessagesUrlPath); // + "?lastmessageid=742");
                     if (response.IsSuccessStatusCode)
                     {
                         GetMessageResponse result = await response.Content.ReadAsAsync<GetMessageResponse>();
@@ -70,53 +82,18 @@ namespace SMSChecker
                             String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
                             SqlConnection con = new SqlConnection(strConnString);
 
-                            SqlCommand cmd = new SqlCommand("UPDATE_RECEIVED", con);
+                            SqlCommand cmd = new SqlCommand("UPDATE_MESSAGE", con);
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             foreach (DeviceMessage msg in result.Messages)
                             {
-                                Console.WriteLine(msg.ToString());
+                                //Console.WriteLine(msg.ToString());
 
-
-                                cmd.Parameters.Add("@DateTime", SqlDbType.VarChar).Value = msg.Date;
-                                cmd.Parameters.Add("@messageID", SqlDbType.VarChar).Value = msg.Id;
-                                cmd.Parameters.Add("@message", SqlDbType.NVarChar).Value = msg.Message;
-                                cmd.Parameters.Add("@number", SqlDbType.VarChar).Value = msg.Number;
-                                cmd.Parameters.Add("@threadid", SqlDbType.VarChar).Value = msg.ThreadId;
-                                cmd.Parameters.Add("@receiver", SqlDbType.VarChar).Value = msg.Receiver;
-                                cmd.Parameters.Add("@sender", SqlDbType.VarChar).Value = msg.Sender;
-                                cmd.Parameters.Add("@messagetype", SqlDbType.VarChar).Value = msg.MessageType;
-
-                                cmd.Connection = con;
-                                try
-                                {
-                                    con.Open();
-                                    SqlDataReader dr = cmd.ExecuteReader();
-                                    if (dr.HasRows)
-                                    {
-                                        while (dr.Read())
-                                        {
-
-                                        }
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine(ex.InnerException);
-                                    throw ex;
-                                }
-                                finally
-                                {
-                                    con.Close();
-                                }
-                                cmd.Parameters.Clear();
-
-                                //services / api / messaging /{ id}
+                                string action = "";
+                                string deleted = "";
 
                                 if (msg.MessageType == "MESSAGE_TYPE_INBOX")
                                 {
-
                                     if (msg.Message.Substring(0, 1) == "@")
                                     {
                                         int nextat = msg.Message.IndexOf('@', 1);
@@ -124,6 +101,8 @@ namespace SMSChecker
                                         {
                                             string word = msg.Message.Substring(1, nextat - 1);
                                             string message = msg.Message.Substring(nextat + 1);
+                                            // to something and set actioned
+                                            action = "To do";
                                         }
                                         else
                                         {
@@ -143,22 +122,97 @@ namespace SMSChecker
                                                 switch (parts[2])
                                                 {
                                                     case "test":
-                                                        a.SendMessage(msg.Number, "Your test was received").ToString();
+                                                        string message = "Your test was received";
+                                                        //func.SendMessage(msg.Number, message).ToString();
+
+                                                        var postData = new List<KeyValuePair<string, string>>();
+                                                        postData.Add(new KeyValuePair<string, string>("to", msg.Number));
+                                                        postData.Add(new KeyValuePair<string, string>("message", message));
+                                                        HttpContent content = new FormUrlEncodedContent(postData);
+
+                                                        HttpResponseMessage sendresponse = await client.PostAsync(MessagesUrlPath, content);
+                                                        if (sendresponse.IsSuccessStatusCode)
+                                                        {
+                                                            PostMessageResponse sendresult = await sendresponse.Content.ReadAsAsync<PostMessageResponse>();
+                                                            if (sendresult.IsSuccessful)
+                                                            {
+                                                                // good
+                                                            }
+                                                            else
+                                                            {
+                                                                // bad  to do error handling
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            // bad  to do error handling
+                                                        }
+
+                                                        // To do, Should write to database here
+
+                                                        action = "Test message sent.";
                                                         break;
                                                 }
                                                 break;
                                             case "status":
                                                 parts[2] = parts[2] ?? "";
                                                 //update status for parts[2] on database record datetime ie: last updated: xxxx
+                                                action = "Status updated.";
                                                 parts[3] = parts[3] ?? "";
                                                 if (parts[3] != "")
                                                 {
                                                     //send out the status message to every one in parts[2]
+                                                    action += " Message sent.";
                                                 }
                                                 break;
                                         }
                                     }
                                 }
+
+                                #region Delete message 
+                                HttpResponseMessage deleteresponse = await client.DeleteAsync(MessagesUrlPath + "?id=" + msg.Id);
+                                if (deleteresponse.IsSuccessStatusCode)
+                                {
+                                    DeleteMessageResponse deleteresult = await deleteresponse.Content.ReadAsAsync<DeleteMessageResponse>();
+                                    deleted = deleteresult.ToString();
+                                }
+                                #endregion //Delete message
+
+                                cmd.Parameters.Add("@DateTime", SqlDbType.VarChar).Value = msg.Date;
+                                cmd.Parameters.Add("@messageID", SqlDbType.VarChar).Value = msg.Id;
+                                cmd.Parameters.Add("@message", SqlDbType.NVarChar).Value = msg.Message;
+                                cmd.Parameters.Add("@number", SqlDbType.VarChar).Value = msg.Number;
+                                cmd.Parameters.Add("@threadid", SqlDbType.VarChar).Value = msg.ThreadId;
+                                cmd.Parameters.Add("@receiver", SqlDbType.VarChar).Value = msg.Receiver;
+                                cmd.Parameters.Add("@sender", SqlDbType.VarChar).Value = msg.Sender;
+                                cmd.Parameters.Add("@messagetype", SqlDbType.VarChar).Value = msg.MessageType;
+                                cmd.Parameters.Add("@action", SqlDbType.VarChar).Value = action;
+                                cmd.Parameters.Add("@deleted", SqlDbType.VarChar).Value = deleted;
+
+                                cmd.Connection = con;
+                                try
+                                {
+                                    con.Open();
+                                    SqlDataReader dr = cmd.ExecuteReader();
+                                    if (dr.HasRows)
+                                    {
+                                        while (dr.Read())
+                                        {
+
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    //Console.WriteLine(ex.Message);
+                                    //Console.WriteLine(ex.InnerException);
+                                    throw ex;
+                                }
+                                finally
+                                {
+                                    con.Close();
+                                }
+                                cmd.Parameters.Clear();
                             }
                             con.Dispose();
                         }

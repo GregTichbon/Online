@@ -65,6 +65,7 @@
     <Compile Include="Model\DeviceMessage.cs" />
     <Compile Include="Model\GetMessageResponse.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\DeleteMessageResponse .cs" />
     <Compile Include="Model\PostMessageResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
