@@ -335,6 +335,10 @@
     <Content Include="images\LeoneandMellisa.jpg" />
     <Content Include="images\MahangaWilliams.jpg" />
     <Content Include="Index.aspx" />
+    <Content Include="MySite\default.html" />
+    <Content Include="MySite\fblogin.png" />
+    <Content Include="MySite\login.aspx" />
+    <Content Include="MySite\Login.html" />
     <Content Include="Pickups\Admin.aspx" />
     <Content Include="Pickups\data.asmx" />
     <Content Include="Pickups\GoogleMaps1.aspx" />
@@ -684,6 +688,7 @@
     <Content Include="Auction\Images\Items\4\original\Rutland Arms Email Banners.pdf" />
     <Content Include="Auction\Images\Items\4\original\The Red Lion.pdf" />
     <Content Include="TOHWAuction.Master" />
+    <Content Include="MySite\MySite.Master" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -754,6 +759,20 @@
     </Compile>
     <Compile Include="2Talk\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MySite\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MySite\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MySite\MySite.Master.cs">
+      <DependentUpon>MySite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MySite\MySite.Master.designer.cs">
+      <DependentUpon>MySite.Master</DependentUpon>
     </Compile>
     <Compile Include="TOHWAuction.Master.cs">
       <DependentUpon>TOHWAuction.Master</DependentUpon>

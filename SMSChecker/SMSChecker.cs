@@ -94,23 +94,7 @@ namespace SMSChecker
 
                                 if (msg.MessageType == "MESSAGE_TYPE_INBOX")
                                 {
-                                    if (msg.Message.Substring(0, 1) == "@")
-                                    {
-                                        int nextat = msg.Message.IndexOf('@', 1);
-                                        if (nextat != -1)
-                                        {
-                                            string word = msg.Message.Substring(1, nextat - 1);
-                                            string message = msg.Message.Substring(nextat + 1);
-                                            // to something and set actioned
-                                            action = "To do";
-                                        }
-                                        else
-                                        {
-                                            // there is no message
-                                        }
-
-                                    }
-                                    else if (msg.Message.Substring(0, 1) == "!")
+                                    if (msg.Message.Substring(0, 1) == "!")
                                     {
                                         string mymessage = msg.Message + "!!!!!!!!!!!!";
                                         string[] parts = msg.Message.Split('!');
@@ -166,7 +150,48 @@ namespace SMSChecker
                                                 }
                                                 break;
                                         }
+                                    } else
+                                    {
+                                        string mymessage = msg.Message; //.Replace(" ", "");
+                                        if (mymessage.StartsWith("seniorclub"))
+                                        {
+                                            mymessage = mymessage.Substring(10).Trim();
+                                        }
+                                        //write in database - done below
+                                        //send response
+                                        //send notification
+
+                                        
+                                        
                                     }
+                                    
+                                    /* 
+                                    if (msg.Message.Substring(0, 1) == "@")
+                                    {
+                                        int nextat = msg.Message.IndexOf('@', 1);
+                                        if (nextat != -1)
+                                        {
+                                            string word = msg.Message.Substring(1, nextat - 1);
+                                            string message = msg.Message.Substring(nextat + 1);
+                                            // to something and set actioned
+                                            action = "To do";
+                                        }
+                                        else
+                                        {
+                                            // there is no message
+                                        }
+                                        
+                                        //string mymessage = msg.Message + "@@@@@@@@@@";
+                                        //string[] parts = msg.Message.Split('@');
+
+                                        //switch (parts[1])
+                                        //{
+                                        //    case "SeniorClubPickups":
+                                        //        parts[2] = parts[2] ?? "";
+                                        //        break;
+                                        //}
+                                    }
+                                */
                                 }
 
                                 #region Delete message 
