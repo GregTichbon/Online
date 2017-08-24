@@ -847,7 +847,7 @@ namespace TeOranganui.Functions
 
             foreach (var obj in form)
             {
-                string key = obj.name; // Used for NameValue[] rather than NameValueCollection
+                string key = obj.name.ToLower(); // Used for NameValue[] rather than NameValueCollection
                 string value = obj.value; // Used for NameValue[] rather than NameValueCollection
 
                 if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))

@@ -18,7 +18,7 @@
             });
 
             var validator = $("#form1").validate({
-                ignore: []
+                ignore: '.ignore'
             });
 
             $("#inputfields :input").prop("disabled", inputfields_disabled)
@@ -140,7 +140,6 @@
                     $("#hf_group_id").val(0);
                 } else if (group_id != '') {
                     $("#hf_group_id").val(group_id);
-
                     $.ajax({
                         async: false,
                         url: "../functions/data.asmx/get_school?group_id=" + group_id, success: function (result) {
@@ -478,6 +477,9 @@
                     nameparts = inputid.split('-');
                     newname = nameparts[0] + "-" + nameparts[1] + "-" + prefix + nameparts[2] + "-" + nameparts[3];
                     $(this).attr('name', newname);
+                    $(this).toggleClass("ignore")
+                    $(this).removeClass('error').next('label.error').remove();
+                    //$(this).valid();
                 });
                 dataidparts = dataid.split('-');
                 if (dataidparts[2].substring(0, 1) == 'D') {
@@ -534,6 +536,13 @@
                                     $(this).attr('name', $(this).attr('name').replace(value.original_id, value.created_id));
                                 });
                             });
+                            if ($('#hf_group_id').val() == 0) {
+                                $('#hf_group_id').val(item.id)
+                                $('#dd_search').append($("<option></option>")  //puts at end.  Would be nice in correct place
+                                                .attr("value",item.id)
+                                                .text($('#tb_groupname').val())
+                                ); 
+                            }
                             alert('Saved');
                         },
                         error: function (xhr, status) {
@@ -559,10 +568,6 @@
                 );
             });
         });
-
- 
-
-
     </script>
 
 
@@ -579,10 +584,7 @@
         </div>
     </div>
 
-
-
     <div id="inputfields">
-
         <div class="form-group">
             <label class="control-label col-sm-4" for="tb_groupname">Group name</label><div class="col-sm-8">
                 <input id="tb_groupname" name="tb_groupname" type="text" class="form-control" required />
@@ -601,8 +603,6 @@
                     <div class="panel-body" style="position: relative">
                         <!-- added relative for datetimepicker -->
                         <!-- Accordian header end -->
-
-
 
                         <div class="form-group">
                             <label class="control-label col-sm-4" for="dd_location">Location</label><div class="col-sm-8">
@@ -679,9 +679,6 @@
             </div>
         </div>
         <!-- Accordian footer end -->
-
-
-
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
             <li><a data-toggle="tab" href="#div_address">Addresses</a></li>
@@ -694,7 +691,6 @@
             <li><a data-toggle="tab" href="#div_accreditation">Accreditation</a></li>
             <li><a data-toggle="tab" href="#div_narrative">Narrative</a></li>
             <li><a data-toggle="tab" href="#div_systems">Systems</a></li>
-
         </ul>
         <!------------------------------------------------------------------------------------------------------>
         <div class="tab-content">
@@ -732,7 +728,7 @@
                 </div>
             </div>
 
-            
+
             <div id="div_engagement" class="tab-pane fade">
                 <h3>Engagement</h3>
                 <div class="datagrid">
@@ -763,7 +759,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <div id="div_roll" class="tab-pane fade">
                 <h3>Roll</h3>
                 <div class="datagrid">

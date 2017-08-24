@@ -1203,6 +1203,7 @@ namespace TeOranganui.data
                         decile = dr["decile"].ToString(),
                         moenumber = dr["moenumber"].ToString(),
                         type = dr["type"].ToString(),
+                        location = dr["location"].ToString(),
                         startyear = dr["startyear"].ToString(),
                         endyear = dr["endyear"].ToString()
                     });
@@ -1263,6 +1264,7 @@ namespace TeOranganui.data
         public string decile;
         public string moenumber;
         public string type;
+        public string location;
         public string startyear;
         public string endyear;
     }

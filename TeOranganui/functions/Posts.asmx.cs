@@ -86,6 +86,7 @@ namespace TeOranganui.posts
             //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
             cmd.Parameters.Add("@group_id", SqlDbType.VarChar).Value = group_id;
             cmd.Parameters.Add("@groupname", SqlDbType.VarChar).Value = formVars.Form("tb_groupname");
+            cmd.Parameters.Add("@location", SqlDbType.VarChar).Value = formVars.Form("dd_location");
             cmd.Parameters.Add("@gendertype", SqlDbType.VarChar).Value = formVars.Form("dd_gendertype");
             cmd.Parameters.Add("@authority", SqlDbType.VarChar).Value = formVars.Form("dd_authority");
             cmd.Parameters.Add("@decile", SqlDbType.VarChar).Value = formVars.Form("dd_decile");
