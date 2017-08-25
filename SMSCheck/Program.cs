@@ -19,8 +19,10 @@ namespace SMSChecker
         private const string MessagesUrlPath = "services/api/messaging";
         private const string MessageStatusUrlPath = "services/api/messaging/status";
 
-        public static string IPAddress = "192.168.10.39";
-        public static string Port = "1688";
+
+
+        public static string IPAddress = ""; //"192.168.10.39";
+        public static string Port = ""; //"1688";
         public static string UserName = "";
         public static string Password = "";
 
@@ -33,7 +35,54 @@ namespace SMSChecker
 
         static async void RetrieveNewMessages()
         {
-            //Functions func = new Functions();
+            String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("GET_PARAMETER", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "IPAddress";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                //SqlDataReader dr = cmd.ExecuteReader();
+                IPAddress = cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InnerException);
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "Port";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                //SqlDataReader dr = cmd.ExecuteReader();
+                Port = cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InnerException);
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            cmd.Parameters.Clear();
+
             try
             {
                 using (var client = new HttpClient())
@@ -59,10 +108,7 @@ namespace SMSChecker
                         GetMessageResponse result = await response.Content.ReadAsAsync<GetMessageResponse>();
                         if (result.IsSuccessful)
                         {
-                            String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-                            SqlConnection con = new SqlConnection(strConnString);
-
-                            SqlCommand cmd = new SqlCommand("UPDATE_MESSAGE", con);
+                            cmd = new SqlCommand("UPDATE_MESSAGE", con);
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             foreach (DeviceMessage msg in result.Messages)

@@ -20,5 +20,10 @@ namespace SMSChecker
         {
 
         }
+
+        private void SMSCheckerService_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
     }
 }

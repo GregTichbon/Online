@@ -168,7 +168,7 @@
 
                     $.getJSON("../functions/data.asmx/get_groupcommunication?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-GroupCommunication-" + item.communication_id;
+                            id = "sub-groupcommunication-" + item.communication_id;
                             populate_communications(id);
                             $("#" + id + "-communicationtype_id").val(item.communicationtype_id);
                             $("#" + id + "-detail").val(item.detail);
@@ -179,7 +179,7 @@
 
                     $.getJSON("../functions/data.asmx/get_groupactivity?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-Groupactivity-" + item.activity_id;
+                            id = "sub-groupactivity-" + item.activity_id;
                             populate_activity(id);
                             $("#" + id + "-activitytype_id").val(item.activitytype_id);
                             $("#" + id + "-startdate").val(item.startdate);
@@ -223,7 +223,7 @@
 
                     $.getJSON("../functions/data.asmx/get_school_programme?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-School_Programme-" + item.school_programme_id;
+                            id = "sub-school_programme-" + item.school_programme_id;
                             populate_programme(id);
                             $("#" + id + "-list_item_id").val(item.list_item_id);
                             $("#" + id + "-startdate").val(item.startdate);
@@ -234,7 +234,7 @@
 
                     $.getJSON("../functions/data.asmx/get_school_policy?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-School_Policy-" + item.school_policy_id;
+                            id = "sub-school_policy-" + item.school_policy_id;
                             populate_policy(id);
                             $("#" + id + "-list_item_id").val(item.list_item_id);
                             $("#" + id + "-dateimplemented").val(item.dateimplemented);
@@ -246,7 +246,7 @@
 
                     $.getJSON("../functions/data.asmx/get_school_accreditation?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
-                            id = "sub-School_Accreditation-" + item.school_accreditation_id;
+                            id = "sub-school_accreditation-" + item.school_accreditation_id;
                             populate_accreditation(id);
                             $("#" + id + "-list_item_id").val(item.list_item_id);
                             $("#" + id + "-dateaccredited").val(item.dateaccredited);
@@ -422,19 +422,19 @@
                     nextnewkey();
                     switch (tbl) {
                         case 'tbl_communications':
-                            populate_communications("sub-GroupCommunication-N" + newkey);
+                            populate_communications("sub-groupcommunication-N" + newkey);
                             break;
                         case 'tbl_address':
-                            populate_address("sub-GroupAddress-N" + newkey);
+                            populate_address("sub-groupaddress-N" + newkey);
                             break;
                         case 'tbl_roll':
-                            populate_roll("sub-GroupRoll-N" + newkey);
+                            populate_roll("sub-grouproll-N" + newkey);
                             break;
                         case 'tbl_engagement':
-                            populate_engagement("sub-GroupEngagement-N" + newkey);
+                            populate_engagement("sub-groupengagement-N" + newkey);
                             break;
                         case 'tbl_activity':
-                            populate_activity("sub-GroupActivity-N" + newkey);
+                            populate_activity("sub-groupactivity-N" + newkey);
                             break;
                         case 'tbl_people':
                             populate_people('sub-group_person-N' + newkey);
@@ -460,33 +460,40 @@
 
             $('body').on('click', '.a_delete', function () {
                 mode = $(this).text();
-                if (mode == 'Delete') {
-                    $('td:first', $(this).parents('tr')).html('<img src="images/delete.png">');
-                    $(this).text('Restore');
-                    prefix = 'D';
-                } else {
-                    $('td:first', $(this).parents('tr')).html('');
-                    $(this).text('Delete');
-                    prefix = '';
-                }
                 tr = $(this).parents('tr');
-                tr.toggleClass("deleterow")
                 dataid = tr.attr("id");
-                $('[name^=' + dataid + ']').each(function (i, obj) {
-                    inputid = $(this).attr('id');
-                    nameparts = inputid.split('-');
-                    newname = nameparts[0] + "-" + nameparts[1] + "-" + prefix + nameparts[2] + "-" + nameparts[3];
-                    $(this).attr('name', newname);
-                    $(this).toggleClass("ignore")
-                    $(this).removeClass('error').next('label.error').remove();
-                    //$(this).valid();
-                });
-                dataidparts = dataid.split('-');
-                if (dataidparts[2].substring(0, 1) == 'D') {
-                    dataidparts[2] = dataidparts[2].substring(1);
+                nameparts = dataid.split('-');
+                if(mode == 'Delete' && nameparts[2].substring(0,1) == "N") {
+                    tr.remove();
+                } else {
+                    if (mode == 'Delete') {
+                        $('td:first', $(this).parents('tr')).html('<img src="images/delete.png">');
+                        $(this).text('Restore');
+                        prefix = 'D';
+                    } else {
+                        $('td:first', $(this).parents('tr')).html('');
+                        $(this).text('Delete');
+                        prefix = '';
+                    }
+                    //tr = $(this).parents('tr');
+                    tr.toggleClass("deleterow")
+                    //dataid = tr.attr("id");
+                    $('[name^=' + dataid + ']').each(function (i, obj) {
+                        inputid = $(this).attr('id');
+                        nameparts = inputid.split('-');
+                        newname = nameparts[0] + "-" + nameparts[1] + "-" + prefix + nameparts[2] + "-" + nameparts[3];
+                        $(this).attr('name', newname);
+                        //$(this).toggleClass("ignore")
+                        //$(this).removeClass('error').next('label.error').remove();
+                        //$(this).valid();
+                    });
+                    dataidparts = dataid.split('-');
+                    if (dataidparts[2].substring(0, 1) == 'D') {
+                        dataidparts[2] = dataidparts[2].substring(1);
+                    }
+                    newdataid = dataidparts[0] + "-" + dataidparts[1] + "-" + prefix + dataidparts[2];
+                    tr.attr('id', newdataid);
                 }
-                newdataid = dataidparts[0] + "-" + dataidparts[1] + "-" + prefix + dataidparts[2];
-                tr.attr('id', newdataid);
             });
 
             $('body').on('dblclick', '.person', function () {
@@ -543,7 +550,19 @@
                                                 .text($('#tb_groupname').val())
                                 ); 
                             }
-                            alert('Saved');
+                            $("#dialog").html("This record has been saved.");
+                            $("#dialog").dialog({
+                                title: "Saved",
+                                resizable: false,
+                                height: "auto",
+                                width: 400,
+                                modal: true,
+                                buttons: {
+                                    Ok: function() {
+                                        $( this ).dialog( "close" );
+                                    }
+                                }
+                            });
                         },
                         error: function (xhr, status) {
                             alert("An error occurred: " + status);
@@ -560,6 +579,25 @@
                 }
             })
 
+            $("#btn_Delete").click(function () {
+                $("#dialog").html("Are you sure you want to delete this record and all it's associated records?");
+                $("#dialog").dialog({
+                    title: "Delete",
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Yes": function() {
+                            $( this ).dialog( "close" );
+                        },
+                        Cancel: function() {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                });
+            });
+
             //$('.dtp').datetimepicker();
             $(document).on('focus', ".dtp", function () {
                 $(this).datepicker({
@@ -573,6 +611,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div id="dialog"></div>
     <input id="hf_group_id" name="hf_group_id" type="hidden" />
     <div class="form-group">
         <label class="control-label col-sm-4" for="dd_search">Search</label><div class="col-sm-8">
@@ -874,7 +913,9 @@
             </div>
 
         </div>
-        <input id="btn_Save" type="button" value="Save" />
+        <hr style="width: 100%; background-color:cornflowerblue; height: 1px; border-color : transparent;" />
+         <div align="right"><input id="btn_Delete" type="button" class="btn btn-info" value="Delete" /> <input id="btn_Save" type="button" class="btn btn-info btn-lg" value="Save" /></div>
+        <br />
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

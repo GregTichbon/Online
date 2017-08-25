@@ -23,7 +23,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSCheck", "SMSCheck\SMSChe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSChecker", "SMSChecker\SMSChecker.csproj", "{2178880E-CABA-48DA-BCEA-475B83A2F5D5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{8673150B-08E5-407A-9362-E303568CC387}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SMSCheckerService", "Installer\Installer.vdproj", "{8673150B-08E5-407A-9362-E303568CC387}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89602768-C868-4FCE-8086-742EFC0C3AD5}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

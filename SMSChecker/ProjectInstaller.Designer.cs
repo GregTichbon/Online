@@ -28,32 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
+            this.SMSCheckerInstaller = new System.ServiceProcess.ServiceProcessInstaller();
             this.SMSCheckerService = new System.ServiceProcess.ServiceInstaller();
             // 
-            // serviceProcessInstaller1
+            // SMSCheckerInstaller
             // 
-            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
-            this.serviceProcessInstaller1.Password = null;
-            this.serviceProcessInstaller1.Username = null;
-            this.serviceProcessInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
+            this.SMSCheckerInstaller.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
+            this.SMSCheckerInstaller.Password = null;
+            this.SMSCheckerInstaller.Username = null;
+            this.SMSCheckerInstaller.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
             // 
             // SMSCheckerService
             // 
             this.SMSCheckerService.ServiceName = "SMSCheckerService";
             this.SMSCheckerService.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.SMSCheckerService.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.SMSCheckerService_AfterInstall);
             // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this.serviceProcessInstaller1,
+            this.SMSCheckerInstaller,
             this.SMSCheckerService});
 
         }
 
         #endregion
 
-        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
+        private System.ServiceProcess.ServiceProcessInstaller SMSCheckerInstaller;
         private System.ServiceProcess.ServiceInstaller SMSCheckerService;
     }
 }
