@@ -641,6 +641,11 @@
     <Content Include="Scripts\PopupOverlay\index.html" />
     <Content Include="Scripts\PopupOverlay\index.js" />
     <Content Include="Scripts\PopupOverlay\jquery.popupoverlay.js" />
+    <Content Include="Scripts\table2Excel\demo\index.html" />
+    <Content Include="Scripts\table2Excel\dist\jquery.table2excel.js" />
+    <Content Include="Scripts\table2Excel\dist\jquery.table2excel.min.js" />
+    <Content Include="Scripts\table2Excel\Gruntfile.js" />
+    <Content Include="Scripts\table2Excel\src\jquery.table2excel.js" />
     <Content Include="test1.aspx" />
     <Content Include="TestandPlay\Format.html" />
     <Content Include="TESTQS.html" />
@@ -1013,6 +1018,17 @@
     <Content Include="Scripts\fullcalendar\demos\php\get-timezones.php" />
     <Content Include="Scripts\fullcalendar\demos\php\utils.php" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
+    <Content Include="Scripts\table2Excel\.editorconfig" />
+    <Content Include="Scripts\table2Excel\.gitignore" />
+    <Content Include="Scripts\table2Excel\.jshintrc" />
+    <Content Include="Scripts\table2Excel\.travis.yml" />
+    <Content Include="Scripts\table2Excel\bower.json" />
+    <Content Include="Scripts\table2Excel\CHANGELOG.md" />
+    <Content Include="Scripts\table2Excel\CONTRIBUTING.md" />
+    <Content Include="Scripts\table2Excel\demo\download.xls" />
+    <Content Include="Scripts\table2Excel\package.json" />
+    <Content Include="Scripts\table2Excel\README.md" />
+    <Content Include="Scripts\table2Excel\table2excel.jquery.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

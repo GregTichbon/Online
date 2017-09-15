@@ -1,6 +1,8 @@
 ﻿using MessagingApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,11 +15,11 @@ namespace SMSChecker
 {
     public partial class _default : System.Web.UI.Page
     {
-        string IPAddress = "192.168.10.39";
-        string Port = "1688";
+        string IPAddress = "";
+        string Port = "";
         string UserName = "";
         string Password = "";
-        string Mode = "";
+        string Operation = "";
         string PhoneNumber = ""; //   "0272495088";
         string Message = ""; //"Test";
         public string html = "";
@@ -25,7 +27,7 @@ namespace SMSChecker
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            Mode = Request.QueryString["M"] ?? "";
+            Operation = Request.QueryString["O"] ?? "";
             PhoneNumber = Request.QueryString["P"] ?? "";
             Message = Request.QueryString["M"] ?? "";
             SendMessage();
@@ -38,7 +40,7 @@ namespace SMSChecker
 
         private async void SendMessage()
         {
-            if(Mode == "S")
+            if(Operation == "S")
             {
 
             }
@@ -48,6 +50,53 @@ namespace SMSChecker
             }
             else
             {
+                String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+                SqlConnection con = new SqlConnection(strConnString);
+
+                SqlCommand cmd = new SqlCommand("GET_PARAMETER", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "IPAddress";
+
+                cmd.Connection = con;
+                try
+                {
+                    con.Open();
+                    //SqlDataReader dr = cmd.ExecuteReader();
+                    IPAddress = cmd.ExecuteScalar().ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.InnerException);
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                }
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "Port";
+
+                cmd.Connection = con;
+                try
+                {
+                    con.Open();
+                    //SqlDataReader dr = cmd.ExecuteReader();
+                    Port = cmd.ExecuteScalar().ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.InnerException);
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                }
+
                 using (var client = new HttpClient())
                 {
                     string url = ConstructBaseUri();

@@ -62,6 +62,8 @@
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="<%: ResolveUrl("~/Scripts/table2Excel/dist/jquery.table2excel.js")%>"></script>
+
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -457,9 +459,11 @@
 
                     if ((gender.indexOf('|' + mygender + '|') != -1) && (enrolementstatus.indexOf('|' + myenrolementstatus + '|') != -1 || ( mystatus != '' || myassigned != '' || myaddress != ''   ) ) && (myassigned == assigned || assigned == 'All') && (searchname == "" || myname.indexOf(searchname) != -1) && (todo.indexOf('|' + mystatus + '|') != -1 || todo == '')) {
                         $(this).show();
+                        $(this).removeClass("noExport");
                         c1 = c1 + 1;
                     } else {
                         $(this).hide();
+                        $(this).addClass("noExport");
                         /*
                         console.log(myname);
                         console.log(mygender);
@@ -499,9 +503,17 @@
                 return result;
             }
 
- 
+            $("#btn_export").click(function(){
+                $("#tbl_data").table2excel({
+                    // exclude CSS class
+                    exclude: ".noExport",
+                    name: "Sheet1",
+                    filename: "Pickups" //do not include extension
+                });
+            });
 
-        })
+
+        }) //document.ready
 
         function htmlDecode(input) {
             var e = document.createElement('div');
@@ -638,6 +650,7 @@
     <span id="span_status" style="color: red"></span>
 
     <input id="btn_map" type="button" value="Map" />
+    <input id="btn_export" type="button" value="Export" />
 
     <table id="tbl_data" class="table table-striped">
         <tbody></tbody>
