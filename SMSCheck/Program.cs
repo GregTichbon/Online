@@ -1,4 +1,4 @@
-﻿using SMSChecker;
+﻿using SMS;
 using MessagingApp.Model;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMSChecker
+namespace SMS
 {
     class Program
     {

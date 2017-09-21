@@ -345,12 +345,14 @@
     <Content Include="Pickups\Icons\Charlie Boy.png" />
     <Content Include="Pickups\Icons\Greg.png" />
     <Content Include="Pickups\Icons\Jay.png" />
+    <Content Include="Pickups\Icons\Jordi.png" />
     <Content Include="Pickups\Icons\Judy.png" />
     <Content Include="Pickups\Icons\Keegan.png" />
     <Content Include="Pickups\Icons\Keith.png" />
     <Content Include="Pickups\Icons\Koralee.png" />
     <Content Include="Pickups\Icons\TOH.png" />
     <Content Include="Pickups\Icons\Unknown.png" />
+    <Content Include="Pickups\Icons\Whakapakari.png" />
     <Content Include="Pickups\InArray1.aspx" />
     <Content Include="Pickups\login.aspx" />
     <Content Include="QS1.html" />

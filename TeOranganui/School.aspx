@@ -334,7 +334,7 @@
             }
 
             function populate_engagement(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                del = '<a class="a_edit" href="javascript:void(0)">Edit</a> <a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required />'),
@@ -343,6 +343,22 @@
                             $('<td style="text-align:center">').html(del)
                         ).appendTo('#tbl_engagement');
             }
+            
+            function engagement_subform(id) {
+                $('#tbl_subform').empty();
+                $('#tbl_subform').append( '<tr><td>Date</td><td><input name="frm_' + id + '-date" id="frm_' + id + '-date" type="text" class="form-control dtp" required /></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Level</td><td><select name="frm_' + id + '-level_id" id="frm_' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Note</td><td><textarea name="frm_' + id + '-note" id="frm_' + id + '-note" class="form-control"></textarea></td></tr>' );
+/*
+                var $table = $(document.createElement('table'));
+                var $tr = $('<tr>').append(
+                    $('<td>').html('Date'),
+                    $('<td>').html('<input name="frm_' + id + '-date" id="frm_' + id + '-date" type="text" class="form-control dtp" required />')
+                  ).appendTo('#tbl_subform');
+*/
+            }
+
+
 
             function populate_people(id) {
                 del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
@@ -456,6 +472,31 @@
                             break;
                     }
                 }
+            });
+            $('body').on('click', '.a_edit', function () {
+                mode = $(this).text();  //don't know if I need this.  It's in a_delete too
+                tr = $(this).parents('tr');
+                dataid = tr.attr("id");
+                nameparts = dataid.split('-');
+                id = nameparts[2];
+                engagement_subform(id);
+                $("#dialog").html('Do popup form: mode=' + mode + ', dataid=' + dataid + $('#tbl_subform').html());
+                $("#dialog").dialog({
+                    title: "Row Edit",
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Save": function() {
+                            $( this ).dialog( "close" );
+                            alert('Does nothing yet');
+                        },
+                       "Cancel": function() {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                });
             });
 
             $('body').on('click', '.a_delete', function () {
@@ -590,6 +631,7 @@
                     buttons: {
                         "Yes": function() {
                             $( this ).dialog( "close" );
+alert('To do');
                         },
                         Cancel: function() {
                             $( this ).dialog( "close" );
@@ -612,6 +654,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="dialog"></div>
+    <table id="tbl_subform"></table>
     <input id="hf_group_id" name="hf_group_id" type="hidden" />
     <div class="form-group">
         <label class="control-label col-sm-4" for="dd_search">Search</label><div class="col-sm-8">

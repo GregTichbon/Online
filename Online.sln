@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingApp", "..\Messagin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auction", "Auction\Auction.csproj", "{33008459-999B-4E81-8773-395C0523297D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataInnovations", "DataInnovations\DataInnovations.csproj", "{4FA4EC39-5836-4B0A-B64C-435CF3B6490C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "office.datainn.co.nz", "DataInnovations\office.datainn.co.nz.csproj", "{4FA4EC39-5836-4B0A-B64C-435CF3B6490C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSCheck", "SMSCheck\SMSCheck.csproj", "{97761C22-B87A-4DEA-860D-7A235F58BE99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS", "SMSCheck\SMS.csproj", "{97761C22-B87A-4DEA-860D-7A235F58BE99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSChecker", "SMSChecker\SMSChecker.csproj", "{2178880E-CABA-48DA-BCEA-475B83A2F5D5}"
 EndProject
@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.txt = ReadMe.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMSProcessing", "WindowsService1\SMSProcessing.csproj", "{D3A36070-8B98-405F-AE14-F6CF473F307D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -166,6 +168,18 @@ Global
 		{8673150B-08E5-407A-9362-E303568CC387}.ProductionServerTEST|Any CPU.ActiveCfg = Release
 		{8673150B-08E5-407A-9362-E303568CC387}.Release|Any CPU.ActiveCfg = Release
 		{8673150B-08E5-407A-9362-E303568CC387}.TestServer|Any CPU.ActiveCfg = Release
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.LocalHost|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.LocalHost|Any CPU.Build.0 = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.ProductionServer|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.ProductionServer|Any CPU.Build.0 = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.ProductionServerTEST|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.ProductionServerTEST|Any CPU.Build.0 = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.TestServer|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A36070-8B98-405F-AE14-F6CF473F307D}.TestServer|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

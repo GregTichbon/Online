@@ -8,14 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace SMSChecker
+namespace SMS
 {
     public class Functions
     {
-        string IPAddress = "192.168.10.39";
-        string Port = "1688";
+        string IPAddress = "";
+        string Port = "";
         string UserName = "";
         string Password = "";
+        string Operation = "";
+        string PhoneNumber = ""; //   "0272495088";
+        string Message = ""; //"Test";
+        public string html = "";
 
         public string Test()
         {
