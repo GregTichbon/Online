@@ -94,7 +94,8 @@ namespace TeOranganui.posts
             cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = formVars.Form("dd_type");
             cmd.Parameters.Add("@startyear", SqlDbType.VarChar).Value = formVars.Form("dd_startyear");
             cmd.Parameters.Add("@endyear", SqlDbType.VarChar).Value = formVars.Form("dd_endyear");
-            
+            cmd.Parameters.Add("@deleteflag", SqlDbType.VarChar).Value = formVars.Form("hf_deleteflag");
+
             #region save data (Standard)
 
             cmd.Connection = con;

@@ -120,20 +120,12 @@
                 });
             });
 
+
+
+
             //Get Record
             $("#dd_search").change(function () {
-                inputfields_disabled = false;
-                $("#inputfields :input").prop("disabled", inputfields_disabled)
-                $("#tb_groupname").val('');
-                $("#dd_location")[0].selectedIndex = 0;
-                $("#dd_gendertype")[0].selectedIndex = 0;
-                $("#dd_authority")[0].selectedIndex = 0;
-                $("#dd_decile")[0].selectedIndex = 0;
-                $("#tb_moenumber").val('');
-                $("#dd_type")[0].selectedIndex = 0;
-                $("#dd_startyear")[0].selectedIndex = 0;
-                $("#dd_endyear")[0].selectedIndex = 0;
-                $(".rowdata").remove();
+                clearall();
 
                 group_id = $(this).val();
                 if (group_id == 'Create') {
@@ -284,44 +276,59 @@
                 newkey++;
             }
 
+            function clearall() {
+                            inputfields_disabled = false;
+                            $("#inputfields :input").prop("disabled", inputfields_disabled)
+                            $("#tb_groupname").val('');
+                            $("#dd_location")[0].selectedIndex = 0;
+                            $("#dd_gendertype")[0].selectedIndex = 0;
+                            $("#dd_authority")[0].selectedIndex = 0;
+                            $("#dd_decile")[0].selectedIndex = 0;
+                            $("#tb_moenumber").val('');
+                            $("#dd_type")[0].selectedIndex = 0;
+                            $("#dd_startyear")[0].selectedIndex = 0;
+                            $("#dd_endyear")[0].selectedIndex = 0;
+                            $(".rowdata").remove();
+            }
+
             function populate_communications(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-communicationtype_id" id="' + id + '-communicationtype_id" class="grid_select form-control" required>' + communicationtype_options + '</select>'),
                             $('<td>').html('<input name="' + id + '-detail" id="' + id + '-detail" type="text" class="form-control" required />'),
-                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
+                            $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control" maxlength="500"></textarea>'),
                             $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_communications');
             }
 
             function populate_activity(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-activitytype_id" id="' + id + '-activitytype_id" class="grid_select form-control" required>' + activitytype_options + '</select>'),
                             $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control dtp" required/>'),
                             $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control dtp" />'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_activity');
             }
 
             function populate_address(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-addresstype_id" id="' + id + '-addresstype_id" class="grid_select form-control" required>' + addresstype_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-detail" id="' + id + '-detail" class="form-control" required></textarea>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_address');
             }
 
             function populate_roll(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required/>'),
@@ -329,62 +336,65 @@
                             $('<td>').html('<select name="' + id + '-classification_id" id="' + id + '-classification_id" class="grid_select form-control" required>' + rollclassification_options + '</select>'),
                             $('<td>').html('<input name="' + id + '-roll" id="' + id + '-roll" type="text" class="form-control" required/>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_roll');
             }
 
             function populate_engagement(id) {
-                del = '<a class="a_edit" href="javascript:void(0)">Edit</a> <a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_edit" href="javascript:void(0)">Edit</a> <a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required />'),
                             $('<td>').html('<select name="' + id + '-level_id" id="' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_engagement');
             }
             
             function engagement_subform(id) {
+                frm_id = "frm_" + id + "-";
                 $('#tbl_subform').empty();
-                $('#tbl_subform').append( '<tr><td>Date</td><td><input name="frm_' + id + '-date" id="frm_' + id + '-date" type="text" class="form-control dtp" required /></td></tr>' );
-                $('#tbl_subform').append( '<tr><td>Level</td><td><select name="frm_' + id + '-level_id" id="frm_' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select></td></tr>' );
-                $('#tbl_subform').append( '<tr><td>Note</td><td><textarea name="frm_' + id + '-note" id="frm_' + id + '-note" class="form-control"></textarea></td></tr>' );
-/*
-                var $table = $(document.createElement('table'));
-                var $tr = $('<tr>').append(
-                    $('<td>').html('Date'),
-                    $('<td>').html('<input name="frm_' + id + '-date" id="frm_' + id + '-date" type="text" class="form-control dtp" required />')
-                  ).appendTo('#tbl_subform');
-*/
+                $('#tbl_subform').append( '<tr><td>Date</td><td><input name="' + frm_id + 'date" id="' + frm_id + 'date" type="text" class="form-control dtp" required /></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Level</td><td><select name="' + frm_id + 'level_id" id="' + frm_id + 'level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Note</td><td><textarea name="' + frm_id + 'note" id="' + frm_id + 'note" class="form-control"></textarea></td></tr>' );
+                source_id = "#sub-groupengagement-" + id + "-";
+                $("#" + frm_id + "date").val($(source_id + "date").val());
+                $("#" + frm_id + "level_id").val($(source_id + "level_id").val());
+                $("#" + frm_id + "note").val($(source_id + "note").val());
+            }
+            function engagement_subform_update(id) {
+                source_id = "#sub-groupengagement-" + id + "-";
+                frm_id = "#frm_" + id + "-";
+                $(source_id + "date").val($(frm_id + "date").val());
+                $(source_id + "level_id").val($(frm_id + "level_id").val());
+                $(source_id + "note").val($(frm_id + "note").val());
             }
 
-
-
             function populate_people(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata person">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-person_id" id="' + id + '-person_id" class="grid_select form-control" required>' + person_options + '</select>'),
                             $('<td>').html('<select name="' + id + '-role_id" id="' + id + '-role_id" class="grid_select form-control">' + role_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_people');
             }
 
             function populate_programme(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + programme_options + '</select>'),
                     $('<td>').html('<input name="' + id + '-startdate" id="' + id + '-startdate" type="text" class="form-control dtp" />'),
                     $('<td>').html('<input name="' + id + '-enddate" id="' + id + '-enddate" type="text" class="form-control dtp" />'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                    $('<td style="text-align:center">').html(del)
+                    $('<td style="text-align:center">').html(action)
                 ).appendTo('#tbl_programme');
             }
 
             function populate_policy(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + policy_options + '</select>'),
@@ -392,12 +402,12 @@
                     $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control dtp" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                    $('<td style="text-align:center">').html(del)
+                    $('<td style="text-align:center">').html(action)
                 ).appendTo('#tbl_policy');
             }
 
             function populate_accreditation(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-list_item_id" id="' + id + '-list_item_id" class="grid_select form-control" required>' + accreditation_options + '</select>'),
@@ -405,21 +415,21 @@
                     $('<td>').html('<input name="' + id + '-datereview" id="' + id + '-datereview" type="text" class="form-control dtp" />'),
                     $('<td>').html('<select name="' + id + '-reviewdone" id="' + id + '-reviewdone" class="grid_select form-control">' + yesno_options + '</select>'),
                     $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
-                    $('<td style="text-align:center">').html(del)
+                    $('<td style="text-align:center">').html(action)
                 ).appendTo('#tbl_accreditation');
             }
 
             function populate_system(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                     $('<td style="text-align:center">').html(''),
                     $('<td>').html('<select name="' + id + '-system_id" id="' + id + '-system_id" class="grid_select form-control" required>' + system_options + '</select>'),
-                    $('<td style="text-align:center">').html(del)
+                    $('<td style="text-align:center">').html(action)
                 ).appendTo('#tbl_systems');
             }
 
             function populate_narrative(id) {
-                del = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required />'),
@@ -428,9 +438,36 @@
                             $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action" class="form-control"></textarea>'),
                             $('<td>').html('<input name="' + id + '-action_date-" id="' + id + '-action_date" type="text" class="form-control dtp" />'),
                             $('<td>').html('<select name="' + id + '-action_user_id-" id="' + id + '-action_user_id" class="grid_select form-control">' + user_options + '</select>'),
-                            $('<td style="text-align:center">').html(del)
+                            $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_narrative');
             }
+
+            $(function() {
+                var pressed = false;
+                var start = undefined;
+                var startX, startWidth;
+    
+                $("table th").mousedown(function(e) {
+                    start = $(this);
+                    pressed = true;
+                    startX = e.pageX;
+                    startWidth = $(this).width();
+                    $(start).addClass("resizing");
+                });
+    
+                $(document).mousemove(function(e) {
+                    if(pressed) {
+                        $(start).width(startWidth+(e.pageX-startX));
+                    }
+                });
+    
+                $(document).mouseup(function() {
+                    if(pressed) {
+                        $(start).removeClass("resizing");
+                        pressed = false;
+                    }
+                });
+            });
 
             $(".a_add").click(function () {
                 if (!inputfields_disabled) {
@@ -474,23 +511,23 @@
                 }
             });
             $('body').on('click', '.a_edit', function () {
-                mode = $(this).text();  //don't know if I need this.  It's in a_delete too
+                mode = $(this).text();  //don't know if I need this.  It's in a_delete too, if so maybe delete it from there as well
                 tr = $(this).parents('tr');
                 dataid = tr.attr("id");
                 nameparts = dataid.split('-');
                 id = nameparts[2];
-                engagement_subform(id);
-                $("#dialog").html('Do popup form: mode=' + mode + ', dataid=' + dataid + $('#tbl_subform').html());
+                engagement_subform(id); //creates the subform
+                $("#dialog").html($('#tbl_subform'));
                 $("#dialog").dialog({
                     title: "Row Edit",
                     resizable: false,
                     height: "auto",
-                    width: 400,
+                    width: 800,
                     modal: true,
                     buttons: {
                         "Save": function() {
                             $( this ).dialog( "close" );
-                            alert('Does nothing yet');
+                            engagement_subform_update(id);
                         },
                        "Cancel": function() {
                             $( this ).dialog( "close" );
@@ -591,9 +628,16 @@
                                                 .text($('#tb_groupname').val())
                                 ); 
                             }
-                            $("#dialog").html("This record has been saved.");
+                            if($('#hf_deleteflag').val() = 1) {
+                                dhtml = "This record has been deleted";
+                                dtitle = "Deleted";
+                            } else {
+                                dhtml = "This record has been saved";
+                                dtitle = "Saved";
+                            }
+                            $("#dialog").html(dhtml);
                             $("#dialog").dialog({
-                                title: "Saved",
+                                title: dtitle,
                                 resizable: false,
                                 height: "auto",
                                 width: 400,
@@ -631,7 +675,12 @@
                     buttons: {
                         "Yes": function() {
                             $( this ).dialog( "close" );
-alert('To do');
+                            alert('Working on');
+                            $('#hf_deleteflag').val(1);
+                            $("#btn_Save").trigger( "click" );
+                            $('#hf_deleteflag').val(0);
+                            clearall();
+                            $("#dd_search option[value=" + $("#hf_group_id").val() + "]").remove();
                         },
                         Cancel: function() {
                             $( this ).dialog( "close" );
@@ -653,10 +702,12 @@ alert('To do');
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div id="dialog"></div>
-    <table id="tbl_subform"></table>
+    <table id="tbl_subform" class="table-responsive" style="width:100%"></table>
     <input id="hf_group_id" name="hf_group_id" type="hidden" />
-    <div class="form-group">
+    <input id="hf_deleteflag" name="hf_deleteflag" type="hidden" />
+   <div class="form-group">
         <label class="control-label col-sm-4" for="dd_search">Search</label><div class="col-sm-8">
             <select id="dd_search" class="form-control">
                 <option></option>
@@ -783,12 +834,12 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_communications">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Type</td>
-                            <td>Detail</td>
-                            <td>Note</td>
-                            <td>Current</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Type</th>
+                            <th>Detail</th>
+                            <th>Note</th>
+                            <th>Current</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -799,12 +850,12 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_address">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Type</td>
-                            <td>Address</td>
-                            <td>Note</td>
-                            <td>Current</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Type</th>
+                            <th>Address</th>
+                            <th>Note</th>
+                            <th>Current</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -816,11 +867,11 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_engagement">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Date</td>
-                            <td>Level</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Date</th>
+                            <th>Level</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -831,12 +882,12 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_activity">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Activity</td>
-                            <td>Start</td>
-                            <td>End</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Activity</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -847,13 +898,13 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_roll">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Date</td>
-                            <td>Type</td>
-                            <td>Classification</td>
-                            <td>Roll</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Classification</th>
+                            <th>Roll</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -864,11 +915,11 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_people">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Name</td>
-                            <td>Role</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -879,12 +930,12 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_programme">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Programme</td>
-                            <td>Start</td>
-                            <td>End</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Programme</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -895,13 +946,13 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_policy">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Policy</td>
-                            <td>Implemented</td>
-                            <td>Review</td>
-                            <td>Review done</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Policy</th>
+                            <th>Implemented</th>
+                            <th>Review</th>
+                            <th>Review done</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -912,13 +963,13 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_accreditation">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Accreditation</td>
-                            <td>Accredited</td>
-                            <td>Review</td>
-                            <td>Review done</td>
-                            <td>Note</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Accreditation</th>
+                            <th>Accredited</th>
+                            <th>Review</th>
+                            <th>Review done</th>
+                            <th>Note</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -929,14 +980,14 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_narrative">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>Date</td>
-                            <td>Narrative</td>
-                            <td>Who</td>
-                            <td>Action</td>
-                            <td>Date</td>
-                            <td>Who</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>Date</th>
+                            <th>Narrative</th>
+                            <th>Who</th>
+                            <th>Action</th>
+                            <th>Date</th>
+                            <th>Who</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
@@ -947,9 +998,9 @@ alert('To do');
                 <div class="datagrid">
                     <table id="tbl_systems">
                         <tr>
-                            <td style="width: 50px; text-align: right"></td>
-                            <td>System</td>
-                            <td style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></td>
+                            <th style="width: 50px; text-align: right"></th>
+                            <th>System</th>
+                            <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
                 </div>
