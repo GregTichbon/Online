@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
+    <Content Include="FB\default.aspx" />
     <Content Include="greg.aspx" />
     <Content Include="Greg\default.aspx" />
     <Content Include="Greg\SMS.aspx" />
@@ -101,9 +102,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Raffles\Data.asmx" />
+    <Content Include="Raffles\Details.aspx" />
+    <Content Include="Raffles\Images\ChefsChoice Logo.PNG" />
+    <Content Include="Raffles\Images\Cullinane Logo.jpg" />
+    <Content Include="Raffles\Images\UBC.png" />
+    <Content Include="Raffles\Images\Whanganui Girls College logo.jpg" />
+    <Content Include="Raffles\Maadi01Feb2018.aspx" />
+    <Content Include="Raffles\Posts.asmx" />
+    <Content Include="Raffles\Send.asp" />
+    <Content Include="Raffles\SendEmail.aspx" />
+    <Content Include="Raffles\SendText.aspx" />
+    <Content Include="Raffles\Test.aspx" />
+    <Content Include="Raffles\Test.html" />
+    <Content Include="Row\SR.aspx" />
+    <Content Include="SMSService.asmx" />
+    <Content Include="SMS\Sendbywebpage.aspx" />
     <Content Include="SMS\Send\default.aspx" />
     <Content Include="SMS\default.aspx" />
     <Content Include="Test.asp" />
+    <Content Include="UBC\HangiFeb2018.aspx" />
+    <Content Include="UBC\Images\HangiTicketFeb2018.PNG" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -114,12 +133,80 @@
     <Compile Include="BBQ\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FB\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FB\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Greg\SMS.aspx.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Greg\SMS.aspx.designer.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\Data.asmx.cs">
+      <DependentUpon>Data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Raffles\Details.aspx.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Details.aspx.designer.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\Maadi01Feb2018.aspx.cs">
+      <DependentUpon>Maadi01Feb2018.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Maadi01Feb2018.aspx.designer.cs">
+      <DependentUpon>Maadi01Feb2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Raffles\SendEmail.aspx.cs">
+      <DependentUpon>SendEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\SendEmail.aspx.designer.cs">
+      <DependentUpon>SendEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\SendText.aspx.cs">
+      <DependentUpon>SendText.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\SendText.aspx.designer.cs">
+      <DependentUpon>SendText.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\SR.aspx.cs">
+      <DependentUpon>SR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\SR.aspx.designer.cs">
+      <DependentUpon>SR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMSService.asmx.cs">
+      <DependentUpon>SMSService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SMS\Sendbywebpage.aspx.cs">
+      <DependentUpon>Sendbywebpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\Sendbywebpage.aspx.designer.cs">
+      <DependentUpon>Sendbywebpage.aspx</DependentUpon>
     </Compile>
     <Compile Include="SMS\Send\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -157,8 +244,21 @@
     <Compile Include="SMS\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UBC\HangiFeb2018.aspx.cs">
+      <DependentUpon>HangiFeb2018.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\HangiFeb2018.aspx.designer.cs">
+      <DependentUpon>HangiFeb2018.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Generic\Generic.csproj">
+      <Project>{790fa8dc-f11c-41de-b52b-23c61a41c2f6}</Project>
+      <Name>Generic</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

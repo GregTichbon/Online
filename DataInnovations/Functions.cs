@@ -1,6 +1,8 @@
 ﻿using MessagingApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,19 +14,25 @@ namespace SMSChecker
 {
     public class Functions
     {
-        string IPAddress = "192.168.10.39";
-        string Port = "1688";
-        string UserName = "";
-        string Password = "";
+        public string IPAddress = "";
+        public string Port = "";
+        public string UserName = "";
+        public string Password = "";
 
         public string Test()
         {
             return "Greg";
         }
 
+
+
         public async Task<string> SendMessage(string PhoneNumber, string Message)
+        //public string SendMessage(string PhoneNumber, string Message)
         {
             string returnval = "";
+            getparams();
+
+
             using (var client = new HttpClient())
             {
                 string url = ConstructBaseUri();
@@ -69,6 +77,56 @@ namespace SMSChecker
         {
             UriBuilder uriBuilder = new UriBuilder("http", IPAddress, Convert.ToInt32(Port));
             return uriBuilder.ToString();
+        }
+
+        public void getparams()
+        {
+            String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("GET_PARAMETER", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "IPAddress";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                //SqlDataReader dr = cmd.ExecuteReader();
+                IPAddress = cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.InnerException);
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "Port";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                //SqlDataReader dr = cmd.ExecuteReader();
+                Port = cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.InnerException);
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         private const string NetworkInfoUrlPath = "services/api/status/network";

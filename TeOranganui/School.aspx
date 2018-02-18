@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Content/datagrid.css" rel="stylesheet" />
 
-
     <script type="text/javascript">
 
         var newkey = 0;
@@ -16,6 +15,10 @@
                     at: "left center"
                 }
             });
+
+        //var geocoder = new google.maps.Geocoder();
+        //console.log(geocoder);
+
 
             var validator = $("#form1").validate({
                 ignore: '.ignore'
@@ -44,7 +47,8 @@
             });
 
             var role_options = '<option value=""></option>';
-            $.getJSON("../functions/data.asmx/get_dropdown?type=role&param1=1", function (data) {
+            $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=11", function (data) {
+            //$.getJSON("../functions/data.asmx/get_dropdown?type=role&param1=1", function (data) {
                 $.each(data, function (i, item) {
                     role_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
@@ -85,12 +89,14 @@
                 });
             });
 
+            /*
             var activitytype_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=15", function (data) {
                 $.each(data, function (i, item) {
                     activitytype_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
+            */
 
             var addresstype_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=addresstype&param1=", function (data) {
@@ -99,12 +105,14 @@
                 });
             });
 
+            /*
             var engagementlevel_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=list_Item&param1=12", function (data) {
                 $.each(data, function (i, item) {
                     engagementlevel_options += '<option value="' + item.value + '">' + item.label + '</option>';
                 });
             });
+            */
 
             var rolltype_options = '<option value=""></option>';
             $.getJSON("../functions/data.asmx/get_dropdown?type=list_item&param1=13", function (data) {
@@ -168,7 +176,7 @@
                             $("#" + id + "-current").val(item.current);
                         });
                     });
-
+                    /*
                     $.getJSON("../functions/data.asmx/get_groupactivity?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
                             id = "sub-groupactivity-" + item.activity_id;
@@ -179,6 +187,7 @@
                             $("#" + id + "-note").val(item.note);
                         });
                     });
+                    */
 
                     $.getJSON("../functions/data.asmx/get_groupaddress?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
@@ -207,8 +216,14 @@
                         $.each(data, function (i, item) {
                             id = "sub-groupengagement-" + item.groupengagement_id;
                             populate_engagement(id);
-                            $("#" + id + "-level_id").val(item.level_id);
+                            //$("#" + id + "-level_id").val(item.level_id);
                             $("#" + id + "-date").val(item.date);
+                            $("#" + id + "-kaupapa").val(item.kaupapa);
+                            $("#" + id + "-narrative").val(item.narrative);
+                            $("#" + id + "-user_id").val(item.user_id);
+                            $("#" + id + "-action").val(item.action);
+                            $("#" + id + "-duedate").val(item.duedate);
+                            $("#" + id + "-completed").val(item.completed);
                             $("#" + id + "-note").val(item.note);
                         });
                     });
@@ -255,7 +270,7 @@
                             $("#" + id + "-system_id").val(item.system_id);
                         });
                     });
-
+                    /*
                     $.getJSON("../functions/data.asmx/get_groupnarrative?group_id=" + group_id, function (data) {
                         $.each(data, function (i, item) {
                             id = "sub-groupnarrative-" + item.groupnarrative_id;
@@ -268,6 +283,7 @@
                             $("#" + id + "-action_user_id").val(item.action_user_id);
                         });
                     });
+                    */
                 }
                 $(this).prop('selectedIndex', 0);
             });
@@ -302,7 +318,7 @@
                             $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_communications');
             }
-
+            /*
             function populate_activity(id) {
                 action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
@@ -314,13 +330,14 @@
                             $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_activity');
             }
+            */
 
             function populate_address(id) {
                 action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<select name="' + id + '-addresstype_id" id="' + id + '-addresstype_id" class="grid_select form-control" required>' + addresstype_options + '</select>'),
-                            $('<td>').html('<textarea name="' + id + '-detail" id="' + id + '-detail" class="form-control" required></textarea>'),
+                            $('<td>').html('<textarea name="' + id + '-detail" id="' + id + '-detail" class="form-control address" required></textarea>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td>').html('<select name="' + id + '-current" id="' + id + '-current" class="grid_select form-control" required>' + yesno_options + '</select>'),
                             $('<td style="text-align:center">').html(action)
@@ -345,7 +362,13 @@
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
                             $('<td style="text-align:center">').html(''),
                             $('<td>').html('<input name="' + id + '-date" id="' + id + '-date" type="text" class="form-control dtp" required />'),
-                            $('<td>').html('<select name="' + id + '-level_id" id="' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
+                            //$('<td>').html('<select name="' + id + '-level_id" id="' + id + '-level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select>'),
+                            $('<td>').html('<input name="' + id + '-kaupapa" id="' + id + '-kaupapa" type="text" class="form-control" />'),
+                            $('<td>').html('<textarea name="' + id + '-narrative" id="' + id + '-narrative" class="form-control"></textarea>'),
+                            $('<td>').html('<select name="' + id + '-user_id" id="' + id + '-user_id" Adclass="grid_select form-control">' + user_options + '</select>'),
+                            $('<td>').html('<textarea name="' + id + '-action" id="' + id + '-action" class="form-control"></textarea>'),
+                            $('<td>').html('<input name="' + id + '-duedate" id="' + id + '-duedate" type="text" class="form-control dtp" />'),
+                            $('<td>').html('<select name="' + id + '-completed" id="' + id + '-completed" class="grid_select form-control">' + yesno_options + '</select>'),
                             $('<td>').html('<textarea name="' + id + '-note" id="' + id + '-note" class="form-control"></textarea>'),
                             $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_engagement');
@@ -355,18 +378,36 @@
                 frm_id = "frm_" + id + "-";
                 $('#tbl_subform').empty();
                 $('#tbl_subform').append( '<tr><td>Date</td><td><input name="' + frm_id + 'date" id="' + frm_id + 'date" type="text" class="form-control dtp" required /></td></tr>' );
-                $('#tbl_subform').append( '<tr><td>Level</td><td><select name="' + frm_id + 'level_id" id="' + frm_id + 'level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select></td></tr>' );
+                //$('#tbl_subform').append( '<tr><td>Level</td><td><select name="' + frm_id + 'level_id" id="' + frm_id + 'level_id" class="grid_select form-control" required>' + engagementlevel_options + '</select></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Kaupapa</td><td><input name="' + frm_id + 'kaupapa" id="' + frm_id + 'kaupapa" class="form-control" /></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Narrative</td><td><textarea name="' + frm_id + 'narrative" id="' + frm_id + 'narrative" class="form-control"></textarea></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Who</td><td><select name="' + frm_id + 'user_id" id="' + frm_id + 'user_id" class="form-control">' + user_options + '</select></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Action</td><td><textarea name="' + frm_id + 'action" id="' + frm_id + 'action" class="form-control"></textarea></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Due date</td><td><input name="' + frm_id + 'duedate" id="' + frm_id + 'duedate" type="text" class="form-control dtp" /></td></tr>' );
+                $('#tbl_subform').append( '<tr><td>Completed</td><td><select name="' + frm_id + 'completed" id="' + frm_id + 'completed" class="form-control">' + yesno_options + '</select></td></tr>' );
                 $('#tbl_subform').append( '<tr><td>Note</td><td><textarea name="' + frm_id + 'note" id="' + frm_id + 'note" class="form-control"></textarea></td></tr>' );
                 source_id = "#sub-groupengagement-" + id + "-";
                 $("#" + frm_id + "date").val($(source_id + "date").val());
-                $("#" + frm_id + "level_id").val($(source_id + "level_id").val());
+                //$("#" + frm_id + "level_id").val($(source_id + "level_id").val());
+                $("#" + frm_id + "kaupapa").val($(source_id + "kaupapa").val());
+                $("#" + frm_id + "narrative").val($(source_id + "narrative").val());
+                $("#" + frm_id + "user_id").val($(source_id + "user_id").val());
+                $("#" + frm_id + "action").val($(source_id + "action").val());
+                $("#" + frm_id + "duedate").val($(source_id + "duedate").val());
+                $("#" + frm_id + "completed").val($(source_id + "completed").val());
                 $("#" + frm_id + "note").val($(source_id + "note").val());
             }
             function engagement_subform_update(id) {
                 source_id = "#sub-groupengagement-" + id + "-";
                 frm_id = "#frm_" + id + "-";
                 $(source_id + "date").val($(frm_id + "date").val());
-                $(source_id + "level_id").val($(frm_id + "level_id").val());
+                //$(source_id + "level_id").val($(frm_id + "level_id").val());
+                $(source_id + "kaupapa").val($(frm_id + "kaupapa").val());
+                $(source_id + "narrative").val($(frm_id + "narrative").val());
+                $(source_id + "user_id").val($(frm_id + "user_id").val());
+                $(source_id + "action").val($(frm_id + "action").val());
+                $(source_id + "duedate").val($(frm_id + "duedate").val());
+                $(source_id + "completed").val($(frm_id + "completed").val());
                 $(source_id + "note").val($(frm_id + "note").val());
             }
 
@@ -427,7 +468,7 @@
                     $('<td style="text-align:center">').html(action)
                 ).appendTo('#tbl_systems');
             }
-
+            /*
             function populate_narrative(id) {
                 action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                 var $tr = $('<tr id="' + id + '" class="rowdata">').append(
@@ -441,6 +482,7 @@
                             $('<td style="text-align:center">').html(action)
                         ).appendTo('#tbl_narrative');
             }
+            */
 
             $(function() {
                 var pressed = false;
@@ -469,6 +511,11 @@
                 });
             });
 
+            //$('body').on('change', '.address', function () {
+            //    alert($(this).val());
+            //    geocodeAddress(geocoder, $(this).val());
+            //});
+
             $(".a_add").click(function () {
                 if (!inputfields_disabled) {
                     tbl = $(this).closest('table').attr('id');
@@ -486,9 +533,9 @@
                         case 'tbl_engagement':
                             populate_engagement("sub-groupengagement-N" + newkey);
                             break;
-                        case 'tbl_activity':
-                            populate_activity("sub-groupactivity-N" + newkey);
-                            break;
+                        //case 'tbl_activity':
+                        //    populate_activity("sub-groupactivity-N" + newkey);
+                        //    break;
                         case 'tbl_people':
                             populate_people('sub-group_person-N' + newkey);
                             break;
@@ -501,9 +548,9 @@
                         case 'tbl_accreditation':
                             populate_accreditation('sub-school_accreditation-N' + newkey);
                             break;
-                        case 'tbl_narrative':
-                            populate_narrative('sub-groupnarrative-N' + newkey);
-                            break;
+                        //case 'tbl_narrative':
+                        //    populate_narrative('sub-groupnarrative-N' + newkey);
+                        //    break;
                         case 'tbl_systems':
                             populate_system('sub-group_system-N' + newkey);
                             break;
@@ -628,7 +675,8 @@
                                                 .text($('#tb_groupname').val())
                                 ); 
                             }
-                            if($('#hf_deleteflag').val() = 1) {
+
+                            if($('#hf_deleteflag').val() == 1) {
                                 dhtml = "This record has been deleted";
                                 dtitle = "Deleted";
                             } else {
@@ -696,13 +744,158 @@
                     }
                 );
             });
-        });
+
+            $('.sort').click(function() {
+/*
+                var th = $(this);
+                var thIndex = th.index();
+                mytable = th.closest('table');
+                //alert(mytable.attr('id'));
+                sortTable(mytable.attr('id'), thIndex);
+*/
+
+var thIndex = 0,
+    curThIndex = null;
+
+                thIndex = $(this).index();
+                if(thIndex != curThIndex){
+                    curThIndex = thIndex;
+                    sorting = [];
+                    tbodyHtml = null;
+                    $('table tbody tr').each(function(){
+                        sorting.push($(this).children('td').eq(curThIndex).html() + ', ' + $(this).index());
+                    });
+      
+                    sorting = sorting.sort();
+                    sortIt();
+                }
+
+
+function sortIt(){
+    for(var sortingIndex = 0; sortingIndex < sorting.length; sortingIndex++){
+        rowId = parseInt(sorting[sortingIndex].split(', ')[1]);
+        tbodyHtml = tbodyHtml + $('table tbody tr').eq(rowId)[0].outerHTML;
+    }
+    $('table tbody').html(tbodyHtml);
+}
+
+
+
+            });        
+
+
+        }); //document ready
+
+/*
+        var map, infoWindow;
+        function initMap() {
+//alert(1);
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 6
+            });
+            infoWindow = new google.maps.InfoWindow;
+//alert(navigator.geolocation);
+            if (navigator.geolocation) {
+alert(1);
+                navigator.geolocation.getCurrentPosition(function(position) {
+alert(position.coords.latitude);
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Location found.');
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+            // Browser doesn't support Geolocation
+                alert('error');
+            }
+        }
+*/
+
+/*
+        function geocodeAddress(geocoder, address) {
+alert(address);
+            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false', null, function (data) {
+                var p = data.results[0].geometry.location
+                alert(p);
+            });
+        }
+*/
+function sortTable(tablename, n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById(tablename);
+alert(table);
+alert(n);
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc"; 
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+//alert(rows.length);
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+//alert(i);
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+alert(x);
+console.log(x);
+
+
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++; 
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
     </script>
 
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <div id="map"></div>
     <div id="dialog"></div>
     <table id="tbl_subform" class="table-responsive" style="width:100%"></table>
     <input id="hf_group_id" name="hf_group_id" type="hidden" />
@@ -816,13 +1009,13 @@
             <li class="active"><a data-toggle="tab" href="#div_communications">Communications</a></li>
             <li><a data-toggle="tab" href="#div_address">Addresses</a></li>
             <li><a data-toggle="tab" href="#div_engagement">Engagement</a></li>
-            <li><a data-toggle="tab" href="#div_activity">Activities</a></li>
+            <!--<li><a data-toggle="tab" href="#div_activity">Activities</a></li>-->
             <li><a data-toggle="tab" href="#div_roll">Roll</a></li>
             <li><a data-toggle="tab" href="#div_people">People</a></li>
             <li><a data-toggle="tab" href="#div_programmes">Programmes</a></li>
             <li><a data-toggle="tab" href="#div_policies">Policies</a></li>
             <li><a data-toggle="tab" href="#div_accreditation">Accreditation</a></li>
-            <li><a data-toggle="tab" href="#div_narrative">Narrative</a></li>
+            <!--<li><a data-toggle="tab" href="#div_narrative">Narrative</a></li>-->
             <li><a data-toggle="tab" href="#div_systems">Systems</a></li>
         </ul>
         <!------------------------------------------------------------------------------------------------------>
@@ -869,7 +1062,12 @@
                         <tr>
                             <th style="width: 50px; text-align: right"></th>
                             <th>Date</th>
-                            <th>Level</th>
+                            <th>Kaupapa</th>
+                            <th>Narrative</th>
+                            <th>Who</th>
+                            <th>Action</th>
+                            <th>Due date</th>
+                            <th>Completed</th>
                             <th>Note</th>
                             <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
@@ -877,6 +1075,7 @@
                 </div>
             </div>
 
+            <!--
             <div id="div_activity" class="tab-pane fade">
                 <h3>Activity</h3>
                 <div class="datagrid">
@@ -892,6 +1091,7 @@
                     </table>
                 </div>
             </div>
+            -->
 
             <div id="div_roll" class="tab-pane fade">
                 <h3>Roll</h3>
@@ -975,6 +1175,7 @@
                 </div>
             </div>
 
+            <!--
             <div id="div_narrative" class="tab-pane fade">
                 <h3>Narrative</h3>
                 <div class="datagrid">
@@ -992,6 +1193,7 @@
                     </table>
                 </div>
             </div>
+            -->
 
             <div id="div_systems" class="tab-pane fade">
                 <h3>Systems</h3>
@@ -999,7 +1201,7 @@
                     <table id="tbl_systems">
                         <tr>
                             <th style="width: 50px; text-align: right"></th>
-                            <th>System</th>
+                            <th class="sort">System</th>
                             <th style="width: 100px; text-align: center">Action / <a class="a_add" href="javascript:void(0)">Add</a></th>
                         </tr>
                     </table>
@@ -1011,6 +1213,8 @@
          <div align="right"><input id="btn_Delete" type="button" class="btn btn-info" value="Delete" /> <input id="btn_Save" type="button" class="btn btn-info btn-lg" value="Save" /></div>
         <br />
     </div>
+        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4EiyE4AE79M4SpyzGYG7KAB6trfGUdsI&callback=initMap"></script>-->
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 </asp:Content>

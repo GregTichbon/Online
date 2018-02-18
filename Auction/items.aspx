@@ -30,7 +30,7 @@
         $(document).ready(function () {
             $(".showitem, .canclick").click(function () {
                 itemid = this.id.substring(8);
-                //alert('Hi Neo, the item id is: ' + itemid);
+                alert('The item id is: ' + itemid);
                 $.colorbox({
                     href: 'showitem.aspx?id=' + itemid,
                     iframe: false,
@@ -50,7 +50,8 @@
 
 
 
-            $('.showitem, .canclick').css('cursor', 'pointer');        });  //document.ready
+            $('.showitem, .canclick').css('cursor', 'pointer');
+        });  //document.ready
 
     </script>
 </asp:Content>

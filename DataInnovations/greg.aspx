@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="greg.aspx.cs" Inherits="SMSChecker.greg" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="greg.aspx.cs" Inherits="SMSChecker.greg" %>
 
 <!DOCTYPE html>
 
@@ -9,10 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Literal ID="Lit_IP" runat="server"></asp:Literal>
             <asp:textbox runat="server" ID="tb_message" Width="100%"></asp:textbox>
             <asp:CheckBoxList ID="cbl_recipients" runat="server">
                 <asp:ListItem Value="027466494">Judy Kumeroa - 027466494</asp:ListItem>
-                <asp:ListItem Value="0272495088">Greg Tichbon - 0212495088</asp:ListItem>
+                <asp:ListItem Value="0272495088">Greg Tichbon - 0272495088</asp:ListItem>
                 <asp:ListItem Value="0211127942">Aimee Matthews - 0211127942</asp:ListItem>
                 <asp:ListItem Value="0275225411">Jordi Haami-Rerekura - 0275225411</asp:ListItem>
                 <asp:ListItem Value="0204075271">Charlie-Boy Williams - 0204075271</asp:ListItem>

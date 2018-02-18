@@ -150,6 +150,7 @@
     <Content Include="List.aspx" />
     <Content Include="Main2.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="map.aspx" />
     <Content Include="Person.aspx" />
     <Content Include="QS1.html" />
     <Content Include="QS2.aspx" />
@@ -498,6 +499,7 @@
     <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.min.js" />
     <Content Include="Search.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="Sort1.aspx" />
     <Content Include="test1.aspx" />
     <Content Include="ToDo.aspx" />
     <Content Include="Web.config" />
@@ -553,6 +555,7 @@
       <DependentUpon>Posts2.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GoogleMaps.cs" />
     <Compile Include="ListORIG.aspx.cs">
       <DependentUpon>ListORIG.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -592,6 +595,13 @@
     </Compile>
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="map.aspx.cs">
+      <DependentUpon>map.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="map.aspx.designer.cs">
+      <DependentUpon>map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\DPS Result.cs" />
     <Compile Include="Models\General.cs" />
@@ -644,6 +654,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sort1.aspx.cs">
+      <DependentUpon>Sort1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sort1.aspx.designer.cs">
+      <DependentUpon>Sort1.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeOranganui.Master.cs">
       <DependentUpon>TeOranganui.Master</DependentUpon>

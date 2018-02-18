@@ -23,6 +23,7 @@ namespace DataInnovations.SMS
             {
                 if (listItem.Selected)
                 {
+                    //this may be wrong,  see sms/send/default.aspx
                     response += "<br />" + listItem.Value + a.SendMessage(listItem.Value, tb_message.Text).ToString();
                 }
                 else

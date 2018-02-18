@@ -119,6 +119,7 @@
                 tr += '<td><select class="address" id="address_' + myid + '" data-value="' + value.pickupRunAddress + '" data-count="' + addresses_cnt + '">' + addresses + '</select></td>';
                 tr += '<td><select class="status" id="status_' + myid + '" data-value="' + value.status + '"><option></option></select></td>';
                 tr += '<td><select class="assignedto" id="assignedto_' + myid + '" data-value="' + value.assignedTo + '"><option></option></select></td>';
+                tr += '<td><input class="note" id="note_' + myid + '" data-value="' + value.note + ' type="text" /></td>';
                 tr += '</tr>';
                 $('#tbl_data').append(tr);
             });

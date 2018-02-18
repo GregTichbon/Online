@@ -5,14 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>My SMS</title>
+    <style type="text/css">
+        .auto-style1 {
+            font-size: xx-large;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
+            <strong><span class="auto-style1">021 1777 870</span></strong>
             <asp:textbox runat="server" ID="tb_message" Width="100%"></asp:textbox>
             <asp:CheckBoxList ID="cbl_recipients" runat="server">
                 <asp:ListItem Value="027466494">Judy Kumeroa - 027466494</asp:ListItem>
-                <asp:ListItem Value="0272495088">Greg Tichbon - 0212495088</asp:ListItem>
+                <asp:ListItem Value="0272495088">Greg Tichbon - 0272495088</asp:ListItem>
                 <asp:ListItem Value="0211127942">Aimee Matthews - 0211127942</asp:ListItem>
                 <asp:ListItem Value="0275225411">Jordi Haami-Rerekura - 0275225411</asp:ListItem>
                 <asp:ListItem Value="0204075271">Charlie-Boy Williams - 0204075271</asp:ListItem>

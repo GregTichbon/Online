@@ -16,13 +16,13 @@ namespace DataInnovations.Greg
 
         protected void btn_send_Click(object sender, EventArgs e)
         {
-            Functions a = new Functions();
+            //Functions a = new Functions();
             string response = "";
             foreach (ListItem listItem in cbl_recipients.Items)
             {
                 if (listItem.Selected)
                 {
-                    response += "<br />" + listItem.Value + a.SendMessage(listItem.Value, tb_message.Text).ToString();
+                    //response += "<br />" + listItem.Value + a.SendMessage(listItem.Value, tb_message.Text).ToString();
                 }
                 else
                 {

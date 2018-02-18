@@ -900,7 +900,13 @@ namespace TeOranganui.data
                         {
                             groupengagement_id = dr["GroupEngagement_ID"].ToString(),
                             date = dr["date"].ToString(),
-                            level_id = dr["level_id"].ToString(),
+                            //level_id = dr["level_id"].ToString(),
+                            kaupapa = dr["kaupapa"].ToString(),
+                            narrative = dr["narrative"].ToString(),
+                            user_id = dr["user_id"].ToString(),
+                            action = dr["action"].ToString(),
+                            duedate = dr["duedate"].ToString(),
+                            completed = dr["completed"].ToString(),
                             note = dr["note"].ToString()
                         });
                     }
@@ -1386,7 +1392,13 @@ namespace TeOranganui.data
     {
         public string groupengagement_id;
         public string date;
-        public string level_id;
+        //public string level_id;
+        public string kaupapa;
+        public string narrative;
+        public string user_id;
+        public string action;
+        public string duedate;
+        public string completed;
         public string note;
     }
 

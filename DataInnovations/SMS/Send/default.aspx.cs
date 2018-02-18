@@ -67,8 +67,8 @@ namespace SMSChecker
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.InnerException);
+                    //Console.WriteLine(ex.Message);
+                    //Console.WriteLine(ex.InnerException);
                     throw ex;
                 }
                 finally
@@ -88,8 +88,8 @@ namespace SMSChecker
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.InnerException);
+                    //Console.WriteLine(ex.Message);
+                    //Console.WriteLine(ex.InnerException);
                     throw ex;
                 }
                 finally
