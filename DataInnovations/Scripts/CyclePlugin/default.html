@@ -1,0 +1,99 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JQuery Cycle Plugin - Centering Slides Horizontally</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../jq.css" />
+    <style type="text/css">
+        img {
+            border: none
+        }
+
+        p {
+            text-align: center
+        }
+
+        /* give slideshow some style */
+        #slideshow {
+            margin: 20px auto;
+            width: 640px;
+            height: 480px;
+        }
+                /* make sure each slide image is centered */
+                #slideshowx div img {
+                    margin: auto;
+                    display: block
+                }
+
+            #slideshow img {
+                margin: auto;
+            }
+
+        #slideshow div {
+            text-align: center;
+            width: 640px !important;
+            overflow: hidden;
+        }
+
+
+
+
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="http://malsup.github.com/jquery.cycle.all.js"></script>
+    <script type="text/javascript">
+
+
+        var maxwidth = 640;
+        var maxheight = 480;
+        $(document).ready(function(){
+            $('img').each(function(i, item) {
+                var width = $(item).width();
+                var height = $(item).height();
+                var widthratio = maxwidth / width;
+                var heightratio = maxheight / height;
+                if (widthratio > heightratio) {
+                    $(item).css({'width': 'auto', 'height': maxheight + 'px'});
+                    //var newMargin = (1200 - $(item).width()) / 2 + 'px';
+                    //$(item).css({'margin-left': newMargin});
+                } else {
+                    $(item).css({'width': maxwidth + 'px', 'height': 'auto'});
+                    //var newMargin = (600 - $(item).height()) / 2 + 'px';
+                    //$(item).css({'margin-top': newMargin });
+                }
+            });
+
+            $('#slideshow').cycle({
+                fx: 'fade',
+                speed: 500,
+                timeout: 2000,
+                slideResize: 0
+            });
+
+        });
+    </script>
+</head>
+<body>
+    
+
+    <div id="slideshow">
+        <!-- wrap each image in a div -->
+        <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t1.0-9/28471480_1617633878283980_3515017228388934910_n.jpg?oh=0e6135ee6f13c7a0cefd3c66458db302&oe=5B3FE77E" /></div>
+        <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28516010_1618384914875543_6356660018532325049_o.jpg?oh=fddb236dfe125f53724e7afd7c41a1aa&oe=5B468799" /></div>
+        <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28337167_1616167681763933_2149117955115379744_o.jpg?oh=00635c3a4a8b3d5c23f6cf28e869c691&oe=5B3B0700" /></div>
+        <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28423665_1616655531715148_5429578332323294245_o.jpg?oh=70c2641c61e9a8c3c60cff41f11c509e&oe=5B4BAAE9" /></div>
+        <div><img src="https://scontent.fakl1-1.fna.fbcdn.net/v/t1.0-9/1930880_1804670336230388_6426919070585543449_n.jpg?oh=91795acaa66565c365c6ba5d0ef3382a&oe=5B39C99D"  /></div>
+
+    </div>
+
+    <!--
+    <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t1.0-9/28471480_1617633878283980_3515017228388934910_n.jpg?oh=0e6135ee6f13c7a0cefd3c66458db302&oe=5B3FE77E" /></div>
+    <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28516010_1618384914875543_6356660018532325049_o.jpg?oh=fddb236dfe125f53724e7afd7c41a1aa&oe=5B468799" /></div>
+    <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28337167_1616167681763933_2149117955115379744_o.jpg?oh=00635c3a4a8b3d5c23f6cf28e869c691&oe=5B3B0700" /></div> 
+    <div><img src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28423665_1616655531715148_5429578332323294245_o.jpg?oh=70c2641c61e9a8c3c60cff41f11c509e&oe=5B4BAAE9" /></div>
+    <div><img src="https://scontent.fakl1-1.fna.fbcdn.net/v/t1.0-9/1930880_1804670336230388_6426919070585543449_n.jpg?oh=91795acaa66565c365c6ba5d0ef3382a&oe=5B39C99D" /></div>-->
+       
+
+    
+</body>
+</html>

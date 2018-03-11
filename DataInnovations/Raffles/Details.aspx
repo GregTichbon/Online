@@ -63,16 +63,7 @@ table.blueTable tfoot .links a{
              <table id="tbl" class="blueTable">
             <tbody>
  
-                <tr>
-                    <td>Ticket Number</td>
-                    <td>Person</td>
-                    <!--<td>Details</td>
-                    <td>Email Address</td>
-                    <td>Mobile</td>-->
-                    <td>Paid</td><!--
-                    <td>Payment</td>
-                    <td>Status</td>-->
-                </tr>
+                
 
                 <asp:Literal ID="LitRows" runat="server"></asp:Literal>
             </tbody>

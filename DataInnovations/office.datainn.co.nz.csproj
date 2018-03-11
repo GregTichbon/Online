@@ -91,9 +91,18 @@
     <Content Include="greg.aspx" />
     <Content Include="Greg\default.aspx" />
     <Content Include="Greg\SMS.aspx" />
+    <Content Include="Maadi\default.asp" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Raffles\DrawText.aspx" />
+    <Content Include="Raffles\Maadi08Mar2018.aspx" />
+    <Content Include="Scripts\CyclePlugin\default.html" />
+    <Content Include="Scripts\CyclePlugin\jquery.cycle.all.js" />
+    <Content Include="Scripts\simplefadeslideshow\.gitignore" />
+    <Content Include="Scripts\simplefadeslideshow\bower.json" />
+    <Content Include="Scripts\simplefadeslideshow\README.md" />
+    <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -104,22 +113,41 @@
   <ItemGroup>
     <Content Include="Raffles\Data.asmx" />
     <Content Include="Raffles\Details.aspx" />
+    <Content Include="Raffles\Images\ajax-loader.gif" />
     <Content Include="Raffles\Images\ChefsChoice Logo.PNG" />
     <Content Include="Raffles\Images\Cullinane Logo.jpg" />
     <Content Include="Raffles\Images\UBC.png" />
     <Content Include="Raffles\Images\Whanganui Girls College logo.jpg" />
     <Content Include="Raffles\Maadi01Feb2018.aspx" />
+    <Content Include="Raffles\Maadi05mar2018.aspx" />
     <Content Include="Raffles\Posts.asmx" />
     <Content Include="Raffles\Send.asp" />
     <Content Include="Raffles\SendEmail.aspx" />
     <Content Include="Raffles\SendText.aspx" />
+    <Content Include="Raffles\Slideshow.aspx" />
     <Content Include="Raffles\Test.aspx" />
     <Content Include="Raffles\Test.html" />
     <Content Include="Row\SR.aspx" />
+    <Content Include="Scripts\ImageCover\image-cover.js" />
+    <Content Include="Scripts\ImageCover\image-cover.min.js" />
+    <Content Include="Scripts\ImageCover\index.html" />
+    <Content Include="Scripts\ImageCover\modernizr.js" />
+    <Content Include="Scripts\simplefadeslideshow\arrows.png" />
+    <Content Include="Scripts\simplefadeslideshow\demoStyleSheet.css" />
+    <Content Include="Scripts\simplefadeslideshow\fadeSlideShow.js" />
+    <Content Include="Scripts\simplefadeslideshow\images\1.jpg" />
+    <Content Include="Scripts\simplefadeslideshow\images\2.jpg" />
+    <Content Include="Scripts\simplefadeslideshow\images\3.jpg" />
+    <Content Include="Scripts\simplefadeslideshow\images\4.jpg" />
+    <Content Include="Scripts\simplefadeslideshow\index.html" />
+    <Content Include="Scripts\simplefadeslideshow\jquery.js" />
+    <Content Include="Scripts\simplefadeslideshow\white.png" />
     <Content Include="SMSService.asmx" />
+    <Content Include="SMS\log.aspx" />
     <Content Include="SMS\Sendbywebpage.aspx" />
     <Content Include="SMS\Send\default.aspx" />
     <Content Include="SMS\default.aspx" />
+    <Content Include="SMS\Send\SendService.asmx" />
     <Content Include="Test.asp" />
     <Content Include="UBC\HangiFeb2018.aspx" />
     <Content Include="UBC\Images\HangiTicketFeb2018.PNG" />
@@ -158,12 +186,33 @@
     <Compile Include="Raffles\Details.aspx.designer.cs">
       <DependentUpon>Details.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\DrawText.aspx.cs">
+      <DependentUpon>DrawText.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\DrawText.aspx.designer.cs">
+      <DependentUpon>DrawText.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Maadi01Feb2018.aspx.cs">
       <DependentUpon>Maadi01Feb2018.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Raffles\Maadi01Feb2018.aspx.designer.cs">
       <DependentUpon>Maadi01Feb2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\Maadi05mar2018.aspx.cs">
+      <DependentUpon>Maadi05mar2018.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Maadi05mar2018.aspx.designer.cs">
+      <DependentUpon>Maadi05mar2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\Maadi08Mar2018.aspx.cs">
+      <DependentUpon>Maadi08Mar2018.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Maadi08Mar2018.aspx.designer.cs">
+      <DependentUpon>Maadi08Mar2018.aspx</DependentUpon>
     </Compile>
     <Compile Include="Raffles\Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
@@ -183,6 +232,13 @@
     <Compile Include="Raffles\SendText.aspx.designer.cs">
       <DependentUpon>SendText.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\Slideshow.aspx.cs">
+      <DependentUpon>Slideshow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Slideshow.aspx.designer.cs">
+      <DependentUpon>Slideshow.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -200,6 +256,13 @@
     <Compile Include="SMSService.asmx.cs">
       <DependentUpon>SMSService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SMS\log.aspx.cs">
+      <DependentUpon>log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\log.aspx.designer.cs">
+      <DependentUpon>log.aspx</DependentUpon>
     </Compile>
     <Compile Include="SMS\Sendbywebpage.aspx.cs">
       <DependentUpon>Sendbywebpage.aspx</DependentUpon>
@@ -243,6 +306,10 @@
     </Compile>
     <Compile Include="SMS\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\Send\SendService.asmx.cs">
+      <DependentUpon>SendService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UBC\HangiFeb2018.aspx.cs">
       <DependentUpon>HangiFeb2018.aspx</DependentUpon>

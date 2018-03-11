@@ -25,8 +25,8 @@ namespace Generic
 {
     public class Functions
     {
-        string IPAddress = "192.168.10.37";
-        string Port = "1688";
+        string IPAddress = "";
+        string Port = "";
         string UserName = "";
         string Password = "";
         string Operation = "";
@@ -215,6 +215,8 @@ namespace Generic
         public async Task<string> SendMessage(string PhoneNumber, string Message)
         {
             string returnval = "";
+            getparams();
+
             using (var client = new HttpClient())
             {
                 string url = ConstructBaseUri();
@@ -257,6 +259,7 @@ namespace Generic
             }
             return (returnval);
         }
+
         protected string ConstructBaseUri()
         {
             UriBuilder uriBuilder = new UriBuilder("http", IPAddress, Convert.ToInt32(Port));
@@ -270,6 +273,79 @@ namespace Generic
         private const string MessagesUrlPath = "services/api/messaging";
 
         private const string MessageStatusUrlPath = "services/api/messaging/status";
+
+        public void getparams()
+        {
+            String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("GET_PARAMETER", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "IPAddress";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                //SqlDataReader dr = cmd.ExecuteReader();
+                IPAddress = cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.InnerException);
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@parameter", SqlDbType.VarChar).Value = "Port";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                //SqlDataReader dr = cmd.ExecuteReader();
+                Port = cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.InnerException);
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public string SendRemoteMessage(string PhoneNumber, string Message)
+        {
+            Message = HttpUtility.UrlEncode(Message);
+            WebRequest wr = WebRequest.Create("http://office.datainn.co.nz/sms/send/?O=S&P=" + PhoneNumber + "&M=" + Message);
+            wr.Timeout = 3500;
+            string responsevalue = String.Empty;
+
+            try
+            {
+                WebResponse response = wr.GetResponse();
+                Stream data = response.GetResponseStream();
+                using (StreamReader sr = new StreamReader(data))
+                {
+                    responsevalue = sr.ReadToEnd();
+                }
+            } catch 
+            {
+                responsevalue = "Error sending txt message";
+            }
+
+            return responsevalue;
+        }
         /*
                 public static gw_Result PXPost(string cardholder, string cardnumber, string amount, string expirydate, string narrative)
                 {

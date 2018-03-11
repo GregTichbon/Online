@@ -364,6 +364,9 @@
     <Content Include="Scripts\grid\js\draggable.min.js" />
     <Content Include="Scripts\grid\js\grid.js" />
     <Content Include="Scripts\grid\js\grid.min.js" />
+    <Content Include="Scripts\ImageCover\image-cover.js" />
+    <Content Include="Scripts\ImageCover\image-cover.min.js" />
+    <Content Include="Scripts\ImageCover\modernizr.js" />
     <Content Include="Scripts\init.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />

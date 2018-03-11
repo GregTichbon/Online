@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace DataInnovations.Raffles
 {
-    public partial class Maadi01Feb2018 : System.Web.UI.Page
+    public partial class Maadi05mar2018 : System.Web.UI.Page
     {
         public string filename;
         public string raffle;
@@ -17,7 +17,8 @@ namespace DataInnovations.Raffles
         protected void Page_Load(object sender, EventArgs e)
         {
             filename = HttpContext.Current.Server.MapPath(".") + "\\raffles.sqlite";
-            raffle = "1";
+            raffle = "2";
+            int ticketstoarow = 6;
             if (!IsPostBack)
             {
                 SQLiteConnection m_dbConnection;
@@ -46,13 +47,18 @@ namespace DataInnovations.Raffles
                     }
                     else
                     {
-                        person = "Taken";
-                    }
-                    if(c % 10 == 1)
-                    {
-                        if(c > 1)
+                        if(reader["Paid"].ToString() == "" )
                         {
-                            if(c > 11)
+                            person = "On hold";
+                        } else { 
+                            person = "Taken";
+                        }
+                    }
+                    if (c % ticketstoarow == 1)
+                    {
+                        if (c > 1)
+                        {
+                            if (c > 11)
                             {
                                 LitRows.Text += "<tr><td colspan=\"11\"><hr /></td></tr>";
                             }

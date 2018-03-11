@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Maadi01Feb2018.aspx.cs" Inherits="DataInnovations.Raffles.Maadi01Feb2018" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Maadi08Mar2018.aspx.cs" Inherits="DataInnovations.Raffles.Maadi08Mar2018" %>
 
 <!DOCTYPE html>
 
@@ -92,7 +92,6 @@
         }
         .auto-style1 {
             width: 872px;
-            height: 337px;
             text-align: center;
         }
         .auto-style2 {
@@ -107,6 +106,18 @@
             width: 267px;
             height: 332px;
         }
+
+        .processing {
+ position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('Images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+
+}
+
     </style>
 
 
@@ -128,7 +139,8 @@
 
             $(".iwantthisticket").click(function () {
                 ticket = $(this).prop('id').substring(7);
-                $("#hf_ticket").val(ticket);    
+                $("#hf_ticket").val(ticket);  
+  
                 $("#hf_update").val("no");  
 
                 var arForm = $("#form1")
@@ -137,6 +149,17 @@
                     .serializeArray();
 
                 var formData = JSON.stringify({ formVars: arForm });
+
+                $.ajaxSetup({
+                    beforeSend:function(){
+                        // show gif here, eg:
+                        $("#processingajax").show();
+                    },
+                    complete:function(){
+                        // hide gif here, eg:
+                        $("#processingajax").hide();
+                    }
+                });
 
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -199,9 +222,12 @@
                         data: formData,
                         dataType: 'json', // what type of data do we expect back from the server
                         success: function (result) {
+
                             details = $.parseJSON(result.d);
                             if(details.status == "Updated") {
+alert(ticket);
                                 $("#td_" + ticket).html("On hold to you");
+                                alert("Thanks - this ticket has been put on hold awaiting payment.  Please feel free to take as many tickets as you like.");
                             } else {
                                 $("#td_" + ticket).html("Taken");
                                 alert("I'm sorry - this ticket has just been taken.  Try another one.");
@@ -233,25 +259,27 @@
     </script>
 </head>
 <body>
+    <div id="processingajax" style="display:none" class="processing"></div>
     <p>
-        Hi, I&#39;ve been asked to sell some raffle tickets.</p>
+        Hi, I&#39;ve been asked to 
+        help sell a few more raffle tickets for those kids that have a few left over.&nbsp; There are two cards listed below, the red one and the white one.&nbsp; Once a card is full we can start doing the draws.</p>
     <p>
         Cullinane and Girls&#39; Colleges as part of the Union Boat Club (<a href="http://unionboatclub.co.nz" target="_blank">unionboatclub.co.nz</a>) are taking a group of students to the Maadi Cup rowing regatta at Lake Ruataniwha in Twizel (<a href="http://www.maadi.co.nz" target="_blank">www.maadi.co.nz</a>).</p>
     <p>
-        Neo is now a keen rower, into his second year and is going.&nbsp; In the Cambridge Town Cup last weekend he made 2 A finals; The Under 16 single sculls and the Under 18 coxed quad sculls (<a href="https://www.rowit.co.nz/results/kric2018r2?pid=32711" target="_blank">Results</a>)&nbsp; He&#39;s loving it and working really hard.</p>
+        Neo is now a keen rower, into his second year and is going really well.&nbsp; He&#39;s loving it and working really hard.</p>
     <p>
         We&#39;re leaving on Saturday 17th March and returning on Tuesday 27th March.&nbsp; Most of us will be flying but the Ignition Ute and Boat Trailer and another van will have to make the long trek down by road and ferry.</p>
     <p>
-        Obviously there is a high cost to this trip, and we are endevouring to make it as affordable for everyone as possible.&nbsp;&nbsp; We are also doing a number of fundraisers of which this raffle is just one.&nbsp; We are also planning a hangi on&nbsp; Wednesday 21st February and some car washes and sausage sizzles.</p>
+        Obviously there is a high cost to this trip, and we are endevouring to make it as affordable for everyone as possible.&nbsp;&nbsp; We are also doing a number of other fundraisers of which this raffle is just one.&nbsp;</p>
     <p>
-        This Raffle</p>
+      This Raffle</strong></p>
     <p>
-        There are 50 tickets.&nbsp; The cost is $20.00 but ... that means your number is entered into 10 weekly draws (ie: $2.00 per week) for a meat pack worth $50.00 from Chef&#39;s Choice.&nbsp; You have overall a 20% chance of winning!</p>
+        There are 50 tickets on each card.&nbsp; The cost is $20.00 but ... that means your number is entered into 10 weekly draws (ie: $2.00 per week) for a meat pack worth $50.00 from Chef&#39;s Choice.&nbsp; You have overall a 20% chance of winning!</p>
     <p>
         If you&#39;d like to support the rowers, please grab one of the tickets below.&nbsp; You can either pay the money into my bank account or otherwise let me know how you can get it to me.&nbsp; Click on the buttons below and you&#39;ll be provided with my bank account and asked for your details.&nbsp; It couldn&#39;t be easier.&nbsp; 
         I&#39;ll place your ticket &quot;on hold&quot; to you until payment is sussed.</p>
     <p>
-        Thanks for your support.&nbsp;</p>
+        Thanks for your support.&nbsp;ort.&nbsp;</p>
     <p>
         &nbsp;</p>
     <p>
@@ -263,9 +291,20 @@
     <!--<div style="width:20%; float:left">-->
         <input type="hidden" id="hf_ticket" name="hf_ticket" />
         <input type="hidden" id="hf_update" name="hf_update" />
-        <p>There are <span id="span_available"><%: available %></span> tickets currently available.</p>
+    <!--
+        <p>There are <span id="span_available1"><%: available1 %></span> tickets currently available on this card.</p>
 
-        <table id="tbl" class="blueTable">
+        <table id="tbl1" class="blueTable">
+            <tbody>
+                
+                <asp:Literal ID="LitRows1" runat="server"></asp:Literal>
+            </tbody>
+        </table>
+    -->
+    <p>The RED card has all been sold now.  THANKS.  The WHITE card has a few more to go.</p>
+
+        <p>There are <span id="span_available2"><%: available2 %></span> tickets currently available on this card.</p>
+    <table id="tbl2" class="blueTable">
             <tbody>
                 <!--
                 <tr>
@@ -273,7 +312,7 @@
                     <td>Status</td>
                 </tr>
                 -->
-                <asp:Literal ID="LitRows" runat="server"></asp:Literal>
+                <asp:Literal ID="LitRows2" runat="server"></asp:Literal>
             </tbody>
         </table>
         <!--
@@ -309,7 +348,8 @@
                         <input type="text" id="tb_mobile" name="tb_mobile" /></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">How will you get the money to Greg?<br /><span style="font-size:small">Bank A/c No: 06-0996-0956968-00 please use <b>"Maadi 1/<span class="ticket"></span></b>" as your reference.</span></td>
+                    <td style="text-align: right">How will you get the money to Greg?
+                        <br /><span style="font-size:small">Bank A/c No: 06-0996-0956968-00<br />Please use <b>"Maadi <span class="ticket"></span></b>" as your reference.</span></td>
                     <td>
                         <textarea id="tb_payment" name="tb_payment" required="required"></textarea></td>
                 </tr>

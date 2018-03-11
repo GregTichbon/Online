@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jQuery Simple Fade SlideShow by Pascal Bajorat</title>
+    <link rel="stylesheet" type="text/css" href="demoStyleSheet.css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="fadeSlideShow.js"></script>
+    <script type="text/javascript">
+
+        var maxwidth = 640;
+        var maxheight = 480;
+        $(document).ready(function(){
+            $('img').each(function(i, item) {
+                var width = $(item).width();
+                var height = $(item).height();
+                var widthratio = maxwidth / width;
+                var heightratio = maxheight / height;
+                if (widthratio > heightratio) {
+                    $(item).css({'width': 'auto', 'height': maxheight + 'px'});
+                    //var newMargin = (1200 - $(item).width()) / 2 + 'px';
+                    //$(item).css({'margin-left': newMargin});
+                } else {
+                    $(item).css({'width': maxwidth + 'px', 'height': 'auto'});
+                    //var newMargin = (600 - $(item).height()) / 2 + 'px';
+                    //$(item).css({'margin-top': newMargin });
+                }
+            });
+	        $('#slideshow').fadeSlideShow({
+                afterSlide: function() {
+                    console.log(1);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="slideshowWrapper">
+        <ul id="slideshow">
+            <li><img src="images/4.jpg" /></li> <!-- This is the last image in the slideshow -->
+            <li><img src="images/3.jpg" /></li>
+            <li><img src="images/2.jpg" /></li>
+            <li><img src="images/1.jpg" /></li> <!-- This is the first image in the slideshow -->
+            <li><img id="1" src="https://scontent.fakl1-2.fna.fbcdn.net/v/t1.0-9/28471480_1617633878283980_3515017228388934910_n.jpg?oh=0e6135ee6f13c7a0cefd3c66458db302&oe=5B3FE77E" /></li>
+            <li><img id="2" src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28516010_1618384914875543_6356660018532325049_o.jpg?oh=fddb236dfe125f53724e7afd7c41a1aa&oe=5B468799" /></li>
+            <li><img id="3" src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28337167_1616167681763933_2149117955115379744_o.jpg?oh=00635c3a4a8b3d5c23f6cf28e869c691&oe=5B3B0700" /></li>
+            <li><img id="4" src="https://scontent.fakl1-2.fna.fbcdn.net/v/t31.0-8/28423665_1616655531715148_5429578332323294245_o.jpg?oh=70c2641c61e9a8c3c60cff41f11c509e&oe=5B4BAAE9" /></li>
+        </ul>
+        <br clear="all" />
+    </div>
+    
+
+</body>
+</html>

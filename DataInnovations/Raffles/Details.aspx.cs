@@ -12,12 +12,14 @@ namespace DataInnovations.Raffles
     {
         public string filename;
         public string raffle;
+        public string mode;
         public int available = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
 
             filename = HttpContext.Current.Server.MapPath(".") + "\\raffles.sqlite";
-            raffle = "1";
+            raffle = Request.QueryString["raffle"] + "";
+            mode = Request.QueryString["mode"] + "";
             int available = 0;
             if (!IsPostBack)
             {
@@ -26,21 +28,51 @@ namespace DataInnovations.Raffles
                 m_dbConnection.Open();
 
                 LitRows.Text = "";
-                string sql = "select * from ticket where raffle_id = '" + raffle + "' order by [Number]";
+                string sql = "select number, person, details, emailaddress, mobile, paid, payment, notes, greeting, splitticket, cast(taken as nvarchar(20)) as taken from ticket where raffle_id = '" + raffle + "' order by [Number]";
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 SQLiteDataReader reader = command.ExecuteReader();
-                
+
+                LitRows.Text += "<tr>";
+                LitRows.Text += "<td>Number</td>";
+                LitRows.Text += "<td>Person</td>";
+                if (mode != "")
+                {
+                    LitRows.Text += "<td>Details</td>";
+                    LitRows.Text += "<td>Emailaddress</td>";
+                }
+                LitRows.Text += "<td>Mobile</td>";
+                if (mode != "")
+                {
+                    LitRows.Text += "<td>Paid</td>";
+                    LitRows.Text += "<td>Payment</td>";
+                    LitRows.Text += "<td>Notes</td>";
+                    LitRows.Text += "<td>Greeting</td>";
+                    LitRows.Text += "<td>Split ticket</td>";
+                }
+                LitRows.Text += "<td>Taken</td>";
+                LitRows.Text += "</tr>";
+
+
+
                 while (reader.Read())
                 {
                     LitRows.Text += "<tr>";
                     LitRows.Text += "<td>" + reader["number"] + "</td>";
                     LitRows.Text += "<td>" + reader["person"] + "</td>";
-                    //LitRows.Text += "<td>" + reader["details"] + "</td>";
-                    //LitRows.Text += "<td>" + reader["emailaddress"] + "</td>";
-                    //LitRows.Text += "<td>" + reader["mobile"] + "</td>";
-                    LitRows.Text += "<td>" + reader["paid"] + "</td>";
-                    //LitRows.Text += "<td>" + reader["payment"] + "</td>";
-                    LitRows.Text += "<td>" + "" + "</td>";
+                    if (mode != "") { 
+                        LitRows.Text += "<td>" + reader["details"] + "</td>";
+                        LitRows.Text += "<td>" + reader["emailaddress"] + "</td>";
+                    }
+                    LitRows.Text += "<td>" + reader["mobile"] + "</td>";
+                    if (mode != "")
+                    {
+                        LitRows.Text += "<td>" + reader["paid"] + "</td>";
+                        LitRows.Text += "<td>" + reader["payment"] + "</td>";
+                        LitRows.Text += "<td>" + reader["notes"] + "</td>";
+                        LitRows.Text += "<td>" + reader["greeting"] + "</td>";
+                        LitRows.Text += "<td>" + reader["splitticket"] + "</td>";
+                    }
+                    LitRows.Text += "<td>" + reader["taken"] + "</td>";
                     LitRows.Text += "</tr>";
 
                     if(reader["Person"].ToString() == "")
@@ -52,6 +84,10 @@ namespace DataInnovations.Raffles
 
                 m_dbConnection.Close();
                 GC.Collect();
+
+
+
+
             }
         }
     }

@@ -23,8 +23,11 @@ namespace DataInnovations.Raffles
         public string getticket(NameValue[] formVars)    //you can't pass any querystring params
         {
             string update = formVars.Form("hf_update");
-            string raffle = formVars.Form("hf_raffle");
             string ticket = formVars.Form("hf_ticket");
+
+            string[] ticketparts = ticket.Split('-');
+            string raffle = ticketparts[0];
+            ticket = ticketparts[1];
 
             string filename = HttpContext.Current.Server.MapPath(".") + "\\raffles.sqlite";
 
@@ -37,6 +40,7 @@ namespace DataInnovations.Raffles
             SQLiteDataReader reader = command.ExecuteReader();
             string person;
             string status = "";
+            string messageresponse = "";
             while (reader.Read())
             {
                 person = reader["Person"].ToString();
@@ -55,11 +59,54 @@ namespace DataInnovations.Raffles
                         string emailaddress = formVars.Form("tb_emailaddress");
                         string mobile = formVars.Form("tb_mobile");
                         string payment = formVars.Form("tb_payment");
+                        string taken = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
 
-                        sql = "update ticket set person = '" + name + "', emailaddress = '" + emailaddress + "', mobile = '" + mobile + "', payment = '" + payment + "' where raffle_id = " + raffle + " and number = " + ticket;
+                        sql = "update ticket set person = '" + name + "', emailaddress = '" + emailaddress + "', mobile = '" + mobile + "', payment = '" + payment + "', taken = '" + taken + "' where raffle_id = " + raffle + " and number = " + ticket;
                         SQLiteCommand commandu = new SQLiteCommand(sql, m_dbConnection);
                         commandu.ExecuteNonQuery();
                         status = "Updated";
+
+                        Generic.Functions gFunctions = new Generic.Functions();
+
+                        string rafflename = "";
+                        switch (raffle)
+                        {
+                            case "1":
+                                rafflename = "'Pale Yellow' $50.00 meat";
+                                break;
+                            case "2":
+                                rafflename = "'Outdoor Table'";
+                                break;
+                            case "3":
+                                rafflename = "'Red' $50.00 meat";
+                                break;
+                            case "4":
+                                rafflename = "'White' $50.00 meat";
+                                break;
+                            default:
+                                Console.WriteLine("Default case");
+                                break;
+                        }
+               
+                        string emailbody = "Thanks for taking ticket " + ticket + " in the Maadi Cup 2018 " + rafflename + " raffle for Cullinane and Girls College";
+                        emailbody += "<table>";
+                        emailbody += "<tr><td>Name </td><td>" + name + "</td></tr>";
+                        emailbody += "<tr><td>Email Address </td><td>" + emailaddress + "</td></tr>";
+                        emailbody += "<tr><td>Mobile Number </td><td>" + mobile + "</td></tr>";
+                        emailbody += "<tr><td>How will you get the money to Greg? </td><td>" + payment + "</td></tr>";
+                        emailbody += "</table>";
+                        emailbody += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
+
+                        gFunctions.sendemail("Maadi rowing: " + rafflename + " raffle", emailbody, emailaddress, "", "greg@datainn.co.nz");
+
+                        string textbody = "Thanks for taking ticket " + ticket + " in the Maadi Cup 2018 " + rafflename + " raffle for Cullinane and Girls College";
+                        textbody += " - Greg: 0272495088, greg@datainn.co.nz";
+
+                        messageresponse = gFunctions.SendRemoteMessage(mobile, textbody);
+
+                        textbody += " " + name + " " + mobile + " " + emailaddress + " " + payment;
+                        gFunctions.SendRemoteMessage("0272495088", textbody);
+                            
                         //status = sql;
                     }
                     else
@@ -79,7 +126,14 @@ namespace DataInnovations.Raffles
             return (passresult);
 
         }
+        private string DateTimeSQLite(DateTime datetime)
+        {
+            string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
+            return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
+        }
     }
+
+
 
     #region classes
     public class NameValue

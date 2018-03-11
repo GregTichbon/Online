@@ -38,6 +38,9 @@ namespace iti.ninja
                     case "WDCOT":
                         redirect = "http://wdc.whanganui.govt.nz/onlinetest/";
                         break;
+                    case "MAADI":
+                        redirect = "http://datainn.co.nz/maadi/";
+                        break;
                     default:
                         Literal1.Text = main + " Not found"; // Common.Functions.test();
                         break;

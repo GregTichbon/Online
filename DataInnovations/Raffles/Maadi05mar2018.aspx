@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Maadi01Feb2018.aspx.cs" Inherits="DataInnovations.Raffles.Maadi01Feb2018" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Maadi05mar2018.aspx.cs" Inherits="DataInnovations.Raffles.Maadi05mar2018" %>
 
 <!DOCTYPE html>
 
@@ -92,7 +92,6 @@
         }
         .auto-style1 {
             width: 872px;
-            height: 337px;
             text-align: center;
         }
         .auto-style2 {
@@ -107,6 +106,18 @@
             width: 267px;
             height: 332px;
         }
+
+        .processing {
+ position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('Images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+
+}
+
     </style>
 
 
@@ -137,6 +148,17 @@
                     .serializeArray();
 
                 var formData = JSON.stringify({ formVars: arForm });
+
+                $.ajaxSetup({
+                    beforeSend:function(){
+                        // show gif here, eg:
+                        $("#processingajax").show();
+                    },
+                    complete:function(){
+                        // hide gif here, eg:
+                        $("#processingajax").hide();
+                    }
+                });
 
                 $.ajax({
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -202,6 +224,7 @@
                             details = $.parseJSON(result.d);
                             if(details.status == "Updated") {
                                 $("#td_" + ticket).html("On hold to you");
+                               alert("Thanks - this ticket has been put on hold awaiting payment.  Please feel free to take as many tickets as you like.");
                             } else {
                                 $("#td_" + ticket).html("Taken");
                                 alert("I'm sorry - this ticket has just been taken.  Try another one.");
@@ -233,23 +256,24 @@
     </script>
 </head>
 <body>
+    <div id="processingajax" style="display:none" class="processing"></div>
     <p>
-        Hi, I&#39;ve been asked to sell some raffle tickets.</p>
+        Hi, I&#39;ve been asked to sell some more raffle tickets.</p>
     <p>
         Cullinane and Girls&#39; Colleges as part of the Union Boat Club (<a href="http://unionboatclub.co.nz" target="_blank">unionboatclub.co.nz</a>) are taking a group of students to the Maadi Cup rowing regatta at Lake Ruataniwha in Twizel (<a href="http://www.maadi.co.nz" target="_blank">www.maadi.co.nz</a>).</p>
     <p>
-        Neo is now a keen rower, into his second year and is going.&nbsp; In the Cambridge Town Cup last weekend he made 2 A finals; The Under 16 single sculls and the Under 18 coxed quad sculls (<a href="https://www.rowit.co.nz/results/kric2018r2?pid=32711" target="_blank">Results</a>)&nbsp; He&#39;s loving it and working really hard.</p>
+        Neo is now a keen rower, into his second year and is going really well.&nbsp; He&#39;s loving it and working really hard.</p>
     <p>
         We&#39;re leaving on Saturday 17th March and returning on Tuesday 27th March.&nbsp; Most of us will be flying but the Ignition Ute and Boat Trailer and another van will have to make the long trek down by road and ferry.</p>
     <p>
-        Obviously there is a high cost to this trip, and we are endevouring to make it as affordable for everyone as possible.&nbsp;&nbsp; We are also doing a number of fundraisers of which this raffle is just one.&nbsp; We are also planning a hangi on&nbsp; Wednesday 21st February and some car washes and sausage sizzles.</p>
+        Obviously there is a high cost to this trip, and we are endevouring to make it as affordable for everyone as possible.&nbsp;&nbsp; We are also doing a number of other fundraisers of which this raffle is just one.&nbsp;</p>
     <p>
-        This Raffle</p>
+        <strong>This Raffle</strong></p>
     <p>
-        There are 50 tickets.&nbsp; The cost is $20.00 but ... that means your number is entered into 10 weekly draws (ie: $2.00 per week) for a meat pack worth $50.00 from Chef&#39;s Choice.&nbsp; You have overall a 20% chance of winning!</p>
+        There are 
+        <strong>250 tickets</strong>.&nbsp; The cost of tickets is <strong>$2.00</strong> and the prize is a really cool <strong>outdoor table</strong> built by one of our rower&#39;s father.</p>
     <p>
-        If you&#39;d like to support the rowers, please grab one of the tickets below.&nbsp; You can either pay the money into my bank account or otherwise let me know how you can get it to me.&nbsp; Click on the buttons below and you&#39;ll be provided with my bank account and asked for your details.&nbsp; It couldn&#39;t be easier.&nbsp; 
-        I&#39;ll place your ticket &quot;on hold&quot; to you until payment is sussed.</p>
+        If you&#39;d like to support the rowers, please grab one (or more) of the tickets below.&nbsp; Just let me know how you can get the money to me.</p>
     <p>
         Thanks for your support.&nbsp;</p>
     <p>
@@ -258,7 +282,7 @@
         -Greg</p>
     <p style="text-align: center">
         <img alt="" class="auto-style2" src="Images/Cullinane%20Logo.jpg" /><img alt="" class="auto-style3" src="Images/Whanganui%20Girls%20College%20logo.jpg" /><img alt="" class="auto-style4" src="Images/UBC.png" /><br />
-        <img alt="" class="auto-style1" src="Images/ChefsChoice%20Logo.PNG" /></p>
+        <img alt="" class="auto-style1" src="Images/outdoortable.jpeg" /></p>
 &nbsp;<form id="form1" runat="server">
     <!--<div style="width:20%; float:left">-->
         <input type="hidden" id="hf_ticket" name="hf_ticket" />
@@ -309,7 +333,8 @@
                         <input type="text" id="tb_mobile" name="tb_mobile" /></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">How will you get the money to Greg?<br /><span style="font-size:small">Bank A/c No: 06-0996-0956968-00 please use <b>"Maadi 1/<span class="ticket"></span></b>" as your reference.</span></td>
+                    <td style="text-align: right">How will you get the money to Greg?
+                        <!--<br /><span style="font-size:small">Bank A/c No: 06-0996-0956968-00 please use <b>"Maadi 1/<span class="ticket"></span></b>" as your reference.</span>--></td>
                     <td>
                         <textarea id="tb_payment" name="tb_payment" required="required"></textarea></td>
                 </tr>

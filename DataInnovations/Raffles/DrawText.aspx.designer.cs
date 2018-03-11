@@ -10,7 +10,7 @@
 namespace DataInnovations.Raffles {
     
     
-    public partial class SendText {
+    public partial class DrawText {
         
         /// <summary>
         /// form1 control.
@@ -22,6 +22,15 @@ namespace DataInnovations.Raffles {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// dd_raffle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dd_raffle;
+        
+        /// <summary>
         /// tb_message control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,31 @@ namespace DataInnovations.Raffles {
         protected global::System.Web.UI.WebControls.TextBox tb_message;
         
         /// <summary>
-        /// btn_submit control.
+        /// tb_onlynumbers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_submit;
+        protected global::System.Web.UI.WebControls.TextBox tb_onlynumbers;
+        
+        /// <summary>
+        /// cb_live control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cb_live;
+        
+        /// <summary>
+        /// btn_send control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_send;
         
         /// <summary>
         /// LitRows control.
