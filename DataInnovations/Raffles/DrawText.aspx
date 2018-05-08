@@ -12,7 +12,7 @@
         <div>
             <asp:DropDownList ID="dd_raffle" runat="server">
                 <asp:ListItem></asp:ListItem>
-                <asp:ListItem Value="1">Yellow Meat</asp:ListItem>
+                <asp:ListItem Value="1">Pale Yellow Meat</asp:ListItem>
                 <asp:ListItem Value="2">Outdoor Table</asp:ListItem>
                 <asp:ListItem Value="3">Red Meat</asp:ListItem>
                 <asp:ListItem Value="4">White Meat</asp:ListItem>

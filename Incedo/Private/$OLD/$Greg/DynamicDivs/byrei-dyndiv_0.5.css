@@ -1,0 +1,105 @@
+.dynDiv_moveDiv
+{
+    OVERFLOW: hidden;
+    POSITION: absolute
+}
+.dynDiv_resizeDiv_tl
+{
+    BORDER-RIGHT: #000 1px solid;
+    BORDER-TOP: #000 1px solid;
+    BACKGROUND: #faa;
+    BORDER-LEFT: #000 1px solid;
+    WIDTH: 10px;
+    BORDER-BOTTOM: #000 1px solid;
+    POSITION: absolute;
+    HEIGHT: 10px
+}
+.dynDiv_resizeDiv_tr
+{
+    BORDER-RIGHT: #000 1px solid;
+    BORDER-TOP: #000 1px solid;
+    BACKGROUND: #faa;
+    BORDER-LEFT: #000 1px solid;
+    WIDTH: 10px;
+    BORDER-BOTTOM: #000 1px solid;
+    POSITION: absolute;
+    HEIGHT: 10px
+}
+.dynDiv_resizeDiv_bl
+{
+    BORDER-RIGHT: #000 1px solid;
+    BORDER-TOP: #000 1px solid;
+    BACKGROUND: #faa;
+    BORDER-LEFT: #000 1px solid;
+    WIDTH: 10px;
+    BORDER-BOTTOM: #000 1px solid;
+    POSITION: absolute;
+    HEIGHT: 10px
+}
+.dynDiv_resizeDiv_br
+{
+    BORDER-RIGHT: #000 1px solid;
+    BORDER-TOP: #000 1px solid;
+    BACKGROUND: #faa;
+    BORDER-LEFT: #000 1px solid;
+    WIDTH: 10px;
+    BORDER-BOTTOM: #000 1px solid;
+    POSITION: absolute;
+    HEIGHT: 10px
+}
+.dynDiv_resizeDiv_tl
+{
+    LEFT: -1px;
+    TOP: -1px
+}
+.dynDiv_resizeDiv_tr
+{
+    RIGHT: -1px;
+    TOP: -1px
+}
+.dynDiv_resizeDiv_bl
+{
+    LEFT: -1px;
+    BOTTOM: -1px
+}
+.dynDiv_resizeDiv_br
+{
+    RIGHT: -1px;
+    BOTTOM: -1px
+}
+.dynDiv_moveParentDiv
+{
+    BORDER-RIGHT: 0px;
+    PADDING-RIGHT: 0px;
+    BORDER-TOP: #aaa 1px solid;
+    PADDING-LEFT: 0px;
+    FONT-SIZE: 15px;
+    BACKGROUND: #faa;
+    LEFT: -1px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: auto;
+    OVERFLOW: hidden;
+    BORDER-LEFT: 0px;
+    WIDTH: 100%;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #aaa 1px solid;
+    WHITE-SPACE: nowrap;
+    POSITION: absolute;
+    TOP: -1px;
+    HEIGHT: 16px
+}
+.dynDiv_minmaxDiv
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    FONT-SIZE: 15px;
+    RIGHT: 15px;
+    BACKGROUND: #faa;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    WIDTH: 15px;
+    PADDING-TOP: 0px;
+    POSITION: absolute;
+    TOP: 1px;
+    HEIGHT: 15px
+}

@@ -10,6 +10,8 @@ using System.Configuration;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Net.NetworkInformation;
+using System.IO;
+using System.Drawing;
 
 namespace TOHW.Pickups
 {
@@ -26,7 +28,7 @@ namespace TOHW.Pickups
     {
         [WebMethod(EnableSession = true)]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void pickups_update(Int32 id, Int32 version, string address, string status, string assignedto, string date)
+        public void pickups_update(Int32 id, Int32 version, string address, string status, string assignedto, string note, string date)
         {
             /*
             //get all nics
@@ -58,6 +60,7 @@ namespace TOHW.Pickups
             cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = status;
             cmd.Parameters.Add("@assignedto", SqlDbType.VarChar).Value = assignedto;
             cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = null;
+            cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
             cmd.Parameters.Add("@debug", SqlDbType.VarChar).Value = Session["pickups_name"].ToString();
 
             cmd.Connection = con;
@@ -123,7 +126,7 @@ namespace TOHW.Pickups
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("pickup_checkforupdates", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = null ;
+            cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = null;
             cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = data;
             cmd.Parameters.Add("@debug", SqlDbType.VarChar).Value = Session["pickups_name"].ToString();
 
@@ -159,6 +162,117 @@ namespace TOHW.Pickups
 
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(PickupUpdatesList));
+
+        }
+
+        [WebMethod(EnableSession = true)]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void getinformation(string id)
+        {
+            String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("pickups_get_information", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+
+            //byte[] picData = { };
+            string html = "";
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        if (html == "")
+                        {
+                            html += "<table>";
+
+                            byte[] picData = dr["image"] as byte[] ?? null;
+
+
+                            if (picData != null)
+                            {
+                                /*                            using (MemoryStream ms = new MemoryStream(picData))
+                                                            {
+                                                                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(ms);
+                                                            }   */
+
+                                /*
+                                ImageConverter imageConverter = new ImageConverter();
+                                byte[] resourceByteArray = (byte[])imageConverter.ConvertTo(picData, typeof(byte[]));
+                                */
+
+                                /*
+                                MemoryStream ms = new MemoryStream(picData);
+                                System.Drawing.Image xx;
+                                xx = Image.FromStream(ms);
+                                */
+                            }
+
+                            string medical = dr["medical"].ToString();
+                            string dateofbirth = dr["dateofbirth"].ToString();
+                            string firstevent = dr["firstevent"].ToString();
+                            string lastevent = dr["lastevent"].ToString();
+                            string facebook = dr["facebook"].ToString();
+
+                            if (medical != "")
+                            {
+                                html += "<tr><td>Medical</td><td>" + medical + "</td></tr>";
+                            }
+                            if (dateofbirth != "")
+                            {
+                                html += "<tr><td>DOB</td><td>" + Convert.ToDateTime(dateofbirth).ToString("d MMM yy") + "</td></tr>";
+                            }
+                            if (firstevent != "")
+                            {
+                                html += "<tr><td>First Event</td><td>" + Convert.ToDateTime(firstevent).ToString("d MMM yy") + "</td></tr>";
+                            }
+                            if (lastevent != "")
+                            {
+                                html += "<tr><td>Last Event</td><td>" + Convert.ToDateTime(lastevent).ToString("d MMM yy") + "</td></tr>";
+                            }
+                            if (facebook != "")
+                            {
+                                html += "<tr><td>Facebook</td><td><a href=\"" + facebook + "\" target=\"facebook\">Link</a></td></tr>";
+                            }
+                            html += "</table>";
+                            html += "<br /><br />";
+                            html += "<table>";
+
+
+                        }
+                        string ctype = dr["type"].ToString();
+                        string cdetail = dr["detail"].ToString();
+                        string cdescription = dr["description"].ToString();
+
+                        if (cdetail != "")
+                        {
+                            html += "<tr><td>" + ctype + "</td><td>" + cdetail + "</td><td>" + cdescription + "</td></tr>";
+                        }
+                    }
+                    html += "</table>";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            Context.Response.Write(html);
+
+            //Context.Response.Write("<img src=\"data: image / png; base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg == \" alt=\"Red dot\">");
+
+            //Context.Response.Write("<img src=\"data: image / jpg; base64," + picData + "\" == \" alt=\"Red dot\">");
+
 
         }
     }

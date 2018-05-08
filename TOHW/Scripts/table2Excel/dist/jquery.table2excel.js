@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  jQuery table2excel - v1.1.1
  *  jQuery plugin to export an .xls file in browser from an HTML table
  *  https://github.com/rainabba/jquery-table2excel
@@ -64,9 +64,15 @@
 								//alert($(p1).val());
 								tempRows += "<td>" + $(p1).val() + "</td>";
 							});
-if(x.length == 0) {
-tempRows += "<td>" + $(q).html() + "</td>";
-}
+							if (x.length == 0) {
+								var x = $(q).find("input").each(function (i1, p1) {
+									//alert($(p1).val());
+									tempRows += "<td>" + $(p1).val() + "</td>";
+								});
+							}
+							if(x.length == 0) {
+								tempRows += "<td>" + $(q).html() + "</td>";
+							}
                             //tempRows += "<td>" + $(q).html() + "</td>";
                             //tempRows += "<td>" + $(q).val() + "</td>";
                         }

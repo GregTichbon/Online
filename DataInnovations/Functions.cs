@@ -28,6 +28,7 @@ namespace SMSChecker
 
         
 
+        
         public async Task<string> SendMessage(string PhoneNumber, string Message)
         //public string SendMessage(string PhoneNumber, string Message)
         {
@@ -75,6 +76,7 @@ namespace SMSChecker
             }
             return(returnval);
         }
+       
         protected string ConstructBaseUri()
         {
             UriBuilder uriBuilder = new UriBuilder("http", IPAddress, Convert.ToInt32(Port));

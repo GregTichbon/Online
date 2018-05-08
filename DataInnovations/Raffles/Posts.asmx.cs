@@ -24,6 +24,7 @@ namespace DataInnovations.Raffles
         {
             string update = formVars.Form("hf_update");
             string ticket = formVars.Form("hf_ticket");
+            string bank = formVars.Form("hf_bank");
 
             string[] ticketparts = ticket.Split('-');
             string raffle = ticketparts[0];
@@ -93,13 +94,17 @@ namespace DataInnovations.Raffles
                         emailbody += "<tr><td>Name </td><td>" + name + "</td></tr>";
                         emailbody += "<tr><td>Email Address </td><td>" + emailaddress + "</td></tr>";
                         emailbody += "<tr><td>Mobile Number </td><td>" + mobile + "</td></tr>";
-                        emailbody += "<tr><td>How will you get the money to Greg? </td><td>" + payment + "</td></tr>";
+                        emailbody += "<tr><td>How will you get the money to us? </td><td>" + payment + "</td></tr>";
                         emailbody += "</table>";
+
+                        emailbody += "<p>Bank A/c: " + bank + " reference: " + raffle + "-" + ticket + "</p>";
+
                         emailbody += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
 
                         gFunctions.sendemail("Maadi rowing: " + rafflename + " raffle", emailbody, emailaddress, "", "greg@datainn.co.nz");
 
                         string textbody = "Thanks for taking ticket " + ticket + " in the Maadi Cup 2018 " + rafflename + " raffle for Cullinane and Girls College";
+                        textbody += " >Bank A/c: " + bank + " reference: " + raffle + "-" + ticket;
                         textbody += " - Greg: 0272495088, greg@datainn.co.nz";
 
                         messageresponse = gFunctions.SendRemoteMessage(mobile, textbody);

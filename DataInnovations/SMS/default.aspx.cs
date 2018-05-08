@@ -23,8 +23,12 @@ namespace DataInnovations.SMS
             {
                 if (listItem.Selected)
                 {
+                    string message = tb_message.Text;
+                    string[] parts = listItem.Text.Split(new string[] { " - " }, StringSplitOptions.None);
+                    string name = parts[0];
+                    message.Replace("@name@", name);
                     //this may be wrong,  see sms/send/default.aspx
-                    response += "<br />" + listItem.Value + a.SendMessage(listItem.Value, tb_message.Text).ToString();
+                    response += "<br />" + listItem.Value + a.SendMessage(listItem.Value, message).ToString();
                 }
                 else
                 {

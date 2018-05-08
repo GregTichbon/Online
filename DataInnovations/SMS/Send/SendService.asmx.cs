@@ -31,7 +31,18 @@ namespace DataInnovations.SMS.Send
             return "Hello World";
         }
 
-        public async void SendMessage(NameValue[] formVars)
+        [WebMethod]
+        //public async Task<string> SendMessage(string PhoneNumber, String Message)
+        public string SendMessage(string PhoneNumber, String Message)
+        {
+            string returnval = "";
+            Generic.Functions gFunctions = new Generic.Functions();
+            gFunctions.SendMessage(PhoneNumber, Message);
+     
+            return (returnval); ;
+        }
+
+        public async void SendMessageX(NameValue[] formVars)
         {
             string Operation = formVars.Form("Operation");
             string PhoneNumber = formVars.Form("PhoneNumber");

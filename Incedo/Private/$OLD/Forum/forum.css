@@ -1,0 +1,29 @@
+table {
+	width: 100%;
+	border: none;
+	border-collapse: collapse;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.line0 {
+	background-color: #6699FF;
+}
+.line1 {
+	background-color: #cccccc;
+}
+img {
+	border: none;
+}
+.summary {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-image: url(Summary.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	font-weight: bold;
+}
+hr {
+	color: #000000;
+	background-color: #000000;
+	height: 1px
+}

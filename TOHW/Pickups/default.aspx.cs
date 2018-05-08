@@ -25,8 +25,10 @@ namespace TOHW.Pickups
         //public string[] assignedto_values = new string[8] { "Jay", "Keith", "Jordi", "Greg", "Nate", "Watties", "Isa", "Judy"};
 
         public string status_values = "Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Will make their own way,Made own way";
-        public string assignedto_values = "Jay,Keith,Jordi,Greg,Nate,Watties,Judy,Charlie Boy,Koralee,Keegan,Mahanga,Aimee,Whakapakari,Driver 1,Driver 2,Driver 3";
+        public string assignedto_values = "Jay,Keith,Jordi,Greg,Nate,Watties,Judy,Charlie Boy,Koralee,Keegan,Mahanga,Aimee,Whakapakari,Rebecca,Driver 1,Driver 2,Driver 3";
         public string missingicons = "";
+
+        public string formattedDate;
 
         public string passresult = "";
 
@@ -41,6 +43,7 @@ namespace TOHW.Pickups
         public string EnrolementStatus = "";
         public string address = "";
         public Int32 version_ctr = 0;
+        public string worker = "";
 
         //public string LastEnrolementID = "";
         //public string Lastname = "";
@@ -83,18 +86,51 @@ namespace TOHW.Pickups
                     }
                 }
 
-                var Personlist = new List<PersonClass>();
-
-                String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
+                string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
                 SqlConnection con = new SqlConnection(strConnString);
-                SqlCommand cmd = new SqlCommand("Get_Pickups", con);
+                SqlCommand cmd = new SqlCommand("Get_Parameter", con);
+                cmd.Parameters.Add("@pName", SqlDbType.VarChar).Value = "CurrentPickupDate";
+
+
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@program", SqlDbType.Int).Value = 1;
                 cmd.Connection = con;
                 try
                 {
                     con.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        string DBDate = dr["pdate1"].ToString();
+                        DateTime theDate;
+                        if (DateTime.TryParse(DBDate, out theDate))
+                        {
+                            formattedDate = theDate.ToString("d MMM yyyy");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+
+                var Personlist = new List<PersonClass>();
+
+                //String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
+                SqlConnection con2 = new SqlConnection(strConnString);
+                SqlCommand cmd2 = new SqlCommand("Get_Pickups", con2);
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.Add("@program", SqlDbType.Int).Value = 1;
+                cmd2.Connection = con2;
+                try
+                {
+                    con2.Open();
+                    SqlDataReader dr = cmd2.ExecuteReader();
                     if (dr.HasRows)
                     {
                         while (dr.Read())
@@ -106,13 +142,14 @@ namespace TOHW.Pickups
                             //OtherEnrolementID = dr["OtherEnrolementID"].ToString();
                             PickupRunAddress = dr["PickupRunAddress"].ToString();
                             //UpdateAddress = dr["UpdateAddress"].ToString();
-                            //note = dr["note"].ToString();
+                            note = dr["note"].ToString();
                             Assignedto = dr["Assignedto"].ToString();
                             address = dr["address"].ToString();
                             gender = dr["Gender"].ToString();
                             EnrolementStatus = dr["EnrolementStatus"].ToString();
                             //Pickedup = dr["Pickedup"].ToString();
                             version_ctr = Convert.ToInt32(dr["version_ctr"]);
+                            worker = dr["worker"].ToString();
                             //if (address != "")
                             //{
                             //    name_addresses += name_addresses_delim + name + "~" + address;
@@ -139,6 +176,7 @@ namespace TOHW.Pickups
                                 gender = gender,
                                 enrolementStatus = EnrolementStatus,
                                 version_ctr = version_ctr,
+                                worker = worker,
                                 address = Addresslist
                             });
 
@@ -192,8 +230,8 @@ namespace TOHW.Pickups
                 }
                 finally
                 {
-                    con.Close();
-                    con.Dispose();
+                    con2.Close();
+                    con2.Dispose();
                 }
 
                 JavaScriptSerializer JS = new JavaScriptSerializer();
@@ -217,6 +255,7 @@ namespace TOHW.Pickups
         public string gender;
         public string enrolementStatus;
         public Int32 version_ctr;
+        public string worker;
         public List<AddressClass> address;
     }
     public class AddressClass

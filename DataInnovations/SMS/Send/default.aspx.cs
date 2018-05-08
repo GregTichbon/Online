@@ -24,18 +24,19 @@ namespace SMSChecker
         string Message = ""; //"Test";
         public string html = "";
 
+    
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //Page.EnableViewState = false;
+            //Page.ViewStateMode = 
+
 
             Operation = Request.QueryString["O"] ?? "";
             PhoneNumber = Request.QueryString["P"] ?? "";
             Message = Request.QueryString["M"] ?? "";
             SendMessage();
-        }
-
-        protected void btn_submit_Click(object sender, EventArgs e)
-        {
-            //SendMessage();
         }
 
         private async void SendMessage()

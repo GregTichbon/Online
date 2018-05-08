@@ -6,6 +6,11 @@
         .Casual {
             color: red;
         }
+
+        .worker {
+            font-weight: bolder;
+        }
+
         .Additional {
             color: green;
         }
@@ -31,35 +36,37 @@
             float: left;
         }
 
-        .toggle label {
-            float: left;
-            width: 5.0em;
-        }
+            .toggle label {
+                float: left;
+                width: 5.0em;
+            }
 
-        .toggle label span {
-            text-align: center;
-            display: block;
-            cursor: pointer;
-        }
+                .toggle label span {
+                    text-align: center;
+                    display: block;
+                    cursor: pointer;
+                }
 
-        .toggle label input {
+                .toggle label input {
+                    display: none;
+                }
+
+            .toggle .input-checked /*, .bounds input:checked + span works for firefox and ie9 but breaks js for ie8(ONLY) */ {
+                background-color: lightgreen;
+            }
+
+
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 600px;
+            width: 100%;
             display: none;
         }
 
-        .toggle .input-checked /*, .bounds input:checked + span works for firefox and ie9 but breaks js for ie8(ONLY) */ {
-           background-color: lightgreen;
+        .warning {
+            background-color: yellow;
         }
-
-
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 600px;
-        width: 100%;
-        display: none;
-      }
-     
-
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="<%: ResolveUrl("~/Scripts/table2Excel/dist/jquery.table2excel.js")%>"></script>
@@ -104,9 +111,9 @@
 
             $.each(mydata, function (index, value) {
                 myid = value.enrollmentId;
-                tr = '<tr id="tr_' + myid + '" class="' + value.enrolementStatus + '" data-version="' + value.version_ctr + '" data-gender="' + value.gender + '" data-status="' + value.enrolementStatus + '" data-name="' + value.name + '">';
+                tr = '<tr id="tr_' + myid + '" class="' + value.enrolementStatus + ' ' + value.worker + '" data-version="' + value.version_ctr + '" data-gender="' + value.gender + '" data-status="' + value.enrolementStatus + '" data-name="' + value.name + '" data-worker="' + value.worker + '">';
                 //tr += '<td id="name_' + myid + '">' + value.name + myid + 'v<span id="span_' + myid + '">' + value.version_ctr + '</span></td>';
-                tr += '<td id="name_' + myid + '">' + value.name + '</td>';
+                tr += '<td class="name" id="name_' + myid + '">' + value.name + '</td>';
                 //console.log(value.name);
                 var addresses = "";
                 var addresses_cnt = 0;
@@ -119,7 +126,8 @@
                 tr += '<td><select class="address" id="address_' + myid + '" data-value="' + value.pickupRunAddress + '" data-count="' + addresses_cnt + '">' + addresses + '</select></td>';
                 tr += '<td><select class="status" id="status_' + myid + '" data-value="' + value.status + '"><option></option></select></td>';
                 tr += '<td><select class="assignedto" id="assignedto_' + myid + '" data-value="' + value.assignedTo + '"><option></option></select></td>';
-                tr += '<td><input class="note" id="note_' + myid + '" data-value="' + value.note + ' type="text" /></td>';
+                //tr += '<td><input class="note" id="note_' + myid + '" data-value="' + value.note + ' type="text" /></td>';
+                tr += '<td><input class="note" id="note_' + myid + '" type="text" value="' + value.note + '" /></td>';
                 tr += '</tr>';
                 $('#tbl_data').append(tr);
             });
@@ -127,13 +135,13 @@
             var name_addresses_array = otherperson.split('|');
 
             $("#search").addClear();
-            
+
             var status_options = "";
             for (var i = 0; i < status_array.length; i++) {
                 status_options += "<option>" + status_array[i] + "</option>";
             }
             $(".status").append(status_options);
-            
+
             var assignedto_options = "";
             for (var i = 0; i < assignedto_array.length; i++) {
                 assignedto_options += "<option>" + assignedto_array[i] + "</option>";
@@ -141,7 +149,7 @@
             $(".assignedto").append(assignedto_options);
 
             $("#dd_assignedto").append(assignedto_options);
-            
+
             $('#tbl_data > tbody  > tr').each(function () {
                 myid = $(this).attr("id").substring(3);
                 $("#status_" + myid).val($("#status_" + myid).data("value"));
@@ -170,6 +178,29 @@
                 showhideclasses()
             });
 
+            $(".name").click(function () {
+                id = $(this).attr("id").substring(5);
+                name = $(this).text();
+                param = "data.asmx/getinformation?id=" + id;
+
+                $.get(param, function (html) {
+                    $("#div_information").html(html)
+                    $("#dialoginformation").dialog({
+                        title: name,
+                    });
+                }).fail(function () {
+                    alert('Error');
+                });
+            });
+
+            /*
+            $.get('http://example.com/page/2/', function(data){ 
+                $(data).find('#reviews .card').appendTo('#reviews');
+            }).fail(function() {
+                alert('woops'); // or whatever
+            });
+            */
+
             $("#btn_add").click(function () {
                 $("#dialogadd").dialog("open");
             });
@@ -197,7 +228,7 @@
 
             function checkforupdates() {
 
-                //$("#span_status").html("Updated:" + moment().format('hh:mm:ss'));
+                $("#span_updated").html("Updating ...");
                 while (updating == true) {
 
                 }
@@ -217,7 +248,6 @@
                 //console.log(versions);
                 param = "data.asmx/pickup_checkforupdates?data=" + versions;
                 $.getJSON(param, function (result) {
-
                     //$(document.body).keydown(false);
                     updatesdone = false;
                     $.each(result, function (i, field) {
@@ -246,16 +276,18 @@
                     if (updatesdone == true) {
                         showhideclasses();
                     }
+
+
                 });
 
-                //$("#span_status").text("xxx");
+                validate('');
+                $("#span_updated").html(" - Updated:" + moment().format('hh:mm:ss'));
 
                 //$(document.body).keydown(true);
                 updatetimer = setTimeout(checkforupdates, 10000)
             }
-
             $(".address").prepend("<option></option>");
-            $(".address").append("<option>Other Address</option><option>Other Person</option>");
+            $(".address").append("<option>Other Address</option><option>Other Person</option><option>32 Totara St</option>");
 
             $("#dialogaddress").dialog({
                 autoOpen: false,
@@ -287,14 +319,14 @@
                 },
                 create: function () {
                     $(this).closest('div.ui-dialog')
-                           .find('.ui-dialog-titlebar-close')
-                           .click(function (e) {
-                               $("#address_" + id + " option").eq(0).prop('selected', true);
-                               if ($("#status_" + id).val() == "Picked up from another address") {
-                                   $("#status_" + id + " option").eq(0).prop('selected', true);
-                               }
-                               e.preventDefault();
-                           });
+                        .find('.ui-dialog-titlebar-close')
+                        .click(function (e) {
+                            $("#address_" + id + " option").eq(0).prop('selected', true);
+                            if ($("#status_" + id).val() == "Picked up from another address") {
+                                $("#status_" + id + " option").eq(0).prop('selected', true);
+                            }
+                            e.preventDefault();
+                        });
                 }
             });
 
@@ -351,6 +383,14 @@
                 }
             });
 
+            $(".note").change(function () {
+                id = $(this).parents('tr').attr("id").substring(3);
+                version_ctr = $(this).parents('tr').data("version");
+                update();
+            });
+
+
+
             $("#otherperson").autocomplete({
                 maxShowItems: 5,
                 source: name_addresses_array,
@@ -369,22 +409,97 @@
                     update();
                 }
             })
-            .autocomplete("instance")._renderItem = function (ul, item) {
-                nameaddress = item.label.split('~');
-                return $("<li>")
-                  .append("<div>" + nameaddress[0] + "<br>" + nameaddress[1] + "</div>")
-                  .appendTo(ul);
-            };
+                .autocomplete("instance")._renderItem = function (ul, item) {
+                    nameaddress = item.label.split('~');
+                    return $("<li>")
+                        .append("<div>" + nameaddress[0] + "<br>" + nameaddress[1] + "</div>")
+                        .appendTo(ul);
+                };
+
+            function validate(myid) {
+                //Working on
+                //All options: Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Will make their own way,Made own way
+                need_address_person = "|Coming|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|";
+                //not done: blank,Not Coming,No Response,Will make their own way,Made own way
+                if (myid != '') {
+                    myselector = $('#tr_' + myid);
+                } else {
+                    myselector = $('#tbl_data > tbody  > tr');
+                }
+                myselector.each(function () {
+                    myid = $(this).attr("id").substring(3);
+
+                    address = $("#address_" + myid).val();
+                    status = $("#status_" + myid).val();
+                    assignedto = $("#assignedto_" + myid).val();
+                    //name = "name: " + $("#name_" + myid).text();
+                    //console.log('*' + name + '*' + address + '*');
+
+
+                    $("#address_" + myid).removeClass('warning');
+                    $("#status_" + myid).removeClass('warning');
+                    $("#assignedto_" + myid).removeClass('warning');
+
+                    if (need_address_person.indexOf('|' + status + '|') != -1) {
+                        if (address == '') {
+                            $("#address_" + myid).addClass('warning');
+                        }
+                        if (assignedto == '') {
+                            $("#assignedto_" + myid).addClass('warning');
+                        }
+                    } else {
+                        if (status == "Made own way") {
+                            if (address != "32 Totara St" && address != "") {
+                                $("#address_" + myid).addClass('warning');
+                            }
+                            if (address == "32 Totara St" && assignedto == "") {
+                                $("#assignedto_" + myid).addClass('warning');
+                            }
+                        } else {
+                            if (address != "") {
+                                $("#address_" + myid).addClass('warning');
+                            }
+                            if (assignedto != "") {
+                                $("#assignedto_" + myid).addClass('warning');
+                            }
+                        }
+                    }
+
+
+                    /*
+                    if (address != "") {
+                        console.log(4);
+                        if (!(address == "32 Totara St" && status == "Made own way")) {
+                            console.log(5);
+                            if (need_address_person.indexOf('|' + status + '|') == -1) {
+                                console.log(6);
+                                $("#status_" + myid).addClass('warning');
+                            }
+                        }
+                    }
+                    if (assignedto == '') {
+                        console.log(7);
+                        if (!(address == "32 Totara St" && status == "Made own way") && (address != "" || need_address_person.indexOf('|' + status + '|') != -1)) {
+                            console.log(8);
+                            $("#assignedto_" + myid).addClass('warning');
+                        }
+                    } else {
+
+                    }
+                    */
+                });
+            }
 
             function update() {
                 updating = true;
                 address = $("#address_" + id).val();
                 status = $("#status_" + id).val();
                 assignedto = $("#assignedto_" + id).val();
+                note = $("#note_" + id).val();
                 //debugtxt = 'do update for id: ' + id + ' version: ' + version_ctr + ', ' + address + ', ' + status + ', ' + assignedto;
                 //$("#debug").text(debugtxt);
                 //console.log(debugtxt)
-                param = "data.asmx/pickups_update?id=" + id + "&version=" + version_ctr + "&address=" + address + "&status=" + status + "&assignedto=" + assignedto + "&date=";
+                param = "data.asmx/pickups_update?id=" + id + "&version=" + version_ctr + "&address=" + address + "&status=" + status + "&assignedto=" + assignedto + "&note=" + note + "&date=";
                 $.getJSON(param, function (result) {
                     $.each(result, function (i, field) {
                         //alert(id + ", " + field.version_ctr);
@@ -395,6 +510,7 @@
                         //$("#span_" + id).text(field.version_ctr);
                     });
                 });
+                validate(id);
                 updating = false;
             }
 
@@ -411,6 +527,9 @@
                 //} else {
                 //    todo = "";
                 //}
+
+                //All options: Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Will make their own way,Made own way
+
                 if ($('#dd_status').val() == "To do") {
                     todo = "|Coming|No Response|Call in|Will make their own way|";
                 } else if ($('#dd_status').val() == "Came") {
@@ -419,14 +538,11 @@
                     todo = "|Coming|Picked up|Picked up from another address|Will make their own way|Made own way|";
                 } else if ($('#dd_status').val() == "Unknown") {
                     todo = "||No Response|Call in|";
-
-
-
+                //} else if ($('#dd_status').val() == "Noted") {
+                //    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Will make their own way|Made own way|";
                 } else {
                     todo = "";
                 }
-
-
 
                 gender = "|Unspecified";
                 if ($('#cb_female').is(":checked")) {
@@ -436,6 +552,12 @@
                     gender += "|Male"
                 }
                 gender += "|";
+
+                if ($('#cb_worker').is(":checked")) {
+                    worker = true
+                } else {
+                    worker = false
+                }
                 assigned = $("#dd_assignedto").val();
                 /*
                 console.log('searchname=' + searchname);
@@ -450,15 +572,25 @@
                 $('#tbl_data > tbody  > tr').each(function () {
                     myname = $(this).data("name").toLowerCase();
                     mygender = $(this).data("gender");
+                    myworker = $(this).data("worker");
                     myenrolementstatus = $(this).data("status");
                     myassigned = $(this).find(".assignedto").val();
                     mystatus = $(this).find(".status").val();
                     myaddress = $(this).find(".address").val() + '';
+
                     if (myaddress == 'null') { myaddress = '' };
                     //alert(myenrolementstatus + '-' + enrolementstatus);
                     //alert(mystatus + '|' + myassigned + '|' + myaddress);
 
-                    if ((gender.indexOf('|' + mygender + '|') != -1) && (enrolementstatus.indexOf('|' + myenrolementstatus + '|') != -1 || ( mystatus != '' || myassigned != '' || myaddress != ''   ) ) && (myassigned == assigned || assigned == 'All') && (searchname == "" || myname.indexOf(searchname) != -1) && (todo.indexOf('|' + mystatus + '|') != -1 || todo == '')) {
+                    if (
+                           (gender.indexOf('|' + mygender + '|') != -1)
+                        && ((worker && myworker) || !myworker)
+                        && (enrolementstatus.indexOf('|' + myenrolementstatus + '|') != -1 || (mystatus != '' || myassigned != '' || myaddress != ''))
+                        && (myassigned == assigned || assigned == 'All')
+                        && (searchname == "" || myname.indexOf(searchname) != -1)
+                        && (todo.indexOf('|' + mystatus + '|') != -1 || todo == '')
+                        && ($('#dd_status').val() == "Noted" && (myassigned != "" || mystatus != "" || myaddress != "") || $('#dd_status').val() != "Noted")
+                    ) {
                         $(this).show();
                         $(this).removeClass("noExport");
                         c1 = c1 + 1;
@@ -475,6 +607,9 @@
        */
 
                     }
+
+
+
                 });
                 $("#span_status").html(c1);
 
@@ -504,12 +639,14 @@
                 return result;
             }
 
-            $("#btn_export").click(function(){
+            $("#btn_export").click(function () {
                 $("#tbl_data").table2excel({
+                    name: "Pickups",
                     // exclude CSS class
                     exclude: ".noExport",
                     name: "Sheet1",
-                    filename: "Pickups" //do not include extension
+                    filename: "Pickups" + new Date().toISOString().replace(/[\-\:\.]/g, ""), //do not include extension
+                    fileext: ".xls"
                 });
             });
 
@@ -569,16 +706,19 @@
 
         function geocodeAddress(geocoder, resultsMap, address, title, assignedto) {
             myaddress = address + ',Whanganui'
-
+            //alert(myaddress + "-" + assignedto);
             $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + myaddress + '&sensor=false', null, function (data) {
                 var p = data.results[0].geometry.location
                 var latlng = new google.maps.LatLng(p.lat, p.lng);
                 addMarker(latlng, title + ' - ' + address, assignedto);
+                //alert(latlng);
             });
         }
 
         function addMarker(location, title, icon) {
-            if ($.inArray(icon, missingicons) != -1) {
+            if (icon == '') {
+                icon = 'UnAssigned';
+            } else if ($.inArray(icon, missingicons) != -1) {
                 title = title + " (" + icon + ")";
                 icon = 'unknown';
             }
@@ -594,11 +734,11 @@
             });
             // SEE COMMENTS ABOUT BOUNDS ABOVE   bounds.extend(marker.position);
             markers.push(marker);
-            
+
 
         }
 
-        
+
 
     </script>
 
@@ -611,7 +751,7 @@
 
     <div id="map"></div>
 
-
+    <p><%: formattedDate %> <span id="span_updated"></span></p>
     <div class="toggle">
         <label>
             <input id="cb_male" type="checkbox" checked="checked" /><span class="input-checked">Male</span></label>
@@ -619,6 +759,10 @@
     <div class="toggle">
         <label>
             <input id="cb_female" type="checkbox" checked="checked" /><span class="input-checked">Female</span></label>
+    </div>
+    <div class="toggle">
+        <label>
+            <input id="cb_worker" type="checkbox" checked="checked" /><span class="input-checked">Worker</span></label>
     </div>
     <!--
     <div class="toggle">
@@ -633,6 +777,7 @@
         <option>Attendance</option>
         <option>Unknown</option>
         <option>Came</option>
+        <option>Noted</option>
     </select>
 
     <div class="toggle">
@@ -646,8 +791,8 @@
     </select>
 
     <!--<input id="btn_test" type="button" value="Test" />-->
-    <input id="search" type="text" style="width:50px" />
-    <input id="btn_add" type="button" value="Add" style="display:none"/>
+    <input id="search" type="text" style="width: 50px" />
+    <input id="btn_add" type="button" value="Add" style="display: none" />
     <span id="span_status" style="color: red"></span>
 
     <input id="btn_map" type="button" value="Map" />
@@ -658,11 +803,17 @@
     </table>
 
     <div id="dialogaddress" title="Other Address">
-        <input id="otheraddress" type="text" style="width: 95%" /></div>
+        <input id="otheraddress" type="text" style="width: 95%" />
+    </div>
     <div id="dialogperson" title="Other Person">
-        <input id="otherperson" type="text" style="width: 95%" /></div>
+        <input id="otherperson" type="text" style="width: 95%" />
+    </div>
     <div id="dialogadd" title="Add Person">
         <input id="addname" type="text" style="width: 95%" />
         <input id="btn_addsubmit" type="button" value="Submit" />
+    </div>
+    <div id="dialoginformation">
+        <div id="div_information">
+        </div>
     </div>
 </asp:Content>

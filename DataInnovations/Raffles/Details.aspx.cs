@@ -21,13 +21,35 @@ namespace DataInnovations.Raffles
             raffle = Request.QueryString["raffle"] + "";
             mode = Request.QueryString["mode"] + "";
             int available = 0;
+            string head = "";
+
+            switch (raffle)
+            {
+                case "1":
+                    head = "Pale Yellow Meat Raffle";
+                    break;
+                case "2":
+                    head = "Outdoor Table Raffle";
+                    break;
+                case "3":
+                    head = "Red Meat Raffle";
+                    break;
+                case "4":
+                    head = "White Meat Raffle";
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }
+            LitRows.Text = "<h2>" + head + "</h2>";
+
             if (!IsPostBack)
             {
                 SQLiteConnection m_dbConnection;
                 m_dbConnection = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
                 m_dbConnection.Open();
 
-                LitRows.Text = "";
+                //LitRows.Text = "";
                 string sql = "select number, person, details, emailaddress, mobile, paid, payment, notes, greeting, splitticket, cast(taken as nvarchar(20)) as taken from ticket where raffle_id = '" + raffle + "' order by [Number]";
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 SQLiteDataReader reader = command.ExecuteReader();

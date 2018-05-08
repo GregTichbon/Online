@@ -12,7 +12,7 @@
             <asp:Literal ID="Lit_IP" runat="server"></asp:Literal>
             <asp:textbox runat="server" ID="tb_message" Width="100%"></asp:textbox>
             <asp:CheckBoxList ID="cbl_recipients" runat="server">
-                <asp:ListItem Value="027466494">Judy Kumeroa - 027466494</asp:ListItem>
+                <asp:ListItem Value="0274266494">Judy Kumeroa - 0274266494</asp:ListItem>
                 <asp:ListItem Value="0272495088">Greg Tichbon - 0272495088</asp:ListItem>
                 <asp:ListItem Value="0211127942">Aimee Matthews - 0211127942</asp:ListItem>
                 <asp:ListItem Value="0275225411">Jordi Haami-Rerekura - 0275225411</asp:ListItem>

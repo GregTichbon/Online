@@ -16,8 +16,9 @@
         <div>
             <strong><span class="auto-style1">021 1777 870</span></strong>
             <asp:textbox runat="server" ID="tb_message" Width="100%"></asp:textbox>
+
             <asp:CheckBoxList ID="cbl_recipients" runat="server">
-                <asp:ListItem Value="027466494">Judy Kumeroa - 027466494</asp:ListItem>
+                <asp:ListItem Value="0274266494">Judy Kumeroa - 0274266494</asp:ListItem>
                 <asp:ListItem Value="0272495088">Greg Tichbon - 0272495088</asp:ListItem>
                 <asp:ListItem Value="0211127942">Aimee Matthews - 0211127942</asp:ListItem>
                 <asp:ListItem Value="0275225411">Jordi Haami-Rerekura - 0275225411</asp:ListItem>
@@ -35,6 +36,29 @@
                 <asp:ListItem Value="0226266166">Corey-Lee Robertson - 0226266166</asp:ListItem>
                 <asp:ListItem Value="0279774023">Te Paerata Tichbon - 0279774023</asp:ListItem>
                 <asp:ListItem Value="0211226723">Neo Tichbon - 0211226723</asp:ListItem>
+
+                <asp:ListItem Value="0274420256">Darryl - 0274420256</asp:ListItem>
+                <asp:ListItem Value="xxxxxx">Bob - xxxxxx</asp:ListItem>
+                <asp:ListItem Value="xxxxxx">Rae - xxxxxx</asp:ListItem>
+                <asp:ListItem Value="xxxxxx">Grant - xxxxxx</asp:ListItem>
+                <asp:ListItem Value="xxxxxx">Xavier - 0279362413</asp:ListItem>
+                <asp:ListItem Value="0272795180">Kurt - 0272795180</asp:ListItem>
+                <asp:ListItem Value="02102873434">Donny - 02102873434</asp:ListItem>
+                <asp:ListItem Value="0273939118">Brennan - 0273939118</asp:ListItem>
+                <asp:ListItem Value="0279186365">Steph - 0279186365</asp:ListItem>
+                <asp:ListItem Value="0274808695">Eliza - 0274808695</asp:ListItem>
+                <asp:ListItem Value="0278815431">Alley - 0278815431</asp:ListItem>
+                <asp:ListItem Value="0224152485">Jade - 0224152485</asp:ListItem>
+                <asp:ListItem Value="0274980842">Tomasi - 0274980842</asp:ListItem>
+                <asp:ListItem Value="0276439949">Cameron - 0276439949</asp:ListItem>
+                <asp:ListItem Value="0224291036">JJ - 0224291036</asp:ListItem>
+                <asp:ListItem Value="0274612490">Milley - 0274612490</asp:ListItem>
+                <asp:ListItem Value="0274133221">Sienna - 0274133221</asp:ListItem>
+                <asp:ListItem Value="0273400477">Britney - 0273400477</asp:ListItem>
+                <asp:ListItem Value="0224660864">Leah - 0224660864</asp:ListItem>
+                <asp:ListItem Value="0273593671">Piper - 0273593671</asp:ListItem>
+                <asp:ListItem Value="xxxxxx">Bella - xxxxxx</asp:ListItem>
+
 
             </asp:CheckBoxList>
 

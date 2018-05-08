@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+	<title>q-imageuploader</title>
+	<script type="text/javascript" src="swfobject.js"></script> 
+</HEAD>
+<BODY>
+<!-- Q-ImageUploader  www.quadroland.com -->
+	<div id="QImageUploader">
+    You need to upgrade your Flash Player or to allow javascript to enable         Image Uploader.<br/>
+		<a href="http://www.adobe.com/go/getflashplayer">Get Flash Player</a>			
+	</div>
+	<script type="text/javascript">
+	// <![CDATA[
+		var so = new SWFObject("q_file_uploader.swf", "imageuploader", "383", "280", "9", "#FFFFFF");
+		so.addParam("scale", "noscale");
+		so.addParam("salign", "TL");
+		so.addVariable("AdditionalStringVariable","pass additional data here");				 
+		so.write("QImageUploader");
+	// ]]>
+	</script>
+</BODY>
+</HTML>

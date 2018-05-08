@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+<link rel="stylesheet" type="text/css" href="../byrei-dyndiv/byrei-dyndiv_0.5.css">
+<style type="text/css">
+#test1a, #test1b, #test1c, #test1d {
+ width: 150px;
+ height: 150px;
+ background: #ccc;
+ border: 1px solid #aaa;
+ top: 25px;
+ left: 25px;
+ position: absolute;
+ overflow: hidden;
+} 
+
+.dynDiv_setLimit {
+ position: relative;
+}
+
+#test2a, #test2b, #test2c, #test2d {
+ width: 150px;
+ height: 150px;
+ right: 10px;
+ top: 120px;
+ border: 1px solid #aaa;
+ position: absolute;
+ overflow: hidden;
+ text-align: center;
+ background: #aaa;
+ filter:alpha(opacity=50);
+ opacity:0.5;
+ color: #000;
+}
+</style>
+  <script type="text/javascript" src="../byrei-dyndiv/byrei-dyndiv_0.8.js"></script>
+  <title>Example: moveable, resizeable, minimize and maximize Div</title>
+ </head>
+ <body>
+     <h1> Movetable and Resizeable Div with minimize and maximize and several Restricted Areas </h1> 
+     <p>
+      This is a complex Example, which shows you that you can set several restricted Area and also Div without no Areas.<br>
+      Please keep in Mind you should understand the other Examples before you try such an example on you own.<br>
+     </p>
+      <div style="width: 300px; height: 300px; border: 2px solid red; float: left;" class="dynDiv_setLimit">
+       <div id="test1a">
+        <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp;Restricted to red<div class="dynDiv_minmaxDiv">[x]</div></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+       <div id="test2a" class="dynDiv_moveDiv">
+        <p style="padding: 10px;"> Restricted to red </p>
+        <div class="dynDiv_resizeDiv_tl"></div>
+        <div class="dynDiv_resizeDiv_tr"></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+      </div>
+
+      <div style="width: 400px; height: 300px; border: 2px solid blue; float: left;" class="dynDiv_setLimit">
+       <div id="test1b">
+        <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp;Restricted to blue<div class="dynDiv_minmaxDiv">[x]</div></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>    
+       <div id="test2b" class="dynDiv_moveDiv">
+        <p style="padding: 10px;"> Restricted to blue </p>
+        <div class="dynDiv_resizeDiv_tl"></div>
+        <div class="dynDiv_resizeDiv_tr"></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+      </div>
+
+      <div style="width: 300px; height: 300px; border: 2px solid green; float: left;" class="dynDiv_setLimit">
+       <div id="test1c">
+        <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp;Restricted to green<div class="dynDiv_minmaxDiv">[x]</div></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>    
+       <div id="test2c" class="dynDiv_moveDiv">
+        <p style="padding: 10px;"> Restricted to green </p>
+        <div class="dynDiv_resizeDiv_tl"></div>
+        <div class="dynDiv_resizeDiv_tr"></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+      </div>
+
+      <div id="test1d">
+       <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp; Not Restricted<div class="dynDiv_minmaxDiv">[x]</div></div>
+       <div class="dynDiv_resizeDiv_bl"></div>
+       <div class="dynDiv_resizeDiv_br"></div>
+      </div>      
+      <div id="test2d" class="dynDiv_moveDiv dynDiv_bodyLimit">
+       <p style="padding: 10px;"> Not Restricted </p>
+       <div class="dynDiv_resizeDiv_tl"></div>
+       <div class="dynDiv_resizeDiv_tr"></div>
+       <div class="dynDiv_resizeDiv_bl"></div>
+       <div class="dynDiv_resizeDiv_br"></div>
+      </div>
+
+  </body>
+</html>

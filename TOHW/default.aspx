@@ -231,12 +231,9 @@
                 </div>
             </section>
             <section>
-                <a href="#" class="image">
-                    <img src="images/DolzHadfield.jpg" alt="" data-position="25% 25%" />
-                </a>
-                <div class="content">
+                <a href="#" class="image">&nbsp;</a><div class="content">
                     <div class="inner">
-                        <h2>Dolz Hadfield</h2>
+                        <h2>Ataria </h2>
                         <p>Stone Soup Worker</p>
                         <ul class="actions">
                             <li><a href="#" class="button">Learn more</a> </li>
@@ -259,6 +256,7 @@
                     </div>
                 </div>
             </section>
+            <!--
             <section>
                 <a href="#" class="image">
                     <img src="images/LeoneandMellisa.jpg" alt="" data-position="25% 25%" />
@@ -274,6 +272,7 @@
                     </div>
                 </div>
             </section>
+            -->
 
         </section>
         <!-- Two -->

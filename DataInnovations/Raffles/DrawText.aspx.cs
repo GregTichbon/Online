@@ -29,7 +29,7 @@ namespace DataInnovations.Raffles
             m_dbConnection.Open();
 
             LitRows.Text = "";
-            string sql = "select number, person, details, emailaddress, mobile, paid, payment, notes, greeting, splitticket, cast(taken as nvarchar(20)) as taken from ticket where raffle_id = '" + dd_raffle.SelectedValue + "' order by [Number]";
+            string sql = "select [number], person, details, emailaddress, mobile, paid, payment, notes, greeting, splitticket, cast(taken as nvarchar(20)) as taken from ticket where raffle_id = '" + dd_raffle.SelectedValue + "' order by [Number]";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
 
@@ -70,8 +70,12 @@ namespace DataInnovations.Raffles
                     if (live && doit)
                     {
                         string message = "Hi " + reader["greeting"] + ", " + tb_message.Text;
-                        //result = "GREG";
+                        //result = gFunctions.test1();  //This does nothing and works fine
+                        //result = gFunctions.test2();  //This does nothing and works fine
+
+                        //mobile = "0272495088";
                         result = gFunctions.SendRemoteMessage(mobile, message);
+                        //break;
                     }
                 }
 
@@ -90,6 +94,8 @@ namespace DataInnovations.Raffles
                 LitRows.Text += "<td>" + result + "</td>";
 
                 LitRows.Text += "</tr>";
+
+                
             }
             LitRows.Text += "</table>";
 

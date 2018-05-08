@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <link rel="stylesheet" type="text/css" href="byrei-dyndiv_0.5.css">
+<style type="text/css">
+
+
+#test1a, #test1b, #test1c, #test1d {
+ width: 150px;
+ height: 150px;
+ background: #ccc;
+ border: 1px solid #aaa;
+ top: 25px;
+ left: 25px;
+ position: absolute;
+ overflow: hidden;
+} 
+
+.dynDiv_setLimit {
+ position: relative;
+}
+
+#test2a, #test2b, #test2c, #test2d {
+ width: 150px;
+ height: 150px;
+ right: 10px;
+ top: 120px;
+ border: 1px solid #aaa;
+ position: absolute;
+ overflow: hidden;
+ text-align: center;
+ background: #aaa;
+ filter:alpha(opacity=50);
+ opacity:0.5;
+ color: #000;
+}
+</style>
+  <script type="text/javascript" src="byrei-dyndiv_0.8.js"></script>
+  <title>Example: moveable, resizeable, minimize and maximize Div</title>
+  <meta name="description" content="Example: moveable, resizeable, minimize and maximize Div - dynDiv (move, resize, drag, drop) by Markus Bordihn">
+    <meta name="author" content="Markus Bordihn">
+    <meta name="keywords" content="dyndiv, dynamic, div, move, resize, drag, drop, puzzle, os like, api, crossbrowser, javascript, w3c, safari, firefox, internet explorer, markus, bordihn, css, js">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta name="generator" content="Markus Bordihn - ByRei.de">
+    <meta http-equiv="content-language" content="de">
+    <meta http-equiv="expires" content="604800">
+    <meta name="revisit-after" content="5 days">
+    <meta name="language" content="en">
+    <meta name="robots" content="all">
+ </head>
+ <body>
+  <div id="sbody">
+   <div id="shead">
+    <div id="headline">
+     <h1> ByRei - dynDiv </h1><br><h3>Simple dynamic Divs by Markus Bordihn</h3>
+     <ul>
+      <li><a href="/" title="Home"><span>Home</span></a></li>
+      <li><a href="/docs/" title="Documentation"><span>Documentation</span></a></li>
+      <li><a href="/example/" title="Example"><span>Examples</span></a></li>
+      <li><a href="/download/" title="Download"><span>Download</span></a></li>
+	  <li><a href="http://code.google.com/p/dyndiv/issues/list" title="Report a Bug / Feature Request"><span>Issues</span></a></li>
+	  <li><a href="/other/" title="More Scripts"><span>More Scripts</span></a></li>
+      <li><a href="/impressum/" title="Impressium"><span>Impressum</span></a></li>
+      <li><a href="/disclaimer/" title="Disclaimer"><span>Disclaimer</span></a></li>
+     </ul>
+    </div>
+    <p class="clearer"></p>
+   </div>
+   <div id="scontent">
+
+    <div id="content">
+     <h1> Movetable and Resizeable Div with minimize and maximize and several Restricted Areas </h1> 
+     <p>
+      This is a complex Example, which shows you that you can set several restricted Area and also Div without no Areas.<br>
+      Please keep in Mind you should understand the other Examples before you try such an example on you own.<br>
+     </p>
+      <div style="width: 300px; height: 300px; border: 2px solid red; float: left;" class="dynDiv_setLimit">
+       <div id="test1a">
+        <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp;Restricted to red<div class="dynDiv_minmaxDiv">[x]</div></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+       <div id="test2a" class="dynDiv_moveDiv">
+        <p style="padding: 10px;"> Restricted to red </p>
+        <div class="dynDiv_resizeDiv_tl"></div>
+        <div class="dynDiv_resizeDiv_tr"></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+      </div>
+
+      <div style="width: 400px; height: 300px; border: 2px solid blue; float: left;" class="dynDiv_setLimit">
+       <div id="test1b">
+        <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp;Restricted to blue<div class="dynDiv_minmaxDiv">[x]</div></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>    
+       <div id="test2b" class="dynDiv_moveDiv">
+        <p style="padding: 10px;"> Restricted to blue </p>
+        <div class="dynDiv_resizeDiv_tl"></div>
+        <div class="dynDiv_resizeDiv_tr"></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+      </div>
+
+      <div style="width: 300px; height: 300px; border: 2px solid green; float: left;" class="dynDiv_setLimit">
+       <div id="test1c">
+        <div class="dynDiv_moveParentDiv">&nbsp;&nbsp;&nbsp;Restricted to green<div class="dynDiv_minmaxDiv">[x]</div></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>    
+       <div id="test2c" class="dynDiv_moveDiv">
+        <p style="padding: 10px;"> Restricted to green </p>
+        <div class="dynDiv_resizeDiv_tl"></div>
+        <div class="dynDiv_resizeDiv_tr"></div>
+        <div class="dynDiv_resizeDiv_bl"></div>
+        <div class="dynDiv_resizeDiv_br"></div>
+       </div>
+      </div>
+
+      <div id="test1d">
+       <div class="dynDiv_moveParentDiv dynDiv_bodyLimit">&nbsp;&nbsp;&nbsp; Not Restricted<div class="dynDiv_minmaxDiv">[x]</div></div>
+       <div class="dynDiv_resizeDiv_bl"></div>
+       <div class="dynDiv_resizeDiv_br"></div>
+      </div>      
+      <div id="test2d" class="dynDiv_moveDiv dynDiv_bodyLimit">
+       <p style="padding: 10px;"> Not Restricted </p>
+       <div class="dynDiv_resizeDiv_tl"></div>
+       <div class="dynDiv_resizeDiv_tr"></div>
+       <div class="dynDiv_resizeDiv_bl"></div>
+       <div class="dynDiv_resizeDiv_br"></div>
+      </div>
+
+     <h2 style="clear: both;"> HTML Code </h2>
+     <pre>
+&lt;link rel="stylesheet" type="text/css" href="byrei-dyndiv_0.5.css"&gt;
+&lt;script type="text/javascript" src="byrei-dyndiv_0.8.js"&gt;&lt;/script&gt;     
+[Custom or additional CSS Code] 
+
+&lt;div style="width: 300px; height: 300px; border: 2px solid red; float: left;" class="dynDiv_setLimit"&gt;
+ &lt;div id="test1a"&gt;
+  &lt;div class="dynDiv_moveParentDiv"&gt;&nbsp;&nbsp;&nbsp;Restricted to red&lt;div class="dynDiv_minmaxDiv"&gt;[x]&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;div id="test2a" class="dynDiv_moveDiv"&gt;
+  &lt;p style="padding: 10px;"&gt; Restricted to red &lt;/p&gt;
+  &lt;div class="dynDiv_resizeDiv_tl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_tr"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style="width: 400px; height: 300px; border: 2px solid blue; float: left;" class="dynDiv_setLimit"&gt;
+ &lt;div id="test1b"&gt;
+  &lt;div class="dynDiv_moveParentDiv"&gt;&nbsp;&nbsp;&nbsp;Restricted to blue&lt;div class="dynDiv_minmaxDiv"&gt;[x]&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+ &lt;/div&gt;    
+ &lt;div id="test2b" class="dynDiv_moveDiv"&gt;
+  &lt;p style="padding: 10px;"&gt; Restricted to blue &lt;/p&gt;
+  &lt;div class="dynDiv_resizeDiv_tl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_tr"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style="width: 300px; height: 300px; border: 2px solid green; float: left;" class="dynDiv_setLimit"&gt;
+ &lt;div id="test1c"&gt;
+  &lt;div class="dynDiv_moveParentDiv"&gt;&nbsp;&nbsp;&nbsp;Restricted to green&lt;div class="dynDiv_minmaxDiv"&gt;[x]&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+ &lt;/div&gt;    
+ &lt;div id="test2c" class="dynDiv_moveDiv"&gt;
+  &lt;p style="padding: 10px;"&gt; Restricted to green &lt;/p&gt;
+  &lt;div class="dynDiv_resizeDiv_tl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_tr"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+  &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="test1c"&gt;
+ &lt;div class="dynDiv_moveParentDiv dynDiv_bodyLimit"&gt;&nbsp;&nbsp;&nbsp;Not Restricted&lt;div class="dynDiv_minmaxDiv"&gt;[x]&lt;/div&gt;&lt;/div&gt;
+ &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+ &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+&lt;/div&gt;    
+&lt;div id="test2c" class="dynDiv_moveDiv dynDiv_bodyLimit"&gt;
+ &lt;p style="padding: 10px;"&gt; Not Restricted &lt;/p&gt;
+ &lt;div class="dynDiv_resizeDiv_tl"&gt;&lt;/div&gt;
+ &lt;div class="dynDiv_resizeDiv_tr"&gt;&lt;/div&gt;
+ &lt;div class="dynDiv_resizeDiv_bl"&gt;&lt;/div&gt;
+ &lt;div class="dynDiv_resizeDiv_br"&gt;&lt;/div&gt;
+&lt;/div&gt;
+     </pre>
+     <h2> Additonal CSS Code </h2>
+     <pre>
+#test1a, #test1b, #test1c, #test1d {
+ width: 150px;
+ height: 150px;
+ background: #ccc;
+ border: 1px solid #aaa;
+ top: 25px;
+ left: 25px;
+ position: absolute;
+ overflow: hidden;
+} 
+
+.dynDiv_setLimit {
+ position: relative;
+}
+
+#test2a, #test2b, #test2c, #test2d {
+ width: 150px;
+ height: 150px;
+ right: 10px;
+ top: 120px;
+ border: 1px solid #aaa;
+ position: absolute;
+ overflow: hidden;
+ text-align: center;
+ background: #aaa;
+ filter:alpha(opacity=50);
+ opacity:0.5;
+ color: #000;
+}
+     </pre>
+     <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88" style="border: 0;"></a></p>
+    </div>
+ 	<div id="copyright">Copyright by Markus Bordihn 2007 (<a href="http://markusbordihn.de">http://markusbordihn.de</a>) </div>   
+   </div>
+  </div></body>
+</html>

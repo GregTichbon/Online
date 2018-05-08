@@ -131,6 +131,9 @@
 
 
         $(document).ready(function () {
+
+            $("#span_bank").html($("#hf_bank").val());
+            06-0996-0956968-00
             $( "#dialog" ).dialog({
                 autoOpen: false,
                 width: 600,
@@ -225,7 +228,6 @@
 
                             details = $.parseJSON(result.d);
                             if(details.status == "Updated") {
-alert(ticket);
                                 $("#td_" + ticket).html("On hold to you");
                                 alert("Thanks - this ticket has been put on hold awaiting payment.  Please feel free to take as many tickets as you like.");
                             } else {
@@ -259,31 +261,24 @@ alert(ticket);
     </script>
 </head>
 <body>
-    <div id="processingajax" style="display:none" class="processing"></div>
     <p>
-        Hi, I&#39;ve been asked to 
-        help sell a few more raffle tickets for those kids that have a few left over.&nbsp; There are two cards listed below, the red one and the white one.&nbsp; Once a card is full we can start doing the draws.</p>
+        The Cullinane and Girls&#39; College Rowers are heading to Maadi and have been fundraising hard.&nbsp; Sausage sizzles, a hangi, marshalling for the off roaders etc and selling raffle tickets.&nbsp; We have a few more raffles to sell to cover costs.</p>
     <p>
-        Cullinane and Girls&#39; Colleges as part of the Union Boat Club (<a href="http://unionboatclub.co.nz" target="_blank">unionboatclub.co.nz</a>) are taking a group of students to the Maadi Cup rowing regatta at Lake Ruataniwha in Twizel (<a href="http://www.maadi.co.nz" target="_blank">www.maadi.co.nz</a>).</p>
-    <p>
-        Neo is now a keen rower, into his second year and is going really well.&nbsp; He&#39;s loving it and working really hard.</p>
-    <p>
+        
         We&#39;re leaving on Saturday 17th March and returning on Tuesday 27th March.&nbsp; Most of us will be flying but the Ignition Ute and Boat Trailer and another van will have to make the long trek down by road and ferry.</p>
     <p>
         Obviously there is a high cost to this trip, and we are endevouring to make it as affordable for everyone as possible.&nbsp;&nbsp; We are also doing a number of other fundraisers of which this raffle is just one.&nbsp;</p>
     <p>
-      This Raffle</strong></p>
+        <strong>This Raffle</strong></p>
     <p>
-        There are 50 tickets on each card.&nbsp; The cost is $20.00 but ... that means your number is entered into 10 weekly draws (ie: $2.00 per week) for a meat pack worth $50.00 from Chef&#39;s Choice.&nbsp; You have overall a 20% chance of winning!</p>
+        There are 50 tickets on each card.&nbsp; The cost is <strong>$20.00</strong> but ... that means your number is entered into <strong>10 weekly draws (ie: $2.00 per week)</strong> for a meat pack worth <strong>$50.00 from Chef&#39;s Choice</strong>.&nbsp; You have overall a 20% chance of winning!</p>
     <p>
-        If you&#39;d like to support the rowers, please grab one of the tickets below.&nbsp; You can either pay the money into my bank account or otherwise let me know how you can get it to me.&nbsp; Click on the buttons below and you&#39;ll be provided with my bank account and asked for your details.&nbsp; It couldn&#39;t be easier.&nbsp; 
-        I&#39;ll place your ticket &quot;on hold&quot; to you until payment is sussed.</p>
+        If you&#39;d like to support the rowers, please grab one of the tickets below.&nbsp; You can either pay the money into the friends of Union bank account or otherwise let us know how you can get it to us.&nbsp; Click on the buttons below and you&#39;ll be provided with the bank account and asked for your details.&nbsp; It couldn&#39;t be easier.&nbsp; 
+        Your ticket will be placed &quot;on hold&quot; to you until payment is sussed.</p>
     <p>
-        Thanks for your support.&nbsp;ort.&nbsp;</p>
+        Thanks for your support.</p>
     <p>
         &nbsp;</p>
-    <p>
-        -Greg</p>
     <p style="text-align: center">
         <img alt="" class="auto-style2" src="Images/Cullinane%20Logo.jpg" /><img alt="" class="auto-style3" src="Images/Whanganui%20Girls%20College%20logo.jpg" /><img alt="" class="auto-style4" src="Images/UBC.png" /><br />
         <img alt="" class="auto-style1" src="Images/ChefsChoice%20Logo.PNG" /></p>
@@ -291,6 +286,7 @@ alert(ticket);
     <!--<div style="width:20%; float:left">-->
         <input type="hidden" id="hf_ticket" name="hf_ticket" />
         <input type="hidden" id="hf_update" name="hf_update" />
+        <input type="hidden" id="hf_bank" name="hf_bank" value="38-9018-0421031-00" />
     <!--
         <p>There are <span id="span_available1"><%: available1 %></span> tickets currently available on this card.</p>
 
@@ -349,7 +345,7 @@ alert(ticket);
                 </tr>
                 <tr>
                     <td style="text-align: right">How will you get the money to Greg?
-                        <br /><span style="font-size:small">Bank A/c No: 06-0996-0956968-00<br />Please use <b>"Maadi <span class="ticket"></span></b>" as your reference.</span></td>
+                        <br /><span style="font-size:small">Bank A/c No: <span id="span_bank"></span><br />Please use <b>"Maadi <span class="ticket"></span></b>" as your reference.</span></td>
                     <td>
                         <textarea id="tb_payment" name="tb_payment" required="required"></textarea></td>
                 </tr>

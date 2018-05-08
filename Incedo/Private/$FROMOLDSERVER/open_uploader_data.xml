@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<uploader>
+	<view type="thumbnails" thumbsize="110"/>
+	<view type="details" sizeColumnWidth="70" nameColumnWidth="120" nameColumnLabel="file" sizeColumnLabel="size"/>
+	<fileFilter description="Photos and images (*.jpg, *.jpeg, *.gif, *.png)" extension="*.jpg; *.jpeg; *.gif; *.png"/>
+	<photo_limit number="40" caption="You reached the photo number limit:"/>
+	<resize process="true" compression="85" maxWidth="600" maxHeight="450" generate_thumbs="true" thumbs_max_size="150"/>
+	<upload preload="Preloading images:" upload="Uploading images to server:" prepare="Processing and image compression:" of="of" cancel="Cancel" start="Start" warning_empty_required_field="Warning! One of the required fields is empty!" confirm="Will be uploaded"/>
+	<urls urlToUpload="q-imageuploadr.asp" urlOnUploadSuccess="" urlOnUploadFail="upload_fail.php" urlUpdateFlashPlayer="" useMessageBoxesAfterUpload="false" messageOnUploadSuccess="Images were successfully uploaded!" messageOnUploadFail="Error! Images failed to upload!" jsFunctionNameOnUpload=""/>
+	<watermark for_thumb="" for_image=""/>
+	<intro enabled="false">
+		<control type="addPhotosButton" x="0" y="0" width="0" height="0" label=""/>
+	</intro>
+	<main>
+		<switcher thumbsLabel="thumbnails" detailsLabel="details" backgroundAlphaNormal="50" backgroundAlphaActive="100" backgroundColor="0xC0D3CF" x="390" y="30"/>
+		<control type="textField" x="550" y="20" width="160" height="20">Upload to album:</control>
+		<control type="ComboBoxWithImage" x="535" y="40" id="ALBUM_COMBO_BOX" label="" defaultValue="0" isGlobal="true" showInDetailedView="false" detailed_width="50" image_shift_x="23" image_shift_y="49" image_width="92" image_height="68" width="150" height="20" rowCount="5" isRequired="false" prompt="Please select the item">
+			<item label="Change the album!!!" value="0" img_url="image_uploader_data/alb_3_birthday.jpg"/>
+			<item label="Nightclub Wendy birthday" value="1" img_url="image_uploader_data/alb_bd_in_nightclub.jpg"/>
+			<item label="Egypt 2009" value="2" img_url="image_uploader_data/alb_me_in_egypt.jpg"/>
+			<item label="Paris 2008" value="3" img_url="image_uploader_data/alb_me_in_paris.jpg"/>
+			<item label="Festival" value="4" img_url="image_uploader_data/alb_img_gulyajpole.jpg"/>
+		</control>
+		<control type="CheckBox" x="400" y="350" id="comments" isGlobal="false" label="comments" checkLabel="Deny comments" initValue="true" showInDetailedView="true" detailed_width="70"/>
+		<control type="TextInput" x="30" y="310" width="166" height="20" initValue="Photo tags" id="photo_tags" label="" isGlobal="false" showInDetailedView="false"/>
+		<control type="TextInput" x="30" y="350" width="166" height="20" initValue="Photo title" id="photo_title" label="" isGlobal="false" showInDetailedView="false"/>
+		<control type="CheckBox" x="400" y="320" id="voting" isGlobal="false" label="voting" checkLabel="Allow voting" initValue="true" showInDetailedView="true" detailed_width="50"/>
+		<control type="MultilineTextInput" x="535" y="179" width="150" height="115" initValue="Album comments here" id="ALBUM_COMMENTS_INPUT" label="" isGlobal="true" showInDetailedView="false" isRequired="false"/>
+		<control type="textField" x="250" y="295" width="100" height="20">Set privacy:</control>
+		<control type="RadioGroup" x="250" y="320" id="privacy" label="privacy" defaultValue="0" gap="-5" isGlobal="false" showInDetailedView="true" detailed_width="90" width="160" height="20">
+			<item label="public" value="0"/>
+			<item label="friends only" value="1"/>
+			<item label="family only" value="2"/>
+		</control>
+		<control type="addPhotosButton" x="550" y="310" width="130" height="27" label="Add photos"/>
+		<control type="uploadButton" x="550" y="350" width="130" height="27" label="Upload"/>
+		<control type="Image" x="535" y="70" path="image_uploader_data/camera_blue.jpg"/>
+		<control type="Image" x="20" y="20" path="image_uploader_data/photos_bg.png"/>
+	</main>
+</uploader>

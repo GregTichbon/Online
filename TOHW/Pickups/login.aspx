@@ -38,6 +38,11 @@
     <div id="centred">
         <table>
             <tr>
+                <td style="text-align: right">Date: </td>
+                <td>
+                    <%: formattedDate %></td>
+            </tr>
+            <tr>
                 <td style="text-align: right">Name: </td>
                 <td>
                     <asp:TextBox ID="tb_name" class="tb_name" runat="server" Style="width:100%"></asp:TextBox></td>

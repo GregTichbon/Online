@@ -15,34 +15,41 @@ namespace TOHW.Pickups
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Parameters", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@pname", SqlDbType.VarChar).Value = "CurrentPickupDate";
-            cmd.Connection = con;
-            try
+            if (!IsPostBack)
             {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                if (Session["pickups_loggedin"] == null)
                 {
-                    while (dr.Read())
+                    Response.Redirect("login.aspx");
+                }
+                String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlCommand cmd = new SqlCommand("Get_Parameters", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@pname", SqlDbType.VarChar).Value = "CurrentPickupDate";
+                cmd.Connection = con;
+                try
+                {
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
                     {
-                        DateTime theDate;
-                        theDate = Convert.ToDateTime(dr["pdate1"]);
-                        tb_date.Text = theDate.ToString("d/MM/yyyy");
+                        while (dr.Read())
+                        {
+                            DateTime theDate;
+                            theDate = Convert.ToDateTime(dr["pdate1"]);
+                            tb_date.Text = theDate.ToString("d MMM yyyy");
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
             }
         }
 
@@ -54,12 +61,12 @@ namespace TOHW.Pickups
         protected void btn_setdate_Click(object sender, EventArgs e)
         {
             DateTime theDate;
-            if (DateTime.TryParseExact(tb_date.Text, "d/MM/yyyy HH:mm:ss",
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out theDate))
+            //if (DateTime.TryParseExact(tb_date.Text, "d/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out theDate))
+            if(DateTime.TryParse(tb_date.Text, out theDate))
             {
                 String strConnString = ConfigurationManager.ConnectionStrings["TOHWConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(strConnString);
-                SqlCommand cmd = new SqlCommand("Update_Parameters", con);
+                SqlCommand cmd = new SqlCommand("Update_Parameter", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@pname", SqlDbType.VarChar).Value = "CurrentPickupDate";
                 cmd.Parameters.Add("@pdate1", SqlDbType.VarChar).Value = tb_date.Text;
@@ -85,6 +92,8 @@ namespace TOHW.Pickups
                     con.Close();
                     con.Dispose();
                 }
+          
+                Response.Redirect ("default.aspx");
             }
             else
             {
