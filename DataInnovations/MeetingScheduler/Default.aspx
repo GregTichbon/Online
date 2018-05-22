@@ -21,8 +21,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        This screen should show all meeting open for a user GUID
-        <a href="Scheduler.aspx?ID=XXXXXXXXXXXXX">mEETING 1</a>
+        <h1>You have an incorrect Meeting Key</h1>
+        This screen should show all meetings open for a user GUID
+        <!--
+        <a href="Scheduler.aspx?ID=XXXXXXXXXXXXX">Meeting 1</a>
+        -->
 
     </form>
 </body>

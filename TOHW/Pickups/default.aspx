@@ -538,8 +538,10 @@
                     todo = "|Coming|Picked up|Picked up from another address|Will make their own way|Made own way|";
                 } else if ($('#dd_status').val() == "Unknown") {
                     todo = "||No Response|Call in|";
-                //} else if ($('#dd_status').val() == "Noted") {
-                //    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Will make their own way|Made own way|";
+                } else if ($('#dd_status').val() == "Noted") {
+                    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Will make their own way|Made own way|";
+                } else if ($('#dd_status').val() == "Pickups") {
+                    todo = "|Coming|Call in|";
                 } else {
                     todo = "";
                 }
@@ -774,6 +776,7 @@
     <select id="dd_status">
         <option>All</option>
         <option>To do</option>
+        <option>Pickups</option>
         <option>Attendance</option>
         <option>Unknown</option>
         <option>Came</option>

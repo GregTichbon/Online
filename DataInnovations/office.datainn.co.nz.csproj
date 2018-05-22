@@ -81,6 +81,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
+    <Content Include="Entity\account.aspx" />
+    <Content Include="Entity\Amended.aspx" />
+    <Content Include="Entity\body.html" />
+    <Content Include="Entity\DisplayActivity.aspx" />
+    <Content Include="Entity\Entity.aspx" />
+    <Content Include="Entity\EntityHelp.html" />
+    <Content Include="Entity\login.aspx" />
+    <Content Include="Entity\LoginAssistance.aspx" />
+    <Content Include="Entity\LoginAssistancePasswordResetEmail.html" />
+    <Content Include="Entity\LoginHelp.html" />
+    <Content Include="Entity\ResetPassword.aspx" />
+    <Content Include="Entity\Test.aspx" />
     <Content Include="FB\default.aspx" />
     <Content Include="greg.aspx" />
     <Content Include="Greg\default.aspx" />
@@ -161,6 +173,62 @@
     </Compile>
     <Compile Include="BBQ\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\account.aspx.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\account.aspx.designer.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Amended.aspx.cs">
+      <DependentUpon>Amended.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\Amended.aspx.designer.cs">
+      <DependentUpon>Amended.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DisplayActivity.aspx.cs">
+      <DependentUpon>DisplayActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\DisplayActivity.aspx.designer.cs">
+      <DependentUpon>DisplayActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Entity.aspx.cs">
+      <DependentUpon>Entity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\Entity.aspx.designer.cs">
+      <DependentUpon>Entity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\LoginAssistance.aspx.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\LoginAssistance.aspx.designer.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="FB\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

@@ -94,7 +94,7 @@ namespace Generic
             client.Send(mail);
         }
 
-        public static void Log(string location, string logMessage, string EmailAddress)
+        public void Log(string location, string logMessage, string EmailAddress)
         {
             String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
 
@@ -108,7 +108,7 @@ namespace Generic
             }
         }
 
-        public static string getReference(string mode = "guid")
+        public string getReference(string mode = "guid")
         {
             string reference = "";
 
@@ -127,7 +127,7 @@ namespace Generic
             return reference;
         }
 
-        public static string makelink(string url, string window = "")
+        public string makelink(string url, string window = "")
         {
             string link = url.Trim().ToLower();
             if (link != "")
@@ -160,7 +160,7 @@ namespace Generic
             return link;
         }
 
-        public static string saveattachments(string attpath, string reference, System.Web.UI.WebControls.FileUpload fucontrol, string RawUrl)
+        public string saveattachments(string attpath, string reference, System.Web.UI.WebControls.FileUpload fucontrol, string RawUrl)
         {
             //if attpath has had reference appended then don't  probably need to pass reference
             string uploadresult = "";

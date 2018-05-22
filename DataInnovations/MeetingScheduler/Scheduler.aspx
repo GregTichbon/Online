@@ -111,6 +111,7 @@
 
         $(document).ready(function () {
 
+
             $('.zui-scroller').css('width', $(window).width() - 200);
 
             $(window).resize(function () {
@@ -129,18 +130,16 @@
             $(".selector").click(function () {
                 $(".selector").css("border-color", "white");
                 newrank = $(this).data('rank');
-                //alert(newrank);
                 $(this).css("border-color", "red");
             });
 
             $(".slot").mouseover(function () {
                 document.getSelection().removeAllRanges();
                 if (down && newrank != "") {
-                    rank = $(this).data('rank');
+                    rank = $(this).attr('data-rank');
                     if (rank != newrank) {
                         $(this).removeClass('s' + rank);
-
-                        $(this).data('rank', newrank);
+                        $(this).attr('data-rank', newrank);
                         $(this).addClass('s' + newrank);
                     }
                 }
@@ -148,11 +147,8 @@
 
             $(".slot").mousedown(function () {
                 document.getSelection().removeAllRanges();
-
-                rank = $(this).data('rank');
+                rank = $(this).attr('data-rank');
                 $(this).removeClass('s' + rank);
-                //alert(newrank);
-                $('#debug').text(newrank);
                 if (newrank == "") {
                     rank++;
                     if (rank > 2) {
@@ -161,7 +157,8 @@
                 } else {
                     rank = newrank;
                 }
-                $(this).data('rank', rank);
+                $(this).attr('data-rank', rank);
+                $(this).attr('data-changed', '1');
                 $(this).addClass('s' + rank);
                 document.getSelection().removeAllRanges();
 
@@ -181,15 +178,29 @@
                 } else {
                     day = $(this).data('day');
                     days = $('*[data-day="' + day + '"]');
+                    days.attr("data-rank", newrank)
+                    days.attr('data-changed', 1);
                     days.removeClass('s0');
                     days.removeClass('s1');
                     days.removeClass('s2');
                     days.removeClass('s3');
                     days.addClass('s' + newrank);
+
                 }
             });
-            $('.save').click(function () {
-                
+
+
+            $("form").submit(function (e) {
+                //e.preventDefault();
+                $('*[data-changed="1"]').each(function (index) {
+                    rank = $(this).attr('data-rank');
+                    reference = $(this).attr('data-reference');
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: reference,
+                        value: rank
+                    }).appendTo('#form1');                    //alert(startdatetime + "=" + rank);
+                });
             });
 
         }); //document.ready
@@ -197,7 +208,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <!--
+         <!--
         <div class="zui-wrapper">
             <div class="zui-scroller">
                 <table class="zui-table">
