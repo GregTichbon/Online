@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
+    <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
     <Content Include="Entity\account.aspx" />
     <Content Include="Entity\Amended.aspx" />
     <Content Include="Entity\body.html" />
@@ -107,6 +108,9 @@
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
+    <Content Include="Row\data.asmx" />
+    <Content Include="Row\Entry.aspx" />
+    <Content Include="Row\Prognostics.aspx" />
     <Content Include="Scripts\CyclePlugin\default.html" />
     <Content Include="Scripts\CyclePlugin\jquery.cycle.all.js" />
     <Content Include="Scripts\simplefadeslideshow\.gitignore" />
@@ -339,6 +343,24 @@
     </Compile>
     <Compile Include="Raffles\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Row\Entry.aspx.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Entry.aspx.designer.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\Prognostics.aspx.cs">
+      <DependentUpon>Prognostics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Prognostics.aspx.designer.cs">
+      <DependentUpon>Prognostics.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\SR.aspx.cs">
       <DependentUpon>SR.aspx</DependentUpon>

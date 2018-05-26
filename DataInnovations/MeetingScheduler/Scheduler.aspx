@@ -109,14 +109,24 @@
     <script type="text/javascript">
 
 
+
         $(document).ready(function () {
 
+            /*
+            window.onbeforeunload = function (e) {
+                var dialogText = $('*[data-changed="1"]').length;
+                e.returnValue = dialogText;
+                return dialogText;
+            };
+            */
 
             $('.zui-scroller').css('width', $(window).width() - 200);
 
             $(window).resize(function () {
                 $('.zui-scroller').css('width', $(window).width() - 200);
             });
+
+
 
             var down = false;
             $(document).mousedown(function () {
@@ -140,6 +150,12 @@
                     if (rank != newrank) {
                         $(this).removeClass('s' + rank);
                         $(this).attr('data-rank', newrank);
+                        if ($(this).attr('data-origrank') != newrank) {
+                            $(this).attr('data-changed', 1);
+                        }
+                        else {
+                            $(this).attr('data-changed', 0);
+                        }
                         $(this).addClass('s' + newrank);
                     }
                 }
@@ -158,10 +174,14 @@
                     rank = newrank;
                 }
                 $(this).attr('data-rank', rank);
-                $(this).attr('data-changed', '1');
+                if ($(this).attr('data-origrank') != newrank) {
+                    $(this).attr('data-changed', 1);
+                }
+                else {
+                    $(this).attr('data-changed', 0);
+                }
                 $(this).addClass('s' + rank);
                 document.getSelection().removeAllRanges();
-
             });
 
             $(".slot").mouseup(function () {
@@ -179,7 +199,14 @@
                     day = $(this).data('day');
                     days = $('*[data-day="' + day + '"]');
                     days.attr("data-rank", newrank)
-                    days.attr('data-changed', 1);
+
+                    if (days.attr('data-origrank') != newrank) {
+                        days.attr('data-changed', 1);
+                    }
+                    else {
+                        days.attr('data-changed', 0);
+                    }
+
                     days.removeClass('s0');
                     days.removeClass('s1');
                     days.removeClass('s2');
@@ -199,11 +226,14 @@
                         type: 'hidden',
                         name: reference,
                         value: rank
-                    }).appendTo('#form1');                    //alert(startdatetime + "=" + rank);
+                    }).appendTo('#form1');
+                    //alert(startdatetime + "=" + rank);
                 });
             });
 
         }); //document.ready
+
+
     </script>
 </head>
 <body>

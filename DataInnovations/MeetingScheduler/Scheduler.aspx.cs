@@ -152,7 +152,8 @@ namespace DataInnovations.MeetingScheduler
                         }
                         string start = table2.Columns[f1].ColumnName;
 
-                        html += "<td class=\"slot s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-day=\"" + day + "\" data-changed=\"0\" data-reference=\"" + entity_ctr + "|" + start + "\">&nbsp;</td>";
+                        //html += "<td class=\"slot s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-origrank=\"" + columnvalue + "\" data-day=\"" + day + "\" data-changed=\"0\" data-reference=\"" + entity_ctr + "|" + start + "\">&nbsp;</td>";
+                        html += "<td class=\"slot s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-origrank=\"" + columnvalue + "\" data-day=\"" + day + "\" data-reference=\"" + entity_ctr + "|" + start + "\">&nbsp;</td>";
                     }
                     else
                     {

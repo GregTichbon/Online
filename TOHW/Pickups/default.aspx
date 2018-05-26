@@ -418,8 +418,8 @@
 
             function validate(myid) {
                 //Working on
-                //All options: Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Will make their own way,Made own way
-                need_address_person = "|Coming|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|";
+                //All options: Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Called in - no response,Will make their own way,Made own way
+                need_address_person = "|Coming|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Called in - no response|";
                 //not done: blank,Not Coming,No Response,Will make their own way,Made own way
                 if (myid != '') {
                     myselector = $('#tr_' + myid);
@@ -528,7 +528,7 @@
                 //    todo = "";
                 //}
 
-                //All options: Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Will make their own way,Made own way
+                //All options: Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Called in - no response,Will make their own way,Made own way
 
                 if ($('#dd_status').val() == "To do") {
                     todo = "|Coming|No Response|Call in|Will make their own way|";
@@ -539,7 +539,7 @@
                 } else if ($('#dd_status').val() == "Unknown") {
                     todo = "||No Response|Call in|";
                 } else if ($('#dd_status').val() == "Noted") {
-                    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Will make their own way|Made own way|";
+                    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Called in - no response|Will make their own way|Made own way|";
                 } else if ($('#dd_status').val() == "Pickups") {
                     todo = "|Coming|Call in|";
                 } else {
