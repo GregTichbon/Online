@@ -109,6 +109,7 @@
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
     <Content Include="Row\data.asmx" />
+    <Content Include="Row\Default.aspx" />
     <Content Include="Row\Entry.aspx" />
     <Content Include="Row\Prognostics.aspx" />
     <Content Include="Scripts\CyclePlugin\default.html" />
@@ -164,6 +165,7 @@
     <Content Include="SMS\default.aspx" />
     <Content Include="SMS\Send\SendService.asmx" />
     <Content Include="SMS\test2.aspx" />
+    <Content Include="StrengthFinders\Entry.aspx" />
     <Content Include="Test.asp" />
     <Content Include="UBC\Analysis.aspx" />
     <Content Include="UBC\HangiFeb2018.aspx" />
@@ -348,6 +350,13 @@
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Row\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Row\Entry.aspx.cs">
       <DependentUpon>Entry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -440,6 +449,13 @@
     </Compile>
     <Compile Include="SMS\test2.aspx.designer.cs">
       <DependentUpon>test2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StrengthFinders\Entry.aspx.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StrengthFinders\Entry.aspx.designer.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
     </Compile>
     <Compile Include="UBC\Analysis.aspx.cs">
       <DependentUpon>Analysis.aspx</DependentUpon>

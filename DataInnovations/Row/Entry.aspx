@@ -4,19 +4,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Meeting Scheduler</title>
+    <title>Entry</title>
     <!-- Style Sheets -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" />
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
     <style>
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="crossorigin="anonymous"></script>
     <script src="../Dependencies/CascadingDropDown/jquery.cascadingdropdown.min.js"></script>
     <script type="text/javascript">
 
 
         $(document).ready(function () {
+
+            //$("#dialogcompetitors").dialog();
 
             //There is a small issue, where a dropdown is changed by the user, the dependant dropdowns still use the parent values when they should really be set to -1
             //The problem is trying to identify that it was a human that changed it rather than the parent values
@@ -38,8 +41,27 @@
                         }
                     },
                     {
-                        selector: '#division',
+                        selector: '#category',
                         requires: ['#discipline'],
+                        source: function (request, response) {
+                            //request.datamode = datamode;
+                            $.getJSON('data.asmx/category', request, function (data) {
+                                //var selectOnlyOption = data.length <= 1;
+                                response($.map(data, function (item, index) {
+                                    return {
+                                        label: item.label,
+                                        value: item.value,
+                                        selected: index == parent.category
+                                        //selected: index == 0 //selectOnlyOption
+                                    };
+                                }));
+                            });
+                        }
+                    },
+                    {
+                        selector: '#division',
+                        requires: ['#discipline', '#category'],
+                        requireAll: true,
                         source: function (request, response) {
                             //request.datamode = datamode;
                             $.getJSON('data.asmx/division', request, function (data) {
@@ -55,9 +77,10 @@
                             });
                         }
                     },
+
                     {
                         selector: '#gender',
-                        requires: ['#discipline', '#division'],
+                        requires: ['#discipline', '#category', '#division'],
                         requireAll: true,
                         source: function (request, response) {
                             //request.datamode = datamode;
@@ -76,28 +99,8 @@
                     },
 
                     {
-                        selector: '#category',
-                        requires: ['#discipline', '#division', '#gender'],
-                        requireAll: true,
-                        source: function (request, response) {
-                            //request.datamode = datamode;
-                            $.getJSON('data.asmx/category', request, function (data) {
-                                //var selectOnlyOption = data.length <= 1;
-                                response($.map(data, function (item, index) {
-                                    return {
-                                        label: item.label,
-                                        value: item.value,
-                                        selected: index == parent.category
-                                        //selected: index == 0 //selectOnlyOption
-                                    };
-                                }));
-                            });
-                        }
-                    },
-
-                    {
                         selector: '#subcategory',
-                        requires: ['#discipline', '#division', '#gender', '#category'],
+                        requires: ['#discipline', '#category', '#division', '#gender'],
                         requireAll: true,
                         source: function (request, response) {
                             //request.datamode = datamode;
@@ -118,87 +121,136 @@
                                 return;
                             }
                             //entry.loading(true);
-                            //alert('Get_subcategorydetails for subcategory_ctr - to get Category_CTR, Seats,	haveCox, PrognosticTime');
-                            //alert('Get_subcategoryotherprognostics for Category_CTR and PrognosticTime - to get Code + subcategory, PrognosticTime');
 
                             var myhtml = '';
                             var category_ctr;
                             var prognostictime;
-                            /*
-                            $.getJSON("data.asmx/subcategorydetails?subcategory=9", function (data) {
-                                $.each(data, function (i, item) {
-                                    alert('category_ctr=' + item.category_ctr + ', seats=' + item.seats + ', havecox=' + item.havecox + ', prognostictime=' + item.prognostictime);
-                                    myhtml = myhtml + 'category_ctr=' + item.category_ctr + ', seats=' + item.seats + ', havecox=' + item.havecox + ', prognostictime=' + item.prognostictime;
+                            var seats;
+                            var havecox;
+                            var options = '';
 
+                            $.getJSON("data.asmx/subcategorydetails?subcategory=" + $('#subcategory').val(), function (data) {
+                                category_ctr = data[0].category_ctr;
+                                prognostictime = data[0].prognostictime;
+                                seats = data[0].seats;
+                                havecox = data[0].havecox;
+                                
+
+                                $.getJSON("data.asmx/subcategoryotherprognostics?category=" + category_ctr + "&prognostictime=" + prognostictime, function (data) {
+                                    $.each(data, function (i, item) {
+                                        if ($('#subcategory').val() == item.value) {
+                                            selected = ' selected';
+                                        } else {
+                                            selected = '';
+                                        }
+                                        options += '<option' + selected + '>' + item.label + '</option>';
+                                    });
+                                    for (f1 = 0; f1 < seats; f1++) {
+                                        if (seats > 1) {
+                                            switch (f1) {
+                                                case 0:
+                                                    role = 'Stroke '
+                                                    break;
+                                                case seats - 1:
+                                                    role = 'Bow '
+                                                    break;
+                                                default:
+                                                    role = f1 + 1 + ' ';
+                                            }
+                                        }
+                                        myhtml += role + 'Name: <input type="text" name="xxx" /><select>' + options + '</select><br />';
+                                    }
+                                    if (havecox == 1) {
+                                        myhtml += 'Cox: <input type="text" name="cox" /><br />';
+                                    }
+
+                                    $('#html').html(myhtml);
+                                    $("#dialogcompetitors").dialog({ width: 800 });
                                 });
                             });
-                            */
-
-                            $.ajax({
-                                dataType: "json",
-                                async: false,
-                                url: "data.asmx/subcategorydetails?subcategory=" + $('#subcategory').val(),
-                                success: function (data) {
-                                    jQuery.each(data, function (i, item) {
-                                        category_ctr = item.category_ctr;
-                                        prognostictime = item.prognostictime;
-                                        //alert('category_ctr=' + item.category_ctr + ', seats=' + item.seats + ', havecox=' + item.havecox + ', prognostictime=' + item.prognostictime);
-                                        myhtml = myhtml + 'category_ctr=' + item.category_ctr + ', seats=' + item.seats + ', havecox=' + item.havecox + ', prognostictime=' + item.prognostictime;
-                                    });
-                                }
-                            });
-
-                            myhtml = myhtml + "<br />Other prognostics";
-                            /*
-                            $.getJSON("data.asmx/subcategoryotherprognostics?category=" + category_ctr + "&prognostictime=" + prognostictime, function (data) {
-                                $.each(data, function (i, item) {
-                                    myhtml = myhtml + "<br />" + item.label;
-                                    alert('label=' + item.label);
-                                });
-                            });
-                            */
-
-
-                            $.ajax({
-                                dataType: "json",
-                                async: false,
-                                url: "data.asmx/subcategoryotherprognostics?category=" + category_ctr + "&prognostictime=" + prognostictime,
-                                success: function (data) {
-                                    jQuery.each(data, function (i, item) {
-                                        myhtml = myhtml + "<br />" + item.label;
-                                    });
-                                }
-                            });
-
-                            //alert(myhtml);
-                            $('#html').html(myhtml);
-
-                            $("#btn_update").attr('disabled', false);
                         }
                     }
                 ]
-            });
+            });
+
 
         }); //document.ready
     </script>
 
 </head>
 <body>
-    Enter the highest level (ie: greatest prognostic as the "Base" entry and then make modifications for lower prognostics<br />Can check this in code
+    <p style="display:none">
+    Enter the highest level (ie: greatest prognostic as the "Base" entry and then make modifications for lower prognostics<br />
+    Can check this in code<br />
+    X means Scull</p>
 
     <form id="form1" runat="server">
 
         <div class="form-group">
-                <label class="control-label col-sm-4" for="clubschool">Club/School</label>
-                <div class="col-sm-8">
-                    <select id="clubschool" name="clubschool" class="form-control">
+            <label class="control-label col-sm-4" for="clubschool">Club/School</label>
+            <div class="col-sm-8">
+                <select id="clubschool" name="clubschool" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="col">
+                Discipline
+            </div>
+            <div class="col">
+                Category
+            </div>
+            <div class="col">
+                Division
+            </div>
+            <div class="col">
+                Gender
+            </div>
+            <div class="col">
+                Event
+            </div>
+
+            <div class="col">
+                Competitor(s)
+            </div>
+        </div>
+
+        <div id="entry">
+            <div class="form-row">
+                <div class="col">
+                    <select id="discipline" name="discipline" class="form-control">
                         <option></option>
                     </select>
                 </div>
+                <div class="col">
+                    <select id="category" name="category" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="division" name="division" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="gender" name="gender" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="subcategory" name="subcategory" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <textarea id="competitor" name="competitor"></textarea>
+                </div>
             </div>
 
-
-        <div id="entry">
+            <!--
             <div class="form-group">
                 <label class="control-label col-sm-4" for="discipline">Discipline</label>
                 <div class="col-sm-8">
@@ -207,6 +259,17 @@
                     </select>
                 </div>
             </div>
+
+                        <div class="form-group">
+                <label class="control-label col-sm-4" for="category">Category</label>
+                <div class="col-sm-8">
+                    <select id="category" name="category" class="form-control">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+
+ 
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="division">Division</label>
@@ -217,7 +280,8 @@
                 </div>
             </div>
 
-            <div class="form-group">
+
+                       <div class="form-group">
                 <label class="control-label col-sm-4" for="gender">Gender</label>
                 <div class="col-sm-8">
                     <select id="gender" name="gender" class="form-control">
@@ -226,14 +290,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-sm-4" for="category">Category</label>
-                <div class="col-sm-8">
-                    <select id="category" name="category" class="form-control">
-                        <option></option>
-                    </select>
-                </div>
-            </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-4" for="subcategory">Event</label>
@@ -251,9 +307,15 @@
                 </div>
 
             </div>
-
+                    -->
         </div>
-        <div id="html"></div>
+
+            <div id="dialogcompetitors" title="Competitors" style="display:none">
+                <div id="html"></div>
+    </div>
+
+
+        
     </form>
 </body>
 </html>

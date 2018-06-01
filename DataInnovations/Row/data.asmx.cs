@@ -66,99 +66,7 @@ namespace DataInnovations.Row
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void division(string discipline)
-        {
-            List<dropdownClass> dropdown = new List<dropdownClass>();
-
-            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Divisions_DD", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
-
-            cmd.Connection = con;
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        dropdown.Add(new dropdownClass
-                        {
-                            label = dr["label"].ToString(),
-                            value = dr["value"].ToString()
-                        });
-                    }
-
-                    dr.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
-            }
-
-
-            JavaScriptSerializer JS = new JavaScriptSerializer();
-            Context.Response.Write(JS.Serialize(dropdown));
-        }
-
-        [WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void gender(string discipline, string division)
-        {
-            List<dropdownClass> dropdown = new List<dropdownClass>();
-
-            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Gender_DD", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
-            cmd.Parameters.Add("@division_id", SqlDbType.VarChar).Value = division;
-
-            cmd.Connection = con;
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        dropdown.Add(new dropdownClass
-                        {
-                            label = dr["label"].ToString(),
-                            value = dr["value"].ToString()
-                        });
-                    }
-
-                    dr.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
-            }
-
-            JavaScriptSerializer JS = new JavaScriptSerializer();
-            Context.Response.Write(JS.Serialize(dropdown));
-        }
-
-        [WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void category(string discipline, string division, string gender)
+        public void category(string discipline)
         {
             List<dropdownClass> dropdown = new List<dropdownClass>();
 
@@ -167,8 +75,6 @@ namespace DataInnovations.Row
             SqlCommand cmd = new SqlCommand("Get_Category_DD", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
-            cmd.Parameters.Add("@division_id", SqlDbType.VarChar).Value = division;
-            cmd.Parameters.Add("@gender_id", SqlDbType.VarChar).Value = gender;
 
             cmd.Connection = con;
             try
@@ -202,6 +108,102 @@ namespace DataInnovations.Row
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(dropdown));
         }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void division(string discipline, string category)
+        {
+            List<dropdownClass> dropdown = new List<dropdownClass>();
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Get_Division_DD", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
+            cmd.Parameters.Add("@category_ctr", SqlDbType.Int).Value = category;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        dropdown.Add(new dropdownClass
+                        {
+                            label = dr["label"].ToString(),
+                            value = dr["value"].ToString()
+                        });
+                    }
+
+                    dr.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(dropdown));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void gender(string discipline, string category, string division)
+        {
+            List<dropdownClass> dropdown = new List<dropdownClass>();
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Get_Gender_DD", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
+            cmd.Parameters.Add("@category_ctr", SqlDbType.Int).Value = category;
+            cmd.Parameters.Add("@division_id", SqlDbType.VarChar).Value = division;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        dropdown.Add(new dropdownClass
+                        {
+                            label = dr["label"].ToString(),
+                            value = dr["value"].ToString()
+                        });
+                    }
+
+                    dr.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(dropdown));
+        }
+
+
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void subcategory(string discipline, string division, string gender, string category)
