@@ -6,6 +6,7 @@
 <head runat="server">
     <title>Strength Finders</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link href="../Dependencies/StickyTableCells/jquery.stickytable.min.css" rel="stylesheet" />
     <style>
         /*
         .dropdown {
@@ -23,6 +24,10 @@
             background-color: aqua;
         }
 
+        .subgroup {
+            font-size: smaller;
+        }
+
         select {
             background-color: yellow;
         }
@@ -35,15 +40,23 @@
             td.left {
                 text-align: left;
             }
+
+   
+        .centered {
+  position: fixed; /* or absolute */
+  top: 20%;
+  left: 50%;
+}
     </style>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../Dependencies/StickyTableCells/jquery.stickytable.min.js"></script>
 
     <script type="text/javascript">
 
         var options = "<select><option></option>";;
-        for (f1 = 1; f1 < 34; f1++) {
+        for (f1 = 0; f1 < 34; f1++) {
             options += "<option>" + f1 + "</option>";
         }
         options += "</select>";
@@ -55,34 +68,6 @@
 
         $(document).ready(function () {
 
-            /*
-            $('#btn_save').click(function () {
-                var valid = true;
-                $('.newname').each(function (i, obj) {
-                    name = $(obj).val().trim();
-                    if (name == '') {
-                        alert('Missing Name');
-                        valid = false;
-                        return;
-                    }
-                    alert(name);
-                });
-                if (valid) {
-                    $('.rank').each(function (i, obj) {
-                        if ($(obj).attr('rank') != $(obj).text()) {
-                            alert($(obj).attr('id') + "=" + $(obj).text());
-                            $('<input>').attr({
-                                type: 'hidden',
-                                name: $(obj).attr('id'),
-                                value: $(obj).text()
-                            }).appendTo('#form1');
-                        }
-                    });
-                    $('#form1').submit();
-                }
-            })
-            */
-
             $("form").submit(function (e) {
                 var valid = true;
                 $('.newname').each(function (i, obj) {
@@ -92,12 +77,11 @@
                         valid = false;
                         return;
                     }
-                    //alert(name);
                 });
                 if (valid) {
+                    $('#processing').show();
                     $('.rank').each(function (i, obj) {
                         if ($(obj).attr('rank') != $(obj).text()) {
-                            //alert($(obj).attr('id') + "=" + $(obj).text());
                             $('<input>').attr({
                                 type: 'hidden',
                                 name: $(obj).attr('id'),
@@ -105,7 +89,6 @@
                             }).appendTo('#form1');
                         }
                     });
-                    //$('#form1').submit();
                 }
             });
 
@@ -122,7 +105,6 @@
                 $('#name_' + newctr).focus();
             });
 
-            //$('.rank').click(function () {
             $(document).on('click', '.rank', function () {
                 td = this;
                 if ($(td).hasClass('dropdown')) {
@@ -134,7 +116,6 @@
                     if ($(this).attr('id') != lastid && lastid != '') {
                         $('#' + lastid).removeClass('dropdown');
                         $('#' + lastid).text($('#' + lastid).find('select').val());
-                        //$(td).text($(this).val());
                     }
                     lastid = $(this).attr('id');
                     val = $(this).text();
@@ -177,15 +158,25 @@
                     $(this).addClass('filtered');
                     person = $(this).attr('id').substring(1);
                     $("[person=" + person + "]").each(function (i, obj) {
-
                         if ($(obj).text() == "") {
                             strength = $(obj).attr('strength');
                             $('[strength=' + strength + ']').hide();
                             $('#S' + strength).hide();
-                            //alert($(obj).text());
-                            //$(obj).parent().hide();
                         }
                     });
+                }
+            });
+
+            $(document).keyup(function (e) {
+                if (e.keyCode == 27) { // escape key maps to keycode `27`
+                    $('tr:hidden').show();
+                    $('th:hidden').show();
+                    $('td:hidden').show();
+                    $('.filtered').removeClass('filtered');
+
+                    td = $('.dropdown');
+                    $(td).text($(td).find('select').val());
+                    $(td).removeClass('dropdown');
                 }
             });
 
@@ -199,7 +190,8 @@
             <asp:Literal ID="LitRows" runat="server"></asp:Literal>
             <a href="javascript:void(0)" id="btn_add">Add</a>  <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" Height="34px" Width="156px" />
         </div>
-
+                <div id="processing" style="display:none">
+            <img src="../Dependencies/Images/processing2.gif" class="centered"/></div>
     </form>
 </body>
 </html>

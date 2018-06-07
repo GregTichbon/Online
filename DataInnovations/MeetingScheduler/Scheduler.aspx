@@ -103,6 +103,11 @@
             width: 180px; /* B) 21 less than A */
             background-color: aqua;
         }
+        .centered {
+  position: fixed; /* or absolute */
+  top: 20%;
+  left: 50%;
+}
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
@@ -218,6 +223,7 @@
 
 
             $("form").submit(function (e) {
+                $('#processing').show();
                 //e.preventDefault();
                 $('*[data-changed="1"]').each(function (index) {
                     rank = $(this).attr('data-rank');
@@ -337,6 +343,8 @@
         </table>
 
         <div id="debug"></div>
+        <div id="processing" style="display:none">
+            <img src="../Dependencies/Images/processing2.gif" class="centered"/></div>
 
     </form>
 </body>

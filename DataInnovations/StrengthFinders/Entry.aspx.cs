@@ -28,14 +28,16 @@ namespace DataInnovations.StrengthFinders
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    LitRows.Text = "<table class=\"table table-bordered table-striped\"><thead>";
+                    LitRows.Text = "<div class=\"sticky-table sticky-headers sticky-ltr-cells\">";
 
-                    LitRows.Text += "<tr>";
-                    LitRows.Text += "<th class=\"left\">Name</th>";
-                    for (int f1 = 4; f1 <= dr.FieldCount-1; f1++)
+                    LitRows.Text += "<table class=\"table table-bordered table-striped\"><thead>";
+
+                    LitRows.Text += "<tr class=\"sticky-row\">";
+                    LitRows.Text += "<th class=\"left sticky-cell\">Name</th>";
+                    for (int f1 = 5; f1 <= dr.FieldCount-1; f1++)
                     {
                         string[] fieldname = dr.GetName(f1).ToString().Split('.');
-                        LitRows.Text += "<th id=\"S" + (f1-3) + "\" class=\"strength\">" + fieldname[1] + "</th>";
+                        LitRows.Text += "<th id=\"S" + (f1-4) + "\" class=\"strength\">" + fieldname[1] + "</th>";
                     }
 
                     LitRows.Text += "</tr></thead><tbody>";
@@ -44,9 +46,9 @@ namespace DataInnovations.StrengthFinders
                     {
                         string person = dr["person_ctr"].ToString();
                         LitRows.Text += "<tr>";
-                        LitRows.Text += "<td id=\"P" + person + "\" class=\"person left\">" +  (dr["firstname"] + " " + dr["lastname"]).Trim() + "</td>";
+                        LitRows.Text += "<td id=\"P" + person + "\" class=\"person left sticky-cell\">" +  (dr["firstname"] + " " + dr["lastname"]).Trim() + "<br /><span class=\"subgroup\">" + dr["subgroup"] + "</span></td>";
                         
-                        for (int f1 = 4; f1 <= dr.FieldCount - 1; f1++)
+                        for (int f1 = 5; f1 <= dr.FieldCount - 1; f1++)
                         {
                             string[] fieldname = dr.GetName(f1).ToString().Split('.');
                             string id = "R_" + person + "_" + fieldname[0];
@@ -56,7 +58,7 @@ namespace DataInnovations.StrengthFinders
                         LitRows.Text += "</tr>";
                     }
                     while (dr.Read());
-                    LitRows.Text += "</tbody></table>";
+                    LitRows.Text += "</tbody></table></div>";
 
                 }
             }

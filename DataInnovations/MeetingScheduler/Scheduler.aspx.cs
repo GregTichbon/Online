@@ -75,6 +75,7 @@ namespace DataInnovations.MeetingScheduler
             string entity_ctr;
             string entity_guid;
             string entityname;
+            string lastupdated;
             string lastdate = "";
             string theday = "";
 
@@ -91,7 +92,7 @@ namespace DataInnovations.MeetingScheduler
 
             h1 += "<th class=\"zui-sticky-col\">" + meetingname + "</th>";
 
-            for (int f1 = 3; f1 < table2.Columns.Count; f1++)
+            for (int f1 = 4; f1 < table2.Columns.Count; f1++)
             {
                 colname = table2.Columns[f1].ColumnName.Substring(0, 9);
                 if (colname != lastdate)
@@ -118,7 +119,7 @@ namespace DataInnovations.MeetingScheduler
                 {
                     html += "<thead>";
                     h2 += "<tr><th class=\"zui-sticky-col\">Name</th>";
-                    for (int f1 = 3; f1 < table2.Columns.Count; f1++)
+                    for (int f1 = 4; f1 < table2.Columns.Count; f1++)
                     {
                         h2 += "<th>" + table2.Columns[f1].ColumnName.Substring(10) + "</th>";
                     }
@@ -130,11 +131,12 @@ namespace DataInnovations.MeetingScheduler
                 entity_ctr = row["entity_ctr"].ToString();
                 entity_guid = row["guid"].ToString();
                 entityname = row["name"].ToString();
+                lastupdated = row["lastupdated"].ToString();
 
-                html += "<tr><td class=\"zui-sticky-col\">" + entityname + "</td>";
+                html += "<tr><td class=\"zui-sticky-col\" title=\"" + lastupdated + "\">" + entityname + "</td>";
                 day = 0;
 
-                for (int f1 = 3; f1 < table2.Columns.Count; f1++)
+                for (int f1 = 4; f1 < table2.Columns.Count; f1++)
                 {
                     colname = table2.Columns[f1].ColumnName.Substring(0, 9);
                     string columnvalue = row[f1].ToString();

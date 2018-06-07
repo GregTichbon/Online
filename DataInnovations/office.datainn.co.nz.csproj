@@ -82,6 +82,44 @@
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
     <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\css\ScrollTabla.css" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo3.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo4.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example1.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example2.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example3.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example4.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example5.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example6.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logoN.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logonit.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Images\processing1.gif" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\index.html" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.js" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.js" />
+    <Content Include="Dependencies\TableHeadFixer\.gitignore" />
+    <Content Include="Dependencies\TableHeadFixer\examples\cutomStyleHeight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeader.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiHead.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiTable.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\gulpfile.js" />
+    <Content Include="Dependencies\TableHeadFixer\index.html" />
+    <Content Include="Dependencies\TableHeadFixer\tableHeadFixer.js" />
     <Content Include="Entity\account.aspx" />
     <Content Include="Entity\Amended.aspx" />
     <Content Include="Entity\body.html" />
@@ -103,6 +141,12 @@
     <Content Include="MeetingScheduler\Default.aspx" />
     <Content Include="MeetingScheduler\Scheduler.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\TableHeadFixer\package.json" />
+    <Content Include="Dependencies\TableHeadFixer\README.md" />
+    <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
+    <Content Include="Dependencies\StickyTableCells\README.md" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Raffles\DrawText.aspx" />
@@ -166,6 +210,7 @@
     <Content Include="SMS\Send\SendService.asmx" />
     <Content Include="SMS\test2.aspx" />
     <Content Include="StrengthFinders\Entry.aspx" />
+    <Content Include="StrengthFinders\Matches.aspx" />
     <Content Include="Test.asp" />
     <Content Include="UBC\Analysis.aspx" />
     <Content Include="UBC\HangiFeb2018.aspx" />
@@ -457,6 +502,13 @@
     <Compile Include="StrengthFinders\Entry.aspx.designer.cs">
       <DependentUpon>Entry.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StrengthFinders\Matches.aspx.cs">
+      <DependentUpon>Matches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StrengthFinders\Matches.aspx.designer.cs">
+      <DependentUpon>Matches.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UBC\Analysis.aspx.cs">
       <DependentUpon>Analysis.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,6 +531,7 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
