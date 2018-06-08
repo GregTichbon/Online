@@ -32,6 +32,14 @@ namespace DataInnovations.StrengthFinders
 
                     LitRows.Text += "<table class=\"table table-bordered table-striped\"><thead>";
 
+                    LitRows.Text += "<tr id=\"groups\" class=\"sticky-row\">";
+                    LitRows.Text += "<th class=\"sticky-cell\"></th>";
+                    LitRows.Text += "<th colspan=\"9\">Executing</th>";
+                    LitRows.Text += "<th colspan=\"9\">Relationship Building</th>";
+                    LitRows.Text += "<th colspan=\"8\">Influencing</th>";
+                    LitRows.Text += "<th colspan=\"8\">Strategic Thinking</th>";
+                    LitRows.Text += "</tr>";
+
                     LitRows.Text += "<tr class=\"sticky-row\">";
                     LitRows.Text += "<th class=\"left sticky-cell\">Name</th>";
                     for (int f1 = 5; f1 <= dr.FieldCount-1; f1++)
@@ -75,18 +83,18 @@ namespace DataInnovations.StrengthFinders
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+
+            HashSet<string> persons = new HashSet<string>();
+
             string strConnString = "Data Source=toh-app;Initial Catalog=StrengthFinders;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-
-
-
-
             foreach (string key in Request.Form.Keys)
             {
                 if (key.StartsWith("R_"))
                 {
                     string[] keysplit = key.Split('_');
                     string person = keysplit[1];
+                    persons.Add(person);
                     string strength = keysplit[2];
                     string rank = Request.Form[key].ToString();
 
@@ -159,6 +167,26 @@ namespace DataInnovations.StrengthFinders
 
                 }
             }
+
+            foreach (string person in persons)
+            {
+                SqlCommand cmd = new SqlCommand("Match_People", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = con;
+                con.Open();
+                cmd.Parameters.Add("@pass_person_ctr", SqlDbType.VarChar).Value = person;
+                cmd.Parameters.Add("@return_top", SqlDbType.VarChar).Value = 0;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                }
+
+                dr.Close();
+                con.Close();
+            }
+
             con.Dispose();
 
             Response.Redirect(Request.RawUrl);

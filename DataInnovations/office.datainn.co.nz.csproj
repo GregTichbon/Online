@@ -82,6 +82,13 @@
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
     <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Dependencies\colorbox\colorbox.css" />
+    <Content Include="Dependencies\colorbox\images\border.png" />
+    <Content Include="Dependencies\colorbox\images\controls.png" />
+    <Content Include="Dependencies\colorbox\images\loading.gif" />
+    <Content Include="Dependencies\colorbox\images\loading_background.png" />
+    <Content Include="Dependencies\colorbox\images\overlay.png" />
+    <Content Include="Dependencies\colorbox\jquery.colorbox-min.js" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\css\ScrollTabla.css" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo3.png" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo4.png" />
@@ -147,6 +154,7 @@
     <Content Include="Dependencies\TableHeadFixer\README.md" />
     <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
     <Content Include="Dependencies\StickyTableCells\README.md" />
+    <Content Include="Dependencies\colorbox\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Raffles\DrawText.aspx" />
@@ -211,6 +219,8 @@
     <Content Include="SMS\test2.aspx" />
     <Content Include="StrengthFinders\Entry.aspx" />
     <Content Include="StrengthFinders\Matches.aspx" />
+    <Content Include="StrengthFinders\RecalcMatches.aspx" />
+    <Content Include="StrengthFinders\showstrength.html" />
     <Content Include="Test.asp" />
     <Content Include="UBC\Analysis.aspx" />
     <Content Include="UBC\HangiFeb2018.aspx" />
@@ -508,6 +518,13 @@
     </Compile>
     <Compile Include="StrengthFinders\Matches.aspx.designer.cs">
       <DependentUpon>Matches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StrengthFinders\RecalcMatches.aspx.cs">
+      <DependentUpon>RecalcMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StrengthFinders\RecalcMatches.aspx.designer.cs">
+      <DependentUpon>RecalcMatches.aspx</DependentUpon>
     </Compile>
     <Compile Include="UBC\Analysis.aspx.cs">
       <DependentUpon>Analysis.aspx</DependentUpon>

@@ -7,6 +7,7 @@
     <title>Strength Finders</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="../Dependencies/StickyTableCells/jquery.stickytable.min.css" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Dependencies/colorbox/colorbox.css")%>" rel="stylesheet" />
     <style>
         /*
         .dropdown {
@@ -21,7 +22,7 @@
                 */
 
         .filtered {
-            background-color: aqua;
+            color: red;
         }
 
         .subgroup {
@@ -32,7 +33,14 @@
             background-color: yellow;
         }
 
-        td {
+        th {
+            text-align: center;
+        }
+                    th.left {
+                text-align: left;
+            }
+
+        td  {
             text-align: center;
             white-space: nowrap;
         }
@@ -41,19 +49,24 @@
                 text-align: left;
             }
 
-   
+
         .centered {
-  position: fixed; /* or absolute */
-  top: 20%;
-  left: 50%;
-}
+            position: fixed; /* or absolute */
+            top: 20%;
+            left: 50%;
+        }
     </style>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../Dependencies/StickyTableCells/jquery.stickytable.min.js"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/colorbox/jquery.colorbox-min.js")%>"></script>
 
     <script type="text/javascript">
+
+        $(document).bind("contextmenu", function (e) {
+            return false;
+        });
 
         var options = "<select><option></option>";;
         for (f1 = 0; f1 < 34; f1++) {
@@ -128,34 +141,57 @@
                 }
             });
 
-            $('.strength').click(function () {
-                $('tr:hidden').show();
-                $('th:hidden').show();
-                $('td:hidden').show();
-                if ($(this).hasClass('filtered')) {
-                    $(this).removeClass('filtered');
-                } else {
-                    $('.filtered').removeClass('filtered');
-                    $(this).addClass('filtered');
-                    strength = $(this).attr('id').substring(1);
-                    $("[strength=" + strength + "]").each(function (i, obj) {
-                        if ($(obj).text() == "") {
-                            $(obj).parent().hide();
+            //$('.strength').click(function () {
+            $('.strength').mousedown(function (event) {
+                switch (event.which) {
+                    case 1:
+                        //alert('Left mouse button is pressed');
+                        $('tr:hidden').show();
+                        $('th:hidden').show();
+                        $('td:hidden').show();
+                        if ($(this).hasClass('filtered')) {
+                            $(this).removeClass('filtered');
+                        } else {
+                            $('.filtered').removeClass('filtered');
+                            $(this).addClass('filtered');
+                            strength = $(this).attr('id').substring(1);
+                            $("[strength=" + strength + "]").each(function (i, obj) {
+                                if ($(obj).text() == "") {
+                                    $(obj).parent().hide();
+                                }
+                            });
                         }
-                    });
+
+                        break;
+                    //case 2:
+                    //    alert('Middle mouse button is pressed');
+                    //    break;
+                    case 3:
+                        //alert('Right mouse button is pressed');
+                        id = $(this).text().replace(' ', '-');
+                        $.colorbox({
+                            href: 'showstrength.html?id=' + id,
+                            iframe: true,
+                            overlayClose: false,
+                            width: '90%',
+                            height: '90%'
+                        }); break;
+                    default:
+                    //alert('Nothing');
                 }
             });
-
 
             $('.person').click(function () {
                 $('tr:hidden').show();
                 $('th:hidden').show();
                 $('td:hidden').show();
+                $('#groups').show();
                 if ($(this).hasClass('filtered')) {
                     $(this).removeClass('filtered');
                 } else {
                     $('.filtered').removeClass('filtered');
                     $(this).addClass('filtered');
+                    $('#groups').hide();
                     person = $(this).attr('id').substring(1);
                     $("[person=" + person + "]").each(function (i, obj) {
                         if ($(obj).text() == "") {
@@ -173,6 +209,7 @@
                     $('th:hidden').show();
                     $('td:hidden').show();
                     $('.filtered').removeClass('filtered');
+                    $('#groups').show();
 
                     td = $('.dropdown');
                     $(td).text($(td).find('select').val());
@@ -188,10 +225,14 @@
     <form id="form1" runat="server">
         <div>
             <asp:Literal ID="LitRows" runat="server"></asp:Literal>
-            <a href="javascript:void(0)" id="btn_add">Add</a>  <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" Height="34px" Width="156px" />
+
+            <button type="button" id="btn_add">Add</button>
+
+            <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" />
         </div>
-                <div id="processing" style="display:none">
-            <img src="../Dependencies/Images/processing2.gif" class="centered"/></div>
+        <div id="processing" style="display: none">
+            <img src="../Dependencies/Images/processing2.gif" class="centered" />
+        </div>
     </form>
 </body>
 </html>
