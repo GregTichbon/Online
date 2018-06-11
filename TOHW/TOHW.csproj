@@ -340,6 +340,13 @@
     <Content Include="MySite\fblogin.png" />
     <Content Include="MySite\login.aspx" />
     <Content Include="MySite\Login.html" />
+    <Content Include="PhotoHunt11Jun18\Answer.aspx" />
+    <Content Include="PhotoHunt11Jun18\Answers.aspx" />
+    <Content Include="PhotoHunt11Jun18\data.asmx" />
+    <Content Include="PhotoHunt11Jun18\Default.aspx" />
+    <Content Include="PhotoHunt11Jun18\ShowAll.aspx" />
+    <Content Include="PhotoHunt11Jun18\TestImage1.aspx" />
+    <Content Include="PhotoHunt11Jun18\UBC.jpg" />
     <Content Include="Pickups\Admin.aspx" />
     <Content Include="Pickups\data.asmx" />
     <Content Include="Pickups\GoogleMaps1.aspx" />
@@ -784,6 +791,45 @@
     <Compile Include="MySite\MySite.Master.designer.cs">
       <DependentUpon>MySite.Master</DependentUpon>
     </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answer.aspx.cs">
+      <DependentUpon>Answer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answer.aspx.designer.cs">
+      <DependentUpon>Answer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answers.aspx.cs">
+      <DependentUpon>Answers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answers.aspx.designer.cs">
+      <DependentUpon>Answers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\ShowAll.aspx.cs">
+      <DependentUpon>ShowAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\ShowAll.aspx.designer.cs">
+      <DependentUpon>ShowAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\TestImage1.aspx.cs">
+      <DependentUpon>TestImage1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\TestImage1.aspx.designer.cs">
+      <DependentUpon>TestImage1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pickups\GoogleMaps2.aspx.cs">
       <DependentUpon>GoogleMaps2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1077,6 +1123,7 @@
     <Folder Include="Auction\Images\Items\53\original\" />
     <Folder Include="Auction\Images\Items\55\original\" />
     <Folder Include="Auction\Images\Items\6\" />
+    <Folder Include="PhotoHunt11Jun18\Images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

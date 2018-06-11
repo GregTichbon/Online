@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Services;
+
+namespace TOHW.PhotoHunt11Jun18
+{
+    public partial class Answers : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("PH_Show_Answers", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.Add("@groupcode", SqlDbType.BigInt).Value = groupcode;
+            //cmd.Parameters.Add("@photo", SqlDbType.BigInt).Value = photo;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while(dr.Read()) 
+                {
+                    Lit_Answers.Text += "<tr>";
+                    Lit_Answers.Text += "<td>" + dr["name"] + "</td>";
+                    Lit_Answers.Text += "<td>" + dr["Description"] + "</td>";
+                    Lit_Answers.Text += "<td>" + dr["Version"] + "</td>";
+                    Lit_Answers.Text += "<td>" + dr["Answered"] + "</td>";
+                    Lit_Answers.Text += "</tr>";
+                    //dr["guid"].ToString() + ".jpg";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+        }
+    }
+}

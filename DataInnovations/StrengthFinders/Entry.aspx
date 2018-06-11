@@ -141,6 +141,38 @@
                 }
             });
 
+            $('.strength').dblclick(function () {
+                id = $(this).text().replace(' ', '-');
+                $.colorbox({
+                    href: 'showstrength.html?id=' + id,
+                    iframe: true,
+                    overlayClose: false,
+                    width: '90%',
+                    height: '90%'
+                });
+            });
+
+            $('.strength').click(function () {
+                $('tr:hidden').show();
+                $('th:hidden').show();
+                $('td:hidden').show();
+                if ($(this).hasClass('filtered')) {
+                    $(this).removeClass('filtered');
+                } else {
+                    $('.filtered').removeClass('filtered');
+                    $(this).addClass('filtered');
+                    strength = $(this).attr('id').substring(1);
+                    $("[strength=" + strength + "]").each(function (i, obj) {
+                        if ($(obj).text() == "") {
+                            $(obj).parent().hide();
+                        }
+                    });
+                }
+            });
+
+            
+
+/*
             //$('.strength').click(function () {
             $('.strength').mousedown(function (event) {
                 switch (event.which) {
@@ -175,12 +207,14 @@
                             overlayClose: false,
                             width: '90%',
                             height: '90%'
-                        }); break;
+                        }); 
+                        break;
                     default:
                     //alert('Nothing');
                 }
             });
 
+*/
             $('.person').click(function () {
                 $('tr:hidden').show();
                 $('th:hidden').show();
@@ -229,6 +263,7 @@
             <button type="button" id="btn_add">Add</button>
 
             <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" />
+            Click on a STRENGTH or a PERSON to show only relevant data.    Double Click on a STRENGTH to read a definition.  Use the ESCAPE key to restore full display at any time.
         </div>
         <div id="processing" style="display: none">
             <img src="../Dependencies/Images/processing2.gif" class="centered" />
