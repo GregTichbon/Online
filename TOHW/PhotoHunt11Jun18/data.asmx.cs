@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -28,7 +29,7 @@ namespace TOHW.PhotoHunt11Jun18
             return "Hello World";
         }
         [WebMethod]
-        public void get_next_version(string groupcode, string photo)
+        public void get_next_version(string groupcode, string photo, string direction)
         {
             //PH_get_next_version
 
@@ -40,6 +41,7 @@ namespace TOHW.PhotoHunt11Jun18
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@groupcode", SqlDbType.BigInt).Value = groupcode;
             cmd.Parameters.Add("@photo", SqlDbType.BigInt).Value = photo;
+            cmd.Parameters.Add("@direction", SqlDbType.VarChar).Value = direction;
 
             cmd.Connection = con;
             try
@@ -63,23 +65,26 @@ namespace TOHW.PhotoHunt11Jun18
                 con.Dispose();
             }
 
-
-
-            //resultclass.src = "ubc.jpg";
-            //resultclass.version = "3";
-
             JavaScriptSerializer JS = new JavaScriptSerializer();
             string passresult = JS.Serialize(resultclass);
 
             Context.Response.Write(passresult);
-
-
-            
         }
 
-
-
-        
+        [WebMethod]
+        public void rotateimage(string filename, string direction)
+        {
+            Image myImage = Image.FromFile(filename);
+            if (direction == "90")
+            {
+                myImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            }
+            else
+            {
+                myImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            }
+            myImage.Save(filename);
+        }
     }
     public class imageversion
     {

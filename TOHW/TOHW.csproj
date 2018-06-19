@@ -323,6 +323,51 @@
     <Content Include="Database\Main2.aspx" />
     <Content Include="Database\Search.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Dependencies\colorbox\colorbox.css" />
+    <Content Include="Dependencies\colorbox\images\border.png" />
+    <Content Include="Dependencies\colorbox\images\controls.png" />
+    <Content Include="Dependencies\colorbox\images\loading.gif" />
+    <Content Include="Dependencies\colorbox\images\loading_background.png" />
+    <Content Include="Dependencies\colorbox\images\overlay.png" />
+    <Content Include="Dependencies\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\css\ScrollTabla.css" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo3.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo4.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example1.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example2.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example3.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example4.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example5.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example6.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logoN.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logonit.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Images\processing1.gif" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\index.html" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.js" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.js" />
+    <Content Include="Dependencies\TableHeadFixer\examples\cutomStyleHeight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeader.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiHead.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiTable.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\gulpfile.js" />
+    <Content Include="Dependencies\TableHeadFixer\index.html" />
+    <Content Include="Dependencies\TableHeadFixer\tableHeadFixer.js" />
     <Content Include="Evaluation\default.aspx" />
     <Content Include="functions\Data.asmx" />
     <Content Include="images\aimeeMatthews.jpg" />
@@ -342,6 +387,7 @@
     <Content Include="MySite\Login.html" />
     <Content Include="PhotoHunt11Jun18\Answer.aspx" />
     <Content Include="PhotoHunt11Jun18\Answers.aspx" />
+    <Content Include="PhotoHunt11Jun18\AnswersPhotos.aspx" />
     <Content Include="PhotoHunt11Jun18\data.asmx" />
     <Content Include="PhotoHunt11Jun18\Default.aspx" />
     <Content Include="PhotoHunt11Jun18\ShowAll.aspx" />
@@ -706,6 +752,14 @@
     <Content Include="Auction\Images\Items\4\original\The Red Lion.pdf" />
     <Content Include="TOHWAuction.Master" />
     <Content Include="MySite\MySite.Master" />
+    <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
+    <Content Include="Dependencies\StickyTableCells\README.md" />
+    <Content Include="Dependencies\TableHeadFixer\.gitignore" />
+    <Content Include="Dependencies\TableHeadFixer\package.json" />
+    <Content Include="Dependencies\TableHeadFixer\README.md" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -804,6 +858,13 @@
     </Compile>
     <Compile Include="PhotoHunt11Jun18\Answers.aspx.designer.cs">
       <DependentUpon>Answers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\AnswersPhotos.aspx.cs">
+      <DependentUpon>AnswersPhotos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\AnswersPhotos.aspx.designer.cs">
+      <DependentUpon>AnswersPhotos.aspx</DependentUpon>
     </Compile>
     <Compile Include="PhotoHunt11Jun18\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>

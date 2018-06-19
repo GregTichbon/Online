@@ -33,6 +33,13 @@ namespace TOHW.PhotoHunt11Jun18
                     Lit_Answers.Text += "<td>" + dr["Description"] + "</td>";
                     Lit_Answers.Text += "<td>" + dr["Version"] + "</td>";
                     Lit_Answers.Text += "<td>" + dr["Answered"] + "</td>";
+                    if(dr["Answered"].ToString() == "Yes")
+                    {
+                        Lit_Answers.Text += "<td><a class=\"showphotos\" data-groupcode=\"" + dr["code"] + "\" data-photo=\"" + dr["photo_ctr"] + "\" href=\"javascript:void(0)\">Photos</a></td>";
+                    } else
+                    {
+                        Lit_Answers.Text += "<td>&nbsp;</td>";
+                    }
                     Lit_Answers.Text += "</tr>";
                     //dr["guid"].ToString() + ".jpg";
 

@@ -39,20 +39,23 @@ namespace TOHW.PhotoHunt11Jun18
                     Lit_Images.Text += "<br />Your current version: <span id=\"V_" + dr["photo_cnt"] + "\">" + dr["version"] + "</span>";
                     if (dr["answered"].ToString() == "Yes")
                     {
-                        Lit_Images.Text += "Answered";
+                        Lit_Images.Text += " Answered";
                     }
-
-                    if (Convert.ToInt16(dr["version"]) > 1)
+                    else
                     {
-                        Lit_Images.Text += " <a class=\"show\" id=\"B_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the pevious version</a>";
-                    }
+                        if (Convert.ToInt16(dr["version"]) > 1 && 1 == 2)
+                        {
+                            Lit_Images.Text += " <a class=\"show\" id=\"B_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the previous version</a>";
+                        }
 
-                    if (dr["version"].ToString() != "4")
-                    //if (dr["answered"].ToString() != "Yes" && dr["version"].ToString() != "4")
-                    {
-                        Lit_Images.Text += " <a class=\"show\" id=\"P_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the next version</a>";
+                        if (dr["version"].ToString() != "4")
+                        //if (dr["answered"].ToString() != "Yes" && dr["version"].ToString() != "4")
+                        {
+                            Lit_Images.Text += " <a class=\"show\" id=\"P_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the next version</a>";
+                        }
+                        //Lit_Images.Text += " <a href=\"answer.aspx?group=" + groupcode + "&photo=" + dr["photo_cnt"] + "\" target=\"photohuntanswer\">Answer</a>";
+                        Lit_Images.Text += " <a href=\"javascript:void(0);\" class=\"answer\" data-groupcode=\"" + groupcode + "\" data-photo=\"" + dr["photo_cnt"] + "\">Answer</a>";
                     }
-                    Lit_Images.Text += " <a href=\"answer.aspx?group=" + groupcode + "&photo=" + dr["photo_cnt"] + "\" target=\"photohuntanswer\">Answer</a>";
                 }
 
             }

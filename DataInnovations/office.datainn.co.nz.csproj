@@ -146,6 +146,7 @@
     <Content Include="Maadi\default.asp" />
     <Content Include="MeetingScheduler\data.asmx" />
     <Content Include="MeetingScheduler\Default.aspx" />
+    <Content Include="MeetingScheduler\Notify.aspx" />
     <Content Include="MeetingScheduler\Scheduler.aspx" />
     <Content Include="packages.config" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
@@ -219,6 +220,7 @@
     <Content Include="SMS\test2.aspx" />
     <Content Include="StrengthFinders\Entry.aspx" />
     <Content Include="StrengthFinders\Matches.aspx" />
+    <Content Include="StrengthFinders\Person.aspx" />
     <Content Include="StrengthFinders\RecalcMatches.aspx" />
     <Content Include="StrengthFinders\showstrength.html" />
     <Content Include="Test.asp" />
@@ -315,6 +317,13 @@
     </Compile>
     <Compile Include="MeetingScheduler\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MeetingScheduler\Notify.aspx.cs">
+      <DependentUpon>Notify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeetingScheduler\Notify.aspx.designer.cs">
+      <DependentUpon>Notify.aspx</DependentUpon>
     </Compile>
     <Compile Include="MeetingScheduler\Scheduler.aspx.cs">
       <DependentUpon>Scheduler.aspx</DependentUpon>
@@ -518,6 +527,13 @@
     </Compile>
     <Compile Include="StrengthFinders\Matches.aspx.designer.cs">
       <DependentUpon>Matches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StrengthFinders\Person.aspx.cs">
+      <DependentUpon>Person.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StrengthFinders\Person.aspx.designer.cs">
+      <DependentUpon>Person.aspx</DependentUpon>
     </Compile>
     <Compile Include="StrengthFinders\RecalcMatches.aspx.cs">
       <DependentUpon>RecalcMatches.aspx</DependentUpon>

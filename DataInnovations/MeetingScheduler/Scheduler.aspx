@@ -62,6 +62,7 @@
 
                 .zui-table thead th.day {
                     text-align: center;
+                    font-size:larger;
                 }
 
                 .zui-table thead th.d0 {
@@ -125,10 +126,10 @@
             };
             */
 
-            $('.zui-scroller').css('width', $(window).width() - 200);
+            $('.zui-scroller').css('width', $(window).width() - 220);
 
             $(window).resize(function () {
-                $('.zui-scroller').css('width', $(window).width() - 200);
+                $('.zui-scroller').css('width', $(window).width() - 220);
             });
 
 
@@ -223,6 +224,8 @@
 
 
             $("form").submit(function (e) {
+                alert($('*[data-rank="0"]').length);
+
                 $('#processing').show();
                 //e.preventDefault();
                 $('*[data-changed="1"]').each(function (index) {
@@ -335,7 +338,7 @@
             <tr>
                 <td class="selector" data-rank="" style="background-color: aqua; border-color: red">Click</td>
                 <td class="selector s1" data-rank="1" style="color: white">Unavailable</td>
-                <td class="selector s3" data-rank="3">Not Sure</td>
+                <td class="selector s3" data-rank="3">Possibly</td>
                 <td class="selector s2" data-rank="2">OK</td>
                 <td><asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" Height="34px" Width="156px" />
                 </td>

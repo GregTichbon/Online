@@ -5,21 +5,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="<%: ResolveUrl("~/Dependencies/colorbox/colorbox.css")%>" rel="stylesheet" />
     <style>
         img {
             width: 100%;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/colorbox/jquery.colorbox-min.js")%>"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('.show').click(function () {
-                if (confirm("Are you sure that you want to show the next version of this photo?")) {
-                    //alert('Ajax update of photo: ' + $(this).attr('id') + ' for group: <%= groupcode %>');
+                direction = $(this).attr('id').substring(0, 1);
+                //alert(direction);
+                if (direction == 'B') {
+                    ans = true;
+                } else {
+                    ans = confirm("Are you sure that you want to show the next version of this photo?")
+                }
+                if(ans) {
                     photo = $(this).attr('id').substring(2);
                     $.ajax({
-                        url: "data.asmx/get_next_version?groupcode=<%=groupcode%>&photo=" + photo, success: function (result) {
+                        url: "data.asmx/get_next_version?groupcode=<%=groupcode%>&photo=" + photo + "&direction=" + direction, success: function (result) {
                             myresult = $.parseJSON(result);
                             src = myresult.src;
                             version = myresult.version;
@@ -35,6 +43,23 @@
                     });
                 }
             });
+
+            $('.answer').click(function () {
+                photo = $(this).data('photo');
+                groupcode = $(this).data('groupcode');
+                $.colorbox({
+                    href: 'answer.aspx?group=' + groupcode + '&photo=' + photo,
+                    iframe: true,
+                    overlayClose: false,
+                    width: '30%',
+                    height: '30%',
+                    onClose: function () {
+                        location.reload;
+                    }
+                });
+
+            });
+
         }); //document ready
 
     </script>

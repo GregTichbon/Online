@@ -14,19 +14,16 @@
 
         $(document).ready(function () {
 
-           
+
 
         }); //document.ready
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <h1>You have an incorrect Meeting Key</h1>
-        This screen should show all meetings open for a user GUID
-        <!--
-        <a href="Scheduler.aspx?ID=XXXXXXXXXXXXX">Meeting 1</a>
-        -->
-
+        <table>
+            <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
+        </table>
     </form>
 </body>
 </html>

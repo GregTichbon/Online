@@ -81,7 +81,7 @@ namespace TOHW.PhotoHunt11Jun18
             }
 
             //Response.Write(path + "<br />");
-            Response.Write("Close this page and refresh the calling page");
+            //Response.Write("Close this page and refresh the calling page");
         }
     }
 }

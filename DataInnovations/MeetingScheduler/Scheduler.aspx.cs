@@ -140,10 +140,12 @@ namespace DataInnovations.MeetingScheduler
                 {
                     colname = table2.Columns[f1].ColumnName.Substring(0, 9);
                     string columnvalue = row[f1].ToString();
+                    /*
                     if (columnvalue == "")
                     {
                         columnvalue = "0";
                     }
+                    */
 
                     if (String.Equals(passed_entity_guid, entity_guid, StringComparison.OrdinalIgnoreCase))
                     {
