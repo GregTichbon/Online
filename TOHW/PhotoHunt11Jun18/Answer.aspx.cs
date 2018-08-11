@@ -14,6 +14,7 @@ namespace TOHW.PhotoHunt11Jun18
     {
         public string groupcode;
         public string photo;
+        public string showupload;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -79,7 +80,8 @@ namespace TOHW.PhotoHunt11Jun18
                 con.Close();
                 con.Dispose();
             }
-
+            Lit_Response.Text = "<span id=\"span_message\">Your image has been recorded.  You may click \"Close\" or \"Upload\" another image.</span><br /><input id=\"btn_close\" type=\"button\" value=\"Close\" /> <input id=\"btn_upload\" type=\"button\" value=\"Upload\" />";
+            showupload = " style=\"display: none\"";
             //Response.Write(path + "<br />");
             //Response.Write("Close this page and refresh the calling page");
         }

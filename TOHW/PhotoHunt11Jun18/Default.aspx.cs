@@ -15,6 +15,10 @@ namespace TOHW.PhotoHunt11Jun18
         protected void Page_Load(object sender, EventArgs e)
         {
             groupcode = Request.QueryString["id"];
+            if(groupcode == null)
+            {
+                groupcode = "";
+            }
             //int bm = 0;
 
             string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -36,25 +40,26 @@ namespace TOHW.PhotoHunt11Jun18
                     //Lit_Images.Text += "<span id=\"" + bm.ToString() + "\"></span>";
 
                     Lit_Images.Text += "<br /><img id=\"I_" + dr["photo_cnt"] + "\" src=\"Images\\" + dr["GUID"] + ".jpg\" title=\"Images\\" + dr["GUID"] + ".jpg\">";
-                    Lit_Images.Text += "<br />Your current version: <span id=\"V_" + dr["photo_cnt"] + "\">" + dr["version"] + "</span>";
+                    Lit_Images.Text += "<br />Photo: " + dr["counter"] + ". &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                    Lit_Images.Text += "Your current version: <span id=\"V_" + dr["photo_cnt"] + "\">" + dr["version"] + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                     if (dr["answered"].ToString() == "Yes")
                     {
-                        Lit_Images.Text += " Answered";
+                        Lit_Images.Text += "Answered";
                     }
                     else
                     {
                         if (Convert.ToInt16(dr["version"]) > 1 && 1 == 2)
                         {
-                            Lit_Images.Text += " <a class=\"show\" id=\"B_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the previous version</a>";
+                            Lit_Images.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=\"show\" id=\"B_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the previous version</a>";
                         }
 
                         if (dr["version"].ToString() != "4")
                         //if (dr["answered"].ToString() != "Yes" && dr["version"].ToString() != "4")
                         {
-                            Lit_Images.Text += " <a class=\"show\" id=\"P_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the next version</a>";
+                            Lit_Images.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=\"show\" id=\"P_" + dr["photo_cnt"] + "\" href=\"javascript:void(0)\">Show the next version</a>";
                         }
                         //Lit_Images.Text += " <a href=\"answer.aspx?group=" + groupcode + "&photo=" + dr["photo_cnt"] + "\" target=\"photohuntanswer\">Answer</a>";
-                        Lit_Images.Text += " <a href=\"javascript:void(0);\" class=\"answer\" data-groupcode=\"" + groupcode + "\" data-photo=\"" + dr["photo_cnt"] + "\">Answer</a>";
+                        Lit_Images.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript:void(0);\" class=\"answer\" data-groupcode=\"" + groupcode + "\" data-photo=\"" + dr["photo_cnt"] + "\">Answer</a>";
                     }
                 }
 

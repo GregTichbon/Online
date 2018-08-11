@@ -103,7 +103,7 @@
     <form id="form1" runat="server">
         <div>
             <table class="blueTable">
-                <tr><th>Group</th><th>Place</th><th>Photo Version</th><th>Answered</th><th>Photos</th></tr>
+                <tr><th>Group</th><th>Photo</th><th>Place</th><th>Photo Version</th><th>Answered</th><th>Photos</th></tr>
                 <asp:Literal ID="Lit_Answers" runat="server"></asp:Literal>
             </table>
         </div>

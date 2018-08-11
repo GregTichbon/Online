@@ -126,6 +126,8 @@ namespace TOHW.Pickups
                 SqlCommand cmd2 = new SqlCommand("Get_Pickups", con2);
                 cmd2.CommandType = CommandType.StoredProcedure;
                 cmd2.Parameters.Add("@program", SqlDbType.Int).Value = 1;
+                cmd2.Parameters.Add("@debug", SqlDbType.VarChar).Value = Session["pickups_name"];
+
                 cmd2.Connection = con2;
                 try
                 {

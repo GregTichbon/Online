@@ -9,7 +9,7 @@
     <link href="<%: ResolveUrl("~/Content/main.css")%>" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css" />
- 
+
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Scripts/jquery-2.2.0.min.js")%>"></script>
@@ -42,8 +42,22 @@
                 }
             });
 
+            width = screen.width;
+
             $(".nav-tabs a").click(function () {
+                href = $(this).attr('href');
+                //$(href).show();
+                hreftab = href.substring(4);
+                //$('#grid' + hreftab).jsGrid('refresh');
                 $(this).tab('show');
+                setTimeout(
+                    function () {
+                        href = $(this).attr('href');
+                        //$(href).show();
+                        hreftab = href.substring(4);
+                        //$('#grid' + hreftab).jsGrid('refresh');
+                        $('#grid' + hreftab).jsGrid('refresh');
+                    }, 500);
             });
 
             $('.nav-tabs a').on('shown.bs.tab', function (event) {
@@ -53,71 +67,122 @@
                 $(".prev span").text(y);
             });
 
-            var clients = [
-                    { "Name": "Otto Clay", "Age": 25, "Country": 1, "Address": "Ap #897-1459 Quam Avenue", "Married": false },
-                    { "Name": "Connor Johnston", "Age": 45, "Country": 2, "Address": "Ap #370-4647 Dis Av.", "Married": true },
-                    { "Name": "Lacey Hess", "Age": 29, "Country": 3, "Address": "Ap #365-8835 Integer St.", "Married": false },
-                    { "Name": "Timothy Henson", "Age": 56, "Country": 1, "Address": "911-5143 Luctus Ave", "Married": true },
-                    { "Name": "Ramona Benton", "Age": 32, "Country": 3, "Address": "Ap #614-689 Vehicula Street", "Married": false }
-            ];
- 
-            var countries = [
-                { Name: "", Id: 0 },
-                { Name: "United States", Id: 1 },
-                { Name: "Canada", Id: 2 },
-                { Name: "United Kingdom", Id: 3 }
+            var workers = [
+                { worker_name: "", worker_entityid: 0 },
+                { worker_name: "Judy Kumeroa", worker_entityid: 14 },
+                { worker_name: "Keith Ramage", worker_entityid: 16 },
+                { worker_name: "Jay Rerekura", worker_entityid: 19 },
+                { worker_name: "Greg Tichbon", worker_entityid: 27 },
+                { worker_name: "Karen Phillips", worker_entityid: 70 },
+                { worker_name: "Zeana Thomas", worker_entityid: 92 },
+                { worker_name: "Jordin Butters", worker_entityid: 96 },
+                { worker_name: "Watson Matthews", worker_entityid: 97 },
+                { worker_name: "Terry Tubman", worker_entityid: 119 },
+                { worker_name: "Keegan Easton", worker_entityid: 140 },
+                { worker_name: "Charlie boy Williams", worker_entityid: 4276 },
+                { worker_name: "Korrallie Bailey-Taurua", worker_entityid: 4277 },
+                { worker_name: "Mary Tafilipepe", worker_entityid: 4344 }
             ];
 
-            var workers = [
-                { Name: "", Id: 0 },
-                { Name: "Keegan", Id: 1 },
-                { Name: "Greg", Id: 2 },
-                { Name: "Jordi", Id: 3 }
+            var programs = [
+                { program_name: "", ProgramID: 0, active: 0 },
+                { program_name: "Senior Club", ProgramID: 1, active: 1 },
+                { program_name: "Te Pihi Ora Hou - Tane", ProgramID: 2, active: 1 },
+                { program_name: "Nga Toa", ProgramID: 8, active: 1 },
+                { program_name: "Breakaway", ProgramID: 9, active: 1 },
+                { program_name: "Te Pihi Ora Hou - Wahine", ProgramID: 10, active: 1 },
+                { program_name: "Whakapakari", ProgramID: 11, active: 1 },
+                { program_name: "Holiday Program October 2014", ProgramID: 12, active: 0 },
+                { program_name: "Social Work", ProgramID: 14, active: 1 },
+                { program_name: "Whanau Ora", ProgramID: 15, active: 1 },
+                { program_name: "Te Pihi Ora Hou Tuahine", ProgramID: 16, active: 1 }
             ];
- 
-            $("#grid_encounters").jsGrid({
+
+            $("#grid_enrolements").jsGrid({
                 width: "100%",
-                height: "400px",
- 
-                inserting: true,
+                height: 400,
+                inserting: false,
+                editing: false,
+                sorting: true,
+                paging: true,
+                autoload: true,
+                controller: {
+                    loadData: function (filter) {
+                        return $.ajax({
+                            url: '../functions/data.asmx/get_enrolements?id=69',
+                            dataType: "json"
+                        });
+                    }
+                },
+                fields: [
+                    { name: 'enrolementid', type: 'number', visible: false },
+                    { name: 'programid', title: 'Program', type: "select", items: programs, valueField: "ProgramID", textField: "program_name", selectedIndex: -1, width: 100 },
+                    { name: 'onfile', title: 'On file', type: "checkbox", width: 50 },
+                    { name: 'onfileasat', title: 'Of file at', type: "text", width: 50 },
+                    { name: 'worker', title: 'Worker', type: "checkbox", width: 50 },
+                    { name: 'enrolementstatus', title: 'Status', type: "text", width: 50 },
+                    { name: 'alwayspickup', title: 'Always Pickup', type: "checkbox", width: 50 },
+                    { type: "control" }
+                ]
+            });
+
+
+            $("#grid_addresses").jsGrid({
+                width: "100%",
+                height: 400,
+                inserting: false,
                 editing: true,
                 sorting: true,
                 paging: true,
                 autoload: true,
- 
                 controller: {
-                    loadData: function () {
-                        var d = $.Deferred();
-
-                        $.ajax({
-                            url: '../functions/data.asmx/get_encounters?id=69',
+                    loadData: function (filter) {
+                        return $.ajax({
+                            url: '../functions/data.asmx/get_addresses?id=69',
                             dataType: "json"
-                        }).done(function (response) {
-                            alert(d.response);
-                            d.resolve(response.value);
                         });
-                        alert(d.promise);
-                        return d.promise();
-
                     }
                 },
                 fields: [
-                    { name: 'encounterid', title: 'ID', type: 'number', width: 30 },
-                    { name: 'startdatetime', title: 'Start', type: "text", width: 120  },
-                    { name: 'enddatetime', title: 'End', type: "text", width: 120 },
-                    { name: 'narrative', title: 'Narrative', type: "textarea", width: 400 },
-                    { name: 'worker_name', title: 'Worker', type: "select", items: workers, valueField: "Id", textField: "Name" },
-                    //{ name: "Name", type: "text", width: 150, validate: "required" },
-                    //{ name: "Age", type: "number", width: 50 },
-                    //{ name: "Address", type: "textarea", width: 200 },
-                    //{ name: "Country", type: "select", items: countries, valueField: "Id", textField: "Name" },
-                   // { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
+                    { name: 'addressid', type: 'number', visible: false },
+                    { name: 'address', title: 'address', type: "textarea", width: 200 },
+                    { name: 'description', title: 'description', type: "textarea", width: 300 },
+                    { name: 'longitude', title: 'longitude', type: "text", width: 100, editing: false },
+                    { name: 'latitude', title: 'latitude', type: "text", width: 100, editing: false },
+                    { name: 'current', title: 'current', type: "checkbox", width: 50 },
+                    { name: 'notes', title: 'Notes', type: "textarea", width: 200 },
                     { type: "control" }
                 ]
             });
- 
 
-  
+            $("#grid_encounters").jsGrid({
+                width: "100%",
+                height: 400,
+                inserting: false,
+                editing: false,
+                sorting: true,
+                paging: true,
+                autoload: true,
+                controller: {
+                    loadData: function (filter) {
+                        return $.ajax({
+                            url: '../functions/data.asmx/get_encounters?id=69',
+                            dataType: "json"
+                        });
+                    }
+                },
+                fields: [
+                    { name: 'encounterid', type: 'number', visible: false },
+                    { name: 'startdatetime', title: 'Start', type: "text", width: 120 },
+                    { name: 'enddatetime', title: 'End', type: "text", width: 120 },
+                    { name: 'narrative', title: 'Narrative', type: "textarea", width: 400 },
+                    { name: 'worker_entityid', title: 'Worker', type: "select", items: workers, valueField: "worker_entityid", textField: "worker_name", selectedIndex: -1, width: 50 },
+                    { type: "control" }
+                ]
+            });
+
+
+
 
             $('.inhibitcutcopypaste').bind("cut copy paste", function (e) {
                 e.preventDefault();
@@ -145,26 +210,31 @@
     <asp:TextBox ID="tb_dateofbirth" runat="server"></asp:TextBox><br />
 
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#div_encounter">Encounters</a></li>
-        <li><a href="#div_address">Address</a></li>
+        <li class="active"><a href="#div_enrolements">Enrolements</a></li>
+        <li><a href="#div_addresses">Address</a></li>
+        <li><a href="#div_encounters">Encounters</a></li>
     </ul>
     <!------------------------------------------------------------------------------------------------------>
     <div class="tab-content">
-        <div id="div_encounter" class="tab-pane fade in active">
-            <h3>Encounters</h3>
-             <div id="grid_encounters"></div>
 
+        <div id="div_enrolements" class="tab-pane fade in active">
+            <h3>Enrolement</h3>
+            <div id="grid_enrolements"></div>
         </div>
 
+        <div id="div_addresses" class="tab-pane fade in">
+            <h3>Address</h3>
+            <div id="grid_addresses"></div>
+        </div>
 
-        <div id="div_address" class="tab-pane fade in active">
-            <h3>
-                Address</h3>
+        <div id="div_encounters" class="tab-pane fade in">
+            <h3>Encounters</h3>
+            <div id="grid_encounters"></div>
         </div>
     </div>
     <!------------------------------------------------------------------------------------------------------>
 
 
 
-    
+
 </asp:Content>

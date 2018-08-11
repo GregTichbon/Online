@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,6 +13,10 @@ namespace DataInnovations.MeetingScheduler
     public partial class Scheduler : System.Web.UI.Page
     {
         public string meeting_ctr;
+        public string meetingname;
+        public string meetingtitle;
+        public string thisentityname; 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string passed_entity_guid = Request.QueryString["entity"] + "";
@@ -25,7 +30,7 @@ namespace DataInnovations.MeetingScheduler
 
             SqlConnection con = new SqlConnection(strConnString);
 
-            string meetingname = "";
+            string meetingdescription = "";
             int timeslots;
             int duration;
 
@@ -44,6 +49,8 @@ namespace DataInnovations.MeetingScheduler
                     dr.Read();
                     meeting_ctr = dr["meeting_ctr"].ToString();
                     meetingname = dr["name"].ToString();
+                    meetingtitle = dr["title"].ToString();
+                    meetingdescription = dr["description"].ToString();
                     timeslots = Convert.ToInt16(dr["timeslots"]);
                     duration = Convert.ToInt16(dr["duration"]);
                     //should see that the entity_guid is in here otherwise don't show!!!
@@ -90,7 +97,7 @@ namespace DataInnovations.MeetingScheduler
                 da.Fill(table2);
             }
 
-            h1 += "<th class=\"zui-sticky-col\">" + meetingname + "</th>";
+            h1 += "<th class=\"zui-sticky-col\" title=\"" + meetingdescription + "\">" + meetingname + "<br />" + meetingtitle + "</th>";
 
             for (int f1 = 4; f1 < table2.Columns.Count; f1++)
             {
@@ -133,7 +140,13 @@ namespace DataInnovations.MeetingScheduler
                 entityname = row["name"].ToString();
                 lastupdated = row["lastupdated"].ToString();
 
-                html += "<tr><td class=\"zui-sticky-col\" title=\"" + lastupdated + "\">" + entityname + "</td>";
+                if (String.Equals(passed_entity_guid, entity_guid, StringComparison.OrdinalIgnoreCase))
+                {
+                    thisentityname = entityname;
+                    entityname = "<span class=\"myname\">" + entityname + "</span>";
+                }
+
+                    html += "<tr><td class=\"zui-sticky-col\" title=\"" + lastupdated + "\">" + entityname + "</td>";
                 day = 0;
 
                 for (int f1 = 4; f1 < table2.Columns.Count; f1++)
@@ -206,6 +219,9 @@ namespace DataInnovations.MeetingScheduler
             }
             con.Close();
             con.Dispose();
+
+            Functions funcs = new Functions();
+            funcs.sendemailV2("datainn.co.nz", "meetingscheduler@datainn.co.nz", "Meeting Scheduler", "m33t1ng", "Meeting Scheduler update by: " + thisentityname, "Meeting: " + meetingname + ".  " + meetingtitle, "", "greg@datainn.co.nz", "", "");
 
             Response.Redirect(Request.RawUrl);
 

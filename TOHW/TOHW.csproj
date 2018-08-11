@@ -393,6 +393,7 @@
     <Content Include="PhotoHunt11Jun18\ShowAll.aspx" />
     <Content Include="PhotoHunt11Jun18\TestImage1.aspx" />
     <Content Include="PhotoHunt11Jun18\UBC.jpg" />
+    <Content Include="PhotoHunt11Jun18\VW1.aspx" />
     <Content Include="Pickups\Admin.aspx" />
     <Content Include="Pickups\data.asmx" />
     <Content Include="Pickups\GoogleMaps1.aspx" />
@@ -699,6 +700,9 @@
     <Content Include="Scripts\PopupOverlay\index.html" />
     <Content Include="Scripts\PopupOverlay\index.js" />
     <Content Include="Scripts\PopupOverlay\jquery.popupoverlay.js" />
+    <Content Include="Scripts\Resize-Center\index.html" />
+    <Content Include="Scripts\Resize-Center\jquery.image-cover.js" />
+    <Content Include="Scripts\Resize-Center\jquery.image-cover.min.js" />
     <Content Include="Scripts\table2Excel\demo\index.html" />
     <Content Include="Scripts\table2Excel\dist\jquery.table2excel.js" />
     <Content Include="Scripts\table2Excel\dist\jquery.table2excel.min.js" />
@@ -707,6 +711,7 @@
     <Content Include="test1.aspx" />
     <Content Include="TestandPlay\Format.html" />
     <Content Include="TESTQS.html" />
+    <Content Include="TOHTSHIRT\default.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="assets\css\font-awesome.min.css" />
     <Content Include="assets\css\ie8.css" />
@@ -891,6 +896,13 @@
     <Compile Include="PhotoHunt11Jun18\TestImage1.aspx.designer.cs">
       <DependentUpon>TestImage1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PhotoHunt11Jun18\VW1.aspx.cs">
+      <DependentUpon>VW1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\VW1.aspx.designer.cs">
+      <DependentUpon>VW1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pickups\GoogleMaps2.aspx.cs">
       <DependentUpon>GoogleMaps2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -904,6 +916,13 @@
     </Compile>
     <Compile Include="Pickups\tabletoExcel.aspx.designer.cs">
       <DependentUpon>tabletoExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TOHTSHIRT\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TOHTSHIRT\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="TOHWAuction.Master.cs">
       <DependentUpon>TOHWAuction.Master</DependentUpon>
@@ -1155,6 +1174,8 @@
     <Content Include="Scripts\table2Excel\package.json" />
     <Content Include="Scripts\table2Excel\README.md" />
     <Content Include="Scripts\table2Excel\table2excel.jquery.json" />
+    <Content Include="Scripts\Resize-Center\LICENSE" />
+    <Content Include="Scripts\Resize-Center\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

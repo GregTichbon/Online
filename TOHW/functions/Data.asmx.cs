@@ -109,11 +109,11 @@ namespace TOHW.data
                     {
                         EncounterList.Add(new Encounter
                         {
-                            encounterid = Convert.ToInt16(dr["encounterid"]) ,
+                            encounterid = dr["encounterid"].ToString(),
                             startdatetime = dr["startdatetime"].ToString(),
                             enddatetime = dr["enddatetime"].ToString(),
                             narrative = dr["narrative"].ToString(),
-                            worker_entityid = Convert.ToInt16(dr["worker_entityid"]),
+                            worker_entityid = dr["worker_entityid"].ToString(),
                             worker_name = dr["worker_name"].ToString()
                         });
                     }
@@ -133,6 +133,102 @@ namespace TOHW.data
             Context.Response.Write(JS.Serialize(EncounterList));
         }
 
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_enrolements(int id)
+        {
+            List<Enrolement> EnrolementList = new List<Enrolement>();
+            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Get_Enrolements", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@entityid", SqlDbType.VarChar).Value = id;
+            cmd.Connection = con;
+
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        EnrolementList.Add(new Enrolement
+                        {
+                            enrolementid = dr["id"].ToString(),
+                            programid = dr["programid"].ToString(),
+                            onfile = dr["onfile"].ToString(),
+                            worker = dr["worker"].ToString(),
+                            onfileasat = dr["onfileasat"].ToString(),
+                            enrolementstatus = dr["enrolementstatus"].ToString(),
+                            alwayspickup = dr["alwayspickup"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(EnrolementList));
+        }
+
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void get_addresses(int id)
+        {
+            List<Address> AddressList = new List<Address>();
+            //String strConnString = ConfigurationManager.ConnectionStrings["WSOnlineConnectionString"].ConnectionString;
+            string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Get_Addresses", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@entityid", SqlDbType.VarChar).Value = id;
+            cmd.Connection = con;
+
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        AddressList.Add(new Address
+                        {
+                            addressid = dr["id"].ToString(),
+                            address = dr["address"].ToString(),
+                            description = dr["description"].ToString(),
+                            longitude = dr["longitude"].ToString(),
+                            latitude = dr["latitude"].ToString(),
+                            current = dr["current"].ToString(),
+                            notes = dr["notes"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(AddressList));
+        }
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void RIDCharges(string property_no, string year, string next_year)
@@ -733,12 +829,34 @@ namespace TOHW.data
 
     public class Encounter
     {
-        public int encounterid;
+        public string encounterid;
         public string startdatetime;
         public string enddatetime;
         public string narrative;
-        public int worker_entityid;
+        public string worker_entityid;
         public string worker_name;
+    }
+
+    public class Enrolement
+    {
+        public string enrolementid;
+        public string programid;
+        public string onfile;
+        public string worker;
+        public string onfileasat;
+        public string enrolementstatus;
+        public string alwayspickup;
+    }
+
+    public class Address
+    {
+        public string addressid;
+        public string address;
+        public string description;
+        public string longitude;
+        public string latitude;
+        public string current;
+        public string notes;
     }
 
     public class TestList

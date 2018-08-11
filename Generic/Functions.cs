@@ -43,7 +43,7 @@ namespace Generic
             return "Test";
         }
 
-        public void sendemail(string emailsubject, string emailbody, string emailRecipient, string emailbcc, string replyto)
+        public void sendemail(string emailsubject, string emailhtml, string emailRecipient, string emailbcc, string replyto)
         {
             //MailMessage mail = new MailMessage("noreply@whanganui.govt.nz", emailRecipient);
 
@@ -67,7 +67,55 @@ namespace Generic
             client.UseDefaultCredentials = false;
             client.Host = "datainn.co.nz";
 
+            string[] emailaddresses = emailRecipient.Split(';');
+
+            IEnumerable<string> distinctemailaddresses = emailaddresses.Distinct();
+
+            foreach (string emailaddress in distinctemailaddresses)
+            {
+                mail.To.Add(emailaddress);
+            }
+
+            if (emailbcc != "")
+            {
+                string[] bccaddresses = emailbcc.Split(';');
+
+                IEnumerable<string> distinctbccaddresses = bccaddresses.Distinct();
+
+                foreach (string bccaddress in distinctbccaddresses)
+                {
+                    mail.Bcc.Add(bccaddress);
+                }
+            }
             mail.IsBodyHtml = true;
+            mail.Subject = emailsubject;
+            mail.Body = emailhtml;
+            client.Send(mail);
+        }
+
+        public void sendemailV2(string host, string emailfrom, string emailfromname, string password, string emailsubject, string emailtext, string emailhtml, string emailRecipient, string emailbcc, string replyto)
+        {
+            //MailMessage mail = new MailMessage("noreply@whanganui.govt.nz", emailRecipient);
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(emailfrom, emailfromname);
+            if (replyto != "")
+            {
+                string[] rtaddresses = replyto.Split(';');
+
+                IEnumerable<string> distinctrtaddresses = rtaddresses.Distinct();
+
+                foreach (string rtaddress in distinctrtaddresses)
+                {
+                    mail.ReplyToList.Add(rtaddress);
+                }
+            }
+
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = host;
 
             string[] emailaddresses = emailRecipient.Split(';');
 
@@ -89,8 +137,25 @@ namespace Generic
                     mail.Bcc.Add(bccaddress);
                 }
             }
+
             mail.Subject = emailsubject;
-            mail.Body = emailbody;
+            if (emailtext != "")
+            {
+                mail.IsBodyHtml = false;
+                mail.Body = emailtext;
+
+                if(emailhtml != "") { 
+                    System.Net.Mime.ContentType mimeType = new System.Net.Mime.ContentType("text/html");
+                    AlternateView alternate = AlternateView.CreateAlternateViewFromString(emailhtml, mimeType);
+                }
+
+            }
+            else //assume html only
+            {
+                mail.IsBodyHtml = true;
+                mail.Body = emailhtml;
+            }
+
             client.Send(mail);
         }
 

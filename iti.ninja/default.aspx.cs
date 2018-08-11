@@ -42,7 +42,8 @@ namespace iti.ninja
                     redirect = "http://datainn.co.nz/maadi/";
                     break;
                 case "TOHTSHIRT":
-                    redirect = "https://www.facebook.com/teorahou.whanganui/";
+                    //redirect = "https://www.facebook.com/teorahou.whanganui/";
+                    redirect = "http://whanganui.teorahou.org.nz/TOHTShirt";
                     break;
 
                 default:

@@ -1,0 +1,317 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{61EDB3B8-71E2-4869-8F92-3EF4158AF141}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>wanganuisportscentre.org.nz</RootNamespace>
+    <AssemblyName>wanganuisportscentre.org.nz</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="httpdocs\.user.ini" />
+    <Content Include="httpdocs\charges-14dec05.pdf" />
+    <Content Include="httpdocs\test\coldfusion\test.cfm" />
+    <Content Include="httpdocs\test\perl\test.pl" />
+    <Content Include="httpdocs\test\python\test.py" />
+    <Content Include="httpdocs\tinymce\js\tinymce\langs\readme.md" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\readme.md" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="httpdocs\web.config" />
+    <Content Include="%24Source\Images.cdr" />
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="httpdocs\%24emailtest.asp" />
+    <Content Include="httpdocs\admin.asp" />
+    <Content Include="httpdocs\arial.asp" />
+    <Content Include="httpdocs\contact_acknowledgment.htm" />
+    <Content Include="httpdocs\contact_form.htm" />
+    <Content Include="httpdocs\contact_process.asp" />
+    <Content Include="httpdocs\css\style.css" />
+    <Content Include="httpdocs\css_wcsc.css" />
+    <Content Include="httpdocs\default.asp" />
+    <Content Include="httpdocs\favicon.ico" />
+    <Content Include="httpdocs\fck_css_wcsc.css" />
+    <Content Include="httpdocs\Images\Arial.jpg" />
+    <Content Include="httpdocs\Images\ArialBig.jpg" />
+    <Content Include="httpdocs\Images\filler.gif" />
+    <Content Include="httpdocs\Images\for_bg.gif" />
+    <Content Include="httpdocs\Images\for_bg_black.gif" />
+    <Content Include="httpdocs\Images\for_bg_navi.gif" />
+    <Content Include="httpdocs\Images\inside_icon_badminton.gif" />
+    <Content Include="httpdocs\Images\inside_icon_bball.gif" />
+    <Content Include="httpdocs\Images\inside_icon_bowls.gif" />
+    <Content Include="httpdocs\Images\inside_icon_futsal.gif" />
+    <Content Include="httpdocs\Images\inside_icon_gym.gif" />
+    <Content Include="httpdocs\Images\inside_icon_hockey.gif" />
+    <Content Include="httpdocs\Images\inside_icon_netball.gif" />
+    <Content Include="httpdocs\Images\inside_icon_rollerderby.gif" />
+    <Content Include="httpdocs\Images\inside_icon_rugby.gif" />
+    <Content Include="httpdocs\Images\inside_icon_tt.gif" />
+    <Content Include="httpdocs\Images\inside_icon_volleyball.gif" />
+    <Content Include="httpdocs\Images\jub1.gif" />
+    <Content Include="httpdocs\Images\jub1th.gif" />
+    <Content Include="httpdocs\Images\navi-mixednetball.gif" />
+    <Content Include="httpdocs\Images\navi_badminton.gif" />
+    <Content Include="httpdocs\Images\navi_basket.gif" />
+    <Content Include="httpdocs\Images\navi_futsal.gif" />
+    <Content Include="httpdocs\Images\navi_gym.gif" />
+    <Content Include="httpdocs\Images\navi_indoor.gif" />
+    <Content Include="httpdocs\Images\navi_inline.gif" />
+    <Content Include="httpdocs\Images\navi_masters.gif" />
+    <Content Include="httpdocs\Images\navi_net.gif" />
+    <Content Include="httpdocs\Images\navi_outdoor.gif" />
+    <Content Include="httpdocs\Images\navi_rollerderby.gif" />
+    <Content Include="httpdocs\Images\navi_rugby.gif" />
+    <Content Include="httpdocs\Images\navi_side1.gif" />
+    <Content Include="httpdocs\Images\navi_side2.gif" />
+    <Content Include="httpdocs\Images\navi_side3a.gif" />
+    <Content Include="httpdocs\Images\navi_side3aWithSplash.gif" />
+    <Content Include="httpdocs\Images\navi_speedskate.gif" />
+    <Content Include="httpdocs\Images\navi_swimming.gif" />
+    <Content Include="httpdocs\Images\navi_tt.gif" />
+    <Content Include="httpdocs\Images\navi_volley.gif" />
+    <Content Include="httpdocs\Images\navi_ymca.gif" />
+    <Content Include="httpdocs\Images\spring1.gif" />
+    <Content Include="httpdocs\Images\spring1th.gif" />
+    <Content Include="httpdocs\Images\topbar1a.jpg" />
+    <Content Include="httpdocs\Images\topbar1b.gif" />
+    <Content Include="httpdocs\Images\topbar2.jpg" />
+    <Content Include="httpdocs\Images\topbar3.jpg" />
+    <Content Include="httpdocs\Images\wcscmap.gif" />
+    <Content Include="httpdocs\Images\ylogo63opt.gif" />
+    <Content Include="httpdocs\img\asp-net.png" />
+    <Content Include="httpdocs\img\blog.png" />
+    <Content Include="httpdocs\img\company-logo.png" />
+    <Content Include="httpdocs\img\facebook.png" />
+    <Content Include="httpdocs\img\forum.png" />
+    <Content Include="httpdocs\img\globe.png" />
+    <Content Include="httpdocs\img\google-plus.png" />
+    <Content Include="httpdocs\img\knowledge-base.png" />
+    <Content Include="httpdocs\img\logo.png" />
+    <Content Include="httpdocs\img\ok.png" />
+    <Content Include="httpdocs\img\perl.png" />
+    <Content Include="httpdocs\img\php.png" />
+    <Content Include="httpdocs\img\python.png" />
+    <Content Include="httpdocs\img\twitter.png" />
+    <Content Include="httpdocs\img\warning.png" />
+    <Content Include="httpdocs\inc_contact.asp" />
+    <Content Include="httpdocs\jubilee.asp" />
+    <Content Include="httpdocs\onlinebooking_acknowledgment.htm" />
+    <Content Include="httpdocs\onlinebooking_form.htm" />
+    <Content Include="httpdocs\onlinebooking_process.asp" />
+    <Content Include="httpdocs\original1.default.asp" />
+    <Content Include="httpdocs\page.asp" />
+    <Content Include="httpdocs\pagelist.asp" />
+    <Content Include="httpdocs\page_process.asp" />
+    <Content Include="httpdocs\Signon.asp" />
+    <Content Include="httpdocs\signon_process.asp" />
+    <Content Include="httpdocs\signout.asp" />
+    <Content Include="httpdocs\springvale.asp" />
+    <Content Include="httpdocs\test\aspnet\test.aspx" />
+    <Content Include="httpdocs\test\aspnet\trace_info.aspx" />
+    <Content Include="httpdocs\test\asp\test_mail.asp" />
+    <Content Include="httpdocs\test\asp\test_msaccess.asp" />
+    <Content Include="httpdocs\test\asp\test_mssql.asp" />
+    <Content Include="httpdocs\test\asp\test_mysql.asp" />
+    <Content Include="httpdocs\test\coldfusion\test.html" />
+    <Content Include="httpdocs\test\perl\test.html" />
+    <Content Include="httpdocs\test\php\test.html" />
+    <Content Include="httpdocs\test\php\test.php" />
+    <Content Include="httpdocs\test\python\test.html" />
+    <Content Include="httpdocs\tinymce\changelog.txt" />
+    <Content Include="httpdocs\tinymce\js\tinymce\license.txt" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\example\dialog.html" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\example\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\example_dependency\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\layer\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.dev.svg" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.dev.svg" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="httpdocs\tinymce\js\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="httpdocs\tinymce\js\tinymce\themes\modern\theme.min.js" />
+    <Content Include="httpdocs\tinymce\js\tinymce\tinymce.min.js" />
+    <Content Include="httpdocs\tinymce\LICENSE.TXT" />
+    <Content Include="WanganuiSportsCentre.mdb" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="httpdocs\App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51300</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51273/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -29,7 +29,8 @@ namespace TOHW.PhotoHunt11Jun18
                 while(dr.Read()) 
                 {
                     Lit_Answers.Text += "<tr>";
-                    Lit_Answers.Text += "<td>" + dr["name"] + "</td>";
+                    Lit_Answers.Text += "<td>" + dr["name"] + " (" + dr["code"] + ")</td>";
+                    Lit_Answers.Text += "<td>" + dr["Counter"] + "</td>";
                     Lit_Answers.Text += "<td>" + dr["Description"] + "</td>";
                     Lit_Answers.Text += "<td>" + dr["Version"] + "</td>";
                     Lit_Answers.Text += "<td>" + dr["Answered"] + "</td>";

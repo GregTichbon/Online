@@ -62,7 +62,7 @@
 
                 .zui-table thead th.day {
                     text-align: center;
-                    font-size:larger;
+                    font-size: xx-large;
                 }
 
                 .zui-table thead th.d0 {
@@ -104,11 +104,20 @@
             width: 180px; /* B) 21 less than A */
             background-color: aqua;
         }
+
         .centered {
-  position: fixed; /* or absolute */
-  top: 20%;
-  left: 50%;
-}
+            position: fixed; /* or absolute */
+            top: 20%;
+            left: 50%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+        .myname {
+            color: red;
+            font-weight: bolder;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
@@ -224,20 +233,29 @@
 
 
             $("form").submit(function (e) {
-                alert($('*[data-rank="0"]').length);
-
-                $('#processing').show();
-                //e.preventDefault();
-                $('*[data-changed="1"]').each(function (index) {
-                    rank = $(this).attr('data-rank');
-                    reference = $(this).attr('data-reference');
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: reference,
-                        value: rank
-                    }).appendTo('#form1');
-                    //alert(startdatetime + "=" + rank);
-                });
+                whiteslots = $('.slot[data-rank=""]').length;
+                //alert(whiteslots);
+                var ans = true;
+                if (whiteslots > 0) {
+                    ans = confirm("You haven't completed all of the timeslots.  OK to save, or CANCEL to complete the form.");
+                }
+                //alert(ans);
+                if (ans == true) {
+                    $('#processing').show();
+                    //e.preventDefault();
+                    $('*[data-changed="1"]').each(function (index) {
+                        rank = $(this).attr('data-rank');
+                        reference = $(this).attr('data-reference');
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: reference,
+                            value: rank
+                        }).appendTo('#form1');
+                        //alert(startdatetime + "=" + rank);
+                    });
+                } else {
+                    e.preventDefault();
+                }
             });
 
         }); //document.ready
@@ -247,7 +265,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-         <!--
+        <!--
         <div class="zui-wrapper">
             <div class="zui-scroller">
                 <table class="zui-table">
@@ -333,21 +351,37 @@
             </div>
         </div>
         -->
-
+        <br />
         <table>
+            <tr>
+                <td></td>
+                <td colspan="3" style="text-align: center">Availability options</td>
+                <td></td>
+            </tr>
             <tr>
                 <td class="selector" data-rank="" style="background-color: aqua; border-color: red">Click</td>
                 <td class="selector s1" data-rank="1" style="color: white">Unavailable</td>
                 <td class="selector s3" data-rank="3">Possibly</td>
                 <td class="selector s2" data-rank="2">OK</td>
-                <td><asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" Height="34px" Width="156px" />
+                <td>
+                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" Height="34px" Width="156px" />
                 </td>
             </tr>
         </table>
 
-        <div id="debug"></div>
-        <div id="processing" style="display:none">
-            <img src="../Dependencies/Images/processing2.gif" class="centered"/></div>
+        <div id="debug">
+            <br />
+            Notes:<br />
+            <br />
+            Complete the form as soon as possible<br />
+            There are potentially time slots to the right, use the scroll bar to access these<br />
+            You may change your availability as often as you need.<br />
+            Select an availability option and click on the day to set all the time slots on that day.&nbsp; (You can still amend individual time slots)<br />
+            Select an availability option and hold the left mouse button down while dragging across the time slots to easily set those time slots.
+        </div>
+        <div id="processing" style="display: none">
+            <img src="../Dependencies/Images/processing2.gif" class="centered" />
+        </div>
 
     </form>
 </body>

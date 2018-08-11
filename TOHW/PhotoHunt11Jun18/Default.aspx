@@ -45,23 +45,26 @@
             });
 
             $('.answer').click(function () {
+                //alert('.answer');
                 photo = $(this).data('photo');
                 groupcode = $(this).data('groupcode');
                 $.colorbox({
                     href: 'answer.aspx?group=' + groupcode + '&photo=' + photo,
                     iframe: true,
                     overlayClose: false,
-                    width: '30%',
-                    height: '30%',
-                    onClose: function () {
-                        location.reload;
+                    width: '70%',
+                    height: '60%',
+                    onClosed: function () {
+                        location.reload(true);
                     }
                 });
-
             });
+
+
 
         }); //document ready
 
+  
     </script>
 </head>
 <body>

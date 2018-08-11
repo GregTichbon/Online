@@ -30,6 +30,8 @@ namespace DataInnovations.SMS
                     message = message.Replace("@name@", nameparts[0]);
                     //this may be wrong,  see sms/send/default.aspx
                     response += "<br />" + listItem.Value + a.SendMessage(listItem.Value, message).ToString();
+
+
                 }
                 else
                 {

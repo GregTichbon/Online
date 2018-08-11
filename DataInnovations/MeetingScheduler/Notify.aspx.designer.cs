@@ -31,6 +31,51 @@ namespace DataInnovations.MeetingScheduler {
         protected global::System.Web.UI.WebControls.TextBox tb_meeting;
         
         /// <summary>
+        /// tb_subject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_subject;
+        
+        /// <summary>
+        /// tb_htmlbody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_htmlbody;
+        
+        /// <summary>
+        /// tb_textbody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_textbody;
+        
+        /// <summary>
+        /// tb_replyto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_replyto;
+        
+        /// <summary>
+        /// tb_txt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_txt;
+        
+        /// <summary>
         /// btn_submit control.
         /// </summary>
         /// <remarks>
@@ -47,5 +92,14 @@ namespace DataInnovations.MeetingScheduler {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal Lit_html;
+        
+        /// <summary>
+        /// Lit_social control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal Lit_social;
     }
 }

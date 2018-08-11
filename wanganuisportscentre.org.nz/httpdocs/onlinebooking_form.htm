@@ -1,0 +1,110 @@
+<script type="text/javascript" src="Javascript/validateEmail.js"></script>
+<script language="JavaScript">
+function checkform() {
+	var msg = ''
+	var delim = ''
+	var frm = document.contact;
+	
+	if(frm.name.value == '') {
+		msg = msg + delim + ' - Your name';
+		delim = '\n';
+	}
+	if(frm.email.value != '') {
+		if(!(IsEmail(frm.email.value))) {
+			msg = msg + delim + ' - A valid email address';
+			delim = '\n';
+		}
+	} 
+	else {
+		msg = msg + delim + ' - Your email address';
+		delim = '\n';
+	}
+	if(frm.event.value == '') {
+		msg = msg + delim + ' - The type of event';
+		delim = '\n';
+	}
+	if(frm.date.value == '') {
+		msg = msg + delim + ' - The Date';
+		delim = '\n';
+	}
+	if(frm.start.value == '') {
+		msg = msg + delim + ' - A Start time';
+		delim = '\n';
+	}
+	if(frm.end.value == '') {
+		msg = msg + delim + ' - An End time';
+		delim = '\n';
+	}
+	if(frm.$securitycode.value != '||securitycode||') {
+		msg = msg + delim + ' - The correct security code';
+		delim = '\n';
+	}
+	if(msg != '') {
+		alert('You must enter valid information for the following:\n' + msg);
+		return(false);
+	}
+}
+
+
+</script>
+<form action="onlinebooking_process.asp" method="post" name="contact" id="contact" OnSubmit="return checkform();">
+  <table cellspacing="0" cellpadding="4" width="100%" border="0" class="bodytext">
+        <tr>
+            <td class="bodycopy" valign="top" width="54%" height="210">
+            <p><span class="title"><strong>Your contact details</strong><strong></strong></span><strong><br />
+            <br />
+            Name</strong><br />
+            <input size="40" name="name" /> <br />
+            <strong><br />
+            Address</strong><br />
+            <textarea cols="37" name="address"></textarea> <br />
+            <br />
+            <strong>Phone</strong><br />
+            <input size="40" name="phone" /> <br />
+            <br />
+            <strong>Fax</strong><br />
+            <input size="40" name="fax" /> <br />
+            <strong><br />
+            Email</strong><br />
+            <input size="40" name="email" /> <br />
+            <br />
+            <span class="title"><strong>Your Booking details</strong> </span><br />
+            <strong><br />
+            Type of Event </strong><br />
+            <input id="event" size="40" name="event" /> 
+            <br />
+            <strong><br />
+            Date</strong> (DD/MM/YY) <br />
+            <input id="date" name="date" /> 
+            <br />
+            <strong><br />
+            Start Time</strong><br />
+            <input id="start" name="start" /> 
+            <br />
+            <strong><br />
+            End Time</strong><br />
+            <input id="end" name="end" /> 
+            <br />
+            <strong><br />
+            Sport</strong><br />
+            <input id="sport" size="40" name="sport" /> 
+            <br />
+            <br />
+            <strong>Stadium</strong><br />
+            <input id="stadium" size="40" name="stadium" /> 
+            <br />
+            - See <a class="inside" target="_blank" href="default.asp?page=facilities">Facilities</a> for options <br />
+            <br />
+            <strong>Any Other Requirements?<br />
+            <textarea name="requirements" cols="50" rows="15" id="requirements"></textarea> 
+            </strong></p>
+            <p><strong>
+              Please enter the following security code: ||securitycode||<br>
+            <input name="$securitycode" type="text" id="$securitycode">
+            <input name="$actualsecuritycode" type="hidden" id="$actualsecuritycode" value="||securitycode||">
+            <br />
+            <strong><strong><strong><br />
+            <input type="submit" name="Submit" value="Submit form" /> <strong><strong><input type="reset" name="Submit2" value="Reset" /> </strong></strong></strong></strong></strong></strong></p></td>
+        </tr>
+  </table>
+</form>

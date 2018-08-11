@@ -29,10 +29,13 @@ namespace TOHW.PhotoHunt11Jun18
                 while (dr.Read())
                 {
                     c1++;
-                    if(c1 == 5)
+                    if(c1 == 1)
+                    {
+                        Lit_Images.Text += "Photo: " + dr["Counter"] + "<br />";
+                    } else if(c1 == 5)
                     {
                         c1 = 1;
-                        Lit_Images.Text += "<br />";
+                        Lit_Images.Text += "<br />Photo: " + dr["Counter"] + "<br />"; ;
                     }
                     Lit_Images.Text += "<img id=\"I_" + dr["photo_cnt"] + "\" src=\"Images\\" + dr["GUID"] + ".jpg\" title=\"Images\\" + dr["GUID"] + ".jpg\">";
                     //Lit_Images.Text += "<br />" + dr["GUID"];

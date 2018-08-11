@@ -146,8 +146,10 @@
     <Content Include="Maadi\default.asp" />
     <Content Include="MeetingScheduler\data.asmx" />
     <Content Include="MeetingScheduler\Default.aspx" />
+    <Content Include="MeetingScheduler\email.aspx" />
     <Content Include="MeetingScheduler\Notify.aspx" />
     <Content Include="MeetingScheduler\Scheduler.aspx" />
+    <Content Include="MeetingScheduler\Setup_Meeting_Blocks.aspx" />
     <Content Include="packages.config" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
@@ -164,6 +166,7 @@
     <Content Include="Row\data.asmx" />
     <Content Include="Row\Default.aspx" />
     <Content Include="Row\Entry.aspx" />
+    <Content Include="Row\Entry2.aspx" />
     <Content Include="Row\Prognostics.aspx" />
     <Content Include="Scripts\CyclePlugin\default.html" />
     <Content Include="Scripts\CyclePlugin\jquery.cycle.all.js" />
@@ -227,6 +230,7 @@
     <Content Include="UBC\Analysis.aspx" />
     <Content Include="UBC\HangiFeb2018.aspx" />
     <Content Include="UBC\Images\HangiTicketFeb2018.PNG" />
+    <Content Include="UBC\ZoneTraining.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +322,13 @@
     <Compile Include="MeetingScheduler\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MeetingScheduler\email.aspx.cs">
+      <DependentUpon>email.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeetingScheduler\email.aspx.designer.cs">
+      <DependentUpon>email.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MeetingScheduler\Notify.aspx.cs">
       <DependentUpon>Notify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -331,6 +342,13 @@
     </Compile>
     <Compile Include="MeetingScheduler\Scheduler.aspx.designer.cs">
       <DependentUpon>Scheduler.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MeetingScheduler\Setup_Meeting_Blocks.aspx.cs">
+      <DependentUpon>Setup_Meeting_Blocks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeetingScheduler\Setup_Meeting_Blocks.aspx.designer.cs">
+      <DependentUpon>Setup_Meeting_Blocks.aspx</DependentUpon>
     </Compile>
     <Compile Include="Raffles\Data.asmx.cs">
       <DependentUpon>Data.asmx</DependentUpon>
@@ -427,6 +445,13 @@
     </Compile>
     <Compile Include="Row\Entry.aspx.designer.cs">
       <DependentUpon>Entry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\Entry2.aspx.cs">
+      <DependentUpon>Entry2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Entry2.aspx.designer.cs">
+      <DependentUpon>Entry2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\Prognostics.aspx.cs">
       <DependentUpon>Prognostics.aspx</DependentUpon>
@@ -555,6 +580,13 @@
     </Compile>
     <Compile Include="UBC\HangiFeb2018.aspx.designer.cs">
       <DependentUpon>HangiFeb2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC\ZoneTraining.aspx.cs">
+      <DependentUpon>ZoneTraining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\ZoneTraining.aspx.designer.cs">
+      <DependentUpon>ZoneTraining.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

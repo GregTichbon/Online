@@ -255,6 +255,57 @@ namespace DataInnovations.Row
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void code_autocomplete(string discipline, string term)
+        {
+             List<CodeClass> CodeList = new List<CodeClass>();
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("code_autocomplete", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@discipline", SqlDbType.Int).Value = discipline;
+            cmd.Parameters.Add("@search", SqlDbType.VarChar).Value = term;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        CodeList.Add(new CodeClass
+                        {
+                            Code_CTR = dr["Code_CTR"].ToString(),
+                            Code = dr["Code"].ToString(),
+                            Description = dr["Description"].ToString(),
+                            HaveCox = dr["HaveCox"].ToString(),
+                            PrognosticTime = dr["PrognosticTime"].ToString(),
+                            Seats = dr["Seats"].ToString(),
+                            label = dr["Code"].ToString() + " : " + dr["Description"].ToString() + " (" + dr["PrognosticTime"].ToString() + ")"
+                        });
+                    }
+
+                    dr.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(CodeList));
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void subcategorydetails(string subcategory)
         {
             List<subcategorydetailsClass> subcategorydetails = new List<subcategorydetailsClass>();
@@ -357,6 +408,18 @@ namespace DataInnovations.Row
         public string seats;
         public string havecox;
         public string prognostictime;
+    }
+
+    public class CodeClass
+    {
+        public string Code_CTR;
+        public string Code;
+        public string Description;
+        public string HaveCox;
+        public string PrognosticTime;
+        public string Seats;
+        public string label;
+       
     }
 
 

@@ -146,12 +146,13 @@
         </div>
 
 
-        <div id="div_address" class="tab-pane fade in active">
+        <div id="div_address" class="tab-pane fade in">
             <h3>
                 Address</h3>
         </div>
     </div>
 
+    <!--
     <table id="grid"></table>
  <script>
      var data, grid;
@@ -166,5 +167,6 @@
          pager: { limit: 2 }
      });
  </script>
+    -->
 
 </asp:Content>
