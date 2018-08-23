@@ -26,6 +26,7 @@ namespace DataInnovations.MeetingScheduler
             Functions funcs = new Functions();
 
             string strConnString = "Data Source=toh-app;Initial Catalog=MeetingScheduler;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            string allemail = "";
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("Get_Meeting_Entity", con);
@@ -41,7 +42,7 @@ namespace DataInnovations.MeetingScheduler
                 {
                     if (btn_submit.Text != "Send")
                     {
-                        Lit_html.Text = "<tr><td>Send Email</td><td>Send Text</td><td>Social</td><td>URL</td><td>Email Address</td><td>Mobile</td></tr>";
+                        Lit_html.Text = "<tr><td>Send Email</td><td>Send Text</td><td>Social</td><td>Name</td><td>URL</td><td>Email Address</td><td>Mobile</td></tr>";
                     }
                     while (dr.Read())
                     {
@@ -54,8 +55,14 @@ namespace DataInnovations.MeetingScheduler
                         string emailaddress = dr["emailaddress"].ToString();
                         string title = dr["title"].ToString();
                         string description = dr["description"].ToString();
+                        string name = dr["name"].ToString();
 
                         string sendemail = "";
+                        if (emailaddress != "")
+                        {
+                            allemail += "; " + emailaddress;
+                        }
+
 
                         if (btn_submit.Text == "Send")
                         {
@@ -139,7 +146,7 @@ namespace DataInnovations.MeetingScheduler
                             string social = "<input id=\"cb_social_" + id + "\" name =\"cb_social_" + id + "\" type=\"checkbox\" />";
 
                             Lit_html.Text += "<tr>";
-                            Lit_html.Text += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + social + "</td><td><a href=\"" + link + "\">" + link + "</a></td><td><a href=\"mailto:" + emailaddress + "\"</a>" + emailaddress + "</td><td>" + dr["mobile"];
+                            Lit_html.Text += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + social + "</td><td>" + name + "</td><td><a href=\"" + link + "\" target_\"_Blank\">" + link + "</a></td><td><a href=\"mailto:" + emailaddress + "\"</a>" + emailaddress + "</td><td>" + dr["mobile"];
                             Lit_html.Text += "</tr>";
                         }
                     }
@@ -156,6 +163,7 @@ namespace DataInnovations.MeetingScheduler
                 con.Close();
                 con.Dispose();
             }
+            Lit_html.Text += allemail.Substring(1);
             btn_submit.Text = "Send";
         }
 

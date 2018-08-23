@@ -123,7 +123,7 @@
 
     <script type="text/javascript">
 
-
+        var highest = 0;
 
         $(document).ready(function () {
 
@@ -134,6 +134,10 @@
                 return dialogText;
             };
             */
+
+            for (f1 = 4; f1 < <%: cols%>; f1++) {
+                calculatescore(f1);
+            }
 
             $('.zui-scroller').css('width', $(window).width() - 220);
 
@@ -160,12 +164,13 @@
 
             $(".slot").mouseover(function () {
                 document.getSelection().removeAllRanges();
-                if (down && newrank != "") {
+                if (down && newrank !== "") {
                     rank = $(this).attr('data-rank');
-                    if (rank != newrank) {
+                    if (rank !== newrank) {
                         $(this).removeClass('s' + rank);
                         $(this).attr('data-rank', newrank);
-                        if ($(this).attr('data-origrank') != newrank) {
+                        calculatescore($(this).attr('data-col'));
+                        if ($(this).attr('data-origrank') !== newrank) {
                             $(this).attr('data-changed', 1);
                         }
                         else {
@@ -189,7 +194,8 @@
                     rank = newrank;
                 }
                 $(this).attr('data-rank', rank);
-                if ($(this).attr('data-origrank') != newrank) {
+                calculatescore($(this).attr('data-col'));
+                if ($(this).attr('data-origrank') !== rank) {
                     $(this).attr('data-changed', 1);
                 }
                 else {
@@ -215,7 +221,12 @@
                     days = $('*[data-day="' + day + '"]');
                     days.attr("data-rank", newrank)
 
-                    if (days.attr('data-origrank') != newrank) {
+                    $(days).each(function () {
+                        col = $(this).attr('data-col');
+                        calculatescore(col);
+                    });
+    
+                    if (days.attr('data-origrank') !== newrank) {
                         days.attr('data-changed', 1);
                     }
                     else {
@@ -260,6 +271,48 @@
 
         }); //document.ready
 
+        function calculatescore(col) {
+            var cnt2 = 0;
+            var cnt3 = 0;
+            $('*[data-col="' + col + '"]').each(function () {
+                thisrank = $(this).attr('data-rank');
+                switch (thisrank) {
+                    case 1:
+                        break;
+                    case '2':
+                        cnt2++;
+                        break;
+                    case '3':
+                        cnt3++;
+                        break;
+                    default:
+                        break;
+                }
+            })
+            if (cnt2 > highest) {
+                highest = cnt2;
+            }
+            $('#score_' + col).text(cnt2 + ',' + cnt3);
+            
+            /*
+            $('[id^=score_]').each(function () {
+                score = $(this).text().split(',')[0];
+                clr = 90 + parseInt((255 - 90) / highest * score);
+                console.log(score + '=' + clr);
+
+                $(this).css("background-color", "rgb(" + clr + ",0,0)"); 
+            })
+            */
+
+
+            clr = 90 + parseInt(<%= rowincrement %> * cnt2);
+            //console.log(cnt2 + '=' + clr);
+            $('#score_' + col).css({ "background-color": "rgb(" + clr + ",0,0)", "color": "white", "text-shadow": "none" }); 
+            //$('#score_' + col).css("color", "white"); 
+            //$('#score_' + col).css("background-color", "hsl(240, 100%, " + clr + "%)"); 
+
+        }
+
 
     </script>
 </head>
@@ -301,6 +354,7 @@
             <div class="zui-scroller">
                 <table class="zui-table">
                     <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
+                    <%= html %>
                 </table>
             </div>
         </div>

@@ -15,7 +15,10 @@ namespace DataInnovations.MeetingScheduler
         public string meeting_ctr;
         public string meetingname;
         public string meetingtitle;
-        public string thisentityname; 
+        public string thisentityname;
+        public int cols;
+        public int rowincrement;
+        public string html;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -76,7 +79,8 @@ namespace DataInnovations.MeetingScheduler
                 con.Dispose();
             }
 
-            string html = "";
+            //string html = "";
+            html = "";
             string h1 = "";
             string h2 = "";
             string entity_ctr;
@@ -99,7 +103,8 @@ namespace DataInnovations.MeetingScheduler
 
             h1 += "<th class=\"zui-sticky-col\" title=\"" + meetingdescription + "\">" + meetingname + "<br />" + meetingtitle + "</th>";
 
-            for (int f1 = 4; f1 < table2.Columns.Count; f1++)
+            cols = table2.Columns.Count;
+            for (int f1 = 4; f1 < cols; f1++)
             {
                 colname = table2.Columns[f1].ColumnName.Substring(0, 9);
                 if (colname != lastdate)
@@ -120,13 +125,14 @@ namespace DataInnovations.MeetingScheduler
             day++;
             h1 += "<th class=\"day d" + d + "\" colspan=\"" + cnt + "\" data-day=\"" + day + "\">" + theday + " " + lastdate + "</th>";
 
+            rowincrement = 255 / table2.Rows.Count;
             foreach (DataRow row in table2.Rows)
             {
                 if (html == "")
                 {
                     html += "<thead>";
                     h2 += "<tr><th class=\"zui-sticky-col\">Name</th>";
-                    for (int f1 = 4; f1 < table2.Columns.Count; f1++)
+                    for (int f1 = 4; f1 < cols; f1++)
                     {
                         h2 += "<th>" + table2.Columns[f1].ColumnName.Substring(10) + "</th>";
                     }
@@ -146,10 +152,10 @@ namespace DataInnovations.MeetingScheduler
                     entityname = "<span class=\"myname\">" + entityname + "</span>";
                 }
 
-                    html += "<tr><td class=\"zui-sticky-col\" title=\"" + lastupdated + "\">" + entityname + "</td>";
+                html += "<tr><td class=\"zui-sticky-col\" title=\"" + lastupdated + "\">" + entityname + "</td>";
                 day = 0;
 
-                for (int f1 = 4; f1 < table2.Columns.Count; f1++)
+                for (int f1 = 4; f1 < cols; f1++)
                 {
                     colname = table2.Columns[f1].ColumnName.Substring(0, 9);
                     string columnvalue = row[f1].ToString();
@@ -170,18 +176,26 @@ namespace DataInnovations.MeetingScheduler
                         string start = table2.Columns[f1].ColumnName;
 
                         //html += "<td class=\"slot s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-origrank=\"" + columnvalue + "\" data-day=\"" + day + "\" data-changed=\"0\" data-reference=\"" + entity_ctr + "|" + start + "\">&nbsp;</td>";
-                        html += "<td class=\"slot s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-origrank=\"" + columnvalue + "\" data-day=\"" + day + "\" data-reference=\"" + entity_ctr + "|" + start + "\">&nbsp;</td>";
+                        html += "<td class=\"slot s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-col=\"" + f1 + "\" data-origrank=\"" + columnvalue + "\" data-day=\"" + day + "\" data-reference=\"" + entity_ctr + "|" + start + "\">&nbsp;</td>";
                     }
                     else
                     {
-                        html += "<td class=\"s" + columnvalue + "\" data-rank=\"" + columnvalue + "\">&nbsp;</td>";
+                        html += "<td class=\"s" + columnvalue + "\" data-rank=\"" + columnvalue + "\" data-col=\"" + f1 + "\" >&nbsp;</td>";
                     }
                 }
                 html += "</tr>";
             }
+
+            html += "<tr><td class=\"zui-sticky-col\">Score</td>";
+            for (int f1 = 4; f1 < cols; f1++)
+            {
+                html += "<td id=\"score_" + f1 + "\"></td>";
+            }
+            html += "</tr>";
+
             html += "</tbody>";
 
-            Lit_html.Text = html;
+            //Lit_html.Text = html;
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)

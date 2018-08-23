@@ -10,6 +10,9 @@
         .worker {
             font-weight: bolder;
         }
+        .whakapakari {
+            color: blue;
+        }
 
         .Additional {
             color: green;
@@ -109,9 +112,11 @@
 
         $(document).ready(function () {
 
+            ShowTime();
+
             $.each(mydata, function (index, value) {
                 myid = value.enrollmentId;
-                tr = '<tr id="tr_' + myid + '" class="' + value.enrolementStatus + ' ' + value.worker + '" data-version="' + value.version_ctr + '" data-gender="' + value.gender + '" data-status="' + value.enrolementStatus + '" data-name="' + value.name + '" data-worker="' + value.worker + '">';
+                tr = '<tr id="tr_' + myid + '" class="' + value.enrolementStatus + ' ' + value.worker + ' ' + value.whakapakari + '" data-version="' + value.version_ctr + '" data-gender="' + value.gender + '" data-status="' + value.enrolementStatus + '" data-name="' + value.name + '" data-worker="' + value.worker + '">';
                 //tr += '<td id="name_' + myid + '">' + value.name + myid + 'v<span id="span_' + myid + '">' + value.version_ctr + '</span></td>';
                 tr += '<td class="name" id="name_' + myid + '">' + value.name + '</td>';
                 //console.log(value.name);
@@ -148,7 +153,32 @@
             }
             $(".assignedto").append(assignedto_options);
 
-            $("#dd_assignedto").append(assignedto_options);
+            //$("#dd_assignedto").append(assignedto_options);
+            /*
+            $("#dd_assignedto").focus(function () {
+                console.log('focus');
+            })
+
+            $("#dd_assignedto").click(function () {
+                console.log('click');
+            })
+            */
+        
+
+            $("#dd_assignedto").focus(function () {
+                assignedtoitems = {};               //console.log('focus');
+                $('.assignedto').each(function () {
+                    assignedtoitems[$(this).val()] = true; 
+                });
+                assignedto_used_options = "<option>All</option>";
+                for(var i in assignedtoitems)
+                {
+                    assignedto_used_options += "<option>" + i + "</option>";
+                }
+                $("#dd_assignedto option").remove()
+                $("#dd_assignedto").append(assignedto_used_options);
+            });
+              
 
             $('#tbl_data > tbody  > tr').each(function () {
                 myid = $(this).attr("id").substring(3);
@@ -739,6 +769,10 @@
 
 
         }
+        function ShowTime() {
+            $('#span_time').text(moment().format('hh:mm:ss'));
+            setTimeout(ShowTime, 900);
+        }
 
 
 
@@ -753,7 +787,7 @@
 
     <div id="map"></div>
 
-    <p><%: formattedDate %> <span id="span_updated"></span></p>
+    <p><%: formattedDate %> <span id="span_time"></span><span id="span_updated"></span></p>
     <div class="toggle">
         <label>
             <input id="cb_male" type="checkbox" checked="checked" /><span class="input-checked">Male</span></label>
@@ -790,7 +824,6 @@
 
     <select id="dd_assignedto">
         <option>All</option>
-        <option></option>
     </select>
 
     <!--<input id="btn_test" type="button" value="Test" />-->

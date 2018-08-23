@@ -319,9 +319,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Database\data.asmx" />
     <Content Include="Database\Main.aspx" />
     <Content Include="Database\Main2.aspx" />
     <Content Include="Database\Search.aspx" />
+    <Content Include="Database\simple.aspx" />
     <Content Include="default.aspx" />
     <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
     <Content Include="Dependencies\colorbox\colorbox.css" />
@@ -394,6 +396,7 @@
     <Content Include="PhotoHunt11Jun18\TestImage1.aspx" />
     <Content Include="PhotoHunt11Jun18\UBC.jpg" />
     <Content Include="PhotoHunt11Jun18\VW1.aspx" />
+    <Content Include="Pickups\accident.bmp" />
     <Content Include="Pickups\Admin.aspx" />
     <Content Include="Pickups\data.asmx" />
     <Content Include="Pickups\GoogleMaps1.aspx" />
@@ -409,6 +412,7 @@
     <Content Include="Pickups\Icons\TOH.png" />
     <Content Include="Pickups\Icons\Unknown.png" />
     <Content Include="Pickups\Icons\Whakapakari.png" />
+    <Content Include="Pickups\ImageHandlerTest.aspx" />
     <Content Include="Pickups\InArray1.aspx" />
     <Content Include="Pickups\login.aspx" />
     <Content Include="Pickups\tabletoExcel.aspx" />
@@ -765,6 +769,7 @@
     <Content Include="Dependencies\TableHeadFixer\.gitignore" />
     <Content Include="Dependencies\TableHeadFixer\package.json" />
     <Content Include="Dependencies\TableHeadFixer\README.md" />
+    <Content Include="Pickups\GetImage.ashx" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -836,6 +841,17 @@
     <Compile Include="2Talk\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Database\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Database\simple.aspx.cs">
+      <DependentUpon>simple.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\simple.aspx.designer.cs">
+      <DependentUpon>simple.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MySite\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -903,12 +919,22 @@
     <Compile Include="PhotoHunt11Jun18\VW1.aspx.designer.cs">
       <DependentUpon>VW1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pickups\GetImage.ashx.cs">
+      <DependentUpon>GetImage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Pickups\GoogleMaps2.aspx.cs">
       <DependentUpon>GoogleMaps2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pickups\GoogleMaps2.aspx.designer.cs">
       <DependentUpon>GoogleMaps2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\ImageHandlerTest.aspx.cs">
+      <DependentUpon>ImageHandlerTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\ImageHandlerTest.aspx.designer.cs">
+      <DependentUpon>ImageHandlerTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pickups\tabletoExcel.aspx.cs">
       <DependentUpon>tabletoExcel.aspx</DependentUpon>

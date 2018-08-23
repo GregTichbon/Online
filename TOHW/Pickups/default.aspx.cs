@@ -25,7 +25,7 @@ namespace TOHW.Pickups
         //public string[] assignedto_values = new string[8] { "Jay", "Keith", "Jordi", "Greg", "Nate", "Watties", "Isa", "Judy"};
 
         public string status_values = "Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Called in - no response,Will make their own way,Made own way";
-        public string assignedto_values = "Jay,Keith,Jordi,Greg,Nate,Watties,Judy,Charlie Boy,Koralee,Keegan,Mahanga,Aimee,Whakapakari,Rebecca,Driver 1,Driver 2,Driver 3";
+        public string assignedto_values = "Jay,Keith,Jordi,Greg,Nate,Watties,Judy,Charlie Boy,Keegan,Rebecca,Chris,Mahanga,Koralee,Aimee,Whakapakari,Driver 1,Driver 2,Driver 3";
         public string missingicons = "";
 
         public string formattedDate;
@@ -44,6 +44,9 @@ namespace TOHW.Pickups
         public string address = "";
         public Int32 version_ctr = 0;
         public string worker = "";
+        public string whakapakari = "";
+
+        
 
         //public string LastEnrolementID = "";
         //public string Lastname = "";
@@ -152,6 +155,7 @@ namespace TOHW.Pickups
                             //Pickedup = dr["Pickedup"].ToString();
                             version_ctr = Convert.ToInt32(dr["version_ctr"]);
                             worker = dr["worker"].ToString();
+                            whakapakari = dr["whakapakari"].ToString();
                             //if (address != "")
                             //{
                             //    name_addresses += name_addresses_delim + name + "~" + address;
@@ -179,6 +183,7 @@ namespace TOHW.Pickups
                                 enrolementStatus = EnrolementStatus,
                                 version_ctr = version_ctr,
                                 worker = worker,
+                                whakapakari = whakapakari,
                                 address = Addresslist
                             });
 
@@ -258,6 +263,7 @@ namespace TOHW.Pickups
         public string enrolementStatus;
         public Int32 version_ctr;
         public string worker;
+        public string whakapakari;
         public List<AddressClass> address;
     }
     public class AddressClass

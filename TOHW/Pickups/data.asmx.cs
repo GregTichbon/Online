@@ -191,26 +191,12 @@ namespace TOHW.Pickups
                         {
                             html += "<table>";
 
-                            byte[] picData = dr["image"] as byte[] ?? null;
+                            //byte[] picData = dr["image"] as byte[] ?? null;
 
 
-                            if (picData != null)
+                            if (dr["image"] != null)
                             {
-                                /*                            using (MemoryStream ms = new MemoryStream(picData))
-                                                            {
-                                                                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(ms);
-                                                            }   */
-
-                                /*
-                                ImageConverter imageConverter = new ImageConverter();
-                                byte[] resourceByteArray = (byte[])imageConverter.ConvertTo(picData, typeof(byte[]));
-                                */
-
-                                /*
-                                MemoryStream ms = new MemoryStream(picData);
-                                System.Drawing.Image xx;
-                                xx = Image.FromStream(ms);
-                                */
+                                html += "<img src=\"GetImage.ashx?id=" + dr["id"] + "\"/>";
                             }
 
                             string medical = dr["medical"].ToString();
@@ -255,6 +241,11 @@ namespace TOHW.Pickups
                         }
                     }
                     html += "</table>";
+
+            
+
+
+
 
                 }
             }
