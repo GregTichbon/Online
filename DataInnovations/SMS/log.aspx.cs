@@ -48,8 +48,8 @@ namespace DataInnovations.SMS
 
             string select = "select m.MessageType, m.datetime, M.message, [dbo].[FormatMobileNumber](M.sender,'') + ' - ' + isnull(Ns.name,'') as [Sender], [dbo].[FormatMobileNumber](M.Receiver,'') + ' - ' + isnull(nr.name,'') as [Receiver] ";
             select += "from message M ";
-            select += "left outer join number ns on Ns.number =  [dbo].[FormatMobileNumber](M.sender, '') ";
-            select += "left outer join number nr on Nr.number = [dbo].[FormatMobileNumber](M.Receiver, '') ";
+            select += "left outer join number ns on [dbo].[FormatMobileNumber](Ns.number,'') =  [dbo].[FormatMobileNumber](M.sender, '') ";
+            select += "left outer join number nr on [dbo].[FormatMobileNumber](Nr.number,'') = [dbo].[FormatMobileNumber](M.Receiver, '') ";
             select += "where m.datetime > dateadd(d, -" + days + ", getdate())" + type + " " ;
             select += "order by m.datetime desc";
 

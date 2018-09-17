@@ -167,9 +167,5 @@ namespace DataInnovations.MeetingScheduler
             btn_submit.Text = "Send";
         }
 
-        protected void tb_body_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

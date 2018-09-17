@@ -45,7 +45,9 @@ namespace iti.ninja
                     //redirect = "https://www.facebook.com/teorahou.whanganui/";
                     redirect = "http://whanganui.teorahou.org.nz/TOHTShirt";
                     break;
-
+                case "LTR":
+                    redirect = "http://office.datainn.co.nz/ubc/ltr.pdf";
+                    break;
                 default:
                     Literal1.Text = main + " Not found"; // Common.Functions.test();
                     break;
