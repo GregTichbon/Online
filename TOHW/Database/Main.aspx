@@ -28,6 +28,7 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
     <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js")%>"></script>
+    <!--https://gijgo.com/grid-->
     <script src="<%: ResolveUrl("~/Scripts/Grid/js/grid.js")%>"></script>
     <script src="<%: ResolveUrl("~/Scripts/generic.js")%>"></script>
 

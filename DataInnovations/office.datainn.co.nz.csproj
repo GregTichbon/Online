@@ -81,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
+    <Content Include="Dependencies\additional-methods.js" />
+    <Content Include="Dependencies\bootstrap.min.css" />
+    <Content Include="Dependencies\bootstrap.min.js" />
     <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
     <Content Include="Dependencies\colorbox\colorbox.css" />
     <Content Include="Dependencies\colorbox\images\border.png" />
@@ -103,6 +106,8 @@
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
     <Content Include="Dependencies\Images\processing1.gif" />
+    <Content Include="Dependencies\jquery-2.2.0.min.js" />
+    <Content Include="Dependencies\jquery.validate.min.js" />
     <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
     <Content Include="Dependencies\StickyTableCells\Examples\index.html" />
     <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
@@ -174,6 +179,7 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
+    <Content Include="UBC\LTR.aspx" />
     <Content Include="UBC\LTR.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -231,6 +237,8 @@
     <Content Include="UBC\Analysis.aspx" />
     <Content Include="UBC\HangiFeb2018.aspx" />
     <Content Include="UBC\Images\HangiTicketFeb2018.PNG" />
+    <Content Include="UBC\LTRCommunicate.aspx" />
+    <Content Include="UBC\LTR\List.aspx" />
     <Content Include="UBC\ZoneTraining.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -581,6 +589,27 @@
     </Compile>
     <Compile Include="UBC\HangiFeb2018.aspx.designer.cs">
       <DependentUpon>HangiFeb2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC\LTR.aspx.cs">
+      <DependentUpon>LTR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\LTR.aspx.designer.cs">
+      <DependentUpon>LTR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC\LTRCommunicate.aspx.cs">
+      <DependentUpon>LTRCommunicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\LTRCommunicate.aspx.designer.cs">
+      <DependentUpon>LTRCommunicate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC\LTR\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\LTR\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
     </Compile>
     <Compile Include="UBC\ZoneTraining.aspx.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>
