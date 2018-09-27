@@ -1,12 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="DataInnovations.UBC.LTR.List" %>
+﻿<%@ Page Title="Union Boat Club - Event" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Event.aspx.cs" Inherits="UBC.People.Event" %>
 
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-   <!-- Style Sheets -->
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
@@ -28,21 +23,21 @@
 
         });
     </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container" style="background-color: #FCF7EA">
 
+        <h1>Union Boat Club - Event
+        </h1>
 
-</head>
-<body>
-        <div class="container" style="background-color: #FCF7EA">
-    <form id="form1" runat="server">
-
-
-        <h2><a href="maint.aspx?id=new" target="edit">New</a></h2>
         <table class="table">
             <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
         </table>
 
 
-    </form>
-            </div>
-</body>
-</html>
+        <asp:Button ID="btn_submit" runat="server" Text="Submit" OnClick="btn_submit_Click" />
+
+    </div>
+
+
+</asp:Content>

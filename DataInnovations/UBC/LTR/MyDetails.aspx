@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LTR.aspx.cs" Inherits="DataInnovations.UBC.LTR" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MyDetails.aspx.cs" Inherits="DataInnovations.UBC.LTR.MyDetails" %>
 
 <!DOCTYPE html>
 

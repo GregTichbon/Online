@@ -10,16 +10,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DataInnovations.UBC.LTR
+namespace UBC.People
 {
     public partial class List : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string strConnString = "Data Source=toh-app;Initial Catalog=datainnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd1 = new SqlCommand("Get_All_LTR", con);
+            SqlCommand cmd1 = new SqlCommand("Get_All_People", con);
 
             cmd1.CommandType = CommandType.StoredProcedure;
             cmd1.Connection = con;
@@ -30,13 +30,17 @@ namespace DataInnovations.UBC.LTR
                 if (dr.HasRows)
                 {
 
-                    Lit_html.Text = "<tr><th>Student</th><th>School</th><th>Notes</th><th>Edit</th></tr>";
+                    Lit_html.Text = "<tr><th>Checkbox</th><th>Name</th><th>Status</th><th>Edit</th></tr>";
 
                     while (dr.Read())
                     {
-                        string id = dr["ltr_ctr"].ToString();
+                        //string id = dr["ltr_ctr"].ToString();
                         string firstname = dr["firstname"].ToString();
                         string lastname = dr["lastname"].ToString();
+                        string status = "Status - based on category and currency";
+       
+
+                        /*
                         string email = dr["email"].ToString();
                         string mobile = dr["mobile"].ToString();
                         string landline = dr["landline"].ToString();
@@ -51,9 +55,10 @@ namespace DataInnovations.UBC.LTR
                         string coming = dr["coming"].ToString();
                         string modified = dr["modifieddate"].ToString();
                         string notes = dr["notes"].ToString();
+ 
 
                         notes = notes.Replace("\n", "<br />");
-
+                       */
 
                         string guid = dr["guid"].ToString();
                         //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
@@ -63,7 +68,7 @@ namespace DataInnovations.UBC.LTR
 
 
                         Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td>" + firstname + " " + lastname + "</td><td>" + school + "</td><td>" + notes + "</td><td>" + link + "</td>";
+                        Lit_html.Text += "<td>Checkbox</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td>";
                         Lit_html.Text += "</tr>";
                     }
                 }

@@ -1,12 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="DataInnovations.UBC.LTR.List" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="UBC.People.List" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-   <!-- Style Sheets -->
+    <title>Union Boat Club - People List</title>
+ <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
@@ -34,7 +33,8 @@
 <body>
         <div class="container" style="background-color: #FCF7EA">
     <form id="form1" runat="server">
-
+                   <h1>Union Boat Club - Person Selection
+            </h1>
 
         <h2><a href="maint.aspx?id=new" target="edit">New</a></h2>
         <table class="table">

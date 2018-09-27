@@ -1,0 +1,223 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6313BBDF-E79E-4DA0-A983-FFD0CC0AA0CC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UBC</RootNamespace>
+    <AssemblyName>UBC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Generic">
+      <HintPath>..\Generic\bin\Generic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.aspx" />
+    <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
+    <Content Include="Dependencies\StickyTableCells\README.md" />
+    <Content Include="Dependencies\TableHeadFixer\.gitignore" />
+    <Content Include="Dependencies\TableHeadFixer\package.json" />
+    <Content Include="Dependencies\TableHeadFixer\README.md" />
+    <None Include="packages.config" />
+    <Content Include="People\Event.aspx" />
+    <Content Include="UBC.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dependencies\additional-methods.js" />
+    <Content Include="Dependencies\bootstrap.min.css" />
+    <Content Include="Dependencies\bootstrap.min.js" />
+    <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Dependencies\colorbox\colorbox.css" />
+    <Content Include="Dependencies\colorbox\images\border.png" />
+    <Content Include="Dependencies\colorbox\images\controls.png" />
+    <Content Include="Dependencies\colorbox\images\loading.gif" />
+    <Content Include="Dependencies\colorbox\images\loading_background.png" />
+    <Content Include="Dependencies\colorbox\images\overlay.png" />
+    <Content Include="Dependencies\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\css\ScrollTabla.css" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo3.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo4.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example1.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example2.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example3.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example4.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example5.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example6.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logoN.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logonit.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Images\processing1.gif" />
+    <Content Include="Dependencies\jquery-2.2.0.min.js" />
+    <Content Include="Dependencies\jquery.validate.min.js" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\index.html" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.js" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.js" />
+    <Content Include="Dependencies\TableHeadFixer\examples\cutomStyleHeight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeader.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiHead.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiTable.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\gulpfile.js" />
+    <Content Include="Dependencies\TableHeadFixer\index.html" />
+    <Content Include="Dependencies\TableHeadFixer\tableHeadFixer.js" />
+    <Content Include="People\List.aspx" />
+    <Content Include="People\Maint.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Event.aspx.cs">
+      <DependentUpon>Event.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Event.aspx.designer.cs">
+      <DependentUpon>Event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Maint.aspx.cs">
+      <DependentUpon>Maint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Maint.aspx.designer.cs">
+      <DependentUpon>Maint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UBC.Master.cs">
+      <DependentUpon>UBC.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC.Master.designer.cs">
+      <DependentUpon>UBC.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51431</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51431/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

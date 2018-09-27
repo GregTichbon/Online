@@ -179,7 +179,6 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
-    <Content Include="UBC\LTR.aspx" />
     <Content Include="UBC\LTR.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -239,6 +238,8 @@
     <Content Include="UBC\Images\HangiTicketFeb2018.PNG" />
     <Content Include="UBC\LTRCommunicate.aspx" />
     <Content Include="UBC\LTR\List.aspx" />
+    <Content Include="UBC\LTR\maint.aspx" />
+    <Content Include="UBC\LTR\MyDetails.aspx" />
     <Content Include="UBC\ZoneTraining.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -590,13 +591,6 @@
     <Compile Include="UBC\HangiFeb2018.aspx.designer.cs">
       <DependentUpon>HangiFeb2018.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UBC\LTR.aspx.cs">
-      <DependentUpon>LTR.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UBC\LTR.aspx.designer.cs">
-      <DependentUpon>LTR.aspx</DependentUpon>
-    </Compile>
     <Compile Include="UBC\LTRCommunicate.aspx.cs">
       <DependentUpon>LTRCommunicate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -610,6 +604,20 @@
     </Compile>
     <Compile Include="UBC\LTR\List.aspx.designer.cs">
       <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC\LTR\maint.aspx.cs">
+      <DependentUpon>maint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\LTR\maint.aspx.designer.cs">
+      <DependentUpon>maint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC\LTR\MyDetails.aspx.cs">
+      <DependentUpon>MyDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC\LTR\MyDetails.aspx.designer.cs">
+      <DependentUpon>MyDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="UBC\ZoneTraining.aspx.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>

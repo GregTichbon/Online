@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataInnovations.UBC.LTR {
+namespace UBC.People {
     
     
     public partial class List {

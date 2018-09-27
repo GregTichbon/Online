@@ -437,6 +437,224 @@ namespace Generic
             return response;
         }
 
+        public static string populateselect(string[] options, string selectedoption, string firstoption = "None")
+        {
+            string selected;
+            string html = "";
+            if (firstoption != "None")
+            {
+                html = html + ("<option>" + firstoption + "</option>");
+
+            }
+
+            foreach (string option in options)
+            {
+                if (option == selectedoption)
+                {
+                    selected = " selected";
+                }
+                else
+                {
+                    selected = "";
+                }
+                html = html + ("<option" + selected + ">" + option + "</option>");
+            }
+            return html;
+        }
+
+        public static string populateselectwithvalue(string[] options, string selectedoption, string firstoption = "None")
+        {
+            string selected;
+            string html = "";
+            if (firstoption != "None")
+            {
+                html = html + ("<option>" + firstoption + "</option>");
+
+            }
+
+            foreach (string option in options)
+            {
+                if (option == selectedoption)
+                {
+                    selected = " selected";
+                }
+                else
+                {
+                    selected = "";
+                }
+                html = html + ("<option value=\"" + "xx" + "\"" + selected + ">" + option + "</option>");
+            }
+            return html;
+        }
+
+        public string buildandpopulateselect(string strConnString, string cmdtext, string selectedoption, Dictionary<string, string> options, string firstoption = "None")
+        {
+            string selected;
+            string html = "";
+
+            if (firstoption != "None")
+            {
+                html = html + ("<option>" + firstoption + "</option>");
+            }
+
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd;
+
+            if (options.ContainsKey("storedprocedure"))
+            {
+                if (options.ContainsKey("storedprocedurename"))
+                {
+                    cmd = new SqlCommand(cmdtext, con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                }
+                else
+                {
+                    cmd = new SqlCommand("builddropdownlist", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sqltext", SqlDbType.VarChar).Value = cmdtext;
+                }
+            }
+            else
+            {
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = cmdtext;
+            }
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    string Label;
+                    string Value = "";
+                    string ValueText = "";
+                    string selectText = "";
+                    while (dr.Read())
+                    {
+                        Label = dr["label"].ToString();
+                        if (options.ContainsKey("usevalues"))
+                        {
+                            Value = dr["value"].ToString();
+                            ValueText = " value=\"" + Value + "\"";
+                        }
+                        if (options["selecttype"] == "Label")
+                        {
+                            selectText = Label;
+                        }
+                        else
+                        {
+                            selectText = Value;
+                        }
+
+                        if (selectText == selectedoption)
+                        {
+                            selected = " selected";
+                        }
+                        else
+                        {
+                            selected = "";
+                        }
+                        html = html + ("<option" + ValueText + selected + ">" + Label + "</option>");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            return html;
+        }
+
+        public string[,] buildselectarray(string strConnString, string cmdtext)
+        {
+            string[,] SelectArray = null;
+
+            var myList = new List<SelectList>();
+
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = cmdtext;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+
+                        myList.Add(new SelectList()
+                        {
+                            Label = dr["label"].ToString(),
+                            Value = dr["value"].ToString()
+                        });
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            SelectArray = new string[myList.Count, 2];
+            for (int i = 0; i < myList.Count; i++)
+            {
+                SelectArray[i, 0] = ((SelectList)myList[i]).Label;
+                SelectArray[i, 1] = ((SelectList)myList[i]).Value;
+            }
+
+            return SelectArray;
+        }
+
+
+
+        public static string populateselect_ccmonth(string selectedoption, string firstoption = "None")
+        {
+            string[] options = new string[12];
+            for (int i = 0; i <= 11; i++)
+            {
+                options[i] = (i + 1).ToString("00");
+            }
+
+
+            return populateselect(options, selectedoption, firstoption);
+        }
+
+        public static string populateselect_ccyear(string selectedoption, string firstoption = "None")
+        {
+            int thisyear = DateTime.Now.Year;
+            string[] options = new string[10];
+            for (int i = 0; i <= 9; i++)
+            {
+                options[i] = (thisyear + i).ToString();
+            }
+
+
+            return populateselect(options, selectedoption, firstoption);
+        }
+
         public async Task<string> SendMessage(string PhoneNumber, string Message)
         {
             string finalresponse = "";
@@ -632,6 +850,11 @@ namespace Generic
 
             }
     */
+}
+public class SelectList
+{
+    public string Label { get; set; }
+    public string Value { get; set; }
 }
 //public class gw_Result
 //{
