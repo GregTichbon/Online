@@ -66,6 +66,22 @@
 
             });
 
+            $('.send_text').click(function () {
+                alert('This will ask for a text message and then send it to: ' + $('td:first', $(this).parents('tr')).text());
+            })
+           $('.send_email_system').click(function () {
+                alert('This will ask for a the subject and body and then send it to: ' + $('td:first', $(this).parents('tr')).text());
+            })
+
+            $('.send_email_local').click(function () {
+                email = $('td:first', $(this).parents('tr')).text();
+                firstname = $('#tb_firstname').val();
+                knownas = $('#tb_knownas').val();
+                if (knownas == "") {
+                    knownas = firstname;
+                }
+                $(this).attr("href", "mailto:" + email + "?subject=Union Boat Club&body=Hi " + knownas);
+            })
 
 
 
@@ -117,11 +133,12 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#div_basic">Basic</a></li>
                 <li><a href="#div_attendance">Attendance</a></li>
-                <li><a href="#div_financeUBC">UBC Finance</a></li>
-                <li><a href="#div_financeFriends">Friends Finance</a></li>
+                <li><a href="#div_finance">Finance</a></li>
+                <li><a href="#div_phone">Phone</a></li>
+                <li><a href="#div_email">Email</a></li>
             </ul>
             <div class="tab-content">
-            <!------------------------------------------------------------------------------------------------------>
+                <!------------------------------------------------------------------------------------------------------>
                 <div id="div_basic" class="tab-pane fade in active">
                     <h3>Basic</h3>
                     <div class="form-group">
@@ -187,15 +204,29 @@
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
-                <div id="div_financeUBC" class="tab-pane fade in">
-                    <h3>UBC Finance</h3>
+                <div id="div_finance" class="tab-pane fade in">
+                    <h3>Finance</h3>
+                    <table class="table">
+                        <asp:Literal ID="Lit_finance" runat="server"></asp:Literal>
+                    </table>
                 </div>
-     <!------------------------------------------------------------------------------------------------------>
-                <div id="div_financeFriends" class="tab-pane fade in">
-                    <h3>Friends Finance</h3>
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_phone" class="tab-pane fade in">
+                    <h3>Phone</h3>
+                    <table class="table">
+                        <asp:Literal ID="Lit_phone" runat="server"></asp:Literal>
+                    </table>
                 </div>
-     <!------------------------------------------------------------------------------------------------------>
-            </div> <!-- tabs -->
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_email" class="tab-pane fade in">
+                    <h3>Email</h3>
+                    <table class="table">
+                        <asp:Literal ID="Lit_email" runat="server"></asp:Literal>
+                    </table>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
+            </div>
+            <!-- tabs -->
             <div class="form-group">
                 <div class="col-sm-4">
                 </div>

@@ -12,6 +12,7 @@ namespace UBC.People
     public partial class Maint : System.Web.UI.Page
     {
         public string hf_guid;
+        public string hf_person_id;
         public string tb_firstname;
         public string tb_lastname;
         public string tb_knownas;
@@ -40,6 +41,9 @@ namespace UBC.People
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] category = new string[3] { "School", "Club", "Cox" };
+        public string[] systems = new string[2] { "UBC", "Friends" };
+        public string[] yesno = new string[2] { "Yes", "No" };
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -64,6 +68,7 @@ namespace UBC.People
                     if (dr.HasRows)
                     {
                         dr.Read();
+                        hf_person_id = dr["person_id"].ToString();
                         tb_firstname = dr["firstname"].ToString();
                         tb_lastname = dr["lastname"].ToString();
                         tb_knownas = dr["knownas"].ToString();
@@ -108,8 +113,8 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string person_event_id = dr["person_event_id"].ToString();
                         string event_id = dr["event_id"].ToString();
                         string title = dr["title"].ToString();
-                        string startdatetime = dr["startdatetime"].ToString();
-                        string enddatetime = dr["enddatetime"].ToString();
+                        string startdatetime = Convert.ToDateTime(dr["startdatetime"]).ToString("dd MMM yy hh:mm");
+                        string enddatetime = Convert.ToDateTime(dr["enddatetime"]).ToString("dd MMM yy hh:mm");
                         string attendance = dr["attendance"].ToString();
                         string note = dr["note"].ToString();
 
@@ -130,10 +135,130 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 }
 
 
+                //-------------------------------------------------------------------------------------
+                Lit_finance.Text = "<tr><th>Date</th><th>System</th><th>Detail</th><th>Amount</th><th>Note</th></tr>";
+                double total = 0;
+
+                cmd.CommandText = "get_person_finance";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string person_finance_id = dr["person_finance_id"].ToString();
+                        string date = Convert.ToDateTime(dr["date"]).ToString("dd MMM yy");
+                        string system = dr["system"].ToString();
+                        string detail = dr["detail"].ToString();
+                        string amount = dr["amount"].ToString();
+                        string note = dr["note"].ToString();
+
+                        total += Convert.ToDouble(  amount);
+
+
+                        Lit_finance.Text += "<tr>";
+                        Lit_finance.Text += "<td>" + date + "</td>";
+                        Lit_finance.Text += "<td>" + system + "</td>";
+                        Lit_finance.Text += "<td>" + detail + "</td>";
+                        Lit_finance.Text += "<td>" + amount + "</td>";
+                        Lit_finance.Text += "<td>" + note + "</td>";
+                        Lit_finance.Text += "</tr>";
+
+
+                    }
+                    dr.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+
+
+                //-------------------------------------------------------------------------------------
+                Lit_phone.Text = "<tr><th>Number</th><th>Mobile</th><th>Send Texts</th><th>Note</th><th>Send Now</th></tr>";
+
+                cmd.CommandText = "get_person_phone";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string person_phone_id = dr["person_phone_id"].ToString();
+                        string phone = dr["phone"].ToString();
+                        string mobile = dr["mobile"].ToString();
+                        string text = dr["text"].ToString();
+                        string note = dr["note"].ToString();
+
+                        string send = "";
+                        if (text == "Yes")
+                        {
+                            send = "<a class=\"send_text\">Send</a>";
+                        }
+
+                        Lit_phone.Text += "<tr>";
+                        Lit_phone.Text += "<td>" + phone + "</td>";
+                        Lit_phone.Text += "<td>" + mobile + "</td>";
+                        Lit_phone.Text += "<td>" + text + "</td>";
+                        Lit_phone.Text += "<td>" + note + "</td>";
+                        Lit_phone.Text += "<td>" + send + "</td>";
+
+                        Lit_phone.Text += "</tr>";
+
+
+                    }
+                    dr.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                //-------------------------------------------------------------------------------------
+                Lit_email.Text = "<tr><th>Email</th><th>Note</th><th>System Send</th><th>Local Send</th></tr>";
+
+                cmd.CommandText = "get_person_email";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string person_email_id = dr["person_email_id"].ToString();
+                        string email = dr["email"].ToString();
+                        string note = dr["note"].ToString();
+
+                        string sendsystem = "<a class=\"send_email_system\">Send</a>";
+                        string sendlocal = "<a class=\"send_email_local\">Send</a>";
+
+                        Lit_email.Text += "<tr>";
+                        Lit_email.Text += "<td>" + email + "</td>";
+                        Lit_email.Text += "<td>" + note + "</td>";
+                        Lit_email.Text += "<td>" + sendsystem + "</td>";
+                        Lit_email.Text += "<td>" + sendlocal + "</td>";
+
+                        Lit_email.Text += "</tr>";
+
+
+                    }
+                    dr.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                //-------------------------------------------------------------------------------------
+
                 con.Close();
                 con.Dispose();
-
-                //
             }
         }
 
