@@ -91,6 +91,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 */
                         //dd_coming = dr["coming"].ToString();
 
+                        if (tb_birthdate != "")
+                        {
+                            tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yy");
+                        }
+
+
                     }
                     dr.Close();
                 }
@@ -245,6 +251,47 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         Lit_email.Text += "<td>" + sendlocal + "</td>";
 
                         Lit_email.Text += "</tr>";
+
+
+                    }
+                    dr.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                //-------------------------------------------------------------------------------------
+                Lit_category.Text = "<tr><th>Category</th><th>From</th><th>To</th><th>Note</th></tr>";
+
+                cmd.CommandText = "get_person_category";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string person_category_id = dr["person_category_id"].ToString();
+                        string category_id = dr["category_id"].ToString();
+                        string category = dr["category"].ToString();
+
+                        string startdate = dr["startdate"].ToString();
+                        if(startdate != "")
+                        {
+                            startdate = Convert.ToDateTime(startdate).ToString("dd MMM yy");
+                        }
+
+                        string enddate = "";// Convert.ToDateTime(dr["startdate"]).ToString("dd MMM yy");
+                        string note = dr["note"].ToString();
+
+                        Lit_category.Text += "<tr>";
+                        Lit_category.Text += "<td>" + category + "</td>";
+                        Lit_category.Text += "<td>" + startdate + "</td>";
+                        Lit_category.Text += "<td>" + enddate + "</td>";
+                        Lit_category.Text += "<td>" + note + "</td>";
+
+                        Lit_category.Text += "</tr>";
 
 
                     }

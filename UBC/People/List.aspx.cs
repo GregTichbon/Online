@@ -35,6 +35,7 @@ namespace UBC.People
                     while (dr.Read())
                     {
                         //string id = dr["ltr_ctr"].ToString();
+                        string person_id = dr["person_id"].ToString();
                         string firstname = dr["firstname"].ToString();
                         string lastname = dr["lastname"].ToString();
                         string status = "Status - based on category and currency";
@@ -63,12 +64,12 @@ namespace UBC.People
                         string guid = dr["guid"].ToString();
                         //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
                         string link = "<a href=\"maint.aspx?id=" + guid + "\">Edit</a>";
-
+                        string image = "<img src=\"Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
 
 
 
                         Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td>Checkbox</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td>";
+                        Lit_html.Text += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td><td>" + image + "</td>";
                         Lit_html.Text += "</tr>";
                     }
                 }

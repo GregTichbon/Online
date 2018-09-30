@@ -69,7 +69,7 @@
             $('.send_text').click(function () {
                 alert('This will ask for a text message and then send it to: ' + $('td:first', $(this).parents('tr')).text());
             })
-           $('.send_email_system').click(function () {
+            $('.send_email_system').click(function () {
                 alert('This will ask for a the subject and body and then send it to: ' + $('td:first', $(this).parents('tr')).text());
             })
 
@@ -94,48 +94,51 @@
         });
 
     </script>
+    <style type="text/css">
+       
+    </style>
 </head>
 <body>
     <div class="container" style="background-color: #FCF7EA">
         <form id="form1" runat="server" class="form-horizontal" role="form">
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
-
-
             <h1>Union Boat Club - Person Maintenance
             </h1>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row form-group">
+                        <label class="control-label col-md-6" for="tb_firstname">First name</label>
+                        <div class="col-md-6">
+                            <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
+                        </div>
 
-
-
-
-
-            <div class="form-group">
-                <label class="control-label col-sm-4" for="tb_firstname">First name</label>
-                <div class="col-sm-8">
-                    <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-6" for="tb_knownas">Known as</label>
+                        <div class="col-md-6">
+                            <input id="tb_knownas" name="tb_knownas" type="text" class="form-control" value="<%:tb_knownas%>" maxlength="20" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-6" for="tb_lastname">Last name</label>
+                        <div class="col-md-6">
+                            <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="20" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-4" for="tb_knownas">Known as</label>
-                <div class="col-sm-8">
-                    <input id="tb_knownas" name="tb_knownas" type="text" class="form-control" value="<%:tb_knownas%>" maxlength="20" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-4" for="tb_lastname">Last name</label>
-                <div class="col-sm-8">
-                    <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="20" required />
-                </div>
+                <div class="col-md-4">
+                    <img alt="" src="Images/<%: hf_person_id %>.jpg" style="width:200px" /></div>
             </div>
 
 
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#div_basic">Basic</a></li>
-                <li><a href="#div_attendance">Attendance</a></li>
-                <li><a href="#div_finance">Finance</a></li>
-                <li><a href="#div_phone">Phone</a></li>
-                <li><a href="#div_email">Email</a></li>
+                <li class="active"><a data-target="#div_basic">Basic</a></li>
+                <li><a data-target="#div_category">Category</a></li>
+                <li><a data-target="#div_attendance">Attendance</a></li>
+                <li><a data-target="#div_finance">Finance</a></li>
+                <li><a data-target="#div_phone">Phone</a></li>
+                <li><a data-target="#div_email">Email</a></li>
+                <li><a data-target="#div_results">Results</a></li>
             </ul>
             <div class="tab-content">
                 <!------------------------------------------------------------------------------------------------------>
@@ -152,7 +155,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_birthdate">Birthdate</label>
                         <div class="col-sm-8">
-                            <input id="tb_birthdate" name="tb_birthdate" type="text" class="form-control" value="<%:tb_birthdate%>" maxlength="20" required />
+                            <input id="tb_birthdate" name="tb_birthdate" type="text" class="form-control" value="<%:tb_birthdate%>" maxlength="20"  />
                         </div>
                     </div>
                     <div class="form-group">
@@ -178,7 +181,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_school">School</label>
                         <div class="col-sm-8">
-                            <select id="dd_school" name="dd_school" class="form-control" required>
+                            <select id="dd_school" name="dd_school" class="form-control" >
                                 <%= Generic.Functions.populateselect(school, dd_school,"") %>
                             </select>
                         </div>
@@ -186,7 +189,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_schoolyear">School year</label>
                         <div class="col-sm-8">
-                            <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" required maxlength="2" />
+                            <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" maxlength="2" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -201,6 +204,13 @@
                     <h3>Attendance</h3>
                     <table class="table">
                         <asp:Literal ID="Lit_attendance" runat="server"></asp:Literal>
+                    </table>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_category" class="tab-pane fade in">
+                    <h3>Category</h3>
+                    <table class="table">
+                        <asp:Literal ID="Lit_category" runat="server"></asp:Literal>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
@@ -222,6 +232,13 @@
                     <h3>Email</h3>
                     <table class="table">
                         <asp:Literal ID="Lit_email" runat="server"></asp:Literal>
+                    </table>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_results" class="tab-pane fade in">
+                    <h3>Results</h3>
+                    <table class="table">
+                        <asp:Literal ID="Lit_results" runat="server"></asp:Literal>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>

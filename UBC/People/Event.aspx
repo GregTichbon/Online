@@ -20,17 +20,59 @@
 
     <script>
         $(document).ready(function () {
-
+            $('#cb_allday').change(function () {
+                if ($(this).is(":checked")) {
+                    $('.usetime').text('');
+                } else {
+                    $('.usetime').text('/time');
+                }
+            });
         });
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="background-color: #FCF7EA">
+    <div class="container" style="background-color:lightskyblue">
 
         <h1>Union Boat Club - Event
         </h1>
 
-        <table class="table">
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_title">Title</label>
+            <div class="col-sm-8">
+                <input id="tb_title" name="tb_title" type="text" class="form-control"  maxlength="20" />
+            </div>
+        </div>
+
+       <div class="form-group">
+            <label class="control-label col-sm-4" for="cb_allday">All day</label>
+            <div class="col-sm-8">
+                <input id="cb_allday" name="cb_allday" type="checkbox" style="width:auto" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_startdatetime">Start date<span class="usetime">/time</span></label>
+            <div class="col-sm-8">
+                <input id="tb_startdatetime" name="tb_startdatetime" type="text" class="form-control" value="" maxlength="20" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_enddatetime">End date<span class="usetime">/time</span></label>
+            <div class="col-sm-8">
+                <input id="tb_enddatetime" name="tb_enddatetime" type="text" class="form-control" value="" maxlength="20" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_description">Description</label>
+            <div class="col-sm-8">
+                <textarea id="tb_description" name="tb_description"></textarea>
+            </div>
+        </div>
+       
+
+        <table class="table table-hover">
             <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
         </table>
 
