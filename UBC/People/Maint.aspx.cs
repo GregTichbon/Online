@@ -121,11 +121,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string title = dr["title"].ToString();
                         string startdatetime = Convert.ToDateTime(dr["startdatetime"]).ToString("dd MMM yy hh:mm");
                         string enddatetime = Convert.ToDateTime(dr["enddatetime"]).ToString("dd MMM yy hh:mm");
+                        string daterange = dr["daterange"].ToString();
                         string attendance = dr["attendance"].ToString();
                         string note = dr["note"].ToString();
 
                         Lit_attendance.Text += "<tr>";
-                        Lit_attendance.Text += "<td>" + startdatetime + " - " + enddatetime + "</td>";
+                        Lit_attendance.Text += "<td>" + daterange + "</td>";
                         Lit_attendance.Text += "<td>" + title + "</td>";
                         Lit_attendance.Text += "<td>" + attendance + "</td>";
                         Lit_attendance.Text += "<td>" + note + "</td>";
@@ -292,6 +293,45 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         Lit_category.Text += "<td>" + note + "</td>";
 
                         Lit_category.Text += "</tr>";
+
+
+                    }
+                    dr.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                //-------------------------------------------------------------------------------------
+                Lit_results.Text = "<tr><th>Regatta</th><th>Event</th><th>Place</th></tr>";
+
+                cmd.CommandText = "get_person_results";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string person_regatta_id = dr["person_regatta_id"].ToString();
+                        string person_id = dr["person_id"].ToString();
+                        string eventdesc = dr["event"].ToString();
+                        string place = dr["place"].ToString();
+                        string regatta = dr["name"].ToString();
+                        string daterange = dr["daterange"].ToString();
+
+
+                        //string note = dr["note"].ToString();
+
+                        Lit_results.Text += "<tr>";
+                        Lit_results.Text += "<td>" + regatta + " (" + daterange +  ")</td>";
+                        Lit_results.Text += "<td>" + eventdesc + "</td>";
+                        Lit_results.Text += "<td>" + place + "</td>";
+                        //Lit_results.Text += "<td>" + note + "</td>";
+
+                        Lit_results.Text += "</tr>";
 
 
                     }

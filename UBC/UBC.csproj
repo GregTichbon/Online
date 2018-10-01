@@ -83,6 +83,7 @@
     <Content Include="People\EventList.aspx" />
     <Content Include="People\Images\1.jpg" />
     <Content Include="People\Menu.aspx" />
+    <Content Include="People\uploadphoto.aspx" />
     <Content Include="SurveySep2018.aspx" />
     <Content Include="Temp.html" />
     <Content Include="UBC.Master" />
@@ -190,6 +191,13 @@
     </Compile>
     <Compile Include="People\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\uploadphoto.aspx.cs">
+      <DependentUpon>uploadphoto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\uploadphoto.aspx.designer.cs">
+      <DependentUpon>uploadphoto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SurveySep2018.aspx.cs">

@@ -83,6 +83,27 @@
                 $(this).attr("href", "mailto:" + email + "?subject=Union Boat Club&body=Hi " + knownas);
             })
 
+            $('#getphoto').click(function () {
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+                $("#dialog-getphoto").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Upload": function () {
+                            alert("to do");
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            })
 
 
             $('.inhibitcutcopypaste').bind("cut copy paste", function (e) {
@@ -91,11 +112,16 @@
 
             //$('[required]').css('border', '1px solid red');
             $('[required]').addClass('required');
+
+
+
+
+
         });
 
     </script>
     <style type="text/css">
-       
+               
     </style>
 </head>
 <body>
@@ -104,6 +130,10 @@
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
             <h1>Union Boat Club - Person Maintenance
             </h1>
+
+
+
+
             <div class="row">
                 <div class="col-md-8">
                     <div class="row form-group">
@@ -127,8 +157,15 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <img alt="" src="Images/<%: hf_person_id %>.jpg" style="width:200px" /></div>
+                    <img alt="" src="Images/<%: hf_person_id %>.jpg" style="width: 200px" /><br />
+                    <a id="getphoto">Upload Photo</a>
+                </div>
             </div>
+
+            <div id="dialog-getphoto" title="Upload Photo" style="display: none">
+                <iframe height="95%" width="95%" frameBorder="0" scrolling="no" src="uploadphoto.aspx?id=<%: hf_person_id %>"></iframe>
+            </div>
+
 
 
             <ul class="nav nav-tabs">
@@ -155,7 +192,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_birthdate">Birthdate</label>
                         <div class="col-sm-8">
-                            <input id="tb_birthdate" name="tb_birthdate" type="text" class="form-control" value="<%:tb_birthdate%>" maxlength="20"  />
+                            <input id="tb_birthdate" name="tb_birthdate" type="text" class="form-control" value="<%:tb_birthdate%>" maxlength="20" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -181,7 +218,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_school">School</label>
                         <div class="col-sm-8">
-                            <select id="dd_school" name="dd_school" class="form-control" >
+                            <select id="dd_school" name="dd_school" class="form-control">
                                 <%= Generic.Functions.populateselect(school, dd_school,"") %>
                             </select>
                         </div>
