@@ -168,7 +168,6 @@
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
-    <Content Include="Row\data.asmx" />
     <Content Include="Row\Default.aspx" />
     <Content Include="Row\Entry.aspx" />
     <Content Include="Row\Entry2.aspx" />
@@ -437,10 +436,6 @@
     </Compile>
     <Compile Include="Raffles\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Row\data.asmx.cs">
-      <DependentUpon>data.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Row\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

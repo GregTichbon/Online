@@ -69,6 +69,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
@@ -79,10 +80,12 @@
     <Content Include="Dependencies\TableHeadFixer\package.json" />
     <Content Include="Dependencies\TableHeadFixer\README.md" />
     <None Include="packages.config" />
+    <Content Include="People\data.asmx" />
     <Content Include="People\Event.aspx" />
     <Content Include="People\EventList.aspx" />
     <Content Include="People\Images\1.jpg" />
     <Content Include="People\Menu.aspx" />
+    <Content Include="People\Search.aspx" />
     <Content Include="People\uploadphoto.aspx" />
     <Content Include="SurveySep2018.aspx" />
     <Content Include="Temp.html" />
@@ -150,12 +153,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="People\Event.aspx.cs">
       <DependentUpon>Event.aspx</DependentUpon>
@@ -191,6 +202,13 @@
     </Compile>
     <Compile Include="People\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\uploadphoto.aspx.cs">
       <DependentUpon>uploadphoto.aspx</DependentUpon>

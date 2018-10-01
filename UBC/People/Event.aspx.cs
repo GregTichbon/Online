@@ -15,6 +15,15 @@ namespace UBC.People
     public partial class Event : System.Web.UI.Page
     {
         public string eventid;
+        public string title;
+        public string description;
+        public string allday;
+        public string allday_checked;
+        public string startdatetime;
+        public string enddatetime;
+        public string datetime;
+
+
         public string[] attendance_values = new string[4] { "No", "Yes", "Partial", "Maybe" };
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,16 +36,65 @@ namespace UBC.People
                     string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
                     SqlConnection con = new SqlConnection(strConnString);
-                    SqlCommand cmd1 = new SqlCommand("get_event_person", con);
+                    con.Open();
+
+                    SqlCommand cmd1 = new SqlCommand("get_event", con);
                     cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
-                    cmd1.Parameters.Add("@mode", SqlDbType.VarChar).Value = "Possible";
 
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Connection = con;
+
                     try
                     {
-                        con.Open();
+
                         SqlDataReader dr = cmd1.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            title = dr["title"].ToString();
+                            description = dr["description"].ToString();
+                            allday = dr["allday"].ToString();
+                            startdatetime = dr["startdatetime"].ToString();
+                            enddatetime = dr["enddatetime"].ToString();
+
+                            if (allday != "Yes")
+                            {
+                                datetime = "/time";
+                                startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy HH:mm");
+                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy HH:mm");
+                                allday_checked = " checked";
+                            }
+                            else
+                            {
+                                datetime = "";
+                                startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy");
+                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
+                            }
+
+
+
+                        }
+
+                        dr.Close();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+
+
+                    SqlCommand cmd2 = new SqlCommand("get_event_person", con);
+                    cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
+                    cmd2.Parameters.Add("@mode", SqlDbType.VarChar).Value = "Possible";
+
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    cmd2.Connection = con;
+                    try
+                    {
+
+                        SqlDataReader dr = cmd2.ExecuteReader();
                         if (dr.HasRows)
                         {
 
@@ -70,11 +128,10 @@ namespace UBC.People
                     {
                         throw ex;
                     }
-                    finally
-                    {
-                        con.Close();
-                        con.Dispose();
-                    }
+
+                    con.Close();
+                    con.Dispose();
+
                 }
             }
         }
@@ -86,8 +143,8 @@ namespace UBC.People
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
 
-            SqlCommand cmd1 = new SqlCommand("update_event_person", con);
-            cmd1.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd2 = new SqlCommand("update_event_person", con);
+            cmd2.CommandType = CommandType.StoredProcedure;
 
             foreach (string fld in Request.Form)
             {
@@ -98,16 +155,16 @@ namespace UBC.People
                     string attendance = Request.Form[fld];
                     string note = Request.Form["note_" + person_id];
 
-                    cmd1.Parameters.Clear();
-                    cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
-                    cmd1.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
-                    cmd1.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
-                    cmd1.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+                    cmd2.Parameters.Clear();
+                    cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
+                    cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+                    cmd2.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
+                    cmd2.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
 
-                    cmd1.Connection = con;
+                    cmd2.Connection = con;
                     try
                     {
-                        cmd1.ExecuteScalar();
+                        cmd2.ExecuteScalar();
                     }
                     catch (Exception ex)
                     {

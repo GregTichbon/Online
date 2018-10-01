@@ -11,6 +11,8 @@ namespace UBC.People
 {
     public partial class Maint : System.Web.UI.Page
     {
+        public string returnto;
+
         public string hf_guid;
         public string hf_person_id;
         public string tb_firstname;
@@ -48,6 +50,7 @@ namespace UBC.People
         protected void Page_Load(object sender, EventArgs e)
         {
             hf_guid = Request.QueryString["id"];
+            returnto = Request.QueryString["returnto"] + "";
 
             if (hf_guid != "new")
             {
@@ -426,8 +429,11 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 con.Close();
                 con.Dispose();
             }
-
-            Response.Redirect("list.aspx");
+            if (returnto == "")
+            {
+                returnto = "list";
+            }
+            Response.Redirect(returnto + ".aspx");
         }
     }
 }
