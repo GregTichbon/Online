@@ -5,6 +5,10 @@
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -16,10 +20,14 @@
     </script>
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 
     <script>
         $(document).ready(function () {
+
+            $('#dd_categories').select2();
+
             $('#cb_allday').change(function () {
                 if ($(this).is(":checked")) {
                     $('.usetime').text('');
@@ -27,6 +35,42 @@
                     $('.usetime').text('/time');
                 }
             });
+
+            $('#dd_show').change(function () {
+                option = $(this).val();
+
+                switch (option) {
+                    case "Only noted":
+                        $('#tbl_attendance tr[id^=tr_]').each(function () {
+                            personid = $(this).attr("id").substring(3);
+                            if ($("#attendance_" + personid).val() == 'No' && $("#note_" + personid).val() == '') {
+                                $(this).hide();
+                            } else {
+                                $(this).show();
+                            }
+                        });
+                        break;
+                    case "All":
+                        $('#tbl_attendance tr[id^=tr_]').show()
+                        break;
+                    case "Not noted":
+                        $('#tbl_attendance tr[id^=tr_]').each(function () {
+                            personid = $(this).attr("id").substring(3);
+                            if ($("#attendance_" + personid).val() == 'No' && $("#note_" + personid).val() == '') {
+                                $(this).show();
+                            }
+                            else {
+                                $(this).hide();
+                            }
+                        });
+                        break;
+                }
+            });
+
+            $('#btn_refresh').click(function () {
+                alert('to do');
+            })
+
         });
     </script>
 </asp:Content>
@@ -75,13 +119,17 @@
       
        
 
-        <table class="table table-hover">
+        
             <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
-        </table>
+     
 
-
-        <asp:Button ID="btn_submit" runat="server" Text="Submit" OnClick="btn_submit_Click" />
-
+<div class="form-group">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-8">
+                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+                </div>
+            </div>
     </div>
 
 

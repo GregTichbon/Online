@@ -1,11 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="UBC.People.Menu" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <a href="List.aspx">People</a>
+    <div style="font-size: xx-large">
+        <a href="Search.aspx">People Search</a>
+        <br />
+        <a href="List.aspx">People List</a>
 
-    <br />
-  
-    <a href="EventList.aspx">Event</a>
+        <br />
+
+        <a href="EventList.aspx">Event List</a>
+    </div>
 
 </asp:Content>

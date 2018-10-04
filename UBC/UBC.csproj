@@ -74,22 +74,175 @@
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\QueryBuilder\build\cleanLn.js" />
+    <Content Include="Dependencies\QueryBuilder\build\initConfig.js" />
+    <Content Include="Dependencies\QueryBuilder\build\jsdoc.js" />
+    <Content Include="Dependencies\QueryBuilder\build\processLang.js" />
+    <Content Include="Dependencies\QueryBuilder\build\removeJshint.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.dark.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.dark.min.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.default.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.default.min.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ar.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.az.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.bg.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.cs.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.da.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.de.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.el.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.en.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.es.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.fa-IR.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.fr.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.he.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.it.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.nl.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.no.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.pl.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.pt-BR.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.pt-PT.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ro.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ru.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.sq.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.tr.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ua.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.zh-CN.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.min.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.standalone.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.standalone.min.js" />
+    <Content Include="Dependencies\QueryBuilder\examples\index.html" />
+    <Content Include="Dependencies\QueryBuilder\examples\screenshot.png" />
+    <Content Include="Dependencies\QueryBuilder\Gruntfile.js" />
+    <Content Include="Dependencies\QueryBuilder\src\.wrapper.js" />
+    <Content Include="Dependencies\QueryBuilder\src\core.js" />
+    <Content Include="Dependencies\QueryBuilder\src\data.js" />
+    <Content Include="Dependencies\QueryBuilder\src\defaults.js" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\.wrapper.js" />
+    <Content Include="Dependencies\QueryBuilder\src\jquery.js" />
+    <Content Include="Dependencies\QueryBuilder\src\main.js" />
+    <Content Include="Dependencies\QueryBuilder\src\model.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-checkbox\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-selectpicker\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-tooltip-errors\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\change-filters\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\chosen-selectpicker\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\filter-description\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\mongodb-support\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\sql-support\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\unique-filter\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\public.js" />
+    <Content Include="Dependencies\QueryBuilder\src\template.js" />
+    <Content Include="Dependencies\QueryBuilder\src\utils.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\common.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\core.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\data.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\index.html" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins-gui.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.mongo-support.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.not-group.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.sql-support.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\utils.module.js" />
     <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
     <Content Include="Dependencies\StickyTableCells\README.md" />
     <Content Include="Dependencies\TableHeadFixer\.gitignore" />
     <Content Include="Dependencies\TableHeadFixer\package.json" />
     <Content Include="Dependencies\TableHeadFixer\README.md" />
+    <Content Include="Dependencies\QueryBuilder\.editorconfig" />
+    <Content Include="Dependencies\QueryBuilder\.github\CONTRIBUTING.md" />
+    <Content Include="Dependencies\QueryBuilder\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="Dependencies\QueryBuilder\.github\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="Dependencies\QueryBuilder\.gitignore" />
+    <Content Include="Dependencies\QueryBuilder\.jscsrc" />
+    <Content Include="Dependencies\QueryBuilder\.jsdoc.json" />
+    <Content Include="Dependencies\QueryBuilder\.jshintrc" />
+    <Content Include="Dependencies\QueryBuilder\.npmignore" />
+    <Content Include="Dependencies\QueryBuilder\.sass-lint.yml" />
+    <Content Include="Dependencies\QueryBuilder\.travis.yml" />
+    <Content Include="Dependencies\QueryBuilder\bower.json" />
+    <Content Include="Dependencies\QueryBuilder\build\jsdoc.md" />
+    <Content Include="Dependencies\QueryBuilder\composer.json" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\dark.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\default.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\bt-tooltip-errors.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\filter-description.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\invert.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\sortable.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_bt-checkbox.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_bt-tooltip-errors.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_filter-description.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_invert.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_sortable.scss" />
+    <Content Include="Dependencies\QueryBuilder\LICENSE" />
+    <Content Include="Dependencies\QueryBuilder\package.json" />
+    <Content Include="Dependencies\QueryBuilder\README.md" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ar.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\az.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\bg.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\cs.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\da.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\de.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\el.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\en.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\es.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\fa-IR.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\fr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\he.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\it.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\nl.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\no.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\pl.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\pt-BR.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\pt-PT.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ro.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ru.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\sq.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\tr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ua.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\zh-CN.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-checkbox\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-tooltip-errors\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\filter-description\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\ar.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\az.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\cs.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\el.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\en.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\fr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\he.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\pl.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\pt-BR.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\ru.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\tr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\ua.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\zh-CN.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\i18n\en.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\i18n\fr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\i18n\he.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\scss\dark.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\scss\default.scss" />
     <None Include="packages.config" />
+    <Content Include="Dependencies\UBC.css" />
     <Content Include="People\data.asmx" />
     <Content Include="People\Event.aspx" />
     <Content Include="People\EventList.aspx" />
     <Content Include="People\Images\1.jpg" />
+    <Content Include="People\Lists.aspx" />
     <Content Include="People\Menu.aspx" />
     <Content Include="People\Search.aspx" />
     <Content Include="People\uploadphoto.aspx" />
     <Content Include="SurveySep2018.aspx" />
     <Content Include="Temp.html" />
+    <Content Include="Test.aspx" />
     <Content Include="UBC.Master" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -189,6 +342,13 @@
     <Compile Include="People\List.aspx.designer.cs">
       <DependentUpon>List.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Lists.aspx.cs">
+      <DependentUpon>Lists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Lists.aspx.designer.cs">
+      <DependentUpon>Lists.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Maint.aspx.cs">
       <DependentUpon>Maint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -224,6 +384,13 @@
     </Compile>
     <Compile Include="SurveySep2018.aspx.designer.cs">
       <DependentUpon>SurveySep2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="UBC.Master.cs">
       <DependentUpon>UBC.Master</DependentUpon>

@@ -29,6 +29,9 @@ namespace UBC.People
         public string dd_school;
         public string tb_schoolyear;
         public string tb_facebook;
+        public string tb_residentialaddress;
+        public string tb_postaladdress;
+        
         /*
         public string tb_caregivername;
         public string tb_caregiveremail;
@@ -83,6 +86,10 @@ namespace UBC.People
                         dd_school = dr["school"].ToString();
                         tb_schoolyear = dr["schoolyear"].ToString();
                         tb_notes = dr["notes"].ToString();
+                        tb_residentialaddress = dr["residentialaddress"].ToString();
+                        tb_postaladdress = dr["postaladdress"].ToString();
+
+
                         /*
 tb_email = dr["email"].ToString();
 tb_mobile = dr["mobile"].ToString();
@@ -371,6 +378,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_notes = Request.Form["tb_notes"];
             tb_dietry = Request.Form["tb_dietry"].Trim();
             tb_medical = Request.Form["tb_medical"].Trim();
+            tb_residentialaddress = Request.Form["tb_residentialaddress"].Trim();
+            tb_postaladdress = Request.Form["tb_postaladdress"].Trim();
+            tb_facebook = Request.Form["tb_facebook"].Trim(); 
             /*
             tb_email = Request.Form["tb_email"].Trim();
             tb_mobile = Request.Form["tb_mobile"].Trim();
@@ -381,7 +391,6 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_caregivermobile = Request.Form["tb_caregivermobile"].Trim();
             tb_caregiverlandline = Request.Form["tb_caregiverlandline"].Trim();
             dd_coming = Request.Form["dd_coming"];
-            tb_facebook = Request.Form["tb_facebook"];
             */
             #endregion
 
@@ -399,6 +408,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@medical", SqlDbType.VarChar).Value = tb_medical;
             cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = dd_gender;
             cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = tb_notes;
+            cmd.Parameters.Add("@residentialaddress", SqlDbType.VarChar).Value = tb_residentialaddress;
+            cmd.Parameters.Add("@postaladdress", SqlDbType.VarChar).Value = tb_postaladdress;
+            cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
 
 
             /*
@@ -410,7 +422,6 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@caregivermobile", SqlDbType.VarChar).Value = tb_caregivermobile;
             cmd.Parameters.Add("@caregiverlandline", SqlDbType.VarChar).Value = tb_caregiverlandline;
             cmd.Parameters.Add("@coming", SqlDbType.VarChar).Value = dd_coming;
-            cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
             */
             #endregion
 

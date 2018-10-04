@@ -97,8 +97,20 @@ namespace UBC.People
                         SqlDataReader dr = cmd2.ExecuteReader();
                         if (dr.HasRows)
                         {
+                            Functions genericfunctions = new Functions();
+                            Dictionary<string, string> functionoptions = new Dictionary<string, string>();
+                            functionoptions.Add("storedprocedure", "");
+                            functionoptions.Add("usevalues","");
+                            string categories = genericfunctions.buildandpopulateselect(strConnString, "@category", "", functionoptions, "None");
 
-                            Lit_html.Text = "<tr><th>Name</th><th>Atendance</th><th>Note</th></tr>";
+
+
+                            Lit_html.Text = "<hr />";
+                            //Lit_html.Text += "<a id=\"btn_notes\" class=\"btn btn-info\" role=\"button\">Show only noted</a>";
+                            Lit_html.Text += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Not noted</option></select>";
+
+                            Lit_html.Text += "<select class=\"form-control\" id=\"dd_categories\" name=\"dd_categories[]\" multiple=\"multiple\">" + categories + "</select><button type=\"button\" id=\"btn_refresh\">Refresh</button><br />";
+                            Lit_html.Text += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Note</th></tr>";
 
                             while (dr.Read())
                             {
@@ -108,17 +120,20 @@ namespace UBC.People
                                 string note = dr["note"].ToString();
                                 string person_id = dr["person_id"].ToString();
 
-                                string dd_attendance = "<select  class=\"form-control\" name=\"attendance_" + person_id + "\">";
+                                string dd_attendance = "<select class=\"form-control\" id=\"attendance_" + person_id + "\" name=\"attendance_" + person_id + "\">";
                                 dd_attendance += Functions.populateselect(attendance_values, attendance);
                                 dd_attendance += "</select>";
 
 
-                                Lit_html.Text += "<tr>";
+                                Lit_html.Text += "<tr id=\"tr_" + person_id + "\">";
                                 Lit_html.Text += "<td>" + name + "</td>";
                                 Lit_html.Text += "<td>" + dd_attendance + "</td>";
-                                Lit_html.Text += "<td><textarea class=\"form-control\" name=\"note_" + person_id + "\">" + note + "</textarea></td>";
+                                Lit_html.Text += "<td><textarea class=\"form-control\" id=\"note_" + person_id + "\" name=\"note_" + person_id + "\">" + note + "</textarea></td>";
                                 Lit_html.Text += "</tr>";
                             }
+
+                            Lit_html.Text += "</table>";
+
                         }
 
                         dr.Close();
@@ -142,6 +157,31 @@ namespace UBC.People
 
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
+           
+            SqlCommand cmd1 = new SqlCommand("update_event", con);
+            cmd1.CommandType = CommandType.StoredProcedure;
+
+
+            cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
+            cmd1.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["tb_title"].Trim();
+            cmd1.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["tb_description"].Trim(); 
+            cmd1.Parameters.Add("@startdatetime", SqlDbType.VarChar).Value = Request.Form["tb_startdatetime"].Trim(); 
+            cmd1.Parameters.Add("@enddatetime", SqlDbType.VarChar).Value = Request.Form["tb_enddatetime"].Trim(); 
+            cmd1.Parameters.Add("@allday", SqlDbType.VarChar).Value = Request.Form["cb_allday"]; 
+
+            cmd1.Connection = con;
+            try
+            {
+                cmd1.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+   
+
+            if(eventid != "new") { 
 
             SqlCommand cmd2 = new SqlCommand("update_event_person", con);
             cmd2.CommandType = CommandType.StoredProcedure;
@@ -176,8 +216,10 @@ namespace UBC.People
 
             con.Close();
             con.Dispose();
+            }
 
             Response.Redirect(Request.RawUrl);
         }
     }
 }
+ 

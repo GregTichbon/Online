@@ -5,8 +5,10 @@
 <html>
 <head runat="server">
     <title></title>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link href="Dependencies/UBC.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" class="form-horizontal" role="form">

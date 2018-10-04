@@ -67,10 +67,46 @@
             });
 
             $('.send_text').click(function () {
-                alert('This will ask for a text message and then send it to: ' + $('td:first', $(this).parents('tr')).text());
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+                $("#dialog-sendtext").dialog({
+                    resizable: false,
+                    height: 250,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Send": function () {
+                            alert("to do");
+                            $(this).dialog("close");
+                        }
+                    }
+                });
             })
             $('.send_email_system').click(function () {
-                alert('This will ask for a the subject and body and then send it to: ' + $('td:first', $(this).parents('tr')).text());
+                 mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+                $("#dialog-sendemail").dialog({
+                    resizable: false,
+                    height: 400,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Send": function () {
+                            alert("to do - send to: " + $('td:first', $(this).parents('tr')).text());
+                            $(this).dialog("close");
+                        }
+                    }
+                });
             })
 
             $('.send_email_local').click(function () {
@@ -166,15 +202,38 @@
                 <iframe height="95%" width="95%" frameBorder="0" scrolling="no" src="uploadphoto.aspx?id=<%: hf_person_id %>"></iframe>
             </div>
 
+            <div id="dialog-sendtext" title="Send Text" style="display: none" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_textmessage">Message</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_textmessage" name="tb_textmessage" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
 
+            <div id="dialog-sendemail" title="Send Email" style="display: none" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_subject">Subject</label>
+                    <div class="col-sm-8">
+                        <input id="tb_subject" name="tb_subject" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_body">Message</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_body" name="tb_body" class="form-control" rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
 
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#div_basic">Basic</a></li>
                 <li><a data-target="#div_category">Category</a></li>
-                <li><a data-target="#div_attendance">Attendance</a></li>
-                <li><a data-target="#div_finance">Finance</a></li>
                 <li><a data-target="#div_phone">Phone</a></li>
+                <li><a data-target="#div_address">Address</a></li>
                 <li><a data-target="#div_email">Email</a></li>
+                <li><a data-target="#div_finance">Finance</a></li>
+                <li><a data-target="#div_attendance">Attendance</a></li>
                 <li><a data-target="#div_results">Results</a></li>
             </ul>
             <div class="tab-content">
@@ -230,6 +289,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_facebook">Facebook</label>
+                        <div class="col-sm-7">
+                            <input id="tb_facebook" name="tb_facebook" type="text" class="form-control" value="<%:tb_facebook%>" maxlength="150" /></div><div class="col-sm-1"><a class="btn btn-info" role="button" href="<%: tb_facebook %>" target="UBC_Facebook">Go</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_notes">Notes</label>
                         <div class="col-sm-8">
                             <textarea id="tb_notes" name="tb_notes" class="form-control"><%: tb_notes %></textarea>
@@ -279,6 +344,23 @@
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
+                <div id="div_address" class="tab-pane fade in">
+                    <h3>Address</h3>
+                   
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_residentialaddress">Residential address</label>
+                        <div class="col-sm-8">
+                            <textarea id="tb_residentialaddress" name="tb_residentialaddress" class="form-control" rows="6"><%: tb_residentialaddress %></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_postaladdress">Postal address</label>
+                        <div class="col-sm-8">
+                            <textarea id="tb_postaladdress" name="tb_postaladdress" class="form-control" rows="6"><%: tb_postaladdress %></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
             </div>
             <!-- tabs -->
             <div class="form-group">
@@ -288,6 +370,10 @@
                     <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
                 </div>
             </div>
+
+
+
+
         </form>
     </div>
 </body>

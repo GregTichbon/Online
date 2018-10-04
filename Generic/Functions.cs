@@ -492,7 +492,7 @@ namespace Generic
             string selected;
             string html = "";
 
-            if (firstoption != "None")
+            if (firstoption != "None")  // could be "Please Select" etc
             {
                 html = html + ("<option>" + firstoption + "</option>");
             }
@@ -542,11 +542,12 @@ namespace Generic
                             Value = dr["value"].ToString();
                             ValueText = " value=\"" + Value + "\"";
                         }
-                        if (options["selecttype"] == "Label")
+                        //if (options["selecttype"] == "Label")
+                        if (options.ContainsKey("comparelabel"))  
                         {
                             selectText = Label;
                         }
-                        else
+                        else //compare value
                         {
                             selectText = Value;
                         }
