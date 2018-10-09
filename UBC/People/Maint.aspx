@@ -8,7 +8,7 @@
     <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-    <link href="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
@@ -23,6 +23,8 @@
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/jquery.validate.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/additional-methods.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
     <!--additional-methods.min.js-->
 
 
@@ -45,8 +47,41 @@
                 $(".prev span").text(y);
             });
 
-            $("#form1").validate();
+            $("#form1").validate({
 
+                rules: {
+
+                    tb_birthdate: {
+                        pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+                    }
+
+                },
+                messages: {
+                    tb_birthdate: {
+                        pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+                    }
+                }
+            });            
+
+            //$("#tb_birthdate").keydown(false);  //Force entry through datetimepicker
+            $('#div_birthdate').datetimepicker({
+                format: 'D MMM YYYY',
+                extraFormats: ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'],
+                daysOfWeekDisabled: [0, 6],
+                showClear: true,
+                viewDate: false,
+                useCurrent: false,
+                sideBySide: true,
+                viewMode: 'years'
+                //,maxDate: moment().add(-1, 'year')
+            });
+
+
+
+            $("#div_birthdate").on("dp.change", function (e) {
+                calculateage(e.date);
+            });
+            var e = moment($("#div_birthdate").find("input").val());            calculateage(e);
             $(".numeric").keydown(function (event) {
                 if (event.shiftKey == true) {
                     event.preventDefault();
@@ -149,11 +184,23 @@
             //$('[required]').css('border', '1px solid red');
             $('[required]').addClass('required');
 
+  
 
 
 
 
         });
+
+        function calculateage(e) {
+            if (moment().diff(e, 'seconds') < 0) {
+                    e.date = moment(e).subtract(100, 'years');
+                    $("#tb_birthdate").val(moment(e).format('D MMM YYYY'));
+                }
+                var years = moment().diff(e, 'years');
+                thisyear = moment().year();
+                var jan1 = moment([thisyear, 1, 1]);
+                $("#span_age").text('Age: ' + years + ' years, ' +  jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
+        }
 
     </script>
     <style type="text/css">
@@ -248,12 +295,26 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_birthdate">Birthdate</label>
+                        <label for="tb_birthdate" class="control-label col-sm-4">
+                            Date of birth
+           </label>
                         <div class="col-sm-8">
-                            <input id="tb_birthdate" name="tb_birthdate" type="text" class="form-control" value="<%:tb_birthdate%>" maxlength="20" />
+                            <div class="input-group date" id="div_birthdate">
+                                <input id="tb_birthdate" name="tb_birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: tb_birthdate %>" />
+
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+
+                                <span id="span_age" class="input-group-addon"></span>
+                            </div>
                         </div>
                     </div>
+
+
+
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_medical">Medical</label>
                         <div class="col-sm-8">

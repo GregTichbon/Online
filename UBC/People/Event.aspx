@@ -43,7 +43,7 @@
                     case "Only noted":
                         $('#tbl_attendance tr[id^=tr_]').each(function () {
                             personid = $(this).attr("id").substring(3);
-                            if ($("#attendance_" + personid).val() == 'No' && $("#note_" + personid).val() == '') {
+                            if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '') {
                                 $(this).hide();
                             } else {
                                 $(this).show();
@@ -56,7 +56,7 @@
                     case "Not noted":
                         $('#tbl_attendance tr[id^=tr_]').each(function () {
                             personid = $(this).attr("id").substring(3);
-                            if ($("#attendance_" + personid).val() == 'No' && $("#note_" + personid).val() == '') {
+                            if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '') {
                                 $(this).show();
                             }
                             else {
@@ -66,12 +66,42 @@
                         break;
                 }
             });
+            
+            counteach();
+
+
 
             $('#btn_refresh').click(function () {
-                alert('to do');
+                alert('Get data from server for categories: ' + $('#dd_categories').val());
+                counteach();
             })
 
         });
+
+        function counteach() {
+            var items = {}, key;
+            $('[id^=dd_attendance_]').each(function () {
+                id = $(this).attr('id').substring(14);
+                key = $(this).val();
+
+                if (key == 'No' && $('#tb_note_' + id).val() != '') {
+                    key = key + ' with notes';
+                }
+                if (!items[key]) {
+                    items[key] = 0;
+                }
+                items[key] += 1;
+            });
+            mydiv = "";
+            mydelim = "";
+            $.each(items, function (key, val) {
+                //alert([key, val]);
+                mydiv += mydelim + [key, val];
+                mydelim = " | ";
+            });
+            $('#div_count').text(mydiv);
+
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -116,20 +146,20 @@
             </div>
         </div>
 
-      
-       
 
-        
-            <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
-     
 
-<div class="form-group">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-8">
-                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
-                </div>
+
+
+        <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
+
+
+        <div class="form-group">
+            <div class="col-sm-4">
             </div>
+            <div class="col-sm-8">
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+            </div>
+        </div>
     </div>
 
 

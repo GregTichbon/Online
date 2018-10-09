@@ -106,6 +106,7 @@ namespace UBC.People
 
 
                             Lit_html.Text = "<hr />";
+                            Lit_html.Text += "<div id=\"div_count\"></div>";
                             //Lit_html.Text += "<a id=\"btn_notes\" class=\"btn btn-info\" role=\"button\">Show only noted</a>";
                             Lit_html.Text += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Not noted</option></select>";
 
@@ -120,7 +121,7 @@ namespace UBC.People
                                 string note = dr["note"].ToString();
                                 string person_id = dr["person_id"].ToString();
 
-                                string dd_attendance = "<select class=\"form-control\" id=\"attendance_" + person_id + "\" name=\"attendance_" + person_id + "\">";
+                                string dd_attendance = "<select class=\"form-control\" id=\"dd_attendance_" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
                                 dd_attendance += Functions.populateselect(attendance_values, attendance);
                                 dd_attendance += "</select>";
 
@@ -128,7 +129,7 @@ namespace UBC.People
                                 Lit_html.Text += "<tr id=\"tr_" + person_id + "\">";
                                 Lit_html.Text += "<td>" + name + "</td>";
                                 Lit_html.Text += "<td>" + dd_attendance + "</td>";
-                                Lit_html.Text += "<td><textarea class=\"form-control\" id=\"note_" + person_id + "\" name=\"note_" + person_id + "\">" + note + "</textarea></td>";
+                                Lit_html.Text += "<td><textarea class=\"form-control\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
                                 Lit_html.Text += "</tr>";
                             }
 
@@ -179,43 +180,44 @@ namespace UBC.People
                 throw ex;
             }
 
-   
 
-            if(eventid != "new") { 
 
-            SqlCommand cmd2 = new SqlCommand("update_event_person", con);
-            cmd2.CommandType = CommandType.StoredProcedure;
-
-            foreach (string fld in Request.Form)
+            if (eventid != "new")
             {
-                string a = fld;
-                if (fld.StartsWith("attendance_"))
+
+                SqlCommand cmd2 = new SqlCommand("update_event_person", con);
+                cmd2.CommandType = CommandType.StoredProcedure;
+
+                foreach (string fld in Request.Form)
                 {
-                    string person_id = fld.Substring(11);
-                    string attendance = Request.Form[fld];
-                    string note = Request.Form["note_" + person_id];
-
-                    cmd2.Parameters.Clear();
-                    cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
-                    cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
-                    cmd2.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
-                    cmd2.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
-
-                    cmd2.Connection = con;
-                    try
+                    string a = fld;
+                    if (fld.StartsWith("dd_attendance_"))
                     {
-                        cmd2.ExecuteScalar();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                        string person_id = fld.Substring(14);
+                        string attendance = Request.Form[fld];
+                        string note = Request.Form["note_" + person_id];
 
+                        cmd2.Parameters.Clear();
+                        cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
+                        cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+                        cmd2.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
+                        cmd2.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+
+                        cmd2.Connection = con;
+                        try
+                        {
+                            cmd2.ExecuteScalar();
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
+
+                    }
                 }
-            }
 
-            con.Close();
-            con.Dispose();
+                con.Close();
+                con.Dispose();
             }
 
             Response.Redirect(Request.RawUrl);

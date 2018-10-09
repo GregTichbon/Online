@@ -71,9 +71,12 @@
   <ItemGroup>
     <Content Include="data.asmx" />
     <Content Include="Default.aspx" />
+    <Content Include="Dependencies\bootstrap-datetimepicker.min.css" />
+    <Content Include="Dependencies\bootstrap-datetimepicker.min.js" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\moment.min.js" />
     <Content Include="Dependencies\QueryBuilder\build\cleanLn.js" />
     <Content Include="Dependencies\QueryBuilder\build\initConfig.js" />
     <Content Include="Dependencies\QueryBuilder\build\jsdoc.js" />
@@ -236,6 +239,7 @@
     <Content Include="People\Images\1.jpg" />
     <Content Include="People\Lists.aspx" />
     <Content Include="People\Menu.aspx" />
+    <Content Include="People\Reports\AttendanceMatrix.aspx" />
     <Content Include="People\Search.aspx" />
     <Content Include="People\uploadphoto.aspx" />
     <Content Include="SurveySep2018.aspx" />
@@ -362,6 +366,13 @@
     </Compile>
     <Compile Include="People\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\AttendanceMatrix.aspx.cs">
+      <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\AttendanceMatrix.aspx.designer.cs">
+      <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>
