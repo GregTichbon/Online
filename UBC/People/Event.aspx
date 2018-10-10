@@ -138,6 +138,17 @@
                 <input id="tb_enddatetime" name="tb_enddatetime" type="text" class="form-control" value="<%: enddatetime %>" maxlength="20" />
             </div>
         </div>
+    <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_type">Type</label>
+            <div class="col-sm-8">
+      <select id="dd_type" name="dd_type" class="form-control" required>
+                                <%= Generic.Functions.populateselect(type_values, type,"None") %>
+                            </select>          
+
+
+            </div>
+        </div>
+
 
         <div class="form-group">
             <label class="control-label col-sm-4" for="tb_description">Description</label>

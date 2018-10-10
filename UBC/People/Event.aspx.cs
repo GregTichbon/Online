@@ -22,9 +22,13 @@ namespace UBC.People
         public string startdatetime;
         public string enddatetime;
         public string datetime;
+        public string type;
+        public string role;
 
 
         public string[] attendance_values = new string[4] { "No", "Yes", "Partial", "Maybe" };
+        public string[] type_values = new string[3] { "Training", "Regatta", "Promotion" };
+        public string[] role_values = new string[4] { "Rower", "Coach", "Coach Support", "Support" };
         protected void Page_Load(object sender, EventArgs e)
         {
             eventid = Request.QueryString["id"];
@@ -57,6 +61,7 @@ namespace UBC.People
                             allday = dr["allday"].ToString();
                             startdatetime = dr["startdatetime"].ToString();
                             enddatetime = dr["enddatetime"].ToString();
+                            type = dr["type"].ToString();
 
                             if (allday != "Yes")
                             {
@@ -111,7 +116,7 @@ namespace UBC.People
                             Lit_html.Text += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Not noted</option></select>";
 
                             Lit_html.Text += "<select class=\"form-control\" id=\"dd_categories\" name=\"dd_categories[]\" multiple=\"multiple\">" + categories + "</select><button type=\"button\" id=\"btn_refresh\">Refresh</button><br />";
-                            Lit_html.Text += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Note</th></tr>";
+                            Lit_html.Text += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Role</th><th>Note</th></tr>";
 
                             while (dr.Read())
                             {
@@ -120,15 +125,23 @@ namespace UBC.People
                                 string attendance = dr["attendance"].ToString();
                                 string note = dr["note"].ToString();
                                 string person_id = dr["person_id"].ToString();
+                                string role = dr["role"].ToString();
 
                                 string dd_attendance = "<select class=\"form-control\" id=\"dd_attendance_" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
                                 dd_attendance += Functions.populateselect(attendance_values, attendance);
                                 dd_attendance += "</select>";
 
+                                string dd_role = "<select class=\"form-control\" id=\"dd_role_" + person_id + "\" name=\"dd_role_" + person_id + "\">";
+                                dd_role += "<option></option>";
+                                dd_role += Functions.populateselect(role_values, role);
+                                dd_role += "</select>";
+
+
 
                                 Lit_html.Text += "<tr id=\"tr_" + person_id + "\">";
                                 Lit_html.Text += "<td>" + name + "</td>";
                                 Lit_html.Text += "<td>" + dd_attendance + "</td>";
+                                Lit_html.Text += "<td>" + dd_role + "</td>";
                                 Lit_html.Text += "<td><textarea class=\"form-control\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
                                 Lit_html.Text += "</tr>";
                             }
@@ -168,7 +181,8 @@ namespace UBC.People
             cmd1.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["tb_description"].Trim(); 
             cmd1.Parameters.Add("@startdatetime", SqlDbType.VarChar).Value = Request.Form["tb_startdatetime"].Trim(); 
             cmd1.Parameters.Add("@enddatetime", SqlDbType.VarChar).Value = Request.Form["tb_enddatetime"].Trim(); 
-            cmd1.Parameters.Add("@allday", SqlDbType.VarChar).Value = Request.Form["cb_allday"]; 
+            cmd1.Parameters.Add("@allday", SqlDbType.VarChar).Value = Request.Form["cb_allday"];
+            cmd1.Parameters.Add("@type", SqlDbType.VarChar).Value = Request.Form["dd_type"];
 
             cmd1.Connection = con;
             try
@@ -195,13 +209,15 @@ namespace UBC.People
                     {
                         string person_id = fld.Substring(14);
                         string attendance = Request.Form[fld];
-                        string note = Request.Form["note_" + person_id];
+                        string note = Request.Form["tb_note_" + person_id];
+                        string role = Request.Form["dd_role_" + person_id];
 
                         cmd2.Parameters.Clear();
                         cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
                         cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
                         cmd2.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
                         cmd2.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+                        cmd2.Parameters.Add("@role", SqlDbType.VarChar).Value = role;
 
                         cmd2.Connection = con;
                         try

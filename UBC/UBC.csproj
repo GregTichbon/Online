@@ -237,9 +237,54 @@
     <Content Include="People\Event.aspx" />
     <Content Include="People\EventList.aspx" />
     <Content Include="People\Images\1.jpg" />
+    <Content Include="People\Images\2.jpg" />
+    <Content Include="People\Images\20.jpg" />
+    <Content Include="People\Images\24.JPG" />
+    <Content Include="People\Images\27.JPG" />
+    <Content Include="People\Images\29.jpg" />
+    <Content Include="People\Images\30.JPG" />
+    <Content Include="People\Images\33.jpg" />
+    <Content Include="People\Images\38.jpg" />
+    <Content Include="People\Images\39.jpg" />
+    <Content Include="People\Images\42.jpg" />
+    <Content Include="People\Images\43.jpg" />
+    <Content Include="People\Images\45.jpg" />
+    <Content Include="People\Images\47.JPG" />
+    <Content Include="People\Images\48.jpg" />
+    <Content Include="People\Images\51.jpg" />
+    <Content Include="People\Images\52.jpg" />
+    <Content Include="People\Images\55.jpg" />
+    <Content Include="People\Images\56.JPG" />
+    <Content Include="People\Images\57.JPG" />
+    <Content Include="People\Images\58.jpg" />
+    <Content Include="People\Images\59.JPG" />
+    <Content Include="People\Images\60.JPG" />
+    <Content Include="People\Images\61.jpg" />
+    <Content Include="People\Images\62.JPG" />
+    <Content Include="People\Images\63.jpg" />
+    <Content Include="People\Images\64.jpg" />
+    <Content Include="People\Images\65.jpg" />
+    <Content Include="People\Images\66.jpg" />
+    <Content Include="People\Images\67.jpg" />
+    <Content Include="People\Images\69.jpg" />
+    <Content Include="People\Images\70.JPG" />
+    <Content Include="People\Images\71.jpg" />
+    <Content Include="People\Images\72.jpg" />
+    <Content Include="People\Images\73.jpg" />
+    <Content Include="People\Images\74.jpg" />
+    <Content Include="People\Images\75.jpg" />
+    <Content Include="People\Images\76.jpg" />
+    <Content Include="People\Images\77.jpg" />
+    <Content Include="People\Images\79.jpg" />
+    <Content Include="People\Images\80.jpg" />
+    <Content Include="People\Images\81.jpg" />
+    <Content Include="People\Images\87.JPG" />
+    <Content Include="People\Images\89.jpg" />
+    <Content Include="People\Images\92.jpg" />
     <Content Include="People\Lists.aspx" />
     <Content Include="People\Menu.aspx" />
     <Content Include="People\Reports\AttendanceMatrix.aspx" />
+    <Content Include="People\Reports\CheckList.aspx" />
     <Content Include="People\Search.aspx" />
     <Content Include="People\uploadphoto.aspx" />
     <Content Include="SurveySep2018.aspx" />
@@ -373,6 +418,13 @@
     </Compile>
     <Compile Include="People\Reports\AttendanceMatrix.aspx.designer.cs">
       <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\CheckList.aspx.cs">
+      <DependentUpon>CheckList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CheckList.aspx.designer.cs">
+      <DependentUpon>CheckList.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

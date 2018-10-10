@@ -10,12 +10,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace UBC.People
+namespace UBC.People.Reports
 {
-    public partial class List : System.Web.UI.Page
+    public partial class CheckList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int cols = 4;
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);
@@ -29,47 +30,50 @@ namespace UBC.People
                 SqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.HasRows)
                 {
+                    int c1 = 0;
 
-                    Lit_html.Text = "<tr><th>Checkbox</th><th>Name</th><th>Status</th><th>Edit</th><th>Image</th></tr>";
+                    Lit_html.Text = "";
 
                     while (dr.Read())
                     {
+
+                        c1++;
+
+                        if (c1 == 1)
+                        {
+                            int rows = 0;
+                            Lit_html.Text += "<tr>";
+                        }
                         //string id = dr["ltr_ctr"].ToString();
                         string person_id = dr["person_id"].ToString();
                         string firstname = dr["firstname"].ToString();
                         string lastname = dr["lastname"].ToString();
-                        string status = "Status - based on category and currency";
-       
-
-                        /*
-                        string email = dr["email"].ToString();
-                        string mobile = dr["mobile"].ToString();
-                        string landline = dr["landline"].ToString();
                         string school = dr["school"].ToString();
                         string schoolyear = dr["schoolyear"].ToString();
-                        string caregivername = dr["caregivername"].ToString();
-                        string caregiveremail = dr["caregiveremail"].ToString();
-                        string caregivermobile = dr["caregivermobile"].ToString();
-                        string caregiverlandline = dr["caregiverlandline"].ToString();
-                        string caregiverfacebook = dr["caregiverfacebook"].ToString();
-                        string facebook = dr["facebook"].ToString();
-                        string coming = dr["coming"].ToString();
-                        string modified = dr["modifieddate"].ToString();
-                        string notes = dr["notes"].ToString();
- 
 
-                        notes = notes.Replace("\n", "<br />");
-                       */
 
                         string guid = dr["guid"].ToString();
                         //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
                         string link = "<a href=\"maint.aspx?id=" + guid + "\">Edit</a>";
-                        string image = "<img src=\"Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
+                        string image = "<img src=\"../Images/" + person_id + ".jpg\" style=\"height: 100px\" />";
 
 
 
-                        Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td><td>" + image + "</td>";
+                        Lit_html.Text += "<td>" + image + "<br />" + firstname + " " + lastname + "</td>";
+                        if(c1 == cols)
+                        {
+                            Lit_html.Text += "</tr>" + "\r\n";
+                            c1 = 0;
+                        }
+
+                    }
+
+                    for (int f1 = c1; f1 < cols; f1++)
+                    {
+                        Lit_html.Text += "<td>&nbsp;</td>";
+                    }
+                    if(c1 > 0)
+                    {
                         Lit_html.Text += "</tr>";
                     }
                 }
