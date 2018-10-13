@@ -231,8 +231,14 @@
     <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\dark.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\default.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <Content Include="Dependencies\UBC.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="People\Check.aspx" />
     <Content Include="People\data.asmx" />
     <Content Include="People\Event.aspx" />
     <Content Include="People\EventList.aspx" />
@@ -240,19 +246,25 @@
     <Content Include="People\Images\2.jpg" />
     <Content Include="People\Images\20.jpg" />
     <Content Include="People\Images\24.JPG" />
+    <Content Include="People\Images\24b.jpg" />
     <Content Include="People\Images\27.JPG" />
     <Content Include="People\Images\29.jpg" />
     <Content Include="People\Images\30.JPG" />
     <Content Include="People\Images\33.jpg" />
+    <Content Include="People\Images\33b.jpg" />
     <Content Include="People\Images\38.jpg" />
     <Content Include="People\Images\39.jpg" />
+    <Content Include="People\Images\39b.jpg" />
     <Content Include="People\Images\42.jpg" />
+    <Content Include="People\Images\42A.JPG" />
     <Content Include="People\Images\43.jpg" />
     <Content Include="People\Images\45.jpg" />
     <Content Include="People\Images\47.JPG" />
     <Content Include="People\Images\48.jpg" />
+    <Content Include="People\Images\48b.jpg" />
     <Content Include="People\Images\51.jpg" />
     <Content Include="People\Images\52.jpg" />
+    <Content Include="People\Images\53.JPG" />
     <Content Include="People\Images\55.jpg" />
     <Content Include="People\Images\56.JPG" />
     <Content Include="People\Images\57.JPG" />
@@ -260,16 +272,22 @@
     <Content Include="People\Images\59.JPG" />
     <Content Include="People\Images\60.JPG" />
     <Content Include="People\Images\61.jpg" />
+    <Content Include="People\Images\61b.jpg" />
     <Content Include="People\Images\62.JPG" />
     <Content Include="People\Images\63.jpg" />
     <Content Include="People\Images\64.jpg" />
+    <Content Include="People\Images\64A.JPG" />
     <Content Include="People\Images\65.jpg" />
     <Content Include="People\Images\66.jpg" />
+    <Content Include="People\Images\66b.jpg" />
     <Content Include="People\Images\67.jpg" />
     <Content Include="People\Images\69.jpg" />
+    <Content Include="People\Images\69b.jpg" />
     <Content Include="People\Images\70.JPG" />
     <Content Include="People\Images\71.jpg" />
+    <Content Include="People\Images\71a.jpg" />
     <Content Include="People\Images\72.jpg" />
+    <Content Include="People\Images\72b.JPG" />
     <Content Include="People\Images\73.jpg" />
     <Content Include="People\Images\74.jpg" />
     <Content Include="People\Images\75.jpg" />
@@ -278,9 +296,17 @@
     <Content Include="People\Images\79.jpg" />
     <Content Include="People\Images\80.jpg" />
     <Content Include="People\Images\81.jpg" />
+    <Content Include="People\Images\81b.JPG" />
+    <Content Include="People\Images\84.jpg" />
+    <Content Include="People\Images\85.JPG" />
     <Content Include="People\Images\87.JPG" />
     <Content Include="People\Images\89.jpg" />
     <Content Include="People\Images\92.jpg" />
+    <Content Include="People\Images\DSC_0008.JPG" />
+    <Content Include="People\Images\DSC_0009 - Copy.JPG" />
+    <Content Include="People\Images\DSC_0015 - Copy.JPG" />
+    <Content Include="People\Images\DSC_0016.JPG" />
+    <Content Include="People\Images\IMG_0674.jpg" />
     <Content Include="People\Lists.aspx" />
     <Content Include="People\Menu.aspx" />
     <Content Include="People\Reports\AttendanceMatrix.aspx" />
@@ -365,6 +391,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Check.aspx.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Check.aspx.designer.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>

@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="CheckList.aspx.cs" Inherits="UBC.People.Reports.CheckList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- Style Sheets -->
+
+    <!-- Javascript -->
+    <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
+
     <style>
         table {
             border-collapse: collapse;
@@ -22,6 +27,19 @@
   tfoot { display:table-footer-group }
 }
     </style>
+
+   <script>
+       $(document).ready(function () {
+           $('.span_name').click(function () {
+               id = $(this).attr('id');
+               window.open("../maint.aspx?id=" + id);
+
+           });
+
+       });
+
+   </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="table">

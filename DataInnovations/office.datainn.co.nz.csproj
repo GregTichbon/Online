@@ -168,9 +168,12 @@
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
+    <Content Include="Row\data.asmx" />
+    <Content Include="Row\data.aspx" />
     <Content Include="Row\Default.aspx" />
     <Content Include="Row\Entry.aspx" />
     <Content Include="Row\Entry2.aspx" />
+    <Content Include="Row\Entry3.aspx" />
     <Content Include="Row\Prognostics.aspx" />
     <Content Include="Scripts\CyclePlugin\default.html" />
     <Content Include="Scripts\CyclePlugin\jquery.cycle.all.js" />
@@ -437,6 +440,17 @@
     <Compile Include="Raffles\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Row\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Row\data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Row\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -457,6 +471,13 @@
     </Compile>
     <Compile Include="Row\Entry2.aspx.designer.cs">
       <DependentUpon>Entry2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\Entry3.aspx.cs">
+      <DependentUpon>Entry3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Entry3.aspx.designer.cs">
+      <DependentUpon>Entry3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\Prognostics.aspx.cs">
       <DependentUpon>Prognostics.aspx</DependentUpon>

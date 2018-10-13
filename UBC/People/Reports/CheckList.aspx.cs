@@ -41,7 +41,6 @@ namespace UBC.People.Reports
 
                         if (c1 == 1)
                         {
-                            int rows = 0;
                             Lit_html.Text += "<tr>";
                         }
                         //string id = dr["ltr_ctr"].ToString();
@@ -50,6 +49,24 @@ namespace UBC.People.Reports
                         string lastname = dr["lastname"].ToString();
                         string school = dr["school"].ToString();
                         string schoolyear = dr["schoolyear"].ToString();
+                        string AgeatDate = dr["AgeatDate"].ToString();
+                        string atDate = dr["atDate"].ToString();
+
+                        string schoolage = "";
+                        if(school != "")
+                        {
+                            schoolage += school + " ";
+                        }
+                        if (schoolyear != "")
+                        {
+                            schoolage += "Year " + schoolyear + " ";
+                        }
+                        if (AgeatDate != "")
+                        {
+                            schoolage += "Age: " + AgeatDate + " at " + atDate;
+                        }
+
+                      
 
 
                         string guid = dr["guid"].ToString();
@@ -59,7 +76,7 @@ namespace UBC.People.Reports
 
 
 
-                        Lit_html.Text += "<td>" + image + "<br />" + firstname + " " + lastname + "</td>";
+                        Lit_html.Text += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span></td>";
                         if(c1 == cols)
                         {
                             Lit_html.Text += "</tr>" + "\r\n";

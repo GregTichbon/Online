@@ -1,4 +1,5 @@
-﻿using MessagingApp.Model;
+﻿using Generic;
+using MessagingApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,10 +26,7 @@ namespace SMSChecker
         {
             return "Greg";
         }
-
-        
-
-        
+            
         public async Task<string> SendMessage(string PhoneNumber, string Message)
         //public string SendMessage(string PhoneNumber, string Message)
         {

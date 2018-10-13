@@ -514,6 +514,11 @@ namespace Generic
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sqltext", SqlDbType.VarChar).Value = cmdtext;
                 }
+                if (options.ContainsKey("parameters"))
+                {
+                    cmd.Parameters.Add("@parameters", SqlDbType.VarChar).Value = options["parameters"];
+
+                }
             }
             else
             {

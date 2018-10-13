@@ -7,10 +7,12 @@
         <a href="Search.aspx">People Search</a>
         <br />
         <a href="List.aspx">People List</a>
-
         <br />
-
         <a href="EventList.aspx">Event List</a>
+        <br />
+        <a href="reports/CheckList.aspx">Check List</a>
+        <br />
+        <a href="AttendanceMatrix.aspx">Attendance Matrix</a>
     </div>
 
 </asp:Content>

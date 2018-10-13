@@ -48,26 +48,22 @@
             });
 
             $("#form1").validate({
-
                 rules: {
-
                     tb_birthdate: {
                         pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
                     }
-
                 },
                 messages: {
                     tb_birthdate: {
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
                     }
                 }
-            });            
-
-            //$("#tb_birthdate").keydown(false);  //Force entry through datetimepicker
+            });
+            
             $('#div_birthdate').datetimepicker({
                 format: 'D MMM YYYY',
                 extraFormats: ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'],
-                daysOfWeekDisabled: [0, 6],
+                //daysOfWeekDisabled: [0, 6],
                 showClear: true,
                 viewDate: false,
                 useCurrent: false,
@@ -76,12 +72,13 @@
                 //,maxDate: moment().add(-1, 'year')
             });
 
-
-
             $("#div_birthdate").on("dp.change", function (e) {
                 calculateage(e.date);
             });
-            var e = moment($("#div_birthdate").find("input").val());            calculateage(e);
+
+            var e = moment($("#div_birthdate").find("input").val());
+            calculateage(e);
+
             $(".numeric").keydown(function (event) {
                 if (event.shiftKey == true) {
                     event.preventDefault();
@@ -208,6 +205,7 @@
     </style>
 </head>
 <body>
+    
     <div class="container" style="background-color: #FCF7EA">
         <form id="form1" runat="server" class="form-horizontal" role="form">
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
@@ -299,7 +297,7 @@
                     <div class="form-group">
                         <label for="tb_birthdate" class="control-label col-sm-4">
                             Date of birth
-           </label>
+                        </label>
                         <div class="col-sm-8">
                             <div class="input-group date" id="div_birthdate">
                                 <input id="tb_birthdate" name="tb_birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: tb_birthdate %>" />
