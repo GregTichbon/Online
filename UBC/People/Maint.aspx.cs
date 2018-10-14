@@ -314,7 +314,19 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 }
 
                 //-------------------------------------------------------------------------------------
-                Lit_results.Text = "<tr><th>Regatta</th><th>Event</th><th>Place</th></tr>";
+                Lit_results.Text = "<thead><tr>";
+                Lit_results.Text += "<th data-hidden='true'>person_event_id</th>";
+                //Lit_results.Text += "<th data-hidden='true'>ID2</th>";
+                Lit_results.Text += "<th>Regatta</th>";
+                Lit_results.Text += "<th>Event</th>";
+                Lit_results.Text += "<th>Place</th>";
+                //Lit_results.Text += "<th data-hidden='false'>TEST</th>";
+                //Lit_results.Text += "<th data-tmpl=\"<span class='material-icons gj-cursor-pointer'>results_edit</span>\" align=\"center\" data-events=\"click: results_edit\"></th>";
+                //Lit_results.Text += "<th data-tmpl=\"<span class='material-icons gj-cursor-pointer'>results_delete</span>\" align=\"center\" data-events=\"click: results_delete\"></th>";
+                Lit_results.Text += "<th data-width='60' data-tmpl='Edit' data-events='click: results_edit'></th>";
+                Lit_results.Text += "<th data-width='80' data-tmpl='Delete' data-events='click: results_delete'></th>";
+                Lit_results.Text += "</tr></thead>";
+                Lit_results.Text += "<tbody>";
 
                 cmd.CommandText = "get_person_results";
                 cmd.Parameters.Clear();
@@ -325,20 +337,26 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     SqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        string person_regatta_id = dr["person_regatta_id"].ToString();
-                        string person_id = dr["person_id"].ToString();
+                        string person_event_id = dr["person_event_id"].ToString();
+                        //string person_id = dr["person_id"].ToString();
+                        string event_id = dr["event_id"].ToString();
                         string eventdesc = dr["event"].ToString();
                         string place = dr["place"].ToString();
-                        string regatta = dr["name"].ToString();
+                        string eventtitle = dr["title"].ToString();
                         string daterange = dr["daterange"].ToString();
 
 
                         //string note = dr["note"].ToString();
 
                         Lit_results.Text += "<tr>";
-                        Lit_results.Text += "<td>" + regatta + " (" + daterange +  ")</td>";
+                        Lit_results.Text += "<td>" + person_event_id + "</td>";
+                        //Lit_results.Text += "<td>" + event_id + "</td>";
+                        Lit_results.Text += "<td>" + eventtitle + " (" + daterange + ")</td>";
                         Lit_results.Text += "<td>" + eventdesc + "</td>";
                         Lit_results.Text += "<td>" + place + "</td>";
+                        //Lit_results.Text += "<td>TEST</td>";
+                        Lit_results.Text += "<td></td>";
+                        Lit_results.Text += "<td></td>";
                         //Lit_results.Text += "<td>" + note + "</td>";
 
                         Lit_results.Text += "</tr>";
@@ -351,6 +369,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
                     throw ex;
                 }
+                Lit_results.Text += "</tbody>";
 
                 //-------------------------------------------------------------------------------------
 
@@ -361,6 +380,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            foreach(string name in Request.Form)
+            {
+                string x = name;
+            }
+
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
