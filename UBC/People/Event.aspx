@@ -28,6 +28,8 @@
 
 
     <script>
+        var tr_changed = [];
+
         $(document).ready(function () {
 
             $("#form1").validate({
@@ -94,8 +96,13 @@
                     $('#div_enddatetime').data("DateTimePicker").extraFormats(myextraFormats);
                 }
             });
+                        /*
+            $('#dd_categories').change(function () {
+                alert($(this).val());
+            })
 
             $('#dd_show').change(function () {
+                
                 option = $(this).val();
 
                 switch (option) {
@@ -125,19 +132,27 @@
                         break;
                 }
             });
+            */
             
-            counteach();
+            processrows();
 
+            $('.tr_field').change(function () {
+                id = $(this).parent().parent().attr('id').substring(3);
+                tr_changed.indexOf(id) === -1 ? tr_changed.push(id) : null;
+                $("#hf_tr_changed").val(tr_changed.toString());
+            });
 
 
             $('#btn_refresh').click(function () {
-                alert('Get data from server for categories: ' + $('#dd_categories').val());
-                counteach();
+                //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories').val());
+                processrows();
             })
 
         });
 
-        function counteach() {
+        function processrows() {
+
+            //This code should be in the loop below ----- START
             var attendances = {};
             var roles = {};
             var key;
@@ -178,11 +193,56 @@
             });
 
             $('#div_count').html(mydiv);
+            //This code should be in the loop below ----- END
 
+            showval = $('#dd_show').val();
+            category = $('#dd_categories').val();
+          
+            $('#tbl_attendance tr[id^=tr_]').each(function () {
+                personid = $(this).attr("id").substring(3);
+                personcategory = $(this).attr("data-category");
+                show = false;
+                switch (showval) {
+                    case "All":
+                        show = true;
+                        break;
+                    case "Not noted":
+                        if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '' && $("#dd_role_" + personid).val() == '') {
+                            show = true;
+                        }
+                        break;
+                    case "Only noted":
+                        if ($("#dd_attendance_" + personid).val() != 'No' || $("#tb_note_" + personid).val() != '' || $("#dd_role_" + personid).val() != '') {
+                            show = true;
+                        }
+                        break;
+                }
+                if (category != null) {
+                    found = false;
+                    for (f1 = 0; f1 < category.length; f1++) {
+                        usecategory = '|' + category[f1] + '|';
+                        if (personcategory.indexOf(usecategory) != -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        show = false;
+                    }
+                }
+                if (show) {
+                     $(this).show();
+                } else {
+                    $(this).hide();
+                }
+               
+            });
+       
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <input type="hidden" id="hf_tr_changed" name="hf_tr_changed" />
     <div class="container" style="background-color:#FCF7EA">
      
         <h1>Union Boat Club - Event

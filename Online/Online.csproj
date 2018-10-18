@@ -23,6 +23,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,6 +86,17 @@
     <Content Include="CommunityContract\Posts.asmx" />
     <Content Include="CommunityContract\register.aspx" />
     <Content Include="CommunityContract\TestPost1.aspx" />
+    <Content Include="Entity\New\account.aspx" />
+    <Content Include="Entity\New\Amended.aspx" />
+    <Content Include="Entity\New\body.html" />
+    <Content Include="Entity\New\DisplayActivity.aspx" />
+    <Content Include="Entity\New\Entity.aspx" />
+    <Content Include="Entity\New\EntityHelp.html" />
+    <Content Include="Entity\New\login.aspx" />
+    <Content Include="Entity\New\LoginAssistance.aspx" />
+    <Content Include="Entity\New\LoginAssistancePasswordResetEmail.html" />
+    <Content Include="Entity\New\LoginHelp.html" />
+    <Content Include="Entity\New\ResetPassword.aspx" />
     <Content Include="FCP\FoodBusinessRegistrationORIG.html" />
     <Content Include="FCP\FoodBusinessRegistration.aspx" />
     <Content Include="FCP\FoodBusinessRegistration.html" />
@@ -609,6 +622,55 @@
     </Compile>
     <Compile Include="Entity\Entity.aspx.designer.cs">
       <DependentUpon>Entity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\account.aspx.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\account.aspx.designer.cs">
+      <DependentUpon>account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\Amended.aspx.cs">
+      <DependentUpon>Amended.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\Amended.aspx.designer.cs">
+      <DependentUpon>Amended.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\DisplayActivity.aspx.cs">
+      <DependentUpon>DisplayActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\DisplayActivity.aspx.designer.cs">
+      <DependentUpon>DisplayActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\Entity.aspx.cs">
+      <DependentUpon>Entity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\Entity.aspx.designer.cs">
+      <DependentUpon>Entity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\LoginAssistance.aspx.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\LoginAssistance.aspx.designer.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\New\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Entity\New\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="FCP\FoodBusinessRegistration.aspx.cs">
       <DependentUpon>FoodBusinessRegistration.aspx</DependentUpon>

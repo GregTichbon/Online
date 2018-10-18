@@ -17,7 +17,18 @@
     </script>
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
+    <link href="<%: ResolveUrl("~/Dependencies/StickyTableCells/jquery.stickytable.min.css")%>" rel="stylesheet" />
+    <script src="<%: ResolveUrl("~/Dependencies/StickyTableCells/jquery.stickytable.min.js")%>"></script>
 
+    <style>
+        td, th {
+            text-align: center;
+            vertical-align: middle;
+             border: 1px #eee solid;
+        }
+
+                            
+    </style>
 
     <script>
         $(document).ready(function () {
@@ -26,12 +37,12 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="background-color: #FCF7EA">
+   
 
         <h1>Union Boat Club - Attendance Matrix
         </h1>
 
         <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
-    </div>
+  
 
 </asp:Content>

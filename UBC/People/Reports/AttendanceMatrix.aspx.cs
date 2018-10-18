@@ -35,22 +35,27 @@ namespace UBC.People.Reports
                     {
                         if (firsttime)
                         {
-                            Lit_html.Text = "<table class=\"table\">";
-                            Lit_html.Text += "<tr>";
-                            Lit_html.Text += "<th>Name</th>";
+                            Lit_html.Text = "<div class=\"sticky-table sticky-ltr-cells\">";
+                            Lit_html.Text += "<table class=\"table\">";
+                            Lit_html.Text += "<thead>";
+                            Lit_html.Text += "<tr class=\"sticky-header\">";
+                            Lit_html.Text += "<th class=\"sticky-cell\">Name</th>";
 
                             for (int f1 = 1; f1 < dr.FieldCount; f1++)
                             {
-                                Lit_html.Text += "<th>" + dr.GetName(f1) + "</th>";
+                                Lit_html.Text += "<th nowrap>" + dr.GetName(f1) + "</th>";
                             }
                             Lit_html.Text += "</tr>";
+                            Lit_html.Text += "</thead>";
                             firsttime = false;
                         }
 
                         //string person_id = dr["person_id"].ToString();
                         string name = dr["name"].ToString();
+                        Lit_html.Text += "<tbody>";
+
                         Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td>" + name + "</td>";
+                        Lit_html.Text += "<td nowrap class=\"sticky-cell\">" + name + "</td>";
 
                         for (int f1 = 1; f1 < dr.FieldCount; f1++)
                         {
@@ -58,9 +63,11 @@ namespace UBC.People.Reports
                         }
 
                         Lit_html.Text += "<tr>";
+                        Lit_html.Text += "</tbody>";
                     }
                 }
                 Lit_html.Text += "</table>";
+                Lit_html.Text += "</div>";
 
                 dr.Close();
             }

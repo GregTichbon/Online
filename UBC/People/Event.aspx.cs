@@ -12,6 +12,16 @@ using System.Web.UI.WebControls;
 
 namespace UBC.People
 {
+
+    /*
+    To do: 
+    Filter by role
+    Record default categories in event table
+    When looping through filter do counts
+    Show that their are hidden records which are noted
+
+    */
+
     public partial class Event : System.Web.UI.Page
     {
         public string eventid;
@@ -76,9 +86,6 @@ namespace UBC.People
                                 startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy");
                                 enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
                             }
-
-
-
                         }
 
                         dr.Close();
@@ -108,8 +115,6 @@ namespace UBC.People
                             functionoptions.Add("usevalues","");
                             string categories = genericfunctions.buildandpopulateselect(strConnString, "@category", "", functionoptions, "None");
 
-
-
                             Lit_html.Text = "<hr />";
                             Lit_html.Text += "<div id=\"div_count\"></div>";
                             //Lit_html.Text += "<a id=\"btn_notes\" class=\"btn btn-info\" role=\"button\">Show only noted</a>";
@@ -126,23 +131,22 @@ namespace UBC.People
                                 string note = dr["note"].ToString();
                                 string person_id = dr["person_id"].ToString();
                                 string role = dr["role"].ToString();
+                                string category = dr["category"].ToString();
 
-                                string dd_attendance = "<select class=\"form-control\" id=\"dd_attendance_" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
+                                string dd_attendance = "<select class=\"form-control tr_field\" id=\"dd_attendance_" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
                                 dd_attendance += Functions.populateselect(attendance_values, attendance);
                                 dd_attendance += "</select>";
 
-                                string dd_role = "<select class=\"form-control\" id=\"dd_role_" + person_id + "\" name=\"dd_role_" + person_id + "\">";
+                                string dd_role = "<select class=\"form-control tr_field\" id=\"dd_role_" + person_id + "\" name=\"dd_role_" + person_id + "\">";
                                 dd_role += "<option></option>";
                                 dd_role += Functions.populateselect(role_values, role);
                                 dd_role += "</select>";
 
-
-
-                                Lit_html.Text += "<tr id=\"tr_" + person_id + "\">";
+                                Lit_html.Text += "<tr id=\"tr_" + person_id + "\" data-id=\"" + person_event_id + "\" data-category=\"" + category + "\">";
                                 Lit_html.Text += "<td>" + name + "</td>";
                                 Lit_html.Text += "<td>" + dd_attendance + "</td>";
                                 Lit_html.Text += "<td>" + dd_role + "</td>";
-                                Lit_html.Text += "<td><textarea class=\"form-control\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
+                                Lit_html.Text += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
                                 Lit_html.Text += "</tr>";
                             }
 
@@ -167,6 +171,8 @@ namespace UBC.People
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            string useeventid;
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);
@@ -187,7 +193,8 @@ namespace UBC.People
             cmd1.Connection = con;
             try
             {
-                cmd1.ExecuteScalar();
+                useeventid = cmd1.ExecuteScalar().ToString();
+
             }
             catch (Exception ex)
             {
@@ -202,6 +209,7 @@ namespace UBC.People
                 SqlCommand cmd2 = new SqlCommand("update_event_person", con);
                 cmd2.CommandType = CommandType.StoredProcedure;
 
+                /*
                 foreach (string fld in Request.Form)
                 {
                     string a = fld;
@@ -231,12 +239,40 @@ namespace UBC.People
 
                     }
                 }
+                */
+
+                string[] tr_changed = Request.Form["hf_tr_changed"].Split(',');
+                foreach(string person_id in tr_changed)
+                {
+                    string attendance = Request.Form["dd_attendance_" + person_id];
+                    string note = Request.Form["tb_note_" + person_id];
+                    string role = Request.Form["dd_role_" + person_id];
+
+                    cmd2.Parameters.Clear();
+                    cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
+                    cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+                    cmd2.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
+                    cmd2.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+                    cmd2.Parameters.Add("@role", SqlDbType.VarChar).Value = role;
+
+                    cmd2.Connection = con;
+                    try
+                    {
+                        cmd2.ExecuteScalar();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
 
                 con.Close();
                 con.Dispose();
             }
 
-            Response.Redirect(Request.RawUrl);
+            string URL = Request.RawUrl;
+            URL = URL.Substring(0, URL.IndexOf("?")) + "?id=" + useeventid;
+            Response.Redirect(URL);
         }
     }
 }

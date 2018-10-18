@@ -12,6 +12,11 @@ namespace UBC
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["UBC_User"] != null)
+            {
+                //Response.Redirect("login.aspx");
+            }
+
         }
     }
 }

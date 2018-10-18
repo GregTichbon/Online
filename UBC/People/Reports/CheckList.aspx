@@ -32,7 +32,7 @@
        $(document).ready(function () {
            $('.span_name').click(function () {
                id = $(this).attr('id');
-               window.open("../maint.aspx?id=" + id);
+               window.open("../maint.aspx?id=" + id, "_ubc_people_maint");
 
            });
 
