@@ -76,6 +76,7 @@
             });
 
             $('#dd_categories').select2();
+            $('#dd_categories_filter').select2();
 
             $('#cb_allday').change(function () {
                 if ($(this).is(":checked")) {
@@ -97,7 +98,7 @@
                 }
             });
                         /*
-            $('#dd_categories').change(function () {
+            $('#dd_categories_filter').change(function () {
                 alert($(this).val());
             })
 
@@ -144,7 +145,7 @@
 
 
             $('#btn_refresh').click(function () {
-                //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories').val());
+                //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories_filter').val());
                 processrows();
             })
 
@@ -196,7 +197,7 @@
             //This code should be in the loop below ----- END
 
             showval = $('#dd_show').val();
-            category = $('#dd_categories').val();
+            category = $('#dd_categories_filter').val();
           
             $('#tbl_attendance tr[id^=tr_]').each(function () {
                 personid = $(this).attr("id").substring(3);
@@ -221,7 +222,7 @@
                     found = false;
                     for (f1 = 0; f1 < category.length; f1++) {
                         usecategory = '|' + category[f1] + '|';
-                        if (personcategory.indexOf(usecategory) != -1) {
+                        if (personcategory.indexOf(usecategory) != -1 || $("#dd_attendance_" + personid).val() != 'No') {
                             found = true;
                             break;
                         }
@@ -243,6 +244,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input type="hidden" id="hf_tr_changed" name="hf_tr_changed" />
+    <input type="hidden" id="hf_event_id" name="hf_event_id" value="<%: event_id %>" />
     <div class="container" style="background-color:#FCF7EA">
      
         <h1>Union Boat Club - Event
@@ -303,7 +305,14 @@
             </div>
         </div>
 
-
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_categories">Categories</label>
+            <div class="col-sm-8">
+                <select id="dd_categories" name="dd_categories" class="form-control" multiple="multiple" required>
+                    <%= categories_values %>
+                </select>            
+            </div>
+        </div>
 
 
 

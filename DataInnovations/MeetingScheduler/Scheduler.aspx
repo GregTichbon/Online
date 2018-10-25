@@ -427,8 +427,9 @@
             <br />
             Notes:<br />
             <br />
-            Complete the form as soon as possible<br />
-            There are potentially time slots to the right, use the scroll bar to access these<br />
+            Complete the form as soon as possible.<br />
+            To work effectively every slot should be identified as Unavailable, Possibly or OK.<br />
+            There are potentially time slots to the right, use the scroll bar to access these.<br />
             You may change your availability as often as you need.<br />
             Select an availability option and click on the day to set all the time slots on that day.&nbsp; (You can still amend individual time slots)<br />
             Select an availability option and hold the left mouse button down while dragging across the time slots to easily set those time slots.

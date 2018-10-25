@@ -492,6 +492,8 @@ namespace Generic
             string selected;
             string html = "";
 
+            //string[] selectedoptions = selectedoption.Split(',');
+
             if (firstoption != "None")  // could be "Please Select" etc
             {
                 html = html + ("<option>" + firstoption + "</option>");
@@ -556,17 +558,19 @@ namespace Generic
                         {
                             selectText = Value;
                         }
-
-                        if (selectText == selectedoption)
-                        {
-                            selected = " selected";
-                        }
-                        else
-                        {
-                            selected = "";
-                        }
-                        html = html + ("<option" + ValueText + selected + ">" + Label + "</option>");
-
+                        //foreach (string option in selectedoptions)
+                        //{
+                        //if (selectText == selectedoption) 
+                        if (selectedoption.Contains("," + selectText + ","))
+                            {
+                                selected = " selected";
+                            }
+                            else
+                            {
+                                selected = "";
+                            }
+                            html = html + ("<option" + ValueText + selected + ">" + Label + "</option>");
+                        //}
                     }
                 }
             }
@@ -633,8 +637,6 @@ namespace Generic
 
             return SelectArray;
         }
-
-
 
         public static string populateselect_ccmonth(string selectedoption, string firstoption = "None")
         {
