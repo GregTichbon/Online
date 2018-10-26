@@ -21,8 +21,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using SMSProcessing.Model;
-
-
+using System.Xml.Linq;
 
 namespace Generic
 {
@@ -778,6 +777,36 @@ namespace Generic
         private const string MessagesUrlPath = "services/api/messaging";
 
         private const string MessageStatusUrlPath = "services/api/messaging/status";
+        public void populateXML(DataTable repeatertable, XElement rootXml)
+        {
+
+            DataView dv2 = new DataView(repeatertable);
+            DataTable dvSites = dv2.ToTable(true, "Name");
+            foreach (DataRow siterow in dvSites.Rows)
+            {
+                XElement repeaterXml = new XElement(siterow["Name"].ToString() + "Repeater");
+
+                string sel = "[Name] = '" + siterow["Name"] + "'";
+                DataView dv3 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                DataTable dvindexess = dv3.ToTable(true, "Index");
+                foreach (DataRow indexrow in dvindexess.Rows)
+                {
+                    XElement subXml = new XElement(siterow["Name"].ToString());
+
+                    subXml.Add(new XElement(siterow["Name"].ToString() + "Index", indexrow["Index"].ToString()));
+
+                    sel = "[Name] = '" + siterow["Name"] + "' AND [Index] = '" + indexrow["Index"] + "'";
+                    DataView dv4 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                    DataTable dvfields = dv4.ToTable();
+                    foreach (DataRow fieldrow in dvfields.Rows)
+                    {
+                        subXml.Add(new XElement(fieldrow["Field"].ToString(), fieldrow["Value"].ToString()));
+                    }
+                    repeaterXml.Add(subXml);
+                }
+                rootXml.Add(repeaterXml);
+            }
+        }
     }
 
 
@@ -858,6 +887,7 @@ namespace Generic
 
             }
     */
+    
 }
 public class SelectList
 {

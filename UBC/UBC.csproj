@@ -69,6 +69,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Completed\default.aspx" />
     <Content Include="data.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="Dependencies\bootstrap-datetimepicker.min.css" />
@@ -311,6 +312,7 @@
     <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\dark.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\default.scss" />
+    <Content Include="EmailTemplate\Standard.html" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -405,6 +407,8 @@
     <Content Include="People\Maint2.aspx" />
     <Content Include="People\Menu.aspx" />
     <Content Include="People\Register.aspx" />
+    <Content Include="People\RegisterEmail.xslt" />
+    <Content Include="People\RegisterScreen.xslt" />
     <Content Include="People\Reports\AttendanceMatrix.aspx" />
     <Content Include="People\Reports\CheckList.aspx" />
     <Content Include="People\Schedule.aspx" />
@@ -479,9 +483,17 @@
     <Content Include="Dependencies\TableHeadFixer\tableHeadFixer.js" />
     <Content Include="People\List.aspx" />
     <Content Include="People\Maint.aspx" />
+    <Content Include="UserCode.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Completed\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Completed\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -665,6 +677,13 @@
     </Compile>
     <Compile Include="UBC.Master.designer.cs">
       <DependentUpon>UBC.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserCode.aspx.cs">
+      <DependentUpon>UserCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserCode.aspx.designer.cs">
+      <DependentUpon>UserCode.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

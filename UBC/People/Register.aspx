@@ -23,6 +23,11 @@
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
     <!--additional-methods.min.js-->
 
+    <style>
+        :required {
+            border-color: red;
+        }
+    </style>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -32,6 +37,10 @@
                     at: "left center"
                 }
             });
+
+            if ($('#dd_school').val() != "") {
+                $("#div_schoolyear").show();
+            }
 
 
             $("#form1").validate({
@@ -85,6 +94,20 @@
 
             });
 
+            $('#dd_school').change(function () {
+                school = $(this).val();
+                //alert('*' + school + '*');
+                if (school != "") {
+                    $("#div_schoolyear").show();
+                } else {
+                    $("#div_schoolyear").hide();
+                    $("#dd_schoolyear").prop('selectedIndex', 0);
+                }
+            });
+
+            $('#tb_birthdate').change(function () {
+
+            });
 
 
             //$('[required]').css('border', '1px solid red');
@@ -100,6 +123,11 @@
             thisyear = moment().year();
             var jan1 = moment([thisyear, 1, 1]);
             $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
+            if (years < 18) {
+                $('#div_parent').show();
+            } else {
+                $('#div_parent').hide();
+            }
         }
 
     </script>
@@ -112,141 +140,207 @@
         <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
         <h1>Union Boat Club - Registration
         </h1>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row form-group">
-                    <label class="control-label col-md-6" for="tb_firstname">First name</label>
-                    <div class="col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Rower</div>
+            <div class="panel-body">
+
+                <!------------------------------------------------------>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_firstname">First name</label>
+                    <div class="col-sm-8">
                         <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
                     </div>
-
                 </div>
 
-                <div class="row form-group">
-                    <label class="control-label col-md-6" for="tb_lastname">Last name</label>
-                    <div class="col-md-6">
-                        <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="20" />
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_lastname">Last name</label>
+                    <div class="col-sm-8">
+                        <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="30" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_gender">Gender</label>
+                    <div class="col-sm-8">
+                        <select id="dd_gender" name="dd_gender" class="form-control" required>
+                            <%= Generic.Functions.populateselect(gender, dd_gender,"None") %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tb_birthdate" class="control-label col-sm-4">
+                        Date of birth
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group date" id="div_birthdate">
+                            <input id="tb_birthdate" name="tb_birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: tb_birthdate %>" required />
+
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+
+                            <span id="span_age" class="input-group-addon"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_school">School (if applicable)</label>
+                    <div class="col-sm-8">
+                        <select id="dd_school" name="dd_school" class="form-control">
+                            <%= Generic.Functions.populateselect(school, dd_school,"") %>
+                        </select>
+                    </div>
+                </div>
+                <div id="div_schoolyear" class="form-group" style="display: none">
+                    <label class="control-label col-sm-4" for="dd_schoolyear">School year</label>
+                    <div class="col-sm-8">
+                        <select id="dd_schoolyear" name="dd_schoolyear" class="form-control" required>
+                            <%= Generic.Functions.populateselect(schoolyear, dd_schoolyear,"") %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_medical">Medical needs</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_medical" name="tb_medical" class="form-control" maxlength="500"><%: tb_medical %></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_dietry">Special Dietry requirements</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_dietry" name="tb_dietry" class="form-control" maxlength="500"><%: tb_dietry %></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_emailaddress">Email address</label>
+                    <div class="col-sm-8">
+                        <input id="tb_emailaddress" name="tb_emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_emailaddress%>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_homephone">Home phone</label>
+                    <div class="col-sm-8">
+                        <input id="tb_homephone" name="tb_homephone" type="text" class="form-control numeric" value="<%:tb_homephone%>" maxlength="20" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_mobilephone">Mobile phone</label>
+                    <div class="col-sm-8">
+                        <input id="tb_mobilephone" name="tb_mobilephone" type="text" class="form-control numeric" value="<%:tb_mobilephone%>" maxlength="20" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_residentialaddress">Home address</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_residentialaddress" name="tb_residentialaddress" class="form-control" rows="6" maxlength="500" required><%: tb_residentialaddress %></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_school">Swimming ability</label>
+                    <div class="col-sm-8">
+                        <select id="dd_swimmer" name="dd_swimmer" class="form-control" required>
+                            <%= Generic.Functions.populateselect(swimmer, dd_swimmer,"") %>
+                        </select>
+                    </div>
+                </div>
+                <!------------------------------------------------------>
+
+            </div>
+        </div>
+
+
+        <div class="panel panel-danger" id="div_parent" style="display: none">
+            <div class="panel-heading">Parent/Caregivers</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver1">Name (1)</label>
+                    <div class="col-sm-8">
+                        <input id="tb_parentcaregiver1" name="tb_parentcaregiver1" type="text" class="form-control" value="<%:tb_parentcaregiver1%>" maxlength="100" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver1_mobilephone">Mobile phone (1)</label>
+                    <div class="col-sm-8">
+                        <input id="tb_parentcaregiver1_mobilephone" name="tb_parentcaregiver1_mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver1_mobilephone%>" required maxlength="20" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver1_emailaddress">Email address (1)</label>
+                    <div class="col-sm-8">
+                        <input id="tb_parentcaregiver1_emailaddress" name="tb_parentcaregiver1_emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_parentcaregiver1_emailaddress%>" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver">Name (2)</label>
+                    <div class="col-sm-8">
+                        <input id="tb_parentcaregiver2" name="tb_parentcaregiver2" type="text" class="form-control" value="<%:tb_parentcaregiver2%>" maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver2_mobilephone">Mobile phone (2)</label>
+                    <div class="col-sm-8">
+                        <input id="tb_parentcaregiver2_mobilephone" name="tb_parentcaregiver2_mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2_mobilephone%>" maxlength="20" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver2_emailaddress">Email address (2)</label>
+                    <div class="col-sm-8">
+                        <input id="tb_parentcaregiver2_emailaddress" name="tb_parentcaregiver2_emailaddress" type="email" class="form-control" maxlength="100" value="<%:tb_parentcaregiver2_emailaddress%>" />
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_gender">Gender</label>
-            <div class="col-sm-8">
-                <select id="dd_gender" name="dd_gender" class="form-control" required>
-                    <%= Generic.Functions.populateselect(gender, dd_gender,"None") %>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="tb_birthdate" class="control-label col-sm-4">
-                Date of birth
-            </label>
-            <div class="col-sm-8">
-                <div class="input-group date" id="div_birthdate">
-                    <input id="tb_birthdate" name="tb_birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: tb_birthdate %>" />
-
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-
-                    <span id="span_age" class="input-group-addon"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_school">School (if applicable)</label>
-            <div class="col-sm-8">
-                <select id="dd_school" name="dd_school" class="form-control">
-                    <%= Generic.Functions.populateselect(school, dd_school,"") %>
-                </select>
-            </div>
-        </div>
-        <div class="form-group" style="display:none">
-            <label class="control-label col-sm-4" for="tb_schoolyear">School year</label>
-            <div class="col-sm-8">
-                <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" maxlength="2" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_medical">Medical needs</label>
-            <div class="col-sm-8">
-                <textarea id="tb_medical" name="tb_medical" class="form-control"><%: tb_medical %></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_dietry">Special Dietry requirements</label>
-            <div class="col-sm-8">
-                <textarea id="tb_dietry" name="tb_dietry" class="form-control"><%: tb_dietry %></textarea>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_emailaddress">Email address</label>
-            <div class="col-sm-8">
-                <input id="tb_emailaddress" name="tb_emailaddress" type="text" class="form-control numeric" value="<%:tb_emailaddress%>" maxlength="2" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_homephone">Home phone</label>
-            <div class="col-sm-8">
-                <input id="tb_homephone" name="tb_homephone" type="text" class="form-control numeric" value="<%:tb_homephone%>" maxlength="2" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_mobilephone">Mobile phone</label>
-            <div class="col-sm-8">
-                <input id="tb_mobilephone" name="tb_mobilephone" type="text" class="form-control numeric" value="<%:tb_mobilephone%>" maxlength="2" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="tb_residentialaddress">Home address</label>
-            <div class="col-sm-8">
-                <textarea id="tb_residentialaddress" name="tb_residentialaddress" class="form-control" rows="6"><%: tb_residentialaddress %></textarea>
-            </div>
-        </div>
-        
 
         <!------------------------------------------------------------------------------------------------------>
 
-
-        <b>Declaration:</b>
-                <br />
-        <ul>
-        <li>I hereby apply for membership of the Union Boat Club. - I agree to be bound by the rules of the Club and to pay the annual subscription fees as set at the Annual General Meeting.</li>
-       <li>I also agree to pay such additional fees and levies which may be set from time to time to cover such items as: plant replacement, regatta entries and travel expenses.</li>
-              
-        <li>I understand that there may be risk of personal injury involved in participating in the sport of rowing and hereby indemnify the Union Boat Club, its Executive, fellow members and coaches from any liability.</li>
-          
-        </ul>
-         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_agreement">I agree with the above statements</label>
-            <div class="col-sm-8">
-                <select id="dd_agreement" name="dd_agreement" class="form-control">
-                    <%= Generic.Functions.populateselect(yesno, "","") %>
-                </select>
+        <div class="panel panel-danger">
+            <div class="panel-heading">Declaration</div>
+            <div class="panel-body">
+                <ul>
+                    <li>I hereby apply for membership of the Union Boat Club. - I agree to be bound by the rules of the Club and to pay the annual subscription fees as set at the Annual General Meeting.</li>
+                    <li>I also agree to pay such additional fees and levies which may be set from time to time to cover such items as: plant replacement, regatta entries and travel expenses.</li>
+                    <li>I understand that there may be risk of personal injury involved in participating in the sport of rowing and hereby indemnify the Union Boat Club, its Executive, fellow members and coaches from any liability.</li>
+                </ul>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_agreement">I agree with the above statements</label>
+                    <div class="col-sm-8">
+                        <select id="dd_agreement" name="dd_agreement" class="form-control" required>
+                            <option></option>
+                            <option>Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_correspondence">I also agree, for my email address to added to the Union Boat Club database to receive email newsletters and updates.</label>
+                    <div class="col-sm-8">
+                        <select id="dd_correspondence" name="dd_correspondence" class="form-control" required>
+                            <option></option>
+                            <option>Yes</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_correspondence">I also agree, for my email address to added to the Union Boat Club database to receive email newsletters and updates.</label>
-            <div class="col-sm-8">
-                <select id="dd_correspondence" name="dd_correspondence" class="form-control">
-                    <%= Generic.Functions.populateselect(yesno, "","") %>
-                </select>
-            </div>
-        </div>
 
+        <!------------------------------------------------------------------------------------------------------>
 
-
-              <div class="form-group">
+        <div class="form-group">
             <div class="col-sm-4">
             </div>
             <div class="col-sm-8">
@@ -255,5 +349,6 @@
         </div>
 
     </div>
+
 
 </asp:Content>
