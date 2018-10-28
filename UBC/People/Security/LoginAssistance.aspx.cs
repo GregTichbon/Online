@@ -138,7 +138,10 @@ namespace UBC.People.Security
                                 }
                             }
                             catch (Exception ex)
+
                             {
+                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+
                             }
 
                             //emailbodydocument = functions.documentfill(emailbodydocument, documentvalues);
@@ -157,6 +160,8 @@ namespace UBC.People.Security
                             }
                             catch (Exception ex)
                             {
+                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+
                             }
 
                             emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
@@ -184,7 +189,8 @@ namespace UBC.People.Security
                             }
                             catch (Exception ex)
                             {
-                                
+                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+
                             }
 
                             //emailbodydocument = functions.documentfill(emailbodydocument, documentvalues);
@@ -203,6 +209,7 @@ namespace UBC.People.Security
                             }
                             catch (Exception ex)
                             {
+                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
                             }
 

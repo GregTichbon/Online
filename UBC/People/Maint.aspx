@@ -25,6 +25,8 @@
     <script src="<%: ResolveUrl("~/Dependencies/additional-methods.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/jscolor.js")%>"></script>
+
     <!--additional-methods.min.js-->
 
     <script type="text/javascript">
@@ -283,6 +285,7 @@
                 <li><a data-target="#div_finance">Finance</a></li>
                 <li><a data-target="#div_attendance">Attendance</a></li>
                 <li><a data-target="#div_results">Results</a></li>
+                <li><a data-target="#div_system">System</a></li>
             </ul>
             <div class="tab-content">
                 <!------------------------------------------------------------------------------------------------------>
@@ -407,6 +410,18 @@
                     <table id="tbl_results">
                         <asp:Literal ID="Lit_results" runat="server"></asp:Literal>
                     </table>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
+                                <div id="div_system" class="tab-pane fade in">
+                     <h3>System</h3>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_colour">Colour</label>
+                        <div class="col-sm-8">
+                            <input id="tb_colour" name="tb_colour" class="jscolor" value="<%: tb_colour %>" />
+                        </div>
+                    </div>
+                    
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_address" class="tab-pane fade in">

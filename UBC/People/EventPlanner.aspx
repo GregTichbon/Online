@@ -81,15 +81,18 @@
 
     <script>
         var event_id;
+        var changed = [];
 
         $(document).ready(function () {
 
             //$('.remove').click(function () {
-            $(document).on('click','.remove',function(){
+            $(document).on('click', '.remove', function () {
+                id = 'del' + $(this).prev().attr("id").substring(11);
+                //alert(id);
+                changed.indexOf(id) === -1 ? changed.push(id) : null;
+                $("#hf_changes").val(changed.toString());
                 $(this).parent().remove();
             });
-
-
 
             $('.add').click(function () {
                 event_id = $(this).parent().parent().attr('id');
@@ -117,7 +120,6 @@
                 }
             });
 
-
             $('.title').click(function () {
                 alert('title clicked - open event')
             });
@@ -138,6 +140,10 @@
                     name = $(this).text();
                     colour = $(this).css("backgroundColor");
                     $('#' + event_id).append('<div class="wrapper"><div class="person" id="coach_' + event_id + '_' + person_id + '" style="background-color:' + colour + ';">' + name + '</div><span class="remove"></span></div>');
+                    id = 'add' + event_id.substring(5) + '_' + person_id;
+                    //alert(id);
+                    changed.indexOf(id) === -1 ? changed.push(id) : null;
+                    $("#hf_changes").val(changed.toString());
                 }
             });
 
@@ -147,8 +153,12 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <input type="hidden" id="hf_changes" name="hf_changes" />
+
+    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Style="width: 100%; height: 60px" Text="Save" />
+
     <%= html%>
-    <div id="div_coaches" title="Select Coach(es)" style="display:none">
+    <div id="div_coaches" title="Select Coach(es)" style="display: none">
         <%= coaches_html %>
     </div>
 </asp:Content>

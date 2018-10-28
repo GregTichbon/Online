@@ -36,11 +36,11 @@ namespace UBC.People
         //public string tb_postaladdress;
         public string dd_swimmer;
         public string tb_parentcaregiver1;
-        public string tb_parentcaregiver1_mobilephone;
+        public string tb_parentcaregiver1mobilephone;
         public string tb_parentcaregiver2;
-        public string tb_parentcaregiver2_mobilephone;
-        public string tb_parentcaregiver1_emailaddress;
-        public string tb_parentcaregiver2_emailaddress;
+        public string tb_parentcaregiver2mobilephone;
+        public string tb_parentcaregiver1emailaddress;
+        public string tb_parentcaregiver2emailaddress;
 
         public string dd_agreement;
         public string dd_correspondence;
@@ -98,11 +98,11 @@ namespace UBC.People
                         tb_mobilephone = dr["mobilephone"].ToString();
                         dd_swimmer = dr["swimmer"].ToString();
                         tb_parentcaregiver1 = dr["parentcaregiver1"].ToString();
-                        tb_parentcaregiver1_mobilephone = dr["parentcaregiver1_mobilephone"].ToString();
-                        tb_parentcaregiver1_emailaddress = dr["parentcaregiver1_emailaddress"].ToString();
+                        tb_parentcaregiver1mobilephone = dr["parentcaregiver1_mobilephone"].ToString();
+                        tb_parentcaregiver1emailaddress = dr["parentcaregiver1_emailaddress"].ToString();
                         tb_parentcaregiver2 = dr["parentcaregiver2"].ToString();
-                        tb_parentcaregiver2_mobilephone = dr["parentcaregiver2_mobilephone"].ToString();
-                        tb_parentcaregiver2_emailaddress = dr["parentcaregiver2_emailaddress"].ToString();
+                        tb_parentcaregiver2mobilephone = dr["parentcaregiver2_mobilephone"].ToString();
+                        tb_parentcaregiver2emailaddress = dr["parentcaregiver2_emailaddress"].ToString();
 
 
                         if (tb_birthdate != "")
@@ -155,11 +155,11 @@ namespace UBC.People
             dd_swimmer = Request.Form["dd_swimmer"].Trim();
 
             tb_parentcaregiver1 = Request.Form["tb_parentcaregiver1"].Trim();
-            tb_parentcaregiver1_mobilephone = Request.Form["tb_parentcaregiver1_mobilephone"].Trim();
-            tb_parentcaregiver1_emailaddress = Request.Form["tb_parentcaregiver1_emailaddress"].Trim();
+            tb_parentcaregiver1mobilephone = Request.Form["tb_parentcaregiver1mobilephone"].Trim();
+            tb_parentcaregiver1emailaddress = Request.Form["tb_parentcaregiver1emailaddress"].Trim();
             tb_parentcaregiver2 = Request.Form["tb_parentcaregiver2"].Trim();
-            tb_parentcaregiver2_mobilephone = Request.Form["tb_parentcaregiver2_mobilephone"].Trim();
-            tb_parentcaregiver2_emailaddress = Request.Form["tb_parentcaregiver2_emailaddress"].Trim();
+            tb_parentcaregiver2mobilephone = Request.Form["tb_parentcaregiver2mobilephone"].Trim();
+            tb_parentcaregiver2emailaddress = Request.Form["tb_parentcaregiver2emailaddress"].Trim();
 
             dd_agreement = Request.Form["dd_agreement"].Trim();
             dd_correspondence = Request.Form["dd_correspondence"].Trim();
@@ -187,11 +187,11 @@ namespace UBC.People
             cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
 
             cmd.Parameters.Add("parentcaregiver1", SqlDbType.VarChar).Value = tb_parentcaregiver1;
-            cmd.Parameters.Add("parentcaregiver1_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver1_mobilephone;
-            cmd.Parameters.Add("parentcaregiver1_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver1_emailaddress;
+            cmd.Parameters.Add("parentcaregiver1_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver1mobilephone;
+            cmd.Parameters.Add("parentcaregiver1_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver1emailaddress;
             cmd.Parameters.Add("parentcaregiver2", SqlDbType.VarChar).Value = tb_parentcaregiver2;
-            cmd.Parameters.Add("parentcaregiver2_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver2_mobilephone;
-            cmd.Parameters.Add("parentcaregiver2_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver2_emailaddress;
+            cmd.Parameters.Add("parentcaregiver2_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver2mobilephone;
+            cmd.Parameters.Add("parentcaregiver2_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver2emailaddress;
 
             cmd.Parameters.Add("@agreement", SqlDbType.VarChar).Value = dd_agreement;
             cmd.Parameters.Add("@correspondence", SqlDbType.VarChar).Value = dd_correspondence;
@@ -261,15 +261,15 @@ namespace UBC.People
             #endregion //BuildXML
 
             string emailbodyTemplate = "RegisterEmail.xslt";
-            string emailSubject = "Novice Registration";
+            string emailSubject = "Union Boat Club Rower Registration";
             string emailBCC = "";
             string screenTemplate = "RegisterScreen.xslt";
             string host = "datainn.co.nz";
-            string emailfrom = "ubc@datainn.co.nz";
+            string emailfrom = "ltr@datainn.co.nz";
             string emailfromname = "Union Boat Club";
-            string password = "xxxxx";
-            string emailRecipient = "greg@datainn.co.nz;";  //info@unionboatclub.co.nz
-
+            string password = "m33t1ng";
+            string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz";  //info@unionboatclub.co.nz
+ 
 
             string path = Server.MapPath(".");
             XmlDocument reader = new XmlDocument();
@@ -298,11 +298,16 @@ namespace UBC.People
             }
             catch (Exception ex)
             {
-            }
-            string emailtext = "xxxxx";
+                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
-            //WDCFunctions.Log(Request.RawUrl, "Put email document into template", "");
+            }
+
             emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
+
+            string emailtext = functions.HTMLtoText(emaildocument);
+
+
+
             #endregion //email
 
             #region send email
@@ -321,6 +326,7 @@ namespace UBC.People
 
 
             //save a copy of formatdocument in submissions
+            /*
             try
             {
                 using (StreamWriter outfile = new StreamWriter(hf_person_id + ".html"))
@@ -329,15 +335,17 @@ namespace UBC.People
                 }
             }
             catch (Exception ex)
-            {
+                       {
+                functions.Log(Request.RawUrl, ex.Message,"greg@datainn.co.nz");
             }
+            */
 
 
 
 
 
             Session["UBC_body"] = ScreenOutput.ToString();
-            Response.Redirect("completed/default.aspx");
+            Response.Redirect("../completed/default.aspx");
         }
     }
 }

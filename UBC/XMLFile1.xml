@@ -1,0 +1,25 @@
+﻿<root>
+  <reference>1</reference>
+  <guid>09db9e21-d49e-441f-9076-2626b37e099c</guid>
+  <firstname>Greg</firstname>
+  <lastname>Tichbon</lastname>
+  <gender>Male</gender>
+  <birthdate>5 Jul 2002</birthdate>
+  <school>City College</school>
+  <schoolyear>10</schoolyear>
+  <medical>Med</medical>
+  <dietry>Diet</dietry>
+  <emailaddress>greg@datainn.co.nz</emailaddress>
+  <homephone>1234</homephone>
+  <mobilephone>0272495088</mobilephone>
+  <residentialaddress>abcabc</residentialaddress>
+  <swimmer>I CAN swim 50 meters in light clothes unassisted</swimmer>
+  <parentcaregiver1>bon</parentcaregiver1>
+  <parentcaregiver1>0272495088</parentcaregiver1>
+  <parentcaregiver1>Test@test</parentcaregiver1>
+  <parentcaregiver2></parentcaregiver2>
+  <parentcaregiver2></parentcaregiver2>
+  <parentcaregiver2></parentcaregiver2>
+  <agreement>Yes</agreement>
+  <correspondence>Yes</correspondence>
+</root>

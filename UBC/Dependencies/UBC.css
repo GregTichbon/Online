@@ -3,6 +3,65 @@
     background-color: black;
     height: 5px;
 }
+
 .error {
-    color:red;
+    color: red;
+}
+/*submission page*/
+
+.submissiontable {
+    width: 90%;
+    border: none;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 20px;
+}
+
+    .submissiontable > tbody > tr:nth-child(even) {
+        background-color: #65B7FF;
+    }
+    .submissiontable > tbody > tr:nth-child(odd) {
+        background-color: #00AFEF;
+    }
+
+    .submissiontable > tbody > tr > td {
+        padding: 10px;
+        width: 50%;
+        border: none;
+    }
+
+        .submissiontable > tbody > tr > td:nth-child(1) {
+            text-align: right;
+            font-weight: bold;
+        }
+
+            .submissiontable > tbody > tr > td:nth-child(1).center {
+                text-align: center;
+                font-weight: bold;
+            }
+
+        .submissiontable > tbody > tr > td.heading {
+            text-align: center;
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .submissiontable > tbody > tr > td.left {
+            text-align: left;
+        }
+
+.submissionhead {
+    width: 90%;
+    border: none;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+    .submissionhead > tbody > tr > td {
+        padding: 10px;
+        border:none;
+    }
+
+:required {
+    border-color: darkblue;
 }

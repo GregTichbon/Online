@@ -22,6 +22,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using SMSProcessing.Model;
 using System.Xml.Linq;
+using HtmlAgilityPack;
 
 namespace Generic
 {
@@ -35,6 +36,14 @@ namespace Generic
         public IHtmlString HTMLRaw(string source)
         {
             return new HtmlString(source);
+        }
+
+        public string HTMLtoText (string source)
+        {
+            var text = new HtmlDocument();
+            text.LoadHtml(source);
+            string pageText = text.DocumentNode.InnerText;
+            return pageText;
         }
 
         public string test()
@@ -94,7 +103,7 @@ namespace Generic
 
         public void sendemailV2(string host, string emailfrom, string emailfromname, string password, string emailsubject, string emailtext, string emailhtml, string emailRecipient, string emailbcc, string replyto)
         {
-            //MailMessage mail = new MailMessage("noreply@whanganui.govt.nz", emailRecipient);
+            //Must pass both text and html!!
 
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(emailfrom, emailfromname);
@@ -114,6 +123,7 @@ namespace Generic
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
+            client.Credentials = new  NetworkCredential(emailfrom, password);
             client.Host = host;
 
             string[] emailaddresses = emailRecipient.Split(';');
@@ -138,28 +148,20 @@ namespace Generic
             }
 
             mail.Subject = emailsubject;
-            if (emailtext != "")
-            {
-                mail.IsBodyHtml = false;
-                mail.Body = emailtext;
 
-                if(emailhtml != "") { 
-                    System.Net.Mime.ContentType mimeType = new System.Net.Mime.ContentType("text/html");
-                    AlternateView alternate = AlternateView.CreateAlternateViewFromString(emailhtml, mimeType);
-                }
+            mail.IsBodyHtml = false;
+            mail.Body = emailtext;
 
-            }
-            else //assume html only
-            {
-                mail.IsBodyHtml = true;
-                mail.Body = emailhtml;
-            }
+            System.Net.Mime.ContentType mimeType = new System.Net.Mime.ContentType("text/html");
+            AlternateView alternate = AlternateView.CreateAlternateViewFromString(emailhtml, mimeType);
+            mail.AlternateViews.Add(alternate);
 
             client.Send(mail);
         }
 
         public void Log(string location, string logMessage, string EmailAddress)
         {
+            /*
             String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
 
             StreamWriter w = File.AppendText(LogFileLocation);
@@ -170,6 +172,7 @@ namespace Generic
             {
                 //sendemail("Online Applications Error", location + "<br>" + logMessage, EmailAddress, "");
             }
+            */
         }
 
         public string getReference(string mode = "guid")

@@ -1,22 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" omit-xml-declaration="yes" />
   <xsl:template match="/">
     <html>
-      <body>
-        <h2>New Owner / Animal Registration</h2>
-        <table class="submissionhead">
-          <tr>
-            <td>
-              Thank you for your registration.
-            </td>
-          </tr>
+      <body bgcolor="#B1C9E6">
+        <table width="100%" border="1" cellpadding="10" cellspacing="0" align="center">
+          <td>
+            <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head-350.png" />
+          </td>
+          <td>
+
+          <h2> Union Boat Club Rower Registration</h2>
+
+          <h4> Thank you for your registration.</h4>
+          </td>
         </table>
+
         <table width="95%" border="1" cellpadding="10" cellspacing="0" align="center">
+          
           <tr>
-            <td align="right" width="50%">Reference number</td>
+            <td align="right" width="50%">First name</td>
             <td>
-              <xsl:value-of select="root/reference"/>
+              <xsl:value-of select="root/firstname"/>
             </td>
           </tr>
 
@@ -28,37 +34,45 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           </tr>
 
           <tr>
-            <td align="right" width="50%">First name</td>
+            <td align="right" width="50%">Gender</td>
             <td>
-              <xsl:value-of select="root/firstname"/>
+              <xsl:value-of select="root/gender"/>
             </td>
           </tr>
 
           <tr>
-            <td align="right" width="50%">Other name(s)</td>
+            <td align="right" width="50%">Date of birth</td>
             <td>
-              <xsl:value-of select="root/othernames"/>
+              <xsl:value-of select="root/birthdate"/>
             </td>
           </tr>
 
-          <tr>
-            <td align="right" width="50%">Known as</td>
-            <td>
-              <xsl:value-of select="root/knownas"/>
-            </td>
-          </tr>
+          <xsl:if test="string(root/school)">
+            <tr>
+              <td align="right" width="50%">School</td>
+              <td>
+                <xsl:value-of select="root/school"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right" width="50%">School year</td>
+              <td>
+                <xsl:value-of select="root/schoolyear"/>
+              </td>
+            </tr>
+          </xsl:if>
 
           <tr>
-            <td align="right" width="50%">Residential address</td>
+            <td align="right" width="50%">Medical needs</td>
             <td>
-              <xsl:value-of select="root/residentialaddress"/>
+              <xsl:value-of select="root/medical"/>
             </td>
           </tr>
-
           <tr>
-            <td align="right" width="50%">Postal address</td>
+            <td align="right" width="50%">Special Dietry requirements</td>
             <td>
-              <xsl:value-of select="root/postaladdress"/>
+              <xsl:value-of select="root/dietry"/>
             </td>
           </tr>
 
@@ -75,6 +89,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           </tr>
 
           <tr>
+            <td align="right" width="50%">Home phone</td>
+            <td>
+              <xsl:value-of select="root/homephone"/>
+            </td>
+          </tr>
+          <tr>
             <td align="right" width="50%">Mobile phone</td>
             <td>
               <xsl:value-of select="root/mobilephone"/>
@@ -82,59 +102,96 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           </tr>
 
           <tr>
-            <td align="right" width="50%">Home phone</td>
+            <td align="right" width="50%">Home address</td>
             <td>
-              <xsl:value-of select="root/homephone"/>
+
+
+              <xsl:call-template name="break">
+                <xsl:with-param name="text" select="root/residentialaddress" />
+              </xsl:call-template>
             </td>
           </tr>
 
           <tr>
-            <td align="right" width="50%">Work phone</td>
+            <td align="right" width="50%">Swimming ability</td>
             <td>
-              <xsl:value-of select="root/workphone"/>
+              <xsl:value-of select="root/swimmer"/>
             </td>
           </tr>
 
+          <xsl:if test="string(root/parentcaregiver1)">
+
+            <tr>
+              <td colspan="2" align="left">
+                <h2>Parent/Caregivers</h2></td>
+            </tr>
+
+            <tr>
+              <td align="right" width="50%">Name (1)</td>
+              <td>
+                <xsl:value-of select="root/parentcaregiver1"/>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="50%">Mobile phone (1)</td>
+              <td>
+                <xsl:value-of select="root/parentcaregiver1mobilephone"/>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="50%">Email address (1)</td>
+              <td>
+                <xsl:value-of select="root/parentcaregiver1emailaddress"/>
+              </td>
+            </tr>
+          </xsl:if>
+
+          <xsl:if test="string(root/parentcaregiver2)">
+
+ 
+            <tr>
+              <td align="right" width="50%">Name (2)</td>
+              <td>
+                <xsl:value-of select="root/parentcaregiver2"/>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="50%">Mobile phone (2)</td>
+              <td>
+                <xsl:value-of select="root/parentcaregiver2mobilephone"/>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="50%">Email address (2)</td>
+              <td>
+                <xsl:value-of select="root/parentcaregiver2emailaddress"/>
+              </td>
+            </tr>
+          </xsl:if>
+
           <tr>
-            <td align="right" width="50%">Gender</td>
+            <td colspan="2" align="left">
+              Declaration
+              <ul>
+                <li>I hereby apply for membership of the Union Boat Club. - I agree to be bound by the rules of the Club and to pay the annual subscription fees as set at the Annual General Meeting.</li>
+                <li>I also agree to pay such additional fees and levies which may be set from time to time to cover such items as: plant replacement, regatta entries and travel expenses.</li>
+                <li>I understand that there may be risk of personal injury involved in participating in the sport of rowing and hereby indemnify the Union Boat Club, its Executive, fellow members and coaches from any liability.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" width="50%">I agree with the above statements.</td>
             <td>
-              <xsl:value-of select="root/gender"/>
+              <xsl:value-of select="root/agreement"/>
             </td>
           </tr>
 
           <tr>
-            <td align="right" width="50%">Date of birth</td>
+            <td align="right" width="50%">I also agree, for my email address to added to the Union Boat Club database to receive email newsletters and updates.</td>
             <td>
-              <xsl:value-of select="root/dateofbirth"/>
+              <xsl:value-of select="root/correspondence"/>
             </td>
           </tr>
-
-          <tr>
-            <td colspan="2" align="center">
-              <b>Dog(s)</b>
-            </td>
-          </tr>
-          <tr>
-
-              <xsl:for-each select="root/DogRepeater/Dog">
-                <td align="right" width="50%">
-                  <b>Dog: <xsl:value-of select="DogIndex"/>
-                  </b>
-                </td>
-                <td>
-                  Name: <xsl:value-of select="name"/><br />
-                  Primary breed: <xsl:value-of select="breed1"/><br />
-                  Secondary breed: <xsl:value-of select="breed2"/><br />
-                  Age: <xsl:value-of select="years"/>:<xsl:value-of select="months"/><br />
-                  Primary colour: <xsl:value-of select="colour1"/><br />
-                  Secondary colour: <xsl:value-of select="colour2"/><br />
-                  Gender: <xsl:value-of select="gender"/><br />
-                  Neutered: <xsl:value-of select="neutered"/><br />
-                  Chip: <xsl:value-of select="chip"/><br />
-                </td>
-              </xsl:for-each>
-          </tr>
-
           <!--
         <tr>
             <td>Attachments</td>
@@ -152,10 +209,35 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             </td>
           </tr>
             -->
-
         </table>
+        <p> </p>
       </body>
     </html>
+
+  </xsl:template>
+
+
+  <xsl:template name="break">
+    <xsl:param name="text" select="string(.)"/>
+    <xsl:choose>
+      <xsl:when test="contains($text, '&#xa;')">
+        <xsl:value-of select="substring-before($text, '&#xa;')"/>
+        <br/>
+        <xsl:call-template name="break">
+          <xsl:with-param
+            name="text"
+            select="substring-after($text, '&#xa;')"
+        />
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
+
+
+
   </xsl:template>
 </xsl:stylesheet>
 

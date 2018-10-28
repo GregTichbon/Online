@@ -44,10 +44,21 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="background-color: #FCF7EA">
-        <h1>Union Boat Club - User Code Entry
-        </h1>
-
+    <div class="container" style="background-color:#B1C9E6" >
+        <p></p>
+        <table style="width:100%">
+            <tr>
+                <td style="width:350px">
+                    <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
+                <td style="text-align:center">
+                    <h1>User Code Entry
+                    </h1>
+                </td>
+            </tr>
+        </table>
+        <p></p>
+        <hr />
+        <p></p>
         <div class="form-group">
             <label class="control-label col-sm-4" for="tb_usercode">Please enter your user code</label>
             <div class="col-sm-8">

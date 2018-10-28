@@ -306,7 +306,9 @@ namespace SMSChecker
             }
             catch (Exception ex)
             {
-                //to do
+                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.InnerException);
+                throw ex;
             }
 
         }

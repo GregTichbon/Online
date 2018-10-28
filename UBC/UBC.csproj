@@ -131,6 +131,10 @@
     <Content Include="Dependencies\GijGo\js\timepicker.min.js" />
     <Content Include="Dependencies\GijGo\js\tree.js" />
     <Content Include="Dependencies\GijGo\js\tree.min.js" />
+    <Content Include="Dependencies\Images\Logo-Page-Head-350.png" />
+    <Content Include="Dependencies\Images\Logo-Page-Head.png" />
+    <Content Include="Dependencies\jscolor-example.html" />
+    <Content Include="Dependencies\jscolor.js" />
     <Content Include="Dependencies\moment.min.js" />
     <Content Include="Dependencies\pwstrength-bootstrap.min.js" />
     <Content Include="Dependencies\QueryBuilder\build\cleanLn.js" />
@@ -320,6 +324,10 @@
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.eot" />
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.ttf" />
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.woff" />
+    <Content Include="Go\Doc1\default.aspx" />
+    <Content Include="Go\Register\default.aspx" />
+    <Content Include="XMLFile1.xml" />
+    <Content Include="XSLTFile1.xslt" />
     <None Include="packages.config" />
     <Content Include="Dependencies\UBC.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -366,7 +374,6 @@
     <Content Include="People\Images\62.JPG" />
     <Content Include="People\Images\63.jpg" />
     <Content Include="People\Images\64.jpg" />
-    <Content Include="People\Images\64A.JPG" />
     <Content Include="People\Images\65.jpg" />
     <Content Include="People\Images\66.jpg" />
     <Content Include="People\Images\66b.jpg" />
@@ -423,6 +430,7 @@
     <Content Include="Test.aspx" />
     <Content Include="Training\ZoneTraining.aspx" />
     <Content Include="UBC.Master" />
+    <Content Include="People\Documents\Parent Information 2018.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -504,6 +512,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Go\Doc1\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Go\Doc1\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Go\Register\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Go\Register\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Check.aspx.cs">
       <DependentUpon>Check.aspx</DependentUpon>

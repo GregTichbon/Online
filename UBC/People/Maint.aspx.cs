@@ -31,7 +31,8 @@ namespace UBC.People
         public string tb_facebook;
         public string tb_residentialaddress;
         public string tb_postaladdress;
-        
+        public string tb_colour;
+
         /*
         public string tb_caregivername;
         public string tb_caregiveremail;
@@ -48,6 +49,9 @@ namespace UBC.People
         public string[] category = new string[3] { "School", "Club", "Cox" };
         public string[] systems = new string[2] { "UBC", "Friends" };
         public string[] yesno = new string[2] { "Yes", "No" };
+
+        public string html_email = "";
+        public string html_system = "";
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -88,7 +92,7 @@ namespace UBC.People
                         tb_notes = dr["notes"].ToString();
                         tb_residentialaddress = dr["residentialaddress"].ToString();
                         tb_postaladdress = dr["postaladdress"].ToString();
-
+                        tb_colour = dr["colour"].ToString();
 
                         /*
 tb_email = dr["email"].ToString();
@@ -237,7 +241,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 }
 
                 //-------------------------------------------------------------------------------------
-                Lit_email.Text = "<tr><th>Email</th><th>Note</th><th>System Send</th><th>Local Send</th></tr>";
+                html_email = "<tr><th>Email</th><th>Note</th><th>System Send</th><th>Local Send</th></tr>";
 
                 cmd.CommandText = "get_person_email";
                 cmd.Parameters.Clear();
@@ -255,13 +259,13 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string sendsystem = "<a class=\"send_email_system\">Send</a>";
                         string sendlocal = "<a class=\"send_email_local\">Send</a>";
 
-                        Lit_email.Text += "<tr>";
-                        Lit_email.Text += "<td>" + email + "</td>";
-                        Lit_email.Text += "<td>" + note + "</td>";
-                        Lit_email.Text += "<td>" + sendsystem + "</td>";
-                        Lit_email.Text += "<td>" + sendlocal + "</td>";
+                        html_email += "<tr>";
+                        html_email += "<td>" + email + "</td>";
+                        html_email += "<td>" + note + "</td>";
+                        html_email += "<td>" + sendsystem + "</td>";
+                        html_email += "<td>" + sendlocal + "</td>";
 
-                        Lit_email.Text += "</tr>";
+                        html_email += "</tr>";
 
 
                     }
@@ -405,6 +409,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_medical = Request.Form["tb_medical"].Trim();
             tb_residentialaddress = Request.Form["tb_residentialaddress"].Trim();
             tb_postaladdress = Request.Form["tb_postaladdress"].Trim();
+            tb_colour = Request.Form["tb_colour"].Trim();
             tb_facebook = Request.Form["tb_facebook"].Trim(); 
             /*
             tb_email = Request.Form["tb_email"].Trim();
@@ -435,7 +440,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = tb_notes;
             cmd.Parameters.Add("@residentialaddress", SqlDbType.VarChar).Value = tb_residentialaddress;
             cmd.Parameters.Add("@postaladdress", SqlDbType.VarChar).Value = tb_postaladdress;
+            
             cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
+            cmd.Parameters.Add("@colour", SqlDbType.VarChar).Value = '#' + tb_colour;
 
 
             /*

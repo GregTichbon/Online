@@ -156,9 +156,15 @@ namespace UBC.People
                             emailtext = emailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                             emailtext = emailtext.Replace("||firstname||", firstname);
 
+                            emailtext = emailtext.Replace("||accesscode||", guid.Substring(0, 5));
+
+
                             string emailhtml = tb_htmlbody.Text;
                             emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                             emailhtml = emailhtml.Replace("||firstname||", firstname);
+
+                            emailhtml = emailhtml.Replace("||accesscode||", guid.Substring(0, 5));
+
                             emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
                             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
@@ -188,6 +194,8 @@ namespace UBC.People
                             string textmessage = tb_txt.Text;
                             textmessage = textmessage.Replace("||link||", link);
                             textmessage = textmessage.Replace("||firstname||", firstname);
+                            textmessage = textmessage.Replace("||accesscode||", guid.Substring(0,5));
+
                             funcs.SendMessage(mobile, textmessage);
                         }
 
@@ -196,6 +204,9 @@ namespace UBC.People
                             string facebookmessage = tb_textbody.Text;
                             facebookmessage = facebookmessage.Replace("||link||", link);
                             facebookmessage = facebookmessage.Replace("||firstname||", firstname);
+
+                            facebookmessage = facebookmessage.Replace("||accesscode||", guid.Substring(0, 5));
+
                             Lit_facebook.Text += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + facebookmessage + "</textarea>";
                         }
 

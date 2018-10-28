@@ -21,13 +21,8 @@
     <script src="<%: ResolveUrl("~/Dependencies/additional-methods.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
-    <!--additional-methods.min.js-->
 
-    <style>
-        :required {
-            border-color: red;
-        }
-    </style>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -111,7 +106,7 @@
 
 
             //$('[required]').css('border', '1px solid red');
-            $('[required]').addClass('required');
+            //$('[required]').addClass('required');
         });
 
         function calculateage(e) {
@@ -127,6 +122,13 @@
                 $('#div_parent').show();
             } else {
                 $('#div_parent').hide();
+                $('#tb_parentcaregiver1').val('');
+                $('#tb_parentcaregiver1mobilephone').val('');
+                $('#tb_parentcaregiver1emailaddress').val('');
+                $('#tb_parentcaregiver2').val('');
+                $('#tb_parentcaregiver2mobilephone').val('');
+                $('#tb_parentcaregiver2emailaddress').val('');
+
             }
         }
 
@@ -136,10 +138,24 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="background-color: #FCF7EA">
-        <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
-        <h1>Union Boat Club - Registration
-        </h1>
+            <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
+
+    <div class="container" style="background-color:#B1C9E6" >
+        <p></p>
+        <table style="width:100%">
+            <tr>
+                <td style="width:350px">
+                    <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
+                <td style="text-align:center">
+                    <h1>Registration
+                    </h1>
+                </td>
+            </tr>
+        </table>
+        <p></p>
+        <hr />
+        <p></p>
+
         <div class="panel panel-danger">
             <div class="panel-heading">Rower</div>
             <div class="panel-body">
@@ -270,16 +286,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver1_mobilephone">Mobile phone (1)</label>
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver1mobilephone">Mobile phone (1)</label>
                     <div class="col-sm-8">
-                        <input id="tb_parentcaregiver1_mobilephone" name="tb_parentcaregiver1_mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver1_mobilephone%>" required maxlength="20" />
+                        <input id="tb_parentcaregiver1mobilephone" name="tb_parentcaregiver1mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver1mobilephone%>" required maxlength="20" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver1_emailaddress">Email address (1)</label>
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver1emailaddress">Email address (1)</label>
                     <div class="col-sm-8">
-                        <input id="tb_parentcaregiver1_emailaddress" name="tb_parentcaregiver1_emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_parentcaregiver1_emailaddress%>" />
+                        <input id="tb_parentcaregiver1emailaddress" name="tb_parentcaregiver1emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_parentcaregiver1emailaddress%>" />
                     </div>
                 </div>
 
@@ -291,15 +307,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver2_mobilephone">Mobile phone (2)</label>
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver2mobilephone">Mobile phone (2)</label>
                     <div class="col-sm-8">
-                        <input id="tb_parentcaregiver2_mobilephone" name="tb_parentcaregiver2_mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2_mobilephone%>" maxlength="20" />
+                        <input id="tb_parentcaregiver2mobilephone" name="tb_parentcaregiver2mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2mobilephone%>" maxlength="20" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver2_emailaddress">Email address (2)</label>
+                    <label class="control-label col-sm-4" for="tb_parentcaregiver2emailaddress">Email address (2)</label>
                     <div class="col-sm-8">
-                        <input id="tb_parentcaregiver2_emailaddress" name="tb_parentcaregiver2_emailaddress" type="email" class="form-control" maxlength="100" value="<%:tb_parentcaregiver2_emailaddress%>" />
+                        <input id="tb_parentcaregiver2emailaddress" name="tb_parentcaregiver2emailaddress" type="email" class="form-control" maxlength="100" value="<%:tb_parentcaregiver2emailaddress%>" />
                     </div>
                 </div>
             </div>
