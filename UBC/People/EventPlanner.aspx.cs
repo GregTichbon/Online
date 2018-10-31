@@ -15,9 +15,36 @@ namespace UBC.People
     {
         public string html = "";
         public string coaches_html = "";
+        public string script = "";
+        public string mode;
+        public string hf_person_id = "";
+        public string hf_person_name = "";
+        public string hf_person_colour = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack) {
+
+                if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
+                {
+                    Response.Redirect("~/default.aspx");
+                }
+
+                if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1001"))
+                {
+                    mode = "admin";
+                    script = "EventPlanner1.js";
+
+                } else
+                {
+                    hf_person_id = Session["UBC_person_id"].ToString();
+                    hf_person_name = Session["UBC_name"].ToString();
+                    hf_person_colour = Session["UBC_colour"].ToString();
+                    mode = "coach";
+                    script = "EventPlanner2.js";
+                }
+
+
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
                 SqlConnection con = new SqlConnection(strConnString);
@@ -64,7 +91,14 @@ namespace UBC.People
                                 html += endtd;
                                 endtd = "</td>";
                                 html += "<td>";
+                                html += "<div class=\"wrapper\">";
                                 html += "<div class=\"date\">" + dateonly + "</div>";
+                                if(mode == "admin")
+                                {
+                                    html += "<span class=\"addevent\"></span>";
+                                }
+                                html += "</div>";
+
                                 lastdate = dateonly;
 
                             }
@@ -90,7 +124,13 @@ namespace UBC.People
                                     foreach (string thecoach in coaches)
                                     {
                                         string[] thecoachparts = thecoach.Split(',');
-                                        html += "<div class=\"wrapper\"><div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div><span class=\"remove\"></span></div>";
+                                        string remove = "";
+
+                                        if (mode == "admin" || thecoachparts[0] == Session["UBC_person_id"].ToString())
+                                        {
+                                            remove = "<span class=\"remove\"></span>";
+                                        }
+                                        html += "<div class=\"wrapper\"><div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div>" + remove +"</div>";
                                     }
 
                                 }

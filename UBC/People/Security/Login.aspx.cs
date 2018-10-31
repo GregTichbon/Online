@@ -19,8 +19,14 @@ namespace UBC.People.Security
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            
+
             Session.Remove("UBC_person_id");
             Session.Remove("UBC_name");
+            Session.Remove("UBC_AccessString");
+            Session.Remove("UBC_Colour");
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
@@ -45,6 +51,8 @@ namespace UBC.People.Security
                     dr.Read();
                     Session["UBC_person_id"] = dr["person_id"].ToString();
                     Session["UBC_name"] = dr["name"].ToString();
+                    Session["UBC_AccessString"] = dr["AccessString"].ToString();
+                    Session["UBC_Colour"] = dr["Colour"].ToString();
                 }
             }
             catch (Exception ex)
@@ -58,7 +66,7 @@ namespace UBC.People.Security
             }
             if (Session["UBC_person_id"] != null)
             {
-                Response.Redirect("default.aspx");
+                Response.Redirect("../../default.aspx");
             }
             else
             {

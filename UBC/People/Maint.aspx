@@ -180,6 +180,10 @@
                 });
             })
 
+            $('.registration_view').click(function () {
+                alert('To do: ajax aspx return dialog, not editable OR dialog iframe');
+            })
+
 
             $('.inhibitcutcopypaste').bind("cut copy paste", function (e) {
                 e.preventDefault();
@@ -286,6 +290,7 @@
                 <li><a data-target="#div_attendance">Attendance</a></li>
                 <li><a data-target="#div_results">Results</a></li>
                 <li><a data-target="#div_system">System</a></li>
+                <li><a data-target="#div_registration">Registration</a></li>
             </ul>
             <div class="tab-content">
                 <!------------------------------------------------------------------------------------------------------>
@@ -441,7 +446,18 @@
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
-               
+                <div id="div_registration" class="tab-pane fade in">
+                    <h3>Registration</h3>
+                     <table style="width:100%">
+                    <%= html_registration %>
+                         </table>
+                </div>
+
+                <p></p>        <p></p>
+
+
+                <!------------------------------------------------------------------------------------------------------>
+
 
 
 

@@ -35,6 +35,7 @@ namespace UBC.People
         public string type;
         public string role;
         public string categories;
+        public string html_persons;
 
 
         public string[] attendance_values = new string[5] { "No", "Yes", "Partial", "Maybe", "Expected" };
@@ -119,18 +120,18 @@ namespace UBC.People
                         {
 
 
-                            Lit_html.Text = "<hr />";
-                            Lit_html.Text += "<div id=\"div_count\"></div>";
-                            //Lit_html.Text += "<a id=\"btn_notes\" class=\"btn btn-info\" role=\"button\">Show only noted</a>";
-                            Lit_html.Text += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Not noted</option></select>";
+                            html_persons = "<hr />";
+                            html_persons += "<div id=\"div_count\"></div>";
+                            //html_persons += "<a id=\"btn_notes\" class=\"btn btn-info\" role=\"button\">Show only noted</a>";
+                            html_persons += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Not noted</option></select>";
 
                             functionoptions.Clear();
                             functionoptions.Add("storedprocedure", "");
                             functionoptions.Add("usevalues", "");
                             categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
 
-                            Lit_html.Text += "<select class=\"form-control\" id=\"dd_categories_filter\" name=\"dd_categories_filter\" multiple=\"multiple\">" + categories_values + "</select><button type=\"button\" id=\"btn_refresh\">Refresh</button><br />";
-                            Lit_html.Text += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Role</th><th>Note</th></tr>";
+                            html_persons += "<select class=\"form-control\" id=\"dd_categories_filter\" name=\"dd_categories_filter\" multiple=\"multiple\">" + categories_values + "</select><button type=\"button\" id=\"btn_refresh\">Refresh</button><br />";
+                            html_persons += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Role</th><th>Note</th></tr>";
 
                             while (dr.Read())
                             {
@@ -151,15 +152,15 @@ namespace UBC.People
                                 dd_role += Functions.populateselect(role_values, role);
                                 dd_role += "</select>";
 
-                                Lit_html.Text += "<tr id=\"tr_" + person_id + "\" data-id=\"" + person_event_id + "\" data-category=\"" + category + "\">";
-                                Lit_html.Text += "<td>" + name + "</td>";
-                                Lit_html.Text += "<td>" + dd_attendance + "</td>";
-                                Lit_html.Text += "<td>" + dd_role + "</td>";
-                                Lit_html.Text += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
-                                Lit_html.Text += "</tr>";
+                                html_persons += "<tr id=\"tr_" + person_id + "\" data-id=\"" + person_event_id + "\" data-category=\"" + category + "\">";
+                                html_persons += "<td>" + name + "</td>";
+                                html_persons += "<td>" + dd_attendance + "</td>";
+                                html_persons += "<td>" + dd_role + "</td>";
+                                html_persons += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
+                                html_persons += "</tr>";
                             }
 
-                            Lit_html.Text += "</table>";
+                            html_persons += "</table>";
 
                         }
 

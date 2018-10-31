@@ -23,18 +23,22 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $("#pagehelp").colorbox({ href: "LoginHelp.html", iframe: true, height: "600", width: "600", overlayClose: false, escKey: false });
+            //$("#pagehelp").colorbox({ href: "LoginHelp.html", iframe: true, height: "600", width: "600", overlayClose: false, escKey: false });
+
+            $("#form1").validate();
 
         }); //document.ready
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+        <div class="container" style="background-color: #FCF7EA">
+            <!--
     <a id="pagehelp">
-        <img id="helpicon" src="http://wdc.whanganui.govt.nz/online/images/question.png" title="Click on me for specific help on this page." /></a>
+        <img id="helpicon" src="../../Dependencies/Images/question.png" title="Click on me for specific help on this page." /></a>
+            -->
 
-    <h1>Log in
+    <h1>UBC Log in
     </h1>
 
     <div class="form-group">
@@ -57,15 +61,19 @@
         </div>
     </div>
 
+            <!--
+
     <div class="form-group">
         <div class="col-sm-4">
         </div>
         <div class="col-sm-8">
-            <img src="../Images/questionsmall.png" title="Log in assistance: If you have previously registered but are having problems logging in please click on 'Log in assistance'." />
+            <img src="../../Dependencies/Images/questionsmall.png" title="Log in assistance: If you have previously registered but are having problems logging in please click on 'Log in assistance'." />
             <a href="loginassistance.aspx">Log in assistance</a>
         </div>
     </div>
-
+            -->
+            </div>
+  
 
 </asp:Content>
 

@@ -12,7 +12,7 @@
         <br />
         <a href="reports/CheckList.aspx">Check List</a>
         <br />
-        <a href="AttendanceMatrix.aspx">Attendance Matrix</a>
+        <a href="reports/AttendanceMatrix.aspx">Attendance Matrix</a>
     </div>
 
 </asp:Content>

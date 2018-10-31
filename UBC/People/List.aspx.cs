@@ -16,6 +16,12 @@ namespace UBC.People
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "111"))
+            {
+                Response.Redirect("~/default.aspx");
+            }
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);

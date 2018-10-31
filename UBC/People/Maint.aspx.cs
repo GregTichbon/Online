@@ -44,6 +44,8 @@ namespace UBC.People
         public string tb_notes;
 
 
+
+
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] category = new string[3] { "School", "Club", "Cox" };
@@ -52,7 +54,8 @@ namespace UBC.People
 
         public string html_email = "";
         public string html_system = "";
-
+        public string html_finance = "";
+        public string html_registration = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -196,6 +199,37 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     throw ex;
                 }
 
+                //-------------------------------------------------------------------------------------
+                html_registration = "<tr><th>Season</th><th>Submitted</th><th>View</th></tr>";
+
+                cmd.CommandText = "get_person_registration";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string registration_id = dr["registration_id"].ToString();
+                        string CreatedDate = Convert.ToDateTime(dr["CreatedDate"]).ToString("dd MMM yy");
+                        string season = dr["season"].ToString();
+
+
+                        html_registration += "<tr>";
+                        html_registration += "<td>" + season + "</td>";
+                        html_registration += "<td>" + CreatedDate + "</td>";
+                        html_registration += "<td><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"" + registration_id + "\"> View</td>";
+                        html_registration += "</tr>";
+
+
+                    }
+                    dr.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
 
                 //-------------------------------------------------------------------------------------

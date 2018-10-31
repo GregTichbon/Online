@@ -10,7 +10,16 @@
 namespace UBC.People {
     
     
-    public partial class Event {
+    public partial class BankImport {
+        
+        /// <summary>
+        /// fu_bankfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fu_bankfile;
         
         /// <summary>
         /// btn_submit control.

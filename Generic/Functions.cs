@@ -51,6 +51,26 @@ namespace Generic
             return "Test";
         }
 
+        public static Boolean accessstringtest(string personaccess, string requiredaccess)
+        {
+            int personaccesslength = personaccess.Length;
+            int requiredaccesslength = requiredaccess.Length;
+            string pad = new String('0', personaccesslength - requiredaccesslength);
+            requiredaccess = requiredaccess + pad;
+
+            int result = Convert.ToInt32(personaccess, 2) & Convert.ToInt32(requiredaccess, 2);
+
+            if (result > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         public void sendemail(string emailsubject, string emailhtml, string emailRecipient, string emailbcc, string replyto)
         {
             //MailMessage mail = new MailMessage("noreply@whanganui.govt.nz", emailRecipient);

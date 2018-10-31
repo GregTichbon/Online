@@ -31,17 +31,9 @@
 <body>
     <form id="form1" runat="server">
         <div id="div_menu">
-            <a href="people/Search.aspx">People Search</a>
+            <%= html %>
             <br />
-            <a href="people/List.aspx">People List</a>
-            <br />
-            <a href="people/EventList.aspx">Event List</a>
-            <br />
-            <a href="people/reports/CheckList.aspx">Check List</a>
-            <br />
-            <a href="people/reports/AttendanceMatrix.aspx">Attendance Matrix</a>
-            <br />
-            <a href="Training/ZoneTraining.aspx">Zone Training</a>
+            <a href="people/security/logout.aspx">Log out</a>
         </div>
     </form>
 </body>

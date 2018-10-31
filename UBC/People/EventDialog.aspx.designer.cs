@@ -10,7 +10,7 @@
 namespace UBC.People {
     
     
-    public partial class Event {
+    public partial class EventDialog {
         
         /// <summary>
         /// btn_submit control.

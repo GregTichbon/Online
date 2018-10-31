@@ -4,19 +4,46 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Generic;
 
 namespace UBC
 {
     public partial class Default : System.Web.UI.Page
     {
+        public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (Session["UBC_person_id"] == null)
             {
-                Response.Redirect("security/login.aspx");
+                Response.Redirect("~/people/security/login.aspx");
+            }
+            html = "";
+
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            {
+                html += "<br /><a href=\"people/communicate.aspx\">Communicate</a>";
             }
 
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1101"))
+            {
+                html += "<br /><a href=\"people/Search.aspx\">People Search</a>";
+                html += "<br /><a href=\"people/List.aspx\">People List</a>";
+            }
+
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
+            {
+                html += "<br /><a href=\"people/reports/CheckList.aspx\">Check List</a>";
+            }
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
+            {
+                html += "<br /><a href=\"people/EventPlanner.aspx\">Event Planner</a>";
+                html += "<br /><a href=\"people/EventList.aspx\">Event List</a>";    //not sure about this one!
+                html += "<br /><a href=\"Training/ZoneTraining.aspx\">Zone Training</a>";
+            }
+
+            html += "<br /><a href=\"people/reports/AttendanceMatrix.aspx\">Attendance Matrix</a>";
         }
     }
 }
+ 

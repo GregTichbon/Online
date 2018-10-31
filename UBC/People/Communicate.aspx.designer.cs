@@ -58,24 +58,6 @@ namespace UBC.People {
         protected global::System.Web.UI.WebControls.TextBox tb_txt;
         
         /// <summary>
-        /// Lit_facebook control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Lit_facebook;
-        
-        /// <summary>
-        /// Lit_html control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Lit_html;
-        
-        /// <summary>
         /// btn_submit control.
         /// </summary>
         /// <remarks>

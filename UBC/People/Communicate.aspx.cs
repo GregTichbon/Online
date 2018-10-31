@@ -14,9 +14,24 @@ namespace UBC.People
 {
     public partial class Communicate : System.Web.UI.Page
     {
+        public string html;
+        public string html_facebook;
+        public string categories;
+
+        public string categories_values;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            Functions genericfunctions = new Functions();
+            Dictionary<string, string> functionoptions = new Dictionary<string, string>();
+            categories = "";
+            functionoptions.Clear();
+            functionoptions.Add("storedprocedure", "");
+            functionoptions.Add("usevalues", "");
+            categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("Get_Communications", con);
@@ -30,7 +45,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    Lit_html.Text = "<tr><td>Name</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Link</td>"; //<td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
+                    html = "<tr><td>Name</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Link</td>"; //<td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
 
                     while (dr.Read())
                     {
@@ -41,6 +56,7 @@ namespace UBC.People
                         string mobile = dr["mobile"].ToString();
                         string email = dr["email"].ToString();
                         string category = dr["category"].ToString();
+                        string categories = dr["categories"].ToString();
                         string guid = dr["guid"].ToString();
 
                         string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
@@ -91,12 +107,12 @@ namespace UBC.People
 */
 
 
-                        Lit_html.Text += "<tr>";
-                        //Lit_html.Text += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + sendfacebook + "</td><td>" + firstname + " " + lastname + " - " + school + " (" + schoolyear + ")</td><td>" + facebooklink + "</td><td><a href=\"mailto:" + email + "\"</a>" + email + "</td><td>" + dr["mobile"] + "</td><td>" + caregivername + "</td><td>" + sendcaregiveremail + "</td><td>" + sendcaregivertext + "</td><td>" + caregiversendfacebook + "</td><td>" + caregiver + "</td>";
-                        Lit_html.Text += "<td>" + name + "</td><td>" + sendtext + " " + mobile + "</td><td>" + sendemail + " " + sendemaillink + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
+                        html += "<tr class=\"tr_person\" data-category=\"" + categories + "\">";
+                        //html += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + sendfacebook + "</td><td>" + firstname + " " + lastname + " - " + school + " (" + schoolyear + ")</td><td>" + facebooklink + "</td><td><a href=\"mailto:" + email + "\"</a>" + email + "</td><td>" + dr["mobile"] + "</td><td>" + caregivername + "</td><td>" + sendcaregiveremail + "</td><td>" + sendcaregivertext + "</td><td>" + caregiversendfacebook + "</td><td>" + caregiver + "</td>";
+                        html += "<td>" + name + "</td><td>" + sendtext + " " + mobile + "</td><td>" + sendemail + " " + sendemaillink + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
                         //<td>" + caregivername + "</td><td>" + sendcaregivertext + " " + caregivermobile + "</td><td>" + sendcaregiveremail + " " + sendcaregiveremaillink + "</td><td>" + sendcaregiverfacebook + " " + caregiverfacebooklink + "</td><td>" + coming + "</td><td>" + modified + "</td>";
-                        Lit_html.Text += "<td>" + link + "</td>";
-                        Lit_html.Text += "</tr>";
+                        html += "<td>" + link + "</td>";
+                        html += "</tr>";
                     }
                 }
 
@@ -135,7 +151,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    //Lit_html.Text = "<tr><td>Student</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Caregiver</td><td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
+                    //html = "<tr><td>Student</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Caregiver</td><td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
 
                     while (dr.Read())
                     {
@@ -146,7 +162,10 @@ namespace UBC.People
                         string mobile = dr["mobile"].ToString();
                         string email = dr["email"].ToString();
                         string category = dr["category"].ToString();
+                        string categories = dr["categories"].ToString();
                         string guid = dr["guid"].ToString();
+                        string username = dr["username"].ToString();
+                        string tempphrase = dr["tempphrase"].ToString();
 
                         string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
 
@@ -157,6 +176,8 @@ namespace UBC.People
                             emailtext = emailtext.Replace("||firstname||", firstname);
 
                             emailtext = emailtext.Replace("||accesscode||", guid.Substring(0, 5));
+                            emailtext = emailtext.Replace("||username||", username);
+                            emailtext = emailtext.Replace("||tempphrase||", tempphrase);
 
 
                             string emailhtml = tb_htmlbody.Text;
@@ -164,6 +185,8 @@ namespace UBC.People
                             emailhtml = emailhtml.Replace("||firstname||", firstname);
 
                             emailhtml = emailhtml.Replace("||accesscode||", guid.Substring(0, 5));
+                            emailhtml = emailhtml.Replace("||username||", username);
+                            emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
 
                             emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
@@ -195,6 +218,8 @@ namespace UBC.People
                             textmessage = textmessage.Replace("||link||", link);
                             textmessage = textmessage.Replace("||firstname||", firstname);
                             textmessage = textmessage.Replace("||accesscode||", guid.Substring(0,5));
+                            textmessage = textmessage.Replace("||username||", username);
+                            textmessage = textmessage.Replace("||tempphrase||", tempphrase);
 
                             funcs.SendMessage(mobile, textmessage);
                         }
@@ -206,8 +231,10 @@ namespace UBC.People
                             facebookmessage = facebookmessage.Replace("||firstname||", firstname);
 
                             facebookmessage = facebookmessage.Replace("||accesscode||", guid.Substring(0, 5));
+                            facebookmessage = facebookmessage.Replace("||username||", username);
+                            facebookmessage = facebookmessage.Replace("||tempphrase||", tempphrase);
 
-                            Lit_facebook.Text += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + facebookmessage + "</textarea>";
+                            html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + facebookmessage + "</textarea>";
                         }
 
                         /*
@@ -259,7 +286,7 @@ namespace UBC.People
                             string facebookmessage = tb_htmlbody.Text;
                             facebookmessage = facebookmessage.Replace("||link||", link);
                             facebookmessage = facebookmessage.Replace("||firstname||", firstname);
-                            Lit_facebook.Text += facebookmessage;
+                            html_facebook.Text += facebookmessage;
                         }
                         */
 

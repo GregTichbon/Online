@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
@@ -326,6 +329,13 @@
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.woff" />
     <Content Include="Go\Doc1\default.aspx" />
     <Content Include="Go\Register\default.aspx" />
+    <Content Include="People\BankImport.aspx" />
+    <Content Include="Dependencies\Images\question.png" />
+    <Content Include="Dependencies\Images\questionsmall.png" />
+    <Content Include="People\EventDialog.aspx" />
+    <Content Include="People\EventPlanner2.js" />
+    <Content Include="People\EventPlanner1.js" />
+    <Content Include="People\Security\LogOut.aspx" />
     <Content Include="XMLFile1.xml" />
     <Content Include="XSLTFile1.xslt" />
     <None Include="packages.config" />
@@ -432,6 +442,7 @@
     <Content Include="UBC.Master" />
     <Content Include="People\Documents\Parent Information 2018.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -527,6 +538,13 @@
     <Compile Include="Go\Register\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\BankImport.aspx.cs">
+      <DependentUpon>BankImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\BankImport.aspx.designer.cs">
+      <DependentUpon>BankImport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Check.aspx.cs">
       <DependentUpon>Check.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -551,6 +569,13 @@
     </Compile>
     <Compile Include="People\Event.aspx.designer.cs">
       <DependentUpon>Event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\EventDialog.aspx.cs">
+      <DependentUpon>EventDialog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\EventDialog.aspx.designer.cs">
+      <DependentUpon>EventDialog.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\EventList.aspx.cs">
       <DependentUpon>EventList.aspx</DependentUpon>
@@ -649,6 +674,13 @@
     </Compile>
     <Compile Include="People\Security\LoginAssistance.aspx.designer.cs">
       <DependentUpon>LoginAssistance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Security\LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Security\LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Security\ResetPassword.aspx.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>

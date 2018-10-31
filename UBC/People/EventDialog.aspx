@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Union Boat Club - Event" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Event.aspx.cs" Inherits="UBC.People.Event" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="EventDialog.aspx.cs" Inherits="UBC.People.EventDialog" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Style Sheets -->
@@ -76,7 +76,6 @@
             });
 
             $('#dd_categories').select2();
-            $('#dd_categories_filter').select2();
 
             $('#cb_allday').change(function () {
                 if ($(this).is(":checked")) {
@@ -135,111 +134,11 @@
             });
             */
             
-            processrows();
-
-            $('.tr_field').change(function () {
-                id = $(this).parent().parent().attr('id').substring(3);
-                tr_changed.indexOf(id) === -1 ? tr_changed.push(id) : null;
-                $("#hf_tr_changed").val(tr_changed.toString());
-            });
-
-
-            $('#btn_refresh').click(function () {
-                //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories_filter').val());
-                processrows();
-            })
+     
 
         });
 
-        function processrows() {
 
-            //This code should be in the loop below ----- START
-            var attendances = {};
-            var roles = {};
-            var key;
-            $('[id^=dd_attendance_]').each(function () {
-                id = $(this).attr('id').substring(14);
-                key = $(this).val();
-
-                if (key == 'No' && $('#tb_note_' + id).val() != '') {
-                    key = key + ' with notes';
-                }
-                if (!attendances[key]) {
-                    attendances[key] = 0;
-                }
-                attendances[key] += 1;
-
-                key = $('#dd_role_' + id).val();
-                if (key != '') {
-                    if (!roles[key]) {
-                        roles[key] = 0;
-                    }
-                    roles[key] += 1;
-                }
-
-            });
-            mydiv = "";
-            mydelim = "";
-            $.each(attendances, function (key, val) {
-                //alert([key, val]);
-                mydiv += mydelim + [key, val];
-                mydelim = " | ";
-            });
-            mydiv += "<br />";
-            mydelim = "";
-            $.each(roles, function (key, val) {
-                //alert([key, val]);
-                mydiv += mydelim + [key, val];
-                mydelim = " | ";
-            });
-
-            $('#div_count').html(mydiv);
-            //This code should be in the loop below ----- END
-
-            showval = $('#dd_show').val();
-            category = $('#dd_categories_filter').val();
-          
-            $('#tbl_attendance tr[id^=tr_]').each(function () {
-                personid = $(this).attr("id").substring(3);
-                personcategory = $(this).attr("data-category");
-                show = false;
-                switch (showval) {
-                    case "All":
-                        show = true;
-                        break;
-                    case "Not noted":
-                        if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '' && $("#dd_role_" + personid).val() == '') {
-                            show = true;
-                        }
-                        break;
-                    case "Only noted":
-                        if ($("#dd_attendance_" + personid).val() != 'No' || $("#tb_note_" + personid).val() != '' || $("#dd_role_" + personid).val() != '') {
-                            show = true;
-                        }
-                        break;
-                }
-                if (category != null) {
-                    found = false;
-                    for (f1 = 0; f1 < category.length; f1++) {
-                        usecategory = '|' + category[f1] + '|';
-                        if (personcategory.indexOf(usecategory) != -1 || $("#dd_attendance_" + personid).val() != 'No') {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        show = false;
-                    }
-                }
-                if (show) {
-                     $(this).show();
-                } else {
-                    $(this).hide();
-                }
-               
-            });
-       
-        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -247,8 +146,7 @@
     <input type="hidden" id="hf_event_id" name="hf_event_id" value="<%: event_id %>" />
     <div class="container" style="background-color:#FCF7EA">
      
-        <h1>Union Boat Club - Event
-        </h1>
+
 
         
         <div class="form-group">
@@ -313,10 +211,6 @@
                 </select>            
             </div>
         </div>
-
-
-
-       <%=html_persons %>
 
 
         <div class="form-group">
