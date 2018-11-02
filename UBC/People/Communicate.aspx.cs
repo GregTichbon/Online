@@ -22,6 +22,15 @@ namespace UBC.People
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            {
+                Response.Redirect("~/default.aspx");
+            }
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             Functions genericfunctions = new Functions();
@@ -60,6 +69,8 @@ namespace UBC.People
                         string guid = dr["guid"].ToString();
 
                         string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
+                        string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
+
 
                         string sendemail = "";
                         string sendemaillink = "";
@@ -108,6 +119,7 @@ namespace UBC.People
 
 
                         html += "<tr class=\"tr_person\" data-category=\"" + categories + "\">";
+                        html += "<td>" + image + "</td>";
                         //html += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + sendfacebook + "</td><td>" + firstname + " " + lastname + " - " + school + " (" + schoolyear + ")</td><td>" + facebooklink + "</td><td><a href=\"mailto:" + email + "\"</a>" + email + "</td><td>" + dr["mobile"] + "</td><td>" + caregivername + "</td><td>" + sendcaregiveremail + "</td><td>" + sendcaregivertext + "</td><td>" + caregiversendfacebook + "</td><td>" + caregiver + "</td>";
                         html += "<td>" + name + "</td><td>" + sendtext + " " + mobile + "</td><td>" + sendemail + " " + sendemaillink + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
                         //<td>" + caregivername + "</td><td>" + sendcaregivertext + " " + caregivermobile + "</td><td>" + sendcaregiveremail + " " + sendcaregiveremaillink + "</td><td>" + sendcaregiverfacebook + " " + caregiverfacebooklink + "</td><td>" + coming + "</td><td>" + modified + "</td>";
@@ -137,7 +149,15 @@ namespace UBC.People
         {
             Functions funcs = new Functions();
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            string emailbodyTemplate = "RegisterEmail.xslt";
+            string emailBCC = "";
+            string screenTemplate = "RegisterScreen.xslt";
+            string host = "datainn.co.nz";
+            string emailfrom = "ltr@datainn.co.nz";
+            string emailfromname = "Union Boat Club";
+            string password = "m33t1ng";
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497;MultipleActiveResultSets=True";
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("Get_Communications", con);
@@ -167,11 +187,22 @@ namespace UBC.People
                         string username = dr["username"].ToString();
                         string tempphrase = dr["tempphrase"].ToString();
 
+
+                        string emailtext = "";
+                        string emailhtml = "";
+                        string textmessage = "";
+                        string facebookmessage = "";
+
                         string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
 
                         if (Request.Form["cb_email_" + id] == "on")
                         {
-                            string emailtext = tb_textbody.Text;
+
+                            string emailRecipient = email;
+
+
+
+                            emailtext = tb_textbody.Text;
                             emailtext = emailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                             emailtext = emailtext.Replace("||firstname||", firstname);
 
@@ -180,7 +211,7 @@ namespace UBC.People
                             emailtext = emailtext.Replace("||tempphrase||", tempphrase);
 
 
-                            string emailhtml = tb_htmlbody.Text;
+                            emailhtml = tb_htmlbody.Text;
                             emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                             emailhtml = emailhtml.Replace("||firstname||", firstname);
 
@@ -189,6 +220,8 @@ namespace UBC.People
                             emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
 
                             emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+
+                            /*
 
                             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
                             message.To.Add(email);
@@ -211,13 +244,18 @@ namespace UBC.People
                             client.UseDefaultCredentials = false;
                             client.Credentials = new System.Net.NetworkCredential("ltr@datainn.co.nz", "m33t1ng");
                             client.Send(message);
+                            */
+
+                            funcs.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, emailtext, emailhtml, emailRecipient, emailBCC, "");
+
+
                         }
                         if (Request.Form["cb_text_" + id] == "on")
                         {
-                            string textmessage = tb_txt.Text;
+                            textmessage = tb_txt.Text;
                             textmessage = textmessage.Replace("||link||", link);
                             textmessage = textmessage.Replace("||firstname||", firstname);
-                            textmessage = textmessage.Replace("||accesscode||", guid.Substring(0,5));
+                            textmessage = textmessage.Replace("||accesscode||", guid.Substring(0, 5));
                             textmessage = textmessage.Replace("||username||", username);
                             textmessage = textmessage.Replace("||tempphrase||", tempphrase);
 
@@ -226,7 +264,7 @@ namespace UBC.People
 
                         if (Request.Form["cb_facebook_" + id] == "on")
                         {
-                            string facebookmessage = tb_textbody.Text;
+                            facebookmessage = tb_textbody.Text;
                             facebookmessage = facebookmessage.Replace("||link||", link);
                             facebookmessage = facebookmessage.Replace("||firstname||", firstname);
 
@@ -289,7 +327,25 @@ namespace UBC.People
                             html_facebook.Text += facebookmessage;
                         }
                         */
+                        if (emailtext != "" || emailhtml != "" || textmessage != "" || facebookmessage != "")
+                        {
+                            SqlCommand cmd2 = new SqlCommand("Insert_Person_communication", con);
+                            cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = id;
+                            cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = emailtext;
+                            cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = emailhtml;
+                            cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = textmessage;
+                            cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = facebookmessage;
 
+
+                            cmd2.CommandType = CommandType.StoredProcedure;
+                            cmd2.Connection = con;
+
+                            //con.Open();
+                            string result = cmd2.ExecuteScalar().ToString();
+                            //SqlDataReader dr2 = cmd1.ExecuteReader();
+
+                            cmd2.Dispose();
+                        }
 
                     }
                 }

@@ -4,21 +4,15 @@
    
  <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-    <script type="text/javascript">
-        // Change JQueryUI plugin names to fix name collision with Bootstrap.
-        $.widget.bridge('uitooltip', $.ui.tooltip);
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
+
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
-    <link href="<%: ResolveUrl("~/Dependencies/StickyTableCells/jquery.stickytable.min.css")%>" rel="stylesheet" />
-    <script src="<%: ResolveUrl("~/Dependencies/StickyTableCells/jquery.stickytable.min.js")%>"></script>
+    <link href="<%: ResolveUrl("~/Dependencies/StickyTableCells/jquery.stickytable.css")%>" rel="stylesheet" />
+    <script src="<%: ResolveUrl("~/Dependencies/StickyTableCells/jquery.stickytable.js")%>"></script>
 
     <style>
         td, th {
@@ -26,14 +20,31 @@
             vertical-align: middle;
              border: 1px #eee solid;
         }
+        .me {
+            background-color:chartreuse;
+        }
+        .selectedrow, .selectedcol {
+            background-color:orange;
 
+        }
                             
     </style>
 
     <script>
         $(document).ready(function () {
 
+            $('td').click(function () {
+                $(this).parent().toggleClass('selectedrow');
+            })
+            $('th').click(function () {
+                var pattern = /c[0-9]*/;
+                thisclass = $(this).attr('class');
+                thisclass = thisclass.match(pattern);
+                $('.' + thisclass).toggleClass('selectedcol');
+            })
+
         });
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -42,7 +53,5 @@
         <h1>Union Boat Club - Attendance Matrix
         </h1>
 
-        <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
-  
-
+        <%= html%>
 </asp:Content>

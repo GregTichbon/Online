@@ -52,22 +52,25 @@
             if (category == null) {
                 $('.tr_person').show();
             } else {
-
                 $('.tr_person').each(function () {
+                    //thename = $(this).children(":first").text();
                     found = false;
                     for (f1 = 0; f1 < category.length; f1++) {
                         usecategory = '|' + category[f1] + '|';
                         person_category = $(this).attr('data-category');
+                        //console.log(thename + ":" + person_category + '-' + usecategory + '=' + person_category.indexOf(usecategory));
                         if (person_category.indexOf(usecategory) != -1) {
                             found = true;
+                            //console.log('found');
                             break;
                         }
-                        if (found) {
-                             $(this).show();
-                        } else {
-                            $(this).hide();
-
-                        }
+                    }
+                    if (found) {
+                        $(this).show();
+                        //console.log('show ' + thename);
+                    } else {
+                        $(this).hide();
+                        //console.log('hide ' + thename);
                     }
                 });
             }

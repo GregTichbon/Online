@@ -14,8 +14,13 @@ namespace UBC.People.Reports
 {
     public partial class AttendanceMatrix : System.Web.UI.Page
     {
+        public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);
@@ -35,39 +40,46 @@ namespace UBC.People.Reports
                     {
                         if (firsttime)
                         {
-                            Lit_html.Text = "<div class=\"sticky-table sticky-ltr-cells\">";
-                            Lit_html.Text += "<table class=\"table\">";
-                            Lit_html.Text += "<thead>";
-                            Lit_html.Text += "<tr class=\"sticky-header\">";
-                            Lit_html.Text += "<th class=\"sticky-cell\">Name</th>";
+                            html = "<div class=\"sticky-table sticky-ltr-cells\">";
+                            html += "<table class=\"table\">";
+                            html += "<thead>";
+                            html += "<tr class=\"sticky-header\">";
+                            html += "<th class=\"sticky-cell\">Name</th>";
 
-                            for (int f1 = 1; f1 < dr.FieldCount; f1++)
+                            for (int f1 = 2; f1 < dr.FieldCount; f1++)
                             {
-                                Lit_html.Text += "<th nowrap>" + dr.GetName(f1) + "</th>";
+                                html += "<th nowrap class=\"c" + f1 + "\">" + dr.GetName(f1) + "</th>";
                             }
-                            Lit_html.Text += "</tr>";
-                            Lit_html.Text += "</thead>";
+                            html += "</tr>";
+                            html += "</thead>";
+                            html += "<tbody>";
+
                             firsttime = false;
                         }
 
                         //string person_id = dr["person_id"].ToString();
                         string name = dr["name"].ToString();
-                        Lit_html.Text += "<tbody>";
 
-                        Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td nowrap class=\"sticky-cell\">" + name + "</td>";
-
-                        for (int f1 = 1; f1 < dr.FieldCount; f1++)
+                        string trclass = "";
+                        if (dr["person_id"].ToString() == Session["UBC_person_id"].ToString())
                         {
-                            Lit_html.Text += "<td>" + dr[f1] + "</td>";
+                            trclass = " class=\"me\"";
+                        }
+                        html += "<tr" + trclass + ">";
+                        html += "<td nowrap class=\"sticky-cell\">" + name + "</td>";
+
+                        for (int f1 = 2; f1 < dr.FieldCount; f1++)
+                        {
+                            html += "<td class=\"c" + f1 + "\">" + dr[f1] + "</td>";
                         }
 
-                        Lit_html.Text += "<tr>";
-                        Lit_html.Text += "</tbody>";
+                        html += "</tr>";
                     }
+                    html += "</tbody>";
+                    html += "</table>";
+                    html += "</div>";
                 }
-                Lit_html.Text += "</table>";
-                Lit_html.Text += "</div>";
+
 
                 dr.Close();
             }

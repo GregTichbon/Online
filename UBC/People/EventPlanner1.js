@@ -40,9 +40,18 @@ $(document).ready(function () {
 
     $('.addevent').click(function () {
         date = $(this).prev().text();
-        $("#div_event").append($("<iframe />").attr("src", "eventdialog.aspx?id=new&date=" + date)).dialog({
-            width: 600,
-            height: 600,
+        var usewidth = $(window).width() * .9;
+        if (usewidth > 810) {
+            usewidth = 810;
+        }
+        var useheight = $(window).height() * .9;
+
+        // width: usewidth,
+        //height: useheight,
+        
+        $("#div_event").dialog({
+            width: usewidth,
+            height: useheight,
             resizable: false,
             modal: true,
             buttons: {
@@ -50,14 +59,23 @@ $(document).ready(function () {
                     $(this).dialog("close");
                 }
             }
-        });
+        }).html('<iframe src="eventdialog.aspx?id=new&date=' + date + '" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>')
     });
 
     $('.title').click(function () {
         event_id = $(this).parent().parent().attr('id').substring(6);
-        $("#div_event").append($("<iframe />").attr("src", "eventdialog.aspx?id=" + event_id)).dialog({
-            width: 600,
-            height: 600,
+        var usewidth = $(window).width() * .9;
+        if (usewidth > 810) {
+            usewidth = 810;
+        }
+        var useheight = $(window).height() * .9;
+
+        // width: usewidth,
+        //height: useheight,
+
+        $("#div_event").dialog({
+            width: usewidth,
+            height: useheight,
             resizable: false,
             modal: true,
             buttons: {
@@ -65,7 +83,7 @@ $(document).ready(function () {
                     $(this).dialog("close");
                 }
             }
-        });
+        }).html('<iframe src="eventdialog.aspx?id=' + event_id + '" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>')
     });
 
     $('.coach').click(function () {

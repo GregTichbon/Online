@@ -34,11 +34,13 @@ namespace UBC
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
             {
                 html += "<br /><a href=\"people/reports/CheckList.aspx\">Check List</a>";
+                html += "<br /><a href=\"people/reports/currentmembers.aspx\">Current Members</a>";
+
             }
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
             {
                 html += "<br /><a href=\"people/EventPlanner.aspx\">Event Planner</a>";
-                html += "<br /><a href=\"people/EventList.aspx\">Event List</a>";    //not sure about this one!
+                html += "<br /><a href=\"people/EventList.aspx\">Event List</a>";    //not sure about this one!  Coaches to update attendance?
                 html += "<br /><a href=\"Training/ZoneTraining.aspx\">Zone Training</a>";
             }
 

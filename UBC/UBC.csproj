@@ -333,8 +333,12 @@
     <Content Include="Dependencies\Images\question.png" />
     <Content Include="Dependencies\Images\questionsmall.png" />
     <Content Include="People\EventDialog.aspx" />
+    <Content Include="People\eventdialogclose.html" />
     <Content Include="People\EventPlanner2.js" />
     <Content Include="People\EventPlanner1.js" />
+    <Content Include="People\Reports\CurrentMembers.aspx" />
+    <Content Include="People\Reports\Test1.html" />
+    <Content Include="People\Reports\Test2.html" />
     <Content Include="People\Security\LogOut.aspx" />
     <Content Include="XMLFile1.xml" />
     <Content Include="XSLTFile1.xslt" />
@@ -422,7 +426,6 @@
     <Content Include="People\Images\IMG_0674.jpg" />
     <Content Include="People\Lists.aspx" />
     <Content Include="People\Maint2.aspx" />
-    <Content Include="People\Menu.aspx" />
     <Content Include="People\Register.aspx" />
     <Content Include="People\RegisterEmail.xslt" />
     <Content Include="People\RegisterScreen.xslt" />
@@ -619,13 +622,6 @@
     <Compile Include="People\Maint2.aspx.designer.cs">
       <DependentUpon>Maint2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="People\Menu.aspx.cs">
-      <DependentUpon>Menu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="People\Menu.aspx.designer.cs">
-      <DependentUpon>Menu.aspx</DependentUpon>
-    </Compile>
     <Compile Include="People\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -646,6 +642,13 @@
     </Compile>
     <Compile Include="People\Reports\CheckList.aspx.designer.cs">
       <DependentUpon>CheckList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\CurrentMembers.aspx.cs">
+      <DependentUpon>CurrentMembers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CurrentMembers.aspx.designer.cs">
+      <DependentUpon>CurrentMembers.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>

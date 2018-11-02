@@ -230,9 +230,10 @@ namespace UBC.People
                 con.Close();
                 con.Dispose();
 
-                string URL = Request.RawUrl;
-                Response.Redirect(URL);
+
             }
+            string URL = Request.RawUrl;
+            Response.Redirect(URL);
 
 
         }

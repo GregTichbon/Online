@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UBC.People
+namespace UBC.People.Reports
 {
 
 
-    public partial class Menu
+    public partial class CurrentMembers
     {
     }
 }

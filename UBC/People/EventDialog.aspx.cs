@@ -35,6 +35,9 @@ namespace UBC.People
 
             if (!IsPostBack)
             {
+
+                btn_delete.Visible = false;
+
                 Functions genericfunctions = new Functions();
                 Dictionary<string, string> functionoptions = new Dictionary<string, string>();
                 categories = "";
@@ -83,6 +86,12 @@ namespace UBC.People
                                 startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy");
                                 enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
                             }
+                            if( Convert.ToDateTime(startdatetime) > DateTime.Now)
+                            {
+                                btn_delete.Visible = true;
+                            }
+
+                         
                         }
 
                         dr.Close();
@@ -92,8 +101,11 @@ namespace UBC.People
                     {
                         throw ex;
                     }
-
-
+                }
+                else
+                {
+                    startdatetime = Request.QueryString["date"] + " 0:00";
+                    enddatetime = startdatetime;
 
                 }
 
@@ -137,13 +149,45 @@ namespace UBC.People
             }
             finally
             {
-
-
-
-
                 con.Close();
                 con.Dispose();
             }
+
+            Response.Redirect("eventdialogclose.html");
+
+        }
+
+        protected void btn_delete_Click(object sender, EventArgs e)
+        {
+            string event_id = Request.Form["hf_event_id"];
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            SqlConnection con = new SqlConnection(strConnString);
+            con.Open();
+
+            SqlCommand cmd1 = new SqlCommand("delete_event", con);
+            cmd1.CommandType = CommandType.StoredProcedure;
+
+            cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+
+            cmd1.Connection = con;
+            try
+            {
+                string result = cmd1.ExecuteScalar().ToString();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            Response.Redirect("eventdialogclose.html");
 
         }
     }

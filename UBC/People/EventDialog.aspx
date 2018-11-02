@@ -59,7 +59,8 @@
                 viewDate: false,
                 useCurrent: false,
                 sideBySide: true,
-                viewMode: 'days'
+                viewMode: 'days',
+                 stepping: 15
                 //,maxDate: moment().add(-1, 'year')
             });
 
@@ -71,7 +72,8 @@
                 viewDate: false,
                 useCurrent: false,
                 sideBySide: true,
-                viewMode: 'days'
+                viewMode: 'days',
+                 stepping: 15
                 //,maxDate: moment().add(-1, 'year')
             });
 
@@ -152,7 +154,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="tb_title">Title</label>
             <div class="col-sm-8">
-                <input id="tb_title" name="tb_title" type="text" class="form-control" value="<%: title %>" maxlength="200" />
+                <input id="tb_title" name="tb_title" type="text" class="form-control" value="<%: title %>" maxlength="200" required />
             </div>
         </div>
 
@@ -167,7 +169,7 @@
             <label class="control-label col-sm-4" for="tb_startdatetime">Start date<span class="usetime"><%:datetime %></span></label>
             <div class="col-sm-8">
                 <div class="input-group date" id="div_startdatetime">
-                    <input id="tb_startdatetime" name="tb_startdatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: startdatetime %>" maxlength="20" />
+                    <input id="tb_startdatetime" name="tb_startdatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: startdatetime %>" maxlength="20" required />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -179,7 +181,7 @@
             <label class="control-label col-sm-4" for="tb_enddatetime">End date<span class="usetime"><%:datetime %></span></label>
             <div class="col-sm-8">
                 <div class="input-group date" id="div_enddatetime">
-                    <input id="tb_enddatetime" name="tb_enddatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: enddatetime %>" maxlength="20" />
+                    <input id="tb_enddatetime" name="tb_enddatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: enddatetime %>" maxlength="20" required />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -206,7 +208,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="dd_categories">Categories</label>
             <div class="col-sm-8">
-                <select id="dd_categories" name="dd_categories" class="form-control" multiple="multiple" required>
+                <select id="dd_categories" name="dd_categories" class="form-control" multiple="multiple">
                     <%= categories_values %>
                 </select>            
             </div>
@@ -218,6 +220,7 @@
             </div>
             <div class="col-sm-8">
                 <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+                <asp:Button ID="btn_delete" runat="server" OnClick="btn_delete_Click" class="btn btn-info" Text="Delete" />
             </div>
         </div>
     </div>

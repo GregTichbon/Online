@@ -14,9 +14,13 @@ namespace UBC.People
 {
     public partial class List : System.Web.UI.Page
     {
+        public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "111"))
             {
                 Response.Redirect("~/default.aspx");
@@ -36,7 +40,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    Lit_html.Text = "<tr><th>Checkbox</th><th>Name</th><th>Status</th><th>Edit</th><th>Image</th></tr>";
+                    html = "<tr><th>Checkbox</th><th>Name</th><th>Status</th><th>Edit</th><th>Image</th></tr>";
 
                     while (dr.Read())
                     {
@@ -74,9 +78,9 @@ namespace UBC.People
 
 
 
-                        Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td><td>" + image + "</td>";
-                        Lit_html.Text += "</tr>";
+                        html += "<tr>";
+                        html += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td><td>" + image + "</td>";
+                        html += "</tr>";
                     }
                 }
 
