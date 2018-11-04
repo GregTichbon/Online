@@ -336,7 +336,12 @@
     <Content Include="People\eventdialogclose.html" />
     <Content Include="People\EventPlanner2.js" />
     <Content Include="People\EventPlanner1.js" />
+    <Content Include="People\Images\100.jpg" />
+    <Content Include="People\Images\103.jpg" />
+    <Content Include="People\Images\96.jpg" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
+    <Content Include="People\Reports\EventSchedule.aspx" />
+    <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
     <Content Include="People\Security\LogOut.aspx" />
@@ -541,6 +546,7 @@
     <Compile Include="Go\Register\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="localfunctions.cs" />
     <Compile Include="People\BankImport.aspx.cs">
       <DependentUpon>BankImport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -649,6 +655,20 @@
     </Compile>
     <Compile Include="People\Reports\CurrentMembers.aspx.designer.cs">
       <DependentUpon>CurrentMembers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\EventSchedule.aspx.cs">
+      <DependentUpon>EventSchedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\EventSchedule.aspx.designer.cs">
+      <DependentUpon>EventSchedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\LoginRegister.aspx.cs">
+      <DependentUpon>LoginRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
+      <DependentUpon>LoginRegister.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>

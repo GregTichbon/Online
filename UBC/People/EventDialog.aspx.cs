@@ -28,7 +28,7 @@ namespace UBC.People
         public string html_persons;
 
 
-        public string[] type_values = new string[3] { "Training", "Regatta", "Promotion" };
+        public string[] type_values = new string[6] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting" };
         public string categories_values;
         protected void Page_Load(object sender, EventArgs e)
         {

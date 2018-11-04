@@ -23,6 +23,7 @@ namespace UBC
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
             {
                 html += "<br /><a href=\"people/communicate.aspx\">Communicate</a>";
+                html += "<br /><a href=\"people/reports/loginregister.aspx\">Login register</a>";
             }
 
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1101"))
@@ -45,6 +46,7 @@ namespace UBC
             }
 
             html += "<br /><a href=\"people/reports/AttendanceMatrix.aspx\">Attendance Matrix</a>";
+            html += "<br /><a href=\"people/reports/EventSchedule.aspx\">Event Schedule</a>";
         }
     }
 }

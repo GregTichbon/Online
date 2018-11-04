@@ -61,9 +61,9 @@
                 }
             });
 
-            $('.submit').click(function() {
-               alert(JSON.stringify(results_grid.getChanges()));
-               alert(JSON.stringify(results_grid.getAll(true)));
+            $('.submit').click(function () {
+                alert(JSON.stringify(results_grid.getChanges()));
+                alert(JSON.stringify(results_grid.getAll(true)));
 
             })
 
@@ -208,8 +208,8 @@
             $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
         }
 
-    
-       
+
+
 
     </script>
     <style type="text/css">
@@ -282,14 +282,13 @@
 
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#div_basic">Basic</a></li>
+                <%=html_tabs %>
                 <li><a data-target="#div_category">Category</a></li>
                 <li><a data-target="#div_phone">Phone</a></li>
                 <li><a data-target="#div_address">Address</a></li>
                 <li><a data-target="#div_email">Email</a></li>
-                <li><a data-target="#div_finance">Finance</a></li>
                 <li><a data-target="#div_attendance">Attendance</a></li>
                 <li><a data-target="#div_results">Results</a></li>
-                <li><a data-target="#div_system">System</a></li>
                 <li><a data-target="#div_registration">Registration</a></li>
             </ul>
             <div class="tab-content">
@@ -337,10 +336,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_category">Category</label>
+                        <label class="control-label col-sm-4" for="dd_feecategory">Fee category</label>
                         <div class="col-sm-8">
-                            <select id="dd_category" name="dd_category" class="form-control">
-                                <%= Generic.Functions.populateselect(category, dd_category,"") %>
+                            <select id="dd_feecategory" name="dd_feecategory" class="form-control">
+                                <%= Generic.Functions.populateselect(feecategory, dd_feecategory,"") %>
                             </select>
                         </div>
                     </div>
@@ -378,47 +377,48 @@
                 <div id="div_attendance" class="tab-pane fade in">
                     <h3>Attendance</h3>
                     <table class="table">
-                        <asp:Literal ID="Lit_attendance" runat="server"></asp:Literal>
+                        <%= html_attendance %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_category" class="tab-pane fade in">
                     <h3>Category</h3>
                     <table class="table">
-                        <asp:Literal ID="Lit_category" runat="server"></asp:Literal>
+                        <%= html_category %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_finance" class="tab-pane fade in">
                     <h3>Finance</h3>
                     <table class="table">
-                        <asp:Literal ID="Lit_finance" runat="server"></asp:Literal>
+                        <%= html_finance %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_phone" class="tab-pane fade in">
                     <h3>Phone</h3>
                     <table class="table">
-                        <asp:Literal ID="Lit_phone" runat="server"></asp:Literal>
+                        <%= html_phone %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_email" class="tab-pane fade in">
                     <h3>Email</h3>
                     <table class="table">
-                        <asp:Literal ID="Lit_email" runat="server"></asp:Literal>
+                        <%= html_email %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_results" class="tab-pane fade in">
-                    <h3>Results</h3><button type="button" id="results_add">Add</button>
+                    <h3>Results</h3>
+                    <button type="button" id="results_add">Add</button>
                     <table id="tbl_results">
-                        <asp:Literal ID="Lit_results" runat="server"></asp:Literal>
+                        <%= html_results %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
-                                <div id="div_system" class="tab-pane fade in">
-                     <h3>System</h3>
+                <div id="div_system" class="tab-pane fade in">
+                    <h3>System</h3>
 
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_colour">Colour</label>
@@ -426,7 +426,7 @@
                             <input id="tb_colour" name="tb_colour" class="jscolor" value="<%: tb_colour %>" />
                         </div>
                     </div>
-                    
+
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_address" class="tab-pane fade in">
@@ -448,18 +448,41 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_registration" class="tab-pane fade in">
                     <h3>Registration</h3>
-                     <table style="width:100%">
-                    <%= html_registration %>
-                         </table>
+                    <table style="width: 100%">
+                        <%= html_registration %>
+                    </table>
                 </div>
 
-                <p></p>        <p></p>
+                <p></p>
+                <p></p>
+
+
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_loginregister" class="tab-pane fade in">
+                    <h3>Logins</h3>
+                    <table class="table" style="width: 100%">
+                        <%= html_loginregister %>
+                    </table>
+                </div>
+
+                <p></p>
+                <p></p>
 
 
                 <!------------------------------------------------------------------------------------------------------>
 
+                 <div id="div_arrangements" class="tab-pane fade in">
+                    <h3>Arrangements</h3>
+                    <table class="table" style="width: 100%">
+                        <%= html_arrangements %>
+                    </table>
+                </div>
+
+                <p></p>
+                <p></p>
 
 
+                <!------------------------------------------------------------------------------------------------------>
 
             </div>
             <!-- tabs -->
@@ -473,7 +496,7 @@
         </form>
     </div>
 
-    
+
 
 </body>
 </html>

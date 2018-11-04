@@ -16,6 +16,10 @@ namespace UBC.People.Reports
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
             int cols = 4;
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
@@ -51,6 +55,7 @@ namespace UBC.People.Reports
                         string schoolyear = dr["schoolyear"].ToString();
                         string AgeatDate = dr["AgeatDate"].ToString();
                         string atDate = dr["atDate"].ToString();
+                        string lastregistered = dr["lastregistered"].ToString();
 
                         string schoolage = "";
                         if(school != "")
@@ -66,7 +71,10 @@ namespace UBC.People.Reports
                             schoolage += "Age: " + AgeatDate + " at " + atDate;
                         }
 
-                      
+                        if(lastregistered != "")
+                        {
+                            lastregistered = "<br />Last Registered: " + Convert.ToDateTime( lastregistered).ToString("d MMM yy");
+                        }
 
 
                         string guid = dr["guid"].ToString();
@@ -76,7 +84,7 @@ namespace UBC.People.Reports
 
 
 
-                        Lit_html.Text += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span></td>";
+                        Lit_html.Text += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span>" + lastregistered  + "</td>";
                         if(c1 == cols)
                         {
                             Lit_html.Text += "</tr>" + "\r\n";

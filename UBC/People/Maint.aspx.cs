@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Generic;
 
 namespace UBC.People
 {
@@ -25,7 +26,7 @@ namespace UBC.People
         public string tb_email;
         public string tb_mobile;
         public string tb_landline;
-        public string dd_category;
+        public string dd_feecategory;
         public string dd_school;
         public string tb_schoolyear;
         public string tb_facebook;
@@ -48,18 +49,61 @@ namespace UBC.People
 
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
-        public string[] category = new string[3] { "School", "Club", "Cox" };
+        public string[] feecategory = new string[5] { "Full", "Club", "Cox", "Novice", "N/A" };
         public string[] systems = new string[2] { "UBC", "Friends" };
         public string[] yesno = new string[2] { "Yes", "No" };
 
+        public string html_tabs = "";
         public string html_email = "";
         public string html_system = "";
         public string html_finance = "";
         public string html_registration = "";
+        public string html_loginregister = "";
+        public string html_attendance = "";
+        public string html_phone = "";
+        public string html_category = "";
+        public string html_results = "";
+        public string html_arrangements = "";
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hf_guid = Request.QueryString["id"];
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
+
+                       hf_guid = Request.QueryString["id"];
+
+            /*
+                        html_tabs += "<li><a data-target=\"#div_category\">Category</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_phone\">Phone</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_address\">Address</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_email\">Email</a></li>";
+                        html_tags += "<li><a data-target=\"#div_attendance\">Attendance</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_results\">Results</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_registration\">Registration</a></li>";
+            */
+
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
+            {
+
+                html_tabs += "<li><a data-target=\"#div_finance\">Finance</a></li>";
+                html_tabs += "<li><a data-target=\"#div_arrangements\">Arrangements</a></li>";
+            }
+
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            {
+
+                html_tabs += "<li><a data-target=\"#div_system\">System</a></li>";
+                html_tabs += "<li><a data-target=\"#div_loginregister\">Logins</a></li>";
+            }
+
+
+
+
+
+
             returnto = Request.QueryString["returnto"] + "";
 
             if (hf_guid != "new")
@@ -96,6 +140,7 @@ namespace UBC.People
                         tb_residentialaddress = dr["residentialaddress"].ToString();
                         tb_postaladdress = dr["postaladdress"].ToString();
                         tb_colour = dr["colour"].ToString();
+                        dd_feecategory = dr["feecategory"].ToString();
 
                         /*
 tb_email = dr["email"].ToString();
@@ -106,9 +151,9 @@ tb_caregiveremail = dr["caregiveremail"].ToString();
 tb_caregivermobile = dr["caregivermobile"].ToString();
 tb_caregiverlandline = dr["caregiverlandline"].ToString();
 */
-                        //dd_coming = dr["coming"].ToString();
+            //dd_coming = dr["coming"].ToString();
 
-                        if (tb_birthdate != "")
+            if (tb_birthdate != "")
                         {
                             tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
                         }
@@ -122,7 +167,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     throw ex;
                 }
 
-                Lit_attendance.Text = "<tr><th>When</th><th>What</th><th>Attendance</th><th>Note</th></tr>";
+                html_attendance = "<tr><th>When</th><th>What</th><th>Attendance</th><th>Note</th></tr>";
 
                 cmd.CommandText = "get_person_event";
                 cmd.Parameters.Clear();
@@ -142,12 +187,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string attendance = dr["attendance"].ToString();
                         string note = dr["note"].ToString();
 
-                        Lit_attendance.Text += "<tr>";
-                        Lit_attendance.Text += "<td>" + daterange + "</td>";
-                        Lit_attendance.Text += "<td>" + title + "</td>";
-                        Lit_attendance.Text += "<td>" + attendance + "</td>";
-                        Lit_attendance.Text += "<td>" + note + "</td>";
-                        Lit_attendance.Text += "</tr>";
+                        html_attendance += "<tr>";
+                        html_attendance += "<td>" + daterange + "</td>";
+                        html_attendance += "<td>" + title + "</td>";
+                        html_attendance += "<td>" + attendance + "</td>";
+                        html_attendance += "<td>" + note + "</td>";
+                        html_attendance += "</tr>";
 
 
                     }
@@ -160,46 +205,55 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 
 
                 //-------------------------------------------------------------------------------------
-                Lit_finance.Text = "<tr><th>Date</th><th>System</th><th>Detail</th><th>Amount</th><th>Note</th></tr>";
-                double total = 0;
-
-                cmd.CommandText = "get_person_finance";
-                cmd.Parameters.Clear();
-                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
-
-                try
+                //FINANCE
+                if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
                 {
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
+                    html_finance = "<tr><th>Date</th><th>System</th><th>Detail</th><th>Amount</th><th>Note</th></tr>";
+                    double total = 0;
+
+                    cmd.CommandText = "get_person_finance";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                    try
                     {
-                        string person_finance_id = dr["person_finance_id"].ToString();
-                        string date = Convert.ToDateTime(dr["date"]).ToString("dd MMM yy");
-                        string system = dr["system"].ToString();
-                        string detail = dr["detail"].ToString();
-                        string amount = dr["amount"].ToString();
-                        string note = dr["note"].ToString();
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            string person_finance_id = dr["person_finance_id"].ToString();
+                            string date = Convert.ToDateTime(dr["date"]).ToString("dd MMM yy");
+                            string system = dr["system"].ToString();
+                            string detail = dr["detail"].ToString();
+                            string amount = dr["amount"].ToString();
+                            string note = dr["note"].ToString();
 
-                        total += Convert.ToDouble(  amount);
-
-
-                        Lit_finance.Text += "<tr>";
-                        Lit_finance.Text += "<td>" + date + "</td>";
-                        Lit_finance.Text += "<td>" + system + "</td>";
-                        Lit_finance.Text += "<td>" + detail + "</td>";
-                        Lit_finance.Text += "<td>" + amount + "</td>";
-                        Lit_finance.Text += "<td>" + note + "</td>";
-                        Lit_finance.Text += "</tr>";
+                            total += Convert.ToDouble(amount);
 
 
+                            html_finance += "<tr>";
+                            html_finance += "<td>" + date + "</td>";
+                            html_finance += "<td>" + system + "</td>";
+                            html_finance += "<td>" + detail + "</td>";
+                            html_finance += "<td>" + amount + "</td>";
+                            html_finance += "<td>" + note + "</td>";
+                            html_finance += "</tr>";
+
+
+                        }
+                        dr.Close();
                     }
-                    dr.Close();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+            
+
+                //-------------------------------------------------------------------------------------
+                    html_arrangements = "TO DO";
                 }
 
                 //-------------------------------------------------------------------------------------
+
                 html_registration = "<tr><th>Season</th><th>Submitted</th><th>View</th></tr>";
 
                 cmd.CommandText = "get_person_registration";
@@ -230,10 +284,43 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
                     throw ex;
                 }
-
-
                 //-------------------------------------------------------------------------------------
-                Lit_phone.Text = "<tr><th>Number</th><th>Mobile</th><th>Send Texts</th><th>Note</th><th>Send Now</th></tr>";
+                //LOGIN REGISTER
+                if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                {
+                    html_loginregister = "<tr><th>Date</th><th>Success</th></tr>";
+
+                    cmd.CommandText = "get_person_login_register";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                    try
+                    {
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            string datetime = dr["datetime"].ToString();
+                            //string success = Convert.ToDateTime(dr["CreatedDate"]).ToString("dd MMM yy");
+                            string success = dr["success"].ToString();
+
+
+                            html_loginregister += "<tr>";
+                            html_loginregister += "<td>" + datetime + "</td>";
+                            html_loginregister += "<td>" + success + "</td>";
+                            html_loginregister += "</tr>";
+
+
+                        }
+                        dr.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+               
+                //-------------------------------------------------------------------------------------
+                html_phone = "<tr><th>Number</th><th>Mobile</th><th>Send Texts</th><th>Note</th><th>Send Now</th></tr>";
 
                 cmd.CommandText = "get_person_phone";
                 cmd.Parameters.Clear();
@@ -256,14 +343,14 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             send = "<a class=\"send_text\">Send</a>";
                         }
 
-                        Lit_phone.Text += "<tr>";
-                        Lit_phone.Text += "<td>" + phone + "</td>";
-                        Lit_phone.Text += "<td>" + mobile + "</td>";
-                        Lit_phone.Text += "<td>" + text + "</td>";
-                        Lit_phone.Text += "<td>" + note + "</td>";
-                        Lit_phone.Text += "<td>" + send + "</td>";
+                        html_phone += "<tr>";
+                        html_phone += "<td>" + phone + "</td>";
+                        html_phone += "<td>" + mobile + "</td>";
+                        html_phone += "<td>" + text + "</td>";
+                        html_phone += "<td>" + note + "</td>";
+                        html_phone += "<td>" + send + "</td>";
 
-                        Lit_phone.Text += "</tr>";
+                        html_phone += "</tr>";
 
 
                     }
@@ -310,7 +397,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     throw ex;
                 }
                 //-------------------------------------------------------------------------------------
-                Lit_category.Text = "<tr><th>Category</th><th>From</th><th>To</th><th>Note</th></tr>";
+                html_category = "<tr><th>Category</th><th>From</th><th>To</th><th>Note</th></tr>";
 
                 cmd.CommandText = "get_person_category";
                 cmd.Parameters.Clear();
@@ -334,13 +421,13 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string enddate = "";// Convert.ToDateTime(dr["startdate"]).ToString("dd MMM yy");
                         string note = dr["note"].ToString();
 
-                        Lit_category.Text += "<tr>";
-                        Lit_category.Text += "<td>" + category + "</td>";
-                        Lit_category.Text += "<td>" + startdate + "</td>";
-                        Lit_category.Text += "<td>" + enddate + "</td>";
-                        Lit_category.Text += "<td>" + note + "</td>";
+                        html_category += "<tr>";
+                        html_category += "<td>" + category + "</td>";
+                        html_category += "<td>" + startdate + "</td>";
+                        html_category += "<td>" + enddate + "</td>";
+                        html_category += "<td>" + note + "</td>";
 
-                        Lit_category.Text += "</tr>";
+                        html_category += "</tr>";
 
 
                     }
@@ -351,20 +438,20 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     throw ex;
                 }
 
-                //-------------------------------------------------------------------------------------
-                Lit_results.Text = "<thead><tr>";
-                Lit_results.Text += "<th data-hidden='true'>person_event_id</th>";
-                //Lit_results.Text += "<th data-hidden='true'>ID2</th>";
-                Lit_results.Text += "<th>Regatta</th>";
-                Lit_results.Text += "<th>Event</th>";
-                Lit_results.Text += "<th>Place</th>";
-                //Lit_results.Text += "<th data-hidden='false'>TEST</th>";
-                //Lit_results.Text += "<th data-tmpl=\"<span class='material-icons gj-cursor-pointer'>results_edit</span>\" align=\"center\" data-events=\"click: results_edit\"></th>";
-                //Lit_results.Text += "<th data-tmpl=\"<span class='material-icons gj-cursor-pointer'>results_delete</span>\" align=\"center\" data-events=\"click: results_delete\"></th>";
-                Lit_results.Text += "<th data-width='60' data-tmpl='Edit' data-events='click: results_edit'></th>";
-                Lit_results.Text += "<th data-width='80' data-tmpl='Delete' data-events='click: results_delete'></th>";
-                Lit_results.Text += "</tr></thead>";
-                Lit_results.Text += "<tbody>";
+//-------------------------------------------------------------------------------------
+                html_results = "<thead><tr>";
+                html_results += "<th data-hidden='true'>person_event_id</th>";
+                //html_results += "<th data-hidden='true'>ID2</th>";
+                html_results += "<th>Regatta</th>";
+                html_results += "<th>Event</th>";
+                html_results += "<th>Place</th>";
+                //html_results += "<th data-hidden='false'>TEST</th>";
+                //html_results += "<th data-tmpl=\"<span class='material-icons gj-cursor-pointer'>results_edit</span>\" align=\"center\" data-events=\"click: results_edit\"></th>";
+                //html_results += "<th data-tmpl=\"<span class='material-icons gj-cursor-pointer'>results_delete</span>\" align=\"center\" data-events=\"click: results_delete\"></th>";
+                html_results += "<th data-width='60' data-tmpl='Edit' data-events='click: results_edit'></th>";
+                html_results += "<th data-width='80' data-tmpl='Delete' data-events='click: results_delete'></th>";
+                html_results += "</tr></thead>";
+                html_results += "<tbody>";
 
                 cmd.CommandText = "get_person_results";
                 cmd.Parameters.Clear();
@@ -386,18 +473,18 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 
                         //string note = dr["note"].ToString();
 
-                        Lit_results.Text += "<tr>";
-                        Lit_results.Text += "<td>" + person_event_id + "</td>";
-                        //Lit_results.Text += "<td>" + event_id + "</td>";
-                        Lit_results.Text += "<td>" + eventtitle + " (" + daterange + ")</td>";
-                        Lit_results.Text += "<td>" + eventdesc + "</td>";
-                        Lit_results.Text += "<td>" + place + "</td>";
-                        //Lit_results.Text += "<td>TEST</td>";
-                        Lit_results.Text += "<td></td>";
-                        Lit_results.Text += "<td></td>";
-                        //Lit_results.Text += "<td>" + note + "</td>";
+                        html_results += "<tr>";
+                        html_results += "<td>" + person_event_id + "</td>";
+                        //html_results += "<td>" + event_id + "</td>";
+                        html_results += "<td>" + eventtitle + " (" + daterange + ")</td>";
+                        html_results += "<td>" + eventdesc + "</td>";
+                        html_results += "<td>" + place + "</td>";
+                        //html_results += "<td>TEST</td>";
+                        html_results += "<td></td>";
+                        html_results += "<td></td>";
+                        //html_results += "<td>" + note + "</td>";
 
-                        Lit_results.Text += "</tr>";
+                        html_results += "</tr>";
 
 
                     }
@@ -407,7 +494,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
                     throw ex;
                 }
-                Lit_results.Text += "</tbody>";
+                html_results += "</tbody>";
 
                 //-------------------------------------------------------------------------------------
 
@@ -444,7 +531,8 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_residentialaddress = Request.Form["tb_residentialaddress"].Trim();
             tb_postaladdress = Request.Form["tb_postaladdress"].Trim();
             tb_colour = Request.Form["tb_colour"].Trim();
-            tb_facebook = Request.Form["tb_facebook"].Trim(); 
+            tb_facebook = Request.Form["tb_facebook"].Trim();
+            dd_feecategory = Request.Form["dd_feecategory"].Trim();
             /*
             tb_email = Request.Form["tb_email"].Trim();
             tb_mobile = Request.Form["tb_mobile"].Trim();
@@ -477,6 +565,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             
             cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
             cmd.Parameters.Add("@colour", SqlDbType.VarChar).Value = '#' + tb_colour;
+            cmd.Parameters.Add("@feecategory", SqlDbType.VarChar).Value = dd_feecategory;
 
 
             /*

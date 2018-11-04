@@ -10,85 +10,136 @@
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
 
 
-     <script type="text/javascript">
-         var grid, dialog;
+    <script type="text/javascript">
+        var grid, dialog;
 
-         function results_edit(e) {
-             $('#ID').val(e.data.record.ID);
-             $('#Name').val(e.data.record.Name);
-             $('#PlaceOfBirth').val(e.data.record.PlaceOfBirth);
-             dialog.open('Edit Player');
-         }
+        function results_edit(e) {
+            $('#ID').val(e.data.record.ID);
+            $('#Name').val(e.data.record.Name);
+            $('#PlaceOfBirth').val(e.data.record.PlaceOfBirth);
+            dialog.open('Edit Player');
+        }
 
-         function results_delete(e) {
-             if (confirm('Are you sure?')) {
-                 grid.removeRow(e.data.id - 1);
-             }
-         }
+        function results_delete(e) {
+            if (confirm('Are you sure?')) {
+                grid.removeRow(e.data.id - 1);
+            }
+        }
 
-         function Save() {
-             if ($('#ID').val()) {
-                 var id = parseInt($('#ID').val());
-                 grid.updateRow(id, { 'ID': id, 'Name': $('#Name').val(), 'PlaceOfBirth': $('#PlaceOfBirth').val() });
-             } else {
-                 grid.addRow({ 'ID': grid.count(true) + 1, 'Name': $('#Name').val(), 'PlaceOfBirth': $('#PlaceOfBirth').val() });
-             }
-             dialog.close();
-         }
+        function Save() {
+            if ($('#ID').val()) {
+                var id = parseInt($('#ID').val());
+                grid.updateRow(id, { 'ID': id, 'Name': $('#Name').val(), 'PlaceOfBirth': $('#PlaceOfBirth').val() });
+            } else {
+                grid.addRow({ 'ID': grid.count(true) + 1, 'Name': $('#Name').val(), 'PlaceOfBirth': $('#PlaceOfBirth').val() });
+            }
+            dialog.close();
+        }
 
-         $(document).ready(function () {
+        $(document).ready(function () {
 
-             $('#btntest').click(function () {
-                 console.log(grid.getAll(true));
-             })
+            $('#btntest').click(function () {
+                console.log(grid.getAll(true));
+            })
 
-             grid = $('#grid').grid({
-                 pager: { limit: 5 }
-             });
+            grid = $('#grid').grid({
+                pager: { limit: 5 }
+            });
 
-             $("input[title='Next Page']").click(function () {
-                 alert(1);
-             })
-             $(":button").click(function () {
-                 alert(2);
-             })
-             $(".gj-button-md").click(function () {
-                 alert(3);
-             })
-             $(document).on('click', ".gj-button-md", function () {
-                 alert(4);
-             })
+            $("input[title='Next Page']").click(function () {
+                alert(1);
+            })
+            $(":button").click(function () {
+                alert(2);
+            })
+            $(".gj-button-md").click(function () {
+                alert(3);
+            })
+            $(document).on('click', ".gj-button-md", function () {
+                alert(4);
+            })
 
-             dialog = $('#dialog').dialog();
+            dialog = $('#dialog').dialog();
 
-             $('#btnAdd').on('click', function () {
-                 $('#ID').val('');
-                 $('#Name').val('');
-                 $('#PlaceOfBirth').val('');
-                 dialog.open('Add Player');
-             });
+            $('#btnAdd').on('click', function () {
+                $('#ID').val('');
+                $('#Name').val('');
+                $('#PlaceOfBirth').val('');
+                dialog.open('Add Player');
+            });
 
-             $('#btnSave').on('click', Save);
+            $('#btnSave').on('click', Save);
 
-             $('#btnCancel').on('click', function () {
-                 dialog.close();
-             });
+            $('#btnCancel').on('click', function () {
+                dialog.close();
+            });
 
-             $('#btnSearch').on('click', function () {
-                 grid.reload({ Name: $('#txtName').val(), PlaceOfBirth: $('#txtPlaceOfBirth').val() });
-             });
+            $('#btnSearch').on('click', function () {
+                grid.reload({ Name: $('#txtName').val(), PlaceOfBirth: $('#txtPlaceOfBirth').val() });
+            });
 
-             $('#btnClear').on('click', function () {
-                 $('#srcName').val('');
-                 $('#srcPlaceOfBirth').val('');
-                 grid.reload({ Name: '', PlaceOfBirth: '' });
-             });
-         });
-     </script>
+            $('#btnClear').on('click', function () {
+                $('#srcName').val('');
+                $('#srcPlaceOfBirth').val('');
+                grid.reload({ Name: '', PlaceOfBirth: '' });
+            });
+        });
+    </script>
 
 
 </head>
 <body>
+    <!-------------------------------------------------------------------->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="date">5 Nov 2018</div>
+                    <div id="event_102" class="event Training others">
+                        <div class="title" title="On water steady state 10+km @ 20">05:45 - 07:00 Seniors Training</div>
+                    </div>
+                    <div id="event_43" class="event Training others">
+                        <div class="title" title="On Water">17:15 - 19:30 Novice Training</div>
+                        <div class="coaches" style="display: none">
+                            <div class="person" id="coach_event_43_57" style="background-color: lightgreen;">Peer</div>
+                        </div>
+                    </div>
+                    <div id="event_95" class="event Training others">
+                        <div class="title" title="Weights">17:15 - 20:00 Senior Training</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="date">6 Nov 2018</div>
+                    <div id="event_71" class="event Training others">
+                        <div class="title" title="Ergs 2 x 30min @ 20">06:00 - 07:00 Senior Training</div>
+                        <div class="coaches" style="display: none">
+                            <div class="person" id="coach_event_71_85" style="background-color: orange;">John</div>
+                        </div>
+                    </div>
+                    <div id="event_104" class="event CommitteeMeeting mine">
+                        <div class="title" title="">18:00 - 20:00 Committee meeting</div>
+                    </div>
+                    </td>
+                </tr>
+
+        </tbody>
+    </table>
+
+    <!-------------------------------------------------------------------->
+
+
     <div class="gj-margin-top-10">
         <div class="gj-float-left">
             <form class="display-inline">
@@ -204,13 +255,13 @@
 
 
 
-        <table id="grid1" style="display:none">
+        <table id="grid1" style="display: none">
             <thead>
                 <tr>
                     <th width="56">ID</th>
                     <th data-sortable="true">Name</th>
                     <th data-field="PlaceOfBirth">Place Of Birth</th>
-                    <th width="64" data-tmpl="<span class='material-icons gj-cursor-pointer'>edit</span>"align="center" data-events="click: Edit"></th>
+                    <th width="64" data-tmpl="<span class='material-icons gj-cursor-pointer'>edit</span>" align="center" data-events="click: Edit"></th>
                     <th width="64" data-tmpl="<span class='material-icons gj-cursor-pointer'>delete</span>" align="center" data-events="click: Delete"></th>
                 </tr>
             </thead>
@@ -262,7 +313,7 @@
     </div>
 
 
-   
+
 
     <div id="dialog" class="gj-display-none" width="360" data-auto-open="false" data-modal="true">
         <div data-role="body">
@@ -280,6 +331,6 @@
         </div>
     </div>
     <button type="button" id="btntest">Test</button>
-   
+
 </body>
 </html>

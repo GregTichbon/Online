@@ -39,7 +39,7 @@ namespace UBC.People
 
 
         public string[] attendance_values = new string[5] { "No", "Yes", "Partial", "Maybe", "Expected" };
-        public string[] type_values = new string[3] { "Training", "Regatta", "Promotion" };
+        public string[] type_values = new string[6] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting" };
         public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise" ,"Coach Support", "Support" };
         public string categories_values;
         protected void Page_Load(object sender, EventArgs e)
