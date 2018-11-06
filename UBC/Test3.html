@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: solid;
+            vertical-align: top;
+        }
+
+        .date {
+            background-color: lightcoral;
+            padding: 5px;
+            margin: 2px
+        }
+
+        .title {
+            padding: 10px;
+            color: red;
+        }
+
+        .event {
+            border: solid;
+            border-color: red;
+            padding: 5px;
+            margin: 2px;
+        }
+
+        .person, .coach {
+            padding: 10px;
+        }
+
+
+        .wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .attendMaybe:before {
+            content: "\003f";
+        }
+
+        .attendGoing:before {
+            content: "\2713";
+        }
+
+        .attendNotGoing:before {
+            content: "\00d7";
+        }
+
+        .remove:before {
+            content: "\00d7";
+        }
+
+        .remove {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            cursor: pointer;
+        }
+
+        .add:before, .addevent:before {
+            content: "+";
+        }
+
+        .add, .addevent, .attendNotGoing, .attendGoing {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            cursor: pointer;
+        }
+
+       
+
+
+    </style>
+</head>
+<body>
+    <table>
+        <thead><tr><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th></tr></thead>
+        <tbody>
+            <tr>
+                <td><div class="date">5 Nov 2018</div></td>
+                <td>
+                    <div class="date">6 Nov 2018</div>
+
+                    <div id="event_104" class="event">
+                        <div class="wrapper">
+                            <span class="attendGoing"></span>
+                            <div class="title" title="">18:00 - 20:00 Committee meeting</div>
+                        </div>
+                    </div>
+
+                    <div id="event_79" class="event">
+                        <div class="wrapper">
+                            <span class="add"></span>
+                            <div class="title" title="Water/erg">05:45 - 07:00 Senior Training</div>
+                        </div>
+                    </div>
+                </td>
+                <td><div class="date">7 Nov 2018</div></td>
+                <td><div class="date">8 Nov 2018</div></td>
+                <td><div class="date">9 Nov 2018</div></td>
+                <td><div class="date">10 Nov 2018</div></td>
+                <td><div class="date">11 Nov 2018</div></td>
+</tbody>
+    </table>
+</body>
+</html>

@@ -344,6 +344,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-4" for="dd_familymember">Family member</label>
+                        <div class="col-sm-8">
+                            <select id="dd_familymember" name="dd_familymember" class="form-control" required>
+                                <%= Generic.Functions.populateselect(familymember, dd_familymember,"") %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_school">School</label>
                         <div class="col-sm-8">
                             <select id="dd_school" name="dd_school" class="form-control">

@@ -58,8 +58,33 @@
             background-color: pink;
         }
 
-        .person, .coach {
+        .person, .attendance {
             padding: 10px;
+        }
+
+        .wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+       .attendNotGoing, .attendGoing, .attendMaybe {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            cursor: pointer;
+        }
+
+        .attendMaybe:before {
+            content: url(../../Dependencies/Images/qm1.png);
+        }
+
+        .attendGoing:before {
+            content:url(../../Dependencies/Images/tick1.png);
+        }
+
+        .attendNotGoing:before {
+            content:url(../../Dependencies/Images/cross1.png);
         }
         /*
             .mine {
@@ -76,13 +101,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 
+
     <script type="text/javascript">
 
-
+        var attend;
         $(document).ready(function () {
+
+            //$('body').on('touchstart', function() {});
 
             $('.others').hide();
 
+            $("#div_information").dialog({
+                resizable: false,
+                width: 800,
+                    modal: true
+                });
 
             $('.title').tooltip({
                 content: function () {
@@ -102,9 +135,48 @@
                 }
 
             });
+            //$('.event:not(.past)').dblclick(function () {
+            $('.event:not(.past)').click(function () {
+                attend = $(this);
+
+                $("#div_attendance").dialog({
+                    resizable: false,
+                    modal: true
+                });
+
+            })
+            /*
+            $('.event').click(function () {
+                $( this ).tooltip( "open" );
+                //alert(1);
+            });
+            */
 
 
+            $('.attendance').click(function () {
+                attendance = $(this).text();
+                event_id = $(attend).attr('id');
+                $('#attend_' + event_id).attr('class', 'attend' + attendance.replace(' ', ''));
+                $("#div_attendance").dialog('close');
 
+                var arForm = [{ "name": "person_id", "value": "<%=person_id%>" }, { "name": "event_id", "value": event_id.substring(6) }, { "name": "attendance", "value": attendance }];
+
+                var formData = JSON.stringify({ formVars: arForm });
+
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    contentType: "application/json; charset=utf-8",
+                    url: '../posts.asmx/update_event_person', // the url where we want to POST
+                    data: formData,
+                    dataType: 'json', // what type of data do we expect back from the server
+                    //success: function (result) {
+                    //    window.location.href = 'default.aspx';
+                    //},
+                    error: function (xhr, status) {
+                        alert("An error occurred: " + status);
+                    }
+                });
+            });
 
         }); //document ready
     </script>
@@ -116,7 +188,18 @@
     <input type="button" id="show" value="Show all" />
 
 
+
     <%= html%>
+        <div id="div_attendance" title="Select attendance option" style="display: none">
+        <%= attendance_html %>
+    </div>
 
     <div id="div_event" title="Event" style="display: none; width: 800px"></div>
+        <div id="div_information" title="Information">
+            <p>Events in the same category that you are registered in show by default.</p>
+            <p>You may see other events by using the &quot;Show All&quot; button at the top left of the screen.</p>
+            <p>You can also hide these other events with the same button.</p>
+            <p>Mouse over an event description to see more detail, if it has been loaded.</p>
+            <p>Click on the title to select whether you are intending to attend or not, &quot;maybe&quot; is also an option.&nbsp; This is very useful for planning of events.&nbsp; You may return and change your attendance &quot;status&quot; as often as you like.</p></div>
+    <p>CLOSE THIS WINDOW TO CONTINUE</p>
 </asp:Content>

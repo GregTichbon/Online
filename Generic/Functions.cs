@@ -194,7 +194,49 @@ namespace Generic
             }
             */
         }
+        public string BrowserDetails(System.Web.HttpBrowserCapabilities browser)
+        {
 
+            string response = "";
+            IPHostEntry Host = default(IPHostEntry);
+            string Hostname = null;
+            Hostname = System.Environment.MachineName;
+            Host = Dns.GetHostEntry(Hostname);
+            foreach (IPAddress IP in Host.AddressList)
+            {
+                if (IP.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    response = "IP Address = " + Convert.ToString(IP) + "<br />";
+                }
+            }
+
+
+            response += "<b>Browser Capabilities</b><br />"
+                + "Type = " + browser.Type + "<br />"
+                + "Name = " + browser.Browser + "<br />"
+                + "Version = " + browser.Version + "<br />"
+                + "Major Version = " + browser.MajorVersion + "<br />"
+                + "Minor Version = " + browser.MinorVersion + "<br />"
+                + "Platform = " + browser.Platform + "<br />"
+                + "Is Beta = " + browser.Beta + "<br />"
+                + "Is Crawler = " + browser.Crawler + "<br />"
+                + "Is AOL = " + browser.AOL + "<br />"
+                + "Is Win16 = " + browser.Win16 + "<br />"
+                + "Is Win32 = " + browser.Win32 + "<br />"
+                + "Supports Frames = " + browser.Frames + "<br />"
+                + "Supports Tables = " + browser.Tables + "<br />"
+                + "Supports Cookies = " + browser.Cookies + "<br />"
+                + "Supports VBScript = " + browser.VBScript + "<br />"
+                + "Supports JavaScript = " +
+                    browser.EcmaScriptVersion.ToString() + "<br />"
+                + "Supports Java Applets = " + browser.JavaApplets + "<br />"
+                + "Supports ActiveX Controls = " + browser.ActiveXControls
+                      + "<br />"
+                + "Supports JavaScript Version = " +
+                    browser["JavaScriptVersion"] + "<br />";
+
+            return response;
+        }
         public string getReference(string mode = "guid")
         {
             string reference = "";

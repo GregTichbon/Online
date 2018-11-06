@@ -82,13 +82,13 @@ namespace UBC.People
 
                             if (dateonly != lastdate)
                             {
+                                html += endtd;
                                 c1++;
 
                                 if (c1 == 1)
                                 {
                                     html += "<tr>";
                                 }
-                                html += endtd;
                                 endtd = "</td>";
                                 html += "<td>";
                                 html += "<div class=\"wrapper\">";
@@ -140,6 +140,7 @@ namespace UBC.People
                             if (c1 == 7)
                             {
                                 html += endtd + "</tr>" + "\r\n";
+                                endtd = "";
                                 c1 = 0;
                             }
 

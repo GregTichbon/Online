@@ -38,7 +38,7 @@ namespace UBC.People
         public string html_persons;
 
 
-        public string[] attendance_values = new string[5] { "No", "Yes", "Partial", "Maybe", "Expected" };
+        public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going","Not Going" };
         public string[] type_values = new string[6] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting" };
         public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise" ,"Coach Support", "Support" };
         public string categories_values;
@@ -99,6 +99,8 @@ namespace UBC.People
                                 startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy");
                                 enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
                             }
+
+                       
                         }
 
                         dr.Close();

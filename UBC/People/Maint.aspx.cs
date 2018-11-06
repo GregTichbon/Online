@@ -27,6 +27,7 @@ namespace UBC.People
         public string tb_mobile;
         public string tb_landline;
         public string dd_feecategory;
+        public string dd_familymember;
         public string dd_school;
         public string tb_schoolyear;
         public string tb_facebook;
@@ -49,9 +50,10 @@ namespace UBC.People
 
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
-        public string[] feecategory = new string[5] { "Full", "Club", "Cox", "Novice", "N/A" };
+        public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };
         public string[] systems = new string[2] { "UBC", "Friends" };
         public string[] yesno = new string[2] { "Yes", "No" };
+        public string[] familymember = new string[5] { "1", "2","3","4","5" };
 
         public string html_tabs = "";
         public string html_email = "";
@@ -141,6 +143,7 @@ namespace UBC.People
                         tb_postaladdress = dr["postaladdress"].ToString();
                         tb_colour = dr["colour"].ToString();
                         dd_feecategory = dr["feecategory"].ToString();
+                        dd_familymember = dr["familymember"].ToString();
 
                         /*
 tb_email = dr["email"].ToString();
@@ -151,9 +154,9 @@ tb_caregiveremail = dr["caregiveremail"].ToString();
 tb_caregivermobile = dr["caregivermobile"].ToString();
 tb_caregiverlandline = dr["caregiverlandline"].ToString();
 */
-            //dd_coming = dr["coming"].ToString();
+                        //dd_coming = dr["coming"].ToString();
 
-            if (tb_birthdate != "")
+                        if (tb_birthdate != "")
                         {
                             tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
                         }
@@ -533,6 +536,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_colour = Request.Form["tb_colour"].Trim();
             tb_facebook = Request.Form["tb_facebook"].Trim();
             dd_feecategory = Request.Form["dd_feecategory"].Trim();
+            dd_familymember = Request.Form["dd_familymember"].Trim();
             /*
             tb_email = Request.Form["tb_email"].Trim();
             tb_mobile = Request.Form["tb_mobile"].Trim();
@@ -566,6 +570,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
             cmd.Parameters.Add("@colour", SqlDbType.VarChar).Value = '#' + tb_colour;
             cmd.Parameters.Add("@feecategory", SqlDbType.VarChar).Value = dd_feecategory;
+            cmd.Parameters.Add("@familymember", SqlDbType.VarChar).Value = dd_familymember;
 
 
             /*

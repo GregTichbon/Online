@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,6 +32,13 @@ namespace UBC.People.Security
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+
+            Functions functions = new Functions();
+
+            System.Web.HttpBrowserCapabilities browser = Request.Browser;
+
+            string browserdetails = functions.BrowserDetails (browser);
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
 
@@ -38,6 +46,7 @@ namespace UBC.People.Security
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@username", SqlDbType.VarChar).Value = Request.Form["tb_username"].Trim();
             cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = Request.Form["tb_password"].Trim();
+            cmd.Parameters.Add("@browserdetails", SqlDbType.VarChar).Value = browserdetails;
 
 
             cmd.Connection = con;

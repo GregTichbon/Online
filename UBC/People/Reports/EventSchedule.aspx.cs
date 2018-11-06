@@ -14,7 +14,9 @@ namespace UBC.People.Reports
 {
     public partial class EventSchedule : System.Web.UI.Page
     {
+        public string person_id;
         public string html = "";
+        public string attendance_html = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,13 +28,19 @@ namespace UBC.People.Reports
 
             if (!IsPostBack)
             {
-                string person_id = Session["UBC_person_id"].ToString();
+                person_id = Session["UBC_person_id"].ToString();
                 string mycategories = localfunctions.get_person_category(person_id);
-                
+                string[] attendance_values = new string[3] { "Maybe", "Going", "Not Going" };
+
+                foreach(string attendance in attendance_values) { 
+                    attendance_html += "<div class=\"attendance\">" + attendance + "</div>";
+                }
+
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
                 SqlConnection con = new SqlConnection(strConnString);
                 SqlCommand cmd1 = new SqlCommand("Build_Event_Planner", con);
+                cmd1.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
 
                 cmd1.CommandType = CommandType.StoredProcedure;
                 cmd1.Connection = con;
@@ -62,18 +70,24 @@ namespace UBC.People.Reports
                             string type = dr["type"].ToString();
                             string coach = dr["coach"].ToString();
                             string category = "|" + dr["category"].ToString() + "|";
+                            string attendance = dr["attendance"].ToString();
+                            if(attendance == "")
+                            {
+                                attendance = "Unknown";
+                            }
+                            attendance = attendance.Replace(" ", "");
 
                             string dateonly = thedate.ToString("d MMM yyyy");
 
                             if (dateonly != lastdate)
                             {
+                                html += endtd;
                                 c1++;
 
                                 if (c1 == 1)
                                 {
                                     html += "<tr>";
                                 }
-                                html += endtd;
                                 endtd = "</td>";
                                 html += "<td>";
                                 html += "<div class=\"date\">" + dateonly + "</div>";
@@ -94,6 +108,13 @@ namespace UBC.People.Reports
                                     time = Convert.ToDateTime(startdatetime).ToString("HH:mm") + " - " + Convert.ToDateTime(enddatetime).ToString("HH:mm");
                                 }
 
+                                string past = "";
+                                if (Convert.ToDateTime(startdatetime) <= DateTime.Now)
+                                {
+                                    past = " past";
+                                }
+                                
+
                                 string mine = " others";
 
                                 foreach(string mycat in mycategories.Split('|'))
@@ -107,11 +128,23 @@ namespace UBC.People.Reports
 
                                 }
 
-                                html += "<div id=\"event_" + event_id + "\" class=\"event " + type.Replace(" ","") + mine + "\"><div class=\"title\" title=\"" + description + "\">" + time + " " + title + "</div>";
+                                html += "<div id=\"event_" + event_id + "\" class=\"event " + type.Replace(" ", "") + mine + past + "\">"; //Start 1
+
+                                if(past == "") { 
+                                    html += "<div class=\"wrapper\">";  //Start 2
+                                    html += "<span id=\"attend_event_" + event_id + "\" class=\"attend" + attendance + "\"></span>";
+
+                                }
+                                html += "<div class=\"title\" title=\"" + description + "\">" + time + " " + title + "</div>";
+                                if (past == "")
+                                {
+                                    //html += "<span id=\"attend_event_" + event_id + "\" class=\"attend" + attendance + "\"></span>";
+                                    html += "</div>";  //End 2
+                                }
 
                                 if (coach != "")
                                 {
-                                    html += "<div class=\"coaches\" style=\"display:none\">";
+                                    html += "<div class=\"coaches\" style=\"display:none\">"; //Start 3
                                     string[] coaches = coach.Split('|');
 
                                     foreach (string thecoach in coaches)
@@ -120,15 +153,16 @@ namespace UBC.People.Reports
 
                                          html += "<div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div>";
                                     }
-                                    html += "</div>";
+                                    html += "</div>";  //End 3
 
                                 }
-                                html += "</div>";
+                                html += "</div>";  //End 1
                             }
 
                             if (c1 == 7)
                             {
                                 html += endtd + "</tr>" + "\r\n";
+                                endtd = "";
                                 c1 = 0;
                             }
 

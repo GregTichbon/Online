@@ -134,8 +134,11 @@
     <Content Include="Dependencies\GijGo\js\timepicker.min.js" />
     <Content Include="Dependencies\GijGo\js\tree.js" />
     <Content Include="Dependencies\GijGo\js\tree.min.js" />
+    <Content Include="Dependencies\Images\cross1.png" />
     <Content Include="Dependencies\Images\Logo-Page-Head-350.png" />
     <Content Include="Dependencies\Images\Logo-Page-Head.png" />
+    <Content Include="Dependencies\Images\qm1.png" />
+    <Content Include="Dependencies\Images\tick1.png" />
     <Content Include="Dependencies\jscolor-example.html" />
     <Content Include="Dependencies\jscolor.js" />
     <Content Include="Dependencies\moment.min.js" />
@@ -339,12 +342,17 @@
     <Content Include="People\Images\100.jpg" />
     <Content Include="People\Images\103.jpg" />
     <Content Include="People\Images\96.jpg" />
+    <Content Include="People\Posts.asmx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
+    <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
     <Content Include="People\Security\LogOut.aspx" />
+    <Content Include="Test2.aspx" />
+    <Content Include="Test2a.aspx" />
+    <Content Include="Test3.html" />
     <Content Include="XMLFile1.xml" />
     <Content Include="XSLTFile1.xslt" />
     <None Include="packages.config" />
@@ -628,6 +636,10 @@
     <Compile Include="People\Maint2.aspx.designer.cs">
       <DependentUpon>Maint2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="People\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -662,6 +674,13 @@
     </Compile>
     <Compile Include="People\Reports\EventSchedule.aspx.designer.cs">
       <DependentUpon>EventSchedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\FullReport.aspx.cs">
+      <DependentUpon>FullReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\FullReport.aspx.designer.cs">
+      <DependentUpon>FullReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\LoginRegister.aspx.cs">
       <DependentUpon>LoginRegister.aspx</DependentUpon>
@@ -740,6 +759,20 @@
     </Compile>
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test2.aspx.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test2.aspx.designer.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test2a.aspx.cs">
+      <DependentUpon>Test2a.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test2a.aspx.designer.cs">
+      <DependentUpon>Test2a.aspx</DependentUpon>
     </Compile>
     <Compile Include="Training\ZoneTraining.aspx.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>
