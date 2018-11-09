@@ -71,7 +71,10 @@ namespace UBC.People.Reports
                             string coach = dr["coach"].ToString();
                             string category = "|" + dr["category"].ToString() + "|";
                             string attendance = dr["attendance"].ToString();
-                            if(attendance == "")
+                            string note = dr["note"].ToString();
+                            string personnote = dr["personnote"].ToString();
+
+                            if (attendance == "")
                             {
                                 attendance = "Unknown";
                             }
@@ -128,7 +131,7 @@ namespace UBC.People.Reports
 
                                 }
 
-                                html += "<div id=\"event_" + event_id + "\" class=\"event " + type.Replace(" ", "") + mine + past + "\">"; //Start 1
+                                html += "<div id=\"event_" + event_id + "\" class=\"event " + type.Replace(" ", "") + mine + past + "\" data-personnote=\"" + personnote + "\">"; //Start 1
 
                                 if(past == "") { 
                                     html += "<div class=\"wrapper\">";  //Start 2

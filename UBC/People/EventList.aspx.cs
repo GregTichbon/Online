@@ -14,6 +14,7 @@ namespace UBC.People
 {
     public partial class EventList : System.Web.UI.Page
     {
+        public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UBC_person_id"] == null)
@@ -35,7 +36,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    Lit_html.Text = "<tr><th>Event</th><th>Date</th><th>Participants</th><th>Edit</th></tr>";
+                    html = "<tr><th>Event</th><th>Date</th><th>Participants</th><th>Edit</th></tr>";
 
                     while (dr.Read())
                     {
@@ -47,12 +48,12 @@ namespace UBC.People
                         string participants = dr["Participants"].ToString();
 
                         string link = "<a href=\"event.aspx?id=" + event_id + "\">Edit</a>";
+                        string thedate = daterange.Substring(4, 9).Insert(7, "20");
 
 
-
-                        Lit_html.Text += "<tr>";
-                        Lit_html.Text += "<td>" + daterange + "</td><td>" + title + "</td><td>" + participants + "</td><td>" + link + "</td>";
-                        Lit_html.Text += "</tr>";
+                        html += "<tr data-date=\"" + thedate + "\">";
+                        html += "<td>" + daterange + "</td><td>" + title + "</td><td>" + participants + "</td><td>" + link + "</td>";
+                        html += "</tr>";
                     }
                 }
 

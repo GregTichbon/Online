@@ -209,7 +209,19 @@ namespace Generic
                     response = "IP Address = " + Convert.ToString(IP) + "<br />";
                 }
             }
+            System.Web.HttpContext context = System.Web.HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    response += addresses[0];
+                }
+            }
+
+            response += context.Request.ServerVariables["REMOTE_ADDR"];
 
             response += "<b>Browser Capabilities</b><br />"
                 + "Type = " + browser.Type + "<br />"

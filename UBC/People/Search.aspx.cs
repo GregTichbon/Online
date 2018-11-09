@@ -11,7 +11,10 @@ namespace UBC.People
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
         }
     }
 }

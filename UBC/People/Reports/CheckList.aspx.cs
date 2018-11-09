@@ -14,6 +14,7 @@ namespace UBC.People.Reports
 {
     public partial class CheckList : System.Web.UI.Page
     {
+        public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UBC_person_id"] == null)
@@ -36,7 +37,7 @@ namespace UBC.People.Reports
                 {
                     int c1 = 0;
 
-                    Lit_html.Text = "";
+                    html = "";
 
                     while (dr.Read())
                     {
@@ -45,7 +46,7 @@ namespace UBC.People.Reports
 
                         if (c1 == 1)
                         {
-                            Lit_html.Text += "<tr>";
+                            html += "<tr>";
                         }
                         //string id = dr["ltr_ctr"].ToString();
                         string person_id = dr["person_id"].ToString();
@@ -84,10 +85,10 @@ namespace UBC.People.Reports
 
 
 
-                        Lit_html.Text += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span>" + lastregistered  + "</td>";
+                        html += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span>" + lastregistered  + "</td>";
                         if(c1 == cols)
                         {
-                            Lit_html.Text += "</tr>" + "\r\n";
+                            html += "</tr>" + "\r\n";
                             c1 = 0;
                         }
 
@@ -95,11 +96,11 @@ namespace UBC.People.Reports
 
                     for (int f1 = c1; f1 < cols; f1++)
                     {
-                        Lit_html.Text += "<td>&nbsp;</td>";
+                        html += "<td>&nbsp;</td>";
                     }
                     if(c1 > 0)
                     {
-                        Lit_html.Text += "</tr>";
+                        html += "</tr>";
                     }
                 }
 

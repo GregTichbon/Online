@@ -264,11 +264,12 @@ namespace UBC.People
             string emailSubject = "Union Boat Club Rower Registration";
             string emailBCC = "";
             string screenTemplate = "RegisterScreen.xslt";
-            string host = "datainn.co.nz";
+            //string host = "datainn.co.nz";
+            string host = "70.35.207.87";
             string emailfrom = "ltr@datainn.co.nz";
             string emailfromname = "Union Boat Club";
             string password = "m33t1ng";
-            string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz";  //info@unionboatclub.co.nz
+            string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
  
 
             string path = Server.MapPath(".");

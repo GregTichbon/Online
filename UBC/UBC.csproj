@@ -341,6 +341,7 @@
     <Content Include="People\EventPlanner1.js" />
     <Content Include="People\Images\100.jpg" />
     <Content Include="People\Images\103.jpg" />
+    <Content Include="People\Images\105.jpg" />
     <Content Include="People\Images\96.jpg" />
     <Content Include="People\Posts.asmx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
@@ -353,6 +354,7 @@
     <Content Include="Test2.aspx" />
     <Content Include="Test2a.aspx" />
     <Content Include="Test3.html" />
+    <Content Include="TestEmail.aspx" />
     <Content Include="XMLFile1.xml" />
     <Content Include="XSLTFile1.xslt" />
     <None Include="packages.config" />
@@ -773,6 +775,13 @@
     </Compile>
     <Compile Include="Test2a.aspx.designer.cs">
       <DependentUpon>Test2a.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestEmail.aspx.cs">
+      <DependentUpon>TestEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestEmail.aspx.designer.cs">
+      <DependentUpon>TestEmail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Training\ZoneTraining.aspx.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>

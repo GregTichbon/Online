@@ -25,7 +25,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
-
+    <style>
+        .personnote {
+            color: red;
+        }
+    </style>
 
     <script>
         var tr_changed = [];
@@ -50,6 +54,17 @@
                     }
                 }
             });
+
+
+            $('#togglepeople').click(function () {
+                if ($(this).val() == "Show people") {
+                    $('#div_people').show();
+                    $(this).val('Hide people');
+                } else {
+                    $('#div_people').hide();
+                    $(this).val('Show people');
+                }
+            })
 
             $('#div_startdatetime').datetimepicker({
                 format: 'D MMM YYYY HH:mm',
@@ -210,12 +225,17 @@
                         show = true;
                         break;
                     case "Not noted":
-                        if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '' && $("#dd_role_" + personid).val() == '') {
+                        if ($("#dd_attendance_" + personid).val() == '' && $("#tb_note_" + personid).val() == '' && $("#dd_role_" + personid).val() == '' && $("#personnote_" + personid).text() == '') {
+                            show = true;
+                        }
+                        break;
+                    case "Only attended or noted":
+                        if ( ($("#dd_attendance_" + personid).val() != '' && $("#dd_attendance_" + personid).val() != 'No'  && $("#dd_attendance_" + personid).val() != 'Not going') || $("#dd_attendance_" + personid).val() != '' || $("#tb_note_" + personid).val() != '' || $("#dd_role_" + personid).val() != '' || $("#personnote_" + personid).text() != '') {
                             show = true;
                         }
                         break;
                     case "Only noted":
-                        if ($("#dd_attendance_" + personid).val() != 'No' || $("#tb_note_" + personid).val() != '' || $("#dd_role_" + personid).val() != '') {
+                        if ($("#dd_attendance_" + personid).val() != '' || $("#dd_attendance_" + personid).val() != '' || $("#tb_note_" + personid).val() != '' || $("#dd_role_" + personid).val() != '' || $("#personnote_" + personid).text() != '') {
                             show = true;
                         }
                         break;
@@ -224,7 +244,10 @@
                     found = false;
                     for (f1 = 0; f1 < category.length; f1++) {
                         usecategory = '|' + category[f1] + '|';
-                        if (personcategory.indexOf(usecategory) != -1 || $("#dd_attendance_" + personid).val() != 'No') {
+                        //console.log(usecategory);
+                        //console.log(personcategory);
+
+                        if (personcategory.indexOf(usecategory) != -1 || $("#dd_attendance_" + personid).val() != '') {
                             found = true;
                             break;
                         }
@@ -316,11 +339,11 @@
             </div>
         </div>
 
-
-
+        <input type="button" id="togglepeople" class="btn btn-info" value="Hide people" />
+        <div id="div_people">
+ 
        <%=html_persons %>
-
-
+ </div>
         <div class="form-group">
             <div class="col-sm-4">
             </div>

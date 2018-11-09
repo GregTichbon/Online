@@ -43,6 +43,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="table">
-        <asp:Literal ID="Lit_html" runat="server"></asp:Literal>
+       <%=html %>
     </table>
 </asp:Content>

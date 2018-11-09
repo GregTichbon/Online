@@ -82,23 +82,25 @@
     <div class="container" style="background-color: #FCF7EA">
         Use ||link|| to include the link, it will be displayed as &quot;here&quot; in the body of the email.<br />
         Also can use ||firstname||, ||caregivername||<br />
+        ||accesscode||<br />
+       ||username||<br />
+        ||tempphrase||
         <br />
         Email messages will not be sent where there is no email subject<br />
         Txt messages will not be sent where there is no text body.<br />
         <br />
         Email Subject:<br />
-        &nbsp;<asp:TextBox ID="tb_subject" runat="server" Width="512px">Union Boat Club Learn to Row 21 - 23 Sep</asp:TextBox><br />
+        &nbsp;<asp:TextBox ID="tb_subject" runat="server" Width="512px">Union Boat Club  </asp:TextBox><br />
         <br />
         Email Body (HTML):<br />
         &nbsp;<asp:TextBox ID="tb_htmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
-&lt;p&gt;Just a reminder of the Learn to Row Weekend this weekend.&lt;/p&gt;&lt;p&gt;For more information, to check and maintain your details,  and to confirm you are coming please go to ||link||.&lt;/p&gt;&lt;p&gt;Thanks&lt;/p&gt;</asp:TextBox><br />
+&lt;p&gt;
+&lt;/p&gt;</asp:TextBox><br />
         <br />
         Email/Facebook Body (Text):<br />
         &nbsp;<asp:TextBox ID="tb_textbody" runat="server" Height="110px" TextMode="MultiLine" Width="902px">Hi ||firstname||
 
-Just a reminder of the Learn to Row Weekend this weekend.
-
-For more information, to check and maintain your details,  and to confirm you are coming please go to ||link||.</asp:TextBox><br />
+</asp:TextBox><br />
         <br />
         Email Reply-To Address:<br />
         &nbsp;<asp:TextBox ID="tb_replyto" runat="server" Width="512px">Not currently used</asp:TextBox><br />
@@ -106,15 +108,16 @@ For more information, to check and maintain your details,  and to confirm you ar
         Text Body:<br />
         &nbsp;<asp:TextBox ID="tb_txt" runat="server" Height="122px" TextMode="MultiLine" Width="910px">Hi ||firstname||
 
-Just a reminder of the Learn to Row Weekend this weekend.
-
-For more information, to check and maintain your details,  and to confirm you are coming please go to ||link||.</asp:TextBox><br />
+</asp:TextBox><br />
         <br />
 
         <br />
         <hr />
 
         <%=html_facebook %>
+
+
+
 
         <select class="form-control" id="dd_categories_filter" name="dd_categories_filter" multiple="multiple">
           <%= categories_values %>

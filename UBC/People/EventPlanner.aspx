@@ -93,8 +93,9 @@
     <input type="hidden" id="hf_person_colour" name="hf_person_colour" value="<%= hf_person_colour %>" />
     <input type="hidden" id="hf_changes" name="hf_changes" />
 
+    <%if( 1 == 2) { %>
     <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn_submit" Style="width: 100%; height: 60px" Text="Save" />
-
+    <%}%> 
     <%= html%>
     <div id="div_coaches" title="Select Coach(es)" style="display: none">
         <%= coaches_html %>

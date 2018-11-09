@@ -46,6 +46,7 @@ namespace UBC.People
             cmd.Parameters.Add("@attendance", SqlDbType.VarChar).Value = formVars.Form("attendance");
             cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = formVars.Form("note");
             cmd.Parameters.Add("@role", SqlDbType.VarChar).Value = formVars.Form("role");
+            cmd.Parameters.Add("@personnote", SqlDbType.VarChar).Value = formVars.Form("personnote");
 
             cmd.Connection = con;
             try

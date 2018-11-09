@@ -24,6 +24,10 @@ namespace UBC.People
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack) {
+                if (Session["UBC_person_id"] == null)
+                {
+                    Response.Redirect("~/people/security/login.aspx");
+                }
 
                 if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
                 {
@@ -124,13 +128,16 @@ namespace UBC.People
                                     foreach (string thecoach in coaches)
                                     {
                                         string[] thecoachparts = thecoach.Split(',');
-                                        string remove = "";
-
-                                        if (mode == "admin" || thecoachparts[0] == Session["UBC_person_id"].ToString())
+                                        if (thecoachparts[3] != "Not Going" && thecoachparts[3] != "No")
                                         {
-                                            remove = "<span class=\"remove\"></span>";
+                                            string remove = "";
+
+                                            if (mode == "admin" || thecoachparts[0] == Session["UBC_person_id"].ToString())
+                                            {
+                                                remove = "<span class=\"remove\"></span>";
+                                            }
+                                            html += "<div class=\"wrapper\"><div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div>" + remove + "</div>";
                                         }
-                                        html += "<div class=\"wrapper\"><div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div>" + remove +"</div>";
                                     }
 
                                 }

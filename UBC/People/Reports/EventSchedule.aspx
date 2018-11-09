@@ -138,6 +138,8 @@
             //$('.event:not(.past)').dblclick(function () {
             $('.event:not(.past)').click(function () {
                 attend = $(this);
+                personnote = $(this).attr('data-personnote');
+                $('#personnote').val(personnote);
 
                 $("#div_attendance").dialog({
                     resizable: false,
@@ -157,9 +159,11 @@
                 attendance = $(this).text();
                 event_id = $(attend).attr('id');
                 $('#attend_' + event_id).attr('class', 'attend' + attendance.replace(' ', ''));
+                personnote = $('#personnote').val();
+                $(attend).attr('data-personnote',personnote);
                 $("#div_attendance").dialog('close');
 
-                var arForm = [{ "name": "person_id", "value": "<%=person_id%>" }, { "name": "event_id", "value": event_id.substring(6) }, { "name": "attendance", "value": attendance }];
+                var arForm = [{ "name": "person_id", "value": "<%=person_id%>" }, { "name": "event_id", "value": event_id.substring(6) }, { "name": "attendance", "value": attendance }, { "name": "personnote", "value": personnote }];
 
                 var formData = JSON.stringify({ formVars: arForm });
 
@@ -192,14 +196,16 @@
     <%= html%>
         <div id="div_attendance" title="Select attendance option" style="display: none">
         <%= attendance_html %>
+            <textarea rows="4" style="width:100%" id="personnote"></textarea>
     </div>
 
     <div id="div_event" title="Event" style="display: none; width: 800px"></div>
-        <div id="div_information" title="Information">
-            <p>Events in the same category that you are registered in show by default.</p>
-            <p>You may see other events by using the &quot;Show All&quot; button at the top left of the screen.</p>
-            <p>You can also hide these other events with the same button.</p>
-            <p>Mouse over an event description to see more detail, if it has been loaded.</p>
-            <p>Click on the title to select whether you are intending to attend or not, &quot;maybe&quot; is also an option.&nbsp; This is very useful for planning of events.&nbsp; You may return and change your attendance &quot;status&quot; as often as you like.</p></div>
-    <p>CLOSE THIS WINDOW TO CONTINUE</p>
+    <div id="div_information" title="Information">
+        <p>Events in the same category that you are registered in show by default.</p>
+        <p>You may see other events by using the &quot;Show All&quot; button at the top left of the screen.</p>
+        <p>You can also hide these other events with the same button.</p>
+        <p>Mouse over an event description to see more detail, if it has been loaded.</p>
+        <p>Click on the title to select whether you are intending to attend or not, &quot;maybe&quot; is also an option.&nbsp; This is very useful for planning of events.&nbsp; You may return and change your attendance &quot;status&quot; as often as you like.</p>
+        <p>CLOSE THIS WINDOW TO CONTINUE</p>
+    </div>
 </asp:Content>

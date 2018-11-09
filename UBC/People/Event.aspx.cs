@@ -39,7 +39,7 @@ namespace UBC.People
 
 
         public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going","Not Going" };
-        public string[] type_values = new string[6] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting" };
+        public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other"};
         public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise" ,"Coach Support", "Support" };
         public string categories_values;
         protected void Page_Load(object sender, EventArgs e)
@@ -124,19 +124,25 @@ namespace UBC.People
                         SqlDataReader dr = cmd2.ExecuteReader();
                         if (dr.HasRows)
                         {
+                            html_persons = "";
+                            //html_persons = "<div id=\"accordion\">";
+                            //html_persons += "<h3>People</h3>";
 
-
-                            html_persons = "<hr />";
+                            html_persons += "<hr />";
                             html_persons += "<div id=\"div_count\"></div>";
                             //html_persons += "<a id=\"btn_notes\" class=\"btn btn-info\" role=\"button\">Show only noted</a>";
-                            html_persons += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Not noted</option></select>";
 
                             functionoptions.Clear();
                             functionoptions.Add("storedprocedure", "");
                             functionoptions.Add("usevalues", "");
                             categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                            html_persons += "<select class=\"form-control\" id=\"dd_categories_filter\" name=\"dd_categories_filter\" multiple=\"multiple\">" + categories_values + "</select>";
 
-                            html_persons += "<select class=\"form-control\" id=\"dd_categories_filter\" name=\"dd_categories_filter\" multiple=\"multiple\">" + categories_values + "</select><button type=\"button\" id=\"btn_refresh\">Refresh</button><br />";
+                            html_persons += "<div class=\"form-inline\">";
+                            html_persons += "<select class=\"form-control\" id=\"dd_show\" name=\"dd_show\"><option selected>All</option><option>Only noted</option><option>Only attended or noted</option><option>Not noted</option></select>";
+                            html_persons += "&nbsp;&nbsp;<button type=\"button\" class=\"submit btn btn-info\" id=\"btn_refresh\">Refresh</button>";
+                            html_persons += "</div>";
+
                             html_persons += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Role</th><th>Note</th></tr>";
 
                             while (dr.Read())
@@ -145,12 +151,13 @@ namespace UBC.People
                                 string name = dr["name"].ToString();
                                 string attendance = dr["attendance"].ToString();
                                 string note = dr["note"].ToString();
+                                string personnote = dr["personnote"].ToString();
                                 string person_id = dr["person_id"].ToString();
                                 string role = dr["role"].ToString();
                                 string category = dr["category"].ToString();
 
                                 string dd_attendance = "<select class=\"form-control tr_field\" id=\"dd_attendance_" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
-                                dd_attendance += Functions.populateselect(attendance_values, attendance);
+                                dd_attendance += Functions.populateselect(attendance_values, attendance,"");
                                 dd_attendance += "</select>";
 
                                 string dd_role = "<select class=\"form-control tr_field\" id=\"dd_role_" + person_id + "\" name=\"dd_role_" + person_id + "\">";
@@ -162,11 +169,12 @@ namespace UBC.People
                                 html_persons += "<td>" + name + "</td>";
                                 html_persons += "<td>" + dd_attendance + "</td>";
                                 html_persons += "<td>" + dd_role + "</td>";
-                                html_persons += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
+                                html_persons += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea><span class=\"personnote\" id=\"personnote_" + person_id + "\">" + personnote + "</span></td>";
                                 html_persons += "</tr>";
                             }
 
                             html_persons += "</table>";
+                            //html_persons += "</div>";
 
                         }
 
@@ -260,7 +268,7 @@ namespace UBC.People
                     }
                 }
                 */
-                string hf_tr_changed = Request.Form["hf_tr_changed"].ToString();
+                            string hf_tr_changed = Request.Form["hf_tr_changed"].ToString();
                 if (hf_tr_changed != "")
                 {
                     string[] tr_changed = hf_tr_changed.Split(',');
