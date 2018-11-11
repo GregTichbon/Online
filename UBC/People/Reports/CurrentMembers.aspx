@@ -30,6 +30,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="background-color: #FCF7EA;width:100%">
+        <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
        <h1>Union Boat Club - Current members
             </h1>
         <table class="table">

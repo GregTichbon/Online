@@ -25,6 +25,7 @@ namespace UBC.People
     public partial class Event : System.Web.UI.Page
     {
         public string event_id;
+        //public string guid;
         public string title;
         public string description;
         public string allday;
@@ -57,6 +58,7 @@ namespace UBC.People
 
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
+                //guid = Request.QueryString["guid"];
                 event_id = Request.QueryString["id"];
 
                 if (event_id != "new")
@@ -66,6 +68,7 @@ namespace UBC.People
 
                     SqlCommand cmd1 = new SqlCommand("get_event", con);
                     cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+                    //cmd1.Parameters.Add("@guid", SqlDbType.VarChar).Value = guid;
 
                     cmd1.CommandType = CommandType.StoredProcedure;
                     cmd1.Connection = con;

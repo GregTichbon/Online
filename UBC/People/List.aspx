@@ -1,10 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="UBC.People.List" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="UBC.People.List" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Union Boat Club - People List</title>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
@@ -29,20 +25,18 @@
     </script>
 
 
-</head>
-<body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="background-color: #FCF7EA">
-        <form id="form1" runat="server">
-            <h1>Union Boat Club - Person Selection
-            </h1>
+        <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" />
+        <h1>Union Boat Club - Person Selection
+        </h1>
 
-            <h2><a href="maint.aspx?id=new" target="edit">New</a></h2>
-            <table class="table">
-                <%= html %>
-            </table>
+        <h2><a href="maint.aspx?id=new" target="edit">New</a></h2>
+        <table class="table">
+            <%= html %>
+        </table>
 
-
-        </form>
     </div>
-</body>
-</html>
+</asp:Content>
+

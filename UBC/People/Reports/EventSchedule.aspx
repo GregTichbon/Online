@@ -32,6 +32,7 @@
         }
 
         .event {
+            position:relative;
             border: solid;
             border-color: red;
             padding: 5px;
@@ -86,6 +87,11 @@
         .attendNotGoing:before {
             content:url(../../Dependencies/Images/cross1.png);
         }
+        .people {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
         /*
             .mine {
             border-width:20px;
@@ -114,8 +120,20 @@
             $("#div_information").dialog({
                 resizable: false,
                 width: 800,
-                    modal: true
-                });
+                modal: true
+            });
+
+            $('.people').click(function (e) {
+                event_id = $(this).parent().attr('id').substring(6);
+                $("#div_people").load("../data.aspx?mode=eventpeople&event_id=" + event_id);
+                $("#div_people").dialog({
+                resizable: false,
+                width: 800,
+                modal: true
+            });
+
+                e.stopPropagation();
+            })
 
             $('.title').tooltip({
                 content: function () {
@@ -142,6 +160,7 @@
                 $('#personnote').val(personnote);
 
                 $("#div_attendance").dialog({
+                    width: 600,
                     resizable: false,
                     modal: true
                 });
@@ -156,7 +175,7 @@
 
 
             $('.attendance').click(function () {
-                attendance = $(this).text();
+                attendance = $(this).val();
                 event_id = $(attend).attr('id');
                 $('#attend_' + event_id).attr('class', 'attend' + attendance.replace(' ', ''));
                 personnote = $('#personnote').val();
@@ -188,16 +207,17 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+     <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
     <input type="button" id="show" value="Show all" />
 
 
 
     <%= html%>
-        <div id="div_attendance" title="Select attendance option" style="display: none">
-        <%= attendance_html %>
+        <div id="div_attendance" title="Select attendance option" style="width:600px;display: none">
             <textarea rows="4" style="width:100%" id="personnote"></textarea>
+        <%= attendance_html %>
     </div>
+     <div id="div_people" title="People" style="display: none; width: 800px"></div>
 
     <div id="div_event" title="Event" style="display: none; width: 800px"></div>
     <div id="div_information" title="Information">

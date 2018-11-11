@@ -335,6 +335,7 @@
     <Content Include="People\BankImport.aspx" />
     <Content Include="Dependencies\Images\question.png" />
     <Content Include="Dependencies\Images\questionsmall.png" />
+    <Content Include="People\data.aspx" />
     <Content Include="People\EventDialog.aspx" />
     <Content Include="People\eventdialogclose.html" />
     <Content Include="People\EventPlanner2.js" />
@@ -581,6 +582,13 @@
     <Compile Include="People\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Event.aspx.cs">
       <DependentUpon>Event.aspx</DependentUpon>

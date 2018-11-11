@@ -297,6 +297,16 @@
             padding-top: 1px;
             background: #C00000;
         }
+
+        .toprighticon {
+            border-style: none;
+            border-color: inherit;
+            border-width: 0;
+            position: fixed;
+            top: 5px;
+            right: 15px;
+            z-index: 9999;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
@@ -304,6 +314,12 @@
 
 
         $(document).ready(function () {
+
+            $('#menu').click(function () {
+                window.location.href = '../default.aspx';
+            })
+
+
             $('#btn_calculate').click(function () {
                 seconds = parseInt($('#minutes').val() * 60) + parseInt($('#seconds').val());
                 workload = seconds / 4;
@@ -360,7 +376,9 @@
 
                 $('#M_2').text('> ' + lastsplit);
                 //--------------------------------------------------
+
             })
+
         }); //document.ready
 
         function secstotime(val) {
@@ -379,7 +397,11 @@
 
 </head>
 <body>
+
+  
+
     <form id="form1" runat="server">
+            <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
         <table style="border-collapse: collapse">
             <tr>
                 <td class="auto-style18" colspan="2">2K Erg Time</td>

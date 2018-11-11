@@ -36,6 +36,10 @@
 
         $(document).ready(function () {
 
+             $('#eventlist').click(function () {
+                window.location.href = "<%: ResolveUrl("eventlist.aspx")%>";
+            })
+
             $("#form1").validate({
                 rules: {
                     tb_startdatetime: {
@@ -271,7 +275,7 @@
     <input type="hidden" id="hf_tr_changed" name="hf_tr_changed" />
     <input type="hidden" id="hf_event_id" name="hf_event_id" value="<%: event_id %>" />
     <div class="container" style="background-color:#FCF7EA">
-     
+      <div class="toprighticon">  <input type="button" id="eventlist" class="btn btn-info" value="Event List" />  <input type="button" id="menu" class="btn btn-info" value="MENU" /> </div>
         <h1>Union Boat Club - Event
         </h1>
 

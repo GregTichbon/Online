@@ -10,6 +10,6 @@
 namespace UBC.People {
     
     
-    public partial class List {
+    public partial class data1 {
     }
 }

@@ -181,6 +181,7 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
+    <Content Include="SMS\TOHRowing.aspx" />
     <Content Include="UBC\LTR.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -564,6 +565,13 @@
     </Compile>
     <Compile Include="SMS\test2.aspx.designer.cs">
       <DependentUpon>test2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\TOHRowing.aspx.cs">
+      <DependentUpon>TOHRowing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\TOHRowing.aspx.designer.cs">
+      <DependentUpon>TOHRowing.aspx</DependentUpon>
     </Compile>
     <Compile Include="StrengthFinders\Entry.aspx.cs">
       <DependentUpon>Entry.aspx</DependentUpon>

@@ -92,7 +92,7 @@
     <input type="hidden" id="hf_person_name" name="hf_person_name" value="<%= hf_person_name %>" />
     <input type="hidden" id="hf_person_colour" name="hf_person_colour" value="<%= hf_person_colour %>" />
     <input type="hidden" id="hf_changes" name="hf_changes" />
-
+    <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
     <%if( 1 == 2) { %>
     <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn_submit" Style="width: 100%; height: 60px" Text="Save" />
     <%}%> 

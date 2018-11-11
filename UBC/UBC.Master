@@ -9,6 +9,15 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Dependencies/UBC.css" rel="stylesheet" />
+    <script>
+
+        $(document).ready(function () {
+            $('#menu').click(function () {
+                window.location.href = "<%: ResolveUrl("~/default.aspx")%>";
+            })
+        });
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server" class="form-horizontal" role="form">

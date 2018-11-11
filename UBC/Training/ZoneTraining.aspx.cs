@@ -12,6 +12,10 @@ namespace UBC.Training
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "101"))
             {
                 Response.Redirect("~/default.aspx");

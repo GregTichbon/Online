@@ -42,6 +42,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
     <table class="table">
        <%=html %>
     </table>

@@ -9,6 +9,7 @@
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
+    <link href="<%: ResolveUrl("~/Dependencies/UBC.css")%>" rel="stylesheet" />
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
@@ -65,6 +66,10 @@
                 alert(JSON.stringify(results_grid.getChanges()));
                 alert(JSON.stringify(results_grid.getAll(true)));
 
+            })
+
+            $('#menu').click(function () {
+                window.location.href = '../default.aspx';
             })
 
             $('#div_birthdate').datetimepicker({
@@ -221,6 +226,11 @@
     <div class="container" style="background-color: #FCF7EA">
         <form id="form1" runat="server" class="form-horizontal" role="form">
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
+
+
+			
+			  <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
+
             <h1>Union Boat Club - Person Maintenance
             </h1>
 

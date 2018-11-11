@@ -36,7 +36,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    html = "<tr><th>Event</th><th>Date</th><th>Participants</th><th>Edit</th></tr>";
+                    html = "<tr><th>Event</th><th>Date</th><th>Participants</th><th>Categories</th><th>Edit</th></tr>";
 
                     while (dr.Read())
                     {
@@ -44,15 +44,15 @@ namespace UBC.People
                         string event_id = dr["event_id"].ToString();
                         string title = dr["title"].ToString();
                         string daterange = dr["daterange"].ToString();
-                        string description = dr["description"].ToString();
+                        string description = dr["description"].ToString().Replace("\r\n", "<br />"); ;
                         string participants = dr["Participants"].ToString();
+                        string categories = dr["categories"].ToString().Replace("|","<br />");
 
                         string link = "<a href=\"event.aspx?id=" + event_id + "\">Edit</a>";
                         string thedate = daterange.Substring(4, 9).Insert(7, "20");
 
-
-                        html += "<tr data-date=\"" + thedate + "\">";
-                        html += "<td>" + daterange + "</td><td>" + title + "</td><td>" + participants + "</td><td>" + link + "</td>";
+                        html += "<tr class=\"title\" title=\"" + description + "\" data-date=\"" + thedate + "\">";
+                        html += "<td>" + daterange + "</td><td>" + title + "</td><td>" + participants + "</td><td>" + categories + "</td><td>" + link + "</td>";
                         html += "</tr>";
                     }
                 }

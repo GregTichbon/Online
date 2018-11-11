@@ -25,6 +25,11 @@ namespace UBC.People.Reports
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
+            Boolean coachmode = false;
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
+            {
+                coachmode = true;
+            }
 
             if (!IsPostBack)
             {
@@ -33,7 +38,7 @@ namespace UBC.People.Reports
                 string[] attendance_values = new string[3] { "Maybe", "Going", "Not Going" };
 
                 foreach(string attendance in attendance_values) { 
-                    attendance_html += "<div class=\"attendance\">" + attendance + "</div>";
+                    attendance_html += "<input type='button' class=\"attendance\" value=\"" + attendance + "\">";
                 }
 
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -138,7 +143,7 @@ namespace UBC.People.Reports
                                     html += "<span id=\"attend_event_" + event_id + "\" class=\"attend" + attendance + "\"></span>";
 
                                 }
-                                html += "<div class=\"title\" title=\"" + description + "\">" + time + " " + title + "</div>";
+                                html += "<div class=\"title\" title=\"" + description + "\">" + time + "<br />" + title + "</div>";
                                 if (past == "")
                                 {
                                     //html += "<span id=\"attend_event_" + event_id + "\" class=\"attend" + attendance + "\"></span>";
@@ -158,6 +163,9 @@ namespace UBC.People.Reports
                                     }
                                     html += "</div>";  //End 3
 
+                                }
+                                if (coachmode) { 
+                                    html += "<span class=\"people\">People</span>";
                                 }
                                 html += "</div>";  //End 1
                             }

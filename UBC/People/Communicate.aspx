@@ -80,6 +80,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="background-color: #FCF7EA">
+         <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
         Use ||link|| to include the link, it will be displayed as &quot;here&quot; in the body of the email.<br />
         Also can use ||firstname||, ||caregivername||<br />
         ||accesscode||<br />

@@ -42,12 +42,7 @@ namespace UBC.People.Reports
                     while (dr.Read())
                     {
 
-                        c1++;
-
-                        if (c1 == 1)
-                        {
-                            html += "<tr>";
-                        }
+                       
                         //string id = dr["ltr_ctr"].ToString();
                         string person_id = dr["person_id"].ToString();
                         string firstname = dr["firstname"].ToString();
@@ -57,36 +52,50 @@ namespace UBC.People.Reports
                         string AgeatDate = dr["AgeatDate"].ToString();
                         string atDate = dr["atDate"].ToString();
                         string lastregistered = dr["lastregistered"].ToString();
+                        string categories = "|" + dr["categories"].ToString() + "|";
 
-                        string schoolage = "";
-                        if(school != "")
+                        if (categories.Contains("|Active|"))
                         {
-                            schoolage += school + " ";
+                            c1++;
+
+                            if (c1 == 1)
+                            {
+                                html += "<tr>";
+                            }
+
+                            string schoolage = "";
+                            if (school != "")
+                            {
+                                schoolage += school + " ";
+                            }
+                            if (schoolyear != "")
+                            {
+                                schoolage += "Year " + schoolyear + " ";
+                            }
+                            if (AgeatDate != "")
+                            {
+                                schoolage += "Age: " + AgeatDate + " at " + atDate;
+                            }
+
+                            if (lastregistered != "")
+                            {
+                                lastregistered = "<br />Last Registered: " + Convert.ToDateTime(lastregistered).ToString("d MMM yy");
+                            }
+
+
+
+                            string guid = dr["guid"].ToString();
+                            //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
+                            string link = "<a href=\"maint.aspx?id=" + guid + "\">Edit</a>";
+                            string image = "<img src=\"../Images/" + person_id + ".jpg\" style=\"height: 100px\" />";
+
+
+
+                            html += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span>" + lastregistered + "</td>";
+
                         }
-                        if (schoolyear != "")
-                        {
-                            schoolage += "Year " + schoolyear + " ";
-                        }
-                        if (AgeatDate != "")
-                        {
-                            schoolage += "Age: " + AgeatDate + " at " + atDate;
-                        }
 
-                        if(lastregistered != "")
-                        {
-                            lastregistered = "<br />Last Registered: " + Convert.ToDateTime( lastregistered).ToString("d MMM yy");
-                        }
-
-
-                        string guid = dr["guid"].ToString();
-                        //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
-                        string link = "<a href=\"maint.aspx?id=" + guid + "\">Edit</a>";
-                        string image = "<img src=\"../Images/" + person_id + ".jpg\" style=\"height: 100px\" />";
-
-
-
-                        html += "<td>" + image + "<br /><span id=\"" + guid + "\" class=\"span_name\">" + firstname + " " + lastname + "</span><br /><span class=\"span_school\">" + schoolage + "</span>" + lastregistered  + "</td>";
-                        if(c1 == cols)
+                        if (c1 == cols)
                         {
                             html += "</tr>" + "\r\n";
                             c1 = 0;
@@ -98,7 +107,7 @@ namespace UBC.People.Reports
                     {
                         html += "<td>&nbsp;</td>";
                     }
-                    if(c1 > 0)
+                    if (c1 > 0)
                     {
                         html += "</tr>";
                     }
