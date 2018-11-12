@@ -119,7 +119,11 @@ namespace UBC.People
                                     time = Convert.ToDateTime(startdatetime).ToString("HH:mm") + " - " + Convert.ToDateTime(enddatetime).ToString("HH:mm");
                                 }
 
-                                html += "<div id=\"event_" + event_id + "\" class=\"event\"><div class=\"wrapper\"><div class=\"title\" title=\"" + description + "\">" + time + " " + title + "</div><span class=\"add\"></span></div>";
+                                html += "<div id=\"event_" + event_id + "\" class=\"event\">";
+                                html += "   <div class=\"wrapper\">";
+                                html += "      <div class=\"title\" title=\"" + description + "\">" + time + "<br />" + title + "</div>";
+                                html += "      <span class=\"add\"></span>";
+                                html += "   </div>";
 
                                 if (coach != "")
                                 {
@@ -130,17 +134,20 @@ namespace UBC.People
                                         string[] thecoachparts = thecoach.Split(',');
                                         if (thecoachparts[3] != "Not Going" && thecoachparts[3] != "No")
                                         {
-                                            string remove = "";
-
+                                           
+                                            html += "<div class=\"wrapper\">";
+                                            html += "<div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div>";
                                             if (mode == "admin" || thecoachparts[0] == Session["UBC_person_id"].ToString())
                                             {
-                                                remove = "<span class=\"remove\"></span>";
+                                                html += "<span class=\"remove\"></span>";
                                             }
-                                            html += "<div class=\"wrapper\"><div class=\"person\" id=\"coach_event_" + event_id + "_" + thecoachparts[0] + "\" style=\"background-color:" + thecoachparts[2] + ";\">" + thecoachparts[1] + "</div>" + remove + "</div>";
+                                            html += "</div>";
                                         }
                                     }
 
                                 }
+                                html += "   <br /><span class=\"people\">People</span>";
+
                                 html += "</div>";
                             }
 

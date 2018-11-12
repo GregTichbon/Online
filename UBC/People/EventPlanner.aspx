@@ -32,7 +32,8 @@
         }
 
         .event {
-            border: solid;
+             position:relative;
+             border: solid;
             border-color: red;
             padding: 5px;
             margin: 2px;
@@ -70,6 +71,11 @@
             right: 2px;
             cursor: pointer;
         }
+        .people {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
 
        
 
@@ -84,6 +90,22 @@
 
     
     <script src="<%: script %>"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.people').click(function (e) {
+                event_id = $(this).parent().attr('id').substring(6);
+                $("#div_people").load("data.aspx?mode=eventpeople&event_id=" + event_id);
+                $("#div_people").dialog({
+                    resizable: false,
+                    width: 800,
+                    modal: true
+                });
+
+                e.stopPropagation();
+            })
+        });
+    </script>
 
 
 </asp:Content>
@@ -100,5 +122,7 @@
     <div id="div_coaches" title="Select Coach(es)" style="display: none">
         <%= coaches_html %>
     </div>
+         <div id="div_people" title="People" style="display: none; width: 800px"></div>
+
     <div id="div_event" title="Event" style="display: none;width:800px"></div>
 </asp:Content>

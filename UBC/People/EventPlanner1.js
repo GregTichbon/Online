@@ -3,6 +3,7 @@ var changed = [];
 
 $(document).ready(function () {
 
+
     //$('.remove').click(function () {
     $(document).on('click', '.remove', function () {
         event_person = $(this).prev().attr("id").substring(12);

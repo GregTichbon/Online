@@ -127,10 +127,10 @@
                 event_id = $(this).parent().attr('id').substring(6);
                 $("#div_people").load("../data.aspx?mode=eventpeople&event_id=" + event_id);
                 $("#div_people").dialog({
-                resizable: false,
-                width: 800,
-                modal: true
-            });
+                    resizable: false,
+                    width: 800,
+                    modal: true
+                });
 
                 e.stopPropagation();
             })
