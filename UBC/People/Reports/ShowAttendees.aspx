@@ -1,10 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="CurrentMembers.aspx.cs" Inherits="UBC.People.Reports.CurrentMembers" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="ShowAttendees.aspx.cs" Inherits="UBC.People.Reports.ShowAttendees" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <!-- Style Sheets -->
+       <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
@@ -18,8 +16,8 @@
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
 
-    <script>
 
+    <script>
         $(document).ready(function () {
             $('#export').click(function () {
                 var table = "<table>";
@@ -62,26 +60,24 @@
                 });
                 //alert(table);
             });
-
         });
-
     </script>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="background-color: #FCF7EA; width: 100%">
-          <div class="toprighticon">
+   
+    <div class="container" style="background-color: #FCF7EA">
+        <div class="toprighticon">
             <input type="button" id="export" class="btn btn-info" value="Export" />
             <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>
-        <h1>Union Boat Club - Current members
+        <h1>Union Boat Club - Attendees
         </h1>
-        <table class="table">
-            <%= html %>
-        </table>
 
-        <div id="div_download" title="Download" style="display: none;">
-            <div id="div_downloadtext"></div>
-        </div>
+ 
+            <%= html %>
+ 
+            <div id="div_download" title="Download" style="display: none;">
+        <div id="div_downloadtext"></div>
+    </div>
     </div>
 </asp:Content>

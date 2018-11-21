@@ -47,6 +47,9 @@
     <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
@@ -54,6 +57,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -344,11 +349,14 @@
     <Content Include="People\Images\103.jpg" />
     <Content Include="People\Images\105.jpg" />
     <Content Include="People\Images\96.jpg" />
+    <Content Include="People\%24Notes\%24Notes.txt" />
     <Content Include="People\Posts.asmx" />
+    <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
+    <Content Include="People\Reports\ShowAttendees.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
     <Content Include="People\Security\LogOut.aspx" />
@@ -460,6 +468,7 @@
     <Content Include="Training\ZoneTraining.aspx" />
     <Content Include="UBC.Master" />
     <Content Include="People\Documents\Parent Information 2018.pdf" />
+    <Content Include="People\Documents\JohnTrophyRegatta.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">
@@ -671,6 +680,13 @@
     <Compile Include="People\Reports\CheckList.aspx.designer.cs">
       <DependentUpon>CheckList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\CurrentCategoriesMatrix.aspx.cs">
+      <DependentUpon>CurrentCategoriesMatrix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CurrentCategoriesMatrix.aspx.designer.cs">
+      <DependentUpon>CurrentCategoriesMatrix.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\CurrentMembers.aspx.cs">
       <DependentUpon>CurrentMembers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -698,6 +714,13 @@
     </Compile>
     <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
       <DependentUpon>LoginRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\ShowAttendees.aspx.cs">
+      <DependentUpon>ShowAttendees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\ShowAttendees.aspx.designer.cs">
+      <DependentUpon>ShowAttendees.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>

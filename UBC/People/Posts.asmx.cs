@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
+using System.Xml;
+using OfficeOpenXml;
+using System.IO;
+using Generic;
 
 namespace UBC.People
 {
@@ -20,7 +24,6 @@ namespace UBC.People
 
     public class Posts : System.Web.Services.WebService
     {
-
         [WebMethod]
         public string update_event_person(NameValue[] formVars)    //you can't pass any querystring params
         {
@@ -71,52 +74,142 @@ namespace UBC.People
             string passresult = JS.Serialize(resultclass);
             return (passresult);
         }
-    }
 
-    #region classes
-    public class NameValue
-    {
-        public string name { get; set; }
-        public string value { get; set; }
-    }
-
-    public class standardResponse
-    {
-        public string status;
-        public string message;
-    }
-
-    #endregion
-    public static class NameValueExtensionMethods
-    {
-        /// <summary>
-        /// Retrieves a single form variable from the list of
-        /// form variables stored
-        /// </summary>
-        /// <param name="formVars"></param>
-        /// <param name="name">formvar to retrieve</param>
-        /// <returns>value or string.Empty if not found</returns>
-        public static string Form(this NameValue[] formVars, string name)
+        [WebMethod]
+        public string TabletoExcelCSV(string table)    //you can't pass any querystring params
         {
-            var matches = formVars.Where(nv => nv.name.ToLower() == name.ToLower()).FirstOrDefault();
-            if (matches != null)
-                return matches.value;
-            return string.Empty;
-        }
+            /*
+              Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+              if (xlApp == null)
+              {
+                  string error = ("Excel is not properly installed!!");
+              }
+              Microsoft.Office.Interop.Excel.Workbook xlWorkBook = xlApp.Workbooks.Add(Type.Missing);
+              Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+              xlWorkSheet.Name = "RowingExport";
 
-        /// <summary>
-        /// Retrieves multiple selection form variables from the list of 
-        /// form variables stored.
-        /// </summary>
-        /// <param name="formVars"></param>
-        /// <param name="name">The name of the form var to retrieve</param>
-        /// <returns>values as string[] or null if no match is found</returns>
-        public static string[] FormMultiple(this NameValue[] formVars, string name)
-        {
-            var matches = formVars.Where(nv => nv.name.ToLower() == name.ToLower()).Select(nv => nv.value).ToArray();
-            if (matches.Length == 0)
-                return null;
-            return matches;
+
+              int r1 = 0;
+              int c1 = 0;
+              XmlDocument doc = new XmlDocument();
+              doc.LoadXml(table);
+
+              foreach (XmlNode trnode in doc.DocumentElement.ChildNodes) //TR
+              {
+                  r1++;
+                  c1 = 0;
+                  foreach (XmlNode tdnode in trnode.ChildNodes)  //TD
+                  {
+                      c1++;
+                      string text = tdnode.InnerText;
+                      if (tdnode.Name == "th")
+                      {
+                          string x = tdnode.Name;
+                          xlWorkSheet.Cells[r1, c1].Font.Bold = true;
+                      }
+                      xlWorkSheet.Cells[r1, c1] = text;
+
+                      //string attr = tdnode.Attributes["colspan"]?.InnerText;
+                  }
+              }
+
+              //xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(2);
+              //xlWorkSheet.Cells[1, 1] = "Sheet 2 content";
+
+              xlWorkBook.SaveAs("exceltest1.xlsx");
+              xlWorkBook.Close();
+              xlApp.Quit();
+          */
+            Functions functions = new Functions();
+            string filename = functions.getReference() + ".xlsx";
+            string fullfilename = Server.MapPath(".") + "\\downloads\\" + filename;
+            using (var p = new ExcelPackage())
+            {
+                //A workbook must have at least one cell, so lets add one... 
+                var ws = p.Workbook.Worksheets.Add("Rowing");
+
+
+                int r1 = 0;
+                int c1 = 0;
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(table);
+
+                foreach (XmlNode trnode in doc.DocumentElement.ChildNodes) //TR
+                {
+                    r1++;
+                    c1 = 0;
+                    foreach (XmlNode tdnode in trnode.ChildNodes)  //TD
+                    {
+                        c1++;
+                        string text = tdnode.InnerText;
+                        if (tdnode.Name == "th")
+                        {
+                            //string x = tdnode.Name;
+                            //ws.Cells[r1, c1].Font.Bold = true;
+                        }
+                        ws.Cells[r1, c1].Value = text;
+
+                        //string attr = tdnode.Attributes["colspan"]?.InnerText;
+                    }
+                }
+                p.SaveAs(new FileInfo(fullfilename));
+
+            }
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Complete";
+            resultclass.message = filename;
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
         }
+    }
+}
+
+#region classes
+public class NameValue
+{
+    public string name { get; set; }
+    public string value { get; set; }
+}
+
+public class standardResponse
+{
+    public string status;
+    public string message;
+}
+
+#endregion
+public static class NameValueExtensionMethods
+{
+    /// <summary>
+    /// Retrieves a single form variable from the list of
+    /// form variables stored
+    /// </summary>
+    /// <param name="formVars"></param>
+    /// <param name="name">formvar to retrieve</param>
+    /// <returns>value or string.Empty if not found</returns>
+    public static string Form(this NameValue[] formVars, string name)
+    {
+        var matches = formVars.Where(nv => nv.name.ToLower() == name.ToLower()).FirstOrDefault();
+        if (matches != null)
+            return matches.value;
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// Retrieves multiple selection form variables from the list of 
+    /// form variables stored.
+    /// </summary>
+    /// <param name="formVars"></param>
+    /// <param name="name">The name of the form var to retrieve</param>
+    /// <returns>values as string[] or null if no match is found</returns>
+    public static string[] FormMultiple(this NameValue[] formVars, string name)
+    {
+        var matches = formVars.Where(nv => nv.name.ToLower() == name.ToLower()).Select(nv => nv.value).ToArray();
+        if (matches.Length == 0)
+            return null;
+        return matches;
     }
 }

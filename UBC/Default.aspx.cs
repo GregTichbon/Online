@@ -46,7 +46,13 @@ namespace UBC
             }
 
             html += "<br /><a href=\"people/reports/AttendanceMatrix.aspx\">Attendance Matrix</a>";
+            html += "<br /><a href=\"people/reports/CurrentCategoriesMatrix.aspx\">Current Categories Matrix</a>";
+
+
+            
             html += "<br /><a href=\"people/reports/EventSchedule.aspx\">Event Schedule</a>";
+            html += "<br /><a href=\"people/reports/ShowAttendees.aspx\">Show Attendees</a>";
+            
         }
     }
 }

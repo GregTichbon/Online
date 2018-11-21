@@ -1,0 +1,8 @@
+﻿Return to - when go to a link and need logging on
+Person_Event - PersonNote - by person, PrivateNote by coach, Note by coach, public 
+When Person records attendance Note is being lost and when a coach/administrator records attendance PersonNote is being lost
+Relationship Table - assoicates Person Records.  New flag for RelationshipOnly
+MyDetails.aspx with an option to make comments
+Show Registration Details 
+
+
