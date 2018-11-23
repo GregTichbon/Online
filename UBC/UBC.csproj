@@ -337,6 +337,7 @@
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.woff" />
     <Content Include="Go\Doc1\default.aspx" />
     <Content Include="Go\Register\default.aspx" />
+    <Content Include="Main.aspx" />
     <Content Include="People\BankImport.aspx" />
     <Content Include="Dependencies\Images\question.png" />
     <Content Include="Dependencies\Images\questionsmall.png" />
@@ -350,12 +351,15 @@
     <Content Include="People\Images\105.jpg" />
     <Content Include="People\Images\96.jpg" />
     <Content Include="People\%24Notes\%24Notes.txt" />
+    <Content Include="People\main.aspx" />
+    <Content Include="People\message.aspx" />
     <Content Include="People\Posts.asmx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
+    <Content Include="People\Reports\RegattaList.aspx" />
     <Content Include="People\Reports\ShowAttendees.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
@@ -469,6 +473,7 @@
     <Content Include="UBC.Master" />
     <Content Include="People\Documents\Parent Information 2018.pdf" />
     <Content Include="People\Documents\JohnTrophyRegatta.pdf" />
+    <Content Include="People\Documents\WaitaraTravel.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">
@@ -567,6 +572,13 @@
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="localfunctions.cs" />
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\BankImport.aspx.cs">
       <DependentUpon>BankImport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -641,6 +653,13 @@
     <Compile Include="People\Lists.aspx.designer.cs">
       <DependentUpon>Lists.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\main.aspx.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\main.aspx.designer.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Maint.aspx.cs">
       <DependentUpon>Maint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -654,6 +673,13 @@
     </Compile>
     <Compile Include="People\Maint2.aspx.designer.cs">
       <DependentUpon>Maint2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\message.aspx.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\message.aspx.designer.cs">
+      <DependentUpon>message.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
@@ -714,6 +740,13 @@
     </Compile>
     <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
       <DependentUpon>LoginRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\RegattaList.aspx.cs">
+      <DependentUpon>RegattaList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\RegattaList.aspx.designer.cs">
+      <DependentUpon>RegattaList.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\ShowAttendees.aspx.cs">
       <DependentUpon>ShowAttendees.aspx</DependentUpon>

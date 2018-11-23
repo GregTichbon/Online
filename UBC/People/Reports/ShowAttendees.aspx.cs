@@ -15,6 +15,7 @@ namespace UBC.People.Reports
     {
         public string html;
         public string guid;
+        public string export;
         protected void Page_Load(object sender, EventArgs e)
         {
             guid = Request.QueryString["id"] ?? "";
@@ -41,9 +42,10 @@ namespace UBC.People.Reports
                 SqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.HasRows)
                 {
-                    html = "<table class=\"table-striped\">";
                     if (guid == "")
                     {
+                        export = "";
+                        html = "<table class=\"table table-striped\">";
                         html += "<tr><th>Title</th><th style=\"white-space:nowrap\">When</th><th>Detail</th></tr>";
 
                         while (dr.Read())
@@ -60,6 +62,8 @@ namespace UBC.People.Reports
                     }
                     else
                     {
+                        export = "<input type=\"button\" id=\"export\" class=\"btn btn-info\" value=\"Export\" />";
+                        html = "<table id=\"attendance\" class=\"table table-striped\">";
                         html += "<tr><th>Name</th><th>Status</th><th>Role</th></tr>";
 
                         while (dr.Read())

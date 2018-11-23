@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="ShowAttendees.aspx.cs" Inherits="UBC.People.Reports.ShowAttendees" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-       <!-- Style Sheets -->
+    <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
@@ -19,9 +20,51 @@
 
     <script>
         $(document).ready(function () {
+
+            var col1 = {};
+            var col2 = {};
+            var key;
+            $('#attendance > tbody  > tr').each(function () {
+                key = $(this).find("td:eq(1)").text();
+                if (key != "") {
+                    if (!col1[key]) {
+                        col1[key] = 0;
+                    }
+                    col1[key] += 1;
+                }
+                key = $(this).find("td:eq(2)").text();
+                if (key != "") {
+
+                    if (!col2[key]) {
+                        col2[key] = 0;
+                    }
+                    col2[key] += 1;
+                }
+
+            });
+
+            mydiv = "<h3>";
+            mydelim = "";
+            $.each(col1, function (key, val) {
+                mydiv += mydelim + [key, val];
+                mydelim = " | ";
+            });
+
+            mydelim = "";
+            mydiv += "<br />";
+            $.each(col2, function (key, val) {
+                mydiv += mydelim + [key, val];
+                mydelim = " | ";
+            });
+            mydiv += "</h3>";
+
+            $('#div_count').html(mydiv);
+
+
+
             $('#export').click(function () {
                 var table = "<table>";
-                $('table > tbody  > tr').each(function () {
+                $('#attendance > tbody  > tr').each(function () {
                     table += "<tr>";
                     $(this).find('td').each(function () {
                         table += "<td>";
@@ -64,20 +107,20 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   
+
     <div class="container" style="background-color: #FCF7EA">
         <div class="toprighticon">
-            <input type="button" id="export" class="btn btn-info" value="Export" />
+            <%=export %>
             <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>
         <h1>Union Boat Club - Attendees
         </h1>
+        <div id="div_count"></div>
 
- 
-            <%= html %>
- 
-            <div id="div_download" title="Download" style="display: none;">
-        <div id="div_downloadtext"></div>
-    </div>
+        <%= html %>
+
+        <div id="div_download" title="Download" style="display: none;">
+            <div id="div_downloadtext"></div>
+        </div>
     </div>
 </asp:Content>
