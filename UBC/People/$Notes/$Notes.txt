@@ -20,3 +20,8 @@ Print out of my schedule
 
 RegattaList.aspx - maybe add field for Travel 
 
+Event Description does not handle Quote Mark
+
+Person_Finance
+Stoed procedure: Create_Person_finance 
+Stoed procedure: Get_finance 

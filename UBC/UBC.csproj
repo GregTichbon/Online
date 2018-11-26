@@ -57,6 +57,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -83,6 +89,7 @@
     <Content Include="Dependencies\bootstrap-datetimepicker.min.css" />
     <Content Include="Dependencies\bootstrap-datetimepicker.min.js" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="Dependencies\dirty.js" />
     <Content Include="Dependencies\fittext.js" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
@@ -474,6 +481,7 @@
     <Content Include="People\Documents\Parent Information 2018.pdf" />
     <Content Include="People\Documents\JohnTrophyRegatta.pdf" />
     <Content Include="People\Documents\WaitaraTravel.pdf" />
+    <Content Include="People\Documents\WaitaraPhone.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">

@@ -25,6 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/dirty.js")%>"></script>
     <style>
         .personnote {
             color: red;
@@ -35,6 +36,8 @@
         var tr_changed = [];
 
         $(document).ready(function () {
+
+            $("#myForm").dirty();
 
             $('#export').click(function () {
                 var table = "<table>";
@@ -159,7 +162,28 @@
                 $('#div_enddatetime').data("DateTimePicker").format(myformat);
                 $('#div_enddatetime').data("DateTimePicker").extraFormats(myextraFormats);
             }
-        });
+            });
+            if ($('#dd_type').val() == "Regatta") {
+                $('#btn_regattalist').show();
+            }
+
+            $('#dd_type').change(function () {
+                if ($(this).val() == "Regatta" && $('#hf_event_id').val() != 'new') {
+                    $('#btn_regattalist').show();
+                } else {
+                    $('#btn_regattalist').hide();
+                    $('#btn_regattalist').hide();
+                }
+            });
+
+            $('#btn_regattalist').click(function () {
+                if ($("#form1").dirty("isDirty")) {
+                    alert('Changes have been made, please submit this form first.')
+                } else {
+                    window.open('reports/regattalist.aspx?id=' + $('#hf_event_id').val(), '_blank');
+                }
+            })
+
         /*
 $('#dd_categories_filter').change(function () {
 alert($(this).val());
@@ -366,12 +390,16 @@ switch (option) {
 
         <div class="form-group">
             <label class="control-label col-sm-4" for="dd_type">Type</label>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <select id="dd_type" name="dd_type" class="form-control" required>
                     <%= Generic.Functions.populateselect(type_values, type,"None") %>
                 </select>
             </div>
+            <div class="col-sm-2">
+                <button class="btn btn-info" style="display: none" type="button" id="btn_regattalist">Regatta List</button>
+            </div>
         </div>
+     
 
         <div class="form-group">
             <label class="control-label col-sm-4" for="tb_description">Description</label>

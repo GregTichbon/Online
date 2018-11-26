@@ -86,6 +86,11 @@
         ||accesscode||<br />
        ||username||<br />
         ||tempphrase||
+         <br />
+         ||attendance|| - requires Event ID<br />
+         <br />
+         Event ID: <asp:TextBox ID="tb_event_id" runat="server" Width="50px"></asp:TextBox>
+         <br />
         <br />
         Email messages will not be sent where there is no email subject<br />
         Txt messages will not be sent where there is no text body.<br />

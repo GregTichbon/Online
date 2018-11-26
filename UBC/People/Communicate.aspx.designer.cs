@@ -13,6 +13,15 @@ namespace UBC.People {
     public partial class Communicate {
         
         /// <summary>
+        /// tb_event_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_event_id;
+        
+        /// <summary>
         /// tb_subject control.
         /// </summary>
         /// <remarks>
