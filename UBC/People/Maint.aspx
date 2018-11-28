@@ -385,6 +385,23 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-4" for="dd_school">Can swim 50m with clothes</label>
+                        <div class="col-sm-8">
+                            <select id="dd_swimmer" name="dd_swimmer" class="form-control">
+                                <%= Generic.Functions.populateselect(yesno, dd_swimmer,"") %>
+                            </select>
+                        </div>
+                    </div>
+                                      <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_schoolyear">RowIt ID</label>
+                        <div class="col-sm-8">
+                            <input id="tb_rowit_id" name="tb_rowit_id" type="text" class="form-control numeric" value="<%:tb_rowit_id%>" maxlength="10" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_notes">Notes</label>
                         <div class="col-sm-8">
                             <textarea id="tb_notes" name="tb_notes" class="form-control"><%: tb_notes %></textarea>

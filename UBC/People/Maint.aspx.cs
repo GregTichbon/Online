@@ -34,6 +34,9 @@ namespace UBC.People
         public string tb_residentialaddress;
         public string tb_postaladdress;
         public string tb_colour;
+        public string dd_swimmer;
+        public string tb_rowit_id;
+        public string dd_relationshiponly;
 
         /*
         public string tb_caregivername;
@@ -144,6 +147,12 @@ namespace UBC.People
                         tb_colour = dr["colour"].ToString();
                         dd_feecategory = dr["feecategory"].ToString();
                         dd_familymember = dr["familymember"].ToString();
+
+                        dd_swimmer = dr["swimmer"].ToString();
+                        tb_rowit_id = dr["rowit_id"].ToString();
+                        dd_relationshiponly = dr["relationshiponly"].ToString();
+
+
 
                         /*
 tb_email = dr["email"].ToString();
@@ -537,6 +546,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_facebook = Request.Form["tb_facebook"].Trim();
             dd_feecategory = Request.Form["dd_feecategory"].Trim();
             dd_familymember = Request.Form["dd_familymember"].Trim();
+
+
+            tb_rowit_id = Request.Form["tb_rowit_id"].Trim();
+            dd_swimmer = Request.Form["dd_swimmer"].Trim();
+            dd_relationshiponly = ""; // Request.Form["dd_relationshiponly"].Trim();
+
             /*
             tb_email = Request.Form["tb_email"].Trim();
             tb_mobile = Request.Form["tb_mobile"].Trim();
@@ -571,6 +586,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@colour", SqlDbType.VarChar).Value = '#' + tb_colour;
             cmd.Parameters.Add("@feecategory", SqlDbType.VarChar).Value = dd_feecategory;
             cmd.Parameters.Add("@familymember", SqlDbType.VarChar).Value = dd_familymember;
+            cmd.Parameters.Add("@rowit_id", SqlDbType.VarChar).Value = tb_rowit_id;
+            cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
+            cmd.Parameters.Add("@relationshiponly", SqlDbType.VarChar).Value = dd_relationshiponly;
 
 
             /*

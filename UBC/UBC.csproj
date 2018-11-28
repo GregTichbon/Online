@@ -364,6 +364,7 @@
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
+    <Content Include="People\Reports\Finance.aspx" />
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
@@ -734,6 +735,13 @@
     </Compile>
     <Compile Include="People\Reports\EventSchedule.aspx.designer.cs">
       <DependentUpon>EventSchedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Finance.aspx.cs">
+      <DependentUpon>Finance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Finance.aspx.designer.cs">
+      <DependentUpon>Finance.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\FullReport.aspx.cs">
       <DependentUpon>FullReport.aspx</DependentUpon>

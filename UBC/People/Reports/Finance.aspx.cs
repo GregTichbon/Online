@@ -12,18 +12,18 @@ using System.Web.UI.WebControls;
 
 namespace UBC.People.Reports
 {
-    public partial class ShowAttendees : System.Web.UI.Page
+    public partial class Finance : System.Web.UI.Page
     {
         public string html;
-        public string guid;
+        public string event_id;
         public string export;
         protected void Page_Load(object sender, EventArgs e)
         {
-            guid = Request.QueryString["id"] ?? "";
+            event_id = Request.QueryString["event"] ?? "";
 
             if (Session["UBC_person_id"] == null)
             {
-                string url = "../reports/ShowAttendees.aspx?id=" + guid;
+                string url = "../reports/finance.aspx";
                 Response.Redirect("~/people/security/login.aspx?return=" + url);
             }
 
@@ -31,8 +31,8 @@ namespace UBC.People.Reports
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd1 = new SqlCommand("Get_Event_Attendees", con);
-            cmd1.Parameters.Add("@guid", SqlDbType.VarChar).Value = guid;
+            SqlCommand cmd1 = new SqlCommand("Get_finance", con);
+            cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
 
 
             cmd1.CommandType = CommandType.StoredProcedure;
@@ -43,6 +43,7 @@ namespace UBC.People.Reports
                 SqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.HasRows)
                 {
+                    /*
                     if (guid == "")
                     {
                         export = "";
@@ -63,23 +64,39 @@ namespace UBC.People.Reports
                     }
                     else
                     {
+                    */
                         export = "<input type=\"button\" id=\"export\" class=\"btn btn-info\" value=\"Export\" />";
                         html = "<table id=\"attendance\" class=\"table table-striped\">";
-                        html += "<tr><th>Name</th><th>Status</th><th>Role</th></tr>";
 
-                        while (dr.Read())
+
+                    //	Person_Finance_ID, person_id, Name, date, system, code, Person_Event_ID, Event_ID, Event Date, Title, Amount, Banked
+
+                    html += "<tr><th>Name</th><th>Event</th><th>Code</th><th>Date</th><th>Amount</th><th>Banked</th></tr>";
+
+                    while (dr.Read())
+                    {
+                        string Person_Finance_ID = dr["Person_Finance_ID"].ToString();
+                        string person_id = dr["person_id"].ToString();
+                        string Name = dr["Name"].ToString();
+                        string date = Convert.ToDateTime(dr["date"]).ToString("dd MMM yy");
+                        string system = dr["system"].ToString();
+                        string code = dr["code"].ToString();
+                        string Person_Event_ID = dr["Person_Event_ID"].ToString();
+                        string Event_ID = dr["Event_ID"].ToString();
+                        string Event_Date = dr["Event Date"].ToString();
+                        string Title = dr["Title"].ToString();
+                        string Amount = Convert.ToDecimal(dr["Amount"]).ToString("0.00");
+                        string Banked = dr["Banked"].ToString();
+                        if (Banked != "")
                         {
-                            string person_id = dr["person_id"].ToString();
-                            string name = dr["name"].ToString();
-                            string attendance = dr["attendance"].ToString();
-                            string role = dr["role"].ToString();
-
-
-                            html += "<tr>";
-                            html += "<td>" + name + "</td><td>" + attendance + "</td><td>" + role + "</td>";
-                            html += "</tr>";
+                            Banked = Convert.ToDateTime(Banked).ToString("dd MMM yy");
                         }
+
+                        html += "<tr>";
+                        html += "<td>" + Name + "</td><td>" + Title + "</td><td>" + code + "</td><td>" + date + "</td><td>" + Amount + "</td><td>" + Banked + "</td>";
+                        html += "</tr>";
                     }
+                    //}
                     html += "</table>";
                 }
 

@@ -48,6 +48,9 @@ namespace iti.ninja
                 case "LTR":
                     redirect = "http://office.datainn.co.nz/ubc/ltr.pdf";
                     break;
+                case "C":
+                    redirect = "http://wdc.whanganui.govt.nz/onlinetest/Cemetery/DataMatching/Walk2.aspx";
+                    break;
                 default:
                     Literal1.Text = main + " Not found"; // Common.Functions.test();
                     break;
