@@ -108,6 +108,7 @@
     <Content Include="Dependencies\Images\processing1.gif" />
     <Content Include="Dependencies\jquery-2.2.0.min.js" />
     <Content Include="Dependencies\jquery.validate.min.js" />
+    <Content Include="Dependencies\moment.min.js" />
     <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
     <Content Include="Dependencies\StickyTableCells\Examples\index.html" />
     <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
@@ -174,7 +175,10 @@
     <Content Include="Row\Entry.aspx" />
     <Content Include="Row\Entry2.aspx" />
     <Content Include="Row\Entry3.aspx" />
+    <Content Include="Row\posts.asmx" />
     <Content Include="Row\Prognostics.aspx" />
+    <Content Include="Row\Timing\Finish.aspx" />
+    <Content Include="Row\Timing\Start.aspx" />
     <Content Include="Scripts\CyclePlugin\default.html" />
     <Content Include="Scripts\CyclePlugin\jquery.cycle.all.js" />
     <Content Include="Scripts\simplefadeslideshow\.gitignore" />
@@ -480,6 +484,10 @@
     <Compile Include="Row\Entry3.aspx.designer.cs">
       <DependentUpon>Entry3.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Row\posts.asmx.cs">
+      <DependentUpon>posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Row\Prognostics.aspx.cs">
       <DependentUpon>Prognostics.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -493,6 +501,20 @@
     </Compile>
     <Compile Include="Row\SR.aspx.designer.cs">
       <DependentUpon>SR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\Timing\Finish.aspx.cs">
+      <DependentUpon>Finish.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Timing\Finish.aspx.designer.cs">
+      <DependentUpon>Finish.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\Timing\Start.aspx.cs">
+      <DependentUpon>Start.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\Timing\Start.aspx.designer.cs">
+      <DependentUpon>Start.aspx</DependentUpon>
     </Compile>
     <Compile Include="SMSService.asmx.cs">
       <DependentUpon>SMSService.asmx</DependentUpon>
