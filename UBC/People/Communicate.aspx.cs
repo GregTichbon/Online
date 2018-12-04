@@ -86,6 +86,7 @@ namespace UBC.People
                         if (mobile != "")
                         {
                             sendtext = "<input id=\"cb_text_" + id + "\" name =\"cb_text_" + id + "\" type=\"checkbox\" />";
+                            mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
                         }
                         string sendfacebook = "";
                         string facebooklink = "";

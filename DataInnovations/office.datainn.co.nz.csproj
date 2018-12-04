@@ -175,6 +175,7 @@
     <Content Include="Row\Entry.aspx" />
     <Content Include="Row\Entry2.aspx" />
     <Content Include="Row\Entry3.aspx" />
+    <Content Include="Row\JuryCup\2018_JuryCup_draw.html" />
     <Content Include="Row\posts.asmx" />
     <Content Include="Row\Prognostics.aspx" />
     <Content Include="Row\Timing\Finish.aspx" />

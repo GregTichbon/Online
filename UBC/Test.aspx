@@ -13,10 +13,10 @@
         $(document).ready(function () {
 
             $('#dd_categories').select2({
-    width: '20%' // need to override the changed default
-});
+                width: '20%' // need to override the changed default
+            });
 
-            
+
 
         });
     </script>
@@ -37,6 +37,39 @@
         <option value="8">School Contact</option>
         <option value="2">Student</option>
     </select>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Atendance</th>
+            <th>Role</th>
+            <th>Public Note</th>
+            <th>Private Note</th>
+        </tr>
+        <tr>
+            <td rowspan="3">Name</td>
+            <td rowspan="3">Attendance</td>
+            <td rowspan="3">Role</td>
+        </tr>
+        <tr>
+            <td>Public</td>
+            <td>Private</td>
+        </tr>
+        <tr>
+            <td colspan="2">Personal</td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">Peer Nielsen</td>
+            <td rowspan="2">5555555555</td>
+            <td rowspan="2">6666666</td>
+        </tr>
+        <tr>
+            <td>77777777777777</td>
+            <td>88888888888888</td>
+        </tr>
+    </table>
+
 
 
 </asp:Content>

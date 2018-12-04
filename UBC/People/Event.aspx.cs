@@ -39,9 +39,9 @@ namespace UBC.People
         public string html_persons;
 
 
-        public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going","Not Going" };
-        public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other"};
-        public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise" ,"Coach Support", "Support" };
+        public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going", "Not Going" };
+        public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other" };
+        public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise", "Coach Support", "Support" };
         public string categories_values;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -103,7 +103,7 @@ namespace UBC.People
                                 enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
                             }
 
-                       
+
                         }
 
                         dr.Close();
@@ -146,7 +146,7 @@ namespace UBC.People
                             html_persons += "&nbsp;&nbsp;<button type=\"button\" class=\"submit btn btn-info\" id=\"btn_refresh\">Refresh</button>";
                             html_persons += "</div>";
 
-                            html_persons += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Role</th><th>Note</th></tr>";
+                            html_persons += "<table id=\"tbl_attendance\" class=\"table table-hover\"><tr><th>Name</th><th>Atendance</th><th>Role</th><th>Public Note</th><th>Private Note</th></tr>";
 
                             while (dr.Read())
                             {
@@ -154,26 +154,35 @@ namespace UBC.People
                                 string name = dr["name"].ToString();
                                 string attendance = dr["attendance"].ToString();
                                 string note = dr["note"].ToString();
+                                string privatenote = dr["privatenote"].ToString();
                                 string personnote = dr["personnote"].ToString();
                                 string person_id = dr["person_id"].ToString();
                                 string role = dr["role"].ToString();
                                 string category = dr["category"].ToString();
 
-                                string dd_attendance = "<select class=\"form-control tr_field\" id=\"dd_attendance_" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
-                                dd_attendance += Functions.populateselect(attendance_values, attendance,"");
+                                string dd_attendance = "<select class=\"form-control tr_field\" id=\"dd_attendance_" + person_id + "\" data-id=\"" + person_id + "\" name=\"dd_attendance_" + person_id + "\">";
+                                dd_attendance += Functions.populateselect(attendance_values, attendance, "");
                                 dd_attendance += "</select>";
 
-                                string dd_role = "<select class=\"form-control tr_field\" id=\"dd_role_" + person_id + "\" name=\"dd_role_" + person_id + "\">";
+                                string dd_role = "<select class=\"form-control tr_field\" id=\"dd_role_" + person_id + "\" data-id=\"" + person_id + "\" name=\"dd_role_" + person_id + "\">";
                                 dd_role += "<option></option>";
                                 dd_role += Functions.populateselect(role_values, role);
                                 dd_role += "</select>";
 
-                                html_persons += "<tr id=\"tr_" + person_id + "\" data-id=\"" + person_event_id + "\" data-category=\"" + category + "\">";
-                                html_persons += "<td>" + name + "</td>";
-                                html_persons += "<td>" + dd_attendance + "</td>";
-                                html_persons += "<td>" + dd_role + "</td>";
-                                html_persons += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea><span class=\"personnote\" id=\"personnote_" + person_id + "\">" + personnote + "</span></td>";
+                                //html_persons += "<div id=\"div_row_" + person_event_id + "\">";
+                                html_persons += "<tr id=\"tr_1_" + person_id + "\" data-id=\"" + person_event_id + "\" data-category=\"" + category + "\">";
+                                html_persons += "<td rowspan=\"3\">" + name + "</td>";
+                                html_persons += "<td rowspan=\"3\">" + dd_attendance + "</td>";
+                                html_persons += "<td rowspan=\"3\">" + dd_role + "</td>";
                                 html_persons += "</tr>";
+                                html_persons += "<tr id=\"tr_2_" + person_id + "\">";
+                                html_persons += "<td><textarea class=\"form-control tr_field\" id=\"tb_note_" + person_id + "\" data-id=\"" + person_id + "\" name=\"tb_note_" + person_id + "\">" + note + "</textarea></td>";
+                                html_persons += "<td><textarea class=\"form-control tr_field\" id=\"tb_privatenote_" + person_id + "\" data-id=\"" + person_id + "\" name=\"tb_privatenote_" + person_id + "\">" + privatenote + "</textarea></td>";
+                                html_persons += "</tr>";
+                                html_persons += "<tr id=\"tr_3_" + person_id + "\">";
+                                html_persons += "<td colspan=\"2\"><span class=\"personnote\" id=\"personnote_" + person_id + "\">" + personnote + "</span></td>";
+                                html_persons += "</tr>";
+                                //html_persons += "</div>";
                             }
 
                             html_persons += "</table>";
@@ -220,6 +229,8 @@ namespace UBC.People
             cmd1.Parameters.Add("@allday", SqlDbType.VarChar).Value = Request.Form["cb_allday"];
             cmd1.Parameters.Add("@type", SqlDbType.VarChar).Value = Request.Form["dd_type"];
             cmd1.Parameters.Add("@categories", SqlDbType.VarChar).Value = Request.Form["dd_categories"];
+            cmd1.Parameters.Add("@showattendees", SqlDbType.VarChar).Value = Request.Form["dd_showattendees"];
+            cmd1.Parameters.Add("@finance", SqlDbType.VarChar).Value = Request.Form["dd_finance"];
 
             cmd1.Connection = con;
             try
@@ -271,15 +282,16 @@ namespace UBC.People
                     }
                 }
                 */
-                            string hf_tr_changed = Request.Form["hf_tr_changed"].ToString();
+                string hf_tr_changed = Request.Form["hf_tr_changed"].ToString();
                 if (hf_tr_changed != "")
                 {
                     string[] tr_changed = hf_tr_changed.Split(',');
                     foreach (string person_id in tr_changed)
                     {
                         string attendance = Request.Form["dd_attendance_" + person_id];
-                        string note = Request.Form["tb_note_" + person_id];
                         string role = Request.Form["dd_role_" + person_id];
+                        string note = Request.Form["tb_note_" + person_id];
+                        string privatenote = Request.Form["tb_privatenote_" + person_id];
 
                         cmd2.Parameters.Clear();
                         cmd2.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
@@ -287,6 +299,9 @@ namespace UBC.People
                         cmd2.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
                         cmd2.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
                         cmd2.Parameters.Add("@role", SqlDbType.VarChar).Value = role;
+                        //cmd2.Parameters.Add("@personnote", SqlDbType.VarChar).Value =  
+                        cmd2.Parameters.Add("@privatenote", SqlDbType.VarChar).Value = privatenote; 
+
 
                         cmd2.Connection = con;
                         try

@@ -220,7 +220,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 //FINANCE
                 if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
                 {
-                    html_finance = "<tr><th>Date</th><th>System</th><th>Detail</th><th>Amount</th><th>Note</th></tr>";
+                    html_finance = "<tr><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th>Edit</th></tr>";
                     double total = 0;
 
                     cmd.CommandText = "get_person_finance";
@@ -238,6 +238,14 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             string detail = dr["detail"].ToString();
                             string amount = dr["amount"].ToString();
                             string note = dr["note"].ToString();
+                            string code = dr["code"].ToString();
+                            string event_id = dr["event_id"].ToString();
+                            string person_event_id = dr["person_event_id"].ToString();
+                            string banked = dr["banked"].ToString();
+                            if(banked != "")
+                            {
+                                banked = Convert.ToDateTime(banked).ToString("dd MMM yy");
+                            }
 
                             total += Convert.ToDouble(amount);
 
@@ -245,9 +253,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             html_finance += "<tr>";
                             html_finance += "<td>" + date + "</td>";
                             html_finance += "<td>" + system + "</td>";
-                            html_finance += "<td>" + detail + "</td>";
+                            html_finance += "<td>" + code + "</td>";
+                            html_finance += "<td>" + event_id + "</td>";
                             html_finance += "<td>" + amount + "</td>";
                             html_finance += "<td>" + note + "</td>";
+                            html_finance += "<td>" + banked + "</td>";
+                            html_finance += "<td><a href=\"javascript:void(0)\" class=\"financeedit\" id=\"" + person_finance_id + "\">Edit</td>";
                             html_finance += "</tr>";
 
 
@@ -353,6 +364,10 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         if (text == "Yes")
                         {
                             send = "<a class=\"send_text\">Send</a>";
+                        }
+                        if(phone != "")
+                        {
+                            phone = "<a href=\"tel:" + phone + "\">" + phone + "</>";
                         }
 
                         html_phone += "<tr>";

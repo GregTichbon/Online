@@ -110,6 +110,11 @@
 
             });
 
+            $('.financeedit').click(function () {
+                alert($(this).attr('id'));
+
+            })
+
             $('.send_text').click(function () {
                 mywidth = $(window).width() * .95;
                 if (mywidth > 800) {
@@ -425,6 +430,7 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_finance" class="tab-pane fade in">
                     <h3>Finance</h3>
+                    <button type="button" class="financeedit btn btn-info">Add</button>
                     <table class="table">
                         <%= html_finance %>
                     </table>

@@ -225,7 +225,8 @@ switch (option) {
         processrows();
 
         $('.tr_field').change(function () {
-            id = $(this).parent().parent().attr('id').substring(3);
+            //id = $(this).parent().parent().attr('id').substring(3);
+            id = $(this).data('id');
             tr_changed.indexOf(id) === -1 ? tr_changed.push(id) : null;
             $("#hf_tr_changed").val(tr_changed.toString());
         });
@@ -286,8 +287,8 @@ switch (option) {
             showval = $('#dd_show').val();
             category = $('#dd_categories_filter').val();
 
-            $('#tbl_attendance tr[id^=tr_]').each(function () {
-                personid = $(this).attr("id").substring(3);
+            $('#tbl_attendance tr[id^=tr_1_]').each(function () {
+                personid = $(this).attr("id").substring(5);
                 personcategory = $(this).attr("data-category");
                 show = false;
                 switch (showval) {
@@ -328,8 +329,12 @@ switch (option) {
                 }
                 if (show) {
                     $(this).show();
+                    $(this).next().show();
+                    $(this).next().next().show();
                 } else {
                     $(this).hide();
+                    $(this).next().hide();
+                    $(this).next().next().hide();
                 }
 
             });
@@ -412,6 +417,24 @@ switch (option) {
             <label class="control-label col-sm-4" for="dd_categories">Categories</label>
             <div class="col-sm-8">
                 <select id="dd_categories" name="dd_categories" class="form-control" multiple="multiple">
+                    <%= categories_values %>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_categories">Show on Attendees</label>
+            <div class="col-sm-8">
+                <select id="dd_showattendees" name="dd_showattendees" class="form-control">
+                    <%= categories_values %>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_categories">Allow financial transactions</label>
+            <div class="col-sm-8">
+                <select id="dd_finance" name="dd_finance" class="form-control">
                     <%= categories_values %>
                 </select>
             </div>
