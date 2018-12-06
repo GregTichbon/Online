@@ -88,6 +88,7 @@
         ||tempphrase||
          <br />
          ||attendance|| - requires Event ID<br />
+         ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
          <br />
          Event ID: <asp:TextBox ID="tb_event_id" runat="server" Width="50px"></asp:TextBox>
          <br />

@@ -71,7 +71,7 @@ namespace UBC.People
                         string attendance = dr["attendance"].ToString();
                         string role = dr["role"].ToString();
 
-                        string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
+                        string link = "<a href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
                         string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
 
 
@@ -218,8 +218,9 @@ namespace UBC.People
                             emailtext = emailtext.Replace("||accesscode||", guid.Substring(0, 5));
                             emailtext = emailtext.Replace("||username||", username);
                             emailtext = emailtext.Replace("||tempphrase||", tempphrase);
-                            emailtext = textmessage.Replace("||attendance||", attendance);
-                            emailtext = textmessage.Replace("||role||", role);
+                            emailtext = emailtext.Replace("||attendance||", attendance);
+                            emailtext = emailtext.Replace("||role||", role);
+                            emailtext = emailtext.Replace("||folder||", "Folder" + id);
 
 
                             emailhtml = tb_htmlbody.Text;
@@ -229,8 +230,9 @@ namespace UBC.People
                             emailhtml = emailhtml.Replace("||accesscode||", guid.Substring(0, 5));
                             emailhtml = emailhtml.Replace("||username||", username);
                             emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
-                            emailhtml = textmessage.Replace("||attendance||", attendance);
-                            emailhtml = textmessage.Replace("||role||", role);
+                            emailhtml = emailhtml.Replace("||attendance||", attendance);
+                            emailhtml = emailhtml.Replace("||role||", role);
+                            emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
 
                             emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
@@ -243,7 +245,7 @@ namespace UBC.People
                             message.From = new System.Net.Mail.MailAddress("ltr@datainn.co.nz", "Union Boat Club");
 
                             string emailsubject = tb_subject.Text;
-                            emailsubject = emailsubject.Replace("||firstname||", firstname);
+                            emailsubject = emailsubject.Replace("||firstname||", firstname);fol
 
                             message.Subject = emailsubject;
                             message.IsBodyHtml = false;
@@ -273,6 +275,7 @@ namespace UBC.People
                             textmessage = textmessage.Replace("||tempphrase||", tempphrase);
                             textmessage = textmessage.Replace("||attendance||", attendance);
                             textmessage = textmessage.Replace("||role||", role);
+                            textmessage = textmessage.Replace("||folder||", "Folder" + id);
 
                             funcs.SendMessage(mobile, textmessage);
                         }
@@ -286,8 +289,9 @@ namespace UBC.People
                             facebookmessage = facebookmessage.Replace("||accesscode||", guid.Substring(0, 5));
                             facebookmessage = facebookmessage.Replace("||username||", username);
                             facebookmessage = facebookmessage.Replace("||tempphrase||", tempphrase);
-                            facebookmessage = textmessage.Replace("||attendance||", attendance);
-                            facebookmessage = textmessage.Replace("||role||", role);
+                            facebookmessage = facebookmessage.Replace("||attendance||", attendance);
+                            facebookmessage = facebookmessage.Replace("||role||", role);
+                            facebookmessage = facebookmessage.Replace("||folder||", "Folder" + id);
 
                             html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + facebookmessage + "</textarea>";
                         }

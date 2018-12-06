@@ -10,7 +10,7 @@
     <script>
         $(document).ready(function () {
             $("#div_menu").fitText(1.1, {
-                minFontSize: 50,
+                minFontSize: '20px',
                 maxFontSize: '75px'
             });
 

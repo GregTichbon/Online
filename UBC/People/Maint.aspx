@@ -62,6 +62,8 @@
                 }
             });
 
+
+
             $('.submit').click(function () {
                 alert(JSON.stringify(results_grid.getChanges()));
                 alert(JSON.stringify(results_grid.getAll(true)));
@@ -71,6 +73,22 @@
             $('#menu').click(function () {
                 window.location.href = '../default.aspx';
             })
+
+            $('.registrationview').click(function () {
+                id = $(this).attr('id');
+                window.open("RegisterDisplay.aspx?id=" + id,'Register');
+            });
+
+            $('.standarddate').datetimepicker({
+                format: 'D MMM YYYY',
+                extraFormats: ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'],
+                //daysOfWeekDisabled: [0, 6],
+                showClear: true,
+                viewDate: false,
+                useCurrent: true
+                //,maxDate: moment().add(-1, 'year')
+            });
+            
 
             $('#div_birthdate').datetimepicker({
                 format: 'D MMM YYYY',
@@ -110,9 +128,57 @@
 
             });
 
-            $('.financeedit').click(function () {
-                alert($(this).attr('id'));
+            $(document).on('click','.financeedit',function() {
+            //$('.financeedit').click(function () {
+                id = $(this).attr('id');
+                if (typeof id === "undefined") {
+                    $("#dialog-finance").find(':input').val('');
+                } else {
+                    tr = $(this).closest('tr');
 
+                    $('#tb_finance_date').val($(tr).find('td').eq(0).text());
+                    $('#dd_finance_system').val($(tr).find('td').eq(1).text());
+                    $('#dd_finance_code').val($(tr).find('td').eq(2).text());
+                    $('#dd_finance_event').val($(tr).find('td').eq(3).text());
+                    $('#tb_finance_amount').val($(tr).find('td').eq(4).text());
+                    $('#tb_finance_note').val($(tr).find('td').eq(5).text());
+                    $('#tb_finance_banked').val($(tr).find('td').eq(6).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-finance").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Save": function () {
+                            if (typeof id === "undefined") {
+                                var tr = $('#div_finance > table > tbody tr:first').clone();
+                                console.log(tr);
+                                tr.find(':input').val('');
+                                $('#div_finance > table > tbody').append(tr);
+                            }
+
+                            $(tr).find('td').eq(0).text($('#tb_finance_date').val());
+                            $(tr).find('td').eq(1).text($('#dd_finance_system').val());
+                            $(tr).find('td').eq(2).text($('#dd_finance_code').val());
+                            $(tr).find('td').eq(3).text($('#dd_finance_event').val());
+                            $(tr).find('td').eq(4).text($('#tb_finance_amount').val());
+                            $(tr).find('td').eq(5).text($('#tb_finance_note').val());
+                            $(tr).find('td').eq(6).text($('#tb_finance_banked').val());
+                            alert("To do: Database update");
+                            $(this).dialog("close");
+                        }
+                    }
+                });
             })
 
             $('.send_text').click(function () {
@@ -295,6 +361,72 @@
                 </div>
             </div>
 
+            <div id="dialog-finance" title="Maintain Transactions" style="display: none" class="form-horizontal">
+                <div class="form-group">
+                    <label for="tb_finance_date" class="control-label col-sm-4">
+                        Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate" >
+                            <input id="tb_finance_date" name="tb_finance_date" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_finance_system">System</label>
+                    <div class="col-sm-8">
+                        <select id="dd_finance_system" name="dd_finance_system" class="form-control">
+                            <%= Generic.Functions.populateselect(finance_system, "","None") %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_finance_code">Code</label>
+                    <div class="col-sm-8">
+                        <select id="dd_finance_code" name="dd_finance_code" class="form-control">
+                            <%= Generic.Functions.populateselect(finance_code, "","None") %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_finance_event">Event</label>
+                    <div class="col-sm-8">
+                        <select id="dd_finance_event" name="dd_finance_event" class="form-control">
+                            <%= person_financial_events %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_finance_amount">Amount</label>
+                    <div class="col-sm-8">
+                        <input id="tb_finance_amount" name="tb_finance_amount" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_finance_note">Note</label>
+                    <div class="col-sm-8">
+                        <input id="tb_finance_note" name="tb_finance_note" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tb_finance_banked" class="control-label col-sm-4">
+                        Banked
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_finance_banked" name="tb_finance_banked" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#div_basic">Basic</a></li>
                 <%=html_tabs %>
@@ -397,14 +529,24 @@
                             </select>
                         </div>
                     </div>
-                                      <div class="form-group">
+                    <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_schoolyear">RowIt ID</label>
                         <div class="col-sm-8">
                             <input id="tb_rowit_id" name="tb_rowit_id" type="text" class="form-control numeric" value="<%:tb_rowit_id%>" maxlength="10" />
                         </div>
                     </div>
-
-
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_schoolyear">Key number</label>
+                        <div class="col-sm-8">
+                            <input id="tb_keynumber" name="tb_keynumber" type="text" class="form-control" value="<%:tb_keynumber%>" maxlength="10" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_notes">On loan from club</label>
+                        <div class="col-sm-8">
+                            <textarea id="tb_onloanfromclub" name="tb_onloanfromclub" class="form-control"><%: tb_onloanfromclub %></textarea>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_notes">Notes</label>
@@ -508,7 +650,16 @@
 
                 <p></p>
                 <p></p>
+    <!------------------------------------------------------------------------------------------------------>
+                <div id="div_tracker" class="tab-pane fade in">
+                    <h3>Tracker</h3>
+                    <table class="table" style="width: 100%">
+                        <%= html_tracker %>
+                    </table>
+                </div>
 
+                <p></p>
+                <p></p>
 
                 <!------------------------------------------------------------------------------------------------------>
 

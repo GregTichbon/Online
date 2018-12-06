@@ -423,19 +423,19 @@ switch (option) {
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_categories">Show on Attendees</label>
+            <label class="control-label col-sm-4" for="dd_showattendees">Show on Attendees</label>
             <div class="col-sm-8">
                 <select id="dd_showattendees" name="dd_showattendees" class="form-control">
-                    <%= categories_values %>
+                    <%= Generic.Functions.populateselect(noyes_values, showattendees,"None") %>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_categories">Allow financial transactions</label>
+            <label class="control-label col-sm-4" for="dd_finance">Allow financial transactions</label>
             <div class="col-sm-8">
                 <select id="dd_finance" name="dd_finance" class="form-control">
-                    <%= categories_values %>
+                    <%= Generic.Functions.populateselect(noyes_values, finance,"None") %>
                 </select>
             </div>
         </div>

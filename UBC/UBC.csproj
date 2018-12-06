@@ -362,6 +362,8 @@
     <Content Include="People\main.aspx" />
     <Content Include="People\message.aspx" />
     <Content Include="People\Posts.asmx" />
+    <Content Include="People\RegisterDisplay.aspx" />
+    <Content Include="People\Reports\ComingEventsList.aspx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
@@ -372,6 +374,7 @@
     <Content Include="People\Reports\ShowAttendees.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
+    <Content Include="People\Reports\Tracker.aspx" />
     <Content Include="People\Security\LogOut.aspx" />
     <Content Include="Test2.aspx" />
     <Content Include="Test2a.aspx" />
@@ -484,6 +487,7 @@
     <Content Include="People\Documents\JohnTrophyRegatta.pdf" />
     <Content Include="People\Documents\WaitaraTravel.pdf" />
     <Content Include="People\Documents\WaitaraPhone.pdf" />
+    <Content Include="People\Documents\Update5Dec2018.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">
@@ -702,6 +706,13 @@
     <Compile Include="People\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\RegisterDisplay.aspx.cs">
+      <DependentUpon>RegisterDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\RegisterDisplay.aspx.designer.cs">
+      <DependentUpon>RegisterDisplay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\AttendanceMatrix.aspx.cs">
       <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -715,6 +726,13 @@
     </Compile>
     <Compile Include="People\Reports\CheckList.aspx.designer.cs">
       <DependentUpon>CheckList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\ComingEventsList.aspx.cs">
+      <DependentUpon>ComingEventsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\ComingEventsList.aspx.designer.cs">
+      <DependentUpon>ComingEventsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\CurrentCategoriesMatrix.aspx.cs">
       <DependentUpon>CurrentCategoriesMatrix.aspx</DependentUpon>
@@ -771,6 +789,13 @@
     </Compile>
     <Compile Include="People\Reports\ShowAttendees.aspx.designer.cs">
       <DependentUpon>ShowAttendees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Tracker.aspx.cs">
+      <DependentUpon>Tracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Tracker.aspx.designer.cs">
+      <DependentUpon>Tracker.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>

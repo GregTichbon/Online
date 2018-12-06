@@ -37,11 +37,14 @@ namespace UBC.People
         public string role;
         public string categories;
         public string html_persons;
+        public string showattendees;
+        public string finance;
 
 
         public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going", "Not Going" };
         public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other" };
         public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise", "Coach Support", "Support" };
+        public string[] noyes_values = new string[2] { "No", "Yes" };
         public string categories_values;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -88,6 +91,8 @@ namespace UBC.People
                             enddatetime = dr["enddatetime"].ToString();
                             type = dr["type"].ToString();
                             categories = dr["categories"].ToString();
+                            showattendees = dr["showattendees"].ToString();
+                            finance = dr["finance"].ToString();
 
                             if (allday != "Yes")
                             {
