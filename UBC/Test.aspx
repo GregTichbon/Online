@@ -20,6 +20,13 @@
 
         });
     </script>
+    <style>
+        table {
+            border:solid;
+        }
+        td {
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -70,6 +77,32 @@
         </tr>
     </table>
 
+
+    <table>
+        <tr>
+            <td>Mon</td>
+            <td>Tues</td>
+            <td>Wed</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td rowspan="2">77</td>
+            <td colspan="2">8&nbsp;&nbsp;&nbsp; 9</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
 
 
 </asp:Content>

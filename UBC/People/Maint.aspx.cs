@@ -226,8 +226,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 //FINANCE
                 if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
                 {
+                   
                     html_finance = "<thead>";
-                    html_finance += "<tr><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th>Edit</th></tr>";
+                    html_finance += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                     html_finance += "</thead>";
                     html_finance += "<tbody>";
                     double total = 0;
@@ -259,7 +260,8 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             total += Convert.ToDouble(amount);
 
 
-                            html_finance += "<tr>";
+                            html_finance += "<tr id=\"finance_" + person_finance_id + "\">";
+                            html_finance += "<td style=\"text-align:center\"></td>";
                             html_finance += "<td>" + date + "</td>";
                             html_finance += "<td>" + system + "</td>";
                             html_finance += "<td>" + code + "</td>";
@@ -267,7 +269,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             html_finance += "<td>" + amount + "</td>";
                             html_finance += "<td>" + note + "</td>";
                             html_finance += "<td>" + banked + "</td>";
-                            html_finance += "<td><a href=\"javascript:void(0)\" class=\"financeedit\" id=\"" + person_finance_id + "\">Edit</td>";
+                            html_finance += "<td><a href=\"javascript:void(0)\" class=\"financeedit\" data-mode=\"edit\">Edit</td>";
+                            //html_finance += "<td style=\"text-align:center\">').html(action) 
+                            //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                             html_finance += "</tr>";
 
 
@@ -637,10 +641,10 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_caregiverlandline = Request.Form["tb_caregiverlandline"].Trim();
             dd_coming = Request.Form["dd_coming"];
             */
-            #endregion
+#endregion
 
-            #region setup specific data
-            cmd.CommandText = "Update_Person";
+                    #region setup specific data
+                    cmd.CommandText = "Update_Person";
             cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
 
             cmd.Parameters.Add("@firstname", SqlDbType.VarChar).Value = tb_firstname;

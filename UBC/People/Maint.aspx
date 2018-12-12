@@ -65,10 +65,41 @@
 
 
             $('.submit').click(function () {
-                alert(JSON.stringify(results_grid.getChanges()));
-                alert(JSON.stringify(results_grid.getAll(true)));
+                delim = String.fromCharCode(254);
+                $('#financetable > tbody > tr [data-maint="changed"]').each(function () {
+                    alert(1);
+                });
 
-            })
+               /* $('#financetable > tbody > tr').each(function (i1, tr) {
+                    $(tr).find('td.item').each(function (i2, td) {
+                        id = $(td).attr('id');
+                        name = $(td).closest('td').next('td').text();
+                        breed1 = $(td).attr('breed1');
+                        breed2 = $(td).attr('breed2');
+                        years = $(td).attr('years');
+                        months = $(td).attr('months');
+                        colour1 = $(td).attr('colour1');
+                        colour2 = $(td).attr('colour2');
+                        gender = $(td).attr('gender');
+                        neutered = $(td).attr('neutered');
+                        chip = $(td).attr('chip');
+                        marks = $(td).attr('marks');
+                        value = name + delim + breed1 + delim + breed2 + delim + years + delim + months + delim + colour1 + delim + colour2 + delim + gender + delim + neutered + delim + chip + delim + marks;
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: id,
+                            value: value
+                        }).appendTo('#form1');
+                    });
+                    
+                });*/
+                //event.preventDefault();
+            });
+                //alert(JSON.stringify(results_grid.getChanges()));
+                //alert(JSON.stringify(results_grid.getAll(true)));
+          //  alert(1);
+
+          
 
             $('#menu').click(function () {
                 window.location.href = '../default.aspx';
@@ -130,19 +161,18 @@
 
             $(document).on('click','.financeedit',function() {
             //$('.financeedit').click(function () {
-                id = $(this).attr('id');
-                if (typeof id === "undefined") {
+                mode = $(this).data('mode');
+                if (mode == "add") {
                     $("#dialog-finance").find(':input').val('');
                 } else {
                     tr = $(this).closest('tr');
-
-                    $('#tb_finance_date').val($(tr).find('td').eq(0).text());
-                    $('#dd_finance_system').val($(tr).find('td').eq(1).text());
-                    $('#dd_finance_code').val($(tr).find('td').eq(2).text());
-                    $('#dd_finance_event').val($(tr).find('td').eq(3).text());
-                    $('#tb_finance_amount').val($(tr).find('td').eq(4).text());
-                    $('#tb_finance_note').val($(tr).find('td').eq(5).text());
-                    $('#tb_finance_banked').val($(tr).find('td').eq(6).text());
+                    $('#tb_finance_date').val($(tr).find('td').eq(1).text());
+                    $('#dd_finance_system').val($(tr).find('td').eq(2).text());
+                    $('#dd_finance_code').val($(tr).find('td').eq(3).text());
+                    $('#dd_finance_event').val($(tr).find('td').eq(4).text());
+                    $('#tb_finance_amount').val($(tr).find('td').eq(5).text());
+                    $('#tb_finance_note').val($(tr).find('td').eq(6).text());
+                    $('#tb_finance_banked').val($(tr).find('td').eq(7).text());
                 }
 
                 mywidth = $(window).width() * .95;
@@ -160,12 +190,14 @@
                             $(this).dialog("close");
                         },
                         "Save": function () {
-                            if (typeof id === "undefined") {
+                            if (mode == "add") {
                                 var tr = $('#div_finance > table > tbody tr:first').clone();
-                                console.log(tr);
+                                //console.log(tr);
                                 tr.find(':input').val('');
                                 $('#div_finance > table > tbody').append(tr);
                             }
+                            console.log(tr);
+                            $(tr).data('maint', 'changed');
 
                             $(tr).find('td').eq(0).text($('#tb_finance_date').val());
                             $(tr).find('td').eq(1).text($('#dd_finance_system').val());
@@ -572,8 +604,7 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_finance" class="tab-pane fade in">
                     <h3>Finance</h3>
-                    <button type="button" class="financeedit btn btn-info">Add</button>
-                    <table class="table">
+                    <table id="financetable" class="table">
                         <%= html_finance %>
                     </table>
                 </div>

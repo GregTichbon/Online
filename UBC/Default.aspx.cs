@@ -27,6 +27,12 @@ namespace UBC
                 html += "<br /><a href=\"people/reports/tracker.aspx\">Tracker</a>";
             }
 
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "100001"))
+            {
+                html += "<br /><a href=\"bookinglist.aspx\">Bookings</a>";
+                html += "<br /><a href=\"bookingcalendar.aspx\">Booking Calendar</a>";
+            }
+
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1101"))
             {
                 html += "<br /><a href=\"people/Search.aspx\">People Search</a>";
