@@ -52,9 +52,8 @@
             });
 
             $('#div_startdatetime').datetimepicker({
-                format: 'D MMM YYYY HH:mm',
-                extraFormats: ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'],
-                //daysOfWeekDisabled: [0, 6],
+                format: <%= format%>,
+                extraFormats: <%= extraFormats %>,
                 showClear: true,
                 viewDate: false,
                 useCurrent: false,
@@ -65,9 +64,8 @@
             });
 
             $('#div_enddatetime').datetimepicker({
-                format: 'D MMM YYYY HH:mm',
-                extraFormats: ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'],
-                //daysOfWeekDisabled: [0, 6],
+                format: <%= format%>,
+                extraFormats: <%= extraFormats %>,
                 showClear: true,
                 viewDate: false,
                 useCurrent: false,

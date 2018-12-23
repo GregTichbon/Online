@@ -23,7 +23,7 @@
         $(document).ready(function () {
 
             $('#fromdate').val(moment().subtract(7,'day').format('D MMM YYYY'));
-            $('#todate').val(moment().add(7,'day').format('D MMM YYYY'));
+            $('#todate').val(moment().add(1,'year').format('D MMM YYYY'));
 
             filterbydate();
 

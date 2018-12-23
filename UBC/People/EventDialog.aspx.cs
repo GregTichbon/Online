@@ -26,6 +26,8 @@ namespace UBC.People
         public string role;
         public string categories;
         public string html_persons;
+        public string format = "'D MMM YYYY HH:mm'";
+        public string extraFormats = "['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm']";
 
 
         public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other" };
@@ -73,20 +75,22 @@ namespace UBC.People
                             type = dr["type"].ToString();
                             categories = dr["categories"].ToString();
 
-                            if (allday != "Yes")
-                            {
-                                datetime = "/time";
-                                startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy HH:mm");
-                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy HH:mm");
-                                allday_checked = " checked";
-                            }
-                            else
+                            if (allday == "Yes")
                             {
                                 datetime = "";
                                 startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy");
                                 enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
+                                allday_checked = " checked";
+                                format = "'D MMM YYYY'";
+                                extraFormats = "['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY']";
                             }
-                            if( Convert.ToDateTime(startdatetime) > DateTime.Now)
+                            else
+                            {
+                                datetime = "/time";
+                                startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy HH:mm");
+                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy HH:mm");
+                            }
+                            if ( Convert.ToDateTime(startdatetime) > DateTime.Now)
                             {
                                 btn_delete.Visible = true;
                             }

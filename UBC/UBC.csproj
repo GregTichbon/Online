@@ -597,6 +597,7 @@
     <Content Include="People\Documents\WaitaraPhone.pdf" />
     <Content Include="People\Documents\Update5Dec2018.pdf" />
     <Content Include="People\Documents\ChristmasRegatta2018.pdf" />
+    <Content Include="People\Documents\Update23Dec2018.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">

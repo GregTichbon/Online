@@ -116,8 +116,8 @@
         })
 
         $('#div_startdatetime').datetimepicker({
-            format: 'D MMM YYYY HH:mm',
-            extraFormats: ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'],
+            format: <%= format%>,
+            extraFormats: <%= extraFormats %>,
             //daysOfWeekDisabled: [0, 6],
             showClear: true,
             viewDate: false,
@@ -129,8 +129,8 @@
         });
 
         $('#div_enddatetime').datetimepicker({
-            format: 'D MMM YYYY HH:mm',
-            extraFormats: ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'],
+            format: <%= format%>,
+            extraFormats: <%=extraFormats %>,
             //daysOfWeekDisabled: [0, 6],
             showClear: true,
             viewDate: false,
@@ -144,25 +144,26 @@
         $('#dd_categories').select2();
         $('#dd_categories_filter').select2();
 
-        $('#cb_allday').change(function () {
-            if ($(this).is(":checked")) {
-                $('.usetime').text('');
-                myformat = 'D MMM YYYY';
-                myextraFormats = ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'];
-                $('#div_startdatetime').data("DateTimePicker").format(myformat);
-                $('#div_startdatetime').data("DateTimePicker").extraFormats(myextraFormats);
-                $('#div_enddatetime').data("DateTimePicker").format(myformat);
-                $('#div_enddatetime').data("DateTimePicker").extraFormats(myextraFormats);
-            } else {
-                $('.usetime').text('/time');
-                myformat = 'D MMM YYYY HH:mm';
-                myextraFormats = ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'];
-                $('#div_startdatetime').data("DateTimePicker").format(myformat);
-                $('#div_startdatetime').data("DateTimePicker").extraFormats(myextraFormats);
-                $('#div_enddatetime').data("DateTimePicker").format(myformat);
-                $('#div_enddatetime').data("DateTimePicker").extraFormats(myextraFormats);
-            }
+            $('#cb_allday').change(function () {
+                if ($(this).is(":checked")) {
+                    $('.usetime').text('');
+                    myformat = 'D MMM YYYY';
+                    myextraFormats = ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'];
+                    $('#div_startdatetime').data("DateTimePicker").format(myformat);
+                    $('#div_startdatetime').data("DateTimePicker").extraFormats(myextraFormats);
+                    $('#div_enddatetime').data("DateTimePicker").format(myformat);
+                    $('#div_enddatetime').data("DateTimePicker").extraFormats(myextraFormats);
+                } else {
+                    $('.usetime').text('/time');
+                    myformat = 'D MMM YYYY HH:mm';
+                    myextraFormats = ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'];
+                    $('#div_startdatetime').data("DateTimePicker").format(myformat);
+                    $('#div_startdatetime').data("DateTimePicker").extraFormats(myextraFormats);
+                    $('#div_enddatetime').data("DateTimePicker").format(myformat);
+                    $('#div_enddatetime').data("DateTimePicker").extraFormats(myextraFormats);
+                }
             });
+
             if ($('#dd_type').val() == "Regatta") {
                 $('#btn_regattalist').show();
             }
@@ -365,7 +366,7 @@ switch (option) {
         <div class="form-group">
             <label class="control-label col-sm-4" for="cb_allday">All day</label>
             <div class="col-sm-8">
-                <input id="cb_allday" name="cb_allday" type="checkbox" style="width: auto" value="Yes" <%:allday_checked %>class="form-control" />
+                <input id="cb_allday" name="cb_allday" type="checkbox" style="width: auto" value="Yes" <%:allday_checked %> class="form-control" />
             </div>
         </div>
 
