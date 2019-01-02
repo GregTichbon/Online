@@ -88,7 +88,8 @@
         ||tempphrase||
          <br />
          ||attendance|| - requires Event ID<br />
-         ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+         ||folder|| as in <a href="http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf">http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
+         ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
          <br />
          Event ID: <asp:TextBox ID="tb_event_id" runat="server" Width="50px"></asp:TextBox>
          <br />

@@ -5,6 +5,7 @@ When Person records attendance Note is being lost and when a coach/administrator
 Would be good to record a log of changes and who made them
 
 Relationship Table - assoicates Person Records.  New flag for RelationshipOnly
+RelationshipType Table
 
 MyDetails.aspx with an option to make comments
 
@@ -25,3 +26,7 @@ Event Description does not handle Quote Mark
 Person_Finance
 Stoed procedure: Create_Person_finance 
 Stoed procedure: Get_finance 
+
+Stored Procedure: find_phone
+
+Add notes to ShowAttendees.aspx for coaches etc

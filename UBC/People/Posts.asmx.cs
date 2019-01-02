@@ -121,6 +121,7 @@ namespace UBC.People
               xlWorkBook.Close();
               xlApp.Quit();
           */
+            table = table.Replace("&", "&amp;");
             Functions functions = new Functions();
             string filename = functions.getReference() + ".xlsx";
             string fullfilename = Server.MapPath(".") + "\\downloads\\" + filename;

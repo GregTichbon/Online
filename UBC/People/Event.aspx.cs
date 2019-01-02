@@ -46,7 +46,7 @@ namespace UBC.People
 
         public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going", "Not Going" };
         public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other" };
-        public string[] role_values = new string[6] { "Rower", "Coach", "Cox", "Gym/Excercise", "Coach Support", "Support" };
+        public string[] role_values = new string[7] { "Rower", "Coach", "Coach/Rower", "Cox", "Gym/Excercise", "Coach Support", "Support" };
         public string[] noyes_values = new string[2] { "No", "Yes" };
         public string categories_values;
         protected void Page_Load(object sender, EventArgs e)
@@ -162,6 +162,7 @@ namespace UBC.People
                             while (dr.Read())
                             {
                                 string person_event_id = dr["person_event_id"].ToString();
+                                string guid = dr["guid"].ToString();
                                 string name = dr["name"].ToString();
                                 string attendance = dr["attendance"].ToString();
                                 string note = dr["note"].ToString();
@@ -180,9 +181,16 @@ namespace UBC.People
                                 dd_role += Functions.populateselect(role_values, role);
                                 dd_role += "</select>";
 
+
+                                string namelink = name;
+                                if (1 == 1)
+                                {
+                                    namelink = "<a href=\"maint.aspx?id=" + guid + "\" target=\"maint\">" + name + "</a>";
+                                }
+
                                 //html_persons += "<div id=\"div_row_" + person_event_id + "\">";
                                 html_persons += "<tr id=\"tr_1_" + person_id + "\" data-id=\"" + person_event_id + "\" data-category=\"" + category + "\">";
-                                html_persons += "<td rowspan=\"3\">" + name + "</td>";
+                                html_persons += "<td rowspan=\"3\">" + namelink + "</td>";
                                 html_persons += "<td rowspan=\"3\">" + dd_attendance + "</td>";
                                 html_persons += "<td rowspan=\"3\">" + dd_role + "</td>";
                                 html_persons += "</tr>";

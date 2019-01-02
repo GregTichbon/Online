@@ -103,6 +103,9 @@
     <Content Include="Dependencies\fullcalendar\demos\default.html" />
     <Content Include="Dependencies\fullcalendar\demos\external-dragging.html" />
     <Content Include="Dependencies\fullcalendar\demos\gcal.html" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg1.html" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg2.aspx" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg2.html" />
     <Content Include="Dependencies\fullcalendar\demos\json.html" />
     <Content Include="Dependencies\fullcalendar\demos\js\theme-chooser.js" />
     <Content Include="Dependencies\fullcalendar\demos\list-views.html" />
@@ -450,6 +453,7 @@
     <Content Include="Go\Doc1\default.aspx" />
     <Content Include="Go\Register\default.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="People\Attendance.aspx" />
     <Content Include="People\BankImport.aspx" />
     <Content Include="Dependencies\Images\question.png" />
     <Content Include="Dependencies\Images\questionsmall.png" />
@@ -478,6 +482,7 @@
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
+    <Content Include="People\Reports\Report.aspx" />
     <Content Include="People\Reports\ShowAttendees.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
@@ -695,6 +700,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dependencies\fullcalendar\demos\Greg2.aspx.cs">
+      <DependentUpon>Greg2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dependencies\fullcalendar\demos\Greg2.aspx.designer.cs">
+      <DependentUpon>Greg2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Go\Doc1\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -716,6 +728,13 @@
     </Compile>
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Attendance.aspx.cs">
+      <DependentUpon>Attendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attendance.aspx.designer.cs">
+      <DependentUpon>Attendance.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\BankImport.aspx.cs">
       <DependentUpon>BankImport.aspx</DependentUpon>
@@ -920,6 +939,13 @@
     </Compile>
     <Compile Include="People\Reports\RegattaList.aspx.designer.cs">
       <DependentUpon>RegattaList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\ShowAttendees.aspx.cs">
       <DependentUpon>ShowAttendees.aspx</DependentUpon>

@@ -67,11 +67,11 @@ namespace UBC.People
                         string email = dr["email"].ToString();
                         string category = dr["category"].ToString();
                         string categories = dr["categories"].ToString();
-                        string guid = dr["guid"].ToString();
+                        string person_guid = dr["person_guid"].ToString();
                         string attendance = dr["attendance"].ToString();
                         string role = dr["role"].ToString();
 
-                        string link = "<a href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
+                        string link = "<a href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">Link</a>";
                         string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
 
 
@@ -190,7 +190,8 @@ namespace UBC.People
                         string email = dr["email"].ToString();
                         string category = dr["category"].ToString();
                         string categories = dr["categories"].ToString();
-                        string guid = dr["guid"].ToString();
+                        string person_guid = dr["person_guid"].ToString();
+                        string event_guid = dr["event_guid"].ToString();
                         string username = dr["username"].ToString();
                         string tempphrase = dr["tempphrase"].ToString();
                         string attendance = dr["attendance"].ToString();
@@ -202,7 +203,7 @@ namespace UBC.People
                         string textmessage = "";
                         string facebookmessage = "";
 
-                        string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + guid + "\" target=\"link\">Link</a>";
+                        string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + person_guid + "\" target=\"link\">Link</a>";
 
                         if (Request.Form["cb_email_" + id] == "on")
                         {
@@ -215,24 +216,25 @@ namespace UBC.People
                             emailtext = emailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                             emailtext = emailtext.Replace("||firstname||", firstname);
 
-                            emailtext = emailtext.Replace("||accesscode||", guid.Substring(0, 5));
+                            emailtext = emailtext.Replace("||accesscode||", person_guid.Substring(0, 5));
                             emailtext = emailtext.Replace("||username||", username);
                             emailtext = emailtext.Replace("||tempphrase||", tempphrase);
                             emailtext = emailtext.Replace("||attendance||", attendance);
                             emailtext = emailtext.Replace("||role||", role);
                             emailtext = emailtext.Replace("||folder||", "Folder" + id);
-
+                            emailtext = emailtext.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                             emailhtml = tb_htmlbody.Text;
                             emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                             emailhtml = emailhtml.Replace("||firstname||", firstname);
 
-                            emailhtml = emailhtml.Replace("||accesscode||", guid.Substring(0, 5));
+                            emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
                             emailhtml = emailhtml.Replace("||username||", username);
                             emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
                             emailhtml = emailhtml.Replace("||attendance||", attendance);
                             emailhtml = emailhtml.Replace("||role||", role);
                             emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
+                            emailhtml = emailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                             emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
@@ -270,12 +272,13 @@ namespace UBC.People
                             textmessage = tb_txt.Text;
                             textmessage = textmessage.Replace("||link||", link);
                             textmessage = textmessage.Replace("||firstname||", firstname);
-                            textmessage = textmessage.Replace("||accesscode||", guid.Substring(0, 5));
+                            textmessage = textmessage.Replace("||accesscode||", person_guid.Substring(0, 5));
                             textmessage = textmessage.Replace("||username||", username);
                             textmessage = textmessage.Replace("||tempphrase||", tempphrase);
                             textmessage = textmessage.Replace("||attendance||", attendance);
                             textmessage = textmessage.Replace("||role||", role);
                             textmessage = textmessage.Replace("||folder||", "Folder" + id);
+                            textmessage = textmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                             funcs.SendMessage(mobile, textmessage);
                         }
@@ -286,12 +289,13 @@ namespace UBC.People
                             facebookmessage = facebookmessage.Replace("||link||", link);
                             facebookmessage = facebookmessage.Replace("||firstname||", firstname);
 
-                            facebookmessage = facebookmessage.Replace("||accesscode||", guid.Substring(0, 5));
+                            facebookmessage = facebookmessage.Replace("||accesscode||", person_guid.Substring(0, 5));
                             facebookmessage = facebookmessage.Replace("||username||", username);
                             facebookmessage = facebookmessage.Replace("||tempphrase||", tempphrase);
                             facebookmessage = facebookmessage.Replace("||attendance||", attendance);
                             facebookmessage = facebookmessage.Replace("||role||", role);
                             facebookmessage = facebookmessage.Replace("||folder||", "Folder" + id);
+                            facebookmessage = facebookmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                             html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + facebookmessage + "</textarea>";
                         }

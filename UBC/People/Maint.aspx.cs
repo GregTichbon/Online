@@ -593,10 +593,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            /*
             foreach(string name in Request.Form)
             {
                 string x = name;
             }
+            */
 
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
