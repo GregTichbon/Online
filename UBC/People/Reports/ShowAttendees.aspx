@@ -60,6 +60,10 @@
 
             $('#div_count').html(mydiv);
 
+            $('#gotoevent').click(function () {
+                event_id = $(this).data("event_id");
+                window.open("../event.aspx?id=" + event_id);
+            });
 
 
             $('#export').click(function () {
@@ -110,6 +114,7 @@
 
     <div class="container" style="background-color: #FCF7EA">
         <div class="toprighticon">
+            <%=gotoevent %>
             <%=export %>
             <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>

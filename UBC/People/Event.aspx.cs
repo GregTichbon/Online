@@ -55,6 +55,11 @@ namespace UBC.People
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
+            Boolean access = false;
+            if (new[] { "1", "3", "4" }.Contains(Session["UBC_person_id"]))
+            {
+                access = true;
+            }
 
             if (!IsPostBack)
             {

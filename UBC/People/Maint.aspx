@@ -462,27 +462,40 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#div_basic">Basic</a></li>
                 <%=html_tabs %>
-                <li><a data-target="#div_category">Category</a></li>
-                <li><a data-target="#div_phone">Phone</a></li>
-                <li><a data-target="#div_address">Address</a></li>
-                <li><a data-target="#div_email">Email</a></li>
-                <li><a data-target="#div_attendance">Attendance</a></li>
-                <li><a data-target="#div_results">Results</a></li>
-                <li><a data-target="#div_registration">Registration</a></li>
             </ul>
             <div class="tab-content">
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_basic" class="tab-pane fade in active">
                     <h3>Basic</h3>
                     <div class="form-group">
+                        <label class="control-label col-sm-4" for="dd_relationshiponly">Relationship Only</label>
+                        <div class="col-sm-8">
+                            <select id="dd_relationshiponly" name="dd_relationshiponly" class="form-control" required="required">
+                                <%= Generic.Functions.populateselect(yesno, dd_relationshiponly,"None") %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_gender">Gender</label>
                         <div class="col-sm-8">
-                            <select id="dd_gender" name="dd_gender" class="form-control" required>
+                            <select id="dd_gender" name="dd_gender" class="form-control" required="required">
                                 <%= Generic.Functions.populateselect(gender, dd_gender,"None") %>
                             </select>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_facebook">Facebook</label>
+                        <div class="col-sm-7">
+                            <input id="tb_facebook" name="tb_facebook" type="text" class="form-control" value="<%:tb_facebook%>" maxlength="150" />
+                        </div>
+                        <div class="col-sm-1">
+                            <a class="btn btn-info" role="button" href="<%: tb_facebook %>" target="UBC_Facebook">Go</a>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_general" class="tab-pane fade in ">
+                    <h3>General</h3>
                     <div class="form-group">
                         <label for="tb_birthdate" class="control-label col-sm-4">
                             Date of birth
@@ -499,9 +512,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_medical">Medical</label>
                         <div class="col-sm-8">
@@ -544,15 +554,7 @@
                             <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" maxlength="2" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_facebook">Facebook</label>
-                        <div class="col-sm-7">
-                            <input id="tb_facebook" name="tb_facebook" type="text" class="form-control" value="<%:tb_facebook%>" maxlength="150" />
-                        </div>
-                        <div class="col-sm-1">
-                            <a class="btn btn-info" role="button" href="<%: tb_facebook %>" target="UBC_Facebook">Go</a>
-                        </div>
-                    </div>
+  
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_school">Can swim 50m with clothes</label>
                         <div class="col-sm-8">
@@ -609,6 +611,13 @@
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
+                 <div id="div_relationships" class="tab-pane fade in">
+                    <h3>Finance</h3>
+                    <table id="relationshiptable" class="table">
+                        <%= html_relationships %>
+                    </table>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>              
                 <div id="div_phone" class="tab-pane fade in">
                     <h3>Phone</h3>
                     <table class="table">

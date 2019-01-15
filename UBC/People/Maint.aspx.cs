@@ -57,9 +57,9 @@ namespace UBC.People
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };
         public string[] yesno = new string[2] { "Yes", "No" };
-        public string[] familymember = new string[5] { "1", "2","3","4","5" };
+        public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
         public string[] finance_system = new string[2] { "UBC", "Friends" };
-        public string[] finance_code = new string[6] { "Full Regatta", "Boat Transport", "Accomodation","Clothing","Fees","Race Fees" };
+        public string[] finance_code = new string[6] { "Full Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees" };
         public string person_financial_events;
 
         public string html_tabs = "";
@@ -74,6 +74,7 @@ namespace UBC.People
         public string html_category = "";
         public string html_results = "";
         public string html_arrangements = "";
+        public string html_relationships = "";
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -83,42 +84,13 @@ namespace UBC.People
                 Response.Redirect("~/people/security/login.aspx");
             }
 
-                       hf_guid = Request.QueryString["id"];
+            hf_guid = Request.QueryString["id"];
 
-            /*
-                        html_tabs += "<li><a data-target=\"#div_category\">Category</a></li>";
-                        html_tabs += "<li><a data-target=\"#div_phone\">Phone</a></li>";
-                        html_tabs += "<li><a data-target=\"#div_address\">Address</a></li>";
-                        html_tabs += "<li><a data-target=\"#div_email\">Email</a></li>";
-                        html_tags += "<li><a data-target=\"#div_attendance\">Attendance</a></li>";
-                        html_tabs += "<li><a data-target=\"#div_results\">Results</a></li>";
-                        html_tabs += "<li><a data-target=\"#div_registration\">Registration</a></li>";
-            */
-
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
-            {
-
-                html_tabs += "<li><a data-target=\"#div_finance\">Finance</a></li>";
-                html_tabs += "<li><a data-target=\"#div_arrangements\">Arrangements</a></li>";
-            }
-
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
-            {
-
-                html_tabs += "<li><a data-target=\"#div_system\">System</a></li>";
-                html_tabs += "<li><a data-target=\"#div_loginregister\">Logins</a></li>";
-                html_tabs += "<li><a data-target=\"#div_tracker\">Tracker</a></li>";
-            }
             returnto = Request.QueryString["returnto"] + "";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-
-  
-
-
             if (hf_guid != "new")
             {
-
                 SqlConnection con = new SqlConnection(strConnString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand();
@@ -184,6 +156,40 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
                     throw ex;
                 }
+                html_tabs += "<li><a data-target=\"#div_phone\">Phone</a></li>";
+                html_tabs += "<li><a data-target=\"#div_address\">Address</a></li>";
+                html_tabs += "<li><a data-target=\"#div_email\">Email</a></li>";
+                html_tabs += "<li><a data-target=\"#div_relationships\">Relationships</a></li>";
+
+                if (dd_relationshiponly == "Yes")
+                {
+                    if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                    {
+                        html_tabs += "<li><a data-target=\"#div_tracker\">Tracker</a></li>";
+                    }
+                }
+                else
+                {
+                    html_tabs += "<li><a data-target=\"#div_general\">General</a></li>";
+                    html_tabs += "<li><a data-target=\"#div_category\">Category</a></li>";
+                    html_tabs += "<li><a data-target=\"#div_attendance\">Attendance</a></li>";
+                    html_tabs += "<li><a data-target=\"#div_results\">Results</a></li>";
+                    html_tabs += "<li><a data-target=\"#div_registration\">Registration</a></li>";
+
+                    if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
+                    {
+                        html_tabs += "<li><a data-target=\"#div_finance\">Finance</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_arrangements\">Arrangements</a></li>";
+                    }
+
+                    if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                    {
+                        html_tabs += "<li><a data-target=\"#div_system\">System</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_loginregister\">Logins</a></li>";
+                        html_tabs += "<li><a data-target=\"#div_tracker\">Tracker</a></li>";
+                    }
+                }
+
 
                 html_attendance = "<tr><th>When</th><th>What</th><th>Attendance</th><th>Note</th></tr>";
 
@@ -226,7 +232,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 //FINANCE
                 if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
                 {
-                   
+
                     html_finance = "<thead>";
                     html_finance += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                     html_finance += "</thead>";
@@ -252,7 +258,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             string event_id = dr["event_id"].ToString();
                             string person_event_id = dr["person_event_id"].ToString();
                             string banked = dr["banked"].ToString();
-                            if(banked != "")
+                            if (banked != "")
                             {
                                 banked = Convert.ToDateTime(banked).ToString("dd MMM yy");
                             }
@@ -284,11 +290,58 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     {
                         throw ex;
                     }
-            
-
-                //-------------------------------------------------------------------------------------
+                    //-------------------------------------------------------------------------------------
                     html_arrangements = "TO DO";
                 }
+
+                //-------------------------------------------------------------------------------------
+                //RELATIONSHIPS
+                //if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
+                //{
+
+                html_relationships = "<thead>";
+                html_relationships += "<tr><th>Relationship</th>><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                html_relationships += "</thead>";
+                html_relationships += "<tbody>";
+
+                cmd.CommandText = "get_person_relationships";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                try
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string relationship_id = dr["relationship_id"].ToString();
+                        string person_guid = dr["person_guid"].ToString();
+                        string person = dr["person"].ToString();
+                        string relationship = dr["Relationship"].ToString();
+                        string status = dr["status"].ToString();
+                        string note = dr["note"].ToString();
+                        string PrimaryRecordat = dr["PrimaryRecordat"].ToString();
+
+                        html_relationships += "<tr id=\"relationships_" + relationship_id + "\">";
+                        //html_relationships += "<td style=\"text-align:center\"></td>";
+                        html_relationships += "<td> is the " + relationship + " of</td>";
+                        html_relationships += "<td><a href=\"maint.aspx?id=" + person_guid + "\">" + person + "</a></td>";
+                        html_relationships += "<td>" + status + "</td>";
+                        html_relationships += "<td>" + note + "</td>";
+                        html_relationships += "<td><a href=\"javascript:void(0)\" class=\"relationshipsedit\" data-mode=\"edit\">Edit</td>";
+                        //html_relationships += "<td style=\"text-align:center\">').html(action) 
+                        //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                        html_relationships += "</tr>";
+
+                    }
+                    dr.Close();
+                    html_relationships += "</tbody>";
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                //}
 
                 //-------------------------------------------------------------------------------------
 
@@ -414,7 +467,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         {
                             send = "<a class=\"send_text\">Send</a>";
                         }
-                        if(phone != "")
+                        if (phone != "")
                         {
                             phone = "<a href=\"tel:" + phone + "\">" + phone + "</>";
                         }
@@ -489,7 +542,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string category = dr["category"].ToString();
 
                         string startdate = dr["startdate"].ToString();
-                        if(startdate != "")
+                        if (startdate != "")
                         {
                             startdate = Convert.ToDateTime(startdate).ToString("dd MMM yy");
                         }
@@ -514,7 +567,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     throw ex;
                 }
 
-//-------------------------------------------------------------------------------------
+                //-------------------------------------------------------------------------------------
                 html_results = "<thead><tr>";
                 html_results += "<th data-hidden='true'>person_event_id</th>";
                 //html_results += "<th data-hidden='true'>ID2</th>";
@@ -630,7 +683,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_keynumber = Request.Form["tb_keynumber"].Trim();
             tb_onloanfromclub = Request.Form["tb_onloanfromclub"].Trim();
             dd_swimmer = Request.Form["dd_swimmer"].Trim();
-            dd_relationshiponly = ""; // Request.Form["dd_relationshiponly"].Trim();
+            dd_relationshiponly = Request.Form["dd_relationshiponly"].Trim();
 
             /*
             tb_email = Request.Form["tb_email"].Trim();
@@ -643,10 +696,11 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_caregiverlandline = Request.Form["tb_caregiverlandline"].Trim();
             dd_coming = Request.Form["dd_coming"];
             */
-#endregion
+            #endregion
 
-                    #region setup specific data
-                    cmd.CommandText = "Update_Person";
+            #region setup specific data
+            string result = "";
+            cmd.CommandText = "Update_Person";
             cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
 
             cmd.Parameters.Add("@firstname", SqlDbType.VarChar).Value = tb_firstname;
@@ -661,7 +715,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = tb_notes;
             cmd.Parameters.Add("@residentialaddress", SqlDbType.VarChar).Value = tb_residentialaddress;
             cmd.Parameters.Add("@postaladdress", SqlDbType.VarChar).Value = tb_postaladdress;
-            
+
             cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
             cmd.Parameters.Add("@colour", SqlDbType.VarChar).Value = '#' + tb_colour;
             cmd.Parameters.Add("@feecategory", SqlDbType.VarChar).Value = dd_feecategory;
@@ -689,7 +743,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             try
             {
                 con.Open();
-                string result = cmd.ExecuteScalar().ToString();
+                result = cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
@@ -700,10 +754,18 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 con.Close();
                 con.Dispose();
             }
-            if (returnto == "")
+            if (hf_guid == "new")
             {
-                returnto = "list";
+                returnto = "maint.aspx?id=" + result;
             }
+            else
+            {
+                if (returnto == "")
+                {
+                    returnto = "list";
+                }
+            }
+
             Response.Redirect(returnto + ".aspx");
         }
     }
