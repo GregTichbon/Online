@@ -66,11 +66,11 @@
 
             $('.submit').click(function () {
                 delim = String.fromCharCode(254);
-                $('#financetable > tbody > tr [data-maint="changed"]').each(function () {
+                $('#transactionstable > tbody > tr [data-maint="changed"]').each(function () {
                     alert(1);
                 });
 
-               /* $('#financetable > tbody > tr').each(function (i1, tr) {
+               /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
                     $(tr).find('td.item').each(function (i2, td) {
                         id = $(td).attr('id');
                         name = $(td).closest('td').next('td').text();
@@ -159,20 +159,20 @@
 
             });
 
-            $(document).on('click','.financeedit',function() {
-            //$('.financeedit').click(function () {
+            $(document).on('click','.transactionsedit',function() {
+            //$('.transactionsedit').click(function () {
                 mode = $(this).data('mode');
                 if (mode == "add") {
-                    $("#dialog-finance").find(':input').val('');
+                    $("#dialog-transactions").find(':input').val('');
                 } else {
                     tr = $(this).closest('tr');
-                    $('#tb_finance_date').val($(tr).find('td').eq(1).text());
-                    $('#dd_finance_system').val($(tr).find('td').eq(2).text());
-                    $('#dd_finance_code').val($(tr).find('td').eq(3).text());
-                    $('#dd_finance_event').val($(tr).find('td').eq(4).text());
-                    $('#tb_finance_amount').val($(tr).find('td').eq(5).text());
-                    $('#tb_finance_note').val($(tr).find('td').eq(6).text());
-                    $('#tb_finance_banked').val($(tr).find('td').eq(7).text());
+                    $('#tb_transactions_date').val($(tr).find('td').eq(1).text());
+                    $('#dd_transactions_system').val($(tr).find('td').eq(2).text());
+                    $('#dd_transactions_code').val($(tr).find('td').eq(3).text());
+                    $('#dd_transactions_event').val($(tr).find('td').eq(4).text());
+                    $('#tb_transactions_amount').val($(tr).find('td').eq(5).text());
+                    $('#tb_transactions_note').val($(tr).find('td').eq(6).text());
+                    $('#tb_transactions_banked').val($(tr).find('td').eq(7).text());
                 }
 
                 mywidth = $(window).width() * .95;
@@ -180,7 +180,7 @@
                     mywidth = 800;
                 }
 
-                $("#dialog-finance").dialog({
+                $("#dialog-transactions").dialog({
                     resizable: false,
                     height: 600,
                     width: mywidth,
@@ -191,21 +191,21 @@
                         },
                         "Save": function () {
                             if (mode == "add") {
-                                var tr = $('#div_finance > table > tbody tr:first').clone();
+                                var tr = $('#div_transactions > table > tbody tr:first').clone();
                                 //console.log(tr);
                                 tr.find(':input').val('');
-                                $('#div_finance > table > tbody').append(tr);
+                                $('#div_transactions > table > tbody').append(tr);
                             }
                             console.log(tr);
                             $(tr).data('maint', 'changed');
 
-                            $(tr).find('td').eq(0).text($('#tb_finance_date').val());
-                            $(tr).find('td').eq(1).text($('#dd_finance_system').val());
-                            $(tr).find('td').eq(2).text($('#dd_finance_code').val());
-                            $(tr).find('td').eq(3).text($('#dd_finance_event').val());
-                            $(tr).find('td').eq(4).text($('#tb_finance_amount').val());
-                            $(tr).find('td').eq(5).text($('#tb_finance_note').val());
-                            $(tr).find('td').eq(6).text($('#tb_finance_banked').val());
+                            $(tr).find('td').eq(0).text($('#tb_transactions_date').val());
+                            $(tr).find('td').eq(1).text($('#dd_transactions_system').val());
+                            $(tr).find('td').eq(2).text($('#dd_transactions_code').val());
+                            $(tr).find('td').eq(3).text($('#dd_transactions_event').val());
+                            $(tr).find('td').eq(4).text($('#tb_transactions_amount').val());
+                            $(tr).find('td').eq(5).text($('#tb_transactions_note').val());
+                            $(tr).find('td').eq(6).text($('#tb_transactions_banked').val());
                             alert("To do: Database update");
                             $(this).dialog("close");
                         }
@@ -393,14 +393,14 @@
                 </div>
             </div>
 
-            <div id="dialog-finance" title="Maintain Transactions" style="display: none" class="form-horizontal">
+            <div id="dialog-transactions" title="Maintain Transactions" style="display: none" class="form-horizontal">
                 <div class="form-group">
-                    <label for="tb_finance_date" class="control-label col-sm-4">
+                    <label for="tb_transactions_date" class="control-label col-sm-4">
                         Date
                     </label>
                     <div class="col-sm-8">
                         <div class="input-group standarddate" >
-                            <input id="tb_finance_date" name="tb_finance_date" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <input id="tb_transactions_date" name="tb_transactions_date" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -408,49 +408,49 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_finance_system">System</label>
+                    <label class="control-label col-sm-4" for="dd_transactions_system">System</label>
                     <div class="col-sm-8">
-                        <select id="dd_finance_system" name="dd_finance_system" class="form-control">
-                            <%= Generic.Functions.populateselect(finance_system, "","None") %>
+                        <select id="dd_transactions_system" name="dd_transactions_system" class="form-control">
+                            <%= Generic.Functions.populateselect(transactions_system, "","None") %>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_finance_code">Code</label>
+                    <label class="control-label col-sm-4" for="dd_transactions_code">Code</label>
                     <div class="col-sm-8">
-                        <select id="dd_finance_code" name="dd_finance_code" class="form-control">
-                            <%= Generic.Functions.populateselect(finance_code, "","None") %>
+                        <select id="dd_transactions_code" name="dd_transactions_code" class="form-control">
+                            <%= Generic.Functions.populateselect(transactions_code, "","None") %>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_finance_event">Event</label>
+                    <label class="control-label col-sm-4" for="dd_transactions_event">Event</label>
                     <div class="col-sm-8">
-                        <select id="dd_finance_event" name="dd_finance_event" class="form-control">
+                        <select id="dd_transactions_event" name="dd_transactions_event" class="form-control">
                             <%= person_financial_events %>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_finance_amount">Amount</label>
+                    <label class="control-label col-sm-4" for="tb_transactions_amount">Amount</label>
                     <div class="col-sm-8">
-                        <input id="tb_finance_amount" name="tb_finance_amount" type="text" class="form-control" />
+                        <input id="tb_transactions_amount" name="tb_transactions_amount" type="text" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_finance_note">Note</label>
+                    <label class="control-label col-sm-4" for="tb_transactions_note">Note</label>
                     <div class="col-sm-8">
-                        <input id="tb_finance_note" name="tb_finance_note" type="text" class="form-control" />
+                        <input id="tb_transactions_note" name="tb_transactions_note" type="text" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tb_finance_banked" class="control-label col-sm-4">
+                    <label for="tb_transactions_banked" class="control-label col-sm-4">
                         Banked
                     </label>
                     <div class="col-sm-8">
                         <div class="input-group standarddate">
-                            <input id="tb_finance_banked" name="tb_finance_banked" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <input id="tb_transactions_banked" name="tb_transactions_banked" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -494,7 +494,7 @@
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
-                <div id="div_general" class="tab-pane fade in ">
+                <div id="div_general" class="tab-pane fade in">
                     <h3>General</h3>
                     <div class="form-group">
                         <label for="tb_birthdate" class="control-label col-sm-4">
@@ -606,13 +606,43 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_finance" class="tab-pane fade in">
                     <h3>Finance</h3>
-                    <table id="financetable" class="table">
-                        <%= html_finance %>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_invoicerecipient">Invoice Recipient</label>
+                        <div class="col-sm-8">
+                            <textarea id="tb_invoicerecipient" name="tb_invoicerecipient" class="form-control"><%: tb_invoicerecipient %></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="dd_invoiceaddresstype">Address type</label>
+                        <div class="col-sm-8">
+                            <select id="dd_invoiceaddresstype" name="dd_invoiceaddresstype" class="form-control">
+                                <%= Generic.Functions.populateselect(invoiceaddresstypes, dd_invoiceaddresstype,"") %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_invoiceaddress">Invoice Address</label>
+                        <div class="col-sm-8">
+                            <textarea id="tb_invoiceaddress" name="tb_invoiceaddress" class="form-control"><%: tb_invoiceaddress %></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_financialnote">Note</label>
+                        <div class="col-sm-8">
+                            <textarea id="tb_financialnote" name="tb_financialnote" class="form-control"><%: tb_financialnote %></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
+                <div id="div_transactions" class="tab-pane fade in">
+                    <h3>Transactions</h3>
+                    <table id="transactionstable" class="table">
+                        <%= html_transactions %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
-                 <div id="div_relationships" class="tab-pane fade in">
-                    <h3>Finance</h3>
+                <div id="div_relationships" class="tab-pane fade in">
+                    <h3>Relationships</h3>
                     <table id="relationshiptable" class="table">
                         <%= html_relationships %>
                     </table>

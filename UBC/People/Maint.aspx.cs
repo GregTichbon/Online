@@ -39,6 +39,10 @@ namespace UBC.People
         public string tb_keynumber;
         public string tb_onloanfromclub;
         public string dd_relationshiponly;
+        public string tb_invoicerecipient;
+        public string dd_invoiceaddresstype;
+        public string tb_invoiceaddress;
+        public string tb_financialnote;
 
         /*
         public string tb_caregivername;
@@ -58,14 +62,15 @@ namespace UBC.People
         public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };
         public string[] yesno = new string[2] { "Yes", "No" };
         public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
-        public string[] finance_system = new string[2] { "UBC", "Friends" };
-        public string[] finance_code = new string[6] { "Full Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees" };
+        public string[] transactions_system = new string[2] { "UBC", "Friends" };
+        public string[] transactions_code = new string[6] { "Full Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees" };
+        public string[] invoiceaddresstypes = new string[4] { "Email", "Text", "Mail", "Hand Deliver" };
         public string person_financial_events;
 
         public string html_tabs = "";
         public string html_email = "";
         public string html_system = "";
-        public string html_finance = "";
+        public string html_transactions = "";
         public string html_registration = "";
         public string html_loginregister = "";
         public string html_tracker = "";
@@ -129,8 +134,10 @@ namespace UBC.People
                         tb_keynumber = dr["keynumber"].ToString();
                         tb_onloanfromclub = dr["onloanfromclub"].ToString();
                         dd_relationshiponly = dr["relationshiponly"].ToString();
-
-
+                        tb_invoicerecipient = dr["InvoiceRecipient"].ToString();
+                        dd_invoiceaddresstype = dr["InvoiceAddressType"].ToString();
+                        tb_invoiceaddress = dr["InvoiceAddress"].ToString();
+                        tb_financialnote = dr["financialnote"].ToString();
 
                         /*
 tb_email = dr["email"].ToString();
@@ -176,9 +183,14 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     html_tabs += "<li><a data-target=\"#div_results\">Results</a></li>";
                     html_tabs += "<li><a data-target=\"#div_registration\">Registration</a></li>";
 
-                    if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
+                    if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11001"))
                     {
                         html_tabs += "<li><a data-target=\"#div_finance\">Finance</a></li>";
+                    }
+
+                    if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
+                    {
+                        html_tabs += "<li><a data-target=\"#div_transactions\">Transactions</a></li>";
                         html_tabs += "<li><a data-target=\"#div_arrangements\">Arrangements</a></li>";
                     }
 
@@ -229,17 +241,17 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 
 
                 //-------------------------------------------------------------------------------------
-                //FINANCE
+                //TRANSACTIONS
                 if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "10001"))
                 {
 
-                    html_finance = "<thead>";
-                    html_finance += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
-                    html_finance += "</thead>";
-                    html_finance += "<tbody>";
+                    html_transactions = "<thead>";
+                    html_transactions += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_transactions += "</thead>";
+                    html_transactions += "<tbody>";
                     double total = 0;
 
-                    cmd.CommandText = "get_person_finance";
+                    cmd.CommandText = "get_person_transactions";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
 
@@ -248,7 +260,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         SqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
-                            string person_finance_id = dr["person_finance_id"].ToString();
+                            string person_transaction_id = dr["person_transaction_id"].ToString();
                             string date = Convert.ToDateTime(dr["date"]).ToString("dd MMM yy");
                             string system = dr["system"].ToString();
                             string detail = dr["detail"].ToString();
@@ -266,24 +278,24 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             total += Convert.ToDouble(amount);
 
 
-                            html_finance += "<tr id=\"finance_" + person_finance_id + "\">";
-                            html_finance += "<td style=\"text-align:center\"></td>";
-                            html_finance += "<td>" + date + "</td>";
-                            html_finance += "<td>" + system + "</td>";
-                            html_finance += "<td>" + code + "</td>";
-                            html_finance += "<td>" + event_id + "</td>";
-                            html_finance += "<td>" + amount + "</td>";
-                            html_finance += "<td>" + note + "</td>";
-                            html_finance += "<td>" + banked + "</td>";
-                            html_finance += "<td><a href=\"javascript:void(0)\" class=\"financeedit\" data-mode=\"edit\">Edit</td>";
+                            html_transactions += "<tr id=\"transactions_" + person_transaction_id + "\">";
+                            html_transactions += "<td style=\"text-align:center\"></td>";
+                            html_transactions += "<td>" + date + "</td>";
+                            html_transactions += "<td>" + system + "</td>";
+                            html_transactions += "<td>" + code + "</td>";
+                            html_transactions += "<td>" + event_id + "</td>";
+                            html_transactions += "<td>" + amount + "</td>";
+                            html_transactions += "<td>" + note + "</td>";
+                            html_transactions += "<td>" + banked + "</td>";
+                            html_transactions += "<td><a href=\"javascript:void(0)\" class=\"transactionsedit\" data-mode=\"edit\">Edit</td>";
                             //html_finance += "<td style=\"text-align:center\">').html(action) 
                             //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
-                            html_finance += "</tr>";
+                            html_transactions += "</tr>";
 
 
                         }
                         dr.Close();
-                        html_finance += "</tbody>";
+                        html_transactions += "</tbody>";
 
                     }
                     catch (Exception ex)
@@ -300,7 +312,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 //{
 
                 html_relationships = "<thead>";
-                html_relationships += "<tr><th>Relationship</th>><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                html_relationships += "<tr><th>Relationship</th>><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"relationshipedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                 html_relationships += "</thead>";
                 html_relationships += "<tbody>";
 
@@ -684,6 +696,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             tb_onloanfromclub = Request.Form["tb_onloanfromclub"].Trim();
             dd_swimmer = Request.Form["dd_swimmer"].Trim();
             dd_relationshiponly = Request.Form["dd_relationshiponly"].Trim();
+            tb_invoicerecipient = Request.Form["tb_invoicerecipient"].Trim();
+            dd_invoiceaddresstype = Request.Form["dd_invoiceaddresstype"].Trim();
+            tb_invoiceaddress = Request.Form["tb_invoiceaddress"].Trim();
+            tb_financialnote = Request.Form["tb_financialnote"].Trim();
+
+
 
             /*
             tb_email = Request.Form["tb_email"].Trim();
@@ -725,8 +743,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@onloanfromclub", SqlDbType.VarChar).Value = tb_onloanfromclub;
             cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
             cmd.Parameters.Add("@relationshiponly", SqlDbType.VarChar).Value = dd_relationshiponly;
+            cmd.Parameters.Add("@InvoiceRecipient", SqlDbType.VarChar).Value = tb_invoicerecipient;
+            cmd.Parameters.Add("@InvoiceAddressType", SqlDbType.VarChar).Value = dd_invoiceaddresstype;
+            cmd.Parameters.Add("@InvoiceAddress", SqlDbType.VarChar).Value = tb_invoiceaddress;
+            cmd.Parameters.Add("@financialnote", SqlDbType.VarChar).Value = tb_financialnote;
 
-
+            
             /*
             cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = tb_email;
             cmd.Parameters.Add("@mobile", SqlDbType.VarChar).Value = tb_mobile;

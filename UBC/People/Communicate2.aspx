@@ -1,4 +1,4 @@
-﻿<%@ Page ValidateRequest="false" Title="Union Boat Club Communicate" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Communicate.aspx.cs" Inherits="UBC.People.Communicate" %>
+﻿<%@ Page ValidateRequest="false" Title="Union Boat Club Communicate" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Communicate2.aspx.cs" Inherits="UBC.People.Communicate2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Style Sheets -->
@@ -136,23 +136,22 @@
                     &nbsp;<asp:TextBox ID="tb_rsubject" runat="server" Width="512px">Union Boat Club  </asp:TextBox><br />
                     <br />
                     Email Body (HTML):<br />
-                    &nbsp;<asp:TextBox ID="tb_rhtmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||rfirstname||&lt;/p&gt;
+                    &nbsp;<asp:TextBox ID="tb_rhtmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
 &lt;p&gt;
-||firstname||
 &lt;/p&gt;</asp:TextBox><br />
                     <br />
                     Email/Facebook Body (Text):<br />
-                    &nbsp;<asp:TextBox ID="tb_rtextbody" runat="server" Height="110px" TextMode="MultiLine" Width="902px">Hi ||rfirstname||
+                    &nbsp;<asp:TextBox ID="tb_rtextbody" runat="server" Height="110px" TextMode="MultiLine" Width="902px">Hi ||firstname||
 
-||firstname||</asp:TextBox><br />
+                    </asp:TextBox><br />
                     <br />
                     Email Reply-To Address:<br />
                     &nbsp;<asp:TextBox ID="tb_rreplyto" runat="server" Width="512px">Not currently used</asp:TextBox><br />
                     <br />
                     Text Body:<br />
-                    &nbsp;<asp:TextBox ID="tb_rtxt" runat="server" Height="122px" TextMode="MultiLine" Width="910px">Hi ||rfirstname||
+                    &nbsp;<asp:TextBox ID="tb_rtxt" runat="server" Height="122px" TextMode="MultiLine" Width="910px">Hi ||firstname||
 
-||firstname||</asp:TextBox></td>
+                    </asp:TextBox></td>
             </tr>
         </table>
         <br />

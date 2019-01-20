@@ -10,7 +10,7 @@
 namespace UBC.People {
     
     
-    public partial class Communicate {
+    public partial class Communicate2 {
         
         /// <summary>
         /// tb_event_id control.
