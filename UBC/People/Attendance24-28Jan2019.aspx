@@ -21,6 +21,21 @@
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/dirty.js")%>"></script>
     <style>
+        h2 {
+            color:red;
+        }
+        h3 {
+            color:blue;
+        }
+        .centered {
+            position: fixed; /* or absolute */
+            top: 20%;
+            left: 50%;
+            text-align:center;
+            border: solid;
+            padding: 10px;
+            color: red;
+        }
      
     </style>
 
@@ -80,6 +95,10 @@
                     default:
                 }
             })
+
+            $('#close').click(function () {
+                $('#response').hide();
+            })
         });
 
 
@@ -91,7 +110,7 @@
     </div>
     <h1>Union Boat Club - Event Attendance
     </h1>
-    <%= header %>
+    <%= header %><br /><br />
 
 
 
@@ -166,4 +185,11 @@
             <asp:Button ID="btn_submit" runat="server" class="btn btn-info" Text="Submit" OnClick="btn_submit_Click" />
         </div>
     </div>
+
+    <div id="response" style="display:<%: display_response %>">
+        <div class="centered">
+            <h1>Thanks - Got it!</h1>You can come back and change this if your details change.<br /><br /><a id="close" href="javascript:void(0)">Close</a>
+        </div>
+    </div>
+
 </asp:Content>

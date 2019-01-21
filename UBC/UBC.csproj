@@ -613,6 +613,7 @@
     <Content Include="People\Documents\ChristmasRegatta2018.pdf" />
     <Content Include="People\Documents\Update23Dec2018.pdf" />
     <Content Include="People\Documents\NICCandCTCEntries2019.pdf" />
+    <Content Include="People\Documents\NICCandCTC2019.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">

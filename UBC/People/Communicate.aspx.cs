@@ -295,7 +295,7 @@ namespace UBC.People
                             string relationships = dr["relationships"].ToString();
 
 
-                            string emailtext = "";
+                            //string emailtext = "";
                             string emailhtml = "";
                             string textmessage = "";
                             string facebookmessage = "";
@@ -307,6 +307,7 @@ namespace UBC.People
 
                                 string emailRecipient = Request.Form["cb_email_" + id];
 
+                                /*
                                 emailtext = tb_textbody.Text;
                                 emailtext = emailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                                 emailtext = emailtext.Replace("||firstname||", firstname);
@@ -318,11 +319,11 @@ namespace UBC.People
                                 emailtext = emailtext.Replace("||role||", role);
                                 emailtext = emailtext.Replace("||folder||", "Folder" + id);
                                 emailtext = emailtext.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+                                */
 
                                 emailhtml = tb_htmlbody.Text;
                                 emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                                 emailhtml = emailhtml.Replace("||firstname||", firstname);
-
                                 emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
                                 emailhtml = emailhtml.Replace("||username||", username);
                                 emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
@@ -402,11 +403,11 @@ namespace UBC.People
 
 
 
-                            if (emailtext != "" || emailhtml != "" || textmessage != "" || facebookmessage != "")
+                            if (emailhtml != "" || textmessage != "" || facebookmessage != "")
                             {
                                 SqlCommand cmd2 = new SqlCommand("Insert_Person_communication", con);
                                 cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = id;
-                                cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_email_" + id] + "<br />" + emailtext;
+                                cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_email_" + id] + "<br />"; // + emailtext;
                                 cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = Request.Form["cb_email_" + id] + "<br />" + emailhtml;
                                 cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = Request.Form["cb_text_" + id] + "<br />" + textmessage;
                                 cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = Request.Form["cb_facebook_" + id] + "<br />" + facebookmessage;
@@ -424,7 +425,7 @@ namespace UBC.People
                             //-------------------------------------------------------------RELATIONSHIPS START-----------------------------
                             #region relationships
 
-                            string remailtext = "";
+                            //string remailtext = "";
                             string remailhtml = "";
                             string rtextmessage = "";
                             string rfacebookmessage = "";
@@ -435,9 +436,9 @@ namespace UBC.People
                                 string[] remailsplit = Request.Form["cb_remail_" + id].Split('|');
                                 string rid = remailsplit[0];
                                 string rfirstname = remailsplit[1];
-                                string remailRecipient = remailsplit[2];
+                                string remailRecipient = remailsplit[2].Split('~')[0];
 
-                                #region x1
+                                /*
                                 remailtext = tb_rtextbody.Text;
                                 remailtext = remailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                                 remailtext = remailtext.Replace("||firstname||", firstname);
@@ -447,7 +448,7 @@ namespace UBC.People
                                 remailtext = remailtext.Replace("||rfolder||", "Folder" + rid);
 
                                 remailtext = remailtext.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-                                #endregion
+                                */
                                 remailhtml = tb_rhtmlbody.Text;
                                 remailhtml = remailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                                 remailhtml = remailhtml.Replace("||firstname||", firstname);
@@ -468,7 +469,7 @@ namespace UBC.People
                                 string[] rmobilessplit = Request.Form["cb_rtext_" + id].Split('|');
                                 string rid = rmobilessplit[0];
                                 string rfirstname = rmobilessplit[1];
-                                string rmobile = rmobilessplit[2];
+                                string rmobile = rmobilessplit[2].Split('~')[0];
 
                                 string mobiles = Request.Form["cb_rtext_" + id];
 
@@ -500,13 +501,13 @@ namespace UBC.People
                                 html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + rfacebookmessage + "</textarea>";
                             }
 
-                            
                             /*
-                            if (remailtext != "" || remailhtml != "" || rtextmessage != "" || rfacebookmessage != "")
+                           
+                            if (remailhtml != "" || rtextmessage != "" || rfacebookmessage != "")
                             {
                                 SqlCommand cmd2 = new SqlCommand("Insert_Person_communication", con);
-                                cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = id;
-                                cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />" + remailtext;
+                                cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = rid;
+                                cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />"; // + remailtext;
                                 cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />" + remailhtml;
                                 cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = Request.Form["cb_rtext_" + id] + "<br />" + rtextmessage;
                                 cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = Request.Form["cb_rfacebook_" + id] + "<br />" + rfacebookmessage;
@@ -521,6 +522,7 @@ namespace UBC.People
                                 cmd2.Dispose();
                             }
                             */
+                         
 
                             //-------------------------------------------------------------RELATIONSHIPS END-----------------------------
                             #endregion

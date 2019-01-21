@@ -41,6 +41,7 @@ namespace UBC.People
         public string label_traveldetail;
         public string label_returntraveldetail;
         public string header;
+        public string display_response;
 
 
 
@@ -50,6 +51,15 @@ namespace UBC.People
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                display_response = "";
+            }
+            else
+            {
+                display_response = "none";
+            }
+
             string personresponded = "";
             attendance = "";
             role = "";
@@ -132,10 +142,10 @@ namespace UBC.People
                         returnseats = dr["returnseats"].ToString();
 
                         others = dr["others"].ToString();
-                        accomodation = dr["accomodation"].ToString();
-                        onsite = dr["onsite"].ToString();
+                        //accomodation = dr["accomodation"].ToString();
+                        //onsite = dr["onsite"].ToString();
                         otherinformation = dr["otherinformation"].ToString();
-                        meals = dr["meals"].ToString();
+                        //meals = dr["meals"].ToString();
 
                         switch (travel)
                         {
@@ -173,7 +183,7 @@ namespace UBC.People
                                 break;
                         }
                     }
-                    header = "<b>" + dr["name"].ToString() + "<br />" + dr["title"].ToString() + "</b><br />" + dr["description"].ToString();
+                    header = "<h2>" + dr["name"].ToString() + "</h2><h3>" + dr["title"].ToString() + "</h3>" + dr["description"].ToString();
                 }
                 dr.Close();
             }
@@ -219,11 +229,11 @@ namespace UBC.People
 
             cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = personid;
             cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
-            cmd.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
-            cmd.Parameters.Add("@role", SqlDbType.VarChar).Value = role;
+            //cmd.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
+            //cmd.Parameters.Add("@role", SqlDbType.VarChar).Value = role;
 
-            cmd.Parameters.Add("@accomodation", SqlDbType.VarChar).Value = accomodation;
-            cmd.Parameters.Add("@meals", SqlDbType.VarChar).Value = meals;
+            //cmd.Parameters.Add("@accomodation", SqlDbType.VarChar).Value = accomodation;
+            //cmd.Parameters.Add("@meals", SqlDbType.VarChar).Value = meals;
             cmd.Parameters.Add("@travel", SqlDbType.VarChar).Value = travel;
             cmd.Parameters.Add("@traveldetail", SqlDbType.VarChar).Value = traveldetail;
             cmd.Parameters.Add("@seats", SqlDbType.VarChar).Value = seats;
@@ -233,8 +243,8 @@ namespace UBC.People
             cmd.Parameters.Add("@returnseats", SqlDbType.VarChar).Value = returnseats;
 
             cmd.Parameters.Add("@others", SqlDbType.VarChar).Value = others;
-            cmd.Parameters.Add("@onsite", SqlDbType.VarChar).Value = onsite;
-            cmd.Parameters.Add("@events", SqlDbType.VarChar).Value = events;
+            //cmd.Parameters.Add("@onsite", SqlDbType.VarChar).Value = onsite;
+            //cmd.Parameters.Add("@events", SqlDbType.VarChar).Value = events;
 
             cmd.Parameters.Add("@otherinformation", SqlDbType.VarChar).Value = otherinformation;
 
