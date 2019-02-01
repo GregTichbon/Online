@@ -15,14 +15,25 @@ namespace UBC.People.Reports
     public partial class ComingEventsList : System.Web.UI.Page
     {
         public string html;
+        public string categories;
+        public string categories_values;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UBC_person_id"] == null)
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
-            
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            Functions genericfunctions = new Functions();
+            Dictionary<string, string> functionoptions = new Dictionary<string, string>();
+            categories = "";
+            functionoptions.Clear();
+            functionoptions.Add("storedprocedure", "");
+            functionoptions.Add("usevalues", "");
+            categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("future_events_query", con);
@@ -41,10 +52,13 @@ namespace UBC.People.Reports
                         if (firsttime)
                         {
                             html = "<thead><tr>"; //<th>Image</th>";
+                            /*
                             for (int f1 = 2; f1 < dr.FieldCount; f1++)
                             {
                                 html += "<th>" + dr.GetName(f1) + "</th>";
                             }
+                            */
+                            html += "<th>When</th><th>Title</th><th>Detail</th><th>Type</th>";
                             // html += "<th>Edit</th>";
                             html += "</tr></thead>";
                             firsttime = false;
@@ -61,14 +75,18 @@ namespace UBC.People.Reports
 
 
 
-                        html += "<tr>";
+                        html += "<tr class=\"tr_event\" data-categories=\"" + dr["categories"].ToString() + "\">";
                         //html += "<td>" + image + "</td>";
+                        /*
                         for (int f1 = 1; f1 < dr.FieldCount; f1++)
                         {
                             string useval = dr[f1].ToString();
 
                             html += "<td>" + useval + "</td>";
                         }
+                        */
+                        html += "<td>" + dr["when"].ToString()  + "</td><td>" + dr["title"].ToString() + "</td><td>" + dr["description"].ToString() + "</td><td>" + dr["type"].ToString() + "</td>";
+
                         //html += "<td>" + link + "</td>";
 
 

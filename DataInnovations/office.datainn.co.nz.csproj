@@ -169,6 +169,7 @@
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
+    <Content Include="Raffles\UBC2019A.aspx" />
     <Content Include="Row\data.asmx" />
     <Content Include="Row\data.aspx" />
     <Content Include="Row\Default.aspx" />
@@ -445,6 +446,13 @@
     </Compile>
     <Compile Include="Raffles\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\UBC2019A.aspx.cs">
+      <DependentUpon>UBC2019A.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019A.aspx.designer.cs">
+      <DependentUpon>UBC2019A.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>

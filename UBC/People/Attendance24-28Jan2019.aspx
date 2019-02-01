@@ -99,6 +99,10 @@
             $('#close').click(function () {
                 $('#response').hide();
             })
+
+              $('#login').click(function () {
+                window.location.href = "security/login.aspx";
+            })
         });
 
 

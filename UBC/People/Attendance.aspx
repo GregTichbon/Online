@@ -65,6 +65,10 @@
                     $('#div_traveldetail').hide();
                 }
             })
+
+            $('#login').click(function () {
+                window.location.href = "security/login.aspx";
+            })
         });
 
 

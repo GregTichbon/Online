@@ -496,6 +496,7 @@
     <Content Include="People\Reports\Tracker.aspx" />
     <Content Include="People\Security\LogOut.aspx" />
     <Content Include="People\TestAndPlay\Email1.aspx" />
+    <Content Include="People\TestAndPlay\Export1.aspx" />
     <Content Include="redirect.aspx" />
     <Content Include="Test2.aspx" />
     <Content Include="Test2a.aspx" />
@@ -614,6 +615,7 @@
     <Content Include="People\Documents\Update23Dec2018.pdf" />
     <Content Include="People\Documents\NICCandCTCEntries2019.pdf" />
     <Content Include="People\Documents\NICCandCTC2019.pdf" />
+    <Content Include="People\Documents\NICCandCTC2019Travel.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">
@@ -1041,6 +1043,13 @@
     </Compile>
     <Compile Include="People\TestAndPlay\Email1.aspx.designer.cs">
       <DependentUpon>Email1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Export1.aspx.cs">
+      <DependentUpon>Export1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Export1.aspx.designer.cs">
+      <DependentUpon>Export1.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\uploadphoto.aspx.cs">
       <DependentUpon>uploadphoto.aspx</DependentUpon>
