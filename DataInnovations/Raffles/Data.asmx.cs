@@ -145,9 +145,30 @@ namespace Online.data
             Context.Response.Write(JS.Serialize(LabelResponseList));
         }
 
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void updateticket(string field, string id, string value)
+        {
+            string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
+            
+
+            string sql1 = "update raffleticket set [" + field + "] = '" + value + "' where raffleticket_id = " + id;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand(sql1, con);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = con;
+
+            con.Open();
+            //SqlDataReader dr = cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
+
+            cmd.Dispose();
+            con.Close();
+            con.Dispose();
+        }
     }
-
     #region classes
     public class TestClass
     {

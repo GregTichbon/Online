@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,7 @@ namespace DataInnovations.Raffles
         public string raffle;
         public int available1 = 0;
         public int available2 = 0;
+        public string colour;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,134 +24,101 @@ namespace DataInnovations.Raffles
             int ticketstoarow = 10;
             if (!IsPostBack)
             {
-                SQLiteConnection m_dbConnection;
-                m_dbConnection = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
-                m_dbConnection.Open();
+                string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
-                LitRows1.Text = "";
-                string person;
+
+                string purchaser;
                 int c;
                 string line1;
                 string line2;
                 string format;
 
-                if (1 == 2)
+
+                raffle = Request.QueryString["id"];
+                raffle = "5";
+                string sql1 = "select * from raffle where raffle_id = " + raffle;
+
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlCommand cmd = new SqlCommand(sql1, con);
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = con;
+                //try
+                //{
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
                 {
-                    raffle = "3";
-                    string sql1 = "select * from ticket where raffle_id = " + raffle + " order by [Number]";
-                    SQLiteCommand command1 = new SQLiteCommand(sql1, m_dbConnection);
-                    SQLiteDataReader reader1 = command1.ExecuteReader();
-                    c = 0;
-                    line1 = "";
-                    line2 = "";
-                    format = "";
 
-                    LitRows1.Text += "<tr><td colspan=\"" + ticketstoarow + 1 + "\"><h2>THE RED RAFFLE</h2></td></tr>";
 
-                    while (reader1.Read())
+                }
+                dr.Close();
+                LitRows2.Text += "<tr><td colspan=\"" + (ticketstoarow + 1) + "\"><h2>THE " + colour + " RAFFLE</h2></td></tr>";
+
+                c = 0;
+                line1 = "";
+                line2 = "";
+                format = "";
+
+                string sql2 = "select * from raffleticket where raffle_id = " + raffle + " order by [TicketNumber]";
+
+                cmd = new SqlCommand(sql2, con)
+                {
+                    CommandType = CommandType.Text,
+                    Connection = con
+                };
+                //try
+                //{
+
+                dr = cmd.ExecuteReader();
+    
+
+                while (dr.Read())
+                {
+                    c++;
+
+                    purchaser = dr["Purchaser"].ToString();
+                    if (purchaser == "")
                     {
-                        c++;
-                        //var markup = "<tr><td><textarea name='who-N" + ctr + "' style='width:90%'></textarea></td><td><textarea name='bringing-N" + ctr + "'style='width:90%'></textarea></td></tr>";
-                        //LitRows.Text += "<tr><td><textarea name='who-" + reader["attendees_ctr"] + "' style='width:90%'>" + reader["name"] + "</textarea></td><td><textarea name='bringing-" + reader["attendees_ctr"] + "'style='width:90%'>" + reader["bringing"] + "</textarea></td><td>" + reader["updated"] + "<input type='hidden' name='updated-" + reader["attendees_ctr"] + "' value='" + reader["updated"] + "'</td></tr>";
-
-                        person = reader1["Person"].ToString();
-                        if (person == "")
+                        purchaser = "<input type=\"button\" class=\"iwantthisticket\" value=\"Buy\" id=\"ticket_" + raffle + "-" + dr["ticketnumber"] + "\" />";
+                        available2++;
+                    }
+                    else
+                    {
+                        if (dr["Paid"].ToString() == "")
                         {
-                            person = "<input type=\"button\" class=\"iwantthisticket\" value=\"Buy ticket\" id=\"ticket_" + raffle + "-" + reader1["number"] + "\" />";
-                            available1++;
+                            purchaser = "On hold";
                         }
                         else
                         {
-                            if (reader1["Paid"].ToString() == "")
-                            {
-                                person = "On hold";
-                            }
-                            else
-                            {
-                                person = "Taken";
-                            }
+                            purchaser = "Taken";
                         }
-                        if (c % ticketstoarow == 1)
-                        {
-                            if (c > 1)
-                            {
-                                if (c > ticketstoarow + 1)
-                                {
-                                    LitRows1.Text += "<tr><td colspan=\"" + ticketstoarow + 1 + "\"><hr /></td></tr>";
-                                }
-                                LitRows1.Text += line1 + "</tr>" + line2 + "</tr>";
-                                line1 = "";
-                                line2 = "";
-                            }
-                            line1 += "<tr><td>Ticket</td>";
-                            line2 += "<tr><td>Status</td>";
-                        }
-                        format = (c % 2).ToString();
-                        line1 += "<td class=\"td" + format + "a\">" + reader1["number"] + "</td>";
-                        line2 += "<td id=\"td_" + raffle + "-" + reader1["number"] + "\" class=\"td" + format + "b\">" + person + "</td>";
                     }
-                    LitRows1.Text += "<tr><td colspan=\"11\"><hr /></td></tr>" + line1 + "</tr>" + line2 + "</tr>";
-                }
-                if (1 == 1)
-                {
-
-                    raffle = Request.QueryString["id"];
-                    string sql2 = "select * from ticket where raffle_id = " + raffle + " order by [Number]";
-                    SQLiteCommand command2 = new SQLiteCommand(sql2, m_dbConnection);
-                    SQLiteDataReader reader2 = command2.ExecuteReader();
-                    c = 0;
-                    line1 = "";
-                    line2 = "";
-                    format = "";
-
-                    LitRows2.Text += "<tr><td colspan=\"" + ticketstoarow + 1 + "\"><h2>THE XXXXX RAFFLE</h2></td></tr>";
-
-                    while (reader2.Read())
+                    if (c % ticketstoarow == 1)
                     {
-                        c++;
-                        //var markup = "<tr><td><textarea name='who-N" + ctr + "' style='width:90%'></textarea></td><td><textarea name='bringing-N" + ctr + "'style='width:90%'></textarea></td></tr>";
-                        //LitRows.Text += "<tr><td><textarea name='who-" + reader["attendees_ctr"] + "' style='width:90%'>" + reader["name"] + "</textarea></td><td><textarea name='bringing-" + reader["attendees_ctr"] + "'style='width:90%'>" + reader["bringing"] + "</textarea></td><td>" + reader["updated"] + "<input type='hidden' name='updated-" + reader["attendees_ctr"] + "' value='" + reader["updated"] + "'</td></tr>";
-
-                        person = reader2["Person"].ToString();
-                        if (person == "")
+                        if (c > 1)
                         {
-                            person = "<input type=\"button\" class=\"iwantthisticket\" value=\"Buy ticket\" id=\"ticket_" + raffle + "-" + reader2["number"] + "\" />";
-                            available2++;
-                        }
-                        else
-                        {
-                            if (reader2["Paid"].ToString() == "")
+                            if (c > ticketstoarow + 1)
                             {
-                                person = "On hold";
+                                LitRows2.Text += "<tr><td colspan=\"" + ticketstoarow + 1 + "\"><hr /></td></tr>";
                             }
-                            else
-                            {
-                                person = "Taken";
-                            }
+                            LitRows2.Text += line1 + "</tr>" + line2 + "</tr>";
+                            line1 = "";
+                            line2 = "";
                         }
-                        if (c % ticketstoarow == 1)
-                        {
-                            if (c > 1)
-                            {
-                                if (c > ticketstoarow + 1)
-                                {
-                                    LitRows2.Text += "<tr><td colspan=\"" + ticketstoarow + 1 + "\"><hr /></td></tr>";
-                                }
-                                LitRows2.Text += line1 + "</tr>" + line2 + "</tr>";
-                                line1 = "";
-                                line2 = "";
-                            }
-                            line1 += "<tr><td>Ticket</td>";
-                            line2 += "<tr><td>Status</td>";
-                        }
-                        format = (c % 2).ToString();
-                        line1 += "<td class=\"td" + format + "a\">" + reader2["number"] + "</td>";
-                        line2 += "<td id=\"td_" + raffle + "-" + reader2["number"] + "\" class=\"td" + format + "b\">" + person + "</td>";
+                        line1 += "<tr><td>Ticket</td>";
+                        line2 += "<tr><td>Status</td>";
                     }
-                    LitRows2.Text += "<tr><td colspan=\"11\"><hr /></td></tr>" + line1 + "</tr>" + line2 + "</tr>";
+                    format = (c % 2).ToString();
+                    line1 += "<td class=\"td" + format + "a\">" + dr["ticketnumber"] + "</td>";
+                    line2 += "<td id=\"td_" + raffle + "-" + dr["ticketnumber"] + "\" class=\"td" + format + "b\">" + purchaser + "</td>";
                 }
+                LitRows2.Text += "<tr><td colspan=\"11\"><hr /></td></tr>" + line1 + "</tr>" + line2 + "</tr>";
+                dr.Close();
 
-                m_dbConnection.Close();
+                dr.Close();
+                con.Close();
+                con.Dispose();
             }
         }
     }

@@ -19,10 +19,10 @@
     <style>
         body {
                 font-family: Arial;
-                font-size: 20px;
+                font-size: 18px;
             }
 
-                .td0a {
+        .td0a {
             background-color: blue;
         }
 
@@ -30,31 +30,32 @@
             background-color: red;
         }
 
-                        .td0b {
+        .td0b {
             background-color: lightblue;
         }
 
         .td1b {
             background-color: lightpink;
-        }
+       }
 
         table.blueTable {
             border: 1px solid #1C6EA4;
             background-color: lightgray;
             text-align: center;
             border-collapse: collapse;
+            width:770px;
         }
 
             table.blueTable td, table.blueTable th {
                 border: 2px solid #1C6EA4;
                 padding: 3px 10px;
                 height: 50px;
-                width: 9%;
+                width: 70px;
             }
 
             table.blueTable tbody td {
                 font-family: Arial;
-                font-size: 20px;
+                font-size: 14px;
                 font-weight: bolder;
             }
 
@@ -72,8 +73,8 @@
             border-radius: 28px;
             font-family: Arial;
             color: #ffffff;
-            font-size: 18px;
-            padding: 8px 16px 8px 16px;
+            font-size: 12px;
+            padding: 6px 12px 6px 12px;
             text-decoration: none;
         }
 
@@ -90,22 +91,7 @@
         input[type=text], input[type=email], textarea {
             width: 100%;
         }
-        .auto-style1 {
-            width: 872px;
-            text-align: center;
-        }
-        .auto-style2 {
-            width: 251px;
-            height: 347px;
-        }
-        .auto-style3 {
-            width: 367px;
-            height: 384px;
-        }
-        .auto-style4 {
-            width: 267px;
-            height: 332px;
-        }
+
 
         .processing {
  position: fixed;
@@ -173,7 +159,7 @@
                     success: function (result) {
                         details = $.parseJSON(result.d);
                         if(details.status == "Available") {
-                            $('.ticket').html(ticket);
+                            $('.ticket').html('<%: colour%> ' + ticket);
                             $( "#dialog" ).dialog("open");
                         } else {
                             $("#td_" + ticket).html("Taken");
@@ -201,6 +187,20 @@
                     }
                 });
 */
+            });
+
+            $('#dd_payment').change(function () {
+                if ($(this).val() == 'Pay into Bank Account') {
+                    $('#div_bankdetails').show();
+                    $('#tb_payment').val('');
+                    $('#tb_payment').hide();
+                } else if ($(this).val() == 'Other') {
+                    $('#div_bankdetails').hide();
+                    $('#tb_payment').show();
+                } else {
+                    $('#div_bankdetails').hide();
+                    $('#tb_payment').hide();
+                }
             });
 
 
@@ -259,8 +259,9 @@
         }); //document.ready
     </script>
 </head>
-<body>
+<body style="background-color:peru">
     <div id="processingajax" style="display:none" class="processing"></div>
+     <div style="width:770px; margin:0 auto; padding:20px; background-color:aquamarine">
     <p>
         Cullinane and Girls&#39; Colleges as part of the Union Boat Club (<a href="http://unionboatclub.co.nz" target="_blank">unionboatclub.co.nz</a>) are taking a group of students to the North Island Secondary School Champs and the Maadi Cup rowing regattas, both at Lake Karapiro just outside of Cambridge.</p>
     <p>
@@ -268,9 +269,9 @@
     <p>
       <strong>The Raffle</strong></p>
     <p>
-        There are 50 tickets on each card.&nbsp; The cost is <strong>$20.00</strong> but ... that means your number is entered into <strong>10 weekly draws (ie: $2.00 per week)</strong> for a meat pack worth <strong>$50.00 from Chef&#39;s Choice</strong>.&nbsp; You have overall a 20% chance of winning!</p>
+        There are 50 tickets in each draw.&nbsp; The cost is <strong>$20.00</strong> but ... that means your number is entered into <strong>10 weekly draws (ie: $2.00 per week)</strong> for a meat pack worth <strong>$50.00 from Chef&#39;s Choice</strong>.&nbsp; You have overall a 20% chance of winning!</p>
     <p>
-        If you&#39;d like to support the rowers, please grab one of the tickets below.&nbsp; You can either pay the money into our bank account or otherwise let me know how you can get it to me.&nbsp; Click on the buttons below and you&#39;ll be provided with my bank account and asked for your details.&nbsp; It couldn&#39;t be easier.&nbsp; 
+        If you&#39;d like to support the rowers, please grab one of the tickets below.&nbsp; You can either pay the money into our bank account or otherwise let me know how you can get it to me.&nbsp; Click on the buttons below and you&#39;ll be provided with our bank account and asked for your details.&nbsp; It couldn&#39;t be easier.&nbsp; 
         I&#39;ll place your ticket &quot;on hold&quot; to you until payment is sussed.</p>
     <p>
         Thanks for your support.</p>
@@ -278,36 +279,25 @@
         &nbsp;</p>
     <p>
         -Greg</p>
+         <p>
+             &nbsp;</p>
     <p style="text-align: center">
-        <img alt="" class="auto-style2" src="Images/Cullinane%20Logo.jpg" /><img alt="" class="auto-style3" src="Images/Whanganui%20Girls%20College%20logo.jpg" /><img alt="" class="auto-style4" src="Images/UBC.png" /><br />
-        <img alt="" class="auto-style1" src="Images/ChefsChoice%20Logo.PNG" /></p>
+        <img alt="" style="height: 300px;"  src="Images/Cullinane%20Logo.jpg" /> <img alt="" style="height: 300px;"  src="Images/UBC.png" /> <img alt="" style="height: 300px;"  src="Images/Whanganui%20Girls%20College%20logo.jpg" /></p>
+         <p style="text-align: center">
+             <br />
+        <img alt="" style="width:654px" src="Images/ChefsChoice%20Logo.PNG" /></p>
 &nbsp;<form id="form1" runat="server">
-    <!--<div style="width:20%; float:left">-->
+
         <input type="hidden" id="hf_ticket" name="hf_ticket" />
         <input type="hidden" id="hf_update" name="hf_update" />
         <input type="hidden" id="hf_bank" name="hf_bank" value="06-0996-0956968-00" />
 
-    <!--
-        <p>There are <span id="span_available1"><%: available1 %></span> tickets currently available on this card.</p>
 
-        <table id="tbl1" class="blueTable">
-            <tbody>
-                
-                <asp:Literal ID="LitRows1" runat="server"></asp:Literal>
-            </tbody>
-        </table>
-    -->
 
         <p>There are <span id="span_available2"><%: available2 %></span> tickets currently available on this card.</p>
     <table id="tbl2" class="blueTable">
             <tbody>
-                <!--
-                <tr>
-                    <td>Ticket Number</td>
-                    <td>Status</td>
-                </tr>
-                -->
-                <asp:Literal ID="LitRows2" runat="server"></asp:Literal>
+                  <asp:Literal ID="LitRows2" runat="server"></asp:Literal>
             </tbody>
         </table>
         <!--
@@ -318,7 +308,7 @@
         -->
   
     </form>
-
+        
 
 
         <div id="dialog" title="Please enter your details">
@@ -343,10 +333,25 @@
                         <input type="text" id="tb_mobile" name="tb_mobile" /></td>
                 </tr>
                 <tr>
+                    <td style="text-align: right">How will you make payment</td>
+                    <td style="text-align: left">
+                        <select id="dd_payment" name="dd_payment" required="required">
+                            <option selected="selected"></option>
+                            <option>Pay into Bank Account</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td style="text-align: right">How will you get the money to Greg?
-                        <br /><span style="font-size:small">Bank A/c No: <span id="span_bank"></span><br />Please use <b>&quot;xxxxxx <span class="ticket"></span></b>" as your reference.</span></td>
+                    </td>
                     <td>
-                        <textarea id="tb_payment" name="tb_payment" required="required"></textarea></td>
+                        <div id="div_bankdetails" style="display: none">
+                            <span style="font-size: small">Please deposit/transfer the money into<br />Bank A/c No: <span id="span_bank"></span>
+                                <br />
+                                Please use your name and <b>&quot;<span class="ticket"></span></b>" as your reference.</span>
+                        </div>
+                        <textarea style="display: none" id="tb_payment" name="tb_payment" required="required"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -354,7 +359,7 @@
                 </tr>
             </table>
         </div>
-
+     </div>
     
 </body>
 </html>

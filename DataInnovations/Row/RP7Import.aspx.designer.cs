@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataInnovations.Raffles {
+namespace DataInnovations.Row {
     
     
-    public partial class UBC2019A {
+    public partial class RP7Import {
         
         /// <summary>
         /// form1 control.
@@ -22,12 +22,21 @@ namespace DataInnovations.Raffles {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LitRows2 control.
+        /// fu_file control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LitRows2;
+        protected global::System.Web.UI.WebControls.FileUpload fu_file;
+        
+        /// <summary>
+        /// btn_submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_submit;
     }
 }

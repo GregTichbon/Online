@@ -43,6 +43,8 @@ namespace UBC
             {
                 html += "<br /><a href=\"people/reports/CheckList.aspx\">Check List</a>";
                 html += "<br /><a href=\"people/reports/currentmembers.aspx\">Current Members</a>";
+                html += "<br /><a href=\"people/findphone.aspx\">Find a phone number</a>";
+                html += "<br /><a href=\"people/reports/SchoolRowers.aspx\">School Rowers</a>";
 
             }
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
@@ -52,6 +54,7 @@ namespace UBC
                 html += "<br /><a href=\"Training/ZoneTraining.aspx\">Zone Training</a>";
             }
 
+            html += "<br /><a href=\"people/resources.aspx\">Rowing Resources</a>";
             html += "<br /><a href=\"people/reports/AttendanceMatrix.aspx\">Attendance Matrix</a>";
             html += "<br /><a href=\"people/reports/CurrentCategoriesMatrix.aspx\">Current Categories Matrix</a>";
 

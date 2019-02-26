@@ -471,6 +471,7 @@
     <Content Include="People\eventdialogclose.html" />
     <Content Include="People\EventPlanner2.js" />
     <Content Include="People\EventPlanner1.js" />
+    <Content Include="People\FindPhone.aspx" />
     <Content Include="People\Images\100.jpg" />
     <Content Include="People\Images\103.jpg" />
     <Content Include="People\Images\105.jpg" />
@@ -490,10 +491,12 @@
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
     <Content Include="People\Reports\Report.aspx" />
+    <Content Include="People\Reports\SchoolRowers.aspx" />
     <Content Include="People\Reports\ShowAttendees.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
     <Content Include="People\Reports\Tracker.aspx" />
+    <Content Include="People\Resources.aspx" />
     <Content Include="People\Security\LogOut.aspx" />
     <Content Include="People\TestAndPlay\Email1.aspx" />
     <Content Include="People\TestAndPlay\Export1.aspx" />
@@ -616,6 +619,7 @@
     <Content Include="People\Documents\NICCandCTCEntries2019.pdf" />
     <Content Include="People\Documents\NICCandCTC2019.pdf" />
     <Content Include="People\Documents\NICCandCTC2019Travel.pdf" />
+    <Content Include="People\Documents\NISS2019.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">
@@ -837,6 +841,13 @@
     <Compile Include="People\EventPlanner.aspx.designer.cs">
       <DependentUpon>EventPlanner.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\FindPhone.aspx.cs">
+      <DependentUpon>FindPhone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\FindPhone.aspx.designer.cs">
+      <DependentUpon>FindPhone.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\List.aspx.cs">
       <DependentUpon>List.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -974,6 +985,13 @@
     <Compile Include="People\Reports\Report.aspx.designer.cs">
       <DependentUpon>Report.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\SchoolRowers.aspx.cs">
+      <DependentUpon>SchoolRowers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\SchoolRowers.aspx.designer.cs">
+      <DependentUpon>SchoolRowers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\ShowAttendees.aspx.cs">
       <DependentUpon>ShowAttendees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -987,6 +1005,13 @@
     </Compile>
     <Compile Include="People\Reports\Tracker.aspx.designer.cs">
       <DependentUpon>Tracker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Resources.aspx.cs">
+      <DependentUpon>Resources.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Resources.aspx.designer.cs">
+      <DependentUpon>Resources.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>

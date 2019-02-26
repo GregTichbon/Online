@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataInnovations.Raffles {
+namespace UBC.People {
     
     
-    public partial class UBC2019A {
+    public partial class FindPhone {
         
         /// <summary>
-        /// form1 control.
+        /// tb_phonenumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox tb_phonenumber;
         
         /// <summary>
-        /// LitRows2 control.
+        /// btn_submit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LitRows2;
+        protected global::System.Web.UI.WebControls.Button btn_submit;
     }
 }
