@@ -17,22 +17,60 @@ namespace DataInnovations.Raffles
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            int firstticket = 1;
+            int lastticket = 50;
+            string raffle = "";
+
+            string identifier = "";
+            string bankaccount = "";
+            string rafflename = "";
+            string detail = "";
+
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             string val;
             tabledata = "var tableData = [";
             string delim = "";
 
+            string guid = Request.QueryString["id"];
 
-            string sql1 = "select * from raffleticket where raffle_id = 5 order by raffle_id, ticketnumber "; // + raffle;
+            string sql1 = "select * from raffle where guid = '" + guid + "'";
+
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand(sql1, con);
 
-            cmd.CommandType = CommandType.Text;
+            cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = con;
-
+            //try
+            //{
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                dr.Read();
+                raffle = dr["raffle_id"].ToString();
+                identifier = dr["identifier"].ToString();
+                firstticket = Convert.ToInt16(dr["firstticket"]);
+                lastticket = Convert.ToInt16(dr["lastticket"]);
+                bankaccount = dr["bankaccount"].ToString();
+                rafflename = dr["name"].ToString();
+                detail = dr["detail"].ToString();
+
+            }
+            dr.Close();
+            html += "<tr><td><h2>" + rafflename + "</h2></td></tr>";
+           
+
+            string sql2 = "select * from raffleticket where raffle_id = " + raffle + " order by ticketnumber ";
+            cmd = new SqlCommand(sql2, con)
+            {
+                CommandType = CommandType.Text,
+                Connection = con
+            };
+
+            //con.Open();
+            dr = cmd.ExecuteReader();
             if (dr.HasRows)
             {
                 html += "<thead><tr>";
@@ -57,8 +95,6 @@ namespace DataInnovations.Raffles
                         html += "</td>";
 
                         tabledata += ", " + dr.GetName(f1).ToString() + ":\"" + dr[f1].ToString() + "\"";
-
-
                     }
                     html += "</tr>";
                     tabledata += "}";

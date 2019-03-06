@@ -80,7 +80,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="background-color: #FCF7EA; width: 100%">
         <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" />
+        <% = response %>
         Event ID:
+
                 <asp:TextBox ID="tb_event_id" runat="server" Width="50px"></asp:TextBox>
         <table>
             <tr>

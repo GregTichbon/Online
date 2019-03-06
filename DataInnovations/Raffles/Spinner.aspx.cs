@@ -15,7 +15,7 @@ namespace DataInnovations.Raffles
         {
             numbers = "";
             string delim = "";
-            for (int i = 1; i <= 30; i++)
+            for (int i = 1; i <= 50; i++)
             {
                 numbers += delim + "c" + i.ToString() + "=" + i.ToString();   //1=1&c2=2&c3=3&c4=4&c5=5&c6=6";
                 delim = "&";

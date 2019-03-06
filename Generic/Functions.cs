@@ -539,15 +539,39 @@ namespace Generic
 
             return responsevalue;
         }
-        public string SendRemoteMessage(string PhoneNumber, string Message)
+        public string SendRemoteMessage(string PhoneNumber, string Message, string Description)
         {
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Update_SMSLog";
+            cmd.Parameters.Add("@direction", SqlDbType.VarChar).Value = "Sent";
+            cmd.Parameters.Add("@phonenumber", SqlDbType.VarChar).Value = PhoneNumber;
+            cmd.Parameters.Add("@message", SqlDbType.VarChar).Value = Message;
+            cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = Description;
+            cmd.Connection = con;
+
+            con.Open();
+            string id = cmd.ExecuteScalar().ToString();
+
+
+
+
+
+            string response;
             Message = HttpUtility.UrlEncode(Message);
             string url = "http://office.datainn.co.nz/sms/send/?O=S&P=" + PhoneNumber + "&M=" + Message;
+            try { 
             var webClient = new WebClient();
             Uri uri = new Uri(url);
-            string response = webClient.DownloadString(uri);
-
+            response = webClient.DownloadString(uri);
+            } catch (Exception e )
+            {
+                response = e.InnerException.ToString();
+            }
             /*
             WebRequest wr = WebRequest.Create(url);
             wr.Timeout = 3500;
@@ -569,6 +593,15 @@ namespace Generic
 
             return responsevalue;
             */
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add("@smslog_id", SqlDbType.VarChar).Value = id;
+            cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = "To Do";
+
+            cmd.Parameters.Add("@response", SqlDbType.VarChar).Value = response;
+            cmd.ExecuteNonQuery();
+
+            con.Close();
+            con.Dispose();
             return response;
         }
 

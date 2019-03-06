@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using System.Web;
@@ -22,105 +24,137 @@ namespace DataInnovations.Raffles
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string getticket(NameValue[] formVars)    //you can't pass any querystring params
         {
+
+            string host = "70.35.207.87";
+            string emailfrom = "raffle@datainn.co.nz";
+            string emailfromname = "Union Boat Club - Raffle";
+            string password = "39%3Zxon";
+            string emailBCC = "greg@datainn.co.nz";
+
+
             string update = formVars.Form("hf_update");
             string ticket = formVars.Form("hf_ticket");
-            string bank = formVars.Form("hf_bank");
+            string bankaccount = formVars.Form("hf_bankaccount");
+            string rafflename = formVars.Form("hf_rafflename");
+            string detail = formVars.Form("hf_detail");
+            string identifier = formVars.Form("hf_identifier");
 
             string[] ticketparts = ticket.Split('-');
             string raffle = ticketparts[0];
             ticket = ticketparts[1];
 
-            string filename = HttpContext.Current.Server.MapPath(".") + "\\raffles.sqlite";
+            string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
-            SQLiteConnection m_dbConnection;
-            m_dbConnection = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
-            m_dbConnection.Open();
+            string sql1 = "select * from raffleticket where raffle_id = '" + raffle + "' and ticketnumber = " + ticket;
 
-            string sql = "select * from ticket where raffle_id = '" + raffle + "' and number = " + ticket;
-            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-            SQLiteDataReader reader = command.ExecuteReader();
-            string person;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand(sql1, con);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = con;
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            string purchaser;
             string status = "";
             string messageresponse = "";
-            while (reader.Read())
+            dr.Read();
+
+            purchaser = dr["purchaser"].ToString();
+
+            dr.Close();
+            if (purchaser != "")
             {
-                person = reader["Person"].ToString();
-                if (person != "")
+                status = "Taken";
+            }
+            else
+            {
+                if (update == "yes")
                 {
-                    status = "Taken";
+                    //Do update
+                    string name = formVars.Form("tb_name");
+                    string emailaddress = formVars.Form("tb_emailaddress");
+                    string mobile = formVars.Form("tb_mobile");
+                    string payment = formVars.Form("tb_payment");
+                    string taken = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
+
+                    string sql2 = "update raffleticket set purchaser = '" + name + "', emailaddress = '" + emailaddress + "', mobile = '" + mobile + "', paymentdetail = '" + payment + "', taken = '" + taken + "' where raffle_id = " + raffle + " and ticketnumber = " + ticket;
+
+                    SqlCommand cmdu = new SqlCommand(sql2, con);
+                    cmdu.ExecuteNonQuery();
+                    status = "Updated";
+
+                    Generic.Functions gFunctions = new Generic.Functions();
+                    /*
+                    string rafflename = "";
+                    switch (raffle)
+                    {
+                        case "1":
+                            rafflename = "'Pale Yellow' $50.00 meat";
+                            break;
+                        case "2":
+                            rafflename = "'Outdoor Table'";
+                            break;
+                        case "3":
+                            rafflename = "'Red' $50.00 meat";
+                            break;
+                        case "4":
+                            rafflename = "'White' $50.00 meat";
+                            break;
+                        case "5":
+                            rafflename = "'Yellow' $50.00 meat";
+                            break;
+                        case "7":
+                            rafflename = "'Black' $50.00 meat";
+                            break;
+                        default:
+                            Console.WriteLine("Default case");
+                            break;
+                    }
+                    */
+
+                    string emailhtml = "Thanks for taking ticket " + ticket + " in the " + rafflename;
+                    emailhtml += "<table>";
+                    emailhtml += "<tr><td>Name </td><td>" + name + "</td></tr>";
+                    emailhtml += "<tr><td>Email Address </td><td>" + emailaddress + "</td></tr>";
+                    emailhtml += "<tr><td>Mobile Number </td><td>" + mobile + "</td></tr>";
+                    emailhtml += "<tr><td>How will you get the money to us? </td><td>" + payment + "</td></tr>";
+                    emailhtml += "</table>";
+
+                    emailhtml += "<p>Bank A/c: " + bankaccount + "<br />Reference: Your name and '" + identifier + "-" + ticket + "'</p>";
+
+                    emailhtml += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
+                    emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+
+                    try
+                    {
+                        gFunctions.sendemailV3(host, emailfrom, emailfromname, password, rafflename, emailhtml, emailaddress, emailBCC, "");
+                    }
+                    catch (Exception e)
+                    {
+                        messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
+                    }
+
+                    string textbody = "Thanks for taking ticket " + ticket + " in the " + rafflename;
+                    textbody += "Bank A/c: " + bankaccount + " reference: " + raffle + "-" + ticket;
+                    textbody += " - Greg: 0272495088, greg@datainn.co.nz";
+
+                    messageresponse = gFunctions.SendRemoteMessage(mobile, textbody, "Raffle Purchase");
+
+                    textbody += " " + name + " " + mobile + " " + emailaddress + " " + payment;
+                    gFunctions.SendRemoteMessage("0272495088", textbody, "Raffle Purchase - organiser");
+
+                    //status = sql;
                 }
                 else
                 {
-                    if (update == "yes")
-                    {
-                        //Do update
-
-
-                        string name = formVars.Form("tb_name");
-                        string emailaddress = formVars.Form("tb_emailaddress");
-                        string mobile = formVars.Form("tb_mobile");
-                        string payment = formVars.Form("tb_payment");
-                        string taken = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
-
-                        sql = "update ticket set person = '" + name + "', emailaddress = '" + emailaddress + "', mobile = '" + mobile + "', payment = '" + payment + "', taken = '" + taken + "' where raffle_id = " + raffle + " and number = " + ticket;
-                        SQLiteCommand commandu = new SQLiteCommand(sql, m_dbConnection);
-                        commandu.ExecuteNonQuery();
-                        status = "Updated";
-
-                        Generic.Functions gFunctions = new Generic.Functions();
-
-                        string rafflename = "";
-                        switch (raffle)
-                        {
-                            case "1":
-                                rafflename = "'Pale Yellow' $50.00 meat";
-                                break;
-                            case "2":
-                                rafflename = "'Outdoor Table'";
-                                break;
-                            case "3":
-                                rafflename = "'Red' $50.00 meat";
-                                break;
-                            case "4":
-                                rafflename = "'White' $50.00 meat";
-                                break;
-                            default:
-                                Console.WriteLine("Default case");
-                                break;
-                        }
-               
-                        string emailbody = "Thanks for taking ticket " + ticket + " in the Maadi Cup 2018 " + rafflename + " raffle for Cullinane and Girls College";
-                        emailbody += "<table>";
-                        emailbody += "<tr><td>Name </td><td>" + name + "</td></tr>";
-                        emailbody += "<tr><td>Email Address </td><td>" + emailaddress + "</td></tr>";
-                        emailbody += "<tr><td>Mobile Number </td><td>" + mobile + "</td></tr>";
-                        emailbody += "<tr><td>How will you get the money to us? </td><td>" + payment + "</td></tr>";
-                        emailbody += "</table>";
-
-                        emailbody += "<p>Bank A/c: " + bank + " reference: " + raffle + "-" + ticket + "</p>";
-
-                        emailbody += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
-
-                        gFunctions.sendemail("Maadi rowing: " + rafflename + " raffle", emailbody, emailaddress, "", "greg@datainn.co.nz");
-
-                        string textbody = "Thanks for taking ticket " + ticket + " in the Maadi Cup 2018 " + rafflename + " raffle for Cullinane and Girls College";
-                        textbody += " >Bank A/c: " + bank + " reference: " + raffle + "-" + ticket;
-                        textbody += " - Greg: 0272495088, greg@datainn.co.nz";
-
-                        messageresponse = gFunctions.SendRemoteMessage(mobile, textbody);
-
-                        textbody += " " + name + " " + mobile + " " + emailaddress + " " + payment;
-                        gFunctions.SendRemoteMessage("0272495088", textbody);
-                            
-                        //status = sql;
-                    }
-                    else
-                    {
-                        status = "Available";
-                    }
+                    status = "Available";
                 }
             }
-            m_dbConnection.Close();
+
+            con.Close();
+            con.Dispose();
 
             standardResponse resultclass = new standardResponse();
             resultclass.status = status;
@@ -131,11 +165,13 @@ namespace DataInnovations.Raffles
             return (passresult);
 
         }
+        /*
         private string DateTimeSQLite(DateTime datetime)
         {
             string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
             return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
         }
+        */
     }
 
 

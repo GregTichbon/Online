@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.8.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UBC\Bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -81,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BBQ\default.aspx" />
+    <Content Include="bin\Generic.dll" />
     <Content Include="Dependencies\additional-methods.js" />
     <Content Include="Dependencies\bootstrap.min.css" />
     <Content Include="Dependencies\bootstrap.min.js" />
@@ -166,10 +171,12 @@
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Raffles\Communicate.aspx" />
     <Content Include="Raffles\Control.aspx" />
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
+    <Content Include="Raffles\Raffles.aspx" />
     <Content Include="Raffles\Spinner.aspx" />
     <Content Include="Raffles\UBC2019A.aspx" />
     <Content Include="Row\data.asmx" />
@@ -190,8 +197,10 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
+    <Content Include="SMS\Send\Form.aspx" />
     <Content Include="SMS\Send\SMSGateway.aspx" />
     <Content Include="SMS\TOHRowing.aspx" />
+    <Content Include="TestEmail1.aspx" />
     <Content Include="UBC\LTR.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -373,6 +382,13 @@
     <Compile Include="MeetingScheduler\Setup_Meeting_Blocks.aspx.designer.cs">
       <DependentUpon>Setup_Meeting_Blocks.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\Communicate.aspx.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Communicate.aspx.designer.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Control.aspx.cs">
       <DependentUpon>Control.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -429,6 +445,13 @@
     <Compile Include="Raffles\Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Raffles\Raffles.aspx.cs">
+      <DependentUpon>Raffles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Raffles.aspx.designer.cs">
+      <DependentUpon>Raffles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Raffles\SendEmail.aspx.cs">
       <DependentUpon>SendEmail.aspx</DependentUpon>
@@ -611,6 +634,13 @@
     <Compile Include="SMS\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SMS\Send\Form.aspx.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\Send\Form.aspx.designer.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SMS\Send\SendService.asmx.cs">
       <DependentUpon>SendService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -663,6 +693,13 @@
     </Compile>
     <Compile Include="StrengthFinders\RecalcMatches.aspx.designer.cs">
       <DependentUpon>RecalcMatches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestEmail1.aspx.cs">
+      <DependentUpon>TestEmail1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestEmail1.aspx.designer.cs">
+      <DependentUpon>TestEmail1.aspx</DependentUpon>
     </Compile>
     <Compile Include="UBC\Analysis.aspx.cs">
       <DependentUpon>Analysis.aspx</DependentUpon>

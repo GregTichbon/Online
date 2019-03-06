@@ -91,7 +91,7 @@
                 { title: "Ticket", field: "TicketNumber" },
                 { title: "Purchaser", field: "Purchaser", editor: "input" },
                 { title: "Detail", field: "Detail", editor: "input" },
-                { title: "Email", field: "Email", editor: "input" },
+                { title: "Email", field: "EmailAddress", editor: "input" },
                 { title: "Mobile", field: "Mobile", editor: "input" },
                 { title: "Paid", field: "Paid", editor: "input" },
                 { title: "Payment Detail", field: "PaymentDetail", editor: "input" },
@@ -115,7 +115,6 @@
     <form id="form1" runat="server">
 
         <div id="rt"></div>
-        <button id="btn">Go</button>
 
     </form>
     <script>

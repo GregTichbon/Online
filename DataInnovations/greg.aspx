@@ -8,36 +8,16 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:Literal ID="Lit_IP" runat="server"></asp:Literal>
-            <asp:textbox runat="server" ID="tb_message" Width="100%"></asp:textbox>
-            <asp:CheckBoxList ID="cbl_recipients" runat="server">
-                <asp:ListItem Value="0274266494">Judy Kumeroa - 0274266494</asp:ListItem>
-                <asp:ListItem Value="0272495088">Greg Tichbon - 0272495088</asp:ListItem>
-                <asp:ListItem Value="0211127942">Aimee Matthews - 0211127942</asp:ListItem>
-                <asp:ListItem Value="0275225411">Jordi Haami-Rerekura - 0275225411</asp:ListItem>
-                <asp:ListItem Value="0204075271">Charlie-Boy Williams - 0204075271</asp:ListItem>
-                <asp:ListItem Value="0278438576">Keegan Easton - 0278438576</asp:ListItem>
-                <asp:ListItem Value="0272433561">Mahanga Williams - 0272433561</asp:ListItem>
-                <asp:ListItem Value="0270445755">Kathy Parnell - 0270445755</asp:ListItem>
-                <asp:ListItem Value="0272511611">Sue Kumeroa - 0272511611</asp:ListItem>
-                <asp:ListItem Value="0223505170">Nate Haami-Rerekura - 0223505170</asp:ListItem>
-                <asp:ListItem Value="0273746182">Keith Ramage - 0273746182</asp:ListItem>
-                <asp:ListItem Value="0211342167">Watson Matthews - 0211342167</asp:ListItem>
-                <asp:ListItem Value="0284056828">Mary Tafilipepe - 0284056828</asp:ListItem>
-                <asp:ListItem Value="0273977501">Dan Chadfield - 0273977501</asp:ListItem>
-                <asp:ListItem Value="0211328295">Jeida Matthews - 0211328295</asp:ListItem>
-                <asp:ListItem Value="0226266166">Corey-Lee Robertson - 0226266166</asp:ListItem>
-                <asp:ListItem Value="0279774023">Te Paerata Tichbon - 0279774023</asp:ListItem>
-                <asp:ListItem Value="0211226723">Neo Tichbon - 0211226723</asp:ListItem>
+        <a href="http://private.incedo.org.nz">Incedo</a><br />
+        <a href="http://private.incedo.org.nz/prayer/send_dailytext.asp">Send Incedo Daily Prayer texts</a><br />
+        <br />
+        <a href="http://office.datainn.co.nz/SMS/Send/Form.aspx">Send text from form</a><br />
+        <br />
+        <a href="http://office.datainn.co.nz/raffles/raffles.aspx">Raffles</a>
+        <br />
+        <a href="http://office.datainn.co.nz/meetingscheduler/meetingscheduler.aspx">Meeting Scheduler</a>
 
-            </asp:CheckBoxList>
-
-            <asp:Button ID="btn_send" runat="server" Text="Send" OnClick="btn_send_Click" />
-            <br />
-            <br />
-            <asp:Label ID="lbl_response" runat="server" Text="Label"></asp:Label>
-        </div>
+        
     </form>
 </body>
 

@@ -88,6 +88,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Generic.dll" />
     <Content Include="BookingCalendar.aspx" />
     <Content Include="BookingCalendarNew.aspx" />
     <Content Include="Completed\default.aspx" />

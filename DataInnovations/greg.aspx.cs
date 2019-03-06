@@ -13,6 +13,7 @@ namespace SMSChecker
 {
     public partial class greg : System.Web.UI.Page
     {
+        public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
             string IPAddress = "";
@@ -41,29 +42,8 @@ namespace SMSChecker
             {
                 con.Close();
             }
-            Lit_IP.Text = "IP Address: " + IPAddress;
+            html = "IP Address: " + IPAddress;
 
-        }
-
-        protected async void btn_send_Click(object sender, EventArgs e)
-        {
-            //Added:  Async="true"  to the page.aspx !!!
-            Functions myFunctions = new Functions();
-            string response = "";
-            foreach (ListItem listItem in cbl_recipients.Items)
-            {
-                if (listItem.Selected)
-                {
-                    string status = await myFunctions.SendMessage(listItem.Value, tb_message.Text);
-                    response += "<br />" + listItem.Value + status;
-                }
-                else
-                {
-                    //do something else 
-                }
-            }
-
-            lbl_response.Text = response;
         }
     }
 }

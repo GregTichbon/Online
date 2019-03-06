@@ -11,17 +11,16 @@ namespace DataInnovations.Raffles
 {
     public partial class UBC2019A : System.Web.UI.Page
     {
-        public string filename;
         public string raffle;
         public int available1 = 0;
         public int available2 = 0;
-        public string colour;
-
+        public string identifier;
+        public string bankaccount;
+        public string rafflename;
+        public string detail;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            filename = HttpContext.Current.Server.MapPath(".") + "\\raffles.sqlite";
-            int ticketstoarow = 10;
             if (!IsPostBack)
             {
                 string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -32,11 +31,14 @@ namespace DataInnovations.Raffles
                 string line1;
                 string line2;
                 string format;
+                int columns = 10;
+                int firstticket = 1;
+                int lastticket = 50;
 
 
-                raffle = Request.QueryString["id"];
-                raffle = "5";
-                string sql1 = "select * from raffle where raffle_id = " + raffle;
+                string guid = Request.QueryString["id"];
+
+                string sql1 = "select * from raffle where guid = '" + guid + "'";
 
                 SqlConnection con = new SqlConnection(strConnString);
                 SqlCommand cmd = new SqlCommand(sql1, con);
@@ -49,18 +51,26 @@ namespace DataInnovations.Raffles
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
-
+                    dr.Read();
+                    raffle = dr["raffle_id"].ToString();
+                    identifier = dr["identifier"].ToString();
+                    columns = Convert.ToInt16(dr["columns"]);
+                    firstticket = Convert.ToInt16(dr["firstticket"]);
+                    lastticket = Convert.ToInt16(dr["lastticket"]);
+                    bankaccount = dr["bankaccount"].ToString();
+                    rafflename = dr["name"].ToString();
+                    detail = dr["detail"].ToString();
 
                 }
                 dr.Close();
-                LitRows2.Text += "<tr><td colspan=\"" + (ticketstoarow + 1) + "\"><h2>THE " + colour + " RAFFLE</h2></td></tr>";
+                LitRows2.Text += "<tr><td colspan=\"" + (columns + 1) + "\"><h2>THE " + identifier + " RAFFLE</h2></td></tr>";
 
                 c = 0;
                 line1 = "";
                 line2 = "";
                 format = "";
 
-                string sql2 = "select * from raffleticket where raffle_id = " + raffle + " order by [TicketNumber]";
+                string sql2 = "select * from raffleticket where raffle_id = " + raffle + " and ticketnumber between " + firstticket + " and " + lastticket + " order by [TicketNumber]";
 
                 cmd = new SqlCommand(sql2, con)
                 {
@@ -94,13 +104,13 @@ namespace DataInnovations.Raffles
                             purchaser = "Taken";
                         }
                     }
-                    if (c % ticketstoarow == 1)
+                    if (c % columns == 1)
                     {
                         if (c > 1)
                         {
-                            if (c > ticketstoarow + 1)
+                            if (c > columns + 1)
                             {
-                                LitRows2.Text += "<tr><td colspan=\"" + ticketstoarow + 1 + "\"><hr /></td></tr>";
+                                LitRows2.Text += "<tr><td colspan=\"" + (columns + 1) + "\"><hr /></td></tr>";
                             }
                             LitRows2.Text += line1 + "</tr>" + line2 + "</tr>";
                             line1 = "";
@@ -113,7 +123,7 @@ namespace DataInnovations.Raffles
                     line1 += "<td class=\"td" + format + "a\">" + dr["ticketnumber"] + "</td>";
                     line2 += "<td id=\"td_" + raffle + "-" + dr["ticketnumber"] + "\" class=\"td" + format + "b\">" + purchaser + "</td>";
                 }
-                LitRows2.Text += "<tr><td colspan=\"11\"><hr /></td></tr>" + line1 + "</tr>" + line2 + "</tr>";
+                LitRows2.Text += "<tr><td colspan=\"" + (columns + 1) + "\"><hr /></td></tr>" + line1 + "</tr>" + line2 + "</tr>";
                 dr.Close();
 
                 dr.Close();

@@ -74,7 +74,7 @@ namespace DataInnovations.Raffles
                         //result = gFunctions.test2();  //This does nothing and works fine
 
                         //mobile = "0272495088";
-                        result = gFunctions.SendRemoteMessage(mobile, message);
+                        result = gFunctions.SendRemoteMessage(mobile, message, "Draw Text");
                         //break;
                     }
                 }

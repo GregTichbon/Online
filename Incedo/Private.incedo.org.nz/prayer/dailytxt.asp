@@ -7,7 +7,7 @@ if 1=2 then
 		secoption = "Daily Texts"
 		secvalue = "Yes"
 %>
-	<!--#include file="../inc_security.asp"-->		
+	 <!--#include file="../inc_security.asp"-->		
 <%
 		administrator = secresult 
 end if
@@ -20,7 +20,7 @@ end if
 <TITLE>Daily Txts</TITLE>
 <script language="javascript">
 function charsleft(line) {
-	document.getElementById('chars' + line).value = 160 - document.getElementById('date' + line).value.length;
+	//document.getElementById('chars' + line).value = 160 - document.getElementById('date' + line).value.length;
 }
 </script>
 </head>
@@ -52,9 +52,9 @@ end if
 			message = rs("message")
 		end if
 		if f1 < 0 then
-			response.write "<tr><td>" & di.DI_format(thisdate,"dddd") & "<br>" & thisdate & "</td><td colspan=""2"">" & message & "</td></tr>"
+			response.write "<tr><td>" & di.DI_format(thisdate,"dddd") & "<br>" & thisdate & "</td><td colspan=""1"">" & message & "</td></tr>"
 		else
-			response.write "<tr><td>" & di.DI_format(thisdate,"dddd") & "<br>" & thisdate & "</td><td><textarea name=""date" & thisdate & """ style=""width:98%"" rows=""3"" id=""date" & f1 & """ onKeyUp=""charsleft(" & f1 & ")"">" & message & "</textarea>" & "</td><td>" & "<input name=""chars" & f1 & """ type=""text"" id=""chars" & f1 & """ value=""" & 160 - len(message) & """ size=""5"" maxlength=""3""></td></tr>"
+			response.write "<tr><td>" & di.DI_format(thisdate,"dddd") & "<br>" & thisdate & "</td><td><textarea name=""date" & thisdate & """ style=""width:98%"" rows=""3"" id=""date" & f1 & """ onKeyUp=""charsleft(" & f1 & ")"">" & message & "</textarea>" & "</td></tr>" '<td>" & "<input name=""chars" & f1 & """ type=""text"" id=""chars" & f1 & """ value=""" & 160 - len(message) & """ size=""5"" maxlength=""3""></td></tr>"
 		end if
 	next
 	rs.close

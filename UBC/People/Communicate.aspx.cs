@@ -16,6 +16,7 @@ namespace UBC.People
     {
         public string html;
         public string html_facebook;
+        public string response = "";
         public string categories;
 
         public string categories_values;
@@ -247,7 +248,9 @@ namespace UBC.People
             }
             if (1 == 1)
             {
-                Functions funcs = new Functions();
+                //Functions funcs = new Functions();
+                Generic.Functions gFunctions = new Generic.Functions();
+
 
                 string emailbodyTemplate = "RegisterEmail.xslt";
                 string emailBCC = "";
@@ -255,9 +258,9 @@ namespace UBC.People
                 string screenTemplate = "RegisterScreen.xslt";
                 //string host = "datainn.co.nz";
                 string host = "70.35.207.87";
-                string emailfrom = "ltr@datainn.co.nz";
+                string emailfrom = "UnionBoatClub@datainn.co.nz";
                 string emailfromname = "Union Boat Club";
-                string password = "m33t1ng";
+                string password = "39%3Zxon";
 
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497;MultipleActiveResultSets=True";
 
@@ -359,8 +362,8 @@ namespace UBC.People
                                 client.Send(message);
                                 */
 
-                                //funcs.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, emailtext, emailhtml, emailRecipient, emailBCC, "");
-                                funcs.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, emailhtml, emailRecipient, emailBCC, "");
+                                //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, emailtext, emailhtml, emailRecipient, emailBCC, "");
+                                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, emailhtml, emailRecipient, emailBCC, "");
 
 
                             }
@@ -380,7 +383,8 @@ namespace UBC.People
                                 textmessage = textmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
                                 foreach (string mobile in mobiles.Split(';'))
                                 {
-                                    funcs.SendMessage(mobile, textmessage);
+                                    //gFunctions.SendMessage(mobile, textmessage);
+                                    response += gFunctions.SendRemoteMessage(mobile, textmessage, "UBC Communications") + "<br />";
                                 }
                             }
 
@@ -460,8 +464,8 @@ namespace UBC.People
 
                                 remailhtml = "<html><head></head><body>" + remailhtml + "</body></html>";
 
-                                //funcs.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, remailtext, remailhtml, remailRecipient, remailBCC, "");
-                                funcs.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, remailhtml, remailRecipient, remailBCC, "");
+                                //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, remailtext, remailhtml, remailRecipient, remailBCC, "");
+                                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, remailhtml, remailRecipient, remailBCC, "");
                             }
                             
                             if (Request.Form["cb_rtext_" + id] + "" != "")
@@ -484,7 +488,8 @@ namespace UBC.People
                                 rtextmessage = rtextmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
                                 foreach (string mobile in rmobile.Split(';'))
                                 {
-                                    funcs.SendMessage(mobile, rtextmessage);
+                                    //gFunctions.SendMessage(mobile, rtextmessage);
+                                    response += gFunctions.SendRemoteMessage(mobile, rtextmessage, "UBC Communications - Relation");
                                 }
                             }
 

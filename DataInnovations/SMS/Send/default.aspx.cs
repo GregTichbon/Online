@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -17,14 +19,14 @@ namespace SMSChecker
     {
         string IPAddress = "";
         string Port = "";
-        string UserName = "";
-        string Password = "";
+        //string UserName = "";
+        //string Password = "";
         string Operation = "";
         string PhoneNumber = ""; //   "0272495088";
         string Message = ""; //"Test";
         public string html = "";
 
-    
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,9 +41,11 @@ namespace SMSChecker
             SendMessage();
         }
 
-        private async void SendMessage()
+        //private async void SendMessage()
+
+        private void SendMessage()
         {
-            if(Operation == "S")
+            if (Operation == "S")
             {
 
             }
@@ -98,6 +102,22 @@ namespace SMSChecker
                     con.Close();
                 }
 
+                WebRequest wr = WebRequest.Create("http://192.168.10.21:8080/?number=" + PhoneNumber + "&text=" + Message);
+                wr.Timeout = 3500;
+
+                //Console.WriteLine(i);
+
+                WebResponse response = wr.GetResponse();
+                Stream data = response.GetResponseStream();
+                using (StreamReader sr = new StreamReader(data))
+                {
+                    html += sr.ReadToEnd();
+                }
+
+                data.Dispose();
+                System.Threading.Thread.Sleep(1000);
+
+                /*
                 using (var client = new HttpClient())
                 {
                     string url = ConstructBaseUri();
@@ -138,20 +158,23 @@ namespace SMSChecker
                         html = response.ToString();
                     }
                 }
+                */
             }
         }
-        protected string ConstructBaseUri()
-        {
-            UriBuilder uriBuilder = new UriBuilder("http", IPAddress, Convert.ToInt32(Port));
-            return uriBuilder.ToString();
-        }
-
-        private const string NetworkInfoUrlPath = "services/api/status/network";
-
-        private const string BatteryInfoUrlPath = "services/api/status/battery";
-
-        private const string MessagesUrlPath = "services/api/messaging";
-
-        private const string MessageStatusUrlPath = "services/api/messaging/status";
     }
+    /*
+    protected string ConstructBaseUri()
+    {
+        UriBuilder uriBuilder = new UriBuilder("http", IPAddress, Convert.ToInt32(Port));
+        return uriBuilder.ToString();
+    }
+
+    private const string NetworkInfoUrlPath = "services/api/status/network";
+
+    private const string BatteryInfoUrlPath = "services/api/status/battery";
+
+    private const string MessagesUrlPath = "services/api/messaging";
+
+    private const string MessageStatusUrlPath = "services/api/messaging/status";
+    */
 }
