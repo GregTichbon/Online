@@ -1,0 +1,59 @@
+routeName,date,meterId,amrMeterId,value,exValue,siteId,customerInfo,stN1,street,city,customerName
+1,12/10/2018 2:20,7141835,25STD5,22496,22366,6696,167,1,Heads Road,Whanganui,Suzuki New Zealand Limited
+1,12/10/2018 2:23,948641203,20COM5,18164,17302,6740-1,176,59,Heads Road,Whanganui,Fullmoon Management Limited
+1,12/10/2018 2:23,941151103,50COM6,277,262,6740-2,176,59,Heads Road,Whanganui,Fullmoon Management Limited
+1,12/11/2018 22:41,852980,25STD5,13774,13708,4781,117,70,Heads Road,Whanganui,Mr BD Mooney
+1,12/10/2018 2:29,4251043,25STD5,4934,4773,47330,1538,281-283,Heads Road,Whanganui,Pine Valley Properties
+1,12/10/2018 2:31,112501470,25STD5,3,0,33301,1286,303,Heads Road,Whanganui,Whanganui District Council
+1,12/10/2018 2:38,142501619,25STD5,1414,1158,1072-1,1754,2,Gilberd Street,Whanganui,Whanganui District Council
+1,12/10/2018 2:39,15714092,20COM5,93,93,1072-2,1754,2,Gilberd Street,Whanganui,Whanganui District Council
+1,12/10/2018 2:39,15710975,50COM6,65,65,1072-3,1754,2,Gilberd Street,Whanganui,Whanganui District Council
+1,12/10/2018 2:41,945292203,20COM5,13050,12911,1017-1,35,29,Gilberd Street,Whanganui,Envirowaste Services Ltd
+1,12/10/2018 2:42,946252803,50COM5,20247,19942,1017-2,35,29,Gilberd Street,Whanganui,Envirowaste Services Ltd
+1,12/10/2018 2:44,8SE0310020093,20REM6,957,864,1013,1736,49,Gilberd Street,Whanganui,Whanganui District Council
+1,12/10/2018 2:49,80041418,20COM5,5685,5265,1014-1,33,53,Gilberd Street,Whanganui,Whanganui District Council
+1,12/10/2018 2:49,80043394,50COM6,1643,1512,1014-2,33,53,Gilberd Street,Whanganui,Whanganui District Council
+1,12/10/2018 19:58,985133006,20COM5,2602,2602,64960-1,1739,84,Gilberd Street,Whanganui,Mr DCP Corney & Estate JC Corney & Mr CF Smith
+1,12/10/2018 19:58,985169606,50COM6,10319,10319,64960-2,1739,84,Gilberd Street,Whanganui,Mr DCP Corney & Estate JC Corney & Mr CF Smith
+1,12/10/2018 20:02,39845249,50STD6,13670,11149,1036,44,350,Heads Road,Whanganui,Mr BL Tunbridge & Mrs FC Tunbridge & Mr RI McKinnon
+1,12/10/2018 20:04,944242903,20COM5,4268,4195,39640-1,1457,359,Heads Road,Whanganui,Bartley Property Investments Limited
+1,12/10/2018 20:04,946253803,50COM6,32780,30860,39640-2,1457,359,Heads Road,Whanganui,Bartley Property Investments Limited
+1,12/11/2018 22:23,11m1538121,20STD5,25165,21716,45000-1,1521,,Hinau Street,Whanganui,Whanganui District Council
+1,12/10/2018 21:27,106757995,50STD6,91771,89696,45000-2,1521,,Hinau Street,Whanganui,Whanganui District Council
+1,12/10/2018 20:17,7437254,25STD5,4067,3959,44960,1520,20,Hinau Street,Whanganui,Mr IP McGuffie & Mrs SGG McGuffie
+1,12/10/2018 20:19,16MC0505331,50STD6,2711,2305,1008,1691,22,Hinau Street,Whanganui,Mr RD Wainhouse & Mrs GM Wainhouse & Mr RGP Eades
+1,12/10/2018 20:20,47169877,25STD5,21758,21627,995-1,25,17-21,Hinau Street,Whanganui,Waters & Farr Limited
+1,12/10/2018 20:22,1334009194,40STD6,7291,6931,995-2,25,17-21,Hinau Street,Whanganui,Waters & Farr Limited
+1,12/10/2018 21:24,90056715,40STD6,14535,13718,1049,55,392,Heads Road,Whanganui,Heads Road Industrial Park Limited
+1,12/10/2018 21:22,7141838,25STD5,10981,10741,1054,58,408,Heads Road,Whanganui,Animal Control Products Limited
+1,12/10/2018 21:32,40431097,25STD5,13716,13507,469,14,443-447,Heads Road,Whanganui,449 Heads Road Limited
+1,12/10/2018 21:15,945864103,50STD6,119253,115441,512,16,492,Heads Road,Whanganui,Poukawa Est Limited
+1,12/10/2018 21:17,957780004A,20COM5,3331,3085,46690-1,1530,485-501,Heads Road,Whanganui,Whanganui District Council
+1,12/10/2018 21:17,959038404,50COM6,5,5,46690-2,1530,485-501,Heads Road,Whanganui,Whanganui District Council
+1,12/10/2018 21:22,72501371,25STD5,7527,7525,514,18,496,Heads Road,Whanganui,Mr C Mitchell-Anyon
+1,12/10/2018 21:02,1432003796,25STD5,10446,8866,306,11,4,Tennyson Street,Whanganui,Castlecliff Club Incorporated
+1,12/11/2018 22:19,17764514,50REM6,668,0,64450,1680,1,Tod Street,Whanganui,Whanganui District Council
+1,12/10/2018 20:26,945864203,100STD6,3984,3665,459,12,1A,Wharf Street,Whanganui,Wanganui Sea Fishing Club
+1,12/10/2018 21:08,90009035,20COM5,39249,35886,295-1,9,1,Morrison Street,Whanganui,Whanganui District Council
+1,12/10/2018 21:09,90006625,50COM6,26318,26311,295-2,9,1,Morrison Street,Whanganui,Whanganui District Council
+1,12/10/2018 20:30,2151586,20STD4,1120,1070,64600,1694,2,Bryce Street,Whanganui,Whanganui District Council
+1,12/10/2018 20:31,2151590,20STD4,2234,1956,64590,1695,1,Polson Street,Whanganui,Whanganui District Council
+1,12/10/2018 20:35,14739382,20COM5,7412,5370,23356-1,1077,25,Polson Street,Whanganui,Education Ministry & Whanganui District Council
+1,12/10/2018 20:35,14744214,50COM6,753,711,23356-2,1077,25,Polson Street,Whanganui,Education Ministry & Whanganui District Council
+1,12/10/2018 20:34,953810904,20COM5,9087,9059,23356-3,1077,25,Polson Street,Whanganui,Education Ministry & Whanganui District Council
+1,12/10/2018 20:34,954409104,50COM6,6811,6442,23356-4,1077,25,Polson Street,Whanganui,Education Ministry & Whanganui District Council
+1,12/10/2018 20:55,948641503,25COM5,20965,20636,33241-1,1282,21A,Manuka Street,Whanganui,Castlecliff Bowling Club Incorporated
+1,12/10/2018 20:55,941151503,100COM6,19430,19408,33241-2,1282,21A,Manuka Street,Whanganui,Castlecliff Bowling Club Incorporated
+1,12/10/2018 20:58,989315306,20COM5,8218,7961,42530-1,1486,103A,Manuka Street,Whanganui,T C Jurgens & Sons Limited
+1,12/10/2018 20:58,989238906,50COM6,5297,5113,42530-2,1486,103A,Manuka Street,Whanganui,T C Jurgens & Sons Limited
+1,12/10/2018 20:52,30016,20STD4,4441,4333,39220-1,1435,1A,Rangiora Street,Whanganui,Mr LP Kelly & Mrs IA Kelly & Kelly Trustees 2017 Limited
+1,12/10/2018 20:51,90096216,50STD6,16268,15492,39220-2,1435,1A,Rangiora Street,Whanganui,Mr LP Kelly & Mrs IA Kelly & Kelly Trustees 2017 Limited
+1,12/10/2018 20:48,6312,20STD4,9890,9722,1098-1,66,65,Karaka Street,Whanganui,POIU Holdings Limited
+1,12/10/2018 20:49,13MC175383,20STD5,994,963,1098-2,66,65,Karaka Street,Whanganui,POIU Holdings Limited
+1,12/10/2018 20:39,8020716-97,100STD6,10228,10073,33530,1327,14,Aranui Avenue,Whanganui,Aranui School Trustees
+1,12/10/2018 20:43,4251004,25STD5,36397,35797,51200,1593,8,Awatea Street,Whanganui,Castlecliff Golf Club Inc
+1,12/10/2018 21:04,13039801,20COM5,12062,11790,43150-1,1499,18,Cross Street,Whanganui,Ministry of Education
+1,12/10/2018 21:04,13048653,50COM6,7177,5947,43150-2,1499,18,Cross Street,Whanganui,Ministry of Education
+1,12/11/2018 22:29,81526897,20STD5,2827,2705,35980,1399,104,Mosston Road,Whanganui,Mr AG Bristol & Mr CS Bristol & Mrs M Bristol
+1,12/11/2018 22:30,70085111,100COM6,59999,59672,41620-1,1475,108,Mosston Road,Whanganui,Heritage Lifecare Villages Limited
+1,12/11/2018 22:30,70092237,25COM5,42637,42214,41620-2,1475,108,Mosston Road,Whanganui,Heritage Lifecare Villages Limited
