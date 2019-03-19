@@ -501,6 +501,8 @@
     <Content Include="People\Security\LogOut.aspx" />
     <Content Include="People\TestAndPlay\Email1.aspx" />
     <Content Include="People\TestAndPlay\Export1.aspx" />
+    <Content Include="People\Transaction.aspx" />
+    <Content Include="People\transactions.aspx" />
     <Content Include="redirect.aspx" />
     <Content Include="Test2.aspx" />
     <Content Include="Test2a.aspx" />
@@ -1076,6 +1078,20 @@
     </Compile>
     <Compile Include="People\TestAndPlay\Export1.aspx.designer.cs">
       <DependentUpon>Export1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Transaction.aspx.cs">
+      <DependentUpon>Transaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Transaction.aspx.designer.cs">
+      <DependentUpon>Transaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\transactions.aspx.cs">
+      <DependentUpon>transactions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\transactions.aspx.designer.cs">
+      <DependentUpon>transactions.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\uploadphoto.aspx.cs">
       <DependentUpon>uploadphoto.aspx</DependentUpon>

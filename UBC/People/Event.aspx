@@ -316,8 +316,7 @@ switch (option) {
                     found = false;
                     for (f1 = 0; f1 < category.length; f1++) {
                         usecategory = '|' + category[f1] + '|';
-                        //console.log(usecategory);
-                        //console.log(personcategory);
+                        //console.log(usecategory + ' | ' + personcategory);
 
                         if (personcategory.indexOf(usecategory) != -1 || $("#dd_attendance_" + personid).val() != '') {
                             found = true;

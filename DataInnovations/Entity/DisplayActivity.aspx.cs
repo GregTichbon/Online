@@ -40,7 +40,7 @@ namespace Online.Entity
                 }
                 catch (Exception ex)
                 {
-                    gFunctions.Log(Request.RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
+                    gFunctions.Log("",Request.RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
                 }
                 lit_data.Text += screendocument;
             } else

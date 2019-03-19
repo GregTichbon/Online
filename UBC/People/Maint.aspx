@@ -31,6 +31,9 @@
     <!--additional-methods.min.js-->
 
     <script type="text/javascript">
+
+        var tr;
+
         $(document).ready(function () {
             $(document).uitooltip({
                 position: {
@@ -66,8 +69,22 @@
 
             $('.submit').click(function () {
                 delim = String.fromCharCode(254);
-                $('#transactionstable > tbody > tr [data-maint="changed"]').each(function () {
-                    alert(1);
+                $('#transactionstable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_date = $(this).find('td:eq(1)').text();
+                    tr_system = $(this).find('td:eq(2)').text();
+                    tr_code = $(this).find('td:eq(3)').text();
+                    tr_event_id = $(this).find('td:eq(4)').attr('event_id');
+                    tr_amount = $(this).find('td:eq(5)').text();
+                    tr_note = $(this).find('td:eq(6)').text();
+                    tr_banked = $(this).find('td:eq(7)').text();
+   
+                    value = tr_date + delim + tr_system + delim + tr_code + delim + tr_event_id + delim + tr_amount + delim + tr_note + delim + tr_banked
+                    $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: value
+                        }).appendTo('#form1');
                 });
 
                /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
@@ -169,7 +186,7 @@
                     $('#tb_transactions_date').val($(tr).find('td').eq(1).text());
                     $('#dd_transactions_system').val($(tr).find('td').eq(2).text());
                     $('#dd_transactions_code').val($(tr).find('td').eq(3).text());
-                    $('#dd_transactions_event').val($(tr).find('td').eq(4).text());
+                    $('#dd_transactions_event').val($(tr).find('td').eq(4).attr('event_id'));
                     $('#tb_transactions_amount').val($(tr).find('td').eq(5).text());
                     $('#tb_transactions_note').val($(tr).find('td').eq(6).text());
                     $('#tb_transactions_banked').val($(tr).find('td').eq(7).text());
@@ -191,22 +208,21 @@
                         },
                         "Save": function () {
                             if (mode == "add") {
-                                var tr = $('#div_transactions > table > tbody tr:first').clone();
-                                //console.log(tr);
+                                tr = $('#div_transactions > table > tbody tr:first').clone();
                                 tr.find(':input').val('');
                                 $('#div_transactions > table > tbody').append(tr);
-                            }
-                            console.log(tr);
-                            $(tr).data('maint', 'changed');
+                            } 
+                            $(tr).attr('maint', 'changed');
 
-                            $(tr).find('td').eq(0).text($('#tb_transactions_date').val());
-                            $(tr).find('td').eq(1).text($('#dd_transactions_system').val());
-                            $(tr).find('td').eq(2).text($('#dd_transactions_code').val());
-                            $(tr).find('td').eq(3).text($('#dd_transactions_event').val());
-                            $(tr).find('td').eq(4).text($('#tb_transactions_amount').val());
-                            $(tr).find('td').eq(5).text($('#tb_transactions_note').val());
-                            $(tr).find('td').eq(6).text($('#tb_transactions_banked').val());
-                            alert("To do: Database update");
+                            $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
+                            $(tr).find('td').eq(2).text($('#dd_transactions_system').val());
+                            $(tr).find('td').eq(3).text($('#dd_transactions_code').val());
+                            $(tr).find('td').eq(4).text($('#dd_transactions_event option:selected').text());
+                            $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
+                            $(tr).find('td').eq(5).text($('#tb_transactions_amount').val());
+                            $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
+                            $(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
+                            //alert("Database will be updated when record submited");
                             $(this).dialog("close");
                         }
                     }

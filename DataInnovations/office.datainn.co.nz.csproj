@@ -154,6 +154,7 @@
     <Content Include="greg.aspx" />
     <Content Include="Greg\default.aspx" />
     <Content Include="Greg\SMS.aspx" />
+    <Content Include="log.aspx" />
     <Content Include="Maadi\default.asp" />
     <Content Include="MeetingScheduler\data.asmx" />
     <Content Include="MeetingScheduler\Default.aspx" />
@@ -174,6 +175,7 @@
     <Content Include="Raffles\Communicate.aspx" />
     <Content Include="Raffles\Control.aspx" />
     <Content Include="Raffles\DrawText.aspx" />
+    <Content Include="Raffles\Images\3logos.jpg" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
     <Content Include="Raffles\Raffles.aspx" />
@@ -197,6 +199,8 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
+    <Content Include="SMS\Receive\Acknowledge.aspx" />
+    <Content Include="SMS\Receive\Default.aspx" />
     <Content Include="SMS\Send\Form.aspx" />
     <Content Include="SMS\Send\SMSGateway.aspx" />
     <Content Include="SMS\TOHRowing.aspx" />
@@ -342,6 +346,13 @@
     </Compile>
     <Compile Include="Greg\SMS.aspx.designer.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="log.aspx.cs">
+      <DependentUpon>log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="log.aspx.designer.cs">
+      <DependentUpon>log.aspx</DependentUpon>
     </Compile>
     <Compile Include="MeetingScheduler\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
@@ -590,6 +601,20 @@
     </Compile>
     <Compile Include="SMS\Maadi.aspx.designer.cs">
       <DependentUpon>Maadi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\Receive\Acknowledge.aspx.cs">
+      <DependentUpon>Acknowledge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\Receive\Acknowledge.aspx.designer.cs">
+      <DependentUpon>Acknowledge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\Receive\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\Receive\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="SMS\Sendbywebpage.aspx.cs">
       <DependentUpon>Sendbywebpage.aspx</DependentUpon>

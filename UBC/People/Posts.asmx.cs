@@ -25,8 +25,59 @@ namespace UBC.People
     public class Posts : System.Web.Services.WebService
     {
         [WebMethod]
+        public string update_person_transaction(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string person_transaction_id = formVars.Form("person_transaction_id");
+            string person_id = formVars.Form("person_id");
+            string date = formVars.Form("date");
+            string system = formVars.Form("system");
+            string code = formVars.Form("code");
+            string event_id = formVars.Form("event_id");
+            string amount = formVars.Form("amount");
+            string note = formVars.Form("note");
+            string banked = formVars.Form("banked");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Update_Person_Transaction";
+            cmd.Parameters.Add("@person_transaction_id", SqlDbType.VarChar).Value = person_transaction_id.Substring(13);
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+            cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = date;
+            cmd.Parameters.Add("@amount", SqlDbType.VarChar).Value = amount;
+            cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+            cmd.Parameters.Add("@system", SqlDbType.VarChar).Value = system;
+            cmd.Parameters.Add("@detail", SqlDbType.VarChar).Value = "";
+            cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = code;
+            cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = banked;
+            cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+
+            con.Open();
+            string result = cmd.ExecuteScalar().ToString();
+            con.Close();
+
+            con.Dispose();
+
+
+
+
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Saved";
+            resultclass.message = "";
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+
+        }
+
+        [WebMethod]
         public string update_event_person(NameValue[] formVars)    //you can't pass any querystring params
         {
+            
 
             /*PROCEDURE [dbo].[update_event_person] (
             @event_id int,

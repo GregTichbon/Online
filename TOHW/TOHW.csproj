@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Generic">
+      <HintPath>..\Generic\bin\Generic.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -308,6 +311,8 @@
     <Content Include="Auction\Images\Items\9\original\Parapara Deer Hunt.jpg" />
     <Content Include="Auction\Images\Items\9\Parapara Deer Hunt.jpg" />
     <Content Include="Auction\Page.aspx" />
+    <Content Include="bin\Generic.dll" />
+    <Content Include="bin\HtmlAgilityPack.dll" />
     <Content Include="BpopUp1.aspx" />
     <Content Include="Bpopup2.aspx" />
     <Content Include="Bpop\assets\jquery.bpopup-0.11.0.min.js" />
@@ -324,6 +329,7 @@
     <Content Include="Database\Main2.aspx" />
     <Content Include="Database\Search.aspx" />
     <Content Include="Database\simple.aspx" />
+    <Content Include="Database\TodaysBirthdays.aspx" />
     <Content Include="default.aspx" />
     <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
     <Content Include="Dependencies\colorbox\colorbox.css" />
@@ -851,6 +857,13 @@
     </Compile>
     <Compile Include="Database\simple.aspx.designer.cs">
       <DependentUpon>simple.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\TodaysBirthdays.aspx.cs">
+      <DependentUpon>TodaysBirthdays.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\TodaysBirthdays.aspx.designer.cs">
+      <DependentUpon>TodaysBirthdays.aspx</DependentUpon>
     </Compile>
     <Compile Include="MySite\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

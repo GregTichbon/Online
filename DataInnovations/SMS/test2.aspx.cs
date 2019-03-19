@@ -11,7 +11,9 @@ namespace DataInnovations.SMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Generic.Functions gFunctions = new Generic.Functions();
+            string html = gFunctions.SendRemoteMessage("0272495088", "1" + System.Environment.NewLine + "2", "Test");
+            Response.Write(html);
         }
     }
 }

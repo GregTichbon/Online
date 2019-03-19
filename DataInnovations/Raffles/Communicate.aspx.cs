@@ -55,7 +55,9 @@ namespace DataInnovations.Raffles
 
             }
             dr.Close();
-            html += "<tr><td><h2>THE " + identifier + " RAFFLE</h2></td></tr>";
+            html += "<tr><td colspan=\"4\"><h2>THE " + identifier + " RAFFLE</h2></td></tr>";
+
+            html += "<tr><td colspan=\"4\"><input id=\"cb_toggleall\" type=\"checkbox\" /></td></tr>";
 
             string sql2 = "select * from raffleticket where raffle_id = " + raffle + " and ticketnumber between " + firstticket + " and " + lastticket + " order by [TicketNumber]";
 
@@ -71,23 +73,27 @@ namespace DataInnovations.Raffles
 
             while (dr.Read())
             {
+                string id = dr["RaffleTicket_ID"].ToString();
                 string purchaser = dr["Purchaser"].ToString();
                 string mobile = dr["mobile"].ToString();
                 string ticketnumber = dr["ticketnumber"].ToString();
                 string emailaddress = dr["emailaddress"].ToString();
                 string greeting = dr["greeting"].ToString();
 
-                html += "<tr><td>" + ticketnumber + "</td><td>" + purchaser + "</td><td>" + mobile + "</td><td>" + emailaddress + "</td></tr>";
-
+                html += "<tr><td><input class=\"checkbox\" id=\"cb_" + id + "\" name=\"cb_" + id + "\" value=\"x\" type=\"checkbox\" />" + ticketnumber + "</td><td>" + purchaser + "</td><td>" + mobile + "</td><td>" + emailaddress + "</td></tr>";
+              
                 if (IsPostBack)
                 {
-                    string textmessage = tb_message.Text;
-                    textmessage = textmessage.Replace("||greeting||", greeting);
-                    textmessage = textmessage.Replace("||ticketnumber||", ticketnumber);
-                    foreach (string mobilex in mobile.Split(';'))
-                    {
-                        Response.Write( gFunctions.SendRemoteMessage(mobilex, textmessage, "Raffle Communication") + "<br />");
-                        c1++;
+                    string val = Request.Form["cb_" + id];
+                    if (val == "x") {
+                        string textmessage = tb_message.Text;
+                        textmessage = textmessage.Replace("||greeting||", greeting);
+                        textmessage = textmessage.Replace("||ticketnumber||", ticketnumber);
+                        foreach (string mobilex in mobile.Split(';'))
+                        {
+                            Response.Write(gFunctions.SendRemoteMessage(mobilex, textmessage, "Raffle Communication") + "<br />");
+                            c1++;
+                        }
                     }
                 }
             }

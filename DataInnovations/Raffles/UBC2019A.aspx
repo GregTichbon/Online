@@ -290,9 +290,7 @@
             &nbsp;
         </p>
         <p style="text-align: center">
-            <img alt="" style="height: 300px;" src="Images/Cullinane%20Logo.jpg" />
-            <img alt="" style="height: 300px;" src="Images/UBC.png" />
-            <img alt="" style="height: 300px;" src="Images/Whanganui%20Girls%20College%20logo.jpg" />
+            <img src="Images/3logos.jpg" style="width: 770px;" />&nbsp;&nbsp;&nbsp;
         </p>
         <p style="text-align: center">
             <br />
@@ -337,13 +335,13 @@
                 </tr>
                 <tr>
                     <td style="text-align: right">Email Address:</td>
-                    <td>
-                        <input type="email" id="tb_emailaddress" name="tb_emailaddress" required="required" /></td>
+                    <td style="text-align: left">
+                        <input type="email" id="tb_emailaddress" name="tb_emailaddress" required="required" autocomplete="on" /></td>
                 </tr>
                 <tr>
                     <td style="text-align: right">Mobile Number:</td>
-                    <td>
-                        <input type="text" id="tb_mobile" name="tb_mobile" /></td>
+                    <td style="text-align: left">
+                        <input type="tel" id="tb_mobile" name="tb_mobile" autocomplete="on" /></td>
                 </tr>
                 <tr>
                     <td style="text-align: right">How will you make payment</td>
@@ -358,7 +356,7 @@
                 <tr>
                     <td style="text-align: right">How will you get the money to Greg?
                     </td>
-                    <td>
+                    <td style="text-align: left">
                         <div id="div_bankdetails" style="display: none">
                             <span style="font-size: small">Please deposit/transfer the money into<br />
                                 Bank A/c No: <%:bankaccount %>

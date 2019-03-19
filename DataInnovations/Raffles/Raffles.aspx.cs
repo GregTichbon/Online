@@ -23,7 +23,7 @@ namespace DataInnovations.Raffles
 
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
-            string sql1 = "select * from raffle order by raffle_id desc";
+            string sql1 = "select * from raffle order by OpenDate, identifier, FirstTicket ";
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand(sql1, con);

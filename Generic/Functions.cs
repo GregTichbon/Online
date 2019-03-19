@@ -38,7 +38,7 @@ namespace Generic
             return new HtmlString(source);
         }
 
-        public string HTMLtoText (string source)
+        public string HTMLtoText(string source)
         {
             var text = new HtmlDocument();
             text.LoadHtml(source);
@@ -143,7 +143,7 @@ namespace Generic
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new  NetworkCredential(emailfrom, password);
+            client.Credentials = new NetworkCredential(emailfrom, password);
             client.Host = host;
 
             string[] emailaddresses = emailRecipient.Split(';');
@@ -181,68 +181,102 @@ namespace Generic
         public void sendemailV3(string host, string emailfrom, string emailfromname, string password, string emailsubject, string emailhtml, string emailRecipient, string emailbcc, string replyto)
         {
             //Must pass both text and html!!
-
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(emailfrom, emailfromname);
-            if (replyto != "")
+            try
             {
-                string[] rtaddresses = replyto.Split(';');
-
-                IEnumerable<string> distinctrtaddresses = rtaddresses.Distinct();
-
-                foreach (string rtaddress in distinctrtaddresses)
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(emailfrom, emailfromname);
+                if (replyto != "")
                 {
-                    mail.ReplyToList.Add(rtaddress);
+                    string[] rtaddresses = replyto.Split(';');
+
+                    IEnumerable<string> distinctrtaddresses = rtaddresses.Distinct();
+
+                    foreach (string rtaddress in distinctrtaddresses)
+                    {
+                        mail.ReplyToList.Add(rtaddress);
+                    }
                 }
-            }
 
-            SmtpClient client = new SmtpClient();
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(emailfrom, password);
-            client.Host = host;
+                SmtpClient client = new SmtpClient();
+                client.Port = 25;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(emailfrom, password);
+                client.Host = host;
 
-            string[] emailaddresses = emailRecipient.Split(';');
+                string[] emailaddresses = emailRecipient.Split(';');
 
-            IEnumerable<string> distinctemailaddresses = emailaddresses.Distinct();
+                IEnumerable<string> distinctemailaddresses = emailaddresses.Distinct();
 
-            foreach (string emailaddress in distinctemailaddresses)
-            {
-                mail.To.Add(emailaddress);
-            }
-
-            if (emailbcc != "")
-            {
-                string[] bccaddresses = emailbcc.Split(';');
-
-                IEnumerable<string> distinctbccaddresses = bccaddresses.Distinct();
-
-                foreach (string bccaddress in distinctbccaddresses)
+                foreach (string emailaddress in distinctemailaddresses)
                 {
-                    mail.Bcc.Add(bccaddress);
+                    mail.To.Add(emailaddress);
                 }
+
+                if (emailbcc != "")
+                {
+                    string[] bccaddresses = emailbcc.Split(';');
+
+                    IEnumerable<string> distinctbccaddresses = bccaddresses.Distinct();
+
+                    foreach (string bccaddress in distinctbccaddresses)
+                    {
+                        mail.Bcc.Add(bccaddress);
+                    }
+                }
+
+                mail.Subject = emailsubject;
+
+                mail.IsBodyHtml = false;
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(emailhtml);
+                string text = doc.DocumentNode.SelectSingleNode("//body").InnerText;
+                mail.Body = text;
+
+                System.Net.Mime.ContentType mimeType = new System.Net.Mime.ContentType("text/html");
+                AlternateView alternate = AlternateView.CreateAlternateViewFromString(emailhtml, mimeType);
+                mail.AlternateViews.Add(alternate);
+
+                client.Send(mail);
             }
-
-            mail.Subject = emailsubject;
-
-            mail.IsBodyHtml = false;
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(emailhtml);
-            string text = doc.DocumentNode.SelectSingleNode("//body").InnerText;
-            mail.Body = text;
-
-            System.Net.Mime.ContentType mimeType = new System.Net.Mime.ContentType("text/html");
-            AlternateView alternate = AlternateView.CreateAlternateViewFromString(emailhtml, mimeType);
-            mail.AlternateViews.Add(alternate);
-
-            client.Send(mail);
+            catch (Exception e)
+            {
+                Log("", @"generic/functions.cs/sendemailV3", "Error: Message; " + e.Message + ", StackTrace; " + e.StackTrace, "");
+            }
         }
-        public void Log(string location, string logMessage, string EmailAddress)
+        public void Log(string guid, string location, string message, string EmailAddress)
         {
-            /*
-            String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
+            //String strConnString = ConfigurationManager.AppSettings["LogConnectionString"];
+            String strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
 
+            SqlCommand cmd = new SqlCommand("insert_log", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = guid;
+            cmd.Parameters.Add("@location", SqlDbType.VarChar).Value = location;
+            cmd.Parameters.Add("@Message", SqlDbType.VarChar).Value = message;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+
+
+
+            //String LogFileLocation = ConfigurationManager.AppSettings["Logfile.Location"];
+            /*
             StreamWriter w = File.AppendText(LogFileLocation);
             w.WriteLine("{0}", DateTime.Now.ToLongTimeString() + "\t" + DateTime.Now.ToLongDateString() + "\t" + location + "\t" + logMessage + "\t" + EmailAddress);
             w.Flush();
@@ -252,6 +286,7 @@ namespace Generic
                 //sendemail("Online Applications Error", location + "<br>" + logMessage, EmailAddress, "");
             }
             */
+
         }
         public string BrowserDetails(System.Web.HttpBrowserCapabilities browser)
         {
@@ -398,7 +433,7 @@ namespace Generic
                     }
                     catch (Exception ex)
                     {
-                        Log(RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
+                        Log("", RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
                         uploadresult = uploadresult + delim + System.IO.Path.GetFileName(postedFile.FileName) + "\x00FD" + "Failed" + "\x00FD" + "";
                         delim = "\x00FE";
                         failed = failed + 1;
@@ -557,20 +592,20 @@ namespace Generic
             con.Open();
             string id = cmd.ExecuteScalar().ToString();
 
-
-
-
-
-            string response;
-            Message = HttpUtility.UrlEncode(Message);
+            string response = "";
             string url = "http://office.datainn.co.nz/sms/send/?O=S&P=" + PhoneNumber + "&M=" + Message;
-            try { 
-            var webClient = new WebClient();
-            Uri uri = new Uri(url);
-            response = webClient.DownloadString(uri);
-            } catch (Exception e )
+
+            try
             {
-                response = e.InnerException.ToString();
+                Message = HttpUtility.UrlEncode(Message);
+                var webClient = new WebClient();
+                Uri uri = new Uri(url);
+                response = webClient.DownloadString(uri);
+            }
+            catch (Exception e)
+            {
+                response = "Could not send text"; // e.InnerException.ToString();
+                Log("", "Generic Functions SendRemoteMessage", "Error", "");
             }
             /*
             WebRequest wr = WebRequest.Create(url);
@@ -598,7 +633,15 @@ namespace Generic
             cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = "To Do";
 
             cmd.Parameters.Add("@response", SqlDbType.VarChar).Value = response;
-            cmd.ExecuteNonQuery();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                response += e.InnerException.ToString();
+            }
 
             con.Close();
             con.Dispose();
@@ -718,7 +761,7 @@ namespace Generic
                             ValueText = " value=\"" + Value + "\"";
                         }
                         //if (options["selecttype"] == "Label")
-                        if (options.ContainsKey("comparelabel"))  
+                        if (options.ContainsKey("comparelabel"))
                         {
                             selectText = Label;
                         }
@@ -730,14 +773,14 @@ namespace Generic
                         //{
                         //if (selectText == selectedoption) 
                         if (selectedoption.Contains("," + selectText + ","))
-                            {
-                                selected = " selected";
-                            }
-                            else
-                            {
-                                selected = "";
-                            }
-                            html = html + ("<option" + ValueText + selected + ">" + Label + "</option>");
+                        {
+                            selected = " selected";
+                        }
+                        else
+                        {
+                            selected = "";
+                        }
+                        html = html + ("<option" + ValueText + selected + ">" + Label + "</option>");
                         //}
                     }
                 }
@@ -910,7 +953,7 @@ namespace Generic
                     HttpContent content = new FormUrlEncodedContent(postData);
 
                     HttpResponseMessage response = await client.PostAsync(MessagesUrlPath, content);
-                  
+
                     if (response.IsSuccessStatusCode)
                     {
                         PostMessageResponse result = await response.Content.ReadAsAsync<PostMessageResponse>();
@@ -918,7 +961,8 @@ namespace Generic
                         {
                             finalresponse = result.ToString();
                         }
-                        else {
+                        else
+                        {
                             finalresponse = result.Description;
                         }
                     }
@@ -926,7 +970,7 @@ namespace Generic
                     {
                         finalresponse = response.ToString();
                     }
-                 
+
                 }
             }
             return finalresponse;
@@ -1056,7 +1100,7 @@ namespace Generic
 
             }
     */
-    
+
 }
 public class SelectList
 {

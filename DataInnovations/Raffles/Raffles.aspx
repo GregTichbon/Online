@@ -8,116 +8,130 @@
     <link href="https://unpkg.com/tabulator-tables@4.2.1/dist/css/tabulator.min.css" rel="stylesheet" />
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.2.1/dist/js/tabulator.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
-     
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
             var dateEditor = function (cell, onRendered, success, cancel) {
-            //cell - the cell component for the editable cell
-            //onRendered - function to call when the editor has been rendered
-            //success - function to call to pass the successfuly updated value to Tabulator
-            //cancel - function to call to abort the edit and return to a normal cell
+                //cell - the cell component for the editable cell
+                //onRendered - function to call when the editor has been rendered
+                //success - function to call to pass the successfuly updated value to Tabulator
+                //cancel - function to call to abort the edit and return to a normal cell
 
-            //create and style input
-            var cellValue = moment(cell.getValue(), "DD/MM/YYYY").format("YYYY-MM-DD"),
-                input = document.createElement("input");
+                //create and style input
+                var cellValue = moment(cell.getValue(), "DD/MM/YYYY").format("YYYY-MM-DD"),
+                    input = document.createElement("input");
 
-            input.setAttribute("type", "date");
+                input.setAttribute("type", "date");
 
-            input.style.padding = "4px";
-            input.style.width = "100%";
-            input.style.boxSizing = "border-box";
+                input.style.padding = "4px";
+                input.style.width = "100%";
+                input.style.boxSizing = "border-box";
 
-            input.value = cellValue;
+                input.value = cellValue;
 
-            onRendered(function () {
-                input.focus();
-                input.style.height = "100%";
-            });
+                onRendered(function () {
+                    input.focus();
+                    input.style.height = "100%";
+                });
 
-            function onChange() {
-                if (input.value != cellValue) {
-                    success(moment(input.value, "YYYY-MM-DD").format("DD/MM/YYYY"));
-                } else {
-                    cancel();
-                }
-            }
-
-            //submit new value on blur or change
-            input.addEventListener("change", onChange);
-            input.addEventListener("blur", onChange);
-
-            //submit new value on enter
-            input.addEventListener("keydown", function (e) {
-                if (e.keyCode == 13) {
-                    onChange();
+                function onChange() {
+                    if (input.value != cellValue) {
+                        success(moment(input.value, "YYYY-MM-DD").format("DD/MM/YYYY"));
+                    } else {
+                        cancel();
+                    }
                 }
 
-                if (e.keyCode == 27) {
-                    cancel();
-                }
-            });
+                //submit new value on blur or change
+                input.addEventListener("change", onChange);
+                input.addEventListener("blur", onChange);
 
-            return input;
-        };
+                //submit new value on enter
+                input.addEventListener("keydown", function (e) {
+                    if (e.keyCode == 13) {
+                        onChange();
+                    }
 
-
-
-        var table = new Tabulator("#rt", {
-            data: tableData,
-            dataEdited: function (data) {
-                //console.log(data);
-            },
-            cellEdited: function (cell) {
-                var cid = cell.getRow().getData().id;
-                var cvalue = cell.getValue();
-                var cfield = cell.getColumn().getField();
-                console.log(cfield + "=" + cid + "=" + cvalue);
-                /*
-                $.ajax({
-                    url: "data.asmx/updateticket?field=" + cfield + "&id=" + cid + "&value=" + cvalue, success: function (result) {
-                        //alert('Success');
-                    }, error: function (XMLHttpRequest, textStatus, error) {
-                        alert("AJAX error: " + textStatus + "; " + error);
+                    if (e.keyCode == 27) {
+                        cancel();
                     }
                 });
-                */
+
+                return input;
+            };
+
+            var actControl = function (cell, formatterParams, onRendered) {
+                return "Control";
+            }
+            var actPurchase = function (cell, formatterParams, onRendered) {
+                return "Purchase";
+            };
+
+            var actCommunicate = function (cell, formatterParams, onRendered) {
+                return "Communicate";
+            };
 
 
-
-            },
-            columns: [
-                { title: "Raffle", field: "Raffle_ID" },
-                { title: "Name", field: "Name", editor: "input" },
-                {
-                    title: "Control", field: "Guid", cellClick: function (e, cell) {
-                        window.open("control.aspx?id=" + cell.getValue(), "RaffleWindow");
-                    }
+            var table = new Tabulator("#rt", {
+                data: tableData,
+                dataEdited: function (data) {
+                    //console.log(data);
                 },
-                {
-                    title: "Communicate", field: "Guid", cellClick: function (e, cell) {
-                        window.open("communicate.aspx?id=" + cell.getValue(), "RaffleWindow");
-                    }
-                },
-                {
-                    title: "Purchase", field: "Guid", cellClick: function (e, cell) {
-                        window.open("UBC2019A.aspx?id=" + cell.getValue(), "RaffleWindow");
-                    }
-                },
-                { title: "Open Date", field: "OpenDate", editor: dateEditor },
-                { title: "Close Date", field: "CloseDate", editor: dateEditor },
-                { title: "Detail", field: "Detail", editor: "input" },
-                { title: "Identifier", field: "Identifier", editor: "input" },
-                { title: "Seller", field: "Seller", editor: "input" },
-                { title: "Guid", field: "Guid", editor: "input" },
-                { title: "First Ticket", field: "FirstTicket", editor: "input" },
-                { title: "Last Ticket", field: "LastTicket", editor: "input" },
-                { title: "Columns", field: "Columns", editor: "input" },
-                { title: "BankAccount", field: "BankAccount", editor: dateEditor }
+                cellEdited: function (cell) {
+                    var cid = cell.getRow().getData().id;
+                    var cvalue = cell.getValue();
+                    var cfield = cell.getColumn().getField();
+                    //console.log(cfield + "=" + cid + "=" + cvalue);
+                    
+                    $.ajax({
+                        url: "data.asmx/updateraffle?field=" + cfield + "&id=" + cid + "&value=" + cvalue, success: function (result) {
+                            //alert('Success');
+                        }, error: function (XMLHttpRequest, textStatus, error) {
+                            alert("AJAX error: " + textStatus + "; " + error);
+                        }
+                    });
+                  
 
 
-            ]
-        });
+
+                },
+                columns: [
+                    { title: "ID", field: "Raffle_ID" },
+                    { title: "Name", field: "Name", editor: "input" },
+                    { title: "Identifier", field: "Identifier", editor: "input" },
+                    { title: "Seller", field: "Seller", editor: "input" },
+                    { title: "Notes", field: "Notes", editor: "textarea" },
+                    { title: "Guid", field: "Guid", visible: false },
+                    { title: "First Ticket", field: "FirstTicket", editor: "input" },
+                    { title: "Last Ticket", field: "LastTicket", editor: "input" },
+                    {
+                        title: "Control", formatter: actControl, cellClick: function (e, cell) {
+                            var guid = cell.getRow().getData().Guid;
+                            window.open("control.aspx?id=" + guid, "RaffleWindow");
+                        }
+                    },
+                    {
+                        title: "Communicate", formatter: actCommunicate, cellClick: function (e, cell) {
+                            var guid = cell.getRow().getData().Guid;
+                            window.open("communicate.aspx?id=" + guid, "RaffleWindow");
+                        }
+                    },
+                    {
+                        title: "Purchase", formatter: actPurchase, cellClick: function (e, cell) {
+                            var guid = cell.getRow().getData().Guid;
+                            window.open("UBC2019A.aspx?id=" + guid, "RaffleWindow");
+                        }
+                    },
+                    { title: "Open Date", field: "OpenDate", editor: dateEditor },
+                    { title: "Close Date", field: "CloseDate", editor: dateEditor },
+                    { title: "Detail", field: "Detail", editor: "input" },
+                    { title: "Columns", field: "Columns", editor: "input" },
+                    { title: "BankAccount", field: "BankAccount", editor: "input" }
+
+
+                ]
+            });
 
         });
         /*
@@ -128,7 +142,7 @@
         <%= tabledata %>
 
 
-    </script>
+</script>
 
 </head>
 <body>

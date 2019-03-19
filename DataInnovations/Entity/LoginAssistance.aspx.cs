@@ -141,7 +141,7 @@ namespace Online.Entity
                             }
                             catch (Exception ex)
                             {
-                                gFunctions.Log(Request.RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
+                                gFunctions.Log("",Request.RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
                             }
 
                             emailbodydocument = "TO FIX"; // gFunctions.documentfill(emailbodydocument, documentvalues);
@@ -160,7 +160,7 @@ namespace Online.Entity
                             }
                             catch (Exception ex)
                             {
-                                gFunctions.Log(Request.RawUrl, ex.Message, "");
+                                gFunctions.Log("",Request.RawUrl, ex.Message, "");
                             }
 
                             emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
@@ -188,7 +188,7 @@ namespace Online.Entity
                             }
                             catch (Exception ex)
                             {
-                                gFunctions.Log(Request.RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
+                                gFunctions.Log("",Request.RawUrl, ex.Message, "greg.tichbon@whanganui.govt.nz");
                             }
 
                             //WDCFunctions.WDCFunctions.Log(Request.RawUrl, "Document fill email", "");
@@ -209,10 +209,10 @@ namespace Online.Entity
                             }
                             catch (Exception ex)
                             {
-                                gFunctions.Log(Request.RawUrl, ex.Message, "");
+                                gFunctions.Log("",Request.RawUrl, ex.Message, "");
                             }
 
-                            gFunctions.Log(Request.RawUrl, "Put email document into template", "");
+                            gFunctions.Log("",Request.RawUrl, "Put email document into template", "");
                             emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
 
                             gFunctions.sendemail("Whanganui District Council - xxxxxx Request", emaildocument, emailaddress, "","");

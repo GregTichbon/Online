@@ -63,7 +63,7 @@ namespace UBC.People
         public string[] yesno = new string[2] { "Yes", "No" };
         public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
         public string[] transactions_system = new string[2] { "UBC", "Friends" };
-        public string[] transactions_code = new string[6] { "Full Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees" };
+        public string[] transactions_code = new string[9] { "Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees", "Fundraising", "Grant Allocation", "Subsidy" };
         public string[] invoiceaddresstypes = new string[4] { "Email", "Text", "Mail", "Hand Deliver" };
         public string person_financial_events;
 
@@ -246,7 +246,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
 
                     html_transactions = "<thead>";
-                    html_transactions += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"financeedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_transactions += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                     html_transactions += "</thead>";
                     html_transactions += "<tbody>";
                     double total = 0;
@@ -268,6 +268,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             string note = dr["note"].ToString();
                             string code = dr["code"].ToString();
                             string event_id = dr["event_id"].ToString();
+                            string event_title = dr["event_title"].ToString();
                             string person_event_id = dr["person_event_id"].ToString();
                             string banked = dr["banked"].ToString();
                             if (banked != "")
@@ -283,7 +284,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             html_transactions += "<td>" + date + "</td>";
                             html_transactions += "<td>" + system + "</td>";
                             html_transactions += "<td>" + code + "</td>";
-                            html_transactions += "<td>" + event_id + "</td>";
+                            html_transactions += "<td event_id=\"" + event_id + "\">" + event_title + "</td>";
                             html_transactions += "<td>" + amount + "</td>";
                             html_transactions += "<td>" + note + "</td>";
                             html_transactions += "<td>" + banked + "</td>";
@@ -748,7 +749,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             cmd.Parameters.Add("@InvoiceAddress", SqlDbType.VarChar).Value = tb_invoiceaddress;
             cmd.Parameters.Add("@financialnote", SqlDbType.VarChar).Value = tb_financialnote;
 
-            
+
             /*
             cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = tb_email;
             cmd.Parameters.Add("@mobile", SqlDbType.VarChar).Value = tb_mobile;
@@ -762,20 +763,52 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
             #endregion
 
             cmd.Connection = con;
-            try
+            //try
+            //{
+            con.Open();
+            result = cmd.ExecuteScalar().ToString();
+            con.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+
+            foreach (string key in Request.Form)
             {
-                con.Open();
-                result = cmd.ExecuteScalar().ToString();
+                if (key.StartsWith("transactions_"))
+                {
+                    string person_transaction_id = key.Substring(13);
+                    if(person_transaction_id.StartsWith("new"))
+                    {
+                        person_transaction_id = "new";
+                    }
+
+                    string[] valuesSplit = Request.Form[key].Split('\x00FE');
+                    cmd.CommandText = "Update_Person_Transaction";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@person_transaction_id", SqlDbType.VarChar).Value = person_transaction_id;
+                    cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
+                    cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = valuesSplit[0];
+                    cmd.Parameters.Add("@amount", SqlDbType.VarChar).Value = valuesSplit[4];
+                    cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[5];
+                    cmd.Parameters.Add("@system", SqlDbType.VarChar).Value = valuesSplit[1];
+                    cmd.Parameters.Add("@detail", SqlDbType.VarChar).Value = "";
+                    cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = valuesSplit[2];
+                    cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = valuesSplit[6];
+                    cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = valuesSplit[3];
+
+                    con.Open();
+                    result = cmd.ExecuteScalar().ToString();
+                    con.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
-            }
+            //finally
+            //{
+
+            con.Dispose();
+            //}
+
             if (hf_guid == "new")
             {
                 returnto = "maint.aspx?id=" + result;

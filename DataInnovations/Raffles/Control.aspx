@@ -86,8 +86,8 @@
 
             },
             columns: [
-                { title: "ID", field: "RaffleTicket_ID" },
-                { title: "Raffle", field: "Raffle_ID" },
+                { title: "ID", field: "RaffleTicket_ID", visible: false },
+                { title: "Raffle", field: "Raffle_ID", visible: false },
                 { title: "Ticket", field: "TicketNumber" },
                 { title: "Purchaser", field: "Purchaser", editor: "input" },
                 { title: "Detail", field: "Detail", editor: "input" },

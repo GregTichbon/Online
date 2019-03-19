@@ -24,9 +24,11 @@ namespace DataInnovations.Raffles
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string getticket(NameValue[] formVars)    //you can't pass any querystring params
         {
+            string guid = Guid.NewGuid().ToString();
+            Generic.Functions gFunctions = new Generic.Functions();
 
             string host = "70.35.207.87";
-            string emailfrom = "raffle@datainn.co.nz";
+            string emailfrom = "raffles@datainn.co.nz";
             string emailfromname = "Union Boat Club - Raffle";
             string password = "39%3Zxon";
             string emailBCC = "greg@datainn.co.nz";
@@ -73,19 +75,36 @@ namespace DataInnovations.Raffles
                 if (update == "yes")
                 {
                     //Do update
-                    string name = formVars.Form("tb_name");
-                    string emailaddress = formVars.Form("tb_emailaddress");
-                    string mobile = formVars.Form("tb_mobile");
-                    string payment = formVars.Form("tb_payment");
+
+
+                    string name = formVars.Form("tb_name") + "";
+                    string emailaddress = formVars.Form("tb_emailaddress") + "";
+                    string mobile = formVars.Form("tb_mobile") + "";
+                    string payment = formVars.Form("tb_payment") + "";
                     string taken = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
+
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", name + ", " + emailaddress + ", " + mobile + ", " + payment + ", " + taken , "");
+
+
+                    name = name.Replace("'", "''");
+                    emailaddress = emailaddress.Replace("'", "''");
+                    mobile = mobile.Replace("'", "''");
+                    payment = payment.Replace("'", "''");
+                    if(payment == "")
+                    {
+                        payment = "Transfer to bank account";
+                    }
 
                     string sql2 = "update raffleticket set purchaser = '" + name + "', emailaddress = '" + emailaddress + "', mobile = '" + mobile + "', paymentdetail = '" + payment + "', taken = '" + taken + "' where raffle_id = " + raffle + " and ticketnumber = " + ticket;
 
+
+                    gFunctions.Log(guid, @"Raffle/posts.asmx","Before Update","");
                     SqlCommand cmdu = new SqlCommand(sql2, con);
                     cmdu.ExecuteNonQuery();
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After Update", "");
+
                     status = "Updated";
 
-                    Generic.Functions gFunctions = new Generic.Functions();
                     /*
                     string rafflename = "";
                     switch (raffle)
@@ -119,6 +138,8 @@ namespace DataInnovations.Raffles
                     emailhtml += "<tr><td>Name </td><td>" + name + "</td></tr>";
                     emailhtml += "<tr><td>Email Address </td><td>" + emailaddress + "</td></tr>";
                     emailhtml += "<tr><td>Mobile Number </td><td>" + mobile + "</td></tr>";
+                    emailhtml += "<tr><td>Cost </td><td>$20.00</td></tr>";
+
                     emailhtml += "<tr><td>How will you get the money to us? </td><td>" + payment + "</td></tr>";
                     emailhtml += "</table>";
 
@@ -127,23 +148,56 @@ namespace DataInnovations.Raffles
                     emailhtml += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
                     emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "Before Email",  "");
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", host + "," + emailfrom + "," + emailfromname + "," + password + "," + rafflename + "," + emailhtml + "," + emailaddress + "," + emailBCC + "," + "", "");
+
                     try
                     {
                         gFunctions.sendemailV3(host, emailfrom, emailfromname, password, rafflename, emailhtml, emailaddress, emailBCC, "");
                     }
                     catch (Exception e)
                     {
-                        messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
+                        gFunctions.Log(guid, @"Raffle/posts.asmx", "Error: gFunctions.sendemailV3", "");
+                        //messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
                     }
 
-                    string textbody = "Thanks for taking ticket " + ticket + " in the " + rafflename;
-                    textbody += "Bank A/c: " + bankaccount + " reference: " + raffle + "-" + ticket;
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After Email", "");
+
+
+                    string textbody = "Thanks for taking ticket " + ticket + " in the " + rafflename + System.Environment.NewLine;
+                    textbody += " Cost: $20.00" + System.Environment.NewLine;
+                    textbody += " Bank A/c: " + bankaccount + " reference: Your name and " + identifier + "-" + ticket + System.Environment.NewLine;
                     textbody += " - Greg: 0272495088, greg@datainn.co.nz";
 
-                    messageresponse = gFunctions.SendRemoteMessage(mobile, textbody, "Raffle Purchase");
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "Before first text", "");
 
-                    textbody += " " + name + " " + mobile + " " + emailaddress + " " + payment;
-                    gFunctions.SendRemoteMessage("0272495088", textbody, "Raffle Purchase - organiser");
+                    try
+                    {
+                        messageresponse = gFunctions.SendRemoteMessage(mobile, textbody, "Raffle Purchase");
+                    }
+                    catch (Exception e)
+                    {
+                        gFunctions.Log(guid, @"Raffle/posts.asmx", "Error: gFunctions.SendRemoteMessage", "");
+                        //messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
+                    }
+
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After first text", "");
+
+                    textbody += System.Environment.NewLine + name + System.Environment.NewLine + mobile + System.Environment.NewLine + emailaddress + System.Environment.NewLine + payment;
+
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "Before second text", "");
+
+                    try
+                    {
+                        messageresponse = gFunctions.SendRemoteMessage("0272495088", textbody, "Raffle Purchase - organiser");
+                    }
+                    catch (Exception e)
+                    {
+                        gFunctions.Log(guid, @"Raffle/posts.asmx", "Error: gFunctions.SendRemoteMessage", "");
+                        //messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
+                    }
+
+                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After second text", "");
 
                     //status = sql;
                 }
