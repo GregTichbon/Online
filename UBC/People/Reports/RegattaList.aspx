@@ -114,6 +114,7 @@
     <div class="container" style="background-color: #FCF7EA">
         <div class="toprighticon">
             <input type="button" id="export" class="btn btn-info" value="Export" />
+            <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>
         <h1>Union Boat Club - Regatta List
         </h1>

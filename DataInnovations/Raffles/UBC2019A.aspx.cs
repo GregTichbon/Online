@@ -18,6 +18,7 @@ namespace DataInnovations.Raffles
         public string bankaccount;
         public string rafflename;
         public string detail;
+        public string MobileToText;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,6 +61,7 @@ namespace DataInnovations.Raffles
                     bankaccount = dr["bankaccount"].ToString();
                     rafflename = dr["name"].ToString();
                     detail = dr["detail"].ToString();
+                    MobileToText = dr["MobileToText"].ToString();
 
                 }
                 dr.Close();

@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UBC.People {
+namespace UBC.People.Reports {
     
     
-    public partial class BankImport {
+    public partial class TestCrystal {
         
         /// <summary>
-        /// fu_bankfile control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fu_bankfile;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// dd_format control.
+        /// crv_report control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_format;
-        
-        /// <summary>
-        /// btn_submit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_submit;
+        protected global::CrystalDecisions.Web.CrystalReportViewer crv_report;
     }
 }

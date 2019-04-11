@@ -32,7 +32,9 @@
         </div>
         <h1>Union Boat Club - Resources
         </h1>
+        <p>&nbsp;</p>
   
+        <p><a href="https://www.youtube.com/watch?v=cP0bMkApHT0" target="Recources">Video - Tips from an Olympic Coach on how to improve your sculling crew (8/4/2019)</a></p>
         <p><a href="https://www.decentrowing.com/howtostopgrabbingatthecatch.html" target="Recources">Video - How to stop grabbing at the catch (16/2/2019)</a></p>
         <p><a href="https://www.decentrowing.com/listentotherowingstroke.html" target="Recources">Video - Listen to the rowing stroke (15/2/2019)</a></p>
         <p><a href="https://youtu.be/3ODyZKeq4Kkhttps://youtu.be/OpZbV8LyT_c" target="Recources">Video - The mental strength of a rower (8/2/2019)</a></p>

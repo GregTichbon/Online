@@ -304,6 +304,9 @@
             <input type="hidden" id="hf_identifier" name="hf_identifier" value="<%:identifier %>" />
             <input type="hidden" id="hf_rafflename" name="hf_rafflename" value="<%:rafflename %>" />
             <input type="hidden" id="hf_detail" name="hf_detail" value="<%:detail %>" />
+            <input type="hidden" id="hf_MobileToText" name="hf_dMobileToText" value="<%:MobileToText %>" />
+
+            
 
             <p>There are <span id="span_available2"><%: available2 %></span> tickets currently available on this card.</p>
             <table id="tbl2" class="blueTable">

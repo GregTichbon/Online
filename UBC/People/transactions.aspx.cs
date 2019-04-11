@@ -33,13 +33,19 @@ namespace UBC.People
             //functionoptions.Add("storedprocedurename", "");
             functionoptions.Add("usevalues", "");
             people = genericfunctions.buildandpopulateselect(strConnString, "select person_id as [value], dbo.get_name(person_id,'') as [Label] from person order by dbo.get_name(person_id,'')", "", functionoptions, "None");
-        
+
+            string personid = Request.QueryString["person"];
+            string eventid = Request.QueryString["event"];
 
 
             string sql1 = "get_all_transactions";
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand(sql1, con);
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = personid;
+            cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = eventid;
+
+
 
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Connection = con;
@@ -50,7 +56,7 @@ namespace UBC.People
 
             
             html_transactions = "<thead>";
-            html_transactions += "<tr><th>Person</th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+            html_transactions += "<tr><th>Person</th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th>Bank</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
             html_transactions += "</thead>";
             html_transactions += "<tbody>";
             double total = 0;
@@ -70,7 +76,8 @@ namespace UBC.People
                 string event_title = dr["event_title"].ToString();
                 string person_event_id = dr["person_event_id"].ToString();
                 string banked = dr["banked"].ToString();
-                if (banked != "")
+                string kb1transaction_id = dr["Kiwibank_Transactions1_id"].ToString();
+                if (kb1transaction_id != "" && banked != "")
                 {
                     banked = Convert.ToDateTime(banked).ToString("dd MMM yy");
                 }
@@ -87,6 +94,12 @@ namespace UBC.People
                 html_transactions += "<td>" + amount + "</td>";
                 html_transactions += "<td>" + note + "</td>";
                 html_transactions += "<td>" + banked + "</td>";
+                if(kb1transaction_id != "") { 
+                    html_transactions += "<td class=\"kbtransaction\" id=\"kb1_" + kb1transaction_id + "\">" + kb1transaction_id + "</td>";
+                } else
+                {
+                    html_transactions += "<td>-</td>";
+                }
                 html_transactions += "<td><a href=\"javascript:void(0)\" class=\"transactionsedit\" data-mode=\"edit\">Edit</td>";
                 //html_finance += "<td style=\"text-align:center\">').html(action) 
                 //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';

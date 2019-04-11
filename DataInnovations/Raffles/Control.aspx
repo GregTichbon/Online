@@ -99,8 +99,12 @@
                 { title: "Greeting", field: "Greeting", editor: "input" },
                 { title: "Split Ticket", field: "SplitTicket", editor: "input" },
                 { title: "Taken", field: "Taken", editor: dateEditor },
-                { title: "On Behalf Of", field: "OnBehalfOf", editor: "input" }
-            ]
+                { title: "On Behalf Of", field: "OnBehalfOf", editor: "input" },
+                { title: "GUID", field: "GUID" },
+                { title: "Winner Status", field: "WinnerStatus", editor: "input" },
+                { title: "Winner Response", field: "WinnerResponse", editor: "input" },
+                { title: "Winner Note", field: "WinnerNote", editor: "input" }
+           ]
         });
 
         });

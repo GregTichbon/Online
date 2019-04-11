@@ -127,7 +127,8 @@
                     { title: "Close Date", field: "CloseDate", editor: dateEditor },
                     { title: "Detail", field: "Detail", editor: "input" },
                     { title: "Columns", field: "Columns", editor: "input" },
-                    { title: "BankAccount", field: "BankAccount", editor: "input" }
+                    { title: "Bank Account", field: "BankAccount", editor: "input" },
+                    { title: "Mobile To Text", field: "MobileToText", editor: "input" }
 
 
                 ]
@@ -151,6 +152,7 @@
         <div id="rt"></div>
 
     </form>
+    <h2>Should make diferent guids for control, communicate, and purchase for security reasons</h2>
 
 </body>
 </html>

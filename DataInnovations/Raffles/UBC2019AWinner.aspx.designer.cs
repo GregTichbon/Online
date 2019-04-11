@@ -7,28 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UBC.People {
+namespace DataInnovations.Raffles {
     
     
-    public partial class BankImport {
+    public partial class UBC2019AWinner {
         
         /// <summary>
-        /// fu_bankfile control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fu_bankfile;
-        
-        /// <summary>
-        /// dd_format control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_format;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// btn_submit control.

@@ -40,6 +40,7 @@ namespace DataInnovations.Raffles
             string rafflename = formVars.Form("hf_rafflename");
             string detail = formVars.Form("hf_detail");
             string identifier = formVars.Form("hf_identifier");
+            string MobileToText = formVars.Form("hf_MobileToText");
 
             string[] ticketparts = ticket.Split('-');
             string raffle = ticketparts[0];
@@ -83,7 +84,7 @@ namespace DataInnovations.Raffles
                     string payment = formVars.Form("tb_payment") + "";
                     string taken = DateTime.Now.ToString("dd MMM yyyy HH:mm:ss");
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", name + ", " + emailaddress + ", " + mobile + ", " + payment + ", " + taken , "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", name + ", " + emailaddress + ", " + mobile + ", " + payment + ", " + taken , "");
 
 
                     name = name.Replace("'", "''");
@@ -98,10 +99,10 @@ namespace DataInnovations.Raffles
                     string sql2 = "update raffleticket set purchaser = '" + name + "', emailaddress = '" + emailaddress + "', mobile = '" + mobile + "', paymentdetail = '" + payment + "', taken = '" + taken + "' where raffle_id = " + raffle + " and ticketnumber = " + ticket;
 
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx","Before Update","");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx","Before Update","");
                     SqlCommand cmdu = new SqlCommand(sql2, con);
                     cmdu.ExecuteNonQuery();
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After Update", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "After Update", "");
 
                     status = "Updated";
 
@@ -148,8 +149,8 @@ namespace DataInnovations.Raffles
                     emailhtml += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
                     emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "Before Email",  "");
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", host + "," + emailfrom + "," + emailfromname + "," + password + "," + rafflename + "," + emailhtml + "," + emailaddress + "," + emailBCC + "," + "", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "Before Email",  "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", host + "," + emailfrom + "," + emailfromname + "," + password + "," + rafflename + "," + emailhtml + "," + emailaddress + "," + emailBCC + "," + "", "");
 
                     try
                     {
@@ -161,7 +162,7 @@ namespace DataInnovations.Raffles
                         //messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
                     }
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After Email", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "After Email", "");
 
 
                     string textbody = "Thanks for taking ticket " + ticket + " in the " + rafflename + System.Environment.NewLine;
@@ -169,7 +170,7 @@ namespace DataInnovations.Raffles
                     textbody += " Bank A/c: " + bankaccount + " reference: Your name and " + identifier + "-" + ticket + System.Environment.NewLine;
                     textbody += " - Greg: 0272495088, greg@datainn.co.nz";
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "Before first text", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "Before first text", "");
 
                     try
                     {
@@ -181,15 +182,19 @@ namespace DataInnovations.Raffles
                         //messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
                     }
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After first text", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "After first text", "");
 
                     textbody += System.Environment.NewLine + name + System.Environment.NewLine + mobile + System.Environment.NewLine + emailaddress + System.Environment.NewLine + payment;
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "Before second text", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "Before second text", "");
 
                     try
                     {
                         messageresponse = gFunctions.SendRemoteMessage("0272495088", textbody, "Raffle Purchase - organiser");
+                        if(MobileToText != "")
+                        {
+                            messageresponse = gFunctions.SendRemoteMessage(MobileToText, textbody, "Raffle Purchase - organiser");
+                        }
                     }
                     catch (Exception e)
                     {
@@ -197,7 +202,7 @@ namespace DataInnovations.Raffles
                         //messageresponse = gFunctions.SendRemoteMessage(mobile, e.InnerException.ToString(), "ERROR");
                     }
 
-                    gFunctions.Log(guid, @"Raffle/posts.asmx", "After second text", "");
+                    //gFunctions.Log(guid, @"Raffle/posts.asmx", "After second text", "");
 
                     //status = sql;
                 }

@@ -14,9 +14,14 @@
         <br />
         <br />
         <a href="http://office.datainn.co.nz/SMS/Send/Form.aspx">Send text from form</a>
+                <br />
+        <br />
+        <a href="http://webmail.datainn.co.nz">Data Innovations Webmail</a>
         <br />
         <br />
         <a href="http://office.datainn.co.nz/raffles/raffles.aspx">Raffles</a>
+        <br />
+        <a href="http://office.datainn.co.nz/raffles/communicatewinners.aspx">Communicate with winners</a>
         <br />
         <a href="http://office.datainn.co.nz/raffles/spinner.aspx">Raffle Spinner</a>
         <br />

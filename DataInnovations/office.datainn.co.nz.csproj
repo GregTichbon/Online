@@ -173,6 +173,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Raffles\Communicate.aspx" />
+    <Content Include="Raffles\CommunicateWinners.aspx" />
     <Content Include="Raffles\Control.aspx" />
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Images\3logos.jpg" />
@@ -181,6 +182,8 @@
     <Content Include="Raffles\Raffles.aspx" />
     <Content Include="Raffles\Spinner.aspx" />
     <Content Include="Raffles\UBC2019A.aspx" />
+    <Content Include="Raffles\UBC2019AMessage.aspx" />
+    <Content Include="Raffles\UBC2019AWinner.aspx" />
     <Content Include="Row\data.asmx" />
     <Content Include="Row\data.aspx" />
     <Content Include="Row\Default.aspx" />
@@ -400,6 +403,13 @@
     <Compile Include="Raffles\Communicate.aspx.designer.cs">
       <DependentUpon>Communicate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\CommunicateWinners.aspx.cs">
+      <DependentUpon>CommunicateWinners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\CommunicateWinners.aspx.designer.cs">
+      <DependentUpon>CommunicateWinners.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Control.aspx.cs">
       <DependentUpon>Control.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -505,6 +515,20 @@
     </Compile>
     <Compile Include="Raffles\UBC2019A.aspx.designer.cs">
       <DependentUpon>UBC2019A.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\UBC2019AMessage.aspx.cs">
+      <DependentUpon>UBC2019AMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019AMessage.aspx.designer.cs">
+      <DependentUpon>UBC2019AMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\UBC2019AWinner.aspx.cs">
+      <DependentUpon>UBC2019AWinner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019AWinner.aspx.designer.cs">
+      <DependentUpon>UBC2019AWinner.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>

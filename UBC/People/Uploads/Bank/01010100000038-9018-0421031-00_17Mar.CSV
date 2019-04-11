@@ -1,0 +1,99 @@
+Account number,Date,Memo/Description,Source Code (payment type),TP ref,TP part,TP code,OP ref,OP part,OP code,OP name,OP Bank Account Number,Amount (credit),Amount (debit),Amount,Balance
+38-9018-0421031-00,25-11-2018,FROM F S F CASSERLEY ;Waitara Tama,,Waitara Tama,,,,,,F S F CASSERLEY,38-9007-0263533-00,20.00,,20.00,2228.11
+38-9018-0421031-00,26-11-2018,Direct Credit Daignault DAIGNAULT DARRY ;Ref: Daignault DAIGNAULT DARRY,DC,,,Daignault,,,,DAIGNAULT DARRY,03-0791-0900442-00,20.00,,20.00,2248.11
+38-9018-0421031-00,26-11-2018,Bill Payment waitara Peter ninham S E & P M NIN ;Ref: waitara Peter ninham S E & P M NIN,BP,waitara,Peter ninham,,,,,S E & P M NIN,01-1842-0129745-00,20.00,,20.00,2268.11
+38-9018-0421031-00,26-11-2018,Bill Payment waitara Maeve weir Regatta TURNER-WEIR J ;Ref: waitara Maeve weir Regatta TURNER-WEIR J,BP,waitara,Maeve weir,Regatta,,,,TURNER-WEIR J,06-0729-0276597-18,20.00,,20.00,2288.11
+38-9018-0421031-00,26-11-2018,Bill Payment Waitara Leigha Stormont STORMONT JAME ;Ref: Waitara Leigha Stormont STORMONT JAME,BP,Waitara,Leigha,Stormont,,,,STORMONT JAME,06-0793-0206710-00,20.00,,20.00,2308.11
+38-9018-0421031-00,26-11-2018,Bill Payment Waitara: SavS. Priest MRS L PRIEST ;Ref: Waitara: SavS. Priest MRS L PRIEST,BP,Waitara: Sav,S. Priest,,,,,MRS L PRIEST,06-0649-0155349-00,20.00,,20.00,2328.11
+38-9018-0421031-00,26-11-2018,Bill Payment waitara:emma HARTELL K L ;Ref: waitara:emma HARTELL K L,BP,waitara:emma,,,,,,HARTELL K L,01-0790-0077183-30,20.00,,20.00,2348.11
+38-9018-0421031-00,26-11-2018,Direct Credit Kurt Waitara Browning K R ;Ref: Kurt Waitara Browning K R,DC,,Kurt,Waitara,,,,Browning K R,03-0791-0767290-01,20.00,,20.00,2368.11
+38-9018-0421031-00,26-11-2018,FROM J R TIORO ;Waitara2018 ShontayDixon,,ShontayDixon,Waitara2018,,,,,J R TIORO,38-9017-0358827-00,20.00,,20.00,2388.11
+38-9018-0421031-00,30-11-2018,TRANSACTION FEES ;,,,,,,,,,,,5.00,-5.00,2383.11
+38-9018-0421031-00,03-12-2018,Bill Payment Waitara Siena McLean Jessica McNaught ;Ref: Waitara Siena McLean Jessica McNaught,BP,Waitara,Siena McLean,,,,,Jessica McNaught,02-0424-0000899-00,20.00,,20.00,2403.11
+38-9018-0421031-00,06-12-2018,Bill Payment Waitara M Bridger BRIDGER M A & ;Ref: Waitara M Bridger BRIDGER M A &,BP,Waitara,M Bridger,,,,,BRIDGER M A &,01-0790-0016241-00,20.00,,20.00,2423.11
+38-9018-0421031-00,06-12-2018,Direct Credit Antonia waitara MRS J LOCKTON ;Ref: Antonia waitara MRS J LOCKTON,DC,Antonia,waitara,,,,,MRS J LOCKTON,12-3163-0162104-00,20.00,,20.00,2443.11
+38-9018-0421031-00,12-12-2018,Bill Payment regatta Leigha StormChristmas STORMONT JAME ;Ref: regatta Leigha StormChristmas STORMONT JAME,BP,regatta,Leigha Storm,Christmas,,,,STORMONT JAME,06-0793-0206710-00,180.00,,180.00,2623.11
+38-9018-0421031-00,12-12-2018,Bill Payment Xmas regattaSiena McLean Jessica McNaught ;Ref: Xmas regattaSiena McLean Jessica McNaught,BP,Xmas regatta,Siena McLean,,,,,Jessica McNaught,02-0424-0000899-97,180.00,,180.00,2803.11
+38-9018-0421031-00,13-12-2018,Direct Credit Christmas Jayde Hawkes HAWKES A L ;Ref: Christmas Jayde Hawkes HAWKES A L,DC,,Christmas,Jayde Hawkes,,,,HAWKES A L,03-0791-0584929-25,180.00,,180.00,2983.11
+38-9018-0421031-00,13-12-2018,Direct Credit Christmas Kyla Joseph PAYNE SARITA ;Ref: Christmas Kyla Joseph PAYNE SARITA,DC,,Christmas,Kyla Joseph,,,,PAYNE SARITA,03-0791-0348467-00,180.00,,180.00,3163.11
+38-9018-0421031-00,13-12-2018,TRANSFER FROM L M JOHNSTON - 00 ;jae/don xmas regatta,,xmas regatta,jae/don,,,,,L M JOHNSTON,38-9008-0396282-00,320.00,,320.00,3483.11
+38-9018-0421031-00,14-12-2018,Bill Payment Xmas RegattaMilly Keenan KEENAN PHILLI ;Ref: Xmas RegattaMilly Keenan KEENAN PHILLI,BP,Xmas Regatta,Milly Keenan,,,,,KEENAN PHILLI,06-0793-0317859-01,180.00,,180.00,3663.11
+38-9018-0421031-00,21-12-2018,CASH DEPOSIT ;CHRISTMAS TAMA ASSEMBLEY,,,,,,,,,,180.00,,180.00,3843.11
+38-9018-0421031-00,28-12-2018,FROM F S F CASSERLEY ;Tama Clive,,Tama Clive,,,,,,F S F CASSERLEY,38-9007-0263533-00,80.00,,80.00,3923.11
+38-9018-0421031-00,31-12-2018,TRANSACTION FEES ;,,,,,,,,,,,5.00,-5.00,3918.11
+38-9018-0421031-00,03-01-2019,TRANSFER FROM L M JOHNSTON - 00 ;,,,,,,,,L M JOHNSTON,38-9008-0396282-00,50.00,,50.00,3968.11
+38-9018-0421031-00,03-01-2019,TRANSFER FROM L M JOHNSTON - 00 ;,,,,,,,,L M JOHNSTON,38-9008-0396282-00,50.00,,50.00,4018.11
+38-9018-0421031-00,03-01-2019,TRANSFER FROM L M JOHNSTON - 00 ;,,,,,,,,L M JOHNSTON,38-9008-0396282-00,70.00,,70.00,4088.11
+38-9018-0421031-00,03-01-2019,Direct Credit Clive Kyla Joseph PAYNE SARITA ;Ref: Clive Kyla Joseph PAYNE SARITA,DC,,Clive,Kyla Joseph,,,,PAYNE SARITA,03-0791-0348467-00,50.00,,50.00,4138.11
+38-9018-0421031-00,03-01-2019,Bill Payment Clive SienaMcLean Jessica McNaught ;Ref: Clive SienaMcLean Jessica McNaught,BP,Clive,Siena McLean,,,,,Jessica McNaught,02-0424-0007281-97,80.00,,80.00,4218.11
+38-9018-0421031-00,03-01-2019,Direct Credit Jayde HawkesClive CO-OPERATIVE BANK ;Ref: Jayde HawkesClive CO-OPERATIVE BANK,DC,,Jayde Hawkes,Clive,,,,,,80.00,,80.00,4298.11
+38-9018-0421031-00,04-01-2019,Direct Credit Kurt & KeriClive regatt Browning K R ;Ref: Kurt & KeriClive regatt Browning K R,DC,,Kurt & Keri,Clive regatt,,,,Browning K R,03-0791-0767290-01,80.00,,80.00,4378.11
+38-9018-0421031-00,04-01-2019,Bill Payment Maeve weir Clive TURNER-WEIR J ;Ref: Maeve weir Clive TURNER-WEIR J,BP,,Maeve weir,Clive,,,,TURNER-WEIR J,06-0729-0276597-18,50.00,,50.00,4428.11
+38-9018-0421031-00,04-01-2019,Bill Payment Clive Sav S. Priest MRS L PRIEST ;Ref: Clive Sav S. Priest MRS L PRIEST,BP,Clive Sav,S. Priest,,,,,MRS L PRIEST,06-0649-0155349-00,20.00,,20.00,4448.11
+38-9018-0421031-00,04-01-2019,Bill Payment Clive Leigha Stormont STORMONT JAME ;Ref: Clive Leigha Stormont STORMONT JAME,BP,Clive,Leigha,Stormont,,,,STORMONT JAME,06-0793-0206710-00,50.00,,50.00,4498.11
+38-9018-0421031-00,04-01-2019,Direct Credit CamDClive +3meals&acc DAIGNAULT DARRY ;Ref: CamDClive +3meals&acc DAIGNAULT DARRY,DC,,CamDClive, +3meals&acc,,,,DAIGNAULT DARRY,03-0791-0900442-00,140.00,,140.00,4638.11
+38-9018-0421031-00,04-01-2019,Direct Credit Clive-Britt Robertson B M ;Ref: Clive-Britt Robertson B M,DC,Clive-Britt,,,,,,Robertson B M,03-0791-0711326-01,50.00,,50.00,4688.11
+38-9018-0421031-00,07-01-2019,PAY Farndon Park Hall ;,,,,,,UBC ROWING,Wanganui,Farndon Park Hall,02-0700-0011544-00,,300.00,-300.00,4388.11
+38-9018-0421031-00,07-01-2019,Direct Credit Accomm Savannah Clive Browning K R ;Ref: Accomm Savannah Clive Browning K R,DC,Accomm,Savannah,Clive,,,,Browning K R,03-0791-0767290-01,30.00,,30.00,4418.11
+38-9018-0421031-00,07-01-2019,PAY Darryl Daignault ;C Daignault Reimburse food-clive,,food-clive,C Daignault,Reimburse,,Reimburse,Food-clive,Darryl Daignault,03-0791-0900442-00,,305.33,-305.33,4112.78
+38-9018-0421031-00,22-01-2019,Bill Payment Greg Payments Made to TICHBON GREGO ;Ref: Greg Payments Made to TICHBON GREGO,BP,Greg,Payments,Made to,,,,TICHBON GREGO,06-0996-0956968-00,95.00,,95.00,4207.78
+38-9018-0421031-00,22-01-2019,Direct Credit Jayde HawkesNIC CTC HAWKES A L ;Ref: Jayde HawkesNIC CTC HAWKES A L,DC,,Jayde Hawkes,NIC CTC,,,,HAWKES A L,03-0791-0584929-25,150.00,,150.00,4357.78
+38-9018-0421031-00,23-01-2019,FROM J R TIORO ;NorthIsland Champs2019 ShontayDixon,,ShontayDixon,NorthIsland,Champs2019,,,,J R TIORO,38-9017-0358827-00,150.00,,150.00,4507.78
+38-9018-0421031-00,23-01-2019,Bill Payment Clive Neo Waitara Xmas TICHBON GREGO ;Ref: Clive Neo Waitara Xmas TICHBON GREGO,BP,Clive,Neo,Waitara Xmas,,,,TICHBON GREGO,06-0996-0956968-00,180.00,,180.00,4687.78
+38-9018-0421031-00,23-01-2019,Direct Credit Kurt CTC & NI Browning K R ;Ref: Kurt CTC & NI Browning K R,DC,,Kurt,CTC & NI,,,,Browning K R,03-0791-0767290-00,110.00,,110.00,4797.78
+38-9018-0421031-00,23-01-2019,Direct Credit CambridgeJanKyla Joseph PAYNE SARITA ;Ref: CambridgeJanKyla Joseph PAYNE SARITA,DC,,CambridgeJan,Kyla Joseph,,,,PAYNE SARITA,03-0791-0348467-00,150.00,,150.00,4947.78
+38-9018-0421031-00,23-01-2019,Bill Payment CTC Maeve weir Regatta TURNER-WEIR J ;Ref: CTC Maeve weir Regatta TURNER-WEIR J,BP,CTC,Maeve weir,Regatta,,,,TURNER-WEIR J,06-0729-0276597-18,110.00,,110.00,5057.78
+38-9018-0421031-00,23-01-2019,Bill Payment Cambridge Leigha Stormont STORMONT JAME ;Ref: Cambridge Leigha Stormont STORMONT JAME,BP,Cambridge,Leigha,Stormont,,,,STORMONT JAME,06-0793-0206710-00,150.00,,150.00,5207.78
+38-9018-0421031-00,23-01-2019,FROM F S F CASSERLEY ;Tama Cambrid,,Tama Cambrid,,,,,,F S F CASSERLEY,38-9007-0263533-00,150.00,,150.00,5357.78
+38-9018-0421031-00,23-01-2019,Bill Payment CambridgecupSiena McLean Jessica McNaught ;Ref: CambridgecupSiena McLean Jessica McNaught,BP,Cambridgecup,Siena McLean,,,,,Jessica McNaught,02-0424-0000899-00,150.00,,150.00,5507.78
+38-9018-0421031-00,24-01-2019,Bill Payment Pip Keenan KEENAN PHILLI ;Ref: Pip Keenan KEENAN PHILLI,BP,,Pip Keenan,,,,,KEENAN PHILLI,06-0793-0317859-01,150.00,,150.00,5657.78
+38-9018-0421031-00,24-01-2019,Bill Payment cambridgemma HARTELL K L ;Ref: cambridgemma HARTELL K L,BP,cambridgemma,,,,,,HARTELL K L,01-0790-0077183-30,20.00,,20.00,5677.78
+38-9018-0421031-00,24-01-2019,Direct Credit Daignault Cambridge tc DAIGNAULT D F & ;Ref: Daignault Cambridge tc DAIGNAULT D F &,DC,,Daignault,Cambridge tc,,,,DAIGNAULT D F &,03-0791-0900442-91,200.00,,200.00,5877.78
+38-9018-0421031-00,25-01-2019,FROM K J THOMPSON  L M JOHNSTON ;ni champs jaedyn,,jaedyn,ni champs,,,,,K J THOMPSON  L M JOHNSTON,38-9009-0606931-01,110.00,,110.00,5987.78
+38-9018-0421031-00,25-01-2019,FROM K J THOMPSON  L M JOHNSTON ;ni champs donny,,donny,ni champs,,,,,K J THOMPSON  L M JOHNSTON,38-9009-0606931-01,110.00,,110.00,6097.78
+38-9018-0421031-00,31-01-2019,TRANSACTION FEES ;,,,,,,,,,,,5.00,-5.00,6092.78
+38-9018-0421031-00,01-02-2019,PAY Tichbon & Kumeroa ;reimburse J Kumeroa Xmas regatta,,Xmas regatta,reimburse,J Kumeroa,Xmas regatta,Reimburse,food-fuel,Tichbon & Kumeroa,06-0996-0956968-00,,709.01,-709.01,5383.77
+38-9018-0421031-00,05-02-2019,PAY Bob Evans ;Reimburse Fuel CliveRegatta,,CliveRegatta,Reimburse,Fuel,Clive,Reimburse,Fuel,Bob Evans,06-0589-0516682-01,,152.25,-152.25,5231.52
+38-9018-0421031-00,08-02-2019,PAY Grant Ryder ;G Ryder reimburse fuel CTC/NI,,fuel CTC/NI,G Ryder,reimburse,CTC & NI Ch.,REIMBURSE,Fuel,Grant Ryder,02-0792-0361911-00,,211.39,-211.39,5020.13
+38-9018-0421031-00,13-02-2019,Bill Payment N Tichbon Cambridge regatta TICHBON GREGO ;Ref: N Tichbon Cambridge regatta TICHBON GREGO,BP,N Tichbon,Cambridge,regatta,,,,TICHBON GREGO,06-0996-0956968-00,110.00,,110.00,5130.13
+38-9018-0421031-00,14-02-2019,Direct Credit Kurt Xmas regatta Browning K R ;Ref: Kurt Xmas regatta Browning K R,DC,,Kurt,Xmas regatta,,,,Browning K R,03-0791-0767290-01,110.00,,110.00,5240.13
+38-9018-0421031-00,14-02-2019,PAY Wgi City College ;Wgi City Koha shed,,shed,Wgi City,Koha,use of shed,Koha-UBC,rowing,Wgi City College,03-0791-0581541-00,,100.00,-100.00,5140.13
+38-9018-0421031-00,14-02-2019,PAY Tichbon & Kumeroa ;reimburse J Kumeroa NISSC,,NISSC,reimburse,J Kumeroa,NISSC,Reimburse,Rowing,Tichbon & Kumeroa,06-0996-0956968-00,,442.62,-442.62,4697.51
+38-9018-0421031-00,19-02-2019,FROM L J & D K J RYAN ;Louise Ryan #36 Yellow Card,,Yellow Card,Louise Ryan,#36,,,,L J & D K J RYAN,38-9009-0238139-02,20.00,,20.00,4717.51
+38-9018-0421031-00,19-02-2019,Direct Credit 17 Yellow Mel Francis 17 Yellow MR B G FRANCIS AND ;Ref: 17 Yellow Mel Francis 17 Yellow MR B G FRANCIS AND,DC,17 Yellow,Mel Francis,17 Yellow,,,,MR B G FRANCIS AND,12-3163-0043121-50,20.00,,20.00,4737.51
+38-9018-0421031-00,19-02-2019,Direct Credit Yellow S Woodhead 45 MR V W HEIHEI AND ;Ref: Yellow S Woodhead 45 MR V W HEIHEI AND,DC,Yellow,S Woodhead,45,,,,MR V W HEIHEI AND,12-3163-0059529-00,20.00,,20.00,4757.51
+38-9018-0421031-00,19-02-2019,Direct Credit Yellow RuthBeard Tkt 48 MR W D BEARD AND ;Ref: Yellow RuthBeard Tkt 48 MR W D BEARD AND,DC,Yellow,Ruth Beard,Tkt 48,,,,MR W D BEARD AND,12-3163-0019594-01,20.00,,20.00,4777.51
+38-9018-0421031-00,19-02-2019,Bill Payment yellow Ellen 32 WAUGH ELLEN R ;Ref: yellow Ellen 32 WAUGH ELLEN R,BP,yellow,Ellen,32,,,,WAUGH ELLEN R,06-0793-0802184-00,20.00,,20.00,4797.51
+38-9018-0421031-00,19-02-2019,Bill Payment 41 Merle yellow BENSON AJC&DM ;Ref: 41 Merle yellow BENSON AJC&DM,BP,41,Merle,yellow,,,,BENSON AJC&DM,06-0793-0153540-00,20.00,,20.00,4817.51
+38-9018-0421031-00,20-02-2019,FROM T M RANGINUI ;Tina.R#6#18,,Tina.R#6#18,,,,,,T M RANGINUI,38-9000-0579359-03,40.00,,40.00,4857.51
+38-9018-0421031-00,21-02-2019,FROM M G BENNETT ;May Bennett 26 Blue,,26 Blue,May Bennett,,,,,M G BENNETT,38-9007-0075620-01,20.00,,20.00,4877.51
+38-9018-0421031-00,21-02-2019,Direct Credit ticket 2 nikki yellow MISS N L CRAWFORD ;Ref: ticket 2 nikki yellow MISS N L CRAWFORD,DC,ticket 2,nikki,yellow,,,,MISS N L CRAWFORD,12-3163-0156708-00,20.00,,20.00,4897.51
+38-9018-0421031-00,25-02-2019,Direct Credit Orange AnneRose ticket50 MR M D ROSE AND ;Ref: Orange AnneRose ticket50 MR M D ROSE AND,DC,Orange,Anne Rose,ticket 50,,,,MR M D ROSE AND,12-3018-0766155-02,20.00,,20.00,4917.51
+38-9018-0421031-00,25-02-2019,Bill Payment Blue raffle BUCHANAN M & ;Ref: Blue raffle BUCHANAN M &,BP,,Blue raffle,,,,,BUCHANAN M &,11-6840-0677206-55,40.00,,40.00,4957.51
+38-9018-0421031-00,25-02-2019,Bill Payment Pink-Hunter5 10 13 14 16 19 21 PAUL&MOULDER ;Ref: Pink-Hunter5 10 13 14 16 19 21 PAUL&MOULDER,BP,Pink-Hunter,5 10 13 14,16 19 21,,,,PAUL&MOULDER,06-0793-0797338-00,140.00,,140.00,5097.51
+38-9018-0421031-00,25-02-2019,Bill Payment Pink-Hunter1 2 3 4 7 811 12 15 17 MOULDER JOSEP ;Ref: Pink-Hunter1 2 3 4 7 811 12 15 17 MOULDER JOSEP,BP,Pink-Hunter,1 2 3 4 7 8,11 12 15 17,,,,MOULDER JOSEP,06-0793-0810213-00,200.00,,200.00,5297.51
+38-9018-0421031-00,25-02-2019,Bill Payment Pink-Hunter20 22 23 24 MOULDER JOSEP ;Ref: Pink-Hunter20 22 23 24 MOULDER JOSEP,BP,Pink-Hunter,20 22 23 24,,,,,MOULDER JOSEP,06-0793-0810213-00,80.00,,80.00,5377.51
+38-9018-0421031-00,26-02-2019,Bill Payment Pink-Hunter9 25 MOULDER JOSEP ;Ref: Pink-Hunter9 25 MOULDER JOSEP,BP,Pink-Hunter,9 25,,,,,MOULDER JOSEP,06-0793-0810213-00,40.00,,40.00,5417.51
+38-9018-0421031-00,28-02-2019,TRANSACTION FEES ;,,,,,,,,,,,5.00,-5.00,5412.51
+38-9018-0421031-00,04-03-2019,Direct Credit FundraisingAaliyah Gran TE MAIPI AROMEA ;Ref: FundraisingAaliyah Gran TE MAIPI AROMEA,DC,Fundraising,Aaliyah Gran,,,,,TE MAIPI AROMEA,03-0638-0473886-25,500.00,,500.00,5912.51
+38-9018-0421031-00,04-03-2019,Direct Credit 1-25 Jayde HawkesTeal Raffle CO-OPERATIVE BANK ;Ref: 1-25 Jayde HawkesTeal Raffle CO-OPERATIVE BANK,DC,1-25,Jayde Hawkes,Teal Raffle,,,,,,500.00,,500.00,6412.51
+38-9018-0421031-00,05-03-2019,PAY Horahora Hall Society ;HorahoraHall Accomm CTC&Xmas,,CTC&Xmas,HorahoraHall,Accomm,Accomm,UBC Wanganui,Inv 002-2018,Horahora Hall Society,03-1568-0060537-00,,2900.00,-2900.00,3512.51
+38-9018-0421031-00,05-03-2019,FROM K J THOMPSON  L M JOHNSTON ;meat raffle Blue 29 35 45,,29 35 45,meat raffle,Blue,,,,K J THOMPSON  L M JOHNSTON,38-9009-0606931-01,60.00,,60.00,3572.51
+38-9018-0421031-00,05-03-2019,Direct Credit Blue #38 #30Keri Browning K R ;Ref: Blue #38 #30Keri Browning K R,DC,,Blue #38 #30,Keri,,,,Browning K R,03-0791-0767290-00,40.00,,40.00,3612.51
+38-9018-0421031-00,05-03-2019,Direct Credit Jayde HawkesNISS HAWKES A L ;Ref: Jayde HawkesNISS HAWKES A L,DC,,Jayde Hawkes,NISS,,,,HAWKES A L,03-0791-0584929-25,150.00,,150.00,3762.51
+38-9018-0421031-00,06-03-2019,Bill Payment NI regatta Neo TICHBON GREGO ;Ref: NI regatta Neo TICHBON GREGO,BP,,NI regatta,Neo,,,,TICHBON GREGO,06-0996-0956968-00,150.00,,150.00,3912.51
+38-9018-0421031-00,06-03-2019,Bill Payment Nth islandsMaeve weir Regatta TURNER-WEIR J ;Ref: Nth islandsMaeve weir Regatta TURNER-WEIR J,BP,Nth islands,Maeve weir,Regatta,,,,TURNER-WEIR J,06-0729-0276597-18,150.00,,150.00,4062.51
+38-9018-0421031-00,07-03-2019,FROM F S F CASSERLEY ;Tama,,Tama,,,,,,F S F CASSERLEY,38-9007-0263533-00,150.00,,150.00,4212.51
+38-9018-0421031-00,07-03-2019,Bill Payment N I RegattaMilly Keenan KEENAN PHILLI ;Ref: N I RegattaMilly Keenan KEENAN PHILLI,BP,N I Regatta,Milly Keenan,,,,,KEENAN PHILLI,06-0793-0317859-01,150.00,,150.00,4362.51
+38-9018-0421031-00,07-03-2019,Direct Credit #47 K Lambert Purple CO-OPERATIVE BANK ;Ref: #47 K Lambert Purple CO-OPERATIVE BANK,DC,#47,K Lambert,Purple,,,,,,20.00,,20.00,4382.51
+38-9018-0421031-00,08-03-2019,Direct Credit Connie 31 LUKE CJ ;Ref: Connie 31 LUKE CJ,DC,,Connie 31,,,,,LUKE CJ,02-0528-0046066-83,20.00,,20.00,4402.51
+38-9018-0421031-00,12-03-2019,CASH DEPOSIT ;MIKE C RAFFLE TICKETS,,,,,,,,,,220.00,,220.00,4622.51
+38-9018-0421031-00,13-03-2019,CASH DEPOSIT ;NEO RAFFLE,,,,,,,,,,720.00,,720.00,5342.51
+38-9018-0421031-00,13-03-2019,CASH DEPOSIT ;MIKE RAFFLE,,,,,,,,,,140.00,,140.00,5482.51
+38-9018-0421031-00,13-03-2019,CASH DEPOSIT ;TAMA RAFFLE,,,,,,,,,,500.00,,500.00,5982.51
+38-9018-0421031-00,13-03-2019,Direct Credit 32-43 R Pereka Tickets Purp CO-OPERATIVE BANK ;Ref: 32-43 R Pereka Tickets Purp CO-OPERATIVE BANK,DC,32-43,R Pereka,Tickets Purp,,,,,,40.00,,40.00,6022.51
+38-9018-0421031-00,13-03-2019,Direct Credit Mike O BlueCard O'SULLIVAN A M ;Ref: Mike O BlueCard O'SULLIVAN A M,DC,Mike O,,Blue Card,,,,O'SULLIVAN A M,02-0792-0356207-30,340.00,,340.00,6362.51
+38-9018-0421031-00,14-03-2019,Bill Payment Mahanga40-41Mahanga40-41Mahanga40-41 WILLIAMS M V ;Ref: Mahanga40-41Mahanga40-41Mahanga40-41 WILLIAMS M V,BP,Mahanga40-41,Mahanga40-41,Mahanga40-41,,,,WILLIAMS M V,11-6010-0020926-00,40.00,,40.00,6402.51
+38-9018-0421031-00,14-03-2019,Bill Payment Dean ticket-13 BLACKWELL DEA ;Ref: Dean ticket-13 BLACKWELL DEA,BP,,Dean,ticket-13,,,,BLACKWELL DEA,11-6840-0442212-01,20.00,,20.00,6422.51
+38-9018-0421031-00,14-03-2019,Bill Payment Nielsen 7-49 Black raffle NIELSEN PH&L ;Ref: Nielsen 7-49 Black raffle NIELSEN PH&L,BP,Nielsen,7-49,Black raffle,,,,NIELSEN PH&L,01-0505-0459968-00,20.00,,20.00,6442.51
+38-9018-0421031-00,15-03-2019,Bill Payment 7-48-Greg Harmony Raffle EDWARDSON HAR ;Ref: 7-48-Greg Harmony Raffle EDWARDSON HAR,BP,7-48-Greg,Harmony,Raffle,,,,EDWARDSON HAR,06-0793-0223043-00,20.00,,20.00,6462.51

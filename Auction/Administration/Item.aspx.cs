@@ -123,7 +123,7 @@ namespace Auction.Administration
                     //{
                         foreach (string fileName in Directory.GetFiles(path))
                         {
-                            images += "<td><img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br /> Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
+                            images += "<td><img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br /> Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
                         }
                     //}
                     images += "</tr></table>";

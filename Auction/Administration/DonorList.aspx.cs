@@ -94,7 +94,7 @@ namespace Auction.Administration
                                 {
                                     if (validimages.Contains(Path.GetExtension(fileName)))
                                     {
-                                        images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" border=\"0\" />";
+                                        images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" />";
                                     }
                                 }
                             //}

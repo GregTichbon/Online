@@ -33,6 +33,8 @@
     <script type="text/javascript">
 
         var tr;
+        var mode;
+        var newctr = 0;
 
         $(document).ready(function () {
             $(document).uitooltip({
@@ -78,45 +80,45 @@
                     tr_amount = $(this).find('td:eq(5)').text();
                     tr_note = $(this).find('td:eq(6)').text();
                     tr_banked = $(this).find('td:eq(7)').text();
-   
+
                     value = tr_date + delim + tr_system + delim + tr_code + delim + tr_event_id + delim + tr_amount + delim + tr_note + delim + tr_banked
                     $('<input>').attr({
-                            type: 'hidden',
-                            name: tr_id,
-                            value: value
-                        }).appendTo('#form1');
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
                 });
 
-               /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
-                    $(tr).find('td.item').each(function (i2, td) {
-                        id = $(td).attr('id');
-                        name = $(td).closest('td').next('td').text();
-                        breed1 = $(td).attr('breed1');
-                        breed2 = $(td).attr('breed2');
-                        years = $(td).attr('years');
-                        months = $(td).attr('months');
-                        colour1 = $(td).attr('colour1');
-                        colour2 = $(td).attr('colour2');
-                        gender = $(td).attr('gender');
-                        neutered = $(td).attr('neutered');
-                        chip = $(td).attr('chip');
-                        marks = $(td).attr('marks');
-                        value = name + delim + breed1 + delim + breed2 + delim + years + delim + months + delim + colour1 + delim + colour2 + delim + gender + delim + neutered + delim + chip + delim + marks;
-                        $('<input>').attr({
-                            type: 'hidden',
-                            name: id,
-                            value: value
-                        }).appendTo('#form1');
-                    });
-                    
-                });*/
+                /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
+                     $(tr).find('td.item').each(function (i2, td) {
+                         id = $(td).attr('id');
+                         name = $(td).closest('td').next('td').text();
+                         breed1 = $(td).attr('breed1');
+                         breed2 = $(td).attr('breed2');
+                         years = $(td).attr('years');
+                         months = $(td).attr('months');
+                         colour1 = $(td).attr('colour1');
+                         colour2 = $(td).attr('colour2');
+                         gender = $(td).attr('gender');
+                         neutered = $(td).attr('neutered');
+                         chip = $(td).attr('chip');
+                         marks = $(td).attr('marks');
+                         value = name + delim + breed1 + delim + breed2 + delim + years + delim + months + delim + colour1 + delim + colour2 + delim + gender + delim + neutered + delim + chip + delim + marks;
+                         $('<input>').attr({
+                             type: 'hidden',
+                             name: id,
+                             value: value
+                         }).appendTo('#form1');
+                     });
+                     
+                 });*/
                 //event.preventDefault();
             });
-                //alert(JSON.stringify(results_grid.getChanges()));
-                //alert(JSON.stringify(results_grid.getAll(true)));
-          //  alert(1);
+            //alert(JSON.stringify(results_grid.getChanges()));
+            //alert(JSON.stringify(results_grid.getAll(true)));
+            //  alert(1);
 
-          
+
 
             $('#menu').click(function () {
                 window.location.href = '../default.aspx';
@@ -124,7 +126,7 @@
 
             $('.registrationview').click(function () {
                 id = $(this).attr('id');
-                window.open("RegisterDisplay.aspx?id=" + id,'Register');
+                window.open("RegisterDisplay.aspx?id=" + id, 'Register');
             });
 
             $('.standarddate').datetimepicker({
@@ -136,7 +138,7 @@
                 useCurrent: true
                 //,maxDate: moment().add(-1, 'year')
             });
-            
+
 
             $('#div_birthdate').datetimepicker({
                 format: 'D MMM YYYY',
@@ -176,8 +178,8 @@
 
             });
 
-            $(document).on('click','.transactionsedit',function() {
-            //$('.transactionsedit').click(function () {
+            $(document).on('click', '.transactionsedit', function () {
+                //$('.transactionsedit').click(function () {
                 mode = $(this).data('mode');
                 if (mode == "add") {
                     $("#dialog-transactions").find(':input').val('');
@@ -201,10 +203,65 @@
                     resizable: false,
                     height: 600,
                     width: mywidth,
+                    modal: true
+                });
+
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if (mode == "add") {
+                            tr = $('#div_transactions > table > tbody tr:first').clone();
+                            tr.find(':input').val('');
+                            $('#div_transactions > table > tbody').append(tr);
+                            $(tr).attr('id', 'transactions_new_' + get_newctr());
+                        }
+                        $(tr).attr('maint', 'changed');
+
+                        $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
+                        $(tr).find('td').eq(2).text($('#dd_transactions_system').val());
+                        $(tr).find('td').eq(3).text($('#dd_transactions_code').val());
+                        $(tr).find('td').eq(4).text($('#dd_transactions_event option:selected').text());
+                        $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
+                        $(tr).find('td').eq(5).text($('#tb_transactions_amount').val());
+                        $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
+                        $(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
+                        //alert("Database will be updated when record submited");
+                        $(this).dialog("close");
+                    }
+                }
+
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this transaction?")) {
+                            $(tr).remove();
+                            alert('To do: Delete in database (Have removed from screen');
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+
+
+                $("#dialog-transactions").dialog('option', 'buttons', myButtons);
+
+                /*
+                $("#dialog-transactions").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
                     modal: true,
                     buttons: {
                         "Cancel": function () {
                             $(this).dialog("close");
+                        },
+                        "Delete": function () {
+                            if (window.confirm("Are you sure you want to delete this transaction?")) {
+                                alert('To do: Remove from screen and delete in database');
+                                $(this).dialog("close");
+
+                            }
                         },
                         "Save": function () {
                             if (mode == "add") {
@@ -212,6 +269,7 @@
                                 tr.find(':input').val('');
                                 $('#div_transactions > table > tbody').append(tr);
                             } 
+                            $(tr).attr('id', 'transactions_new_' + get_newctr());
                             $(tr).attr('maint', 'changed');
 
                             $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
@@ -227,6 +285,7 @@
                         }
                     }
                 });
+                */
             })
 
             $('.send_text').click(function () {
@@ -332,7 +391,10 @@
             $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
         }
 
-
+        function get_newctr() {
+            newctr++;
+            return newctr;
+        }
 
 
     </script>
@@ -347,8 +409,8 @@
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
 
 
-			
-			  <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" /> 
+
+            <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" />
 
             <h1>Union Boat Club - Person Maintenance
             </h1>
@@ -415,7 +477,7 @@
                         Date
                     </label>
                     <div class="col-sm-8">
-                        <div class="input-group standarddate" >
+                        <div class="input-group standarddate">
                             <input id="tb_transactions_date" name="tb_transactions_date" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -570,7 +632,7 @@
                             <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" maxlength="2" />
                         </div>
                     </div>
-  
+
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_school">Can swim 50m with clothes</label>
                         <div class="col-sm-8">
@@ -663,7 +725,7 @@
                         <%= html_relationships %>
                     </table>
                 </div>
-                <!------------------------------------------------------------------------------------------------------>              
+                <!------------------------------------------------------------------------------------------------------>
                 <div id="div_phone" class="tab-pane fade in">
                     <h3>Phone</h3>
                     <table class="table">
@@ -736,7 +798,7 @@
 
                 <p></p>
                 <p></p>
-    <!------------------------------------------------------------------------------------------------------>
+                <!------------------------------------------------------------------------------------------------------>
                 <div id="div_tracker" class="tab-pane fade in">
                     <h3>Tracker</h3>
                     <table class="table" style="width: 100%">
@@ -749,7 +811,7 @@
 
                 <!------------------------------------------------------------------------------------------------------>
 
-                 <div id="div_arrangements" class="tab-pane fade in">
+                <div id="div_arrangements" class="tab-pane fade in">
                     <h3>Arrangements</h3>
                     <table class="table" style="width: 100%">
                         <%= html_arrangements %>

@@ -20,11 +20,14 @@ namespace UBC
             }
             html = "";
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
             {
                 html += "<br /><a href=\"people/communicate.aspx\">Communicate</a>";
                 html += "<br /><a href=\"people/reports/loginregister.aspx\">Login register</a>";
                 html += "<br /><a href=\"people/reports/tracker.aspx\">Tracker</a>";
+                html += "<br /><a href=\"people/bankimport.aspx\">Bank Import</a>";
+                html += "<br /><a href=\"people/bankallocate.aspx\">Bank alloction</a>";
+                html += "<br /><a href=\"people/transactions.aspx\">Transactions</a>";
             }
 
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "100001"))

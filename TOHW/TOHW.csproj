@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
@@ -851,6 +854,12 @@
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Database\Reports\Attendance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Attendance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Database\simple.aspx.cs">
       <DependentUpon>simple.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1245,6 +1254,15 @@
     <Folder Include="Auction\Images\Items\55\original\" />
     <Folder Include="Auction\Images\Items\6\" />
     <Folder Include="PhotoHunt11Jun18\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Database\Reports\Attendance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Attendance.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

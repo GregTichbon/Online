@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
@@ -461,6 +465,7 @@
     <Content Include="Main.aspx" />
     <Content Include="People\Attendance.aspx" />
     <Content Include="People\Attendance24-28Jan2019.aspx" />
+    <Content Include="People\BankAllocate.aspx" />
     <Content Include="People\BankImport.aspx" />
     <Content Include="Dependencies\Images\question.png" />
     <Content Include="Dependencies\Images\questionsmall.png" />
@@ -496,6 +501,7 @@
     <Content Include="People\Reports\ShowAttendees.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
+    <Content Include="People\Reports\TestCrystal.aspx" />
     <Content Include="People\Reports\Tracker.aspx" />
     <Content Include="People\Resources.aspx" />
     <Content Include="People\Security\LogOut.aspx" />
@@ -763,6 +769,13 @@
     <Compile Include="People\Attendance24-28Jan2019.aspx.designer.cs">
       <DependentUpon>Attendance24-28Jan2019.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\BankAllocate.aspx.cs">
+      <DependentUpon>BankAllocate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\BankAllocate.aspx.designer.cs">
+      <DependentUpon>BankAllocate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\BankImport.aspx.cs">
       <DependentUpon>BankImport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -932,6 +945,24 @@
     <Compile Include="People\Reports\ComingEventsList.aspx.designer.cs">
       <DependentUpon>ComingEventsList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\Crystal\RegattaStatements.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegattaStatements.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\Simple1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Simple1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\testNoData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>testNoData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="People\Reports\CurrentCategoriesMatrix.aspx.cs">
       <DependentUpon>CurrentCategoriesMatrix.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1001,6 +1032,13 @@
     </Compile>
     <Compile Include="People\Reports\ShowAttendees.aspx.designer.cs">
       <DependentUpon>ShowAttendees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\TestCrystal.aspx.cs">
+      <DependentUpon>TestCrystal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\TestCrystal.aspx.designer.cs">
+      <DependentUpon>TestCrystal.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\Tracker.aspx.cs">
       <DependentUpon>Tracker.aspx</DependentUpon>
@@ -1165,7 +1203,26 @@
       <DependentUpon>UserCode.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="People\Uploads\Bank\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="People\Reports\Crystal\RegattaStatements.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RegattaStatements.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\Simple1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Simple1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\testNoData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>testNoData.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

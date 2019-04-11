@@ -52,7 +52,7 @@ namespace UBC.People
             cmd.Parameters.Add("@system", SqlDbType.VarChar).Value = system;
             cmd.Parameters.Add("@detail", SqlDbType.VarChar).Value = "";
             cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = code;
-            cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = banked;
+            //cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = banked;
             cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
 
             con.Open();
@@ -67,6 +67,35 @@ namespace UBC.People
 
             standardResponse resultclass = new standardResponse();
             resultclass.status = "Saved";
+            resultclass.message = "";
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+
+        }
+
+        [WebMethod]
+        public string delete_person_transaction(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string person_transaction_id = formVars.Form("person_transaction_id");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Delete_Person_Transaction";
+            cmd.Parameters.Add("@person_transaction_id", SqlDbType.VarChar).Value = person_transaction_id.Substring(13);
+
+            con.Open();
+            string result = cmd.ExecuteScalar().ToString();
+            con.Close();
+
+            con.Dispose();
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Deleted";
             resultclass.message = "";
             JavaScriptSerializer JS = new JavaScriptSerializer();
             string passresult = JS.Serialize(resultclass);
