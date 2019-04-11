@@ -1,0 +1,19 @@
+﻿
+<XML>
+  <Section criteria="dd_fundraiser~=~Charitable organisation">
+    <tr>
+      <td>1</td>
+    </tr>
+  </Section>
+  <Section criteria="dd_fundraiser~=~Charitable organisation">
+    <tr>
+      <td>2</td>
+    </tr>
+    <Section criteria="dd_fundraiser~=~Charitable organisation">
+      <tr>
+        <td>2.1</td>
+      </tr>
+    </Section>
+  </Section>
+</XML>
+

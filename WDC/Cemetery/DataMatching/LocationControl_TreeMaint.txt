@@ -1,0 +1,522 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script type="text/javascript">
+var delflag = false;
+function checkform() {
+	var frm = document.maint;
+	if(delflag) {
+		if(confirm('Are you sure you want to delete?')) {
+			document.getElementById('params').value = 'delete' + document.getElementById('params').value.substring(4);
+			//alert(document.getElementById('params').value);
+			return(true);
+		}
+		else {
+			delflag = false;
+			return(false);
+		}
+	}
+	
+	if(frm.field.value == '') {
+		alert('You must enter a name');
+		return(false);
+	}
+}
+function setdelete() {
+	delflag = true;
+}
+function processfield(mode,what,name,id,parentid,anchorname) {
+//processfield('edit','cemetery','" & rsc("cemeteryname") & "'," & rsc("cemeteryid") & ")
+//processfield('add','block','" & rsa("areaname") & "'," & rsa("areaid") & ")
+	//alert(mode + ',' + what + ',' + name + ',' + id);
+	if(mode == 'edit') {
+		switch(what) {
+			case 'cemetery':
+				document.getElementById('fieldinformation').innerHTML = '<b>Edit ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Cemetery Name';
+				break;
+			case 'area':
+				document.getElementById('fieldinformation').innerHTML = '<b>Edit Area: ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Area Name';
+				break;
+			case 'block':
+				document.getElementById('fieldinformation').innerHTML = '<b>Edit Block: ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Block Name';
+				break;
+			case 'division':
+				document.getElementById('fieldinformation').innerHTML = '<b>Edit Division: ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Division Name';
+				break;
+		}
+		document.getElementById('params').value = mode + ',' + what + ',' + id + ',' + parentid;
+		document.getElementById('field').value = name;
+		document.getElementById('btndelete').style.display = '';
+	} 
+	else {
+		//mode = add
+		switch(what) {
+			case 'area':
+				document.getElementById('fieldinformation').innerHTML = '<b>Add Area to: ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Area Name';
+				document.getElementById('params').value = mode + ',' + what + ',' + id;
+				break;
+			case 'block':
+				document.getElementById('fieldinformation').innerHTML = '<b>Add Block to: ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Block Name';
+				document.getElementById('params').value = mode + ',' + what + ',' + id;
+				break;
+			case 'division':
+				document.getElementById('fieldinformation').innerHTML = '<b>Add Division to: ' + name + '</b>';
+				document.getElementById('fieldheader').innerHTML = 'Division Name';
+				document.getElementById('params').value = mode + ',' + what + ',' + id;
+				break;
+		}
+		document.getElementById('field').value = '';
+		document.getElementById('btndelete').style.display = 'none';
+	}
+	//document.getElementById('diventry').style.display = '';
+	document.getElementById('maint').action = '#' + anchorname;
+	ShowContent('diventry');
+	document.getElementById('field').focus();
+}
+
+var cX = 0; var cY = 0; var rX = 0; var rY = 0;
+function UpdateCursorPosition(e) { 
+	cX = e.pageX; cY = e.pageY;
+}
+function UpdateCursorPositionDocAll(e) { 
+	cX = event.clientX; cY = event.clientY;
+}
+if(document.all) { 
+	document.onmousemove = UpdateCursorPositionDocAll; 
+}
+else { 
+	document.onmousemove = UpdateCursorPosition; 
+}
+function AssignPosition(d) {
+	if(self.pageYOffset) {
+		rX = self.pageXOffset;
+		rY = self.pageYOffset;
+	}
+	else if(document.documentElement && document.documentElement.scrollTop) {
+		rX = document.documentElement.scrollLeft;
+		rY = document.documentElement.scrollTop;
+	}
+	else if(document.body) {
+		rX = document.body.scrollLeft;
+		rY = document.body.scrollTop;
+	}
+	if(document.all) {
+		cX += rX; 
+		cY += rY;
+	}
+	d.style.left = (cX+10) + "px";
+	d.style.top = (cY+10) + "px";
+}
+function HideContent(d) {
+	if(d.length < 1) { 
+		return; 
+	}
+	document.getElementById(d).style.display = "none";
+}
+function ShowContent(d) {
+	if(d.length < 1) { 
+		return; 
+	}
+	var dd = document.getElementById(d);
+	AssignPosition(dd);
+	dd.style.display = "block";
+}
+function ReverseContentDisplay(d) {
+	if(d.length < 1) { 
+		return; 
+	}
+	var dd = document.getElementById(d);
+	AssignPosition(dd);
+	if(dd.style.display == "none") { 
+		dd.style.display = "block"; 
+	}
+	else { 
+		dd.style.display = "none";
+	}
+}
+
+var toggleaddshow = '';
+var toggleeditshow = '';
+var toggledivisionsshow = '';
+
+function toggledivisions() {
+	if(toggledivisionsshow == '') {
+		toggledivisionsshow = 'none';
+	}
+	else {
+		toggledivisionsshow = '';
+	}
+	var all = document.getElementsByTagName("*");
+	
+	for (var i=0, max=all.length; i < max; i++) {
+		 if(all[i].className == 'divisions') {
+		 	all[i].style.display = toggledivisionsshow;
+		 }
+	}
+
+}
+
+
+
+function toggleaddbuttons() {
+	if(toggleaddshow == '') {
+		toggleaddshow = 'none';
+	}
+	else {
+		toggleaddshow = '';
+	}
+	var all = document.getElementsByTagName("*");
+	
+	for (var i=0, max=all.length; i < max; i++) {
+		 if(all[i].className == 'add') {
+		 	all[i].style.display = toggleaddshow;
+		 }
+	}
+
+}
+function toggleeditbuttons() {
+	if(toggleeditshow == '') {
+		toggleeditshow = 'none';
+	}
+	else {
+		toggleeditshow = '';
+	}
+	var all = document.getElementsByTagName("*");
+	
+	for (var i=0, max=all.length; i < max; i++) {
+		 if(all[i].className.substring(0,7) == 'buttone') {
+		 	all[i].style.display = toggleeditshow;
+		}
+	}
+
+}
+
+</script>
+<style type="text/css">
+<!--
+.cemetery {
+	color: #FF0000;
+}
+.area {
+	color:#0000FF;
+}
+.block {
+	color:#00CC00;
+}
+.division {
+	color:#000000}
+.diventry {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #00FF00;
+	padding: 10px;
+	border: thin solid #000000;
+}
+.buttona {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #99FF00;
+	padding: 1px;
+	border: 1px solid #000000;
+	text-align: center;
+	width: 80px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.buttonb {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #99FF00;
+	padding: 1px;
+	border: 1px solid #000000;
+	text-align: center;
+	width: 80px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.buttond {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #99FF00;
+	padding: 1px;
+	border: 1px solid #000000;
+	text-align: center;
+	width: 80px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+}
+.toggle {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #FF00FF;
+	padding: 1px;
+	border: 1px solid #000000;
+	text-align: center;
+	width: 150px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+	height: 30px;
+	top: 15px;
+	z-index: 1;
+	position:absolute; 
+}
+.buttone {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #99FF00;
+	padding: 1px;
+	border: 1px solid #000000;
+	text-align: center;
+	width: 80px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+}
+-->
+</style>
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</script>
+</head>
+<%
+	none = "none"
+	showcount = false
+	id = request.querystring("id")
+	useserver = "WDC-WWW"
+	usedatabase = "Cemeteries"
+	set db = Server.CreateObject("ADODB.Connection")
+	db.Open "Provider=sqloledb;Data Source=" & useserver & ";Initial Catalog=" & usedatabase & ";Integrated Security=SSPI"
+	
+	if request.form("params") <> "" then
+		'response.write "params=" & request.form("params") & "<br>field=" & request.form("field") & "<br>"
+		params = split(request.form("params"),",")
+		fld = request.form("field")
+		Set rs = Server.CreateObject("ADODB.Recordset")
+		if params(0) = "add" then
+			select case params(1)
+				case "cemetery"
+					xtra = ""
+				case "area"
+					xtra = " and cemeteryid = " & params(2)
+				case "block"
+					xtra = " and areaid = " & params(2)
+				case "division"
+					xtra = " and blockid = " & params(2)
+			end select
+			sql = "select count(" & params(1) & "id) as cnt from [" & params(1) & "] where " & params(1) & "name = '" & fld & "'" & xtra
+			rs.open sql, db
+			if rs("cnt") = 0 then
+				Set rsm = Server.CreateObject("ADODB.Recordset")
+				rsm.Open params(1), db, 1, 2
+				rsm.addnew
+				select case params(1)
+					case "area" 
+						rsm.fields("areaname") = fld
+						rsm.fields("cemeteryid") = params(2)
+					case "block"
+						rsm.fields("blockname") = fld
+						rsm.fields("areaid") = params(2)
+					case "division"
+						rsm.fields("divisionname") = fld
+						rsm.fields("blockid") = params(2)
+				end select
+				rsm.update
+				rsm.close
+				set rsm = nothing
+			else
+				message = "There is already a " & params(1) & " named: " & fld & "."
+			end if
+		elseif params(0) = "edit" or params(0) = "delete" then
+			if params(0) = "edit" then
+				select case params(1)
+					case "cemetery"
+						xtra = ""
+					case "area"
+						parenttable = "cemetery"
+						xtra = " and cemeteryid = " & params(3)
+					case "block"
+						xtra = " and areaid = " & params(3)
+					case "division"
+						xtra = " and blockid = " & params(3)
+				end select
+				sql = "select count(" & params(1) & "id) as [cnt] from [" & params(1) & "] where " & params(1) & "name = '" & fld & "'" & xtra & " and " & params(1) & "id <> " & params(2)
+				'response.write sql 
+				'response.end
+			elseif params(0) = "delete" then
+				select case params(1)
+					case "cemetery"
+						subtable = "area"
+					case "area"
+						subtable = "block"
+					case "block"
+						subtable = "division"
+					case "division"
+						subtable = "plot"
+				end select
+						
+				sql = "select count(" & subtable & "id) as cnt from [" & subtable & "] where " & params(1) & "id = " & params(2)
+			end if
+			'response.write sql
+			'response.end
+			rs.open sql, db
+			if rs("cnt") = 0 then
+				Set rsm = Server.CreateObject("ADODB.Recordset")
+				rsm.Open params(1), db, 1, 2
+				rsm.filter = params(1) & "id = " & params(2)
+				if not rsm.eof then
+					if params(0) = "edit" then
+						rsm.fields(params(1) & "name") = fld
+						rsm.update
+					elseif params(0) = "delete" then
+						rsm.delete
+					end if
+				end if
+				rsm.close
+				set rsm = nothing
+			else
+				message = "This " & params(1) & " could not be " & params(0) & "ed. "
+				if params(0) = "edit" then
+					message = message & "There is already a record of this name." 
+					response.write sql
+				elseif params(0) = "delete" then
+					message = message & "There are " & subtable & "s under this record."
+				end if
+			end if
+			rs.close
+		end if
+		set rs = nothing
+	end if
+	
+	if message <> "" then
+		message = " onload=""alert('" & message & "')"""
+		'response.write message
+	end if
+%>
+<body<%=message%>>
+<div id="toggleadd" style="left: 600px;" onClick="toggleaddbuttons();" class="toggle"><span style="line-height: 30px;">Toggle Add Buttons</span></div>
+<div id="toggleedit" style="left: 400px;" onClick="toggleeditbuttons();" class="toggle"><span style="line-height: 30px;">Toggle Edit Buttons</span></div>
+<div id="toggledivisions" style="left: 800px;" onClick="toggledivisions();" class="toggle"><span style="line-height: 30px;">Toggle Divisions</span></div>
+<%		
+	anchor = 0
+	response.write "<p><div class=""cemetery"">Cemetery</span> <span class=""area"">Area</span> <span class=""block"">Block</span> <span class=""division"">Divsion</div></p>"
+	
+	sql = "select * from cemetery order by cemeteryname"
+	set rsc = db.execute(sql)
+	do until rsc.eof
+		anchor = anchor + 1
+		response.write "<a name=""" & anchor & """><span class=""cemetery"">" & rsc("cemeteryname") & "</span> "
+		response.write "<a class=""buttone"" href=""javascript:void(0);"" onClick=""javascript:processfield('edit','cemetery','" & rsc("cemeteryname") & "'," & rsc("cemeteryid") & ", 0, " & anchor & ");"">Edit</a><br>"
+		response.write "<span class=""add"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=""buttona"" href=""javascript:void(0);"" onClick=""javascript:processfield('add','area','" & rsc("cemeteryname") & "'," & rsc("cemeteryid") & ", 0, " & anchor & ");"">Add Area</a><br></span>"
+
+		sql = "SELECT * FROM [area] where cemeteryID = " & rsc("cemeteryid") & " order by areaname"
+
+		set rsa = db.execute(sql)
+		acnt = 0
+		do until rsa.eof
+			anchor = anchor + 1
+			response.write "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name=""" & anchor & """></a><span class=""area"">" & rsa("areaname")& "</span> "
+			response.write "<a class=""buttone"" href=""javascript:void(0);"" onClick=""javascript:processfield('edit','area','" & rsa("areaname") & "'," & rsa("areaid") & ", " & rsc("cemeteryid") & ", " & anchor & ");"">Edit</a><br>"
+			response.write "<span class=""add"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=""buttonb"" href=""javascript:void(0);"" onClick=""javascript:processfield('add','block','" & rsa("areaname") & "'," & rsa("areaid") & ", 0, " & anchor & ");"">Add Block</a><br></span>"
+			sql = "SELECT * FROM [block] where areaid = " & rsa("areaid") & " order by blockname"
+			
+			set rsb = db.execute(sql)
+			bcnt = 0
+			do until rsb.eof
+				anchor = anchor + 1
+				response.write "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name=""" & anchor & """><span class=""block"">" & rsb("blockname")& "</span> "
+				response.write "<a class=""buttone"" href=""javascript:void(0);"" onClick=""javascript:processfield('edit','block','" & rsb("blockname") & "'," & rsb("blockid") & ", " & rsa("areaid") & ", " & anchor & ");"">Edit</a><br>"
+				response.write "<span class=""add"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=""buttond"" href=""javascript:void(0);"" onClick=""javascript:processfield('add','division','" & rsb("blockname") & "'," & rsb("blockid") & ", 0, " & anchor & ");"">Add Division</a><br></span>"
+				response.write "<div class=""divisions"">"
+				'sql = "SELECT * FROM [division] where blockid = " & rsb("blockid") & " order by right(divisionname,20)"
+				sql = "SELECT * FROM [division] where blockid = " & rsb("blockid") & " order by right('00000000000000000000' + divisionname,20)"
+				set rsd = db.execute(sql)
+				dcnt = 0
+				do until rsd.eof
+					anchor = anchor + 1
+					response.write "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name=""" & anchor & """><span class=""division"">" & rsd("divisionName") & "</span> "
+					response.write "<a class=""buttone"" href=""javascript:void(0);"" onClick=""javascript:processfield('edit','division','" & rsd("divisionname") & "'," & rsd("divisionid") & ", " & rsb("blockid") & ", " & anchor & ");"">Edit</a>"
+					if showcount then
+						sql = "select count(*) as plots from plot where cemeteryid = " & rsc("cemeteryid") & " and isnull(extensionName,'') = '" & rsa("oldkey") & "' and isnull(block,'None') = '" & rsb("blockname") & "' and isnull(division,'None') = '" & rsd("divisionname") & "'"
+						
+						'response.write sql & "<br>"
+						
+						set rsx = db.execute(sql)
+						response.write " (" & rsx("plots") & ")"
+						acnt = acnt + rsx("plots")
+						bcnt = bcnt + rsx("plots")
+						dcnt = dcnt + rsx("plots")
+						tot = tot + rsx("plots")
+						rsx.close
+						set rsx = nothing
+					end if
+					response.write "<br>"
+					rsd.movenext
+				loop
+				'if dcnt = 0 then response.write "<br>"
+				if showcount then response.write "<span class=""block"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" & dcnt & "</span><br>"
+				rsd.close
+				set rsd = nothing
+				response.write "</div>"
+				rsb.movenext
+			loop
+			if showcount then response.write "<span class=""area"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" & bcnt & "</span><br>"
+			rsb.close
+			set rsb = nothing
+			rsa.movenext
+		loop
+		if showcount then response.write "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=""area"">" & acnt& "</span><br>"
+		cemeteryid = rsc("cemeteryid")
+		rsa.close
+		set rsa = nothing
+		rsc.movenext
+	loop
+	rsc.close
+	set rsc = nothing
+	if showcount then
+		sql = "select count(*) as plots from plot"
+		set rsx = db.execute(sql)
+		totplots = rsx("plots")
+		rsx.close
+		set rsx = nothing
+	end if
+	
+	
+	db.close
+	set db = nothing
+
+	if showcount then
+		response.write "<p><b>Total Plots: " & tot & "/" & totplots & "</b></p>"
+	end if
+%>
+
+<div id="diventry" style="position:absolute; width:494px; height:122px; z-index:1; display:<%=none%>; left: 583px; top: 157px;" class="diventry">
+  <p align="right"><a href="javascript:void(0);" onClick="document.getElementById('diventry').style.display = 'none';">Close</a></p>
+  <form id="maint" name="maint" method="post" action="#" onSubmit="return checkform();">
+    <p id="fieldinformation">Field Information</p>
+    <Span id="fieldheader">Field Header</span>: 
+    <input name="params" type="hidden" id="params">
+    <input id="field" type="text" name="field" style="width:200px">
+    <input type="submit" name="Submit" value="Submit">
+    <input id="btndelete" type="submit" name="Delete" value="Delete" style="display:none" onClick="setdelete()">
+  </form>
+</div>
+<a name="test"></a>
+</body>
+</html>
