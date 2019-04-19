@@ -36,6 +36,7 @@ namespace UBC.People
             string amount = formVars.Form("amount");
             string note = formVars.Form("note");
             string banked = formVars.Form("banked");
+            string banktransaction_id = formVars.Form("banktransaction_id");
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -54,6 +55,7 @@ namespace UBC.People
             cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = code;
             //cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = banked;
             cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+            cmd.Parameters.Add("@banktransaction_id", SqlDbType.VarChar).Value = banktransaction_id;
 
             con.Open();
             string result = cmd.ExecuteScalar().ToString();

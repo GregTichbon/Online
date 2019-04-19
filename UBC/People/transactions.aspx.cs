@@ -56,7 +56,7 @@ namespace UBC.People
 
             
             html_transactions = "<thead>";
-            html_transactions += "<tr><th>Person</th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th>Bank</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+            html_transactions += "<tr><th>Person</th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Bank</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
             html_transactions += "</thead>";
             html_transactions += "<tbody>";
             double total = 0;
@@ -75,12 +75,14 @@ namespace UBC.People
                 string event_id = dr["event_id"].ToString();
                 string event_title = dr["event_title"].ToString();
                 string person_event_id = dr["person_event_id"].ToString();
-                string banked = dr["banked"].ToString();
                 string kb1transaction_id = dr["Kiwibank_Transactions1_id"].ToString();
+                /*
+                string banked = dr["banked"].ToString();
                 if (kb1transaction_id != "" && banked != "")
                 {
                     banked = Convert.ToDateTime(banked).ToString("dd MMM yy");
                 }
+                */
 
                 total += Convert.ToDouble(amount);
 
@@ -93,7 +95,7 @@ namespace UBC.People
                 html_transactions += "<td event_id=\"" + event_id + "\">" + event_title + "</td>";
                 html_transactions += "<td>" + amount + "</td>";
                 html_transactions += "<td>" + note + "</td>";
-                html_transactions += "<td>" + banked + "</td>";
+                //html_transactions += "<td>" + banked + "</td>";
                 if(kb1transaction_id != "") { 
                     html_transactions += "<td class=\"kbtransaction\" id=\"kb1_" + kb1transaction_id + "\">" + kb1transaction_id + "</td>";
                 } else

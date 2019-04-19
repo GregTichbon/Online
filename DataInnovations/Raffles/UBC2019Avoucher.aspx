@@ -1,0 +1,93 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UBC2019Avoucher.aspx.cs" Inherits="DataInnovations.Raffles.UBC2019Avoucher" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .pc {
+            text-align:center;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: solid;
+            border-width: thin;
+            border-collapse: collapse;
+            padding: 5px;
+            text-wrap: none;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .centered {
+            position: absolute;
+            width:100px;
+            top: 40%;
+            left: 45%;
+        }
+
+        .bigfont {
+            font-size: x-large;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('#sel_status').change(function () {
+                $('#processing').show();
+
+                $.ajax({
+                    url: "data.asmx/updaterafflestatus?id=" + $('#hf_id').val() + "&status=" + $(this).val(), success: function (result) {
+                        //alert('Success');
+                    }, error: function (XMLHttpRequest, textStatus, error) {
+                        alert("AJAX error: " + textStatus + "; " + error);
+                    }
+                });
+                setTimeout(
+                    function () {
+                        $('#processing').hide();
+                    }, 1000);
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <img src="Images/ChefsChoice%20Logo.PNG" />
+        <div>
+            <p></p>
+            <%= html%>
+        </div>
+
+        <div id="processing" style="display: none">
+            <img src="../Dependencies/Images/processing2.gif" class="centered" />
+        </div>
+
+
+    </form>
+</body>
+</html>

@@ -246,7 +246,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
 
                     html_transactions = "<thead>";
-                    html_transactions += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th>Banked</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_transactions += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                     html_transactions += "</thead>";
                     html_transactions += "<tbody>";
                     double total = 0;
@@ -270,11 +270,13 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             string event_id = dr["event_id"].ToString();
                             string event_title = dr["event_title"].ToString();
                             string person_event_id = dr["person_event_id"].ToString();
+                            /*
                             string banked = dr["banked"].ToString();
                             if (banked != "")
                             {
                                 banked = Convert.ToDateTime(banked).ToString("dd MMM yy");
                             }
+                            */
 
                             total += Convert.ToDouble(amount);
 
@@ -287,7 +289,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             html_transactions += "<td event_id=\"" + event_id + "\">" + event_title + "</td>";
                             html_transactions += "<td>" + amount + "</td>";
                             html_transactions += "<td>" + note + "</td>";
-                            html_transactions += "<td>" + banked + "</td>";
+                            //html_transactions += "<td>" + banked + "</td>";
                             html_transactions += "<td><a href=\"javascript:void(0)\" class=\"transactionsedit\" data-mode=\"edit\">Edit</td>";
                             //html_finance += "<td style=\"text-align:center\">').html(action) 
                             //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
@@ -795,7 +797,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     cmd.Parameters.Add("@system", SqlDbType.VarChar).Value = valuesSplit[1];
                     cmd.Parameters.Add("@detail", SqlDbType.VarChar).Value = "";
                     cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = valuesSplit[2];
-                    cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = valuesSplit[6];
+                    //cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = valuesSplit[6];
                     cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = valuesSplit[3];
 
                     con.Open();

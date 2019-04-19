@@ -945,6 +945,12 @@
     <Compile Include="People\Reports\ComingEventsList.aspx.designer.cs">
       <DependentUpon>ComingEventsList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\Crystal\KeyRegister.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyRegister.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="People\Reports\Crystal\RegattaStatements.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1207,6 +1213,10 @@
     <Folder Include="People\Uploads\Bank\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="People\Reports\Crystal\KeyRegister.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>KeyRegister.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="People\Reports\Crystal\RegattaStatements.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RegattaStatements.cs</LastGenOutput>

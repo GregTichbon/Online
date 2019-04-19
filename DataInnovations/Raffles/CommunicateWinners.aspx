@@ -5,6 +5,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style>
+        html, body {
+            width: 100%;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: solid;
+            border-width: thin;
+            border-collapse: collapse;
+            padding: 5px;
+            text-wrap: none;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
 
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
 
@@ -31,12 +52,18 @@
 
     <form id="form1" runat="server">
         <br />
+        ||greeting|| 
+                             <br />
+        ||ticketnumber||<br />
+                             ||guid||<br />
+        ||identifier||<br />
         <br />
-        <br />
-        <br />
-        <asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px">Hi ||greeting||
-Your ticket, number ||ticketnumber||, is a winner in the Union Boat Club rowing raffle.
-Please go to: http://office.datainn.co.nz/raffles/ubc2019awinner.aspx?id=||guid|| to claim your prize or contact Greg on (027) 2495088.</asp:TextBox>
+&nbsp;<asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
+Your ticket, ||identifier||/||ticketnumber||, is a winner in the Maadi rowing raffle.
+Please go to: http://office.datainn.co.nz/raffles/images/vouchers//||guid||.jpg to viewdownload your Chef's Choice Voucher.
+Thanks for your support.
+Please contact Greg (0272495088) if you need assistance.
+      </asp:TextBox>
         <table style="width:100%">
             <%=html %>
         </table>

@@ -171,6 +171,28 @@ namespace Online.data
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void updaterafflestatus(string id, string status)
+        {
+            string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            string sql1 = "update rafflewinner set [status] = '" + status + "' where raffleWinner_ID = " + id;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand(sql1, con);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = con;
+
+            con.Open();
+            //SqlDataReader dr = cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
+
+            cmd.Dispose();
+            con.Close();
+            con.Dispose();
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void updateraffle(string field, string id, string value)
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";

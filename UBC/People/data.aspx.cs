@@ -108,7 +108,7 @@ namespace UBC.People
 
 
 
-                            html += "<tr><td>ID</td><td>" + Kiwibank_Transactions1_ID + "</td></tr>";
+                            html += "<tr><td>ID</td><td id=\"banktransaction_id\">" + Kiwibank_Transactions1_ID + "</td></tr>";
                             //html += "<tr><td>Account_number</td><td>" + Account_number + "</td></tr>";
                             html += "<tr><td>Date</td><td>" + Date + "</td></tr>";
                             html += "<tr><td>Memo</td><td>" + Memo + "</td></tr>";
@@ -128,9 +128,10 @@ namespace UBC.People
                             html += "<tr><td>Our Notes</td><td><textarea style=\"width:100%\">" + OurNotes + "</textarea><br /><input class=\"btn_updatenote\" id=\"note_" + Kiwibank_Transactions1_ID + "\" type=\"button\" value=\"Update\" /></td></tr>";
                             html += "</tbody></table>";
                             dr.Close();
+                            html += "<h2>People Transactions</h2><span class=\"persontransaction\">Add</span>";
 
-                            SqlCommand cmd2B = new SqlCommand("get_transaction_allocations", con2);
-                            cmd2B.Parameters.Add("@Source", SqlDbType.VarChar).Value = "Kiwibank";
+                            SqlCommand cmd2B = new SqlCommand("get_transaction_person_allocations", con2);
+                            cmd2B.Parameters.Add("@Source", SqlDbType.VarChar).Value = "Kiwibank1";
                             cmd2B.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
 
                             cmd2B.CommandType = CommandType.StoredProcedure;
@@ -141,15 +142,14 @@ namespace UBC.People
                                 dr = cmd2B.ExecuteReader();
                                 if (dr.HasRows)
                                 {
-                                    //html += "People Transactions";
                                     html += "<table class=\"table\">";
                                     html += "<thead>";
-                                    html += "<tr><th>Person</th><th class=\"number\">Amount</th>";
+                                    html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit</th>";
                                     html += "</thead>";
                                     html += "<tbody>";
                                     while (dr.Read())
                                     {
-                                        html += "<tr><td>" + dr["person"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td></tr>";
+                                        html += "<tr><td>" + dr["person"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"persontransaction\">Edit</td></tr>";
                                     }
                                     html += "</tbody>";
                                     html += "</table>";

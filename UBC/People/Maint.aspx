@@ -79,9 +79,9 @@
                     tr_event_id = $(this).find('td:eq(4)').attr('event_id');
                     tr_amount = $(this).find('td:eq(5)').text();
                     tr_note = $(this).find('td:eq(6)').text();
-                    tr_banked = $(this).find('td:eq(7)').text();
+                    //tr_banked = $(this).find('td:eq(7)').text();
 
-                    value = tr_date + delim + tr_system + delim + tr_code + delim + tr_event_id + delim + tr_amount + delim + tr_note + delim + tr_banked
+                    value = tr_date + delim + tr_system + delim + tr_code + delim + tr_event_id + delim + tr_amount + delim + tr_note; // + delim + tr_banked
                     $('<input>').attr({
                         type: 'hidden',
                         name: tr_id,
@@ -191,7 +191,7 @@
                     $('#dd_transactions_event').val($(tr).find('td').eq(4).attr('event_id'));
                     $('#tb_transactions_amount').val($(tr).find('td').eq(5).text());
                     $('#tb_transactions_note').val($(tr).find('td').eq(6).text());
-                    $('#tb_transactions_banked').val($(tr).find('td').eq(7).text());
+                    //$('#tb_transactions_banked').val($(tr).find('td').eq(7).text());
                 }
 
                 mywidth = $(window).width() * .95;
@@ -226,7 +226,7 @@
                         $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
                         $(tr).find('td').eq(5).text($('#tb_transactions_amount').val());
                         $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
-                        $(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
+                        //$(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
                         //alert("Database will be updated when record submited");
                         $(this).dialog("close");
                     }
@@ -522,6 +522,7 @@
                         <input id="tb_transactions_note" name="tb_transactions_note" type="text" class="form-control" />
                     </div>
                 </div>
+                <!--
                 <div class="form-group">
                     <label for="tb_transactions_banked" class="control-label col-sm-4">
                         Banked
@@ -535,6 +536,7 @@
                         </div>
                     </div>
                 </div>
+                -->
             </div>
 
             <ul class="nav nav-tabs">

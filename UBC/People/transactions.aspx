@@ -51,8 +51,8 @@
             //$('.transactionsedit').click(function () {
             $(document).on('click', '.transactionsedit', function () {  //Can edit transactions created on the fly
                 mode = $(this).data('mode');
+                $("#dialog-transactions").find(':input').val(''); //clear all fields
                 if (mode == "add") {
-                    $("#dialog-transactions").find(':input').val(''); //clear all fields
                     $('#dd_transactions_person_transaction_id').val('transactions_new');
                     /*
                     $('#dd_transactions_person_id').val('');
@@ -75,14 +75,18 @@
                     $('#dd_transactions_event_id').val($(tr).find('td').eq(4).attr('event_id'));
                     $('#tb_transactions_amount').val($(tr).find('td').eq(5).text());
                     $('#tb_transactions_note').val($(tr).find('td').eq(6).text());
-                    banklinked = $(tr).find('td').eq(8).text();
-                    if (banklinked == '-') {
-                        $('#div_banked').hide();
 
+                    banklinked = $(tr).find('td').eq(7).text();
+
+                    if (banklinked == '-') {
+                        //$('#div_banked').hide();
+                        $('#tb_transactions_date').prop('readonly', false);
                     } else {
-                        $('#div_banked').show();
-                        $('#div_bankeddate').text($(tr).find('td').eq(7).text());
+                        $('#tb_transactions_date').prop('readonly', true);
+                        //$('#div_banked').show();
+                        //$('#div_bankeddate').text($(tr).find('td').eq(7).text());
                     }
+
                 }
 
 
@@ -197,7 +201,8 @@
                     //height: 700,
                     width: mywidth,
                     modal: true,
-                    position: { my: "top", at: "centre top", of: "window" }
+                    position: { my: "top", at: "centre top" }
+
                 });
             });
 
@@ -233,7 +238,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_transactions_person_id">Person</label>
                     <div class="col-sm-8">
@@ -243,10 +247,6 @@
                         </select>
                     </div>
                 </div>
-
-
-
-
 
                 <div class="form-group">
                     <label for="tb_transactions_date" class="control-label col-sm-4">
@@ -261,6 +261,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_transactions_system">System</label>
                     <div class="col-sm-8">
@@ -269,6 +270,7 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_transactions_code">Code</label>
                     <div class="col-sm-8">
@@ -294,18 +296,21 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_transactions_amount">Amount</label>
                     <div class="col-sm-8">
                         <input id="tb_transactions_amount" name="tb_transactions_amount" type="text" class="form-control" />
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_transactions_note">Note</label>
                     <div class="col-sm-8">
                         <input id="tb_transactions_note" name="tb_transactions_note" type="text" class="form-control" />
                     </div>
                 </div>
+                <!--
                 <div class="form-group" id="div_banked">
                     <label for="tb_transactions_banked" class="control-label col-sm-4">
                         Banked
@@ -313,6 +318,7 @@
                     <div class="col-sm-8 align-text-bottom" id="div_bankeddate">
                     </div>
                 </div>
+                -->
             </div>
 
             <div id="dialog-kiwibank1" title="Kiwibank Transaction" style="display: none" class="form-horizontal">

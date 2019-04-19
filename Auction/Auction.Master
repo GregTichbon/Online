@@ -81,7 +81,7 @@
 
             <div class="jumbotron" style="background-color: white;">
                 <a href="default.aspx">
-                    <img src="<%: ResolveUrl("~/Images/TOHAuction.png") %>" /></a>
+                    <img src="<%: ResolveUrl("~/Images/WRAuction.png") %>" /></a>
                 <br />
             </div>
 

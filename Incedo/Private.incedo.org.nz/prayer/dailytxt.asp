@@ -25,6 +25,7 @@ function charsleft(line) {
 </script>
 </head>
 <body><p>Daily Prayer Texts</p><p>You can use ||UseFirstname|| in the message to include the recipient's name</p>
+    <p>Accented characters do not work.</p>
 <%
 if request.querystring("msg") <> "" then
 	response.write "<strong><font color=""#FF0000"" size=""+2"">" & request.querystring("msg") & "</font></strong>"
