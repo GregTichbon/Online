@@ -23,215 +23,222 @@ namespace UBC.People
 
         protected void Page_Load(object sender, EventArgs e)
         {
-       
-            if (Session["UBC_person_id"] == null)
+            /*
+                    ||folder|| and ||redirect|| requires changes to web.config
+                    <validation validateIntegratedModeConfiguration="false" />
+                    <httpErrors existingResponse="Replace" errorMode="Custom">
+                       <remove statusCode="404" subStatusCode="-1" />
+                       <error statusCode="404" prefixLanguageFilePath="" path="/main.aspx" responseMode="ExecuteURL" />
+                    </httpErrors>
+             */
+            if (!IsPostBack)
             {
-                Response.Redirect("~/people/security/login.aspx");
-            }
-            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
-            {
-                Response.Redirect("~/default.aspx");
-            }
-         
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-
-            Functions genericfunctions = new Functions();
-            Dictionary<string, string> functionoptions = new Dictionary<string, string>();
-            categories = "";
-            functionoptions.Clear();
-            functionoptions.Add("storedprocedure", "");
-            functionoptions.Add("usevalues", "");
-            categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
-
-
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd1 = new SqlCommand("Get_Communications", con);
-            cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = tb_event_id.Text;
-
-            cmd1.CommandType = CommandType.StoredProcedure;
-            cmd1.Connection = con;
-            //try
-            {
-                con.Open();
-                SqlDataReader dr = cmd1.ExecuteReader();
-                if (dr.HasRows)
+                if (Session["UBC_person_id"] == null)
                 {
-
-                    html = "<tr><td colspan=\"2\">Person</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Relations</td><td>Attendance</td>"; //<td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
-
-                    while (dr.Read())
-                    {
-                        string id = dr["person_id"].ToString();
-                        string name = dr["name"].ToString();
-                        string firstname = dr["firstname"].ToString();
-                        string facebook = dr["facebook"].ToString();
-                        string mobile = dr["mobile"].ToString();
-                        string email = dr["email"].ToString();
-                        string category = dr["category"].ToString();
-                        string categories = dr["categories"].ToString();
-                        string person_guid = dr["person_guid"].ToString();
-                        string attendance = dr["attendance"].ToString();
-                        string role = dr["role"].ToString();
-                        string relationships = dr["relationships"].ToString();
-
-
-                        string person = "<a href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
-                        string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
-
-                        string sendemail = "";
-                        //string sendemaillink = "";
-                        if (email != "")
-                        {
-                            string delim = "";
-                            //string[] emailsplit = email.Split('|');
-                            foreach(string emailsplit in email.Split('|'))
-                            {
-                                string address = emailsplit.Split('~')[0];
-                                string note = emailsplit.Split('~')[1];
-                                if (note != "")
-                                {
-                                    note = " - " + note;
-                                }
-                                sendemail += delim + "<input name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
-                                //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
-                                delim = "<br />";
-                            }
-                        }
-                        string sendtext = "";
-                        if (mobile != "")
-                        {
-                            string delim = "";
-                            //string[] mobilesplit = mobile.Split('|');
-                            foreach (string mobilesplit in mobile.Split('|'))
-                            {
-                                string number = mobilesplit.Split('~')[0];
-                                string note = mobilesplit.Split('~')[1];
-                                if (note != "")
-                                {
-                                    note = " - " + note;
-                                }
-                                sendtext = delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
-                                //mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
-                                delim = "<br />";
-                            }
-                        }
-
-                        string sendfacebook = "";
-                        string facebooklink = "";
-                        if (facebook != "")
-                        {
-                            sendfacebook = "<input id=\"cb_facebook_" + id + "\" name =\"cb_facebook_" + id + "\" type=\"checkbox\" />";
-                            facebooklink = "<a href=\"" + facebook + "\" target=\"Facebook\">Facebook</a>";
-                        }
-
-                        /*
-                    string sendcaregiveremail = "";
-                    string sendcaregiveremaillink = "";
-
-
-                    if (caregiveremail != "")
-                    {
-                        sendcaregiveremail = "<input id=\"cb_caregiveremail_" + id + "\" name =\"cb_caregiveremail_" + id + "\" type=\"checkbox\" />";
-                        sendcaregiveremaillink = "<a href=\"mailto:" + caregiveremail + "\">" + caregiveremail + "</a>";
-                    }
-                    string sendcaregivertext = "";
-                    if (caregivermobile != "")
-                    {
-                        sendcaregivertext = "<input id=\"cb_caregivertext_" + id + "\" name =\"cb_caregivertext_" + id + "\" type=\"checkbox\" />";
-                    }
-                    string sendcaregiverfacebook = "";
-                    string caregiverfacebooklink = "";
-                    if (caregiverfacebook != "")
-                    {
-                        sendcaregiverfacebook = "<input id=\"cb_caregiverfacebook_" + id + "\" name =\"cb_caregiverfacebook_" + id + "\" type=\"checkbox\" />";
-                        caregiverfacebooklink = "<a href=\"" + caregiverfacebook + "\" target=\"Facebook\">Facebook</a>";
-                    }
-
-*/
-                        /* ^Sibling^Ally Keenan^Ally^0278815431~^
-                          \^Child^Pip Keenan^Pip^0276955901~^pip_chris@xtra.co.nz~
-                          \^Child^Chris Keenan^Chris^0272187656~|Test~Test^pip_chris@xtra.co.nz~
-                        */
-                        //string rnote = "";
-                        //string rrelationship = "";
-                        //string rname = "";
-                        string rline = "";
-                        if (relationships != "")
-                        {
-                            foreach (string relation in relationships.Split('\\'))
-                            {
-                                string rid = relation.Split('^')[0];
-                                string rrelationship = relation.Split('^')[1];
-                                string rname = relation.Split('^')[2];
-                                string rfirstname = relation.Split('^')[3];
-                                string rnote = relation.Split('^')[4];
-                                if (rnote != "")
-                                {
-                                    rnote = " - " + rnote;
-                                }
-                                rline += "<b>" + rname + "</b> " + rrelationship + rnote + "<br />";
-
-                                string rphones = relation.Split('^')[5];
-                                if (rphones != "")
-                                {
-                                    foreach (string rphone in rphones.Split('|'))
-                                    {
-                                        string rphonenumber = rphone.Split('~')[0];
-                                        string rphonenote = rphone.Split('~')[1];
-                                        if (rphonenote != "")
-                                        {
-                                            rphonenote = " - " + rphonenote;
-                                        }
-                                        rline += "<input name =\"cb_rtext_" + id + "\" type=\"checkbox\"  value=\"" + rid + "|" + rfirstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
-                                    }
-                                }
-                                string remails = relation.Split('^')[6];
-                                if (remails != "")
-                                {
-                                    foreach (string remail in remails.Split('|'))
-                                    {
-                                        string remailaddress = remail.Split('~')[0];
-                                        string remailnote = remail.Split('~')[1];
-                                        if (remailnote != "")
-                                        {
-                                            remailnote = " - " + remailnote;
-                                        }
-                                        rline += "<input name =\"cb_remail_" + id + "\" type=\"checkbox\"  value=\"" + rid + "|" + rfirstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
-                                    }
-                                }
-                            }
-                        }
-
-
-                        html += "<tr class=\"tr_person\" data-category=\"" + categories + "\">";
-                        html += "<td>" + image + "</td>";
-                        //html += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + sendfacebook + "</td><td>" + firstname + " " + lastname + " - " + school + " (" + schoolyear + ")</td><td>" + facebooklink + "</td><td><a href=\"mailto:" + email + "\"</a>" + email + "</td><td>" + dr["mobile"] + "</td><td>" + caregivername + "</td><td>" + sendcaregiveremail + "</td><td>" + sendcaregivertext + "</td><td>" + caregiversendfacebook + "</td><td>" + caregiver + "</td>";
-                        //html += "<td>" + name + "</td><td>" + sendtext + " " + mobile + "</td><td>" + sendemail + " " + sendemaillink + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
-                        html += "<td>" + person + "</td><td>" + sendtext + "</td><td>" + sendemail + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
-                        html += "<td>" + rline + "</td>";
-
-                        //<td>" + caregivername + "</td><td>" + sendcaregivertext + " " + caregivermobile + "</td><td>" + sendcaregiveremail + " " + sendcaregiveremaillink + "</td><td>" + sendcaregiverfacebook + " " + caregiverfacebooklink + "</td><td>" + coming + "</td><td>" + modified + "</td>";
-                        html += "<td>" + attendance + "</td>";
-                        html += "</tr>" + "\r\n";
-                    }
+                    Response.Redirect("~/people/security/login.aspx");
+                }
+                if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                {
+                    Response.Redirect("~/default.aspx");
                 }
 
-                dr.Close();
+                string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+                Functions genericfunctions = new Functions();
+                Dictionary<string, string> functionoptions = new Dictionary<string, string>();
+                categories = "";
+                functionoptions.Clear();
+                functionoptions.Add("storedprocedure", "");
+                functionoptions.Add("usevalues", "");
+                categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+
+
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlCommand cmd1 = new SqlCommand("Get_Communications", con);
+                cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = tb_event_id.Text;
+
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Connection = con;
+                //try
+                {
+                    con.Open();
+                    SqlDataReader dr = cmd1.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+
+                        html = "<tr><td colspan=\"2\">Person</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Relations</td><td>Attendance</td>"; //<td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
+
+                        while (dr.Read())
+                        {
+                            string id = dr["person_id"].ToString();
+                            string name = dr["name"].ToString();
+                            string firstname = dr["firstname"].ToString();
+                            string facebook = dr["facebook"].ToString();
+                            string mobile = dr["mobile"].ToString();
+                            string email = dr["email"].ToString();
+                            string category = dr["category"].ToString();
+                            string categories = dr["categories"].ToString();
+                            string person_guid = dr["person_guid"].ToString();
+                            string attendance = dr["attendance"].ToString();
+                            string role = dr["role"].ToString();
+                            string relationships = dr["relationships"].ToString();
+
+
+                            string person = "<a href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
+                            string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
+
+                            string sendemail = "";
+                            //string sendemaillink = "";
+                            if (email != "")
+                            {
+                                string delim = "";
+                                //string[] emailsplit = email.Split('|');
+                                foreach (string emailsplit in email.Split('|'))
+                                {
+                                    string address = emailsplit.Split('~')[0];
+                                    string note = emailsplit.Split('~')[1];
+                                    if (note != "")
+                                    {
+                                        note = " - " + note;
+                                    }
+                                    sendemail += delim + "<input name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
+                                    //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
+                                    delim = "<br />";
+                                }
+                            }
+                            string sendtext = "";
+                            if (mobile != "")
+                            {
+                                string delim = "";
+                                //string[] mobilesplit = mobile.Split('|');
+                                foreach (string mobilesplit in mobile.Split('|'))
+                                {
+                                    string number = mobilesplit.Split('~')[0];
+                                    string note = mobilesplit.Split('~')[1];
+                                    if (note != "")
+                                    {
+                                        note = " - " + note;
+                                    }
+                                    sendtext = delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
+                                    //mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
+                                    delim = "<br />";
+                                }
+                            }
+
+                            string sendfacebook = "";
+                            string facebooklink = "";
+                            if (facebook != "")
+                            {
+                                sendfacebook = "<input id=\"cb_facebook_" + id + "\" name =\"cb_facebook_" + id + "\" type=\"checkbox\" />";
+                                facebooklink = "<a href=\"" + facebook + "\" target=\"Facebook\">Facebook</a>";
+                            }
+
+                            /*
+                        string sendcaregiveremail = "";
+                        string sendcaregiveremaillink = "";
+
+
+                        if (caregiveremail != "")
+                        {
+                            sendcaregiveremail = "<input id=\"cb_caregiveremail_" + id + "\" name =\"cb_caregiveremail_" + id + "\" type=\"checkbox\" />";
+                            sendcaregiveremaillink = "<a href=\"mailto:" + caregiveremail + "\">" + caregiveremail + "</a>";
+                        }
+                        string sendcaregivertext = "";
+                        if (caregivermobile != "")
+                        {
+                            sendcaregivertext = "<input id=\"cb_caregivertext_" + id + "\" name =\"cb_caregivertext_" + id + "\" type=\"checkbox\" />";
+                        }
+                        string sendcaregiverfacebook = "";
+                        string caregiverfacebooklink = "";
+                        if (caregiverfacebook != "")
+                        {
+                            sendcaregiverfacebook = "<input id=\"cb_caregiverfacebook_" + id + "\" name =\"cb_caregiverfacebook_" + id + "\" type=\"checkbox\" />";
+                            caregiverfacebooklink = "<a href=\"" + caregiverfacebook + "\" target=\"Facebook\">Facebook</a>";
+                        }
+
+    */
+                            /* ^Sibling^Ally Keenan^Ally^0278815431~^
+                              \^Child^Pip Keenan^Pip^0276955901~^pip_chris@xtra.co.nz~
+                              \^Child^Chris Keenan^Chris^0272187656~|Test~Test^pip_chris@xtra.co.nz~
+                            */
+                            //string rnote = "";
+                            //string rrelationship = "";
+                            //string rname = "";
+                            string rline = "";
+                            if (relationships != "")
+                            {
+                                foreach (string relation in relationships.Split('\\'))
+                                {
+                                    string rid = relation.Split('^')[0];
+                                    string rrelationship = relation.Split('^')[1];
+                                    string rname = relation.Split('^')[2];
+                                    string rfirstname = relation.Split('^')[3];
+                                    string rnote = relation.Split('^')[4];
+                                    if (rnote != "")
+                                    {
+                                        rnote = " - " + rnote;
+                                    }
+                                    rline += "<b>" + rname + "</b> " + rrelationship + rnote + "<br />";
+
+                                    string rphones = relation.Split('^')[5];
+                                    if (rphones != "")
+                                    {
+                                        foreach (string rphone in rphones.Split('|'))
+                                        {
+                                            string rphonenumber = rphone.Split('~')[0];
+                                            string rphonenote = rphone.Split('~')[1];
+                                            if (rphonenote != "")
+                                            {
+                                                rphonenote = " - " + rphonenote;
+                                            }
+                                            rline += "<input name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + rfirstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
+                                        }
+                                    }
+                                    string remails = relation.Split('^')[6];
+                                    if (remails != "")
+                                    {
+                                        foreach (string remail in remails.Split('|'))
+                                        {
+                                            string remailaddress = remail.Split('~')[0];
+                                            string remailnote = remail.Split('~')[1];
+                                            if (remailnote != "")
+                                            {
+                                                remailnote = " - " + remailnote;
+                                            }
+                                            rline += "<input name =\"cb_remail_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + rfirstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            html += "<tr class=\"tr_person\" data-category=\"" + categories + "\">";
+                            html += "<td>" + image + "</td>";
+                            //html += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + sendfacebook + "</td><td>" + firstname + " " + lastname + " - " + school + " (" + schoolyear + ")</td><td>" + facebooklink + "</td><td><a href=\"mailto:" + email + "\"</a>" + email + "</td><td>" + dr["mobile"] + "</td><td>" + caregivername + "</td><td>" + sendcaregiveremail + "</td><td>" + sendcaregivertext + "</td><td>" + caregiversendfacebook + "</td><td>" + caregiver + "</td>";
+                            //html += "<td>" + name + "</td><td>" + sendtext + " " + mobile + "</td><td>" + sendemail + " " + sendemaillink + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
+                            html += "<td>" + person + "</td><td>" + sendtext + "</td><td>" + sendemail + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
+                            html += "<td>" + rline + "</td>";
+
+                            //<td>" + caregivername + "</td><td>" + sendcaregivertext + " " + caregivermobile + "</td><td>" + sendcaregiveremail + " " + sendcaregiveremaillink + "</td><td>" + sendcaregiverfacebook + " " + caregiverfacebooklink + "</td><td>" + coming + "</td><td>" + modified + "</td>";
+                            html += "<td>" + attendance + "</td>";
+                            html += "</tr>" + "\r\n";
+                        }
+                    }
+
+                    dr.Close();
+                }
+
+                //catch (Exception ex)
+                {
+                    //throw ex;
+                }
+                //finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
             }
-
-            //catch (Exception ex)
-            {
-                //throw ex;
-            }
-            //finally
-            {
-                con.Close();
-                con.Dispose();
-            }
-
-
-
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
@@ -250,7 +257,6 @@ namespace UBC.People
             {
                 //Functions funcs = new Functions();
                 Generic.Functions gFunctions = new Generic.Functions();
-
 
                 string emailbodyTemplate = "RegisterEmail.xslt";
                 string emailBCC = "";
@@ -276,9 +282,7 @@ namespace UBC.People
                     SqlDataReader dr = cmd1.ExecuteReader();
                     if (dr.HasRows)
                     {
-
                         //html = "<tr><td>Student</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Caregiver</td><td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
-
                         while (dr.Read())
                         {
                             string id = dr["person_id"].ToString();
@@ -296,8 +300,6 @@ namespace UBC.People
                             string attendance = dr["attendance"].ToString();
                             string role = dr["role"].ToString();
                             string relationships = dr["relationships"].ToString();
-
-
                             //string emailtext = "";
                             string emailhtml = "";
                             string textmessage = "";
@@ -305,9 +307,8 @@ namespace UBC.People
 
                             string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + person_guid + "\" target=\"link\">Link</a>";
 
-                            if (Request.Form["cb_email_" + id]+"" != "")
+                            if (Request.Form["cb_email_" + id] + "" != "")
                             {
-
                                 string emailRecipient = Request.Form["cb_email_" + id];
 
                                 /*
@@ -333,8 +334,8 @@ namespace UBC.People
                                 emailhtml = emailhtml.Replace("||attendance||", attendance);
                                 emailhtml = emailhtml.Replace("||role||", role);
                                 emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
+                                emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
                                 emailhtml = emailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-
                                 emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
                                 /*
@@ -364,13 +365,10 @@ namespace UBC.People
 
                                 //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, emailtext, emailhtml, emailRecipient, emailBCC, "");
                                 gFunctions.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, emailhtml, emailRecipient, emailBCC, "");
-
-
                             }
                             if (Request.Form["cb_text_" + id] + "" != "")
                             {
                                 string mobiles = Request.Form["cb_text_" + id];
-
                                 textmessage = tb_txt.Text;
                                 textmessage = textmessage.Replace("||link||", link);
                                 textmessage = textmessage.Replace("||firstname||", firstname);
@@ -380,6 +378,7 @@ namespace UBC.People
                                 textmessage = textmessage.Replace("||attendance||", attendance);
                                 textmessage = textmessage.Replace("||role||", role);
                                 textmessage = textmessage.Replace("||folder||", "Folder" + id);
+                                textmessage = textmessage.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
                                 textmessage = textmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
                                 foreach (string mobile in mobiles.Split(';'))
                                 {
@@ -393,7 +392,6 @@ namespace UBC.People
                                 facebookmessage = tb_textbody.Text;
                                 facebookmessage = facebookmessage.Replace("||link||", link);
                                 facebookmessage = facebookmessage.Replace("||firstname||", firstname);
-
                                 facebookmessage = facebookmessage.Replace("||accesscode||", person_guid.Substring(0, 5));
                                 facebookmessage = facebookmessage.Replace("||username||", username);
                                 facebookmessage = facebookmessage.Replace("||tempphrase||", tempphrase);
@@ -401,11 +399,8 @@ namespace UBC.People
                                 facebookmessage = facebookmessage.Replace("||role||", role);
                                 facebookmessage = facebookmessage.Replace("||folder||", "Folder" + id);
                                 facebookmessage = facebookmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-
                                 html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + facebookmessage + "</textarea>";
                             }
-
-
 
                             if (emailhtml != "" || textmessage != "" || facebookmessage != "")
                             {
@@ -415,14 +410,11 @@ namespace UBC.People
                                 cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = Request.Form["cb_email_" + id] + "<br />" + emailhtml;
                                 cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = Request.Form["cb_text_" + id] + "<br />" + textmessage;
                                 cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = Request.Form["cb_facebook_" + id] + "<br />" + facebookmessage;
-
                                 cmd2.CommandType = CommandType.StoredProcedure;
                                 cmd2.Connection = con;
-
                                 //con.Open();
                                 string result = cmd2.ExecuteScalar().ToString();
                                 //SqlDataReader dr2 = cmd1.ExecuteReader();
-
                                 cmd2.Dispose();
                             }
 
@@ -433,101 +425,104 @@ namespace UBC.People
                             string remailhtml = "";
                             string rtextmessage = "";
                             string rfacebookmessage = "";
-
-
-                            if (Request.Form["cb_remail_" + id] + "" != "")
+                            if (relationships != "")
                             {
-                                string[] remailsplit = Request.Form["cb_remail_" + id].Split('|');
-                                string rid = remailsplit[0];
-                                string rfirstname = remailsplit[1];
-                                string remailRecipient = remailsplit[2].Split('~')[0];
-
-                                /*
-                                remailtext = tb_rtextbody.Text;
-                                remailtext = remailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
-                                remailtext = remailtext.Replace("||firstname||", firstname);
-                                remailtext = remailtext.Replace("||rfirstname||", rfirstname);
-
-                                remailtext = remailtext.Replace("||folder||", "Folder" + id);
-                                remailtext = remailtext.Replace("||rfolder||", "Folder" + rid);
-
-                                remailtext = remailtext.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-                                */
-                                remailhtml = tb_rhtmlbody.Text;
-                                remailhtml = remailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
-                                remailhtml = remailhtml.Replace("||firstname||", firstname);
-                                remailhtml = remailhtml.Replace("||rfirstname||", rfirstname);
-
-                                remailhtml = remailhtml.Replace("||folder||", "Folder" + id);
-                                remailhtml = remailhtml.Replace("||rfolder||", "Folder" + rid);
-                                remailhtml = remailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-
-                                remailhtml = "<html><head></head><body>" + remailhtml + "</body></html>";
-
-                                //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, remailtext, remailhtml, remailRecipient, remailBCC, "");
-                                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, remailhtml, remailRecipient, remailBCC, "");
-                            }
-                            
-                            if (Request.Form["cb_rtext_" + id] + "" != "")
-                            {
-                                string[] rmobilessplit = Request.Form["cb_rtext_" + id].Split('|');
-                                string rid = rmobilessplit[0];
-                                string rfirstname = rmobilessplit[1];
-                                string rmobile = rmobilessplit[2].Split('~')[0];
-
-                                string mobiles = Request.Form["cb_rtext_" + id];
-
-                                rtextmessage = tb_rtxt.Text;
-                                rtextmessage = rtextmessage.Replace("||link||", link);
-                                rtextmessage = rtextmessage.Replace("||firstname||", firstname);
-                                rtextmessage = rtextmessage.Replace("||rfirstname||", rfirstname);
-
-                                rtextmessage = rtextmessage.Replace("||folder||", "Folder" + id);
-                                rtextmessage = rtextmessage.Replace("||rfolder||", "Folder" + rid);
-
-                                rtextmessage = rtextmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-                                foreach (string mobile in rmobile.Split(';'))
+                                foreach (string relation in relationships.Split('\\'))
                                 {
-                                    //gFunctions.SendMessage(mobile, rtextmessage);
-                                    response += gFunctions.SendRemoteMessage(mobile, rtextmessage, "UBC Communications - Relation");
+                                    string rid = relation.Split('^')[0];
+
+                                    if (Request.Form["cb_remail_" + rid] + "" != "")
+                                    {
+                                        string[] remailsplit = Request.Form["cb_remail_" + rid].Split('|');
+                                        string rfirstname = remailsplit[1];
+                                        string remailRecipient = remailsplit[2].Split('~')[0];
+
+                                        /*
+                                        remailtext = tb_rtextbody.Text;
+                                        remailtext = remailtext.Replace("||link||", "<a href=\"" + link + "\">here</a>");
+                                        remailtext = remailtext.Replace("||firstname||", firstname);
+                                        remailtext = remailtext.Replace("||rfirstname||", rfirstname);
+
+                                        remailtext = remailtext.Replace("||folder||", "Folder" + id);
+                                        remailtext = remailtext.Replace("||rfolder||", "Folder" + rid);
+
+                                        remailtext = remailtext.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+                                        */
+                                        remailhtml = tb_rhtmlbody.Text;
+                                        remailhtml = remailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
+                                        remailhtml = remailhtml.Replace("||firstname||", firstname);
+                                        remailhtml = remailhtml.Replace("||rfirstname||", rfirstname);
+                                        remailhtml = remailhtml.Replace("||folder||", "Folder" + rid);
+                                        remailhtml = remailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + rid + "/redirect.aspx?url=");
+                                        remailhtml = remailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+
+                                        remailhtml = "<html><head></head><body>" + remailhtml + "</body></html>";
+
+                                        //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, remailtext, remailhtml, remailRecipient, remailBCC, "");
+                                        gFunctions.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, remailhtml, remailRecipient, remailBCC, "");
+                                    }
+
+                                    if (Request.Form["cb_rtext_" + rid] + "" != "")
+                                    {
+                                        string[] rmobilessplit = Request.Form["cb_rtext_" + rid].Split('|');
+                                        string rfirstname = rmobilessplit[1];
+                                        string rmobile = rmobilessplit[2].Split('~')[0];
+
+                                        //string mobiles = Request.Form["cb_rtext_" + id];
+
+                                        rtextmessage = tb_rtxt.Text;
+                                        rtextmessage = rtextmessage.Replace("||link||", link);
+                                        rtextmessage = rtextmessage.Replace("||firstname||", firstname);
+                                        rtextmessage = rtextmessage.Replace("||rfirstname||", rfirstname);
+                                        rtextmessage = rtextmessage.Replace("||folder||", "Folder" + rid);
+                                        rtextmessage = rtextmessage.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + rid + "/redirect.aspx?url=");
+                                        rtextmessage = rtextmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+                                        foreach (string mobile in rmobile.Split(';'))
+                                        {
+                                            //gFunctions.SendMessage(mobile, rtextmessage);
+                                            response += gFunctions.SendRemoteMessage(mobile, rtextmessage, "UBC Communications - Relation");
+                                        }
+                                    }
+
+                                    if (Request.Form["cb_rfacebook_" + rid] == "on")
+                                    {
+                                        string[] rfacebooksplit = Request.Form["cb_rtext_" + rid].Split('|');
+                                        string rfirstname = rfacebooksplit[1];
+
+                                        rfacebookmessage = tb_textbody.Text;
+                                        rfacebookmessage = rfacebookmessage.Replace("||link||", link);
+                                        rfacebookmessage = rfacebookmessage.Replace("||firstname||", firstname);
+                                        rfacebookmessage = rfacebookmessage.Replace("||rfirstname||", rfirstname);
+                                        rfacebookmessage = rfacebookmessage.Replace("||folder||", "Folder" + id);
+                                        rfacebookmessage = rfacebookmessage.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + rid + "/redirect.aspx?url=");
+                                        rfacebookmessage = rfacebookmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+
+                                        html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + rfacebookmessage + "</textarea>";
+                                    }
+
+                                    /*
+
+                                    if (remailhtml != "" || rtextmessage != "" || rfacebookmessage != "")
+                                    {
+                                        SqlCommand cmd2 = new SqlCommand("Insert_Person_communication", con);
+                                        cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = rid;
+                                        cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />"; // + remailtext;
+                                        cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />" + remailhtml;
+                                        cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = Request.Form["cb_rtext_" + id] + "<br />" + rtextmessage;
+                                        cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = Request.Form["cb_rfacebook_" + id] + "<br />" + rfacebookmessage;
+
+                                        cmd2.CommandType = CommandType.StoredProcedure;
+                                        cmd2.Connection = con;
+
+                                        //con.Open();
+                                        string result = cmd2.ExecuteScalar().ToString();
+                                        //SqlDataReader dr2 = cmd1.ExecuteReader();
+
+                                        cmd2.Dispose();
+                                    }
+                                    */
                                 }
                             }
-
-                            if (Request.Form["cb_rfacebook_" + id] == "on")
-                            {
-                                rfacebookmessage = tb_textbody.Text;
-                                rfacebookmessage = rfacebookmessage.Replace("||link||", link);
-                                rfacebookmessage = rfacebookmessage.Replace("||firstname||", firstname);
-
-                                rfacebookmessage = rfacebookmessage.Replace("||folder||", "Folder" + id);
-
-                                rfacebookmessage = rfacebookmessage.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-
-                                html_facebook += "<button data-link=\"" + facebook + "\" type=\"button\" class=\"fb_clipboard\"> GO </button><textarea>" + rfacebookmessage + "</textarea>";
-                            }
-
-                            /*
-                           
-                            if (remailhtml != "" || rtextmessage != "" || rfacebookmessage != "")
-                            {
-                                SqlCommand cmd2 = new SqlCommand("Insert_Person_communication", con);
-                                cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = rid;
-                                cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />"; // + remailtext;
-                                cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = Request.Form["cb_remail_" + id] + "<br />" + remailhtml;
-                                cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = Request.Form["cb_rtext_" + id] + "<br />" + rtextmessage;
-                                cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = Request.Form["cb_rfacebook_" + id] + "<br />" + rfacebookmessage;
-
-                                cmd2.CommandType = CommandType.StoredProcedure;
-                                cmd2.Connection = con;
-
-                                //con.Open();
-                                string result = cmd2.ExecuteScalar().ToString();
-                                //SqlDataReader dr2 = cmd1.ExecuteReader();
-
-                                cmd2.Dispose();
-                            }
-                            */
-                         
 
                             //-------------------------------------------------------------RELATIONSHIPS END-----------------------------
                             #endregion

@@ -93,7 +93,8 @@
                     ||tempphrase||
          <br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in <a href="http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf">http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
+                    ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+                    ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />
                     Email messages will not be sent where there is no email subject<br />
@@ -124,7 +125,8 @@
                     ||tempphrase||
          <br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in <a href="http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf">http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
+                    ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+                    ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />
                     Email messages will not be sent where there is no email subject<br />

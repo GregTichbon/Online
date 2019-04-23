@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace UBC
 {
+    //Configure in IIS | Error Pages | 404 | Execute URL | /main.aspx 
     public partial class Main : System.Web.UI.Page
     {
         public string url;
@@ -65,9 +66,6 @@ namespace UBC
                     con.Close();
                     con.Dispose();
                 }
-
-
-
 
                 Response.Redirect(newurl);
             }
