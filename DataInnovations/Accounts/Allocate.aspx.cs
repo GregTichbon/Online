@@ -13,7 +13,7 @@ namespace DataInnovations.Accounts
     public partial class Allocate : System.Web.UI.Page
     {
 
-        public string[] codes = new string[5] { "Personal", "Reimburse", "Company", "Family Trust", "Transfer" };
+        //public string[] codes = new string[5] { "Personal", "Reimburse", "Company", "Family Trust", "Transfer" };
 
         public string html_transactions = "";
 
@@ -47,16 +47,31 @@ namespace DataInnovations.Accounts
             while (dr.Read())
             {
                 string account = dr[1].ToString();
+                string accountid = "X";
                 if(account.EndsWith("-6216"))
                 {
-                    account = "Credit Card - Greg";
-                }else if(account.EndsWith("-8503"))
+                    account = "ANZ - Credit Card - Greg";
+                    accountid = "D1";
+                }
+                else if(account.EndsWith("-8503"))
                 {
-                    account = "Credit Card - Judy";
+                    account = "ANZ - Credit Card - Judy";
+                    accountid = "D2";
                 }
                 else if(account == "06-0996-0956968-00")
                 {
                     account = "ANZ - General";
+                    accountid = "D3";
+                }
+                else if (account == "06-0583-0966770-00")
+                {
+                    account = "ANZ - Family Trust";
+                    accountid = "D4";
+                }
+                else if (account == "4367-****-****-7610")
+                {
+                    account = "ANZ - Credit Card";
+                    accountid = "D5";
                 }
 
                 string type = dr[2].ToString();
@@ -71,22 +86,24 @@ namespace DataInnovations.Accounts
                         {
                             particulars = "Card - Judy";
                             code = "";
+                            accountid += " J";
                         }
                         else if (code.StartsWith("6216"))
                         {
                             particulars = "Card - Greg";
                             code = "";
+                            accountid += " G";
                         }
                     }
                 }
-                string allocated = "";
+                string allocated = " unallocated";
                 if(Convert.ToDecimal(dr[7].ToString()) == Convert.ToDecimal(dr[9].ToString())) {
                     allocated = " allocated";
                 }
 
-                html_transactions += "<tr class=\"select" + allocated + "\" id=\"" + dr[0].ToString() + "\">";
+                html_transactions += "<tr class=\"select" + allocated + " " + accountid + "\" id=\"" + dr[0].ToString() + "\">";
                 html_transactions += "<td>" + account + "</td>";
-                html_transactions += "<td>" + DateTime.Parse(dr[8].ToString()).ToString("dd-MMM-yyyy") + "</td>";  
+                html_transactions += "<td>" + DateTime.Parse(dr[8].ToString()).ToString("ddd dd-MMM-yyyy") + "</td>";  
                 html_transactions += "<td>" + type + "</td>";
                 html_transactions += "<td>" + dr[3].ToString() + "</td>";
 

@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,58 +17,40 @@ namespace iti.ninja
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
-            if (1 == 2)
-            {
-                Literal1.Text = Common.Functions.test() + "<br />" + Request.Url.ToString();
-            }
-            else
-            {
-            */
-            string url = Request.Url.ToString().Substring(54);
-            //http://iti.ninja/default.aspx?404;http://iti.ninja:80/
-            //Literal1.Text = Request.Url.AbsolutePath + "<br />" + Request.Url.AbsoluteUri + "<br />" + Request.Url.LocalPath + "<br />" + Request.Url.PathAndQuery;
-            int firstdelim = (url + "/").IndexOf("/");
-            string main = url.Substring(0, firstdelim).ToUpper();
-            string extra = url.Substring(firstdelim);
+            string link = Request.Url.ToString();
             string redirect = "";
-            switch (main)
+
+            string strConnString = "Data Source=localhost\\MSSQLSERVER2016;Initial Catalog=Iti_Ninja;Integrated Security=False;user id=iti_ninja;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd = new SqlCommand("Action_Redirection", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@link", SqlDbType.VarChar).Value = link;
+            cmd.Connection = con;
+            try
             {
-                case "ACO":
-                    redirect = "http://wdc.whanganui.govt.nz/online/administration/aco/";
-                    break;
-                case "WDCO":
-                    redirect = "http://wdc.whanganui.govt.nz/online/";
-                    break;
-                case "WDCOT":
-                    redirect = "http://wdc.whanganui.govt.nz/onlinetest/";
-                    break;
-                case "MAADI":
-                    redirect = "http://datainn.co.nz/maadi/";
-                    break;
-                case "TOHTSHIRT":
-                    //redirect = "https://www.facebook.com/teorahou.whanganui/";
-                    redirect = "http://whanganui.teorahou.org.nz/TOHTShirt";
-                    break;
-                case "LTR":
-                    redirect = "http://office.datainn.co.nz/ubc/ltr.pdf";
-                    break;
-                case "C":
-                    redirect = "http://wdc.whanganui.govt.nz/onlinetest/Cemetery/DataMatching/Walk2.aspx";
-                    break;
-                default:
-                    Literal1.Text = main + " Not found"; // Common.Functions.test();
-                    break;
+                SqlDataReader dr = cmd.ExecuteReader();
+                if(dr.HasRows) {
+                    dr.Read();
+                    redirect = dr["url"].ToString();
+                }
+                dr.Close();
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            //lit_Error.Text = link;
             if (redirect != "")
             {
-                redirect += extra;
                 Response.Redirect(redirect);
-                //Literal1.Text = redirect;
             }
-            /*
-             }
-             */
         }
     }
 }

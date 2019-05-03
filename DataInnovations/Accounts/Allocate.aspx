@@ -95,7 +95,7 @@
                     //height: 700,
                     width: mywidth,
                     modal: true,
-                    position: { my: "top", at: "centre" }
+                    position: { my: "centre", at: "centre", of: window }
                 });
             });
 
@@ -154,11 +154,19 @@
                         $('#' + id).find('td').eq(8).text(total);
 
                         if (fullamount == total) {
-                            $(transaction_tr).addClass('allocated');
+                            $(transaction_tr).removeClass("unallocated").addClass("allocated");
                         } else {
-                            $(transaction_tr).removeClass('allocated');
-
+                            $(transaction_tr).removeClass("allocated").addClass("unallocated");
                         }
+                        allocatedclass = $("#selectallocated").val();
+                        accountclass = $("#selectaccount").val();
+
+                        if (($(transaction_tr).hasClass(accountclass) || accountclass == 'All') && $(transaction_tr).hasClass(allocatedclass)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                        //showhide(); //this might be slow
 
                         $(this).dialog("close");
                         var arForm = [{ "name": "Transactions_Items_ID", "value": itemid }, { "name": "Transactions_ID", "value": id }, { "name": "area", "value": area }, { "name": "note", "value": note }, { "name": "amount", "value": amount }];
@@ -219,19 +227,49 @@
                 $("#dialog_allocate").dialog('option', 'buttons', myButtons);
             })
 
-            $('#show').click(function () {
-                $(".allocated").attr('class', 'allocatedX');
-            })
-            $('#hide').click(function () {
-                $(".allocatedX").attr('class', 'allocated');
-            })
+            $("#selectallocated").change(function () {
+                showhide()
+            });
+
+            $("#selectaccount").change(function () {
+                showhide()
+            });
+
+            function showhide() {
+                allocatedclass = $("#selectallocated").val();
+                accountclass = $("#selectaccount").val();
+                $('.select').each(function () {
+                    if (($(this).hasClass(accountclass) || accountclass == 'All') && $(this).hasClass(allocatedclass)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                })
+            }
+
         }); //document.ready
+
+
+
     </script>
 
 </head>
 <body>
     <form id="form1" runat="server">
-        Allocated: <span id="show">Show</span> | <span id="hide">Hide</span>
+        Show: <select id="selectallocated">
+            <option value="unallocated">Unallocated</option>
+            <option value="allocated">Allocated</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select id="selectaccount">
+            <option value="All">All</option>
+            <option value="D5">ANZ - Credit Card</option>
+            <option value="D1">ANZ - Credit Card - Greg</option>
+            <option value="D2">ANZ - Credit Card - Judy</option>
+            <option value="D3">ANZ - General</option>
+            <option value="D4">ANZ - Family Trust</option>
+            <option value="J">Card - Judy</option>
+            <option value="G">Card - Greg</option>
+        </select>
         <% = html_transactions %>
         <div id="dialog_items" title="Allocate" style="display: none" class="form-horizontal">
             <div id="div_items"></div>
@@ -252,6 +290,9 @@
                                 <option>Koha (Tax deductible)</option>
                                 <option>Transfer</option>
                                 <option>Income (To be declared)</option>
+                                <option>Financial Charge (To be claimed)</option>
+                                <option>Tax</option>
+                                <option>Opening Balance</option>
                             </select></td>
                     </tr>
                     <tr>

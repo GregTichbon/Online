@@ -120,7 +120,7 @@
                     {
                         title: "Purchase", formatter: actPurchase, cellClick: function (e, cell) {
                             var guid = cell.getRow().getData().Guid;
-                            window.open("UBC2019A.aspx?id=" + guid, "RaffleWindow");
+                            window.open("UBC2019A/ticket.aspx?id=" + guid, "RaffleWindow");
                         }
                     },
                     { title: "Open Date", field: "OpenDate", editor: dateEditor },

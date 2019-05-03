@@ -69,6 +69,8 @@
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
     <Content Include="packages.config" />
+    <Content Include="Posts.asmx" />
+    <Content Include="tracker.aspx" />
     <Content Include="x\default.aspx" />
     <Content Include="Dependencies\DownCount\bower.json" />
     <Content Include="Dependencies\DownCount\downCount.jquery.json" />
@@ -94,7 +96,18 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tracker.aspx.cs">
+      <DependentUpon>tracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tracker.aspx.designer.cs">
+      <DependentUpon>tracker.aspx</DependentUpon>
+    </Compile>
     <Compile Include="x\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

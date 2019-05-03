@@ -52,6 +52,7 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="QRCoder, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QRCoder.1.3.5\lib\net40\QRCoder.dll</HintPath>
     </Reference>
@@ -184,6 +185,7 @@
     <Content Include="Raffles\Communicate.aspx" />
     <Content Include="Raffles\CommunicateWinners.aspx" />
     <Content Include="Raffles\Control.aspx" />
+    <Content Include="Raffles\Data.aspx" />
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Images\3logos.jpg" />
     <Content Include="Raffles\Images\ChefsChoiceWinningTicket2019A.jpg" />
@@ -205,12 +207,14 @@
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
     <Content Include="Raffles\Raffles.aspx" />
     <Content Include="Raffles\Spinner.aspx" />
-    <Content Include="Raffles\UBC2019A.aspx" />
+    <Content Include="Raffles\Test-iti-post.aspx" />
     <Content Include="Raffles\UBC2019ALogin.aspx" />
     <Content Include="Raffles\UBC2019AMessage.aspx" />
     <Content Include="Raffles\UBC2019Avoucher.aspx" />
     <Content Include="Raffles\UBC2019AWinner.aspx" />
     <Content Include="Raffles\UBC2019AWinnerVoucher.aspx" />
+    <Content Include="Raffles\UBC2019A\Default.aspx" />
+    <Content Include="Raffles\UBC2019A\Ticket.aspx" />
     <Content Include="Row\data.asmx" />
     <Content Include="Row\data.aspx" />
     <Content Include="Row\Default.aspx" />
@@ -229,6 +233,8 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
+    <Content Include="SMS\data.aspx" />
+    <Content Include="SMS\posts.asmx" />
     <Content Include="SMS\Receive\Acknowledge.aspx" />
     <Content Include="SMS\Receive\Default.aspx" />
     <Content Include="SMS\Send\Form.aspx" />
@@ -480,6 +486,13 @@
       <DependentUpon>Data.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Raffles\Data.aspx.cs">
+      <DependentUpon>Data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Data.aspx.designer.cs">
+      <DependentUpon>Data.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Details.aspx.cs">
       <DependentUpon>Details.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -561,19 +574,19 @@
     <Compile Include="Raffles\Spinner.aspx.designer.cs">
       <DependentUpon>Spinner.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\Test-iti-post.aspx.cs">
+      <DependentUpon>Test-iti-post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\Test-iti-post.aspx.designer.cs">
+      <DependentUpon>Test-iti-post.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Raffles\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Raffles\UBC2019A.aspx.cs">
-      <DependentUpon>UBC2019A.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Raffles\UBC2019A.aspx.designer.cs">
-      <DependentUpon>UBC2019A.aspx</DependentUpon>
     </Compile>
     <Compile Include="Raffles\UBC2019ALogin.aspx.cs">
       <DependentUpon>UBC2019ALogin.aspx</DependentUpon>
@@ -609,6 +622,20 @@
     </Compile>
     <Compile Include="Raffles\UBC2019AWinnerVoucher.aspx.designer.cs">
       <DependentUpon>UBC2019AWinnerVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\UBC2019A\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019A\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\UBC2019A\Ticket.aspx.cs">
+      <DependentUpon>Ticket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019A\Ticket.aspx.designer.cs">
+      <DependentUpon>Ticket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
@@ -692,6 +719,13 @@
       <DependentUpon>SMSService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SMS\data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SMS\log.aspx.cs">
       <DependentUpon>log.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -705,6 +739,10 @@
     </Compile>
     <Compile Include="SMS\Maadi.aspx.designer.cs">
       <DependentUpon>Maadi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\posts.asmx.cs">
+      <DependentUpon>posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SMS\Receive\Acknowledge.aspx.cs">
       <DependentUpon>Acknowledge.aspx</DependentUpon>

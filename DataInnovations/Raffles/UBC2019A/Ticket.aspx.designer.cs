@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataInnovations.SMS {
+namespace DataInnovations.Raffles.UBC2019A {
     
     
-    public partial class log {
+    public partial class Ticket {
         
         /// <summary>
         /// form1 control.
@@ -20,5 +20,14 @@ namespace DataInnovations.SMS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// LitRows2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LitRows2;
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="iti.ninja._default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Test-iti-post.aspx.cs" Inherits="DataInnovations.Raffles.Test_iti_post" %>
 
 <!DOCTYPE html>
 
@@ -9,7 +9,6 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Literal ID="lit_Error" runat="server"></asp:Literal>
         </div>
     </form>
 </body>

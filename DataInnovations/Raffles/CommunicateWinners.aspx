@@ -57,10 +57,11 @@
         ||ticketnumber||<br />
                              ||guid||<br />
         ||identifier||<br />
+        ||voucher||<br />
         <br />
 &nbsp;<asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
 Your ticket, ||identifier||/||ticketnumber||, is a winner in the Maadi rowing raffle.
-Please go to: http://office.datainn.co.nz/raffles/images/vouchers//||guid||.jpg to viewdownload your Chef's Choice Voucher.
+Please go to: ||voucher|| to view/download your Chef's Choice Voucher.
 Thanks for your support.
 Please contact Greg (0272495088) if you need assistance.
       </asp:TextBox>

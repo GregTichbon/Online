@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -230,6 +232,23 @@ end if
             return html;
         }
 
+        private Bitmap ResizeBitmap(Bitmap image, int nWidth, int nHeight)
+        {
+            int originalWidth = image.Width;
+            int originalHeight = image.Height;
+            float percentWidth = (float)nWidth / (float)originalWidth;
+            float percentHeight = (float)nHeight / (float)originalHeight;
+            float percent = percentHeight < percentWidth ? percentHeight : percentWidth;
+            int newWidth = (int)(originalWidth * percent);
+            int newHeight = (int)(originalHeight * percent);
+
+            Bitmap result = new Bitmap(newWidth, newHeight);
+            result.SetResolution(96, 96);
+            using (Graphics g = Graphics.FromImage((System.Drawing.Image)result))
+                g.DrawImage(image, 0, 0, newWidth, newHeight);
+            return result;
+        }
+
         protected void btn_submit_Click(object sender, EventArgs e)
         {
             string item_ctr = Request.Form["item_ctr"];
@@ -400,16 +419,20 @@ end if
                     int c1 = 0;
                     string newfilename = "";
                     string wpextension = System.IO.Path.GetExtension(postedFile.FileName);
-                    string wpfilename = System.IO.Path.GetFileNameWithoutExtension(postedFile.FileName);
+                    //string wpfilename = System.IO.Path.GetFileNameWithoutExtension(postedFile.FileName);
 
                     do
                     {
                         c1++;
-                        newfilename = wpfilename + "_" + c1.ToString("000") + wpextension;
+                        newfilename = "Img_" + c1.ToString("000") + wpextension;
                     } while (File.Exists(newfilename));
 
-                    postedFile.SaveAs(path + "\\" + newfilename);
                     postedFile.SaveAs(originalpath + "\\" + newfilename);
+
+                    System.Drawing.Image bm = System.Drawing.Image.FromStream(postedFile.InputStream);
+                    bm = ResizeBitmap((Bitmap)bm, 100, 100); /// new width, height
+                    bm.Save(path + "\\" + newfilename, ImageFormat.Jpeg);
+
                 }
             }
             /*

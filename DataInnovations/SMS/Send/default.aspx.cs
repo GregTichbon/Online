@@ -38,6 +38,7 @@ namespace SMSChecker
             Operation = Request.QueryString["O"] ?? "";
             PhoneNumber = Request.QueryString["P"] ?? "";
             Message = Request.QueryString["M"] ?? "";
+            Message = Message.Replace("^^", "&");
             SendMessage();
         }
 
@@ -102,6 +103,7 @@ namespace SMSChecker
                     con.Close();
                 }
 
+                Message = HttpUtility.UrlEncode(Message);
                 WebRequest wr = WebRequest.Create("http://192.168.10.21:8080/?number=" + PhoneNumber + "&text=" + Message);
                 wr.Timeout = 3500;
 

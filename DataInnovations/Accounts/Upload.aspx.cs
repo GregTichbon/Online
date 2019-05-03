@@ -26,8 +26,9 @@ namespace DataInnovations.Accounts
             //string datetimestamp = new DateTime().ToString("ddMMyyHHmmss");
 
             string datetimestamp = DateTime.Now.ToString("ddMMyyHHmmss");
-
-            string filename = Server.MapPath("Uploads\\Bank") + "\\" + datetimestamp + fu_bankfile.FileName;
+            string extension = Path.GetExtension(fu_bankfile.FileName);
+            string filename = Path.GetFileNameWithoutExtension(fu_bankfile.FileName);
+            filename = Server.MapPath("Uploads\\Bank") + "\\" + filename + "_" + datetimestamp + "." + extension;
 
             fu_bankfile.SaveAs(filename);
             try

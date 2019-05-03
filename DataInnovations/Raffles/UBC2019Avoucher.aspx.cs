@@ -16,6 +16,7 @@ namespace DataInnovations.Raffles
         protected void Page_Load(object sender, EventArgs e)
         {
             string guid = Request.QueryString["id"] ?? "";
+            string[] status_values = new string[6] { "Winner", "Notified", "Ordered", "Collected", "Invoiced", "Paid" };
 
             if (Request.Cookies["chefschoiceaccess"] == null)
             {
@@ -32,7 +33,16 @@ namespace DataInnovations.Raffles
                 SqlCommand cmd = new SqlCommand();
                 if (guid == "")
                 {
-                    html += "<table><thead><tr><th>Draw</th><th>Ticket</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr></thead><tbody>";
+                    string filter = "Show ==> ";
+                    foreach(string status in status_values)
+                    {
+                        filter += "&nbsp;&nbsp;&nbsp;&nbsp;<input checked type=\"checkbox\" value=\"" + status + "\" /> " + status;
+                    }
+
+                    html += "<table><thead>";
+                    html += "<tr><th colspan=\"6\">" + filter + "</th></tr>";
+
+                    html += "<tr><th>Ticket Reference</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr></thead><tbody>";
 
                     cmd = new SqlCommand("Get_Raffle_Winners", con);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -61,7 +71,7 @@ namespace DataInnovations.Raffles
                                 email = "<a href=\"mailto:" + email + "\">" + email + "</a>";
                             }
 
-                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + " " + draw + "</a></td><td>" + ticketnumber + "</td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + status + "</td></tr>";
+                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a></td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + status + "</td></tr>";
                         }
 
                         html += "</tbody></table>";
@@ -112,9 +122,9 @@ namespace DataInnovations.Raffles
                             html += "<input type=\"hidden\" id=\"hf_id\" value=\"" + raffleWinner_ID + "\">";
                             html += "<div class=\"bigfont\">";
                             html += "<table>";
-                            html += "<tr><td>Draw</td><td>" + identifier + "/" + draw + "</td></tr>";
+                            html += "<tr><td>Ticket Reference</td><td>" + identifier + "/" + draw + " Ticket " + ticketnumber + "</td></tr>";
 
-                            html += "<tr><td>Ticket </td><td>" + ticketnumber + "</td></tr>";
+                            //html += "<tr><td>Ticket </td><td>" + ticketnumber + "</td></tr>";
                             html += "<tr><td>Name </td><td>" + name + "</td></tr>";
                             if(email != "")
                             {
@@ -127,7 +137,6 @@ namespace DataInnovations.Raffles
                             html += "<tr><td>Status</td><td>";
                             //html += status;
                             Functions genericfunctions = new Functions();
-                            string[] status_values = new string[3] { "Winner", "Ordered", "Collected" };
                             html += "<select class=\"bigfont\" id=\"sel_status\">";
                             html += Functions.populateselect(status_values, status, "None");
                             html += "</select>";

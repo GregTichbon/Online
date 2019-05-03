@@ -43,6 +43,7 @@ namespace DataInnovations.MeetingScheduler
                     if (btn_submit.Text != "Send")
                     {
                         Lit_html.Text = "<tr><td>Send Email</td><td>Send Text</td><td>Social</td><td>Name</td><td>URL</td><td>Email Address</td><td>Mobile</td></tr>";
+                        allemail = "";
                     }
                     while (dr.Read())
                     {
@@ -66,6 +67,7 @@ namespace DataInnovations.MeetingScheduler
 
                         if (btn_submit.Text == "Send")
                         {
+                            string response = "";
                             if (Request.Form["cb_email_" + id] == "on")
                             {
                                 string emailtext = tb_textbody.Text;
@@ -118,7 +120,9 @@ namespace DataInnovations.MeetingScheduler
                                 textmessage = textmessage.Replace("||link||", link);
                                 textmessage = textmessage.Replace("||greeting||", greeting);
                                 textmessage = textmessage.Replace("||title||", title);
-                                funcs.SendMessage(mobile, textmessage);
+                                //funcs.SendMessage(mobile, textmessage);
+                                response += funcs.SendRemoteMessage(mobile, textmessage, "Meeting Scheduler");
+                                Response.Write(response);
 
                             }
 

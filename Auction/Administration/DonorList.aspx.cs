@@ -92,7 +92,7 @@ namespace Auction.Administration
                             //{
                                 foreach (string fileName in Directory.GetFiles(imagepath))
                                 {
-                                    if (validimages.Contains(Path.GetExtension(fileName)))
+                                    if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
                                     {
                                         images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" />";
                                     }

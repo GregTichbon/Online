@@ -69,6 +69,23 @@
                         $('#processing').hide();
                     }, 1000);
             });
+            $(':checkbox').change(function () {
+                var selected = [];
+                $(':checkbox:checked').each(function() {
+                    selected.push($(this).val());
+                });
+
+                $('tbody tr').each(function () {
+                    thisstatus = $(this).find('td').eq(5).text();
+                    if (selected.indexOf(thisstatus) != -1) {
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+
+            });
         });
     </script>
 
@@ -89,5 +106,7 @@
 
 
     </form>
+    <p>
+        </p>
 </body>
 </html>

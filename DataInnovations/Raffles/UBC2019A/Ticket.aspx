@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UBC2019A.aspx.cs" Inherits="DataInnovations.Raffles.UBC2019A" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Ticket.aspx.cs" Inherits="DataInnovations.Raffles.UBC2019A.Ticket" %>
 
 <!DOCTYPE html>
 
@@ -100,7 +100,7 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: url('Images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+            background: url('../Images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
         }
     </style>
 
@@ -290,11 +290,11 @@
             &nbsp;
         </p>
         <p style="text-align: center">
-            <img src="Images/3logos.jpg" style="width: 770px;" />&nbsp;&nbsp;&nbsp;
+            <img src="../Images/3logos.jpg" style="width: 770px;" />&nbsp;&nbsp;&nbsp;
         </p>
         <p style="text-align: center">
             <br />
-            <img alt="" style="width: 654px" src="Images/ChefsChoice%20Logo.PNG" />
+            <img alt="" style="width: 654px" src="../Images/ChefsChoice%20Logo.PNG" />
         </p>
         &nbsp;<form id="form1" runat="server">
 

@@ -13,30 +13,38 @@
         <a href="http://private.incedo.org.nz/prayer/send_dailytext.asp" onclick="return confirm('Are you sure you want to do this?');">Send Incedo Daily Prayer texts</a>
         <br />
         <br />
-        <a href="http://office.datainn.co.nz/SMS/Send/Form.aspx">Send text from form</a>
+        <a href="SMS/Send/Form.aspx">Send text from form</a>
                 <br />
         <br />
         <a href="http://webmail.datainn.co.nz">Data Innovations Webmail</a>
         <br />
         <br />
-        <a href="http://office.datainn.co.nz/raffles/raffles.aspx">Raffles</a>
+        <a href="raffles/raffles.aspx">Raffles</a>
         <br />
-        <a href="http://office.datainn.co.nz/raffles/communicatewinners.aspx">Communicate with winners</a>
+        <a href="raffles/communicatewinners.aspx">Communicate with winners</a>
         <br />
-        <a href="http://office.datainn.co.nz/raffles/spinner.aspx">Raffle Spinner</a>
-        <br />
-        <br />
-        <a href="http://office.datainn.co.nz/meetingscheduler/meetingscheduler.aspx">Meeting Scheduler</a>
+        <a href="raffles/spinner.aspx">Raffle Spinner</a>
         <br />
         <br />
-        <a href="http://office.datainn.co.nz/sms/log.aspx">SMS Log (to do)</a>
+        <a href="../raffles/ubc2019a">UBC2019A Raffle menu</a>
+        <br />
+        <br />
+        <a href="meetingscheduler/meetingscheduler.aspx">Meeting Scheduler</a>
+        <br />
+        <br />
+        <a href="sms/log.aspx">SMS Log</a>
         <br />
         <br />
         <a href="http://datainn.co.nz/vehiclereminders/default.asp">Vehicle Reminders</a>
         <br />
         <br />
-        <a href="http://office.datainn.co.nz/log.aspx">Log</a>
-
+        <a href="log.aspx">Log</a>
+                <br />
+        <br />
+        <a href="http://iti.ninja/tracker.aspx">Iti.ninja Tracker</a><br />
+        <a href="http://iti.ninja/post.asmx">Iti.ninja Create Link</a><br />
+        <br />
+        <a href="accounts">Personal Accounts</a>
 
     </form>
 </body>

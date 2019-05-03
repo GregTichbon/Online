@@ -22,6 +22,49 @@ namespace DataInnovations.Raffles
     {
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string update_ticket_winner(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string rafflewinner_id = formVars.Form("rafflewinner_id");
+            string raffleticket_id = formVars.Form("raffleticket_id");
+            string draw = formVars.Form("draw");
+            string status = formVars.Form("status");
+            string notes = formVars.Form("notes");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("update_ticket_winner", con);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@rafflewinner_id", SqlDbType.VarChar).Value = rafflewinner_id;
+            cmd.Parameters.Add("@raffleticket_id", SqlDbType.VarChar).Value = raffleticket_id;
+            cmd.Parameters.Add("@draw", SqlDbType.VarChar).Value = draw;
+            cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = status;
+            cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = notes;
+            //cmd.Parameters.Add("@response", SqlDbType.VarChar).Value = response;
+
+            cmd.Connection = con;
+
+            con.Open();
+
+            string response = cmd.ExecuteScalar().ToString();
+
+            con.Close();
+            con.Dispose();
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = response;
+            resultclass.message = "";
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string getticket(NameValue[] formVars)    //you can't pass any querystring params
         {
             string guid = Guid.NewGuid().ToString();
@@ -224,6 +267,36 @@ namespace DataInnovations.Raffles
             return (passresult);
 
         }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string test1(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "xxx";
+            resultclass.message = "";
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public standardResponse test2(string param1 = "", string param2 = "")    //you can't pass any querystring params
+        {
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "xxx";
+            resultclass.message = "";
+            return (resultclass);
+
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+
+        }
+
         /*
         private string DateTimeSQLite(DateTime datetime)
         {

@@ -40,7 +40,6 @@ namespace Auction
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             userid = "1"; // Session["Auction_user_ctr"].ToString();
             username = "Greg"; // Session["Auction_Fullname"].ToString();
             if (userid == "")
@@ -103,11 +102,6 @@ namespace Auction
             {
                 itemimages = "<div class=\"cycle-slideshow item-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine + itemimages + "</div>" + System.Environment.NewLine;
             }
-
-
-
-
-
             con = new SqlConnection(strConnString);
             cmd = new SqlCommand("Get_bid_information", con);
             cmd.CommandType = CommandType.StoredProcedure;

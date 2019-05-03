@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -19,8 +23,8 @@ namespace DataInnovations.Raffles
             Generic.Functions gFunctions = new Generic.Functions();
 
             int c1 = 0;
-            
-   
+
+
             html += "<tr><td colspan=\"9\"><input id=\"cb_toggleall\" type=\"checkbox\" /></td></tr>";
             html += "<tr><td>Draw</td><td>Ticket</td><td>Purchaser</td><td>Greeting</td><td>Mobile</td><td>Email Address</td><td>Winner Status</td><td>Winner Response</td><td>Winner Note</td></tr>";
 
@@ -28,7 +32,7 @@ namespace DataInnovations.Raffles
                 from RaffleWinner W
                 inner join raffleticket T on T.RaffleTicket_ID = W.RaffleTicket_ID
                 inner join Raffle R on R.Raffle_ID = T.Raffle_ID where isnull(w.status,'') <> '' 
-                order by isnull(winnerstatus,'') desc, R.identifier, w.Draw";
+                order by isnull(W.status,'') desc, R.identifier, w.Draw";
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand(sql2, con)
@@ -39,7 +43,7 @@ namespace DataInnovations.Raffles
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = con;
 
- 
+
             //try
             //{
             con.Open();
@@ -72,6 +76,38 @@ namespace DataInnovations.Raffles
                         if (val == "x")
                         {
                             string textmessage = tb_message.Text;
+                            if (textmessage.Contains("||voucher||"))
+                            {
+                                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://iti.ninja/posts.asmx/Create_Link");
+                                request.Method = "POST";
+
+                                string jsonContent = @"{
+                                ""link"": """",
+                                ""datetimefrom"": """",
+                                ""datetimeto"": """",
+                                ""url"": ""http://office.datainn.co.nz/raffles/images/vouchers/" + guid + @".jpg"",
+                                ""description"": ""Raffle - Winner: " + purchaser + @""",
+                                ""recordlog"": ""Yes""}";
+
+                                System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+                                Byte[] byteArray = encoding.GetBytes(jsonContent);
+                                request.ContentLength = byteArray.Length;
+                                request.ContentType = @"application/json";
+                                using (Stream dataStream = request.GetRequestStream())
+                                {
+                                    dataStream.Write(byteArray, 0, byteArray.Length);
+                                }
+                                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                                Stream receiveStream = response.GetResponseStream();
+                                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+                                string ans = readStream.ReadToEnd();
+                                dynamic result = JsonConvert.DeserializeObject(ans);
+                                string itninja = result.d.value;
+                                response.Close();
+                                readStream.Close();
+                                textmessage = textmessage.Replace("||voucher||", "http://iti.ninja/" + itninja);
+                            }
+
                             textmessage = textmessage.Replace("||greeting||", greeting);
                             textmessage = textmessage.Replace("||ticketnumber||", ticketnumber);
                             textmessage = textmessage.Replace("||guid||", guid);

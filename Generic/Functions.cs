@@ -574,7 +574,7 @@ namespace Generic
 
             return responsevalue;
         }
-        public string SendRemoteMessage(string PhoneNumber, string Message, string Description)
+        public string SendRemoteMessage(string PhoneNumber, string Message, string Description, string resend_id = "")
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
@@ -587,24 +587,29 @@ namespace Generic
             cmd.Parameters.Add("@phonenumber", SqlDbType.VarChar).Value = PhoneNumber;
             cmd.Parameters.Add("@message", SqlDbType.VarChar).Value = Message;
             cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = Description;
+            if(resend_id != "")
+            {
+                cmd.Parameters.Add("@resend_id", SqlDbType.VarChar).Value = resend_id;
+            }
             cmd.Connection = con;
 
             con.Open();
             string id = cmd.ExecuteScalar().ToString();
 
             string response = "";
+            Message = Message.Replace("&", "^^");
+            Message = HttpUtility.UrlEncode(Message);
             string url = "http://office.datainn.co.nz/sms/send/?O=S&P=" + PhoneNumber + "&M=" + Message;
 
             try
             {
-                Message = HttpUtility.UrlEncode(Message);
                 var webClient = new WebClient();
                 Uri uri = new Uri(url);
                 response = webClient.DownloadString(uri);
             }
             catch (Exception e)
             {
-                response = "Could not send text"; // e.InnerException.ToString();
+                response = "Could not send text:" + e.ToString();
                 Log("", "Generic Functions SendRemoteMessage", "Error", "");
             }
             /*

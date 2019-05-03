@@ -12,8 +12,74 @@ namespace DataInnovations.SMS
 {
     public partial class log : System.Web.UI.Page
     {
+        public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            string days = Request.QueryString["days"] + "";
+            if (days == "")
+            {
+                days = "2";
+            }
+            string type = Request.QueryString["type"] + "";
+            if (type == "")
+            {
+                type = "B";
+            }
+
+            switch (type.ToUpper())
+            {
+                case "R":
+                    type = " and Direction = 'Received'";
+                    break;
+                case "S":
+                    type = " and MessageType = 'Sent'";
+                    break;
+                default:
+                    type = "";
+                    break;
+            }
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            string sql = "select * from smslog";
+            sql += " where datetime > dateadd(d, -" + days + ", getdate())" + type + " " ;
+            sql += "order by Datetime";
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    html += "<tr class=\"select\">";
+                    html += "<td>" + dr["smsLog_ID"] + "</td>";
+                    html += "<td>" + dr["ID"] + "</td>";
+                    html += "<td>" + dr["DateTime"] + "</td>";
+                    html += "<td>" + dr["Direction"] + "</td>";
+                    html += "<td>" + dr["PhoneNumber"] + "</td>";
+                    html += "<td>" + dr["Message"] + "</td>";
+                    html += "<td>" + dr["Description"] + "</td>";
+                    html += "<td>" + dr["Response"] + "</td>";
+                    html += "<td>" + dr["Resend_ID"] + "</td>";
+                    html += "<td>" + dr["ResendOF_ID"] + "</td>";
+                    html += "</tr>";
+                }
+                html += "</table>";
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            #region oldCode
+            /*
             string days = Request.QueryString["days"] + "";
             if(days == "")
             {
@@ -37,11 +103,6 @@ namespace DataInnovations.SMS
                     type = "";
                     break;
             }
-        
-
-
-        
-
 
             string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -63,28 +124,27 @@ namespace DataInnovations.SMS
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    LitRows.Text = "<table>";
+                    html = "<table>";
 
-                    LitRows.Text += "<tr>";
-                    LitRows.Text += "<td>Type</td>";
-                    LitRows.Text += "<td>Date/Time</td>";
-                    LitRows.Text += "<td>Message</td>";
-                    LitRows.Text += "<td>Sender</td>";
-                    LitRows.Text += "<td>Receiver</td>";
-                    LitRows.Text += "</tr>";
+                    html += "<tr>";
+                    html += "<td>Type</td>";
+                    html += "<td>Date/Time</td>";
+                    html += "<td>Message</td>";
+                    html += "<td>Sender</td>";
+                    html += "<td>Receiver</td>";
+                    html += "</tr>";
 
                     while (dr.Read())
                     {
-                        LitRows.Text += "<tr>";
-                        LitRows.Text += "<td>" + dr["MessageType"] + "</td>";
-                        LitRows.Text += "<td>" + dr["datetime"] + "</td>";
-                        LitRows.Text += "<td>" + dr["message"] + "</td>";
-                        LitRows.Text += "<td>" + dr["sender"] + "</td>";
-                        LitRows.Text += "<td>" + dr["receiver"] + "</td>";
-                        LitRows.Text += "</tr>";
+                        html += "<tr>";
+                        html += "<td>" + dr["MessageType"] + "</td>";
+                        html += "<td>" + dr["datetime"] + "</td>";
+                        html += "<td>" + dr["message"] + "</td>";
+                        html += "<td>" + dr["sender"] + "</td>";
+                        html += "<td>" + dr["receiver"] + "</td>";
+                        html += "</tr>";
                     }
-                    LitRows.Text += "</table>";
-
+                    html += "</table>";
                 }
             }
             catch (Exception ex)
@@ -96,6 +156,8 @@ namespace DataInnovations.SMS
                 con.Close();
                 con.Dispose();
             }
+            */
+            #endregion
         }
     }
 }

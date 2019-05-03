@@ -384,12 +384,20 @@
     <Content Include="Javascript\ToolTipster\js\jquery.tooltipster.min.js" />
     <Content Include="VehicleReminders\dailyreminder.asp" />
     <Content Include="VehicleReminders\default.asp" />
+    <Content Include="VehicleReminders\default.aspx" />
     <Content Include="VehicleReminders\Process.asp" />
     <Content Include="Web.config" />
     <Content Include="Javascript\jquery-2.2.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VehicleReminders\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VehicleReminders\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

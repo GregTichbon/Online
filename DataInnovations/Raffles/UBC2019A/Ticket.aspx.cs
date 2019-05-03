@@ -7,9 +7,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DataInnovations.Raffles
+namespace DataInnovations.Raffles.UBC2019A
 {
-    public partial class UBC2019A : System.Web.UI.Page
+    public partial class Ticket : System.Web.UI.Page
     {
         public string raffle;
         public int available1 = 0;
@@ -83,7 +83,7 @@ namespace DataInnovations.Raffles
                 //{
 
                 dr = cmd.ExecuteReader();
-    
+
 
                 while (dr.Read())
                 {
