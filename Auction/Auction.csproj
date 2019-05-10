@@ -83,6 +83,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="ShowItem.aspx" />
+    <Content Include="ShowItem2.aspx" />
     <Content Include="TestandPlay\Test1.html" />
     <Content Include="_Includes\Scripts\colorbox\images\Thumbs.db" />
     <Content Include="_Includes\Scripts\fullcalendar\demos\json\events.json" />
@@ -758,6 +759,13 @@
     </Compile>
     <Compile Include="ShowItem.aspx.designer.cs">
       <DependentUpon>ShowItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowItem2.aspx.cs">
+      <DependentUpon>ShowItem2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowItem2.aspx.designer.cs">
+      <DependentUpon>ShowItem2.aspx</DependentUpon>
     </Compile>
     <Compile Include="_Includes\Functions\functions.cs" />
     <Compile Include="_Includes\Models\models.cs" />

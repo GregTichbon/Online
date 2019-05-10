@@ -629,6 +629,7 @@
     <Content Include="People\Documents\NICCandCTC2019.pdf" />
     <Content Include="People\Documents\NICCandCTC2019Travel.pdf" />
     <Content Include="People\Documents\NISS2019.pdf" />
+    <Content Include="People\Documents\TasterFlyer.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Web.Debug.config">

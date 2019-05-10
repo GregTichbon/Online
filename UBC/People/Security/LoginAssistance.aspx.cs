@@ -140,7 +140,7 @@ namespace UBC.People.Security
                             catch (Exception ex)
 
                             {
-                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                                functions.Log("",Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
                             }
 
@@ -160,7 +160,7 @@ namespace UBC.People.Security
                             }
                             catch (Exception ex)
                             {
-                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                                functions.Log("",Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
                             }
 
@@ -189,7 +189,7 @@ namespace UBC.People.Security
                             }
                             catch (Exception ex)
                             {
-                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                                functions.Log("",Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
                             }
 
@@ -209,7 +209,7 @@ namespace UBC.People.Security
                             }
                             catch (Exception ex)
                             {
-                                functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                                functions.Log("",Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
                             }
 

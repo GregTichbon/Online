@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Create_Link.aspx" />
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
     <Content Include="packages.config" />
@@ -89,6 +90,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Create_Link.aspx.cs">
+      <DependentUpon>Create_Link.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Create_Link.aspx.designer.cs">
+      <DependentUpon>Create_Link.aspx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

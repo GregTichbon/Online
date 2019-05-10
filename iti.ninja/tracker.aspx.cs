@@ -48,7 +48,7 @@ namespace iti.ninja
                 string TheDateTime = dr[3].ToString();
                 if(TheDateTime != "")
                 {
-                    TheDateTime = DateTime.Parse(TheDateTime).ToString("ddd dd-MMM-yy");
+                    TheDateTime = DateTime.Parse(TheDateTime).ToString("ddd dd-MMM-yy HH:mm");
                 }
 
                 string ID = dr[4].ToString();

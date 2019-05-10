@@ -397,6 +397,7 @@ end if
                             }
                             //html += "<div class=\"row\">"; //; //& vbcrlf
                             //html += "<div class=\"mycentered\">"; //& vbcrlf
+                            html += "<hr />";
                             html += "<div style=\"height: 50px\"><h3>" + title + "</h3></div>" + System.Environment.NewLine;
                             html += "<div style=\"height: 50px\">" + description + "</div>" + System.Environment.NewLine;
 

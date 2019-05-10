@@ -25,6 +25,9 @@
         <br />
         <a href="raffles/spinner.aspx">Raffle Spinner</a>
         <br />
+        <a href="raffles/UBC2019Avoucher.aspx">Raffle Voucher</a>
+        <br />
+        
         <br />
         <a href="../raffles/ubc2019a">UBC2019A Raffle menu</a>
         <br />

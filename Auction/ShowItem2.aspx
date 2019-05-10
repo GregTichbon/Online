@@ -1,7 +1,10 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Auction.Master" AutoEventWireup="true" CodeBehind="ShowItem.aspx.cs" Inherits="Auction.ShowItem" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowItem2.aspx.cs" Inherits="Auction.ShowItem2" %>
 
+<!DOCTYPE html>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
     <style>
         .item-slideshow {
             height: 400px;
@@ -20,18 +23,17 @@
                 width: auto;
                 height: 100%;
             }
+
+            .numeric {
+                direction: rtl;
+            }
     </style>
-
-    <script src="http://www.datainn.co.nz/Javascript/jquery.cycle2/jquery.cycle2.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
-
             $(".numeric").keydown(function (event) {
                 if (event.shiftKey == true) {
                     event.preventDefault();
                 }
-
                 if ((event.keyCode >= 48 && event.keyCode <= 57) ||
                     (event.keyCode >= 96 && event.keyCode <= 105) ||
                     event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
@@ -46,12 +48,11 @@
 
             });
             $("#help").click(function () {
-
                 mywidth = $(window).width() * .95;
                 if (mywidth > 500) {
                     mywidth = 500;
                 }
-                $("#dialog-help").dialog({
+                $("#dialog_help").dialog({
                     resizable: false,
                     height: 340,
                     width: mywidth,
@@ -71,7 +72,7 @@
                 $('#hf_userid').removeAttr('value');
                 $('#hf_username').removeAttr('value');
                 $('#usernamelabel').html('Returning user?<br />Enter your pass code to bid:');
-                $('#username').html('<input name="passcode" type="text" id="passcode" style="color:black; width:80px"><br />');
+                $('#username').html('<input name="passcode" type="text" id="passcode"><br />');
                 $('#registerhere').show();
             })
 
@@ -91,7 +92,7 @@
                     if (mywidth > 500) {
                         mywidth = 500;
                     }
-                    $("#dialog-response").dialog({
+                    $("#dialog_response").dialog({
                         resizable: false,
                         height: 340,
                         width: mywidth,
@@ -111,7 +112,7 @@
                     if (mywidth > 500) {
                         mywidth = 500;
                     }
-                    $("#dialog-response").dialog({
+                    $("#dialog_response").dialog({
                         resizable: false,
                         height: 340,
                         width: mywidth,
@@ -130,7 +131,7 @@
                     if (mywidth > 500) {
                         mywidth = 500;
                     }
-                    $("#dialog-response").dialog({
+                    $("#dialog_response").dialog({
                         resizable: false,
                         height: 340,
                         width: mywidth,
@@ -148,7 +149,7 @@
                         if (mywidth > 500) {
                             mywidth = 500;
                         }
-                        $("#dialog-confirm").dialog({
+                        $("#dialog_confirm").dialog({
                             resizable: false,
                             height: 340,
                             width: mywidth,
@@ -157,7 +158,7 @@
                                 "Yes - Please place this bid": function () {
                                     $(this).dialog("close");
                                     $.ajax({
-                                        url: "makebid.asp?userid=" + $("#hf_userid").val() + "&id=" + $('#hf_id') + "&bid=" + $("#bid").val() + "&username=" + $("#hf_username").val() + "&passcode=" + $("#passcode").val(), success: function (returned) {
+                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&username=" + $("#hf_username").val() + "&passcode=" + $("#passcode").val(), success: function (returned) {
                                             //alert(result);
                                             returnedjson = $.parseJSON(returned);
                                             //alert(returnedjson);
@@ -166,7 +167,7 @@
                                             if (mywidth > 500) {
                                                 mywidth = 500;
                                             }
-                                            $("#dialog-response").dialog({
+                                            $("#dialog_response").dialog({
                                                 resizable: false,
                                                 height: 340,
                                                 width: mywidth,
@@ -182,7 +183,7 @@
 
                                             } else if (returnedjson.status == "Outbid") {
                                                 $("#usernamelabel").html("Logged in as:");
-                                                $("#username").html(returnedjson.fullname + '&nbsp;&nbsp;<input style="color:black" type="button" name="logout" id="logout" value="Log out">');
+                                                $("#username").html(returnedjson.fullname + '&nbsp;&nbsp;<input type="button" name="logout" id="logout" value="Log out">');
 
                                                 $("#hf_userid").val(returnedjson.hf_userid);
                                                 $("#hf_username").val(returnedjson.fullname);
@@ -195,7 +196,7 @@
 
                                             } else {
                                                 $("#usernamelabel").html("Logged in as:");
-                                                $("#username").html(returnedjson.fullname + '&nbsp;&nbsp;<input style="color:black" type="button" name="logout" id="logout" value="Log out">');
+                                                $("#username").html(returnedjson.fullname + '&nbsp;&nbsp;<input type="button" name="logout" id="logout" value="Log out">');
 
                                                 $("#hf_userid").val(returnedjson.hf_userid);
                                                 $("#hf_username").val(returnedjson.fullname);
@@ -236,82 +237,90 @@
                 }
             });
 
-            $('#register').css('cursor', 'pointer');
 
         });
-
     </script>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div id="dialog-confirm" title="Bid Confirmation">
-        <span id="confirmation-message"></span>
-    </div>
-    <div id="dialog-response" title="Bid Response">
-        <span id="response-message"></span>
-    </div>
-    <div id="dialog-help" title="HELP!" style="display: none">
-        <br />
-        <p>Welcome to the silent auction bidding page.</p>
-        Making a bid is pretty simple!  You need to have a pass code to make a bid.  If you don't have a pass code, then you need to register.  Once you placed a bid, the system will remember you and you can continue to bid on all the items.  Remember to log out when you are finished.<p>If nobody is logged in, then you can either enter your pass code and make your bid or if you are not registered (don't have a pass code) then there is a REGISTER button to click and then enter your details.</p>
-        <p>That's all, happy bidding and good luck.</p>
-    </div>
 
-    <h3><%=title %></h3>
-    <p><%=description%></p>
-    <%=itemimages %>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="dialog_confirm" title="Bid Confirmation">
+            <span id="confirmation-message"></span>
+        </div>
+        <div id="dialog_response" title="Bid Response">
+            <span id="response-message"></span>
+        </div>
+        <div id="dialog_help" title="HELP!" style="display: none">
+            <br />
+            <p>Welcome to the silent auction bidding page.</p>
+            Making a bid is pretty simple!  You need to have a pass code to make a bid.  If you don't have a pass code, then you need to register.  Once you placed a bid, the system will remember you and you can continue to bid on all the items.  Remember to log out when you are finished.<p>If nobody is logged in, then you can either enter your pass code and make your bid or if you are not registered (don't have a pass code) then there is a REGISTER button to click and then enter your details.</p>
+            <p>That's all, happy bidding and good luck.</p>
+        </div>
 
-    <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />
-    <input name="hf_userid" id="hf_userid" type="hidden" value="<%=userid%>" />
-    <input name="hf_username" id="hf_username" type="hidden" value="<%=username%>" />
-    <input name="hf_itemid" id="hf_itemid" type="hidden" value="<%=item_ctr%>" />
+        <h3><%=title %></h3>
+        <p><%=description%></p>
+        <%=itemimages %>
 
-    <table class="table">
-        <tr>
-            <td>
-                <div id="usernamelabel"><%=usernamelabel%></div>
-            </td>
-            <td><span id="username"><%=usernamedisplay%></span></td>
-        </tr>
-        <tr style="display: <%=displayregister%>" id="registerhere">
-            <td>
-                <div>Don't have a pass code?</div>
-            </td>
-            <td>
-                <img src="registerhere.png" id="register" /></td>
-        </tr>
-        <tr>
-            <td>
-                <div>Highest bid:</div>
-            </td>
-            <td><span id="highestbid"><%=highestbid%></span></td>
-        </tr>
-        <tr>
-            <td>
-                <div>Highest bidder:</div>
-            </td>
-            <td><span id="highestbidder"><%=highestbidder%></span></td>
-        </tr>
-        <tr style="display: none">
-            <td>
-                <div>Next minimum bid:</div>
-            </td>
-            <td><span id="nextminimum"><%=nextminimum%></span></td>
-        </tr>
-        <tr>
-            <td>
-                <div>Your bid </div>
-            </td>
-            <td>$
-								<input name="bid" type="text" id="bid" style="color: black; width: 60px; direction: RTL" class="numeric" maxlength="5" />
-                <!-- value="<%=yourbid%>">.00-->
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="button" name="submit" id="submit" value="Place Your Bid" /></td>
-        </tr>
-    </table>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-</asp:Content>
+        <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />
+        <input name="hf_user_ctr" id="hf_user_ctr" type="hidden" value="<%=user_ctr%>" />
+        <input name="hf_username" id="hf_username" type="hidden" value="<%=username%>" />
+        <input name="hf_item_ctr" id="hf_item_ctr" type="hidden" value="<%=item_ctr%>" />
+
+        <table class="table">
+            <tr style="display: <%=displayloggedin%>" id="displayloggedin">
+                <td>Logged in as:
+                </td>
+                <td>
+                    <input type="button" name="logout" id="logout" value="Log out" /></td>
+            </tr>
+
+            <tr style="display: <%=displaylogin%>" id="displaylogin">
+                <td>Returning user?<br />
+                    Enter your pass code to bid:
+                </td>
+                <td>
+                    <input name="passcode" type="text" id="passcode" /></td>
+            </tr>
+
+            <tr style="display: <%=displaylogin%>" id="displaylogin">
+                <td>
+                    <div>Don't have a pass code?</div>
+                </td>
+                <td>
+                    <input type="button" name="logout" id="register" value="Register here" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <div>Highest bid:</div>
+                </td>
+                <td><span id="highestbid"><%=highestbid%></span></td>
+            </tr>
+            <tr>
+                <td>
+                    <div>Highest bidder:</div>
+                </td>
+                <td><span id="highestbidder"><%=highestbidder%></span></td>
+            </tr>
+            <tr style="display: none">
+                <td>
+                    <div>Next minimum bid:</div>
+                </td>
+                <td><span id="nextminimum"><%=nextminimum%></span></td>
+            </tr>
+            <tr>
+                <td>
+                    <div>Your bid </div>
+                </td>
+                <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" />
+                    <!-- value="<%=yourbid%>">.00-->
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" name="submit" id="submit" value="Place Your Bid" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

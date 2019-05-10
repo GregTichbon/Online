@@ -11,8 +11,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <CR:CrystalReportViewer ID="crv_report" runat="server" AutoDataBind="True" GroupTreeImagesFolderUrl="" Height="50px" OnInit="crv_report_Init" ReportSourceID="CrystalReportSource2" ToolbarImagesFolderUrl="" ToolPanelWidth="200px" Width="350px" />
+                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+            <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+            <CR:CrystalReportViewer ID="crv_report" runat="server" GroupTreeImagesFolderUrl="" Height="50px" ToolbarImagesFolderUrl="" ToolPanelWidth="200px" Width="350px" />
         </div>
+
     </form>
 </body>
 </html>

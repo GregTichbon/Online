@@ -151,7 +151,7 @@
                     type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                     async: true,
                     contentType: "application/json; charset=utf-8",
-                    url: 'posts.asmx/getticket', // the url where we want to POST
+                    url: '../posts.asmx/getticket', // the url where we want to POST
                     data: formData,
                     dataType: 'json', // what type of data do we expect back from the server
                     success: function (result) {
@@ -218,7 +218,7 @@
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                         async: true,
                         contentType: "application/json; charset=utf-8",
-                        url: 'posts.asmx/getticket', // the url where we want to POST
+                        url: '../posts.asmx/getticket', // the url where we want to POST
                         data: formData,
                         dataType: 'json', // what type of data do we expect back from the server
                         success: function (result) {
@@ -304,7 +304,7 @@
             <input type="hidden" id="hf_identifier" name="hf_identifier" value="<%:identifier %>" />
             <input type="hidden" id="hf_rafflename" name="hf_rafflename" value="<%:rafflename %>" />
             <input type="hidden" id="hf_detail" name="hf_detail" value="<%:detail %>" />
-            <input type="hidden" id="hf_MobileToText" name="hf_dMobileToText" value="<%:MobileToText %>" />
+            <input type="hidden" id="hf_MobileToText" name="hf_MobileToText" value="<%:MobileToText %>" />
 
             
 
