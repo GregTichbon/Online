@@ -12,16 +12,23 @@
         .donor-slideshow {
             height: 100px;
         }
+
             .donor-slideshow img {
                 width: auto;
                 height: 100%;
             }
-    </style>
 
+        .stop-scrolling {
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
     <script src="http://www.datainn.co.nz/Javascript/jquery.cycle2/jquery.cycle2.min.js"></script>
+
+    
     <script>
         $(document).ready(function () {
-            mywidth = $(window).width() * .95;
+            //mywidth = $(window).width() * .95;
             /*
             if (mywidth > 800) {
                 mywidth = 800;
@@ -31,15 +38,20 @@
             $(".showitem, .canclick").click(function () {
                 itemid = this.id.substring(8);
                 //alert('The item id is: ' + itemid);
+                $('body').addClass('stop-scrolling');
                 $('#dialog_showitem').dialog({
                     modal: true,
                     open: function () {
                         $(this).load('showitem2.aspx?id=' + itemid);
                     },
-                    width: mywidth,
-                    height: 800
+                    width: $(window).width() * .95,
+                    height: 800,
+                    close: function () {
+                        $('body').removeClass('stop-scrolling');
+                    }
                     //,                    title: 'xxxxx'
                 });
+
 
                 /*
                 $.colorbox({

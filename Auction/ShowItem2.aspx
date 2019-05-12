@@ -28,6 +28,9 @@
                 direction: rtl;
             }
     </style>
+
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".numeric").keydown(function (event) {
@@ -67,19 +70,20 @@
 
             $('body').on('click', '#logout', function () {
                 $.ajax({
-                    url: "logout.asp?noredirect=true"
+                    url: "data.asmx/logout"
                 });
-                $('#hf_userid').removeAttr('value');
-                $('#hf_username').removeAttr('value');
-                $('#usernamelabel').html('Returning user?<br />Enter your pass code to bid:');
-                $('#username').html('<input name="passcode" type="text" id="passcode"><br />');
-                $('#registerhere').show();
+                $('#hf_user_ctr').removeAttr('value');
+                $('#hf_fullname').removeAttr('value');
+                $('#passcode').val('');
+                $('#displayloggedin').hide();
+                $('.displaylogin').show();
+                //$('#fullnamelabel').html('Returning user?<br />Enter your pass code to bid:');
+                //$('#fullname').html('<input name="passcode" type="text" id="passcode"><br />');
+                //$('#registerhere').show();
             })
 
-            $('body').on('click', '#register', function () {
-                parent.jQuery.colorbox.close();
-                parent.window.location.replace("register.asp?item=" + $("#hf_itemid").val());
-            })
+            
+                
 
             $("#submit").click(function () {
                 placebid();
@@ -104,7 +108,6 @@
                         }
                     });
                     $("#bid").val(Number($("#hf_highestbid").val()) + 10);
-
                     //alert('Your bid needs to be higher than the current highest bid');
                 } else if ($("#bid").val() % 10 != 0) {
                     $("#response-message").html("<br />" + 'Your bid should be to the nearest $10.00');
@@ -125,7 +128,7 @@
                     });
                     $("#bid").val(Number($("#hf_highestbid").val()) + 10);
                     //alert('Your bid should be to the nearest $10.00');
-                } else if ($('#passcode').length > 0 && $('#passcode').val() == '') {
+                } else if ($('#hf_user_ctr').val() == '' && $('#passcode').val() == '') {
                     $("#response-message").html("<br />" + 'You need to enter your pass code');
                     mywidth = $(window).width() * .95;
                     if (mywidth > 500) {
@@ -143,7 +146,7 @@
                         }
                     });
                 } else {
-                    $("#confirmation-message").html("<br />Please confirm that you would like to make a bid of $" + $("#bid").val() + ".00 on the following item:<br /><br /><b>" + $('#hf_title').val() + "</b>");
+                    $("#confirmation-message").html("<br />Please confirm that you would like to make a bid of $" + $("#bid").val() + ".00 on the following item:<br /><br /><b>" + $('#title').html() + "</b>");
                     $(function () {
                         mywidth = $(window).width() * .95;
                         if (mywidth > 500) {
@@ -158,10 +161,8 @@
                                 "Yes - Please place this bid": function () {
                                     $(this).dialog("close");
                                     $.ajax({
-                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&username=" + $("#hf_username").val() + "&passcode=" + $("#passcode").val(), success: function (returned) {
-                                            //alert(result);
+                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val(), success: function (returned) {
                                             returnedjson = $.parseJSON(returned);
-                                            //alert(returnedjson);
                                             $("#response-message").html("<br />" + returnedjson.message);
                                             mywidth = $(window).width() * .95;
                                             if (mywidth > 500) {
@@ -178,41 +179,45 @@
                                                     }
                                                 }
                                             });
-                                            //alert(returnedjson.message);
                                             if (returnedjson.status == "Invalid pass code") {
-
+                                                alert(1);
                                             } else if (returnedjson.status == "Outbid") {
-                                                $("#usernamelabel").html("Logged in as:");
-                                                $("#username").html(returnedjson.fullname + '&nbsp;&nbsp;<input type="button" name="logout" id="logout" value="Log out">');
+                                                alert(2);
+                                                //$("#fullnamelabel").html("Logged in as:");
+                                                $("#fullname").html(returnedjson.fullname);
 
-                                                $("#hf_userid").val(returnedjson.hf_userid);
-                                                $("#hf_username").val(returnedjson.fullname);
+                                                $("#hf_user_ctr").val(returnedjson.user_ctr);
+                                                $("#hf_fullname").val(returnedjson.fullname);
 
-                                                $("#hf_highestbid").val(returnedjson.hf_highestbid);
+                                                $("#hf_highestbid").val(returnedjson.highestbid);
                                                 $("#highestbid").html(returnedjson.highestbid);
                                                 $("#highestbidder").html(returnedjson.highestbidder);
                                                 $("#nextminimum").html(returnedjson.nextminimum);
-                                                $("#bid").val(returnedjson.bid);
+                                                $("#bid").val(returnedjson.nextminimum);
 
                                             } else {
-                                                $("#usernamelabel").html("Logged in as:");
-                                                $("#username").html(returnedjson.fullname + '&nbsp;&nbsp;<input type="button" name="logout" id="logout" value="Log out">');
+                                                alert(3);
+                                                $('#displayloggedin').show();
+                                                $('.displaylogin').hide();
+                                                $('#passcode').val('');
 
-                                                $("#hf_userid").val(returnedjson.hf_userid);
-                                                $("#hf_username").val(returnedjson.fullname);
+                                                $("#hf_user_ctr").val(returnedjson.user_ctr);
 
-                                                $("#hf_highestbid").val(returnedjson.hf_highestbid);
+                                                //$("#fullnamelabel").html("Logged in as:");
+                                                $("#fullname").html(returnedjson.fullname);
+                                                $("#hf_fullname").val(returnedjson.fullname);
+                                                $("#hf_highestbid").val(returnedjson.highestbid);
                                                 $("#highestbid").html(returnedjson.highestbid);
                                                 $("#highestbidder").html(returnedjson.highestbidder);
                                                 $("#nextminimum").html(returnedjson.nextminimum);
-                                                $("#bid").val(returnedjson.bid);
+                                                $("#bid").val(returnedjson.nextminimum);
                                                 $("#registerhere").hide();
                                             }
                                             /*
                                             member("status") = status
                                             member("message") = message
                                             member("fullname") = fullname
-                                            member("hf_highestbid") = highestbid
+                                            member("highestbid") = highestbid
                                             member("highestbid") = "$" & highestbid & ".00"
                                             member("highestbidder") = highestbidder
                                             member("nextminimum") = nextminimum
@@ -230,12 +235,32 @@
                 }
             }
 
+            // $('body').on('click', '#register', function () {
+            $("#register").click(function () {
+                itemid = this.id.substring(8);
+                //alert('The item id is: ' + itemid);
+                $('body').addClass('stop-scrolling');
+                $('#dialog_register').dialog({
+                    modal: true,
+                    open: function () {
+                        $(this).load('register.aspx');
+                    },
+                    width: $(window).width() * .75,
+                    height: 400,
+                    close: function () {
+                        $('body').removeClass('stop-scrolling');
+                    }
+                });
+            });
+
+
             $("input").keypress(function (event) {
                 if (event.which == 13) {
                     event.preventDefault();
                     placebid();
                 }
             });
+            $('.slideshow').cycle();
 
 
         });
@@ -258,24 +283,29 @@
             <p>That's all, happy bidding and good luck.</p>
         </div>
 
+
+        <div id="dialog_register" title="Register">
+           
+        </div>
+
         <h3><%=title %></h3>
         <p><%=description%></p>
         <%=itemimages %>
 
         <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />
         <input name="hf_user_ctr" id="hf_user_ctr" type="hidden" value="<%=user_ctr%>" />
-        <input name="hf_username" id="hf_username" type="hidden" value="<%=username%>" />
+        <input name="hf_fullname" id="hf_fullname" type="hidden" value="<%=fullname%>" />
         <input name="hf_item_ctr" id="hf_item_ctr" type="hidden" value="<%=item_ctr%>" />
 
         <table class="table">
             <tr style="display: <%=displayloggedin%>" id="displayloggedin">
-                <td>Logged in as:
+                <td>Logged in as: <span id="fullname"><%=fullname %></span>
                 </td>
                 <td>
                     <input type="button" name="logout" id="logout" value="Log out" /></td>
             </tr>
 
-            <tr style="display: <%=displaylogin%>" id="displaylogin">
+            <tr style="display: <%=displaylogin%>" class="displaylogin">
                 <td>Returning user?<br />
                     Enter your pass code to bid:
                 </td>
@@ -283,12 +313,12 @@
                     <input name="passcode" type="text" id="passcode" /></td>
             </tr>
 
-            <tr style="display: <%=displaylogin%>" id="displaylogin">
+            <tr style="display: <%=displaylogin%>" class="displaylogin">
                 <td>
                     <div>Don't have a pass code?</div>
                 </td>
                 <td>
-                    <input type="button" name="logout" id="register" value="Register here" /></td>
+                    <input type="button" name="register" id="register" value="Register here" /></td>
             </tr>
             <tr>
                 <td>
@@ -312,8 +342,7 @@
                 <td>
                     <div>Your bid </div>
                 </td>
-                <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" />
-                    <!-- value="<%=yourbid%>">.00-->
+                <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" value="<%=nextminimum%>" />
                 </td>
             </tr>
             <tr>

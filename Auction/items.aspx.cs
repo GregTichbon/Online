@@ -398,7 +398,7 @@ end if
                             //html += "<div class=\"row\">"; //; //& vbcrlf
                             //html += "<div class=\"mycentered\">"; //& vbcrlf
                             html += "<hr />";
-                            html += "<div style=\"height: 50px\"><h3>" + title + "</h3></div>" + System.Environment.NewLine;
+                            html += "<div style=\"height: 50px\"><h3 id=\"title\">" + title + "</h3></div>" + System.Environment.NewLine;
                             html += "<div style=\"height: 50px\">" + description + "</div>" + System.Environment.NewLine;
 
                             //html += "<div class=\"cycle-slideshow " + canclick + " id=\"viewitem" + id + " data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";

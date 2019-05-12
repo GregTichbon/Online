@@ -12,17 +12,16 @@
     <!-- Style Sheets -->
     <link href="_Includes/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-    <link href="<%: ResolveUrl("~/_Includes/Scripts/colorbox/colorbox.css")%>" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/_Includes/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css" />
+<!--    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css" />
-    <link href="_Includes/Content/main.css" rel="stylesheet" />
+    <link href="_Includes/Content/main.css" rel="stylesheet" />-->
 
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/_Includes/Scripts/jquery-2.2.0.min.js")%>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.js"></script>
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.js"></script>-->
 
     <script type="text/javascript">
         // Change JQueryUI plugin names to fix name collision with Bootstrap.
@@ -31,7 +30,7 @@
     </script>
 
     <script src="<%: ResolveUrl("~/_Includes/Scripts/bootstrap.min.js")%>"></script>
-    <script src="<%: ResolveUrl("~/_Includes/Scripts/colorbox/jquery.colorbox-min.js")%>"></script>
+   <!-- <script src="<%: ResolveUrl("~/_Includes/Scripts/colorbox/jquery.colorbox-min.js")%>"></script>-->
     <script src="<%: ResolveUrl("~/_Includes/Scripts/jquery.validate.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/additional-methods.js")%>"></script>
     <!--additional-methods.min.js-->

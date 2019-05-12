@@ -77,7 +77,7 @@
 
             $('body').on('click', '#register', function () {
                 parent.jQuery.colorbox.close();
-                parent.window.location.replace("register.asp?item=" + $("#hf_itemid").val());
+                parent.window.location.replace("register.asp?item=" + $("#hf_item_ctr").val());
             })
 
             $("#submit").click(function () {
@@ -264,7 +264,7 @@
     <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />
     <input name="hf_userid" id="hf_userid" type="hidden" value="<%=userid%>" />
     <input name="hf_username" id="hf_username" type="hidden" value="<%=username%>" />
-    <input name="hf_itemid" id="hf_itemid" type="hidden" value="<%=item_ctr%>" />
+    <input name="hf_item_ctr" id="hf_itemid" type="hidden" value="<%=item_ctr%>" />
 
     <table class="table">
         <tr>

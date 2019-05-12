@@ -14,7 +14,7 @@ namespace Auction
     public partial class ShowItem2 : System.Web.UI.Page
     {
         public string user_ctr;
-        public string username;
+        public string fullname;
         public string item_ctr;
 
         public string seq;
@@ -32,7 +32,7 @@ namespace Auction
         public string you;
         public string highestbidder;
         public string nextminimum;
-        public string yourbid;
+        
 
 
         public string displayregister;
@@ -43,7 +43,7 @@ namespace Auction
         protected void Page_Load(object sender, EventArgs e)
         {
             user_ctr = (string)Session["Auction_user_ctr"] ?? "";
-            username = (string)Session["Auction_Fullname"] ?? "";
+            fullname = (string)Session["Auction_Fullname"] ?? "";
 
             item_ctr = Request.QueryString["id"];
 
@@ -97,8 +97,10 @@ namespace Auction
             }
             if (itemimages != "")
             {
-                itemimages = "<div class=\"cycle-slideshow item-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine + itemimages + "</div>" + System.Environment.NewLine;
+                itemimages = "<div class=\"cycle-slideshow slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine + itemimages + "</div>" + System.Environment.NewLine;
             }
+
+            double yourbid;
             con = new SqlConnection(strConnString);
             cmd = new SqlCommand("Get_bid_information", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -111,8 +113,10 @@ namespace Auction
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    hf_highestbid = dr["amount"].ToString();
-                    highestbid = "$" + dr["amount"].ToString() + ".00";
+
+                    double currentbid = Convert.ToDouble(dr["amount"]);
+                    hf_highestbid = currentbid.ToString("#.00");
+                    highestbid = "$" + hf_highestbid;
                     if (dr["user_ctr"].ToString() == user_ctr)
                     {
                         you = " (YOU!)";
@@ -122,16 +126,16 @@ namespace Auction
                         you = "";
                     }
                     highestbidder = dr["fullname"].ToString() + you;
-                    nextminimum = "$" + dr["amount"].ToString() + 10 + ".00";
-                    yourbid = dr["amount"].ToString() + 10;
+                    yourbid = currentbid + 10;
+                    nextminimum = yourbid.ToString("#.00");
                 }
                 else
                 {
                     hf_highestbid = "0";
                     highestbid = "No bids yet .... be the first";
                     highestbidder = "Give it a go";
-                    nextminimum = "$10.00";
-                    yourbid = "10";
+                    yourbid = 10;
+                    nextminimum = yourbid.ToString("#.00");
                 }
             }
             catch (Exception ex)

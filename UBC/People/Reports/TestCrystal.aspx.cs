@@ -97,7 +97,7 @@ namespace UBC.People.Reports
                     SqlConnection con = new SqlConnection(strConnString);
                     SqlCommand cmd1 = new SqlCommand("get_people_for_statements", con);
                     //cmd1.Parameters.Add("@asatDate", SqlDbType.VarChar).Value = person_id;
-                    cmd1.Parameters.Add("@include_non_zero", SqlDbType.VarChar).Value = "Yes";
+                    cmd1.Parameters.Add("@include_zero", SqlDbType.VarChar).Value = "Yes";
                     cmd1.Parameters.Add("@system", SqlDbType.VarChar).Value = "Friends";
 
                     cmd1.CommandType = CommandType.StoredProcedure;
@@ -168,7 +168,7 @@ namespace UBC.People.Reports
                             if (invoiceaddresstype == "Email" && invoiceaddress != "")
                             {
                                 emailto = invoiceaddress;
-                                emailto = "greg@datainn.co.nz";
+                                //emailto = "greg@datainn.co.nz";
                             }
                             else
                             {
