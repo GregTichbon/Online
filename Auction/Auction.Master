@@ -14,8 +14,8 @@
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/_Includes/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
 <!--    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css" />
-    <link href="_Includes/Content/main.css" rel="stylesheet" />-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.1/jsgrid-theme.min.css" />-->
+    <link href="_Includes/Content/main.css" rel="stylesheet" />
 
 
     <!-- Javascript -->
@@ -56,6 +56,28 @@
 
             //$('[required]').css('border', '1px solid red');
             $('[required]').addClass('required');
+
+            $(".numeric").keydown(function (event) {
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if (
+                    (event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46 || (event.keyCode == 190 && 1 == 2)
+                ) {
+                    //ok
+                } else {
+                    event.preventDefault();
+                }
+              
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+                  
+                //if a decimal has been added, disable the "."-button
+
+            });
         });
 
     </script>

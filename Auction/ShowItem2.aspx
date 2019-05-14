@@ -24,9 +24,7 @@
                 height: 100%;
             }
 
-            .numeric {
-                direction: rtl;
-            }
+            
     </style>
 
 
@@ -180,9 +178,7 @@
                                                 }
                                             });
                                             if (returnedjson.status == "Invalid pass code") {
-                                                alert(1);
                                             } else if (returnedjson.status == "Outbid") {
-                                                alert(2);
                                                 //$("#fullnamelabel").html("Logged in as:");
                                                 $("#fullname").html(returnedjson.fullname);
 
@@ -196,7 +192,6 @@
                                                 $("#bid").val(returnedjson.nextminimum);
 
                                             } else {
-                                                alert(3);
                                                 $('#displayloggedin').show();
                                                 $('.displaylogin').hide();
                                                 $('#passcode').val('');
@@ -237,20 +232,20 @@
 
             // $('body').on('click', '#register', function () {
             $("#register").click(function () {
-                itemid = this.id.substring(8);
-                //alert('The item id is: ' + itemid);
                 $('body').addClass('stop-scrolling');
+              
                 $('#dialog_register').dialog({
                     modal: true,
                     open: function () {
                         $(this).load('register.aspx');
                     },
                     width: $(window).width() * .75,
-                    height: 400,
+                    height: 500,
                     close: function () {
                         $('body').removeClass('stop-scrolling');
                     }
                 });
+              
             });
 
 

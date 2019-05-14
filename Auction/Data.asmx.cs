@@ -37,6 +37,12 @@ namespace Auction
             HttpContext.Current.Session.Remove("Auction_Fullname");
         }
 
+        [WebMethod(EnableSession = true)]
+        public void verifypasscode()
+        {
+            Context.Response.Write(true);
+        }
+
         [WebMethod (EnableSession = true)]
         public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname)
         {

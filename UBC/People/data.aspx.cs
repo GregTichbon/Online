@@ -128,8 +128,14 @@ namespace UBC.People
                             html += "<tr><td>Our Notes</td><td><textarea style=\"width:100%\">" + OurNotes + "</textarea><br /><input class=\"btn_updatenote\" id=\"note_" + Kiwibank_Transactions1_ID + "\" type=\"button\" value=\"Update\" /></td></tr>";
                             html += "</tbody></table>";
                             dr.Close();
-                            html += "<h2>People Transactions</h2><span class=\"persontransaction\">Add</span>";
 
+                            html += "<hr />";
+                            html += "<h2>People Transactions</h2>";
+                            html += "<table class=\"table\">";
+                            html += "<thead>";
+                            html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit / <span class=\"persontransaction\">Add</span></th>";
+                            html += "</thead>";
+                            html += "<tbody>";
                             SqlCommand cmd2B = new SqlCommand("get_transaction_person_allocations", con2);
                             cmd2B.Parameters.Add("@Source", SqlDbType.VarChar).Value = "Kiwibank1";
                             cmd2B.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
@@ -142,22 +148,45 @@ namespace UBC.People
                                 dr = cmd2B.ExecuteReader();
                                 if (dr.HasRows)
                                 {
-                                    html += "<table class=\"table\">";
-                                    html += "<thead>";
-                                    html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit</th>";
-                                    html += "</thead>";
-                                    html += "<tbody>";
+
                                     while (dr.Read())
                                     {
                                         html += "<tr><td>" + dr["person"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"persontransaction\">Edit</td></tr>";
                                     }
-                                    html += "</tbody>";
-                                    html += "</table>";
-
-
                                 }
                                 dr.Close();
                             }
+                            html += "</tbody>";
+                            html += "</table>";
+
+                            html += "<hr />";
+                            html += "<h2>Other Transactions</h2>";
+                            html += "<table class=\"table\">";
+                            html += "<thead>";
+                            html += "<tr><th>Code</th><th class=\"number\">Amount</th><th>Edit / <span class=\"othertransaction\">Add</span></th>";
+                            html += "</thead>";
+                            html += "<tbody>";
+                            SqlCommand cmd2C = new SqlCommand("get_transaction_other_allocations", con2);
+                            cmd2C.Parameters.Add("@Source", SqlDbType.VarChar).Value = "Kiwibank1";
+                            cmd2C.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
+
+                            cmd2C.CommandType = CommandType.StoredProcedure;
+                            cmd2C.Connection = con2;
+                            //try
+                            {
+                                //con2.Open();
+                                dr = cmd2C.ExecuteReader();
+                                if (dr.HasRows)
+                                {
+                                    while (dr.Read())
+                                    {
+                                        html += "<tr><td>" + dr["code"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"othertransaction\">Edit</td></tr>";
+                                    }
+                                }
+                                dr.Close();
+                            }
+                            html += "</tbody>";
+                            html += "</table>";
                         }
                     }
 

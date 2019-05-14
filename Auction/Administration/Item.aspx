@@ -90,8 +90,14 @@
         <tr>
             <td>Title</td>
             <td>
-                <input type="text" name="Title" id="Title" value="<%=title%>" /></td>
+                <input type="text" name="Title" id="Title" value="<%=title%>" maxlength="255" /></td>
         </tr>
+        <tr>
+            <td>Short description</td>
+            <td>
+                <input type="text" name="shortdescription" id="shortdescription" value="<%=shortdescription%>" style="width:100%"/></td>
+        </tr>
+
         <tr>
             <td>Description</td>
             <td>
@@ -111,23 +117,38 @@
             </td>
         </tr>
         <tr>
-            <td>Reserve</td>
+            <td>Reserve ($)</td>
             <td>
-                <input type="text" name="Reserve" id="Reserve" value="<%=reserve%>" />
+                <input type="text" name="Reserve" id="Reserve" value="<%=reserve%>" class="numeric" />
             </td>
         </tr>
         <tr>
-            <td>Retail Price</td>
+            <td>Retail Price ($)</td>
             <td>
-                <input type="text" name="RetailPrice" id="RetailPrice" value="<%=retailprice%>" /></td>
+                <input type="text" name="RetailPrice" id="RetailPrice" value="<%=retailprice%>" class="numeric" /></td>
         </tr>
+        <tr>
+            <td>Increment ($)</td>
+            <td>
+                <input type="text" name="increment" id="increment" value="<%=increment%>" class="numeric" /></td>
+        </tr>
+        <tr>
+            <td>Starting bid ($)</td>
+            <td>
+                <input type="text" name="startbid" id="startbid" value="<%=startbid%>" class="numeric" /></td>
+        </tr>
+
+
         <tr>
             <td>Image(s)</td>
             <td>
-            <asp:FileUpload ID="fu_images" name="fu_images" runat="server" AllowMultiple="true" /></td>
+                <asp:FileUpload ID="fu_images" name="fu_images" runat="server" AllowMultiple="true" /></td>
         </tr>
-        <tr><td></td><td> <%=images %></td></tr>
-               
+        <tr>
+            <td></td>
+            <td><%=images %></td>
+        </tr>
+
 
         <tr>
             <td>Sequence</td>

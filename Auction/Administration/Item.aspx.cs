@@ -18,10 +18,13 @@ namespace Auction.Administration
         public string item_ctr;
         //public string All;
         public string title;
+        public string shortdescription;
         public string description;
         public string auctiontype;
         public string reserve;
         public string retailprice;
+        public string startbid;
+        public string increment;
         public string donor;
         public string seq;
         public string hide;
@@ -99,11 +102,14 @@ namespace Auction.Administration
                         dr.Read();
                         title = dr["title"].ToString();
                         description = dr["description"].ToString();
+                        shortdescription = dr["shortdescription"].ToString();
                         auctiontype = dr["auctiontype"].ToString();
                         reserve = dr["reserve"].ToString();
                         retailprice = dr["retailprice"].ToString();
+                        increment = dr["increment"].ToString();
+                        startbid = dr["startbid"].ToString();
                         //donor = dr["donor"].ToString();
-                        seq = dr["seq"].ToString();
+                        seq = dr["seq"] == DBNull.Value ? "0" : dr["seq"].ToString();
                         hide = dr["hide"].ToString();
                     }
                 }
@@ -260,10 +266,13 @@ end if
             cmd.CommandText = "Update_item";
             cmd.Parameters.Add("@item_ctr", SqlDbType.VarChar).Value = item_ctr;
             cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["title"];
+            cmd.Parameters.Add("@shortdescription", SqlDbType.VarChar).Value = Request.Form["shortdescription"];
             cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["description"];
             cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];
             cmd.Parameters.Add("@reserve", SqlDbType.VarChar).Value = Request.Form["reserve"];
             cmd.Parameters.Add("@retailprice", SqlDbType.VarChar).Value = Request.Form["retailprice"];
+            cmd.Parameters.Add("@increment", SqlDbType.VarChar).Value = Request.Form["increment"];
+            cmd.Parameters.Add("@startbid", SqlDbType.VarChar).Value = Request.Form["startbid"];
             cmd.Parameters.Add("@seq", SqlDbType.VarChar).Value = Request.Form["seq"];
             cmd.Parameters.Add("@hide", SqlDbType.VarChar).Value = Request.Form["hide"];
             cmd.Parameters.Add("@auction", SqlDbType.VarChar).Value = 1;

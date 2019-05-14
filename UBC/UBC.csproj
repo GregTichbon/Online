@@ -964,6 +964,12 @@
       <DependentUpon>Simple1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="People\Reports\Crystal\Subs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Subs.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="People\Reports\Crystal\testNoData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1225,6 +1231,10 @@
     <EmbeddedResource Include="People\Reports\Crystal\Simple1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Simple1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\Subs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Subs.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="People\Reports\Crystal\testNoData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

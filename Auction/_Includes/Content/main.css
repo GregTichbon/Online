@@ -121,3 +121,7 @@ select[readonly]:focus {
 .dependantrequired {
     border: 1px solid red;
 }
+
+.numeric {
+    direction: rtl;
+}

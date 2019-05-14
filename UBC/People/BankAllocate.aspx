@@ -66,6 +66,12 @@
                 alert('To do: update kiwibank record with note for ' + id);
             })
 
+            $('body').on('click', '.othertransaction', function () {
+                alert('to do');
+
+            });
+
+
             $('body').on('click', '.persontransaction', function () {
                 mode = $(this).text();
                 $("#dialog-transactions").find(':input').val(''); //clear all fields
