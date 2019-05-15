@@ -27,6 +27,7 @@ namespace DataInnovations.Raffles
             string rafflewinner_id = formVars.Form("rafflewinner_id");
             string raffleticket_id = formVars.Form("raffleticket_id");
             string draw = formVars.Form("draw");
+            string drawndate = formVars.Form("drawndate");
             string status = formVars.Form("status");
             string notes = formVars.Form("notes");
 
@@ -37,9 +38,10 @@ namespace DataInnovations.Raffles
             SqlCommand cmd = new SqlCommand("update_ticket_winner", con);
 
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@rafflewinner_id", SqlDbType.VarChar).Value = rafflewinner_id;
+            cmd.Parameters.Add("@rafflewinner_id", SqlDbType.VarChar).Value = rafflewinner_id.Substring(3);
             cmd.Parameters.Add("@raffleticket_id", SqlDbType.VarChar).Value = raffleticket_id;
             cmd.Parameters.Add("@draw", SqlDbType.VarChar).Value = draw;
+            cmd.Parameters.Add("@drawndate", SqlDbType.VarChar).Value = drawndate;
             cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = status;
             cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = notes;
             //cmd.Parameters.Add("@response", SqlDbType.VarChar).Value = response;
@@ -54,7 +56,7 @@ namespace DataInnovations.Raffles
             con.Dispose();
 
             standardResponse resultclass = new standardResponse();
-            resultclass.status = response;
+            resultclass.id = response;
             resultclass.message = "";
 
             JavaScriptSerializer JS = new JavaScriptSerializer();
@@ -319,7 +321,7 @@ namespace DataInnovations.Raffles
     {
         public string status;
         public string message;
-        public string @ctr = null;
+        public string id = null;
     }
 
     #endregion

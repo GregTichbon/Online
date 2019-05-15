@@ -26,7 +26,7 @@ namespace DataInnovations.Raffles
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
 
-            string sql = @"select R.identifier, T.purchaser, t.TicketNumber, t.guid, W.Draw 
+            string sql = @"select R.identifier, T.purchaser, t.TicketNumber, t.guid, W.Draw, W.drawndate
                 from RaffleWinner W
                 inner join raffleticket T on T.RaffleTicket_ID = W.RaffleTicket_ID
                 inner join Raffle R on R.Raffle_ID = T.Raffle_ID where isnull(W.status,'') = 'Winner'
@@ -51,6 +51,7 @@ namespace DataInnovations.Raffles
                         string ticketnumber = dr["ticketnumber"].ToString();
                         string guid = dr["guid"].ToString();
                         string identifier = dr["identifier"].ToString();
+                        string drawndate = dr["drawndate"].ToString();
                         //greeting = dr["greeting"].ToString();
                         //winnerstatus = dr["winnerstatus"].ToString();
                         //winnerresponse = dr["winnerresponse"].ToString();

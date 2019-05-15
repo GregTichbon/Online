@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Create_Link.aspx" />
+    <Content Include="data.aspx" />
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
     <Content Include="packages.config" />
@@ -96,6 +97,13 @@
     </Compile>
     <Compile Include="Create_Link.aspx.designer.cs">
       <DependentUpon>Create_Link.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

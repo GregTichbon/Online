@@ -187,9 +187,11 @@
                 } else {
                     tr = $(this).closest('tr');
                     itemid = $(tr).attr("id");
+                    
                     $('#draw').val($(tr).find('td').eq(0).text());
-                    $('#status').val($(tr).find('td').eq(1).text());
-                    $('#notes').val($(tr).find('td').eq(2).text());
+                    $('#drawndate').val($(tr).find('td').eq(1).text());
+                    $('#status').val($(tr).find('td').eq(2).text());
+                    $('#notes').val($(tr).find('td').eq(3).text());
                 }
 
                 $("#dialog_Wins").dialog({
@@ -206,21 +208,23 @@
                     },
                     "Save": function () {
                         if (mode == "Add") {
-                            $('#tab_Wins tbody').append('<tr><td></td><td></td><td></td><td><span class="edit">Edit</td></tr>');
+                            $('#tab_Wins tbody').append('<tr><td></td><td></td><td></td><td></td><td><span class="edit">Edit</td></tr>');
                             tr = $('#tab_Wins tbody tr:last');
                         }
                         //tr.find(':input').val('');
 
                         draw = $('#draw').val();
+                        drawndate = $('#drawndate').val();
                         status = $('#status').val();
                         notes = $('#notes').val();
  
                         $(tr).find('td').eq(0).text(draw);
-                        $(tr).find('td').eq(1).text(status);
-                        $(tr).find('td').eq(2).text(notes);
+                        $(tr).find('td').eq(1).text(drawndate);
+                        $(tr).find('td').eq(2).text(status);
+                        $(tr).find('td').eq(3).text(notes);
 
                         $(this).dialog("close");
-                        var arForm = [{ "name": "rafflewinner_id", "value": itemid }, { "name": "raffleticket_id", "value": id }, { "name": "draw", "value": draw }, { "name": "status", "value": status }, { "name": "notes", "value": notes }];
+                        var arForm = [{ "name": "rafflewinner_id", "value": itemid }, { "name": "raffleticket_id", "value": id }, { "name": "draw", "value": draw }, { "name": "drawndate", "value": drawndate }, { "name": "status", "value": status }, { "name": "notes", "value": notes }];
                         var formData = JSON.stringify({ formVars: arForm });
 
                         $.ajax({
@@ -289,8 +293,14 @@
                     <tr>
                         <td>Draw</td>
                         <td>
-                            <input style="text-align: right" id="draw" name="draw" /></td>
-                        </tr><tr>
+                            <input type="number" style="text-align: right" id="draw" name="draw" /></td>
+                        </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>
+                            <input  id="drawndate" name="drawndate" /></td>
+                        </tr>
+                    <tr>
                         <td>Status</td>
                         <td>
                             <select id="status" name="status">

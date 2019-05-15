@@ -43,6 +43,18 @@
                     });
                 }
             });
+
+            $('.itininja').click(function () {
+                cell = $(this)
+                itininjaid = $(cell).text();
+                $.ajax({
+                    dataType: 'html', // what type of data do we expect back from the server
+                    url: "http://iti.ninja/data.aspx?mode=Track_link&link=" + itininjaid, success: function (result) {
+                        $(cell).html(result);
+                        $(cell).unbind( "click" );
+                    }
+                });
+            });
         });
     </script>
 
