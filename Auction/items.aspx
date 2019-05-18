@@ -22,8 +22,13 @@
             height: 100%;
             overflow: hidden;
         }
+
+        .cycle-slide {
+            height:200px;
+        }
+
     </style>
-    <script src="http://www.datainn.co.nz/Javascript/jquery.cycle2/jquery.cycle2.min.js"></script>
+    <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
 
     
     <script>
@@ -42,7 +47,7 @@
                 $('#dialog_showitem').dialog({
                     modal: true,
                     open: function () {
-                        $(this).load('showitem2.aspx?id=' + itemid);
+                        $(this).load('showitem.aspx?id=' + itemid);
                     },
                     width: $(window).width() * .95,
                     height: 800,

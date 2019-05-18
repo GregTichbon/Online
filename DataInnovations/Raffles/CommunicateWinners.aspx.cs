@@ -28,7 +28,7 @@ namespace DataInnovations.Raffles
             html += "<tr><td colspan=\"10\"><input id=\"cb_toggleall\" type=\"checkbox\" /></td></tr>";
             html += "<tr><td>Draw</td><td>Ticket</td><td>Purchaser</td><td>Greeting</td><td>Mobile</td><td>Email Address</td><td>Iti.Ninja</td><td>Winner Status</td><td>Winner Response</td><td>Winner Note</td></tr>";
 
-            string sql = @"select W.rafflewinner_id, R.identifier, T.RaffleTicket_ID, T.purchaser, t.greeting, t.mobile, t.TicketNumber, t.EmailAddress, t.Greeting, t.guid, W.status, W.Draw, W.Notes, W.Response, W.itininjaid
+            string sql = @"select W.rafflewinner_id, R.identifier, T.RaffleTicket_ID, T.purchaser, t.greeting, t.mobile, t.TicketNumber, t.EmailAddress, t.Greeting, t.guid, W.status, W.Draw, W.Notes, W.Response, W.itininjaid, W.drawndate
                 from RaffleWinner W
                 inner join raffleticket T on T.RaffleTicket_ID = W.RaffleTicket_ID
                 inner join Raffle R on R.Raffle_ID = T.Raffle_ID where isnull(w.status,'') <> '' 
@@ -69,8 +69,25 @@ namespace DataInnovations.Raffles
                     string winnerresponse = dr["response"].ToString();
                     string winnernote = dr["notes"].ToString();
                     string draw = dr["draw"].ToString();
+                    string drawndate = "";
+                    if (dr["drawndate"] != DBNull.Value) { 
+                        drawndate = Convert.ToDateTime(dr["drawndate"]).ToString("dd MMM yy");
+                    }
 
-                    html += "<tr><td><input class=\"checkbox\" id=\"cb_" + id + "\" name=\"cb_" + id + "\" value=\"x\" type=\"checkbox\" /><a href=\"" + link + guid + "\" target=\"order\">" + identifier + " " + draw + "</a></td><td>" + ticketnumber + "</td><td>" + purchaser + "</td><td>" + greeting + "</td><td>" + mobile + "</td><td>" + emailaddress + "</td><td class=\"itininja\">" + itininjaid + "</td><td>" + winnerstatus + "</td><td>" + winnerresponse + "</td><td>" + winnernote + "</td></tr>";
+                    string itininjahtml = "";
+                    
+                    string url = "http://iti.ninja/data.aspx?mode=Track_link&link=" + itininjaid + "&format=simple";
+                    HttpWebRequest httprequest = WebRequest.Create(url) as HttpWebRequest;
+                    HttpWebResponse httpresponse = (HttpWebResponse)httprequest.GetResponse();
+                    WebHeaderCollection header = httpresponse.Headers;
+
+                    var httpencoding = System.Text.ASCIIEncoding.ASCII;
+                    using (var reader = new System.IO.StreamReader(httpresponse.GetResponseStream(), httpencoding))
+                    {
+                        itininjahtml = reader.ReadToEnd();
+                    }
+
+                    html += "<tr><td><input class=\"checkbox\" id=\"cb_" + id + "\" name=\"cb_" + id + "\" value=\"x\" type=\"checkbox\" /><a href=\"" + link + guid + "\" target=\"order\">" + identifier + " " + draw + "</a><br />" + drawndate + "</td><td>" + ticketnumber + "</td><td>" + purchaser + "</td><td>" + greeting + "</td><td>" + mobile + "</td><td>" + emailaddress + "</td><td class=\"itininja\">" + itininjahtml + "</td><td>" + winnerstatus + "</td><td>" + winnerresponse + "</td><td>" + winnernote + "</td></tr>";
 
                     if (IsPostBack)
                     {

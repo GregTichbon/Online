@@ -144,7 +144,7 @@
                         }
                     });
                 } else {
-                    $("#confirmation-message").html("<br />Please confirm that you would like to make a bid of $" + $("#bid").val() + ".00 on the following item:<br /><br /><b>" + $('#title').html() + "</b>");
+                    $("#confirmation-message").html("<br />Please confirm that you would like to make a bid of $" + $("#bid").val() + ".00 on the following item:<br /><br /><b>" + $('#show_title').html() + "</b>");
                     $(function () {
                         mywidth = $(window).width() * .95;
                         if (mywidth > 500) {
@@ -283,8 +283,8 @@
            
         </div>
 
-        <h3><%=title %></h3>
-        <p><%=description%></p>
+        <p id="show_title"><%=title %></p>
+        <p id="show_shortdescription"><%=shortdescription%></p>
         <%=itemimages %>
 
         <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />

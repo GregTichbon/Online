@@ -11,7 +11,7 @@
             }
     </style>
 
-    <script src="http://www.datainn.co.nz/Javascript/jquery.cycle2/jquery.cycle2.min.js"></script>
+    <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
 
 
     <script type="text/javascript">

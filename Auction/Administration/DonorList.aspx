@@ -13,7 +13,7 @@
 
 
     </style>
-    <script src="http://www.datainn.co.nz/Javascript/jquery.cycle2/jquery.cycle2.min.js"></script>
+    <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
 
 
     <script type="text/javascript">
@@ -28,7 +28,7 @@
     <a href="donor.aspx" class="btn btn-info" role="button">Create</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="default.aspx" class="btn btn-info" role="button">Menu</a><br />
     <table class="table">
         <tr><th>Donor</th><th>Seq</th><th>Hide</th><th>Item(s)</th><th>Images(s)</th></tr>
-        <%=get_donorlist(MapPath("..//images") )%>
+          <%=html%>
     </table>
 <br />
 <a href="default.aspx" class="btn btn-info" role="button">Menu</a>

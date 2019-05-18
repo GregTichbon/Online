@@ -25,9 +25,11 @@ namespace Auction.Administration
         public string images;
         string[] validimages = new string[] { ".jpg", ".gif", ".png" };
         public string[] yesno_values = new string[2] { "Yes", "No" };
+        public Dictionary<string, string> parameters;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
             donor_ctr = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(donor_ctr))
             {
@@ -107,6 +109,7 @@ namespace Auction.Administration
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.CommandText = "Update_Donor";
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
             cmd.Parameters.Add("@donor_ctr", SqlDbType.VarChar).Value = donor_ctr;
             cmd.Parameters.Add("@donorname", SqlDbType.VarChar).Value = Request.Form["donorname"];
             cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["description"];
@@ -136,8 +139,8 @@ namespace Auction.Administration
                 con.Dispose();
             }
             //don't need to go through here if it's a new donor - will fix sometime
-            string path = Server.MapPath("..\\images\\auction\\donors\\" + donor_ctr);
-            string deletepath = Server.MapPath("..\\images\\auction\\donors\\" + donor_ctr + "\\deleted");
+            string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr);
+            string deletepath = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr + "\\deleted");
 
             foreach (string fld in Request.Form)
             {
@@ -166,7 +169,7 @@ namespace Auction.Administration
             {
                 Directory.CreateDirectory(path);
             }
-            string originalpath = Server.MapPath("..\\images\\auction\\donors\\" + donor_ctr + "\\originals");
+            string originalpath = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr + "\\originals");
             if (!Directory.Exists(originalpath))
             {
                 Directory.CreateDirectory(originalpath);

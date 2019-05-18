@@ -71,11 +71,13 @@
                 msg = msg + delim + ' - Title';
                 delim = '\n';
             }
+            /*
             //alert(frm.AuctionType.Index);
             if (frm.AuctionType.Index == 0) {
                 msg = msg + delim + ' - Auction Type';
                 delim = '\n';
             }
+            */
             if (msg != '') {
                 alert('You must enter:\n' + msg);
                 return (false);
@@ -106,16 +108,17 @@
             </td>
         </tr>
 
-
+        <!--
         <tr>
             <td>Type</td>
             <td>
                 <select name="AuctionType" id="AuctionType" size="1">
                     <option value="">Please Select</option>
-                    <%=General.Functions.Functions.populateselect(auctiontype_values, auctiontype, "None")%>
+                    <//%=General.Functions.Functions.populateselect(auctiontype_values, auctiontype, "None")%>
                 </select>
             </td>
         </tr>
+        -->
         <tr>
             <td>Reserve ($)</td>
             <td>

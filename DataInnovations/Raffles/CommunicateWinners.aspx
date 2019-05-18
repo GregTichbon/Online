@@ -44,6 +44,7 @@
                 }
             });
 
+            /*
             $('.itininja').click(function () {
                 cell = $(this)
                 itininjaid = $(cell).text();
@@ -55,6 +56,7 @@
                     }
                 });
             });
+            */
         });
     </script>
 

@@ -19,6 +19,7 @@ namespace Auction
 
         public string seq;
         public string title;
+        public string shortdescription;
         public string auctiontype;
         public string auctiontype_ctr;
         public string description;
@@ -42,6 +43,9 @@ namespace Auction
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+
             user_ctr = (string)Session["Auction_user_ctr"] ?? "";
             fullname = (string)Session["Auction_Fullname"] ?? "";
 
@@ -61,6 +65,7 @@ namespace Auction
                 {
                     dr.Read();
                     title = dr["title"].ToString();
+                    shortdescription = dr["shortdescription"].ToString();
                     auctiontype = dr["auctiontype"].ToString();
                     description = dr["Description"].ToString();
                     reserve = dr["Reserve"].ToString();
@@ -79,8 +84,8 @@ namespace Auction
 
             itemimages = "";
 
-            string imagefolder = Server.MapPath("images\\auction\\items");
-            string donorimagefolder = Server.MapPath("images\\auction\\donors");
+            string imagefolder = Server.MapPath("images\\auction" + parameters["Auction_CTR"] + "\\items");
+            string donorimagefolder = Server.MapPath("images\\auction" + parameters["Auction_CTR"] + "\\donors");
 
             string thisimagefolder = imagefolder + "\\" + item_ctr;
             if (Directory.Exists(thisimagefolder))
@@ -91,7 +96,7 @@ namespace Auction
                     string justfilename = System.IO.Path.GetFileName(filename);
                     //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                     //{
-                    itemimages += "<img src=\"images/auction/items/" + item_ctr + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                    itemimages += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
                     //}
                 }
             }

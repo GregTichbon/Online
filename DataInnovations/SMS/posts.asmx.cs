@@ -24,6 +24,69 @@ namespace DataInnovations.SMS
     {
 
         [WebMethod]
+        public standardResponse2 updatenumber(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            /*{ "name": "number_ctr", "value": "new" }, 
+             * { "name": "number", "value": $('#number').val() }, 
+             * { "name": "greeting", "value": $('#greeting').val() }, 
+             * { "name": "status", "value": $('#status').val() }, 
+             * { "name": "name", "value": $('#name').val() }, 
+             * { "name": "source", "value": $('#source').val() }, 
+             * { "name": "group_ctr", "value": $('#cb_group').val() }]
+             */
+
+            string number_ctr = formVars.Form("number_ctr");
+            string number = formVars.Form("number");
+            string greeting = formVars.Form("greeting");
+            string status = formVars.Form("status");
+            string name = formVars.Form("name");
+            string source = formVars.Form("source");
+            string group_ctr = formVars.Form("group_ctr");
+
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "[updatenumber]";
+            cmd.Parameters.Add("@number_ctr", SqlDbType.VarChar).Value = number_ctr;
+            cmd.Parameters.Add("@number", SqlDbType.VarChar).Value = number;
+            cmd.Parameters.Add("@greeting", SqlDbType.VarChar).Value = greeting;
+            cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = status;
+            cmd.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
+            cmd.Parameters.Add("@source", SqlDbType.VarChar).Value = source;
+            cmd.Parameters.Add("@group_ctr", SqlDbType.VarChar).Value = group_ctr;
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string Group_Number_CTR = dr[0].ToString();
+            string Number_CTR = dr[1].ToString();
+
+            con.Close();
+
+            con.Dispose();
+
+            standardResponse2 resultclass = new standardResponse2();
+            resultclass.status = "Done";
+            resultclass.message = "";
+            resultclass.Number_CTR = Number_CTR;
+            resultclass.Group_Number_CTR = Group_Number_CTR;
+
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+
+            return (resultclass);
+            //Context.Response.Write(resultclass);
+
+        }
+
+        [WebMethod]
         public string send_sms(NameValue[] formVars)    //you can't pass any querystring params
         {
             string SMSLog_ID = formVars.Form("SMSLog_ID");
@@ -70,6 +133,13 @@ namespace DataInnovations.SMS
     }
 }
 
+public class standardResponse2
+{
+    public string status;
+    public string message;
+    public string Number_CTR;
+    public string Group_Number_CTR;
+}
 /*
  * region
 public class NameValue
@@ -78,7 +148,7 @@ public class NameValue
     public string value { get; set; }
 }
 
-public class standardResponse
+public class standardResponse 
 {
     public string status;
     public string message;

@@ -190,6 +190,7 @@ namespace DataInnovations.Raffles
                     emailhtml += "</table>";
 
                     emailhtml += "<p>Bank A/c: " + bankaccount + "<br />Reference: Your name and '" + identifier + "-" + ticket + "'</p>";
+                    emailhtml += "<p>Results will be posted at: https://www.facebook.com/UBCWANGANUI" + "'</p>";
 
                     emailhtml += "Contact Greg: 0272495088 <a href=\"mailto:greg@datainn.co.nz\">greg@datainn.co.nz</a>";
                     emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
@@ -213,6 +214,9 @@ namespace DataInnovations.Raffles
                     string textbody = "Thanks for taking ticket " + ticket + " in the " + rafflename + System.Environment.NewLine;
                     textbody += " Cost: $20.00" + System.Environment.NewLine;
                     textbody += " Bank A/c: " + bankaccount + " reference: Your name and " + identifier + "-" + ticket + System.Environment.NewLine;
+                    textbody += " Results will be posted at: https://www.facebook.com/UBCWANGANUI" + System.Environment.NewLine;
+
+
                     textbody += " - Greg: 0272495088, greg@datainn.co.nz";
 
                     //gFunctions.Log(guid, @"Raffle/posts.asmx", "Before first text", "");

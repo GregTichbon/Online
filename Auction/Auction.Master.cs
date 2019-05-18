@@ -9,8 +9,10 @@ namespace Auction
 {
     public partial class Auction : System.Web.UI.MasterPage
     {
+        public Dictionary<string, string> parameters;
         protected void Page_Load(object sender, EventArgs e)
         {
+            parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
 
         }
     }

@@ -233,6 +233,9 @@
     <Content Include="Scripts\simplefadeslideshow\bower.json" />
     <Content Include="Scripts\simplefadeslideshow\README.md" />
     <Content Include="Scripts\simplefadeslideshow\simplefadeslideshow.jquery.json" />
+    <Content Include="SMS\Administration\Group.aspx" />
+    <Content Include="SMS\Administration\GroupSend.aspx" />
+    <Content Include="SMS\data.asmx" />
     <Content Include="SMS\data.aspx" />
     <Content Include="SMS\posts.asmx" />
     <Content Include="SMS\Receive\Acknowledge.aspx" />
@@ -717,6 +720,24 @@
     </Compile>
     <Compile Include="SMSService.asmx.cs">
       <DependentUpon>SMSService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SMS\Administration\Group.aspx.cs">
+      <DependentUpon>Group.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\Administration\Group.aspx.designer.cs">
+      <DependentUpon>Group.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\Administration\GroupSend.aspx.cs">
+      <DependentUpon>GroupSend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS\Administration\GroupSend.aspx.designer.cs">
+      <DependentUpon>GroupSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SMS\data.aspx.cs">

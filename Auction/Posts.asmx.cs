@@ -33,6 +33,9 @@ namespace Auction
         [WebMethod]
         public string Update_User(NameValue[] formVars)    //you can't pass any querystring params
         {
+            string URL = formVars.Form("URL");
+            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(URL);
+
             string fullname = formVars.Form("fullname");
             string emailaddress = formVars.Form("emailaddress");
             string passcode = formVars.Form("passcode");
@@ -48,6 +51,7 @@ namespace Auction
             cmd.Connection = con;
 
             cmd.CommandText = "Update_User";
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
             cmd.Parameters.Add("@fullname", SqlDbType.VarChar).Value = fullname;
             cmd.Parameters.Add("@emailaddress", SqlDbType.VarChar).Value = emailaddress;
             cmd.Parameters.Add("@passcode", SqlDbType.VarChar).Value = passcode;

@@ -21,6 +21,11 @@ namespace iti.ninja
             {
                 case "Track_link":
                     string link = Request.QueryString["link"];
+                    string format = Request.QueryString["format"];
+                    if(format == "")
+                    {
+                        format = "simple";
+                    }
 
                     strConnString = "Data Source=localhost\\MSSQLSERVER2016;Initial Catalog=Iti_Ninja;Integrated Security=False;user id=iti_ninja;password=Whanganui497";
 
@@ -38,17 +43,37 @@ namespace iti.ninja
                         if (dr.HasRows)
                         {
                             dr.Read();
+                            string datetime = dr["datetime"].ToString();
                             html = "<a href=\"" + dr["url"].ToString() + "\">" + dr["url"].ToString() + "</a><br />";
-                            html += "<table id=\"itininjatable\"><thead><tr><th>Date</th></tr></thead><tbody>";
+
+                            switch (format)
+                            {
+                                case "table":
+                                    html += "<table id=\"itininjatable\"><thead><tr><th>Date</th></tr></thead><tbody>";
+                                    break;
+                            }
 
                             do
                             {
-                                string datetime = dr["datetime"].ToString();
-                                html += "<tr><td>" + datetime + "</td></tr>";
+                                datetime = dr["datetime"].ToString();
+                                switch (format)
+                                {
+                                    case "table":
+                                        html += "<tr><td>" + datetime + "</td></tr>";
+                                        break;
+                                    case "simple":
+                                        html += datetime + "<br />";
+                                        break;
+                                }
+                                
                             }
                             while (dr.Read());
-
-                            html += "</tbody></table>";
+                            switch (format)
+                            {
+                                case "table":
+                                    html += "</tbody></table>";
+                                    break;
+                            }
 
                         }
                         dr.Close();

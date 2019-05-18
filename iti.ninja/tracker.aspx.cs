@@ -18,6 +18,7 @@ namespace iti.ninja
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string link = Request.QueryString["link"];
 
             string strConnString = "Data Source=localhost\\MSSQLSERVER2016;Initial Catalog=Iti_Ninja;Integrated Security=False;user id=iti_ninja;password=Whanganui497";
 
@@ -25,6 +26,7 @@ namespace iti.ninja
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.Add("@link", SqlDbType.VarChar).Value = link;
 
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Connection = con;
@@ -55,7 +57,7 @@ namespace iti.ninja
                 string QueryString = dr[5].ToString();
 
                 html += "<tr>";
-                html += "<td>" + Link + "</td>";
+                html += "<td><a href=\"?link=" + Link + "\">" + Link + "</a></td>";
                 html += "<td><a href=\"" + URL + QueryString + "\">" + URL + "</td>";
                 html += "<td>" + Description + "</td>";
                 html += "<td>" + TheDateTime + "</td>";

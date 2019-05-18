@@ -294,10 +294,13 @@ end if
         */
             #endregion
 
+            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+
             string id = "";
             string seq = "";
             string title = "";
             string description = "";
+            string shortdescription = "";
 
             string hide = "";
             string donor_ctr;
@@ -311,19 +314,14 @@ end if
             string[,] donors_Title = new string[10, 2];
             string[,] donors_Images = new string[10, 2];
 
-            int auctiontype = 1;
             string canclick = "";
-            if (auctiontype == 1)
+            if (parameters["AuctionType"] == "Silent")
             {
                 canclick = " canclick";
             }
-            else
-            {
-                canclick = "";
-            }
             //string imagefolder = HttpContext.Current.Request.PhysicalApplicationPath + "auction\\images\\auction\\items";
-            string imagefolder = Server.MapPath("images\\auction\\items");
-            string donorimagefolder = Server.MapPath("images\\auction\\donors");
+            string imagefolder = Server.MapPath("images\\auction" + parameters["Auction_CTR"] + "\\items");
+            string donorimagefolder = Server.MapPath("images\\auction" + parameters["Auction_CTR"] + "\\donors");
 
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
@@ -331,8 +329,7 @@ end if
             SqlConnection con2 = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("Get_Items", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
-            cmd.Parameters.Add("@auctiontype_ctr", SqlDbType.Int).Value = auctiontype;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
             cmd.Connection = con;
             int c1 = 0;
             try
@@ -350,6 +347,7 @@ end if
                             seq = dr["seq"].ToString();
                             title = dr["title"].ToString();
                             description = dr["description"].ToString();
+                            shortdescription = dr["shortdescription"].ToString();
                             hide = dr["hide"].ToString();
                             donors = "";
                             delim = "";
@@ -367,7 +365,7 @@ end if
                                     while (dr2.Read())
                                     {
                                         donor_ctr = dr2["donor_ctr"].ToString();
-                                        donors += delim + "<a href=\"javascript:void(0)\" class=\"donor-link\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>" + System.Environment.NewLine;
+                                        donors += delim + "<a href=\"javascript:void(0)\" class=\"donor-link donor_name\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>" + System.Environment.NewLine;
                                         delim = "<br />";
                                         donorimages = "";
 
@@ -380,7 +378,7 @@ end if
                                                 string justfilename = System.IO.Path.GetFileName(filename);
                                                 //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                                                 //{
-                                                donorimages += "<img class=\"donor-link\" data-id=\"" + id + "\" src=\"images/auction/donors/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                                                donorimages += "<img class=\"donor-link donor_image\" data-id=\"" + id + "\" src=\"images/auction" + parameters["Auction_CTR"] + "/donors/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
                                                 //}
                                             }
                                         }
@@ -398,8 +396,8 @@ end if
                             //html += "<div class=\"row\">"; //; //& vbcrlf
                             //html += "<div class=\"mycentered\">"; //& vbcrlf
                             html += "<hr />";
-                            html += "<div style=\"height: 50px\"><h3 id=\"title\">" + title + "</h3></div>" + System.Environment.NewLine;
-                            html += "<div style=\"height: 50px\">" + description + "</div>" + System.Environment.NewLine;
+                            html += "<div class=\"items_title\">" + title + "</div>" + System.Environment.NewLine;
+                            html += "<div class=\"items_shortdescription\" > " + shortdescription + "</div>" + System.Environment.NewLine;
 
                             //html += "<div class=\"cycle-slideshow " + canclick + " id=\"viewitem" + id + " data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
 
@@ -414,7 +412,8 @@ end if
                                     string justfilename = System.IO.Path.GetFileName(filename);
                                     //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                                     //{
-                                    images += "<img src=\"images/auction/items/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                                    //Classes are lost because of cycle-slide  -->  Can set style on cycle-style
+                                    images += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
                                     //}
                                 }
                             }
@@ -427,7 +426,7 @@ end if
                             //html += "</div>"; //mycentered
                             //html += "</div>"; //row
 
-                            html += "<h3>Generously Donated by</h3>" + System.Environment.NewLine;
+                            html += "<div class=\"items_donated_head\">Generously Donated by</h3>" + System.Environment.NewLine;
                             html += donors;
                             if (donorimages != "")
                             {

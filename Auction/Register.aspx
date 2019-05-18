@@ -10,7 +10,7 @@
         $(document).ready(function () {
             $('#save').click(function () {
                 if ($("#formReg").valid()) {
-                    var arForm = [{ "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#mobilenumber').val() }, { "name": "textnotifications", "value": $('#textnotifications').val() }, { "name": "contactpermission", "value": $('#contactpermission').val() }];
+                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#mobilenumber').val() }, { "name": "textnotifications", "value": $('#textnotifications').val() }, { "name": "contactpermission", "value": $('#contactpermission').val() }];
                     var formData = JSON.stringify({ formVars: arForm });
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)

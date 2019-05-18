@@ -65,13 +65,18 @@ namespace DataInnovations.Raffles
                             string notes = dr["notes"].ToString();
                             string response = dr["response"].ToString();
                             guid = dr["guid"].ToString();
+                            string drawndate = "";
+                            if (dr["drawndate"] != DBNull.Value)
+                            {
+                                drawndate = Convert.ToDateTime(dr["drawndate"]).ToString("dd MMM yy");
+                            }
 
                             if (email != "")
                             {
                                 email = "<a href=\"mailto:" + email + "\">" + email + "</a>";
                             }
 
-                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a></td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + status + "</td></tr>";
+                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a><br />" + drawndate + "</td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + status + "</td></tr>";
                         }
 
                         html += "</tbody></table>";

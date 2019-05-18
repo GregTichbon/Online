@@ -20,7 +20,7 @@ namespace Auction.Administration
         public string title;
         public string shortdescription;
         public string description;
-        public string auctiontype;
+        //public string auctiontype;
         public string reserve;
         public string retailprice;
         public string startbid;
@@ -30,7 +30,9 @@ namespace Auction.Administration
         public string hide;
         public string images;
 
-        public string[] auctiontype_values = new string[2] { "Silent", "Live" };
+        public Dictionary<string, string> parameters;
+
+        //public string[] auctiontype_values = new string[2] { "Silent", "Live" };
         public string[] yesno_values = new string[2] { "Yes", "No" };
 
         public static string[] donor_ctrs = new string[100];
@@ -39,6 +41,9 @@ namespace Auction.Administration
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+
             /*
             dim donors_ctr()
         dim donors_name()
@@ -60,7 +65,7 @@ namespace Auction.Administration
 
             SqlCommand cmd = new SqlCommand("Get_Donors", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
             cmd.Connection = con;
             try
             {
@@ -103,7 +108,7 @@ namespace Auction.Administration
                         title = dr["title"].ToString();
                         description = dr["description"].ToString();
                         shortdescription = dr["shortdescription"].ToString();
-                        auctiontype = dr["auctiontype"].ToString();
+                        //auctiontype = dr["auctiontype"].ToString();
                         reserve = dr["reserve"].ToString();
                         retailprice = dr["retailprice"].ToString();
                         increment = dr["increment"].ToString();
@@ -268,14 +273,14 @@ end if
             cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["title"];
             cmd.Parameters.Add("@shortdescription", SqlDbType.VarChar).Value = Request.Form["shortdescription"];
             cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["description"];
-            cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];
+            //cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];
             cmd.Parameters.Add("@reserve", SqlDbType.VarChar).Value = Request.Form["reserve"];
             cmd.Parameters.Add("@retailprice", SqlDbType.VarChar).Value = Request.Form["retailprice"];
             cmd.Parameters.Add("@increment", SqlDbType.VarChar).Value = Request.Form["increment"];
             cmd.Parameters.Add("@startbid", SqlDbType.VarChar).Value = Request.Form["startbid"];
             cmd.Parameters.Add("@seq", SqlDbType.VarChar).Value = Request.Form["seq"];
             cmd.Parameters.Add("@hide", SqlDbType.VarChar).Value = Request.Form["hide"];
-            cmd.Parameters.Add("@auction", SqlDbType.VarChar).Value = 1;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
 
             cmd.Connection = con;
             try
@@ -385,8 +390,8 @@ end if
                      */
                     #endregion
             //don't need to go through here if it's a new item - will fix sometime
-            string path = Server.MapPath("..\\images\\auction\\items\\" + item_ctr);
-            string deletepath = Server.MapPath("..\\images\\auction\\items\\" + item_ctr + "\\deleted");
+            string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr);
+            string deletepath = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr + "\\deleted");
 
             foreach (string fld in Request.Form)
             {
@@ -415,7 +420,7 @@ end if
             {
                 Directory.CreateDirectory(path);
             }
-            string originalpath = Server.MapPath("..\\images\\auction\\items\\" + item_ctr + "\\originals");
+            string originalpath = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr + "\\originals");
             if (!Directory.Exists(originalpath))
             {
                 Directory.CreateDirectory(originalpath);

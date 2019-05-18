@@ -16,6 +16,8 @@ namespace Auction.Administration
         public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+
             #region ASP CODE
             /*
   <%
@@ -132,7 +134,7 @@ namespace Auction.Administration
                         }
 
                         //string imagepath = path + "\\auction\\items\\" + item_ctr;
-                        string path = Server.MapPath("..\\images\\auction\\items\\" + item_ctr);
+                        string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr);
                         if (Directory.Exists(path))
                         {
                             //images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true data-cycle-log=false>";
@@ -144,7 +146,7 @@ namespace Auction.Administration
                                 {
                                     if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
                                     {
-                                        images += "<img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" border=\"0\" />";
+                                        images += "<img src=\"../images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" border=\"0\" />";
                                     }
                                 }
                             //}

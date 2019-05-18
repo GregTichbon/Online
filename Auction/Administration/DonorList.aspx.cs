@@ -13,12 +13,12 @@ namespace Auction.Administration
 {
     public partial class DonorList : System.Web.UI.Page
     {
+        public string html = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
 
-        }
-        public static string get_donorlist(string path)
-        {
             string donor_ctr;
             string donorname;
             string seq;
@@ -28,8 +28,7 @@ namespace Auction.Administration
             string items = "";
             string delim = "";
             string images = "";
-            string html = "";
-            string[] validimages = new string[] { ".jpg",".gif",".png" };
+            string[] validimages = new string[] { ".jpg", ".gif", ".png" };
 
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
@@ -85,18 +84,20 @@ namespace Auction.Administration
                             con2.Close();
                         }
                         images = "";
-                        string imagepath = path + "\\auction\\donors\\" + donor_ctr;
-                        if (Directory.Exists(imagepath))
+                        //string imagepath = path + "\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr;
+                        string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr);
+
+                        if (Directory.Exists(path))
                         {
                             //foreach (string dirFile in Directory.GetDirectories(imagepath))
                             //{
-                                foreach (string fileName in Directory.GetFiles(imagepath))
+                            foreach (string fileName in Directory.GetFiles(path))
+                            {
+                                if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
                                 {
-                                    if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
-                                    {
-                                        images += "<img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" />";
-                                    }
+                                    images += "<img src=\"../images/auction" + parameters["Auction_CTR"] + "/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" />";
                                 }
+                            }
                             //}
                             images = "<div class=\"cycle-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + images + "</div>";
                         }
@@ -114,7 +115,11 @@ namespace Auction.Administration
                 con.Close();
                 con.Dispose();
             }
-            return html;
+            
+        }
+        public static string get_donorlist(string path)
+        {
+            return "Why was I using this instead of Page_Load?";
         }
     }
 }
