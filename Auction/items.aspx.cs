@@ -190,7 +190,7 @@ end if
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("Get_Items", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];;
             cmd.Parameters.Add("@auctiontype_ctr", SqlDbType.Int).Value = auctiontype;
             cmd.Connection = con;
             try

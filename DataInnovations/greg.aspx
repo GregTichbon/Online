@@ -35,6 +35,8 @@
         <a href="meetingscheduler/meetingscheduler.aspx">Meeting Scheduler</a>
         <br />
         <br />
+        <a href="sms/administration/group.aspx">SMS Groups and Send</a>
+        <br />
         <a href="sms/log.aspx">SMS Log</a>
         <br />
         <br />

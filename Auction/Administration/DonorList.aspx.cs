@@ -37,7 +37,7 @@ namespace Auction.Administration
 
             SqlCommand cmd = new SqlCommand("Get_Donors", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
             cmd.Connection = con;
             try
             {

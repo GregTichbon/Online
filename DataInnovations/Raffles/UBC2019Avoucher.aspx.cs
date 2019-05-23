@@ -123,11 +123,16 @@ namespace DataInnovations.Raffles
                             string status = dr["status"].ToString();
                             string notes = dr["notes"].ToString();
                             string response = dr["response"].ToString();
+                            string drawndate = "";
+                            if (dr["drawndate"] != DBNull.Value)
+                            {
+                                drawndate = Convert.ToDateTime(dr["drawndate"]).ToString("dd MMM yy");
+                            }
 
                             html += "<input type=\"hidden\" id=\"hf_id\" value=\"" + raffleWinner_ID + "\">";
                             html += "<div class=\"bigfont\">";
                             html += "<table>";
-                            html += "<tr><td>Ticket Reference</td><td>" + identifier + "/" + draw + " Ticket " + ticketnumber + "</td></tr>";
+                            html += "<tr><td>Ticket Reference</td><td>" + identifier + "/" + draw + " Ticket " + ticketnumber + "<br />" + drawndate + "</td></tr>";
 
                             //html += "<tr><td>Ticket </td><td>" + ticketnumber + "</td></tr>";
                             html += "<tr><td>Name </td><td>" + name + "</td></tr>";

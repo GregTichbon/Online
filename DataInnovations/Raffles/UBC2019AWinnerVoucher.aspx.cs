@@ -26,7 +26,7 @@ namespace DataInnovations.Raffles
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
 
-            string sql = @"select R.identifier, T.purchaser, t.TicketNumber, t.guid, W.Draw, W.drawndate
+            string sql = @"select R.identifier, T.purchaser, t.TicketNumber, w.guid, W.Draw, W.drawndate
                 from RaffleWinner W
                 inner join raffleticket T on T.RaffleTicket_ID = W.RaffleTicket_ID
                 inner join Raffle R on R.Raffle_ID = T.Raffle_ID where isnull(W.status,'') = 'Winner'
@@ -51,7 +51,12 @@ namespace DataInnovations.Raffles
                         string ticketnumber = dr["ticketnumber"].ToString();
                         string guid = dr["guid"].ToString();
                         string identifier = dr["identifier"].ToString();
-                        string drawndate = dr["drawndate"].ToString();
+                        string draw = dr["draw"].ToString();
+                        string drawndate = "";
+                        if (dr["drawndate"] != DBNull.Value)
+                        {
+                            drawndate = Convert.ToDateTime(dr["drawndate"]).ToString("dd MMM yy");
+                        }
                         //greeting = dr["greeting"].ToString();
                         //winnerstatus = dr["winnerstatus"].ToString();
                         //winnerresponse = dr["winnerresponse"].ToString();
@@ -59,9 +64,11 @@ namespace DataInnovations.Raffles
                         //string text = name + Environment.NewLine + "Ticket: " + identifier + " - " + ticketnumber;
 
                         string text = "Ticket: " + identifier + "/" + ticketnumber + " " + name;
-                        Response.Write (name + " " + identifier + " " + ticketnumber + "<br />");
 
                         string targetImage = folder + "\\vouchers\\" + guid + ".jpg";
+                        Response.Write(name + " " + identifier + " " + ticketnumber + " <a href=\"" + targetImage + "\">" + targetImage + "</a><br />");
+
+
                         QRCodeGenerator qrGenerator = new QRCodeGenerator();
                         QRCodeData qrCodeData = qrGenerator.CreateQrCode("http://office.datainn.co.nz/raffles/UBC2019Avoucher.aspx?id=" + guid, QRCodeGenerator.ECCLevel.Q);
                         QRCode qrCode = new QRCode(qrCodeData);
@@ -86,6 +93,16 @@ namespace DataInnovations.Raffles
                                 y = 1200;
                                 imageGraphics.DrawString(text, Font, Brushes.Blue, x, y);
                             }
+
+                            using (Font Font = new Font("Arial", 26))
+                            {
+                                float textwidth = imageGraphics.MeasureString(text, Font, 0, StringFormat.GenericTypographic).Width;
+                                x = 1300;
+                                y = 50;
+                                imageGraphics.DrawString("Draw " + draw + " - " + drawndate, Font, Brushes.Yellow, x, y);
+                            }
+
+
                             image.Save(targetImage);
                         }
                     }

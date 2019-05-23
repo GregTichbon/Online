@@ -26,7 +26,7 @@
     <script>
         $(document).ready(function () {
             $('[rel=tooltip]').tooltip('destroy');
-           
+
 
             var dateEditor = function (cell, onRendered, success, cancel) {
                 //cell - the cell component for the editable cell
@@ -96,7 +96,7 @@
                     var cfield = cell.getColumn().getField();
                     //console.log(cfield + "=" + cid + "=" + cvalue);
                     //alert(cfield + "=" + cid + "=" + cvalue);
-                   
+
                     $.ajax({
                         url: "../data.asmx/updatenumber?field=" + cfield + "&id=" + cid + "&value=" + cvalue, success: function (result) {
                             //alert('Success');
@@ -104,7 +104,7 @@
                             alert("AJAX error: " + textStatus + "; " + error);
                         }
                     });
-                
+
                 },
                 columns: [
                     //{ title: "Send", align:"center", formatter: actSend },
@@ -139,14 +139,14 @@
                     position: { my: "centre", at: "centre", of: window }
                 });
                 $("#searchname").autocomplete({
-                source: "../data.asmx/name_autocomplete",
-                minLength: 2,
+                    source: "../data.asmx/name_autocomplete",
+                    minLength: 2,
                     select: function (event, ui) {
                         //event.preventDefault();
                         selected = ui.item;
                         //alert(selected.value);
                         if (selected.value == 'new') {
-                            $("#dialog_addnumber").find('input:text').val('');  
+                            $("#dialog_addnumber").find('input:text').val('');
                             $("#dialog_addnumber").dialog({
                                 resizable: false,
                                 height: 300,
@@ -200,7 +200,43 @@
                 //table.addRow();
             })
 
-           
+            $('#btn_create').click(function (e) {
+                $("#dialog_create").dialog({
+                    resizable: false,
+                    height: 300,
+                    width: 400,
+                    modal: true,
+                    position: { my: "centre", at: "centre", of: window },
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Save": function () {
+                            $(this).dialog("close");
+                            alert('to do');
+                            var arForm = [{ "name": "name", "value": $('#groupname').val() }];
+                            //console.log(arForm);
+                            var formData = JSON.stringify({ formVars: arForm });
+                            //alert(formData);
+                            $.ajax({
+                                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                                contentType: "application/json; charset=utf-8",
+                                url: '../posts.asmx/creategroup', // the url where we want to POST
+                                data: formData,
+                                dataType: 'json', // what type of data do we expect back from the server
+                                success: function (result) {
+                                    location.reload();
+                                },
+                                error: function (xhr, status) {
+                                    alert("An error occurred: " + status);
+                                }
+                            });
+                        }
+                    }
+                });
+            })
+
+
         });
 
              <%= tabledata %>
@@ -249,11 +285,10 @@
     <form id="form1" runat="server">
         <asp:DropDownList ID="cb_group" runat="server" OnSelectedIndexChanged="cb_group_SelectedIndexChanged" AutoPostBack="true">
             <asp:ListItem Value="">Please Select</asp:ListItem>
-            <asp:ListItem Value="1">TOH Whakapakari</asp:ListItem>
-            <asp:ListItem Value="2">TOH Office</asp:ListItem>
-            <asp:ListItem Value="4">LTRT</asp:ListItem>
+
         </asp:DropDownList>
-        <%=addrow %> <a href="groupsend.aspx">Send</a>
+        <%=addrow %>
+        <button id="btn_create" type="button">Create Group</button>
 
         <div id="rt"></div>
         <!--<asp:Label ID="lbl_html" runat="server" Text="Label"></asp:Label>-->
@@ -261,11 +296,27 @@
             <input id="searchname" name="searchname" type="text" />
         </div>
         <div id="dialog_addnumber" title="Add a person/number" style="display: none">
-            Number: <input id="number" name="number" type="text" /> <br />
-            Name: <input id="name" name="name" type="text" /> <br />
-            Greeting: <input id="greeting" name="greeting" type="text" /> <br />
-            Status: <input id="status" name="status" type="text" /> <br />
-            Source: <input id="source" name="source" type="text" /> <br />
+            Number:
+            <input id="number" name="number" type="text" />
+            <br />
+            Name:
+            <input id="name" name="name" type="text" />
+            <br />
+            Greeting:
+            <input id="greeting" name="greeting" type="text" />
+            <br />
+            Status:
+            <input id="status" name="status" type="text" />
+            <br />
+            Source:
+            <input id="source" name="source" type="text" />
+            <br />
+        </div>
+        <div id="dialog_create" title="Create a group" style="display: none">
+            Name:
+            <input id="groupname" name="groupname" type="text" />
+            <br />
+
         </div>
 
 

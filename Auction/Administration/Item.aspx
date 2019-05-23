@@ -215,11 +215,9 @@ Set fsoFolder=nothing
                 <select id="_itemdonor_donor_ctr_" size="1">
                     <option value="">Please Select</option>
                     <%
-                        int c1 = 0;
-                        foreach (string donor_ctr in donor_ctrs)
+                        for (int f1 = 0; f1 <= donors; f1++)
                         {
-                            Response.Write("<option value=\"" + donor_ctr + "\">" + donornames[c1] + "</option>");
-                            c1++;
+                            Response.Write("<option value=\"" + donor_ctrs[f1] + "\">" + donornames[f1] + "</option>");
                         }
                     %>
                 </select>

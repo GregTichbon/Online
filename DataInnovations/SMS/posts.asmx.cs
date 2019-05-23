@@ -24,6 +24,49 @@ namespace DataInnovations.SMS
     {
 
         [WebMethod]
+        public standardResponse2 creategroup(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            
+            string name = formVars.Form("name");
+            
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "[create_group]";
+            cmd.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
+            
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string Group_Number_CTR = dr[0].ToString();
+
+            con.Close();
+
+            con.Dispose();
+
+            standardResponse2 resultclass = new standardResponse2();
+            resultclass.status = "Done";
+            resultclass.message = "";
+            resultclass.Group_Number_CTR = Group_Number_CTR;
+            resultclass.Number_CTR = "";
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+
+            return (resultclass);
+            //Context.Response.Write(resultclass);
+
+        }
+        
+
+        [WebMethod]
         public standardResponse2 updatenumber(NameValue[] formVars)    //you can't pass any querystring params
         {
             /*{ "name": "number_ctr", "value": "new" }, 

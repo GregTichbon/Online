@@ -64,7 +64,8 @@ namespace Auction.Administration
                     con.Dispose();
                 }
 
-                string path = Server.MapPath("..\\images\\auction\\donors\\" + donor_ctr);
+                string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr);
+              
                 if (Directory.Exists(path))
                 {
                     images = "<table><tr>";
@@ -72,9 +73,11 @@ namespace Auction.Administration
                     //{
                         foreach (string fileName in Directory.GetFiles(path))
                         {
-                            if (validimages.Contains(Path.GetExtension(fileName)))
+                     
+                            if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
                             {
-                                images += "<td><img src=\"../images/auction/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br />Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
+                       
+                                images += "<td><img src=\"../images/auction" + parameters["Auction_CTR"] + "/donors/" + donor_ctr + "/" + Path.GetFileName(fileName) + "\" height=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br />Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
                             }
                         }
                     //}
@@ -118,8 +121,8 @@ namespace Auction.Administration
             cmd.Parameters.Add("@hide", SqlDbType.VarChar).Value = Request.Form["hide"];
 
             cmd.Connection = con;
-            try
-            {
+            //try
+            //{
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
 
@@ -128,16 +131,16 @@ namespace Auction.Administration
                     dr.Read();
                     donor_ctr = dr["donor_ctr"].ToString();
                 }
-            }
-            catch (Exception ex)
-            {
-                General.Functions.Functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
-            }
-            finally
-            {
+            //}
+            //catch (Exception ex)
+            //{
+            //    General.Functions.Functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+            //}
+            //finally
+            //{
                 con.Close();
                 con.Dispose();
-            }
+            //}
             //don't need to go through here if it's a new donor - will fix sometime
             string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr);
             string deletepath = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\donors\\" + donor_ctr + "\\deleted");

@@ -14,6 +14,7 @@ namespace DataInnovations.SMS.Administration
         public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string group_ctr = Request.QueryString["id"].ToString();
             Generic.Functions gFunctions = new Generic.Functions();
 
             string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -24,7 +25,7 @@ namespace DataInnovations.SMS.Administration
             SqlCommand cmd = new SqlCommand(sql1, con);
 
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@group_ctr", SqlDbType.VarChar).Value = 4;
+            cmd.Parameters.Add("@group_ctr", SqlDbType.VarChar).Value = group_ctr;
 
             cmd.Connection = con;
             //try
@@ -63,7 +64,8 @@ namespace DataInnovations.SMS.Administration
                             
 
                             textmessage = textmessage.Replace("||greeting||", greeting);
-                            
+                            textmessage = textmessage.Replace("||ID||", id);
+
                             foreach (string mobilex in mobile.Split(';'))
                             {
                                 Response.Write(gFunctions.SendRemoteMessage(mobilex, textmessage, "SMS Group") + "<br />");

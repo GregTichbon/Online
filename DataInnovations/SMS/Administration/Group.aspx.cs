@@ -12,33 +12,53 @@ namespace DataInnovations.SMS.Administration
     public partial class Group : System.Web.UI.Page
     {
         //public string html;
-        public string tabledata;
+        public string tabledata = "var tableData = [";
         public string addrow;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlCommand cmd;
+            SqlDataReader dr;
+
+
+            string sql1 = "get_groups";
+
+            SqlConnection con = new SqlConnection(strConnString);
+            if (!IsPostBack)
+            {
+                cmd = new SqlCommand(sql1, con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = con;
+                con.Open();
+                dr = cmd.ExecuteReader();
+                int c1 = 0;
+
+                while (dr.Read())
+                {
+                    c1 += 1;
+                    cb_group.Items.Insert(c1, new ListItem(dr["name"].ToString(), dr["group_ctr"].ToString()));
+
+                }
+                dr.Close();
+            }
+
             if (cb_group.Text != "")
             {
-                addrow = "<span id=\"addrow\">Add</span>";
                 string group_ctr = cb_group.SelectedValue;
-                string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+                addrow = "<span id=\"addrow\">Add</span> <a href=\"groupsend.aspx?id=" + group_ctr + "\">Send</a>";
 
-                string sql1 = "get_numbers_for_group";
-
-                SqlConnection con = new SqlConnection(strConnString);
-                SqlCommand cmd = new SqlCommand(sql1, con);
-
+                sql1 = "get_numbers_for_group";
+                //SqlConnection con = new SqlConnection(strConnString);
+                cmd = new SqlCommand(sql1, con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add("@group_ctr", SqlDbType.VarChar).Value = group_ctr;
-
                 cmd.Connection = con;
-                //try
-                //{
                 con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
                 if (dr.HasRows)
                 {
-                    tabledata = "var tableData = [";
+                    //tabledata += "";
                     string delim1 = "";
                     /*
                     html += "<table>";
@@ -78,10 +98,11 @@ namespace DataInnovations.SMS.Administration
                     dr.Close();
                     con.Close();
                     con.Dispose();
-                    tabledata += "]";
 
                 }
             }
+            tabledata += "]";
+
         }
 
         protected void cb_group_SelectedIndexChanged(object sender, EventArgs e)

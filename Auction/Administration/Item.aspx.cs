@@ -37,7 +37,7 @@ namespace Auction.Administration
 
         public static string[] donor_ctrs = new string[100];
         public static string[] donornames = new string[100];
-        int c1 = 0;
+        public static int donors = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -63,6 +63,7 @@ namespace Auction.Administration
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
 
+            donors = -1;
             SqlCommand cmd = new SqlCommand("Get_Donors", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
@@ -75,9 +76,9 @@ namespace Auction.Administration
                 {
                     while (dr.Read())
                     {
-                        c1++;
-                        donor_ctrs[c1] = dr["donor_ctr"].ToString();
-                        donornames[c1] = dr["donorname"].ToString();
+                        donors++;
+                        donor_ctrs[donors] = dr["donor_ctr"].ToString();
+                        donornames[donors] = dr["donorname"].ToString();
                     }
                 }
             }
@@ -128,7 +129,7 @@ namespace Auction.Administration
                     con.Dispose();
                 }
 
-                string path = Server.MapPath("..\\images\\auction\\items\\" + item_ctr);
+                string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr);
                 if (Directory.Exists(path))
                 {
                     images = "<table><tr>";
@@ -136,7 +137,7 @@ namespace Auction.Administration
                     //{
                         foreach (string fileName in Directory.GetFiles(path))
                         {
-                            images += "<td><img src=\"../images/auction/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br /> Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
+                            images += "<td><img src=\"../images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br /> Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
                         }
                     //}
                     images += "</tr></table>";
@@ -185,60 +186,64 @@ end if
             int donorctr = 0;
             string html = "";
 
-            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlConnection con2 = new SqlConnection(strConnString);
-
-            SqlCommand cmd = new SqlCommand("Get_Donors_for_Item", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@item_ctr", SqlDbType.Int).Value = item_ctr;
-            cmd.Connection = con;
-            try
+            if (!(item_ctr == null))
             {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+
+                String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlConnection con2 = new SqlConnection(strConnString);
+
+                SqlCommand cmd = new SqlCommand("Get_Donors_for_Item", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@item_ctr", SqlDbType.Int).Value = item_ctr;
+                cmd.Connection = con;
+                try
                 {
-                    while (dr.Read())
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
                     {
-                        donor_ctr = dr["donor_ctr"].ToString();
-                        itemdonor_ctr = dr["itemdonor_ctr"].ToString();
-                        amount = dr["amount"].ToString();
-
-                        string selectdonor = "<option value=\">Please Select\"</option>";
-                        for (int f1 = 0; f1 < donor_ctrs.Length; f1++)
+                        while (dr.Read())
                         {
-                            string selected = "";
-                            if (donor_ctr == donor_ctrs[f1])
-                            {
-                                selected = " selected";
-                            }
-                            selectdonor = selectdonor + "<option value=\"" + donor_ctrs[f1] + "\"" + selected + ">" + donornames[f1] + "</option>";
-                        }
-                        donorctr++;
+                            donor_ctr = dr["donor_ctr"].ToString();
+                            itemdonor_ctr = dr["itemdonor_ctr"].ToString();
+                            amount = dr["amount"].ToString();
 
-                        html += "<tr>";
-                        html += "<td>";
-                        html += "<input id=\"_itemdonor_ctr_" + donorctr + "\" name=\"_itemdonor_ctr_" + donorctr + "\" type=\"hidden\" value=\"" + itemdonor_ctr + "\">";
-                        html += "<input class=\"index\" id=\"_itemdonor_index_" + donorctr + "\" name=\"_itemdonor_index_" + donorctr + "\" type=\"hidden\" value=\"" + donorctr + "\">";
-                        html += "<select id=\"_itemdonor_donor_ctr_" + donorctr + "\" name=\"_itemdonor_donor_ctr_" + donorctr + "\" size=\"1\" required>" + selectdonor + "</select>";
-                        html += "</td>";
-                        html += "<td><input id=\"_itemdonor_amount_" + donorctr + "\" name=\"_itemdonor_amount_" + donorctr + "\" type=\"text\" value=\"" + amount + "\"></td>";
-                        //html += "<td><a class=""delete"">Delete</a></td>"
-                        html += "<td><input type=\"checkbox\" id=\"_itemdonor_delete_" + donorctr + "\" name=\"_itemdonor_delete_" + donorctr + "\" value=\"yes\">Delete</td>";
-                        html += "</tr>";
+                            string selectdonor = "<option value=\"\">Please Select</option>";
+                            for (int f1 = 0; f1 <= donors; f1++)
+                            {
+                                string selected = "";
+                                if (donor_ctr == donor_ctrs[f1])
+                                {
+                                    selected = " selected";
+                                }
+                                selectdonor = selectdonor + "<option value=\"" + donor_ctrs[f1] + "\"" + selected + ">" + donornames[f1] + "</option>";
+                            }
+                            donorctr++;
+
+                            html += "<tr>";
+                            html += "<td>";
+                            html += "<input id=\"_itemdonor_ctr_" + donorctr + "\" name=\"_itemdonor_ctr_" + donorctr + "\" type=\"hidden\" value=\"" + itemdonor_ctr + "\">";
+                            html += "<input class=\"index\" id=\"_itemdonor_index_" + donorctr + "\" name=\"_itemdonor_index_" + donorctr + "\" type=\"hidden\" value=\"" + donorctr + "\">";
+                            html += "<select id=\"_itemdonor_donor_ctr_" + donorctr + "\" name=\"_itemdonor_donor_ctr_" + donorctr + "\" size=\"1\" required>" + selectdonor + "</select>";
+                            html += "</td>";
+                            html += "<td><input id=\"_itemdonor_amount_" + donorctr + "\" name=\"_itemdonor_amount_" + donorctr + "\" type=\"text\" value=\"" + amount + "\"></td>";
+                            //html += "<td><a class=""delete"">Delete</a></td>"
+                            html += "<td><input type=\"checkbox\" id=\"_itemdonor_delete_" + donorctr + "\" name=\"_itemdonor_delete_" + donorctr + "\" value=\"yes\">Delete</td>";
+                            html += "</tr>";
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con2.Close();
-                con.Close();
-                con.Dispose();
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    con2.Close();
+                    con.Close();
+                    con.Dispose();
+                }
             }
             return html;
         }
@@ -444,7 +449,7 @@ end if
                     postedFile.SaveAs(originalpath + "\\" + newfilename);
 
                     System.Drawing.Image bm = System.Drawing.Image.FromStream(postedFile.InputStream);
-                    bm = ResizeBitmap((Bitmap)bm, 100, 100); /// new width, height
+                    bm = ResizeBitmap((Bitmap)bm, 800, 800); /// new width, height
                     bm.Save(path + "\\" + newfilename, ImageFormat.Jpeg);
 
                 }

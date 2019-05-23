@@ -27,6 +27,7 @@
 <body>
     <form id="form1" runat="server">
         <asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
+            ||ID||
       </asp:TextBox>
    
        <%=html%>  

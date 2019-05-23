@@ -87,7 +87,7 @@ namespace Auction.Administration
             SqlConnection con2 = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("Get_Items", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
             cmd.Connection = con;
             try
             {
