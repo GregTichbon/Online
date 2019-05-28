@@ -108,7 +108,7 @@
                 },
                 columns: [
                     //{ title: "Send", align:"center", formatter: actSend },
-                    { title: "Group_number_CTR", field: "Group_number_CTR", visible: false },
+                    { title: "Group_number_CTR", field: "Group_number_CTR" },
                     { title: "Number_CTR", field: "Number_CTR", visible: false },
                     { title: "Number", field: "Number", editor: "input" },
                     { title: "Name", field: "Name", editor: "input" },

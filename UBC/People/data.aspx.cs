@@ -131,7 +131,7 @@ namespace UBC.People
 
                             html += "<hr />";
                             html += "<h2>People Transactions</h2>";
-                            html += "<table class=\"table\">";
+                            html += "<table id=\"tab_transactions\" class=\"table\">";
                             html += "<thead>";
                             html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit / <span class=\"persontransaction\">Add</span></th>";
                             html += "</thead>";
@@ -161,7 +161,8 @@ namespace UBC.People
 
                             html += "<hr />";
                             html += "<h2>Other Transactions</h2>";
-                            html += "<table class=\"table\">";
+                            html += "<div id=\"div_othertransactions\">";
+                            html += "<table id=\"tab_othertransactions\" class=\"table\">";
                             html += "<thead>";
                             html += "<tr><th>Code</th><th class=\"number\">Amount</th><th>Edit / <span class=\"othertransaction\">Add</span></th>";
                             html += "</thead>";
@@ -180,13 +181,15 @@ namespace UBC.People
                                 {
                                     while (dr.Read())
                                     {
-                                        html += "<tr><td>" + dr["code"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"othertransaction\">Edit</td></tr>";
+                                        string othertransaction = "<tr id=\"othertransaction_" + dr["othertransactions_id"].ToString() + "\" system=\"" + dr["system"].ToString() + "\" person_id=\"" + dr["person_id"].ToString() + "\" event_id=\"" + dr["event_id"].ToString() + "\" note=\"" + dr["note"].ToString() + "\"><td>" + dr["code"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"othertransaction\">Edit</td></tr>";
+                                        html += othertransaction;
                                     }
                                 }
                                 dr.Close();
                             }
                             html += "</tbody>";
                             html += "</table>";
+                            html += "</div>";
                         }
                     }
 

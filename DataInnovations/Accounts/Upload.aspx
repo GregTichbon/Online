@@ -18,7 +18,7 @@
                 Please upload the bank file
             </div>
             <div class="col-sm-8">
-                <asp:FileUpload ID="fu_bankfile" runat="server" />
+                <asp:FileUpload ID="fu_bankfile" runat="server" AllowMultiple="True" />
             </div>
         </div>
 

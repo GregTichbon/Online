@@ -32,7 +32,7 @@
         <a href="../raffles/ubc2019a">UBC2019A Raffle menu</a>
         <br />
         <br />
-        <a href="meetingscheduler/meetingscheduler.aspx">Meeting Scheduler</a>
+        <a href="meetingscheduler/notify.aspx">Meeting Scheduler - Notify</a>
         <br />
         <br />
         <a href="sms/administration/group.aspx">SMS Groups and Send</a>

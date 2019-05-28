@@ -377,6 +377,27 @@
                 $('#M_2').text('> ' + lastsplit);
                 //--------------------------------------------------
 
+                UBC_person_id = "<%= Session["UBC_person_id"] %>";
+                UBC_name = "<%= Session["UBC_name"] %>";
+                if (1 == 1) {
+                    var arForm = [{ "name": "UBC_person_id", "value": UBC_person_id }, { "name": "UBC_name", "value": UBC_name }, { "name": "seconds", "value": seconds }];
+                    var formData = JSON.stringify({ formVars: arForm });
+                    $.ajax({
+                        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                        contentType: "application/json; charset=utf-8",
+                        url: '../people/posts.asmx/Update_person_ergTime', // the url where we want to POST
+                        data: formData,
+                        dataType: 'json'
+                        /*
+                        , // what type of data do we expect back from the server
+                        success: function (result) {
+                        },
+                        error: function (xhr, status) {
+                            alert("An error occurred: " + status);
+                        }
+                        */
+                    });
+                }
             })
 
         }); //document.ready

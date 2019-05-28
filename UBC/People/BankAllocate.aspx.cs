@@ -61,8 +61,8 @@ namespace UBC.People
                 string Date = Convert.ToDateTime(dr["Date"]).ToString("dd MMM yy");
                 string Memo = dr["Memo"].ToString();
                 string BankAmount = Convert.ToDouble(dr["BankAmount"]).ToString("0.00");
-                string PersonAmount = Convert.ToDouble(dr["PersonAmount"]).ToString("0.00");
-                string OtherAmount = Convert.ToDouble(dr["OtherAmount"]).ToString("0.00");
+                string PersonTotal = Convert.ToDouble(dr["PersonTotal"]).ToString("0.00");
+                string OtherTotal = Convert.ToDouble(dr["OtherTotal"]).ToString("0.00");
 
                 string class_allocated = "";
                 if(Convert.ToDouble(dr["BankAmount"]) == Convert.ToDouble(dr["PersonTotal"]) + Convert.ToDouble(dr["OtherTotal"]))
@@ -83,8 +83,8 @@ namespace UBC.People
                     html_transactions += "<td colspan=\"4\"></td>";
                 }
 
-                html_transactions += "<td style=\"text-align:right\">" + PersonAmount + "</td>";
-                html_transactions += "<td style=\"text-align:right\">" + OtherAmount + "</td>";
+                html_transactions += "<td style=\"text-align:right\">" + PersonTotal + "</td>";
+                html_transactions += "<td style=\"text-align:right\">" + OtherTotal + "</td>";
 
    
                 //html_finance += "<td style=\"text-align:center\">').html(action) 

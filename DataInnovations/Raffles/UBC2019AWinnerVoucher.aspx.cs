@@ -64,9 +64,9 @@ namespace DataInnovations.Raffles
                         //string text = name + Environment.NewLine + "Ticket: " + identifier + " - " + ticketnumber;
 
                         string text = "Ticket: " + identifier + "/" + ticketnumber + " " + name;
-
+                        //http://office.datainn.co.nz/raffles/images/vouchers/2226619e-d8d4-46db-a310-597b87842395.jpg
                         string targetImage = folder + "\\vouchers\\" + guid + ".jpg";
-                        Response.Write(name + " " + identifier + " " + ticketnumber + " <a href=\"" + targetImage + "\">" + targetImage + "</a><br />");
+                        Response.Write(name + " " + identifier + " " + ticketnumber + " <a href=\"http://office.datainn.co.nz/raffles/images/vouchers/" + guid + ".jpg" + "\">" + "http://office.datainn.co.nz/raffles/images/vouchers/" + guid + ".jpg" + "</a><br />");
 
 
                         QRCodeGenerator qrGenerator = new QRCodeGenerator();

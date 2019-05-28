@@ -25,7 +25,108 @@ namespace UBC.People
     public class Posts : System.Web.Services.WebService
     {
         [WebMethod]
-        public string update_person_transaction(NameValue[] formVars)    //you can't pass any querystring params
+        public standardResponseID update_othertransaction(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string othertransaction_id = formVars.Form("othertransaction_id");
+            string person_id = formVars.Form("person_id");
+            string date = formVars.Form("date");  //Only use for NON-Bank transactions
+            string system = formVars.Form("system");
+            string code = formVars.Form("code");
+            string event_id = formVars.Form("event_id");
+            string amount = formVars.Form("amount");
+            string note = formVars.Form("note");
+            //string banked = formVars.Form("banked");
+            string banktransaction_id = formVars.Form("banktransaction_id");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Update_OtherTransaction";
+            cmd.Parameters.Add("@othertransaction_id", SqlDbType.VarChar).Value = othertransaction_id.Substring(17);
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+            cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = date;  //Only use for NON-Bank transactions
+            cmd.Parameters.Add("@amount", SqlDbType.VarChar).Value = amount;
+            cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+            cmd.Parameters.Add("@system", SqlDbType.VarChar).Value = system;
+            cmd.Parameters.Add("@detail", SqlDbType.VarChar).Value = "";
+            cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = code;
+            //cmd.Parameters.Add("@banked", SqlDbType.VarChar).Value = banked;
+            cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+            cmd.Parameters.Add("@banktransaction_id", SqlDbType.VarChar).Value = banktransaction_id;
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string id = dr[0].ToString();
+            con.Close();
+
+            con.Dispose();
+            
+            standardResponseID resultclass = new standardResponseID();
+            resultclass.status = "Saved";
+            resultclass.message = "";
+            resultclass.id = id;
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+
+            return (resultclass);
+
+        }
+
+        [WebMethod]
+        public standardResponseID Update_person_ergTime(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            // var arForm = [{ "name": "UBC_person_id", "value": UBC_person_id }, { "name": "UBC_name", "value": UBC_name }, { "name": "seconds", "value": seconds }];
+
+            string UBC_person_id = formVars.Form("UBC_person_id");
+            string UBC_name = formVars.Form("UBC_name");
+            decimal seconds = Convert.ToDecimal(formVars.Form("seconds"));
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Update_person_ergTime";
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = UBC_person_id;
+            SqlParameter parameter = new SqlParameter("@totaltime", SqlDbType.Decimal);
+            parameter.Value = seconds;
+            parameter.Precision = 6;
+            parameter.Scale = 2;
+            cmd.Parameters.Add(parameter);
+
+            //cmd.Parameters.Add("@totaltime", SqlDbType.Decimal(2,0)).Value = seconds;
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string id = dr[0].ToString();
+            con.Close();
+
+            con.Dispose();
+
+            standardResponseID resultclass = new standardResponseID();
+            resultclass.status = "Saved";
+            resultclass.message = "";
+            resultclass.id = id;
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+            return (resultclass);
+
+        }
+
+        [WebMethod]
+        public standardResponseID update_person_transaction(NameValue[] formVars)    //you can't pass any querystring params
         {
             string person_transaction_id = formVars.Form("person_transaction_id");
             string person_id = formVars.Form("person_id");
@@ -58,21 +159,23 @@ namespace UBC.People
             cmd.Parameters.Add("@banktransaction_id", SqlDbType.VarChar).Value = banktransaction_id;
 
             con.Open();
-            string result = cmd.ExecuteScalar().ToString();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string id = dr[0].ToString();
             con.Close();
 
             con.Dispose();
 
-
-
-
-
-            standardResponse resultclass = new standardResponse();
+            standardResponseID resultclass = new standardResponseID();
             resultclass.status = "Saved";
             resultclass.message = "";
-            JavaScriptSerializer JS = new JavaScriptSerializer();
-            string passresult = JS.Serialize(resultclass);
-            return (passresult);
+            resultclass.id = id;
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+            return (resultclass);
 
         }
 
@@ -89,6 +192,35 @@ namespace UBC.People
 
             cmd.CommandText = "Delete_Person_Transaction";
             cmd.Parameters.Add("@person_transaction_id", SqlDbType.VarChar).Value = person_transaction_id.Substring(13);
+
+            con.Open();
+            string result = cmd.ExecuteScalar().ToString();
+            con.Close();
+
+            con.Dispose();
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Deleted";
+            resultclass.message = "";
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+
+        }
+
+        [WebMethod]
+        public string delete_othertransaction(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string othertransaction_id = formVars.Form("othertransaction_id");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Delete_OtherTransaction";
+            cmd.Parameters.Add("@othertransaction_id", SqlDbType.VarChar).Value = othertransaction_id.Substring(17);
 
             con.Open();
             string result = cmd.ExecuteScalar().ToString();
@@ -262,6 +394,12 @@ public class standardResponse
 {
     public string status;
     public string message;
+}
+public class standardResponseID
+{
+    public string status;
+    public string message;
+    public string id;
 }
 
 #endregion

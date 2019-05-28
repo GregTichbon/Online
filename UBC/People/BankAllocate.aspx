@@ -67,13 +67,19 @@
             })
 
             $('body').on('click', '.othertransaction', function () {
-                alert('to do');
                 mode = $(this).text();
                 $("#dialog_othertransactions").find(':input').val(''); //clear all fields
                 if (mode == "Add") {
-                    $('#dd_transactions_other_transaction_id').val('transactions_new');
+                    $('#dd_othertransactions_transaction_id').val('othertransaction_new');
                 } else {
-                    alert('Edit is currently not done');
+                    tr = $(this).closest('tr');
+                    $('#dd_othertransactions_transaction_id').val($(tr).attr('id'));
+                    $('#dd_othertransactions_system').val($(tr).attr('system'));
+                    $('#dd_othertransactions_person_id').val($(tr).attr('person_id'));
+                    $('#dd_othertransactions_code').val($(tr).find('td').eq(0).text());
+                    $('#dd_othertransactions_event_id').val($(tr).attr('event_id'));
+                    $('#tb_othertransactions_amount').val($(tr).find('td').eq(1).text());
+                    $('#tb_othertransactions_note').val($(tr).attr('note'));
                 }
 
                 $("#dialog_othertransactions").dialog({
@@ -89,52 +95,46 @@
                         $(this).dialog("close");
                     },
                     "Save": function () {
-                        if (mode == "add") {
-                            tr = $('#div_othertransactions > table > tbody tr:first').clone();
-                            tr.find(':input').val('');
-                            $('#div_othertransactions > table > tbody').append(tr);
-                        }
-
-
-                        //person_transaction_id = $('#dd_transactions_person_transaction_id').val();
-                        //person = $('#dd_transactions_person_id option:selected').text();
-                        //person_id = $('#dd_transactions_person_id').val();
+                        othertransaction_id = $('#dd_othertransactions_transaction_id').val();
+                        person = $('#dd_othertransactions_person_id option:selected').text();
+                        person_id = $('#dd_othertransactions_person_id').val();
                         //date = $('#tb_transactions_date').val();
                         system = $('#dd_othertransactions_system').val();
                         code = $('#dd_othertransactions_code').val();
-                        //event = $('#dd_othertransactions_event_id option:selected').text();
-                        //event_id = $('#dd_othertransactions_event_id').val();
+                        event = $('#dd_othertransactions_event_id option:selected').text();
+                        event_id = $('#dd_othertransactions_event_id').val();
                         amount = $('#tb_othertransactions_amount').val();
                         note = $('#tb_othertransactions_note').val();
                         banktransaction_id = $('#banktransaction_id').text();   ////??????????????????????
-                        alert(banktransaction_id);
 
-                        /*
-                                                $(tr).find('td').eq(0).text(person);
-                                                $(tr).find('td').eq(0).attr('person_id', person_id);
-                                                $(tr).find('td').eq(1).text(date);
-                                                $(tr).find('td').eq(2).text(system);
-                                                $(tr).find('td').eq(3).text(code);
-                                                $(tr).find('td').eq(4).text(event);
-                                                $(tr).find('td').eq(4).attr('event_id', event_id);
-                                                $(tr).find('td').eq(5).text(amount);
-                                                $(tr).find('td').eq(6).text(note);
-                        */
                         $(this).dialog("close");
 
-                        var arForm = [{ "name": "system", "value": system }, { "name": "code", "value": code }, { "name": "amount", "value": amount }, { "name": "note", "value": note }, { "name": "banktransaction_id", "value": banktransaction_id }]; //, { "name": "banked", "value": banked }]; , { "name": "date", "value": date }
-                        //console.log(arForm);
+                        var arForm = [{ "name": "othertransaction_id", "value": othertransaction_id }, { "name": "person_id", "value": person_id }, { "name": "system", "value": system }, { "name": "code", "value": code }, { "name": "event_id", "value": event_id }, { "name": "amount", "value": amount }, { "name": "note", "value": note }, { "name": "banktransaction_id", "value": banktransaction_id }]; //, { "name": "banked", "value": banked }]; , { "name": "date", "value": date }
+                       //console.log(arForm);
                         var formData = JSON.stringify({ formVars: arForm });
                         //alert(formData);
                         $.ajax({
                             type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                             contentType: "application/json; charset=utf-8",
-                            url: 'posts.asmx/update_other_transaction', // the url where we want to POST
+                            url: 'posts.asmx/update_othertransaction', // the url where we want to POST
                             data: formData,
                             dataType: 'json', // what type of data do we expect back from the server
-                            //success: function (result) {
-                            //    window.location.href = 'default.aspx';
-                            //},
+                            success: function (result) {
+                                if (mode == 'Add') {
+                                    $('#div_othertransactions > table > tbody').append('<tr><td></td><td class="number"></td><td class="othertransaction">Edit</td></tr>');
+                                    tr = $('#div_othertransactions > table > tbody tr:last')
+                                    $(tr).attr('id', result.d.id);
+                                }
+                                //$(tr).find('td').eq(0).text(person);
+                                $(tr).attr('system', system);
+                                $(tr).attr('person_id', person_id);
+                                $(tr).attr('event_id', event_id);
+                                $(tr).find('td').eq(0).text(code);
+                                //$(tr).find('td').eq(4).text(event);
+                                $(tr).find('td').eq(1).text(parseFloat(amount).toFixed(2));
+                                $(tr).attr('note', note);
+                                $(tr).find('td').eq(2).text('Edit');
+                            },
                             error: function (xhr, status) {
                                 alert("An error occurred: " + status);
                             }
@@ -142,21 +142,20 @@
                     }
                 }
 
-                if (mode != 'add') {
+                if (mode != 'Add') {
                     othertransactionButtons["Delete"] = function () {
                         if (window.confirm("Are you sure you want to delete this transaction?")) {
                             $(tr).remove();
-
                             $(this).dialog("close");
-                            other_transaction_id = $('#dd_transactions_other_transaction_id').val();
-                            var arForm = [{ "name": "other_transaction_id", "value": other_transaction_id }];
+                            othertransaction_id = $('#dd_othertransactions_transaction_id').val();
+                            var arForm = [{ "name": "othertransaction_id", "value": othertransaction_id }];
                             //console.log(arForm);
                             var formData = JSON.stringify({ formVars: arForm });
                             //alert(formData);
                             $.ajax({
                                 type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
                                 contentType: "application/json; charset=utf-8",
-                                url: 'posts.asmx/delete_other_transaction', // the url where we want to POST
+                                url: 'posts.asmx/delete_othertransaction', // the url where we want to POST
                                 data: formData,
                                 dataType: 'json', // what type of data do we expect back from the server
                                 //success: function (result) {
@@ -218,10 +217,10 @@
                         $(this).dialog("close");
                     },
                     "Save": function () {
-                        if (mode == "add") {
-                            tr = $('#div_transactions > table > tbody tr:first').clone();
+                        if (mode == "Add") {
+                            tr = $('#tab_transactions > tbody tr:first').clone();
                             tr.find(':input').val('');
-                            $('#div_transactions > table > tbody').append(tr);
+                            $('#tab_transactions > tbody').append(tr);
                         }
 
 
@@ -236,7 +235,6 @@
                         amount = $('#tb_transactions_amount').val();
                         note = $('#tb_transactions_note').val();
                         banktransaction_id = $('#banktransaction_id').text();
-                        alert(banktransaction_id);
 
                         /*
                                                 $(tr).find('td').eq(0).text(person);
@@ -271,7 +269,7 @@
                     }
                 }
 
-                if (mode != 'add') {
+                if (mode != 'Add') {
                     transactionButtons["Delete"] = function () {
                         if (window.confirm("Are you sure you want to delete this transaction?")) {
                             $(tr).remove();
@@ -328,12 +326,12 @@
             <div id="dialog_kiwibank1" title="Kiwibank Transaction" style="display: none" class="form-horizontal">
                 <div id="kiwibank1"></div>
             </div>
-
+            <!-- DIALOG PERSON TRANSACTIONS -->
             <div id="dialog_transactions" title="Maintain Transactions" style="display: none" class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_transactions_person_transaction_id">ID</label>
                     <div class="col-sm-8">
-                        <input id="dd_transactions_person_transaction_id" name="dd_transactions_person_transaction_id" type="text" class="form-control" readonly />
+                        <input id="dd_transactions_person_transaction_id" name="dd_transactions_person_transaction_id" type="text" class="form-control" readonly="readonly" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -405,12 +403,12 @@
                 </div>
             </div>
 
-
+          <!-- DIALOG OTHER TRANSACTIONS -->
             <div id="dialog_othertransactions" title="Maintain Transactions" style="display: none" class="form-horizontal">
                  <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_transactions_other_transaction_id">ID</label>
+                    <label class="control-label col-sm-4" for="dd_othertransactions_transaction_id">ID</label>
                     <div class="col-sm-8">
-                        <input id="dd_transactions_other_transaction_id" name="dd_transactions_other_transaction_id" type="text" class="form-control" readonly />
+                        <input id="dd_othertransactions_transaction_id" name="dd_othertransactions_transaction_id" type="text" class="form-control" readonly="readonly" />
                     </div>
                 </div>
                 <!--
@@ -436,6 +434,15 @@
                         </select>
                     </div>
                 </div>
+                 <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_othertransactions_person_id">Person</label>
+                    <div class="col-sm-8">
+                        <select id="dd_othertransactions_person_id" name="dd_othertransactions_person_id" class="form-control">
+                            <option></option>
+                            <%= people %>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_othertransactions_code">Code</label>
                     <div class="col-sm-8">
@@ -444,8 +451,21 @@
                         </select>
                     </div>
                 </div>
-
-
+                 <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_othertransactions_event_id">Event</label>
+                    <div class="col-sm-8">
+                        <select id="dd_othertransactions_event_id" name="dd_othertransactions_event_id" class="form-control">
+                            <option></option>
+                            <option value="107">John Trophy Regatta, Waitara</option>
+                            <option value="148">Karapiro Christmas Regatta</option>
+                            <option value="150">Hawkes Bay Cup Regatta / Clive</option>
+                            <option value="179">North Island Club Champs / Cambridge Town Cup - Karapiro</option>
+                            <option value="250">North Island Secondary School Championships</option>
+                            <option value="274">Maadi</option>
+                            <option value="275">Pre-Paid Event</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_othertransactions_amount">Amount</label>
                     <div class="col-sm-8">

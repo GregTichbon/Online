@@ -251,6 +251,8 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="YourPassing\Default.aspx" />
+    <Content Include="YourPassing\Main.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Raffles\Data.asmx" />
@@ -938,6 +940,20 @@
     <Compile Include="UBC\ZoneTraining.aspx.designer.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>
     </Compile>
+    <Compile Include="YourPassing\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Generic\Generic.csproj">
@@ -948,6 +964,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Accounts\Uploads\Bank\" />
+    <Folder Include="YourPassing\Administration\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

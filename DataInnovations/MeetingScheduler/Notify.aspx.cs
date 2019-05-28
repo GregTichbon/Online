@@ -86,7 +86,13 @@ namespace DataInnovations.MeetingScheduler
 
 
                                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-                                message.To.Add(emailaddress);
+
+                                //message.To.Add(emailaddress);
+                                string[] emailaddresses = emailaddress.Split(';');
+                                foreach (string eachemailaddress in emailaddresses)
+                                {
+                                    message.To.Add(eachemailaddress);
+                                }
 
                                 message.ReplyToList.Add(new System.Net.Mail.MailAddress("greg@stonesoup.org.nz", "Greg Tichbon"));
                                 message.From = new System.Net.Mail.MailAddress("meetingscheduler@datainn.co.nz", "Meeting Scheduler");
