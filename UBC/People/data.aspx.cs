@@ -133,7 +133,7 @@ namespace UBC.People
                             html += "<h2>People Transactions</h2>";
                             html += "<table id=\"tab_transactions\" class=\"table\">";
                             html += "<thead>";
-                            html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit / <span class=\"persontransaction\">Add</span></th>";
+                            html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit / <span class=\"person_transaction\">Add</span></th>";
                             html += "</thead>";
                             html += "<tbody>";
                             SqlCommand cmd2B = new SqlCommand("get_transaction_person_allocations", con2);
@@ -152,6 +152,8 @@ namespace UBC.People
                                     while (dr.Read())
                                     {
                                         html += "<tr><td>" + dr["person"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"persontransaction\">Edit</td></tr>";
+                                        //string person_transaction = "<tr id=\"person_transaction_" + dr["othertransactions_id"].ToString() + "\" system=\"" + dr["system"].ToString() + "\" person_id=\"" + dr["person_id"].ToString() + "\" event_id=\"" + dr["event_id"].ToString() + "\" note=\"" + dr["note"].ToString() + "\"><td>" + dr["code"].ToString() + "</td><td class=\"number\">" + Convert.ToDouble(dr["amount"]).ToString("0.00") + "</td><td class=\"person_transaction\">Edit</td></tr>";
+                                        //html += person_transaction;
                                     }
                                 }
                                 dr.Close();

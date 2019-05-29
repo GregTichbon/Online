@@ -180,6 +180,10 @@
     <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
     <Content Include="Dependencies\StickyTableCells\README.md" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="YourPassing\deceased.aspx" />
+    <Content Include="YourPassing\Mourner.aspx" />
+    <Content Include="YourPassing\Posts.asmx" />
+    <Content Include="YourPassing\_Includes\JqueryUI.css" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Raffles\Communicate.aspx" />
@@ -251,6 +255,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="YourPassing\agent.aspx" />
+    <Content Include="YourPassing\AgentDeceasedManagement.aspx" />
+    <Content Include="YourPassing\agentregister.aspx" />
     <Content Include="YourPassing\Default.aspx" />
     <Content Include="YourPassing\Main.Master" />
   </ItemGroup>
@@ -940,6 +947,34 @@
     <Compile Include="UBC\ZoneTraining.aspx.designer.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>
     </Compile>
+    <Compile Include="YourPassing\agent.aspx.cs">
+      <DependentUpon>agent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\agent.aspx.designer.cs">
+      <DependentUpon>agent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\AgentDeceasedManagement.aspx.cs">
+      <DependentUpon>AgentDeceasedManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\AgentDeceasedManagement.aspx.designer.cs">
+      <DependentUpon>AgentDeceasedManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\agentregister.aspx.cs">
+      <DependentUpon>agentregister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\agentregister.aspx.designer.cs">
+      <DependentUpon>agentregister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\deceased.aspx.cs">
+      <DependentUpon>deceased.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\deceased.aspx.designer.cs">
+      <DependentUpon>deceased.aspx</DependentUpon>
+    </Compile>
     <Compile Include="YourPassing\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -953,6 +988,17 @@
     </Compile>
     <Compile Include="YourPassing\Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\Mourner.aspx.cs">
+      <DependentUpon>Mourner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\Mourner.aspx.designer.cs">
+      <DependentUpon>Mourner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
