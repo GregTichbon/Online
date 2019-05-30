@@ -47,12 +47,16 @@ namespace DataInnovations.YourPassing
             html += "</table>";
 
             html += "<br /><br /><br /><br /><br /><br /><br />";
-            html += "<button id=\"btn_message\" type=\"button\">Leave a message (NB: this will still lead on to making a koha)</button><br /><br />";
-            html += "<button id=\"btn_support\" type=\"button\">Help support the family</button>";
+            html += "<button id=\"btn_support\" type=\"button\">Help support the family and leave a message</button>";
 
             dr.Close();
             con.Close();
             con.Dispose();
+        }
+
+        protected void btn_submit_Click(object sender, EventArgs e)
+        {
+            string x = tb_amount.Text;
         }
     }
 }

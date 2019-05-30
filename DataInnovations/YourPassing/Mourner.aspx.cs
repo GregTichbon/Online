@@ -33,13 +33,14 @@ namespace DataInnovations.YourPassing
 
             while (dr.Read())
             {
-                html += "<tr data-id=\"" + dr["deceased_ctr"].ToString() + "\">";
+
+                html += "<tr data-id=\"" + dr["deceased_ctr"].ToString() + "\" data-name=\"" + dr["name"].ToString() + "\">";
                 html += "<td>" + dr["firstname"].ToString() + "</td>";
                 //html += "<td>" + DateTime.Parse(dr[8].ToString()).ToString("ddd dd-MMM-yyyy") + "</td>";
                 html += "<td>" + dr["lastname"].ToString() + "</td>";
                 html += "<td>" + "" + "</td>";
                 html += "<td>" + "" + "</td>";
-                html += "<td class=\"view\">" + "View" + "</td>";
+                html += "<td><button data-id=\"btn_view\" type=\"button\">" + "View" + "</button></td>";
                 html += "</tr>";
             }
             dr.Close();

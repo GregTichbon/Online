@@ -29,7 +29,8 @@ namespace DataInnovations.YourPassing
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
 
-            html = "<table>";
+            if(dr.HasRows) { 
+            html = "<table class=\"DITable\">";
             html += "<thead>";
             html += "<tr><th>First name</th><th>Last name</th><th>Known as</th><th>Date of Death</th><th>Funeral Director</th><th>Edit</th></tr>";
             html += "</thead>";
@@ -45,12 +46,13 @@ namespace DataInnovations.YourPassing
                 html += "<td>" + "" + "</td>";
                 html += "<td>" + "" + "</td>";
                 html += "<td>" + "" + "</td>";
-                html += "<td>" + "Edit" + "</td>";
+                html += "<td><button data-id=\"btn_maintain\" data-mode=\"edit\" type=\"button\">" + "Edit" + "</button></td>";
                 html += "</tr>";
             }
             dr.Close();
             html += "</tbody>";
             html += "</table>";
+            }
             dr.Close();
             con.Close();
             con.Dispose();

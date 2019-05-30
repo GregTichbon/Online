@@ -5,14 +5,19 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-    <link href="_Includes/JqueryUI.css" rel="stylesheet" />
+    <link href="_Includes/jquery-ui-themes-1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
 
     <script>
         agent_ctr = "<%= Session["K4U_Agent_CTR"] %>";
         $(document).ready(function () {
-            $('[data-id="btn_add"]').click(function () {
-                mode = "Add";
+
+         
+            $('[data-id="btn_maintain"]').click(function () {
+                mode = $(this).attr('data-mode');
+                if (mode == 'edit') {
+                    alert('need to load in id and data');
+                }
                 $('#dialog_deceased').dialog({
                     modal: true,
                     width: $(window).width() * .5,
@@ -55,7 +60,6 @@
                                 alert("An error occurred: " + status);
                             }
                         });
-                       
                     }
                 }
 
@@ -95,7 +99,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%=html %>
-    <button id="btn_add" data-id="btn_add" type="button">Register a deceased person</button><br />
+    <button data-id="btn_maintain" data-mode="add" type="button">Register a deceased person</button><br />
     <div id="dialog_deceased" title="Please enter the deceased's details" style="display: none">
         First name:
         <asp:TextBox ID="tb_firstname" data-id="tb_firstname" runat="server"></asp:TextBox><br />

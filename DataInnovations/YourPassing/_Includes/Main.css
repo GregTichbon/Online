@@ -1,0 +1,36 @@
+﻿table {
+    width: 100%;
+    border: 1px solid #FFFFFF;
+    border-collapse: collapse;
+}
+
+    table td, table th {
+        border: 1px solid #FFFFFF;
+        padding: 5px;
+        text-align: left;
+    }
+
+    table tbody td {
+        font-size: 13px;
+    }
+
+    table tr:nth-child(even) {
+        background: #D0E4F5;
+    }
+
+    table thead {
+        background: #0B6FA4;
+        border-bottom: 5px solid #FFFFFF;
+    }
+
+        table thead th {
+            font-size: 17px;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-align: left;
+            border-left: 2px solid #FFFFFF;
+        }
+
+            table thead th:first-child {
+                border-left: none;
+            }
