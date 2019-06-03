@@ -73,10 +73,11 @@
                 mode = $(this).text();
                 $("#dialog_othertransactions").find(':input').val(''); //clear all fields
                 if (mode == "Add") {
-                    $('#dd_othertransactions_transaction_id').val('othertransaction_new');
+                    $('#tb_othertransactions_transaction_id').val('othertransaction_new');
+                    setdefaultamount();
                 } else {
                     tr = $(this).closest('tr');
-                    $('#dd_othertransactions_transaction_id').val($(tr).attr('id'));
+                    $('#tb_othertransactions_transaction_id').val($(tr).attr('id'));
                     $('#dd_othertransactions_system').val($(tr).attr('system'));
                     $('#dd_othertransactions_person_id').val($(tr).attr('person_id'));
                     $('#dd_othertransactions_code').val($(tr).find('td').eq(0).text());
@@ -98,7 +99,7 @@
                         $(this).dialog("close");
                     },
                     "Save": function () {
-                        othertransaction_id = $('#dd_othertransactions_transaction_id').val();
+                        othertransaction_id = $('#tb_othertransactions_transaction_id').val();
                         person = $('#dd_othertransactions_person_id option:selected').text();
                         person_id = $('#dd_othertransactions_person_id').val();
                         //date = $('#tb_transactions_date').val();
@@ -148,7 +149,7 @@
                     othertransactionButtons["Delete"] = function () {
                         if (window.confirm("Are you sure you want to delete this transaction?")) {
                             $(this).dialog("close");
-                            othertransaction_id = $('#dd_othertransactions_transaction_id').val();
+                            othertransaction_id = $('#tb_othertransactions_transaction_id').val();
                             var arForm = [{ "name": "othertransaction_id", "value": othertransaction_id }];
                             var formData = JSON.stringify({ formVars: arForm });
                             $.ajax({
@@ -176,10 +177,11 @@
                 mode = $(this).text();
                 $("#dialog_person_transactions").find(':input').val(''); //clear all fields
                 if (mode == "Add") {
-                    $('#dd_person_transactions_person_transaction_id').val('person_transaction_new');
+                    $('#tb_person_transactions_transaction_id').val('person_transaction_new');
+                     setdefaultamount();
                 } else {
                     tr = $(this).closest('tr');
-                    $('#dd_person_transactions_transaction_id').val($(tr).attr('id'));
+                    $('#tb_person_transactions_transaction_id').val($(tr).attr('id'));
                     $('#dd_person_transactions_system').val($(tr).attr('system'));
                     $('#dd_person_transactions_person_id').val($(tr).attr('person_id'));
                     $('#dd_person_transactions_code').val($(tr).find('td').eq(0).text());
@@ -201,7 +203,7 @@
                         $(this).dialog("close");
                     },
                     "Save": function () {
-                        person_transaction_id = $('#dd_person_transactions_transaction_id').val();
+                        person_transaction_id = $('#tb_person_transactions_transaction_id').val();
                         person = $('#dd_person_transactions_person_id option:selected').text();
                         person_id = $('#dd_person_transactions_person_id').val();
                         //date = $('#tb_transactions_date').val();
@@ -251,7 +253,7 @@
                     person_transactionButtons["Delete"] = function () {
                         if (window.confirm("Are you sure you want to delete this transaction?")) {
                             $(this).dialog("close");
-                            person_transaction_id = $('#dd_person_transactions_transaction_id').val();
+                            person_transaction_id = $('#tb_person_transactions_transaction_id').val();
                             var arForm = [{ "name": "person_transaction_id", "value": person_transaction_id }];
                             var formData = JSON.stringify({ formVars: arForm });
                             $.ajax({
@@ -290,11 +292,18 @@
 
                 if (parseFloat($(tr_transaction).find('td').eq(3).text()) == total_other_transactions) {
                     $(tr_transaction).addClass('allocated');
+                    $("#dialog_kiwibank1").dialog("close");
                 } else {
                     $(tr_transaction).removeClass('allocated');
                 }
             }
 
+            function setdefaultamount() {
+                transaction_amount = parseFloat($(tr_transaction).find('td').eq(3).text());
+                transaction_person = parseFloat($(tr_transaction).find('td').eq(4).text());
+                transaction_other = parseFloat($(tr_transaction).find('td').eq(5).text());
+                $('#tb_othertransactions_amount').val((transaction_amount - transaction_person - transaction_other).toFixed(2));
+            }
 
             $('#menu').click(function () {
                 window.location.href = "<%: ResolveUrl("~/default.aspx")%>";
@@ -403,9 +412,9 @@
           <!-- DIALOG OTHER TRANSACTIONS -->
             <div id="dialog_othertransactions" title="Maintain Other Transactions" style="display: none" class="form-horizontal">
                  <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_othertransactions_transaction_id">ID</label>
+                    <label class="control-label col-sm-4" for="tb_othertransactions_transaction_id">ID</label>
                     <div class="col-sm-8">
-                        <input id="dd_othertransactions_transaction_id" name="dd_othertransactions_transaction_id" type="text" class="form-control" readonly="readonly" />
+                        <input id="tb_othertransactions_transaction_id" name="tb_othertransactions_transaction_id" type="text" class="form-control" readonly="readonly" />
                     </div>
                 </div>
                 <!--

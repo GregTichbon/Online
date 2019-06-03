@@ -10,7 +10,7 @@
 namespace DataInnovations.YourPassing {
     
     
-    public partial class deceased {
+    public partial class DeceasedDetails {
         
         /// <summary>
         /// dd_amount control.

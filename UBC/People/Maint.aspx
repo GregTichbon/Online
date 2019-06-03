@@ -14,6 +14,7 @@
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/UBC.js")%>"></script>
 
     <script type="text/javascript">
         // Change JQueryUI plugin names to fix name collision with Bootstrap.
@@ -179,7 +180,6 @@
             });
 
             $(document).on('click', '.transactionsedit', function () {
-                //$('.transactionsedit').click(function () {
                 mode = $(this).data('mode');
                 if (mode == "add") {
                     $("#dialog-transactions").find(':input').val('');
@@ -213,21 +213,25 @@
                     "Save": function () {
                         if (mode == "add") {
                             tr = $('#div_transactions > table > tbody tr:first').clone();
-                            tr.find(':input').val('');
-                            $('#div_transactions > table > tbody').append(tr);
+                            $(tr).removeAttr('style');
+                            $('#div_transactions > table > tbody > tr:last').before(tr);
                             $(tr).attr('id', 'transactions_new_' + get_newctr());
+                            $(tr).find('td:first').attr("class", "inserted");
+                        } else {
+                            $(tr).find('td:first').attr("class", "changed");
+
                         }
                         $(tr).attr('maint', 'changed');
-
                         $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
                         $(tr).find('td').eq(2).text($('#dd_transactions_system').val());
                         $(tr).find('td').eq(3).text($('#dd_transactions_code').val());
                         $(tr).find('td').eq(4).text($('#dd_transactions_event option:selected').text());
                         $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
-                        $(tr).find('td').eq(5).text($('#tb_transactions_amount').val());
+                        $(tr).find('td').eq(5).text(formatcurrency($('#tb_transactions_amount').val()));
                         $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
+                        totaltransactions();
                         //$(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
-                        //alert("Database will be updated when record submited");
+                        alert("Database will be updated when record submited");
                         $(this).dialog("close");
                     }
                 }
@@ -236,8 +240,11 @@
                 if (mode != 'add') {
                     myButtons["Delete"] = function () {
                         if (window.confirm("Are you sure you want to delete this transaction?")) {
-                            $(tr).remove();
-                            alert('To do: Delete in database (Have removed from screen');
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            totaltransactions();
+                            alert('To do: Delete in database');
                             $(this).dialog("close");
                         }
                     }
@@ -245,50 +252,182 @@
 
 
                 $("#dialog-transactions").dialog('option', 'buttons', myButtons);
+            })
 
-                /*
-                $("#dialog-transactions").dialog({
+            /* ========================================= PHONE ===========================================*/
+            $(document).on('click', '.phoneedit', function () {
+                //$('.phonesedit').click(function () {
+                mode = $(this).data('mode');
+                if (mode == "add") {
+                    $("#dialog-phones").find(':input').val('');
+                } else {
+                    tr = $(this).closest('tr');
+                    $('#tb_phones_number').val($(tr).find('td').eq(1).text());
+                    $('#dd_phones_mobile').val($(tr).find('td').eq(2).text());
+                    if ($('#dd_phones_mobile').val() != 'Yes') {
+                        $('#dd_phones_sendtexts').attr("disabled", true);
+                    } else {
+                        $('#dd_phones_sendtexts').val($(tr).find('td').eq(3).text());
+                    }
+                    //$('#dd_phones_sendtexts').val($(tr).find('td').eq(3).attr('event_id'));
+                    $('#tb_phones_note').val($(tr).find('td').eq(4).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-phones").dialog({
                     resizable: false,
                     height: 600,
                     width: mywidth,
-                    modal: true,
-                    buttons: {
-                        "Cancel": function () {
-                            $(this).dialog("close");
-                        },
-                        "Delete": function () {
-                            if (window.confirm("Are you sure you want to delete this transaction?")) {
-                                alert('To do: Remove from screen and delete in database');
-                                $(this).dialog("close");
+                    modal: true
+                });
 
-                            }
-                        },
-                        "Save": function () {
-                            if (mode == "add") {
-                                tr = $('#div_transactions > table > tbody tr:first').clone();
-                                tr.find(':input').val('');
-                                $('#div_transactions > table > tbody').append(tr);
-                            } 
-                            $(tr).attr('id', 'transactions_new_' + get_newctr());
-                            $(tr).attr('maint', 'changed');
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if (mode == "add") {
+                            tr = $('#div_phone > table > tbody tr:first').clone();
+                            $(tr).removeAttr('style');
+                            //$('#div_phone > table > tbody > tr:last').before(tr);
+                            $('#div_phone > table > tbody').append(tr);
+                            $(tr).attr('id', 'phones_new_' + get_newctr());
+                            $(tr).find('td:first').attr("class", "inserted");
+                        } else {
+                            $(tr).find('td:first').attr("class", "changed");
 
-                            $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
-                            $(tr).find('td').eq(2).text($('#dd_transactions_system').val());
-                            $(tr).find('td').eq(3).text($('#dd_transactions_code').val());
-                            $(tr).find('td').eq(4).text($('#dd_transactions_event option:selected').text());
-                            $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
-                            $(tr).find('td').eq(5).text($('#tb_transactions_amount').val());
-                            $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
-                            $(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
-                            //alert("Database will be updated when record submited");
+                        }
+                        $(tr).attr('maint', 'changed');
+                        $(tr).find('td').eq(1).html('<a href="tel:' + $('#tb_phones_number').val() + '">' + $('#tb_phones_number').val() + '</a>');
+                        $(tr).find('td').eq(2).text($('#dd_phones_mobile').val());
+                        $(tr).find('td').eq(3).text($('#dd_phones_sendtexts').val());
+                        $(tr).find('td').eq(4).text($('#tb_phones_note').val());
+                        if ($('#dd_phones_sendtexts').val() == 'Yes') {
+                            $(tr).find('td').eq(5).html('<a class="send_text">Send</a>');
+                        } else {
+                            $(tr).find('td').eq(5).html('');
+                        }
+                        alert("Database will be updated when record submited");
+                        $(this).dialog("close");
+                    }
+                }
+
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this phone?")) {
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            alert('To do: Delete in database');
                             $(this).dialog("close");
                         }
                     }
-                });
-                */
+                }
+
+
+                $("#dialog-phones").dialog('option', 'buttons', myButtons);
+
             })
 
-            $('.send_text').click(function () {
+            $('#dd_phones_mobile').change(function () {
+                if ($(this).val() == "No") {
+                    $('#dd_phones_sendtexts').val('');
+                    $('#dd_phones_sendtexts').attr("disabled", true);
+                } else {
+                    $('#dd_phones_sendtexts').removeAttr("disabled");
+                }
+            });
+
+
+/* ========================================= EMAIL ===========================================*/
+            $(document).on('click', '.emailedit', function () {
+                //$('.emailedit').click(function () {
+                mode = $(this).data('mode');
+                if (mode == "add") {
+                    $("#dialog-email").find(':input').val('');
+                } else {
+                    tr = $(this).closest('tr');
+                    $('#tb_email_emailaddress').val($(tr).find('td').eq(1).text());
+                    $('#tb_email_note').val($(tr).find('td').eq(2).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-email").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true
+                });
+
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if (mode == "add") {
+                            tr = $('#div_email > table > tbody tr:first').clone();
+                            $(tr).removeAttr('style');
+                            //$('#div_email > table > tbody > tr:last').before(tr);
+                            $('#div_email > table > tbody').append(tr);
+                            $(tr).attr('id', 'email_new_' + get_newctr());
+                            $(tr).find('td:first').attr("class", "inserted");
+                        } else {
+                            $(tr).find('td:first').attr("class", "changed");
+
+                        }
+                        $(tr).attr('maint', 'changed');
+                        $(tr).find('td').eq(1).text($('#tb_email_emailaddress').val());
+                        $(tr).find('td').eq(2).text($('#tb_email_note').val());
+                        $(tr).find('td').eq(3).html('<a class="send_email_system">Send</a>');
+                        //$(tr).find('td').eq(4).html('<a class="send_email_local" href="mailto:' + $('#tb_email_emailaddress').val() + '?subject=Union Boat Club&amp;body=Hi ' + 'Greg' + '">Send</a>');
+                        $(tr).find('td').eq(4).html('<a class="send_email_local">Send</a>');
+                        
+                        alert("Database will be updated when record submited");
+                        $(this).dialog("close");
+                    }
+                }
+
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this email?")) {
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            alert('To do: Delete in database');
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+
+
+                $("#dialog-email").dialog('option', 'buttons', myButtons);
+
+            })
+
+            /* ========================================= EMAIL END ===========================================*/
+
+            $('#dd_emails_mobile').change(function () {
+                if ($(this).val() == "No") {
+                    $('#dd_emails_sendtexts').val('');
+                    $('#dd_emails_sendtexts').attr("disabled", true);
+                } else {
+                    $('#dd_emails_sendtexts').removeAttr("disabled");
+                }
+            });
+
+
+            //$('.send_text').click(function () {
+            $(document).on('click', '.send_text', function () {
                 mywidth = $(window).width() * .95;
                 if (mywidth > 800) {
                     mywidth = 800;
@@ -309,7 +448,9 @@
                     }
                 });
             })
-            $('.send_email_system').click(function () {
+
+            //$('.send_email_system').click(function () {
+            $(document).on('click', '.send_email_system', function () {
                 mywidth = $(window).width() * .95;
                 if (mywidth > 800) {
                     mywidth = 800;
@@ -324,15 +465,16 @@
                             $(this).dialog("close");
                         },
                         "Send": function () {
-                            alert("to do - send to: " + $('td:first', $(this).parents('tr')).text());
+                            alert("to do - send to: " + $('td:eq(1)', $(this).parents('tr')).text());
                             $(this).dialog("close");
                         }
                     }
                 });
             })
 
-            $('.send_email_local').click(function () {
-                email = $('td:first', $(this).parents('tr')).text();
+            //$('.send_email_local').click(function () {
+            $(document).on('click', '.send_email_local', function () {
+                email = $('td:eq(1)', $(this).parents('tr')).text();
                 firstname = $('#tb_firstname').val();
                 knownas = $('#tb_knownas').val();
                 if (knownas == "") {
@@ -394,6 +536,21 @@
         function get_newctr() {
             newctr++;
             return newctr;
+        }
+
+        function totaltransactions() {
+            transactionstotal = 0
+
+            $('#div_transactions > table > tbody > tr:not(:first-child, :last-child)').each(function () {
+                if ($(this).attr('maint') != 'deleted') {
+                    transactionstotal += parseFloat($(this).find('td').eq(5).text());
+                }
+            })
+            Cr = '';
+            if (transactionstotal > 0) {
+                Cr = 'Cr';
+            }
+            $('#div_transactions > table > tbody > tr:last').find('td').eq(0).html('<b>' + parseFloat(transactionstotal).toFixed(2) + Cr + '</b>');
         }
 
 
@@ -470,7 +627,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- =================================TRANSACTIONS===================================  -->
             <div id="dialog-transactions" title="Maintain Transactions" style="display: none" class="form-horizontal">
                 <div class="form-group">
                     <label for="tb_transactions_date" class="control-label col-sm-4">
@@ -538,6 +695,59 @@
                 </div>
                 -->
             </div>
+
+            <!-- ================================= PHONE ===================================  -->
+            <div id="dialog-phones" title="Maintain phones" style="display: none" class="form-horizontal">
+                <div class="form-group">
+                    <label for="tb_phones_number" class="control-label col-sm-4">
+                        Number
+                    </label>
+                    <div class="col-sm-8">
+                        <input id="tb_phones_number" name="tb_phones_number" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_phones_mobile">Mobile</label>
+                    <div class="col-sm-8">
+                        <select id="dd_phones_mobile" name="dd_phones_mobile" class="form-control">
+                            <%= Generic.Functions.populateselect(yesno, "","None") %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_phones_sendtexts">Send texts</label>
+                    <div class="col-sm-8">
+                        <select id="dd_phones_sendtexts" name="dd_phones_sendtexts" class="form-control">
+                            <%= Generic.Functions.populateselect(yesno, "","") %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_phones_note">Note</label>
+                    <div class="col-sm-8">
+                        <input id="tb_phones_note" name="tb_phones_note" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- ================================= EMAIL ===================================  -->
+            <div id="dialog-email" title="Maintain email" style="display: none" class="form-horizontal">
+                <div class="form-group">
+                    <label for="tb_email_emailaddress" class="control-label col-sm-4">
+                        Email Address
+                    </label>
+                    <div class="col-sm-8">
+                        <input id="tb_email_emailaddress" name="tb_email_emailaddress" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_email_note">Note</label>
+                    <div class="col-sm-8">
+                        <input id="tb_email_note" name="tb_email_note" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+                        <!-- ================================= END ===================================  -->
 
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#div_basic">Basic</a></li>

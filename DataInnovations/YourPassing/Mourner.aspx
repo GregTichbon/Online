@@ -23,6 +23,10 @@
                     title: name
                 });
             });
+            $('[data-id="btn_view2"]').click(function () {
+                id = $(this).closest('tr').attr('data-id');
+                window.open("DeceasedDetails.aspx?id=" + id);
+            });
 
             
         }); //$(document).ready

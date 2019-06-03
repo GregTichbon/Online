@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataInnovations.YourPassing {
+namespace DataInnovations.YourPassing.PXPay2 {
     
     
-    public partial class deceased {
+    public partial class Default {
         
         /// <summary>
-        /// dd_amount control.
+        /// txtAmountInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_amount;
+        protected global::System.Web.UI.WebControls.TextBox txtAmountInput;
         
         /// <summary>
-        /// tb_amount control.
+        /// txtCurrencyInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_amount;
+        protected global::System.Web.UI.WebControls.TextBox txtCurrencyInput;
         
         /// <summary>
-        /// tb_message control.
+        /// txtMerchantReference control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_message;
+        protected global::System.Web.UI.WebControls.TextBox txtMerchantReference;
         
         /// <summary>
-        /// btn_submit control.
+        /// ddlTxnType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_submit;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTxnType;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
     }
 }

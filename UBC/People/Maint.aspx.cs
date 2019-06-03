@@ -86,7 +86,9 @@ namespace UBC.People
         {
             if (Session["UBC_person_id"] == null)
             {
-                Response.Redirect("~/people/security/login.aspx");
+                string url = "../search.aspx";
+                Response.Redirect("~/people/security/login.aspx?return=" + url);
+
             }
 
             hf_guid = Request.QueryString["id"];
@@ -246,15 +248,32 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
 
                     html_transactions = "<thead>";
-                    html_transactions += "<tr><th style=\"width:50px;text-align:right\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th>Amount</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_transactions += "<tr><th style=\"width:50px;text-align:center\"></th><th>Date</th><th>System</th><th>Code</th><th>Event</th><th style=\"text-align:right\">Amount</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"transactionsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                     html_transactions += "</thead>";
                     html_transactions += "<tbody>";
+
+                    //hidden row, used for creating new rows client side
+                    html_transactions += "<tr style=\"display:none\">";
+                    html_transactions += "<td style=\"text-align:center\"></td>";
+                    html_transactions += "<td></td>";
+                    html_transactions += "<td></td>";
+                    html_transactions += "<td></td>";
+                    html_transactions += "<td></td>";
+                    html_transactions += "<td style=\"text-align:right\"></td>";
+                    html_transactions += "<td></td>";
+                    //html_transactions += "<td>" + banked + "</td>";
+                    html_transactions += "<td><a href=\"javascript:void(0)\" class=\"transactionsedit\" data-mode=\"edit\">Edit</td>";
+                    //html_finance += "<td style=\"text-align:center\">').html(action) 
+                    //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
+                    html_transactions += "</tr>";
+
                     double total = 0;
 
                     cmd.CommandText = "get_person_transactions";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
 
+                    double totalamount = 0;
                     try
                     {
                         SqlDataReader dr = cmd.ExecuteReader();
@@ -264,7 +283,9 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             string date = Convert.ToDateTime(dr["date"]).ToString("dd MMM yy");
                             string system = dr["system"].ToString();
                             string detail = dr["detail"].ToString();
-                            string amount = Convert.ToDouble(dr["amount"]).ToString("0.00");
+                            double amount = Convert.ToDouble(dr["amount"]);
+                            totalamount += amount;
+                            string amountdisplay = amount.ToString("0.00");
                             string note = dr["note"].ToString();
                             string code = dr["code"].ToString();
                             string event_id = dr["event_id"].ToString();
@@ -287,7 +308,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             html_transactions += "<td>" + system + "</td>";
                             html_transactions += "<td>" + code + "</td>";
                             html_transactions += "<td event_id=\"" + event_id + "\">" + event_title + "</td>";
-                            html_transactions += "<td>" + amount + "</td>";
+                            html_transactions += "<td style=\"text-align:right\">" + amountdisplay + "</td>";
                             html_transactions += "<td>" + note + "</td>";
                             //html_transactions += "<td>" + banked + "</td>";
                             html_transactions += "<td><a href=\"javascript:void(0)\" class=\"transactionsedit\" data-mode=\"edit\">Edit</td>";
@@ -298,6 +319,12 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
 
                         }
                         dr.Close();
+                        string Cr = "";
+                        if(totalamount > 0)
+                        {
+                            Cr = "Cr";
+                        }
+                        html_transactions += "<tr><td colspan=\"6\" style=\"text-align:right\"><b>" + totalamount.ToString("0.00") + Cr + "</b></td><td colspan\"2\"></td></tr>";
                         html_transactions += "</tbody>";
 
                     }
@@ -315,7 +342,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 //{
 
                 html_relationships = "<thead>";
-                html_relationships += "<tr><th>Relationship</th>><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"relationshipedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                html_relationships += "<tr><th>Relationship</th><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"relationshipedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                 html_relationships += "</thead>";
                 html_relationships += "<tbody>";
 
@@ -459,8 +486,23 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         throw ex;
                     }
                 }
-                //-------------------------------------------------------------------------------------
-                html_phone = "<tr><th>Number</th><th>Mobile</th><th>Send Texts</th><th>Note</th><th>Send Now</th></tr>";
+                //------------------------------------PHONE-------------------------------------------------
+                html_phone = "<thead>";
+
+                html_phone += "<tr><th style=\"width:50px;text-align:center\"></th><th>Number</th><th>Mobile</th><th>Send Texts</th><th>Note</th><th>Send Now</th><th style=\"width:100px\">Action / <a class=\"phoneedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                html_phone += "</thead>";
+                html_phone += "<tbody>";
+
+                //hidden row, used for creating new rows client side
+                html_phone += "<tr style=\"display:none\">";
+                html_phone += "<td style=\"text-align:center\"></td>";
+                html_phone += "<td></td>";
+                html_phone += "<td></td>";
+                html_phone += "<td></td>";
+                html_phone += "<td></td>";
+                html_phone += "<td></td>";
+                html_phone += "<td><a href=\"javascript:void(0)\" class=\"phoneedit\" data-mode=\"edit\">Edit</td>";
+                html_phone += "</tr>";
 
                 cmd.CommandText = "get_person_phone";
                 cmd.Parameters.Clear();
@@ -487,13 +529,14 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                             phone = "<a href=\"tel:" + phone + "\">" + phone + "</>";
                         }
 
-                        html_phone += "<tr>";
+                        html_phone += "<tr id=\"phone_" + person_phone_id + "\">";
+                        html_phone += "<td style=\"text-align:center\"></td>";
                         html_phone += "<td>" + phone + "</td>";
                         html_phone += "<td>" + mobile + "</td>";
                         html_phone += "<td>" + text + "</td>";
                         html_phone += "<td>" + note + "</td>";
                         html_phone += "<td>" + send + "</td>";
-
+                        html_phone += "<td><a href=\"javascript:void(0)\" class=\"phoneedit\" data-mode=\"edit\">Edit</td>";
                         html_phone += "</tr>";
 
 
@@ -504,9 +547,24 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                 {
                     throw ex;
                 }
+                html_phone += "</tbody>";
+
 
                 //-------------------------------------------------------------------------------------
-                html_email = "<tr><th>Email</th><th>Note</th><th>System Send</th><th>Local Send</th></tr>";
+                html_email = "<thead>";
+                html_email += "<tr><th style=\"width:50px;text-align:center\"></th><th>Email</th><th>Note</th><th>System Send</th><th>Local Send</th><th style=\"width:100px\">Action / <a class=\"emailedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                html_email += "</thead>";
+                html_email += "<tbody>";
+
+                //hidden row, used for creating new rows client side
+                html_email += "<tr style=\"display:none\">";
+                html_email += "<td style=\"text-align:center\"></td>";
+                html_email += "<td></td>";
+                html_email += "<td></td>";
+                html_email += "<td></td>";
+                html_email += "<td></td>";
+                html_email += "<td><a href=\"javascript:void(0)\" class=\"emailedit\" data-mode=\"edit\">Edit</td>";
+                html_email += "</tr>";
 
                 cmd.CommandText = "get_person_email";
                 cmd.Parameters.Clear();
@@ -524,12 +582,13 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string sendsystem = "<a class=\"send_email_system\">Send</a>";
                         string sendlocal = "<a class=\"send_email_local\">Send</a>";
 
-                        html_email += "<tr>";
+                        html_email += "<tr id=\"email_" + person_email_id + "\">";
+                        html_email += "<td style=\"text-align:center\"></td>";
                         html_email += "<td>" + email + "</td>";
                         html_email += "<td>" + note + "</td>";
                         html_email += "<td>" + sendsystem + "</td>";
                         html_email += "<td>" + sendlocal + "</td>";
-
+                        html_email += "<td><a href=\"javascript:void(0)\" class=\"emailedit\" data-mode=\"edit\">Edit</td>";
                         html_email += "</tr>";
 
 

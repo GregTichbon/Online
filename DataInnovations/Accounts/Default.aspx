@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
      <a href="upload.aspx">Upload</a><br /><br />
-        <a href="allocate.aspx">Allocate</a>
+        <a href="allocate.aspx">Allocate</a><br /><br />
+        <a href="reports.aspx">Reports</a>
     </form>
 </body>
 </html>

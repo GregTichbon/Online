@@ -267,7 +267,9 @@
     <Content Include="Dependencies\Images\cross1.png" />
     <Content Include="Dependencies\Images\Logo-Page-Head-350.png" />
     <Content Include="Dependencies\Images\Logo-Page-Head.png" />
+    <Content Include="Dependencies\Images\pencil.png" />
     <Content Include="Dependencies\Images\qm1.png" />
+    <Content Include="Dependencies\Images\star.png" />
     <Content Include="Dependencies\Images\tick1.png" />
     <Content Include="Dependencies\jscolor-example.html" />
     <Content Include="Dependencies\jscolor.js" />
@@ -452,6 +454,7 @@
     <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\dark.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\default.scss" />
+    <Content Include="Dependencies\UBC.js" />
     <Content Include="EmailTemplate\Standard.html" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -482,17 +485,22 @@
     <Content Include="People\Images\103.jpg" />
     <Content Include="People\Images\105.jpg" />
     <Content Include="People\Images\109.jpg" />
+    <Content Include="People\Images\139.jpg" />
     <Content Include="People\Images\96.jpg" />
     <Content Include="People\%24Notes\%24Notes.txt" />
+    <Content Include="Dependencies\Images\Scissors.png" />
     <Content Include="People\main.aspx" />
     <Content Include="People\message.aspx" />
     <Content Include="People\Posts.asmx" />
     <Content Include="People\RegisterDisplay.aspx" />
+    <Content Include="People\Registration.aspx" />
     <Content Include="People\Reports\ComingEventsList.aspx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
     <Content Include="People\Reports\Finance.aspx" />
+    <Content Include="People\Reports\FriendsStatements.aspx" />
+    <Content Include="People\Reports\FriendsStatementsPreview.aspx" />
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
@@ -925,6 +933,13 @@
     <Compile Include="People\RegisterDisplay.aspx.designer.cs">
       <DependentUpon>RegisterDisplay.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Registration.aspx.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Registration.aspx.designer.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\AttendanceMatrix.aspx.cs">
       <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -951,6 +966,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KeyRegister.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\FriendsStatements.cs">
+      <DependentUpon>FriendsStatements.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="People\Reports\Crystal\RegattaStatements.cs">
       <AutoGen>True</AutoGen>
@@ -1003,6 +1024,20 @@
     </Compile>
     <Compile Include="People\Reports\Finance.aspx.designer.cs">
       <DependentUpon>Finance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatements.aspx.cs">
+      <DependentUpon>FriendsStatements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatements.aspx.designer.cs">
+      <DependentUpon>FriendsStatements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatementsPreview.aspx.cs">
+      <DependentUpon>FriendsStatementsPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatementsPreview.aspx.designer.cs">
+      <DependentUpon>FriendsStatementsPreview.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\FullReport.aspx.cs">
       <DependentUpon>FullReport.aspx</DependentUpon>
@@ -1223,6 +1258,10 @@
     <EmbeddedResource Include="People\Reports\Crystal\KeyRegister.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>KeyRegister.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\FriendsStatements.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FriendsStatements.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="People\Reports\Crystal\RegattaStatements.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

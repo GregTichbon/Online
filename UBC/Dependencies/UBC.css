@@ -74,5 +74,13 @@
     right: 15px;
     z-index: 9999;
 }
-
+.changed {
+    content: url('Images/pencil.png');
+}
+.deleted {
+    content: url('Images/scissors.png');
+}
+.inserted {
+    content: url('Images/star.png');
+}
 

@@ -9,6 +9,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Dependencies/UBC.css" rel="stylesheet" />
+    <script src="Dependencies/UBC.js"></script>
     <script>
 
         $(document).ready(function () {

@@ -31,9 +31,12 @@ namespace UBC.People.Reports
             {
                 case "1":
                     SqlConnection con1 = new SqlConnection(strConnString);
-                    SqlDataAdapter adp1 = new SqlDataAdapter("Report_RegattaTransactions", con1);
+                    SqlDataAdapter adp1 = new SqlDataAdapter("Report_Person_Transactions", con1);
+                    //SqlDataAdapter adp1 = new SqlDataAdapter("Report_RegattaTransactions", con1);
+                    
                     adp1.Fill(ds);
-                    report = Server.MapPath("~/people/reports/crystal/RegattaStatements.rpt");
+                    report = Server.MapPath("~/people/reports/crystal/FriendsStatements.rpt");
+                    //report = Server.MapPath("~/people/reports/crystal/RegattaStatements.rpt");
                     rpt.Load(report);
                     rpt.SetDataSource(ds.Tables["Table"]);
 
@@ -80,7 +83,7 @@ namespace UBC.People.Reports
                     crv_report.ReportSource = rpt;
 
                     break;
-                case "4":
+                case "fgfdsg;fdggdf'gg'huio4":
 
                     //string emailbodyTemplate = "RegisterEmail.xslt";
                     string emailBCC = "greg@datainn.co.nz";

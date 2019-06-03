@@ -88,6 +88,14 @@
     <Content Include="ShowItem.aspx" />
     <Content Include="ShowItem2.aspx" />
     <Content Include="TestandPlay\Test1.html" />
+    <Content Include="_Includes\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="_Includes\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="_Includes\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="_Includes\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="_Includes\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="_Includes\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="_Includes\css\jquery-ui.css" />
+    <Content Include="_Includes\js\vendor\jquery.cycle2.min.js" />
     <Content Include="_Includes\Scripts\colorbox\images\Thumbs.db" />
     <Content Include="_Includes\Scripts\Cycle2\jquery.cycle2.center.min.js" />
     <Content Include="_Includes\Scripts\Cycle2\jquery.cycle2.min.js" />
