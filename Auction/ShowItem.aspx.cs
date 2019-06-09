@@ -25,6 +25,8 @@ namespace Auction
         public string retailprice;
         public string itemimages;
         public string donorimages;
+        public string increment;
+        public string startbid;
 
         public string hf_highestbid;
         public string highestbid;
@@ -67,6 +69,13 @@ namespace Auction
                     description = dr["Description"].ToString();
                     reserve = dr["Reserve"].ToString();
                     retailprice = dr["RetailPrice"].ToString();
+                    increment = dr["increment"].ToString();
+                    if(increment == "")
+                    {
+                        increment = parameters["xx"];
+                    }
+                    startbid = dr["startbid"].ToString();
+                    
                 }
             }
             catch (Exception ex)

@@ -26,8 +26,8 @@ namespace DataInnovations.YourPassing.PXPay2
 
             if (!string.IsNullOrEmpty(ResultQs))
             {
-                string PxPayUserId = "WhanganuiDC_Dev"; // ConfigurationManager.AppSettings["PxPayUserId"];
-                string PxPayKey = "44C56d26"; // ConfigurationManager.AppSettings["PxPayKey"];
+                string PxPayUserId = ConfigurationManager.AppSettings["PxPayUserId"];
+                string PxPayKey = ConfigurationManager.AppSettings["PxPayKey"];
 
                 //        WhanganuiDC_Dev    44C56d26
                 //        WanganuiDCDev    1A5B9A93   test1234
@@ -91,8 +91,8 @@ namespace DataInnovations.YourPassing.PXPay2
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string PxPayUserId = "WanganuiDCDev"; // ConfigurationManager.AppSettings["PxPayUserId"];
-            string PxPayKey = "1A5B9A93"; // ConfigurationManager.AppSettings["PxPayKey"];
+            string PxPayUserId = ConfigurationManager.AppSettings["PxPayUserId"];
+            string PxPayKey = ConfigurationManager.AppSettings["PxPayKey"];
 
             //        WhanganuiDC_Dev    44C56d26
             //        WanganuiDCDev    1A5B9A93   test1234
@@ -117,7 +117,7 @@ namespace DataInnovations.YourPassing.PXPay2
             var props = output.GetType().GetProperties();
             foreach (var p in props)
             {
-                Response.Write(p.Name + ": " + p.GetValue(output, null) + "<br />");
+                //Response.Write(p.Name + ": " + p.GetValue(output, null) + "<br />");
             }
 
             if (output.valid == "1")

@@ -126,6 +126,112 @@
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logonit.png" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
     <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\fullcalendar\CHANGELOG.txt" />
+    <Content Include="Dependencies\fullcalendar\CONTRIBUTING.txt" />
+    <Content Include="Dependencies\fullcalendar\demos\agenda-views.html" />
+    <Content Include="Dependencies\fullcalendar\demos\background-events.html" />
+    <Content Include="Dependencies\fullcalendar\demos\basic-views.html" />
+    <Content Include="Dependencies\fullcalendar\demos\default.html" />
+    <Content Include="Dependencies\fullcalendar\demos\external-dragging.html" />
+    <Content Include="Dependencies\fullcalendar\demos\gcal.html" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg1.html" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg2.aspx" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg2.html" />
+    <Content Include="Dependencies\fullcalendar\demos\json.html" />
+    <Content Include="Dependencies\fullcalendar\demos\js\theme-chooser.js" />
+    <Content Include="Dependencies\fullcalendar\demos\list-views.html" />
+    <Content Include="Dependencies\fullcalendar\demos\locales.html" />
+    <Content Include="Dependencies\fullcalendar\demos\php\get-events.php" />
+    <Content Include="Dependencies\fullcalendar\demos\php\get-timezones.php" />
+    <Content Include="Dependencies\fullcalendar\demos\php\utils.php" />
+    <Content Include="Dependencies\fullcalendar\demos\selectable.html" />
+    <Content Include="Dependencies\fullcalendar\demos\themes.html" />
+    <Content Include="Dependencies\fullcalendar\demos\timezones.html" />
+    <Content Include="Dependencies\fullcalendar\demos\week-numbers.html" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.css" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.js" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.print.min.css" />
+    <Content Include="Dependencies\fullcalendar\gcal.js" />
+    <Content Include="Dependencies\fullcalendar\gcal.min.js" />
+    <Content Include="Dependencies\fullcalendar\lib\jquery-ui.min.js" />
+    <Content Include="Dependencies\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Dependencies\fullcalendar\lib\moment.min.js" />
+    <Content Include="Dependencies\fullcalendar\LICENSE.txt" />
+    <Content Include="Dependencies\fullcalendar\locale-all.js" />
+    <Content Include="Dependencies\fullcalendar\locale\af.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-dz.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-kw.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-ly.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-ma.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-sa.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-tn.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar.js" />
+    <Content Include="Dependencies\fullcalendar\locale\bg.js" />
+    <Content Include="Dependencies\fullcalendar\locale\bs.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ca.js" />
+    <Content Include="Dependencies\fullcalendar\locale\cs.js" />
+    <Content Include="Dependencies\fullcalendar\locale\da.js" />
+    <Content Include="Dependencies\fullcalendar\locale\de-at.js" />
+    <Content Include="Dependencies\fullcalendar\locale\de-ch.js" />
+    <Content Include="Dependencies\fullcalendar\locale\de.js" />
+    <Content Include="Dependencies\fullcalendar\locale\el.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-au.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-ca.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-gb.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-ie.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-nz.js" />
+    <Content Include="Dependencies\fullcalendar\locale\es-do.js" />
+    <Content Include="Dependencies\fullcalendar\locale\es-us.js" />
+    <Content Include="Dependencies\fullcalendar\locale\es.js" />
+    <Content Include="Dependencies\fullcalendar\locale\et.js" />
+    <Content Include="Dependencies\fullcalendar\locale\eu.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fa.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fi.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fr-ca.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fr-ch.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\gl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\he.js" />
+    <Content Include="Dependencies\fullcalendar\locale\hi.js" />
+    <Content Include="Dependencies\fullcalendar\locale\hr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\hu.js" />
+    <Content Include="Dependencies\fullcalendar\locale\id.js" />
+    <Content Include="Dependencies\fullcalendar\locale\is.js" />
+    <Content Include="Dependencies\fullcalendar\locale\it.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ja.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ka.js" />
+    <Content Include="Dependencies\fullcalendar\locale\kk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ko.js" />
+    <Content Include="Dependencies\fullcalendar\locale\lb.js" />
+    <Content Include="Dependencies\fullcalendar\locale\lt.js" />
+    <Content Include="Dependencies\fullcalendar\locale\lv.js" />
+    <Content Include="Dependencies\fullcalendar\locale\mk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ms-my.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ms.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nb.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nl-be.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nn.js" />
+    <Content Include="Dependencies\fullcalendar\locale\pl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\pt-br.js" />
+    <Content Include="Dependencies\fullcalendar\locale\pt.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ro.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ru.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sq.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sr-cyrl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sv.js" />
+    <Content Include="Dependencies\fullcalendar\locale\th.js" />
+    <Content Include="Dependencies\fullcalendar\locale\tr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\uk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\vi.js" />
+    <Content Include="Dependencies\fullcalendar\locale\zh-cn.js" />
+    <Content Include="Dependencies\fullcalendar\locale\zh-tw.js" />
     <Content Include="Dependencies\Images\processing1.gif" />
     <Content Include="Dependencies\jquery-2.2.0.min.js" />
     <Content Include="Dependencies\jquery.validate.min.js" />
@@ -186,6 +292,11 @@
     <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
     <Content Include="Dependencies\StickyTableCells\README.md" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="YearPlanner\FullCalendarIO_Original.html" />
+    <Content Include="YearPlanner\FullCalendarIO.aspx" />
+    <Content Include="YearPlanner\FullCalendarIO.html" />
+    <Content Include="YearPlanner\Readme.txt" />
+    <Content Include="YearPlanner\Test1.aspx" />
     <Content Include="YourPassing\Administration\Agents.aspx" />
     <Content Include="YourPassing\Administration\default.aspx" />
     <Content Include="YourPassing\Administration\Directors.aspx" />
@@ -656,6 +767,7 @@
     <Content Include="YourPassing\_Includes\tinymce\js\tinymce\themes\silver\theme.min.js" />
     <Content Include="YourPassing\_Includes\tinymce\js\tinymce\tinymce.min.js" />
     <Content Include="YourPassing\_Includes\tinymce\LICENSE.TXT" />
+    <Content Include="Dependencies\fullcalendar\demos\json\events.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Raffles\Communicate.aspx" />
@@ -850,6 +962,10 @@
     </Compile>
     <Compile Include="BBQ\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\fullcalendar\demos\Greg2.aspx.cs">
+      <DependentUpon>Greg2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Entity\account.aspx.cs">
       <DependentUpon>account.aspx</DependentUpon>
@@ -1440,6 +1556,20 @@
     </Compile>
     <Compile Include="UBC\ZoneTraining.aspx.designer.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YearPlanner\FullCalendarIO.aspx.cs">
+      <DependentUpon>FullCalendarIO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YearPlanner\FullCalendarIO.aspx.designer.cs">
+      <DependentUpon>FullCalendarIO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YearPlanner\Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YearPlanner\Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
     </Compile>
     <Compile Include="YourPassing\Administration\Agents.aspx.cs">
       <DependentUpon>Agents.aspx</DependentUpon>

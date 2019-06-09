@@ -9,8 +9,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#save').click(function () {
+                
                 if ($("#formReg").valid()) {
-                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#mobilenumber').val() }, { "name": "textnotifications", "value": $('#textnotifications').val() }, { "name": "contactpermission", "value": $('#contactpermission').val() }];
+                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#r_emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#r_mobilenumber').val() }, { "name": "textnotifications", "value": $('#r_textnotifications').val() }, { "name": "contactpermission", "value": $('#r_contactpermission').val() }];
                     var formData = JSON.stringify({ formVars: arForm });
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -34,24 +35,42 @@
                 };
             });
 
+            
             $("#formReg").validate({
                 rules: {
-                    passcode: {
+                    r_passcode: {
                         minlength: 6,
-                        remote: "data.asmx/verifypasscode"
+                        //remote: "data.asmx/verifypasscode?id=" + $('#r_emailaddress').val()
                     },
-                    mobilenumber: { required: "#TextNotifications:checked" }
+                    r_mobilenumber: { required: "#r_textnotifications:checked" }
                 },
                 messages: {
-                    passcode: {
+                    r_passcode: {
                         minlength: "Your pass code must be at least 6 characters long<br />",
-                        remote: " Your pass code must not already have been used<br />"
+                        //remote: " Your pass code must not already have been used<br />"
                     },
-                    mobilenumber: {
+                    r_mobilenumber: {
                         required: "You must enter a mobile phone number if you want text notifications"
                     }
                 }
             });
+           
+
+          
+
+        
+            $.validator.addMethod('passcode', function (value, element) {
+                alert($('#r_emailaddress').val());
+                alert(value);
+
+                if (1 == 2) {
+                    return true;
+                } else {
+                    //do ajax
+                    return false;
+                }
+            }, "Invalid User ID / Passcode combination");
+          
 
             $('#viewtermsandconditions').click(function () {
                 $("#dialog_termsandconditions").dialog({
@@ -66,13 +85,13 @@
                     }
                 });
             });
-            /*
+          
 
 			$("#submitbutton").on("click", function () {
 				$("#form1").submit();
 			});
 			$('#submitbutton').css('cursor', 'pointer');
-			
+			/*
 			$("input").keypress(function(event) {
 				if (event.which == 13) {
 					event.preventDefault();
@@ -88,15 +107,8 @@
     <form id="formReg" runat="server">
 
         <div id="dialog_termsandconditions" title="Terms and Conditions" style="display: none">
-            <p>This Cancer Society of New Zealand (Canterbury-West Coast Division) silent auction will be conducted electronically with bids being displayed automatically.</p>
-            <p>Items will be sold to the highest eligible bidder recorded at the close of bidding. You will be notified on screen if you are the winner and receive a text message confirmation of this.</p>
-            <p>Bids will not be accepted after the close of the auction.</p>
-            <p>Minimum Bid increments are indicated next to each item.</p>
-            <p>No auction item may be redeemed for cash.</p>
-            <p>Cancer Society of New Zealand (Canterbury-West Coast Division) shall not be liable for any loss or damage whatsoever suffered (including but not limited to direct or consequential loss) or personal injury suffered or sustained in connection with the auction or auction items except for any liability which cannot be excluded by law.</p>
-            <p>By agreeing to these terms and conditions you the bidder accept that as a successful winner of an item you will fully pay for the item including any surcharge or tax and delivery of all the items you win in a timely manner.</p>
-            <p>Cancer Society of New Zealand (Canterbury-West Coast Division) will keep a record of the details you provide when you registered to bid on the auction. Unless you advise Cancer Society of New Zealand (Canterbury-West Coast Division) otherwise, your name and contact details will be included in the list of event participants distributed to sponsors of the event and the list of bidders distributed to donors of the auction. If you wish to be removed from these databases, please let Cancer Society of New Zealand (Canterbury-West Coast Division) know in writing by emailing ball@cancercwc.org.nz and we’ll have you removed immediately.</p>
-        </div>
+            <%= TermsAndConditions %>
+                </div>
 
         <div class="row">
             <div class="form-group">
@@ -109,12 +121,23 @@
 
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-sm-4" for="emailaddress">Email Address</label>
+                <label class="control-label col-sm-4" for="r_emailaddress">Email Address</label>
                 <div class="col-sm-8">
-                    <input type="email" name="emailaddress" id="emailaddress" class="form-control" required="required" />
+                    <input type="email" name="r_emailaddress" id="r_emailaddress" class="form-control" required="required" />
                 </div>
             </div>
         </div>
+        <!--
+                <div class="row">
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="r_userid">User ID</label>
+                <div class="col-sm-8">
+                    <input type="text" name="r_userid" id="r_userid" class="form-control" required="required" />
+                </div>
+            </div>
+        </div>
+
+            -->
 
         <div class="row">
             <div class="form-group">
@@ -127,38 +150,38 @@
 
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-sm-4" for="mobilenumber">Mobile phone number</label>
+                <label class="control-label col-sm-4" for="r_mobilenumber">Mobile phone number</label>
                 <div class="col-sm-8">
-                    <input type="text" name="mobilenumber" id="mobilenumber" class="form-control" />
+                    <input type="text" name="r_mobilenumber" id="r_mobilenumber" class="form-control" />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-sm-4" for="textnotifications">Send a text to my mobile phone number if I have been outbid on an item.</label>
+                <label class="control-label col-sm-4" for="r_textnotifications">Send a text to my mobile phone number if I have been outbid on an item.</label>
                 <div class="col-sm-1">
-                    <input name="textnotifications" type="checkbox" id="textnotifications" class="form-control " value="Yes" checked="checked" />
+                    <input name="r_textnotifications" type="checkbox" id="r_textnotifications" class="form-control " value="Yes" checked="checked" />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-sm-4" for="contactpermission">I give permission to The Whanganui Womens Refuge to send information to me by email and/or text message from time to time.</label>
+                <label class="control-label col-sm-4" for="r_contactpermission">I give permission to The Whanganui Womens Refuge to send information to me by email and/or text message from time to time.</label>
                 <div class="col-sm-1">
-                    <input name="contactpermission" type="checkbox" id="contactpermission" class="form-control" value="Yes" checked="checked" />
+                    <input name="r_contactpermission" type="checkbox" id="r_contactpermission" class="form-control" value="Yes" checked="checked" />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-sm-4" for="contactpermission">I have read and accept the terms and conditions
+                <label class="control-label col-sm-4" for="r_viewtermsandconditions">I have read and accept the terms and conditions
                 <br />
                     <span id="viewtermsandconditions">View</span></label>
                 <div class="col-sm-1">
-                    <input name="termsandconditions" type="checkbox" id="termsandconditions" class="form-control" value="Yes" required="required" />
+                    <input name="r_viewtermsandconditions" type="checkbox" id="r_viewtermsandconditions" class="form-control" value="Yes" required="required" />
                 </div>
             </div>
         </div>

@@ -14,8 +14,11 @@ namespace Auction
     public partial class items : System.Web.UI.Page
     {
         public string html = "";
+        public string categories = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+
             #region ASP CODE
             /*
               <%
@@ -296,11 +299,58 @@ end if
 
             Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
 
+            //---------------------------------------
+
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd;
+
+            if (parameters["EnableCategories"] == "Yes") {
+                categories += "<button class=\"categoryselect categoryselected\" id=\"btn_category_All\" type=\"button\">All</button>";
+
+            string ctrl_category_ctr;
+            string ctrl_category;
+
+            
+
+            cmd = new SqlCommand("Get_Categories", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                            ctrl_category_ctr = dr["category_ctr"].ToString();
+                            ctrl_category = dr["category"].ToString();
+
+                        categories += "<button class=\"categoryselect\" id=\"btn_category_" + ctrl_category_ctr + "\" type=\"button\">" + ctrl_category + "</button>";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            }
+
+            //======================================
+
+
             string id = "";
             string seq = "";
             string title = "";
             string description = "";
             string shortdescription = "";
+            string category = "";
 
             string hide = "";
             string donor_ctr;
@@ -324,10 +374,9 @@ end if
             string donorimagefolder = Server.MapPath("images\\auction" + parameters["Auction_CTR"] + "\\donors");
 
 
-            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(strConnString);
+            con = new SqlConnection(strConnString);
             SqlConnection con2 = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Items", con);
+            cmd = new SqlCommand("Get_Items", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
             cmd.Connection = con;
@@ -349,6 +398,7 @@ end if
                             description = dr["description"].ToString();
                             shortdescription = dr["shortdescription"].ToString();
                             hide = dr["hide"].ToString();
+                            category = dr["category_ctr"].ToString();
                             donors = "";
                             delim = "";
 
@@ -395,6 +445,7 @@ end if
                             }
                             //html += "<div class=\"row\">"; //; //& vbcrlf
                             //html += "<div class=\"mycentered\">"; //& vbcrlf
+                            html += "<div class=\"div_category\" category=\"" + category + "\">";
                             html += "<hr />";
                             html += "<div class=\"items_title\">" + title + "</div>" + System.Environment.NewLine;
                             html += "<div class=\"items_shortdescription\" > " + shortdescription + "</div>" + System.Environment.NewLine;
@@ -426,7 +477,7 @@ end if
                             //html += "</div>"; //mycentered
                             //html += "</div>"; //row
 
-                            html += "<div class=\"items_donated_head\">Generously Donated by</h3>" + System.Environment.NewLine;
+                            html += "<div class=\"items_donated_head\">Generously Donated by" + System.Environment.NewLine;
                             html += donors;
                             if (donorimages != "")
                             {
@@ -434,8 +485,10 @@ end if
                                 html += donorimages;
                                 html += "</div>" + System.Environment.NewLine; //slideshow
                             }
+                            html += "</div>"; //<div class=\"items_donated_head\">Generously Donated by
 
                             html += "<hr />";
+                            html += "</div>";
                         }
                     }
                     con2.Dispose();

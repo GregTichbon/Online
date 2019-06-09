@@ -742,19 +742,19 @@ namespace Generic
             return html;
         }
 
-        public static string populateselectwithvalue(string[] options, string selectedoption, string firstoption = "None")
+        public static string populateselectwithvalue(string[,] options, string selectedoption, string firstoption = "None", string firstvalue = "")
         {
             string selected;
             string html = "";
             if (firstoption != "None")
             {
-                html = html + ("<option>" + firstoption + "</option>");
+                html = html + ("<option value=\"" + firstvalue + "\"> " + firstoption + "</option>");
 
             }
 
-            foreach (string option in options)
+            for (int f1 = 0; f1 < options.GetLength(0); f1++)
             {
-                if (option == selectedoption)
+                if (options[f1, 1] == selectedoption)
                 {
                     selected = " selected";
                 }
@@ -762,17 +762,20 @@ namespace Generic
                 {
                     selected = "";
                 }
-                html = html + ("<option value=\"" + "xx" + "\"" + selected + ">" + option + "</option>");
+                html = html + ("<option value=\"" + options[f1, 1] + "\"" + selected + ">" + options[f1, 0] + "</option>");
             }
             return html;
         }
 
-        public string buildandpopulateselect(string strConnString, string cmdtext, string selectedoption, Dictionary<string, string> options, string firstoption = "None")
+        public static string buildandpopulateselect(string strConnString, string cmdtext, string selectedoption, Dictionary<string, string> options, string firstoption = "None")
         {
             string selected;
             string html = "";
 
             //string[] selectedoptions = selectedoption.Split(',');
+            if(selectedoption != "") { 
+                selectedoption = "," + selectedoption + ",";
+            }
 
             if (firstoption != "None")  // could be "Please Select" etc
             {

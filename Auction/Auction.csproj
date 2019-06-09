@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Generic">
+      <HintPath>..\Generic\bin\Generic.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -66,8 +70,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\Category.aspx" />
+    <Content Include="Administration\CategoryList.aspx" />
     <Content Include="Administration\logoff.aspx" />
     <Content Include="Administration\Reports.aspx" />
+    <Content Include="Administration\Setup.aspx" />
+    <Content Include="Administration\Test.aspx" />
     <Content Include="Administration\Winners.aspx" />
     <Content Include="Data.asmx" />
     <Content Include="Default.aspx" />
@@ -684,6 +692,20 @@
     <Content Include="_Includes\Scripts\jquery-2.2.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\CategoryList.aspx.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\CategoryList.aspx.designer.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -732,6 +754,20 @@
     </Compile>
     <Compile Include="Administration\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Setup.aspx.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Setup.aspx.designer.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\Winners.aspx.cs">
       <DependentUpon>Winners.aspx</DependentUpon>

@@ -10,6 +10,8 @@
             paste_as_text: true
         });
 
+        var increment = <% =increment%>;
+
         $(document).ready(function () {
 
             var donorctr = $('#table_donor tr').length - 1;
@@ -51,6 +53,49 @@
                 stop: updateIndex
             });
 
+            $("[myid='btn_delete']").click(function (e) {
+                if (confirm('Are you sure you want to delete this item?') != true) {
+                    e.preventDefault();
+                }
+            })
+
+            $("[myid='btn_submit']").click(function (e) {
+                var msg = ''
+                var delim = ''
+
+                if ($('#Title').val() == '') {
+                    msg = msg + delim + ' - Title';
+                    delim = '\n';
+                }
+
+                if ($('#increment').val() != '') {
+                    useincrement = $('#increment').val();
+                } else {
+                    useincrement = increment;
+                }
+
+                if ($("#startbid").val() % useincrement != 0) {
+                    msg = msg + delim + ' - A start bid that is a multiple of the increment';
+                    delim = '\n';
+                }
+
+                /*
+                //alert(frm.AuctionType.Index);
+                if (frm.AuctionType.Index == 0) {
+                    msg = msg + delim + ' - Auction Type';
+                    delim = '\n';
+                }
+                */
+                if (msg != '') {
+                    alert('You must enter:\n' + msg);
+                    e.preventDefault();
+                }
+            })
+            
+           
+  
+
+
             //$('#submit').click(function () {
             //$( window ).unload(function() {
             //	$('[name^="_donor_"]').val(function(i, v) { //index, current value
@@ -62,27 +107,7 @@
             //});
         });  //document.ready
 
-        function checkform() {
-            var msg = ''
-            var delim = ''
-            var frm = document.form1;
-
-            if (frm.Title.value == '') {
-                msg = msg + delim + ' - Title';
-                delim = '\n';
-            }
-            /*
-            //alert(frm.AuctionType.Index);
-            if (frm.AuctionType.Index == 0) {
-                msg = msg + delim + ' - Auction Type';
-                delim = '\n';
-            }
-            */
-            if (msg != '') {
-                alert('You must enter:\n' + msg);
-                return (false);
-            }
-        }
+       
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -97,7 +122,7 @@
         <tr>
             <td>Short description</td>
             <td>
-                <input type="text" name="shortdescription" id="shortdescription" value="<%=shortdescription%>" style="width:100%"/></td>
+                <input type="text" name="shortdescription" id="shortdescription" value="<%=shortdescription%>" style="width: 100%" /></td>
         </tr>
 
         <tr>
@@ -119,6 +144,15 @@
             </td>
         </tr>
         -->
+        <tr>
+            <td>Category</td>
+            <td>
+                <select name="category_ctr" id="category_ctr" size="1">
+                    <option value="">Please Select</option>
+                    <%= categories %>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td>Reserve ($)</td>
             <td>
@@ -184,7 +218,9 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+              
+                <asp:Button ID="btn_delete" myid="btn_delete" runat="server" OnClick="btn_submit_Delete" class="btn btn-info" Text="Delete" />&nbsp;&nbsp;&nbsp;&nbsp;
+                  <asp:Button ID="btn_submit" myid="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
         </tr>
     </table>
 

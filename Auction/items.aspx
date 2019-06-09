@@ -26,7 +26,12 @@
         .cycle-slide {
             height:200px;
         }
-
+        .hidden {
+            display:none;
+        }
+        .categoryselected {
+            background-color:green;
+        }
     </style>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
 
@@ -39,6 +44,22 @@
                 mywidth = 800;
             }
             */
+
+            $('.categoryselect').click(function () {
+                $('.categoryselect').removeClass('categoryselected');
+                $(this).addClass('categoryselected');
+                id = $(this).attr('id').substring(13);
+                //alert(id);
+                $('.div_category').each(function () {
+                    if ($(this).attr('category') == id || id == 'All') {
+                        $(this).removeClass('hidden');
+                    } else {
+                        $(this).addClass('hidden');
+                    }
+                })
+                //$('.hidden').removeClass('hidden');
+                //$('#' + id).toggleClass("hidden");
+            })
 
             $(".showitem, .canclick").click(function () {
                 itemid = this.id.substring(8);
@@ -81,6 +102,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%= categories %>
     <%=html%>
     <div id="dialog_showitem"></div>
 </asp:Content>

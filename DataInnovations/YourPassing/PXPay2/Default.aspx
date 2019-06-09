@@ -16,7 +16,7 @@
                 Currency
             </td>
             <td>
-                <asp:TextBox ID="txtCurrencyInput" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtCurrencyInput" runat="server" value="NZD"></asp:TextBox>
             </td>
         </tr>
         <tr>

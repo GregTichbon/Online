@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Generic;
 
 namespace Auction.Administration
 {
@@ -29,12 +30,14 @@ namespace Auction.Administration
         public string seq;
         public string hide;
         public string images;
+        public string category_ctr;
+        public static string bids;
 
         public Dictionary<string, string> parameters;
 
         //public string[] auctiontype_values = new string[2] { "Silent", "Live" };
         public string[] yesno_values = new string[2] { "Yes", "No" };
-
+        public string categories;
         public static string[] donor_ctrs = new string[100];
         public static string[] donornames = new string[100];
         public static int donors = 0;
@@ -61,43 +64,17 @@ namespace Auction.Administration
 
         */
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(strConnString);
 
-            donors = -1;
-            SqlCommand cmd = new SqlCommand("Get_Donors", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
-            cmd.Connection = con;
-            try
-            {
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        donors++;
-                        donor_ctrs[donors] = dr["donor_ctr"].ToString();
-                        donornames[donors] = dr["donorname"].ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-            }
-
-            item_ctr = Request.QueryString["id"];
-            if (!string.IsNullOrEmpty(item_ctr))
+            if (!IsPostBack)
             {
 
-                cmd = new SqlCommand("Get_Item", con);
+
+                SqlConnection con = new SqlConnection(strConnString);
+
+                donors = -1;
+                SqlCommand cmd = new SqlCommand("Get_Donors", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@item_ctr", SqlDbType.Int).Value = item_ctr;
+                cmd.Parameters.Add("@auction_ctr", SqlDbType.Int).Value = parameters["Auction_CTR"];
                 cmd.Connection = con;
                 try
                 {
@@ -105,18 +82,12 @@ namespace Auction.Administration
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
-                        dr.Read();
-                        title = dr["title"].ToString();
-                        description = dr["description"].ToString();
-                        shortdescription = dr["shortdescription"].ToString();
-                        //auctiontype = dr["auctiontype"].ToString();
-                        reserve = dr["reserve"].ToString();
-                        retailprice = dr["retailprice"].ToString();
-                        increment = dr["increment"].ToString();
-                        startbid = dr["startbid"].ToString();
-                        //donor = dr["donor"].ToString();
-                        seq = dr["seq"] == DBNull.Value ? "0" : dr["seq"].ToString();
-                        hide = dr["hide"].ToString();
+                        while (dr.Read())
+                        {
+                            donors++;
+                            donor_ctrs[donors] = dr["donor_ctr"].ToString();
+                            donornames[donors] = dr["donorname"].ToString();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -126,21 +97,80 @@ namespace Auction.Administration
                 finally
                 {
                     con.Close();
-                    con.Dispose();
                 }
 
-                string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr);
-                if (Directory.Exists(path))
+                item_ctr = Request.QueryString["id"];
+                if (!string.IsNullOrEmpty(item_ctr))
                 {
-                    images = "<table><tr>";
-                    //foreach (string dirFile in Directory.GetDirectories(path))
-                    //{
+
+                    cmd = new SqlCommand("Get_Item", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@item_ctr", SqlDbType.Int).Value = item_ctr;
+                    cmd.Connection = con;
+                    try
+                    {
+                        con.Open();
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+                            title = dr["title"].ToString();
+                            description = dr["description"].ToString();
+                            shortdescription = dr["shortdescription"].ToString();
+                            //auctiontype = dr["auctiontype"].ToString();
+                            reserve = dr["reserve"].ToString();
+                            retailprice = dr["retailprice"].ToString();
+                            increment = dr["increment"].ToString();
+                            startbid = dr["startbid"].ToString();
+                            //donor = dr["donor"].ToString();
+                            seq = dr["seq"] == DBNull.Value ? "0" : dr["seq"].ToString();
+                            hide = dr["hide"].ToString();
+                            category_ctr = dr["category_ctr"].ToString();
+                            bids = dr["bids"].ToString();
+
+                            if(bids != "0")
+                            {
+                                btn_delete.Visible = false;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        con.Close();
+                        con.Dispose();
+                    }
+
+                    Dictionary<string, string> category_options = new Dictionary<string, string>();
+                    category_options["usevalues"] = "";
+                    category_options["selecttype"] = "Value";
+                    //category_options["storedprocedure"] = "get_categories";
+                    //category_options["storedprocedurename"] = "get_categories";
+                    //category_options["parameters"] = parameters["Auction_CTR"];
+                    //Generic.Functions gFunctions = new Generic.Functions();
+                    categories = Functions.buildandpopulateselect(strConnString, "exec get_categories " + parameters["Auction_CTR"], category_ctr, category_options, "None");
+
+
+                    string path = Server.MapPath("..\\images\\auction" + parameters["Auction_CTR"] + "\\items\\" + item_ctr);
+                    if (Directory.Exists(path))
+                    {
+                        images = "<table><tr>";
+                        //foreach (string dirFile in Directory.GetDirectories(path))
+                        //{
                         foreach (string fileName in Directory.GetFiles(path))
                         {
                             images += "<td><img src=\"../images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" width=\"160\" border=\"0\" alt=\"" + Path.GetFileName(fileName) + "\"><br /> Delete <input name=\"_imgdelete_" + Path.GetFileName(fileName) + "\" type=\"checkbox\" id=\"_imgdelete_" + Path.GetFileName(fileName) + "\" value=\"-1\"></td>";
                         }
-                    //}
-                    images += "</tr></table>";
+                        //}
+                        images += "</tr></table>";
+                    }
+                }
+                else
+                {
+                    btn_delete.Visible = false;
                 }
             }
         }
@@ -286,6 +316,7 @@ end if
             cmd.Parameters.Add("@seq", SqlDbType.VarChar).Value = Request.Form["seq"];
             cmd.Parameters.Add("@hide", SqlDbType.VarChar).Value = Request.Form["hide"];
             cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
+            cmd.Parameters.Add("@category_ctr", SqlDbType.VarChar).Value = Request.Form["category_ctr"];
 
             cmd.Connection = con;
             try
@@ -462,6 +493,36 @@ end if
            end if		
            */
             Response.Redirect("ItemList.aspx");
+        }
+
+        protected void btn_submit_Delete(object sender, EventArgs e)
+        {
+            string item_ctr = Request.Form["item_ctr"];
+            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.CommandText = "Delete_item";
+            cmd.Parameters.Add("@item_ctr", SqlDbType.VarChar).Value = item_ctr;
+            
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                string response = cmd.ExecuteScalar().ToString();
+                
+            }
+            catch (Exception ex)
+            {
+                General.Functions.Functions.Log(Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
         }
     }
 }

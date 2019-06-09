@@ -257,6 +257,10 @@
             });
             $('.slideshow').cycle();
 
+            $('#makeautobid').change(function () {
+                alert($(this).val());
+            })
+
 
         });
     </script>
@@ -337,7 +341,9 @@
                 <td>
                     <div>Your bid </div>
                 </td>
-                <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" value="<%=nextminimum%>" />
+                <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" value="<%=nextminimum%>" /><br /><input type="checkbox" id="makeautobid" value="Yes"/> Make an AutoBid (?)
+                    $<input style="display:none" name="autobid" type="text" id="autobid" class="numeric" maxlength="5" />
+
                 </td>
             </tr>
             <tr>

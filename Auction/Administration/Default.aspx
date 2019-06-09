@@ -7,9 +7,13 @@
     <!--<p><a href="item.aspx?all=true">All Items</a></p>-->
     <p><a href="donorlist.aspx">Donors</a></p>
     <!--<p><a href="donor.aspx?all=true">All Donors</a></p>-->
+      <p><a href="categorylist.aspx">Categories</a></p>
+    <p></p>
+
     <p><a href="reports.aspx">Reports</a></p>
     <p><a href="winners.aspx">Winners</a></p>
-        <p><a href="../default.aspx" target="_blank">Auction</a></p>
+    <p><a href="setup.aspx">Setup</a></p>
+    <p><a href="../default.aspx" target="_blank">Auction</a></p>
 
     <p><a href="logoff.aspx">Log Off</a></p>
 </asp:Content>

@@ -30,6 +30,9 @@
 
 
     <script type="text/javascript">
+        var increment = <% =increment%>;
+        var minimumbid = <% =startbid %>;
+
         $(document).ready(function () {
             $(".numeric").keydown(function (event) {
                 if (event.shiftKey == true) {
@@ -105,10 +108,10 @@
                             }
                         }
                     });
-                    $("#bid").val(Number($("#hf_highestbid").val()) + 10);
+                    $("#bid").val(Number($("#hf_highestbid").val()) + increment);
                     //alert('Your bid needs to be higher than the current highest bid');
-                } else if ($("#bid").val() % 10 != 0) {
-                    $("#response-message").html("<br />" + 'Your bid should be to the nearest $10.00');
+                } else if ($("#bid").val() % increment != 0) {
+                    $("#response-message").html("<br />" + 'Your bid should be to the nearest $' + increment + '.00');
                     mywidth = $(window).width() * .95;
                     if (mywidth > 500) {
                         mywidth = 500;
@@ -124,7 +127,7 @@
                             }
                         }
                     });
-                    $("#bid").val(Number($("#hf_highestbid").val()) + 10);
+                    $("#bid").val(Number($("#hf_highestbid").val()) + increment);
                     //alert('Your bid should be to the nearest $10.00');
                 } else if ($('#hf_user_ctr').val() == '' && $('#passcode').val() == '') {
                     $("#response-message").html("<br />" + 'You need to enter your pass code');
@@ -257,6 +260,14 @@
             });
             $('.slideshow').cycle();
 
+            $('#makeautobid').change(function () {
+                if ($(this).is(':checked')) {
+                    $("#span_autobid").show();  // checked
+                } else {
+                    $('#autobid').val('');
+                    $("#span_autobid").hide();  // unchecked
+                    }
+            })
 
         });
     </script>
@@ -338,6 +349,14 @@
                     <div>Your bid </div>
                 </td>
                 <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" value="<%=nextminimum%>" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div><input type="checkbox" id="makeautobid" value="Yes"/> Make an AutoBid (?)</div>
+                </td>
+                <td>
+                    <span id="span_autobid" style="display:none">$<input name="autobid" type="text" id="autobid" class="numeric" maxlength="5" /></span>
                 </td>
             </tr>
             <tr>
