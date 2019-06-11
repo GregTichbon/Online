@@ -41,6 +41,8 @@
                     r_passcode: {
                         minlength: 6,
                         //remote: "data.asmx/verifypasscode?id=" + $('#r_emailaddress').val()
+                        passcode: true;
+
                     },
                     r_mobilenumber: { required: "#r_textnotifications:checked" }
                 },

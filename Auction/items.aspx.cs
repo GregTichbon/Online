@@ -415,7 +415,14 @@ end if
                                     while (dr2.Read())
                                     {
                                         donor_ctr = dr2["donor_ctr"].ToString();
-                                        donors += delim + "<a href=\"javascript:void(0)\" class=\"donor-link donor_name\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>" + System.Environment.NewLine;
+                                        string donor_url = dr2["url"].ToString();
+                                        if(donor_url == "")
+                                        {
+                                            donors += delim + dr2["donorname"].ToString();
+                                        } else
+                                        {
+                                            donors += delim + "<a href=\"" + donor_url +"\" target=\"_blank\" class=\"donor-link donor_name\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>" + System.Environment.NewLine;
+                                        }
                                         delim = "<br />";
                                         donorimages = "";
 

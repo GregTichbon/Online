@@ -49,7 +49,6 @@
                 $('.categoryselect').removeClass('categoryselected');
                 $(this).addClass('categoryselected');
                 id = $(this).attr('id').substring(13);
-                //alert(id);
                 $('.div_category').each(function () {
                     if ($(this).attr('category') == id || id == 'All') {
                         $(this).removeClass('hidden');

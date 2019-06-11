@@ -497,6 +497,7 @@ end if
 
         protected void btn_submit_Delete(object sender, EventArgs e)
         {
+            string response = "";
             string item_ctr = Request.Form["item_ctr"];
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
@@ -511,7 +512,7 @@ end if
             try
             {
                 con.Open();
-                string response = cmd.ExecuteScalar().ToString();
+                response = cmd.ExecuteScalar().ToString();
                 
             }
             catch (Exception ex)
@@ -522,6 +523,9 @@ end if
             {
                 con.Close();
                 con.Dispose();
+            }
+            if(response == "Done") { 
+                Response.Redirect("ItemList.aspx");
             }
         }
     }
