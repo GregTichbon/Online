@@ -5,6 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <p><a href="itemlist.aspx">Items</a></p>
     <!--<p><a href="item.aspx?all=true">All Items</a></p>-->
+    <p><a href="resequence.aspx">Resequence Items</a></p>
     <p><a href="donorlist.aspx">Donors</a></p>
     <!--<p><a href="donor.aspx?all=true">All Donors</a></p>-->
       <p><a href="categorylist.aspx">Categories</a></p>

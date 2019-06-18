@@ -79,7 +79,7 @@ namespace Auction.Administration
             string donors = "";
             string delim = "";
             string images = "";
-            string[] validimages = new string[] { ".jpg", ".gif", ".png" };
+            //string[] validimages = new string[] { ".jpg", ".gif", ".png", ".jpeg" };
 
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
@@ -144,10 +144,10 @@ namespace Auction.Administration
                             //{
                                 foreach (string fileName in Directory.GetFiles(path))
                                 {
-                                    if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
-                                    {
+                                    //if (validimages.Contains(Path.GetExtension(fileName).ToLower()))
+                                    //{
                                         images += "<img src=\"../images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + Path.GetFileName(fileName) + "\" border=\"0\" />";
-                                    }
+                                    //}
                                 }
                             //}
 

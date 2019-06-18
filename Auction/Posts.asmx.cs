@@ -30,8 +30,8 @@ namespace Auction
             return "Hello World";
         }
 
-        [WebMethod]
-        public string Update_User(NameValue[] formVars)    //you can't pass any querystring params
+        [WebMethod(EnableSession = true)]
+        public standardResponse Update_User(NameValue[] formVars)    //you can't pass any querystring params
         {
             string URL = formVars.Form("URL");
             Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(URL);
@@ -63,16 +63,86 @@ namespace Auction
             con.Open();
             string result = cmd.ExecuteScalar().ToString();
             con.Close();
-
             con.Dispose();
+
+            HttpContext.Current.Session.Add("Auction_user_ctr", result);
+            HttpContext.Current.Session.Add("Auction_Fullname", fullname);
 
             standardResponse resultclass = new standardResponse();
             resultclass.status = "Saved";
             resultclass.message = result;
-            JavaScriptSerializer JS = new JavaScriptSerializer();
-            string passresult = JS.Serialize(resultclass);
-            return (passresult);
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+            return (resultclass);
 
+        }
+
+        [WebMethod(EnableSession = true)]
+        public userResponse Login(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            userResponse resultclass = new userResponse();
+            string URL = formVars.Form("URL");
+            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(URL);
+
+            string emailaddress = formVars.Form("emailaddress");
+            string passcode = formVars.Form("passcode");
+            Boolean keepmeloggedin = Convert.ToBoolean(formVars.Form("keepmeloggedin"));
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=Auction;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Login";
+            cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
+            cmd.Parameters.Add("@emailaddress", SqlDbType.VarChar).Value = emailaddress;
+            cmd.Parameters.Add("@passcode", SqlDbType.VarChar).Value = passcode;
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                dr.Read();
+                string user_ctr = dr["user_ctr"].ToString();
+                string fullname = dr["fullname"].ToString();
+
+                resultclass.user_ctr = user_ctr;
+                resultclass.fullname = fullname;
+                resultclass.message = "Valid";
+
+                HttpContext.Current.Session.Add("Auction_user_ctr", user_ctr);
+                HttpContext.Current.Session.Add("Auction_Fullname", fullname);
+
+                if(keepmeloggedin)
+                {
+                    DateTime expires = DateTime.Now.AddHours(1);
+                    HttpCookie Auction_user_ctr = new HttpCookie("Auction_user_ctr");
+                    Auction_user_ctr.Value = user_ctr;
+                    Auction_user_ctr.Expires = expires;
+                    HttpContext.Current.Response.Cookies.Add(Auction_user_ctr);
+
+                    HttpCookie Auction_Fullname = new HttpCookie("Auction_Fullname", fullname);
+                    Auction_Fullname.Expires = expires;
+                    HttpContext.Current.Response.Cookies.Add(Auction_Fullname);
+
+                    //string xx = HttpContext.Current.Response.Cookies.Get("CookieName").ToString();
+                }
+
+            } else
+            {
+                resultclass.message = "Invalid";
+
+                HttpContext.Current.Session.Remove("Auction_user_ctr");
+                HttpContext.Current.Session.Remove("Auction_Fullname");
+            }
+            con.Close();
+            con.Dispose();
+
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            return (resultclass);
         }
     }
 }
@@ -87,6 +157,13 @@ public class NameValue
 public class standardResponse
 {
     public string status;
+    public string message;
+}
+
+public class userResponse
+{
+    public string user_ctr;
+    public string fullname;
     public string message;
 }
 

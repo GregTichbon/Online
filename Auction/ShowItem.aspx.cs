@@ -25,8 +25,8 @@ namespace Auction
         public string retailprice;
         public string itemimages;
         public string donorimages;
-        public string increment;
-        public string startbid;
+        public double increment;
+        public double startbid;
 
         public string hf_highestbid;
         public string highestbid;
@@ -49,6 +49,12 @@ namespace Auction
             user_ctr = (string)Session["Auction_user_ctr"] ?? "";
             fullname = (string)Session["Auction_Fullname"] ?? "";
 
+            if(user_ctr == "")
+            {
+                user_ctr = Request.Cookies["Auction_user_ctr"].Value ?? "";
+                fullname = Request.Cookies["Auction_Fullname"].Value ?? "";  
+            }
+
             item_ctr = Request.QueryString["id"];
 
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
@@ -69,12 +75,12 @@ namespace Auction
                     description = dr["Description"].ToString();
                     reserve = dr["Reserve"].ToString();
                     retailprice = dr["RetailPrice"].ToString();
-                    increment = dr["increment"].ToString();
-                    if(increment == "")
+                    increment = Convert.ToDouble(dr["increment"]);
+                    if(increment == 0)
                     {
-                        increment = parameters["xx"];
+                        increment = Convert.ToDouble(parameters["Increment"]);
                     }
-                    startbid = dr["startbid"].ToString();
+                    startbid = Convert.ToDouble(dr["startbid"]);
                     
                 }
             }
@@ -137,7 +143,7 @@ namespace Auction
                         you = "";
                     }
                     highestbidder = dr["fullname"].ToString() + you;
-                    yourbid = currentbid + 10;
+                    yourbid = currentbid + increment;
                     nextminimum = yourbid.ToString("#.00");
                 }
                 else
@@ -145,7 +151,7 @@ namespace Auction
                     hf_highestbid = "0";
                     highestbid = "No bids yet .... be the first";
                     highestbidder = "Give it a go";
-                    yourbid = 10;
+                    yourbid = startbid;
                     nextminimum = yourbid.ToString("#.00");
                 }
             }

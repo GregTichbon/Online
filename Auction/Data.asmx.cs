@@ -37,6 +37,43 @@ namespace Auction
             HttpContext.Current.Session.Remove("Auction_Fullname");
         }
 
+        [WebMethod]
+        public void verifyemailaddress(string r_emailaddress)
+        {
+            Boolean response = false;
+            String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("VerifyEmailAddress", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@EmailAddress", SqlDbType.VarChar).Value = r_emailaddress;
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                string TorF = cmd.ExecuteScalar().ToString();
+                if(TorF == "True")
+                {
+                    response = true;
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            //return response;
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(response));
+
+        }
+
+
         [WebMethod(EnableSession = true)]
         public void verifypasscode()
         {
@@ -44,7 +81,7 @@ namespace Auction
         }
 
         [WebMethod (EnableSession = true)]
-        public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname)
+        public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname, double increment)
         {
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
           
@@ -56,7 +93,7 @@ namespace Auction
             double nextbid = 0;
             string nextminimum = "";
 
-            if (user_ctr == "")
+            if (user_ctr == "" && passcode != "")
             {
                 SqlConnection con = new SqlConnection(strConnString);
                 SqlCommand cmd = new SqlCommand("Get_User", con);
@@ -117,13 +154,14 @@ namespace Auction
                     double db_amount = Convert.ToDouble(dr["amount"]);
                     string db_user_ctr = dr["user_ctr"].ToString();
                     string title = dr["title"].ToString();
+                    //double increment = Convert.ToDouble(dr["increment"]);
 
                     if (bid > db_amount) {
                         status = "Success";
                         message = "Your bid has been successful";
                         highestbid = bid.ToString("#.00");
                         highestbidder = fullname + " (YOU!)";
-                        nextbid = bid + 10;
+                        nextbid = bid + increment;
                         nextminimum = nextbid.ToString("#.00");
                         //savebid = true;
                         if (db_user_ctr != user_ctr)
@@ -152,7 +190,7 @@ namespace Auction
                     message = "Thank you for starting the bidding, your bid has been successful";
                     highestbid = bid.ToString("#.00");
                     highestbidder = fullname + " (YOU!)";
-                    nextbid = bid + 10;
+                    nextbid = bid + increment;
                     nextminimum = nextbid.ToString("#.00");
 
                     //savebid = true;

@@ -76,7 +76,7 @@
                 $('#hf_user_ctr').removeAttr('value');
                 $('#hf_fullname').removeAttr('value');
                 $('#passcode').val('');
-                $('#displayloggedin').hide();
+                $('.displayloggedin').hide();
                 $('.displaylogin').show();
                 //$('#fullnamelabel').html('Returning user?<br />Enter your pass code to bid:');
                 //$('#fullname').html('<input name="passcode" type="text" id="passcode"><br />');
@@ -162,8 +162,9 @@
                                 "Yes - Please place this bid": function () {
                                     $(this).dialog("close");
                                     $.ajax({
-                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val(), success: function (returned) {
+                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val()+ "&increment=" + increment, success: function (returned) {
                                             returnedjson = $.parseJSON(returned);
+                                            $("#response-message").html("<br />" + returnedjson.message);
                                             $("#response-message").html("<br />" + returnedjson.message);
                                             mywidth = $(window).width() * .95;
                                             if (mywidth > 500) {
@@ -195,7 +196,7 @@
                                                 $("#bid").val(returnedjson.nextminimum);
 
                                             } else {
-                                                $('#displayloggedin').show();
+                                                $('.displayloggedin').show();
                                                 $('.displaylogin').hide();
                                                 $('#passcode').val('');
 
@@ -251,6 +252,23 @@
               
             });
 
+            $("#login").click(function () {
+                $('body').addClass('stop-scrolling');
+              
+                $('#dialog_login').dialog({
+                    modal: true,
+                    open: function () {
+                        $(this).load('login.aspx');
+                    },
+                    width: $(window).width() * .75,
+                    height: 500,
+                    close: function () {
+                        $('body').removeClass('stop-scrolling');
+                    }
+                });
+              
+            });
+
 
             $("input").keypress(function (event) {
                 if (event.which == 13) {
@@ -260,6 +278,7 @@
             });
             $('.slideshow').cycle();
 
+            
             $('#makeautobid').change(function () {
                 if ($(this).is(':checked')) {
                     $("#span_autobid").show();  // checked
@@ -268,6 +287,7 @@
                     $("#span_autobid").hide();  // unchecked
                     }
             })
+           
 
         });
     </script>
@@ -290,9 +310,8 @@
         </div>
 
 
-        <div id="dialog_register" title="Register">
-           
-        </div>
+        <div id="dialog_register" title="Register"></div>
+        <div id="dialog_login" title="Login"></div>
 
         <p id="show_title"><%=title %></p>
         <p id="show_shortdescription"><%=shortdescription%></p>
@@ -304,7 +323,7 @@
         <input name="hf_item_ctr" id="hf_item_ctr" type="hidden" value="<%=item_ctr%>" />
 
         <table class="table">
-            <tr style="display: <%=displayloggedin%>" id="displayloggedin">
+            <tr style="display: <%=displayloggedin%>" class="displayloggedin">
                 <td>Logged in as: <span id="fullname"><%=fullname %></span>
                 </td>
                 <td>
@@ -312,55 +331,62 @@
             </tr>
 
             <tr style="display: <%=displaylogin%>" class="displaylogin">
-                <td>Returning user?<br />
-                    Enter your pass code to bid:
-                </td>
+                <td></td>
                 <td>
-                    <input name="passcode" type="text" id="passcode" /></td>
+                    <input type="button" name="login" id="login" value="Login" />
+                    <input type="button" name="register" id="register" value="Register" /></td>
             </tr>
 
-            <tr style="display: <%=displaylogin%>" class="displaylogin">
-                <td>
-                    <div>Don't have a pass code?</div>
-                </td>
-                <td>
-                    <input type="button" name="register" id="register" value="Register here" /></td>
-            </tr>
+
             <tr>
                 <td>
-                    <div>Highest bid:</div>
+                     Highest bid: 
                 </td>
                 <td><span id="highestbid"><%=highestbid%></span></td>
             </tr>
             <tr>
                 <td>
-                    <div>Highest bidder:</div>
+                     Highest bidder: 
                 </td>
                 <td><span id="highestbidder"><%=highestbidder%></span></td>
             </tr>
             <tr style="display: none">
                 <td>
-                    <div>Next minimum bid:</div>
+                     Next minimum bid: 
                 </td>
                 <td><span id="nextminimum"><%=nextminimum%></span></td>
             </tr>
-            <tr>
+            <tr style="display: <%=displayloggedin%>" class="displayloggedin">
                 <td>
-                    <div>Your bid </div>
+                    Your bid 
                 </td>
                 <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" value="<%=nextminimum%>" />
                 </td>
             </tr>
-            <tr>
+           
+            <tr style="display: <%=displayloggedin%>" class="displayloggedin">
                 <td>
-                    <div><input type="checkbox" id="makeautobid" value="Yes"/> Make an AutoBid (?)</div>
+                        <input type="checkbox" id="makeautobid" value="Yes" />
+                        Make an AutoBid (?)
                 </td>
                 <td>
-                    <span id="span_autobid" style="display:none">$<input name="autobid" type="text" id="autobid" class="numeric" maxlength="5" /></span>
+                    <span id="span_autobid" style="display: none">$<input name="autobid" type="text" id="autobid" class="numeric" maxlength="5" /></span>
                 </td>
             </tr>
+                      <!--
             <tr>
-                <td colspan="2">
+                <td>
+                        
+                </td>
+                <td>
+                    <input type="checkbox" id="makeautobid" value="Yes" />
+                        Make this an AutoBid (?)
+                </td>
+            </tr>
+                          -->
+            <tr style="display: <%=displayloggedin%>" class="displayloggedin">
+                <td></td>
+                <td>
                     <input type="button" name="submit" id="submit" value="Place Your Bid" /></td>
             </tr>
         </table>

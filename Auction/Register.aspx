@@ -4,13 +4,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Auction Register</title>
+
+    <link href="_Includes/css/main.css" rel="stylesheet" />
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#save').click(function () {
-                
-                if ($("#formReg").valid()) {
+            $('#btn_submit').click(function () {
+                if ($("#formRegister").valid()) {
                     var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#r_emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#r_mobilenumber').val() }, { "name": "textnotifications", "value": $('#r_textnotifications').val() }, { "name": "contactpermission", "value": $('#r_contactpermission').val() }];
                     var formData = JSON.stringify({ formVars: arForm });
                     $.ajax({
@@ -20,8 +21,7 @@
                         data: formData,
                         dataType: 'json', // what type of data do we expect back from the server
                         success: function (result) {
-                            details = $.parseJSON(result.d);
-                            $('#hf_user_ctr').val(details.message);
+                            $('#hf_user_ctr').val(result.d.message);
                             $('#hf_fullname').val($('#r_fullname').val());
                             $("#fullname").html($('#r_fullname').val());
                             $('#displayloggedin').show();
@@ -35,44 +35,58 @@
                 };
             });
 
-            
-            $("#formReg").validate({
+
+            $("#formRegister").validate({
+                onkeyup: false,
+                onclick: false,
+                onfocusout: false,
                 rules: {
                     r_passcode: {
-                        minlength: 6,
+                        minlength: 6//,
                         //remote: "data.asmx/verifypasscode?id=" + $('#r_emailaddress').val()
-                        passcode: true;
-
+                        //passcode: true
+                    },
+                    r_emailaddress: {
+                        remote: "data.asmx/verifyemailaddress"
                     },
                     r_mobilenumber: { required: "#r_textnotifications:checked" }
                 },
                 messages: {
                     r_passcode: {
-                        minlength: "Your pass code must be at least 6 characters long<br />",
-                        //remote: " Your pass code must not already have been used<br />"
+                        minlength: "Your pasword must be at least 6 characters long<br />"//,
+                        //remote: " Your pasword must not already have been used<br />"
+                    },
+                    r_emailaddress: {
+                        remote: "This email address has already been registered"
                     },
                     r_mobilenumber: {
                         required: "You must enter a mobile phone number if you want text notifications"
                     }
                 }
             });
-           
 
-          
 
+
+            /*
         
             $.validator.addMethod('passcode', function (value, element) {
-                alert($('#r_emailaddress').val());
-                alert(value);
+                //alert($('#r_emailaddress').val());
+                //alert($('#r_passcode').val());
+                //do ajax
+                $.ajax({
+                    url: "data.asmx/validatepasscode?email=" + $('#r_emailaddress').val() + "&passcode=" + $('#r_passcode').val(), success: function (returned) {
+                        returnedjson = $.parseJSON(returned);
+                        console.log(returnedjson);
+                    }
+                });
 
                 if (1 == 2) {
                     return true;
                 } else {
-                    //do ajax
                     return false;
                 }
             }, "Invalid User ID / Passcode combination");
-          
+          */
 
             $('#viewtermsandconditions').click(function () {
                 $("#dialog_termsandconditions").dialog({
@@ -87,12 +101,14 @@
                     }
                 });
             });
-          
 
-			$("#submitbutton").on("click", function () {
-				$("#form1").submit();
-			});
-			$('#submitbutton').css('cursor', 'pointer');
+            
+         //   $("#submitbutton").on("click", function () {
+         //       $("#form1").submit();
+         //   });
+         //   $('#submitbutton').css('cursor', 'pointer');
+
+
 			/*
 			$("input").keypress(function(event) {
 				if (event.which == 13) {
@@ -106,13 +122,23 @@
     </script>
 </head>
 <body>
-    <form id="formReg" runat="server">
-
-        <div id="dialog_termsandconditions" title="Terms and Conditions" style="display: none">
-            <%= TermsAndConditions %>
-                </div>
-
-        <div class="row">
+    <form id="formRegister" runat="server">
+        <div class="xcontainer">
+            <div id="dialog_termsandconditions" title="Terms and Conditions" style="display: none">
+                <%= TermsAndConditions %>
+            </div>
+            <p><input type="text" name="r_fullname" id="r_fullname" class="form-control" required="required" placeholder="Full name" /></p>
+            <p><input type="email" name="r_emailaddress" id="r_emailaddress" class="form-control" required="required" placeholder="Email address" /></p>
+           <p> <input type="text" name="r_passcode" id="r_passcode" class="form-control" required="required" placeholder="Password" /></p>
+           <p> <input type="checkbox" class="xform-control" name="r_keepmeloggedin" id="r_keepmeloggedin" /> Keep me logged in</p>
+           <p> <input type="text" name="r_mobilenumber" id="r_mobilenumber" class="form-control" placeholder="Mobile number" /></p>
+           <p> <input type="checkbox" name="r_textnotifications" id="r_textnotifications" class="xform-control " value="Yes" checked="checked" /> Send a text to my mobile phone number if I have been outbid on an item.</p>
+           <p> <input type="checkbox" name="r_contactpermission" id="r_contactpermission" class="xform-control" value="Yes" checked="checked" /> I give permission to The Whanganui Womens Refuge to send information to me by email and/or text message from time to time.</p>
+            <p><input type="checkbox" name="r_viewtermsandconditions" id="r_viewtermsandconditions" class="xform-control" value="Yes" required="required" /> I have read and accept the terms and conditions.  <span id="viewtermsandconditions">View here</span></p>
+            <input type="button" name="btn_submit" id="btn_submit" class="xform-control" value="Submit" />
+             
+            <!--
+        <div class="rowx">
             <div class="form-group">
                 <label class="control-label col-sm-4" for="r_fullname">Full name</label>
                 <div class="col-sm-8">
@@ -121,7 +147,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="rowx">
             <div class="form-group">
                 <label class="control-label col-sm-4" for="r_emailaddress">Email Address</label>
                 <div class="col-sm-8">
@@ -129,26 +155,36 @@
                 </div>
             </div>
         </div>
-        <!--
-                <div class="row">
+        
+        <div class="rowx">
             <div class="form-group">
-                <label class="control-label col-sm-4" for="r_userid">User ID</label>
+                <label class="control-label col-sm-4" for="r_passcode">Password
+                <br /><span class="note">You will need to remember this to make bids.</span></label>
                 <div class="col-sm-8">
-                    <input type="text" name="r_userid" id="r_userid" class="form-control" required="required" />
+                    <input type="text" name="r_passcode" id="r_passcode" class="form-control" required="required" />
                 </div>
             </div>
         </div>
 
-            -->
-
-        <div class="row">
+       
             <div class="form-group">
-                <label class="control-label col-sm-4" for="r_passcode">Pass code</label>
-                <div class="col-sm-8">
-                    <input type="text" name="r_passcode" id="r_passcode" class="form-control" required="required" /><span style="font-style: italic; font-size: 18px;">You will need to remember this to make bids.</span>
-                </div>
+                
+                    <div class="col-sm-4"></div>
+                 
+                        <input type="checkbox" class="form-control" name="r_keepmeloggedin" id="r_keepmeloggedin"  />
+                        <label class="control-label" for="r_keepmeloggedin">Keep me logged in</label>
+               
+
             </div>
-        </div>
+
+ 
+             <div class="col-sm-4"></div>
+				<input type="checkbox" id="optinosCheckbox1" value="" />
+				<label for="optinosCheckbox1">
+					Checkbox option one is this and that&mdash;be sure to include why it's great
+				</label>
+		
+ 
 
         <div class="row">
             <div class="form-group">
@@ -196,6 +232,9 @@
                 <input type="button" name="save" id="save" value="Submit" />
 
             </div>
+        </div>
+    -->
+           
         </div>
     </form>
 

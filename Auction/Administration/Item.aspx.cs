@@ -475,7 +475,7 @@ end if
                     {
                         c1++;
                         newfilename = "Img_" + c1.ToString("000") + wpextension;
-                    } while (File.Exists(newfilename));
+                    } while (File.Exists(originalpath + "\\" + newfilename));
 
                     postedFile.SaveAs(originalpath + "\\" + newfilename);
 

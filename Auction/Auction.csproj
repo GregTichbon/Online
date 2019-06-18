@@ -74,6 +74,7 @@
     <Content Include="Administration\CategoryList.aspx" />
     <Content Include="Administration\logoff.aspx" />
     <Content Include="Administration\Reports.aspx" />
+    <Content Include="Administration\Resequence.aspx" />
     <Content Include="Administration\Setup.aspx" />
     <Content Include="Administration\Test.aspx" />
     <Content Include="Administration\Winners.aspx" />
@@ -81,6 +82,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Images\Auction2\Header.png" />
     <Content Include="items.aspx" />
+    <Content Include="login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Auction.Master" />
     <None Include="Properties\PublishProfiles\auction.thegreatball.nz.pubxml" />
@@ -103,6 +105,7 @@
     <Content Include="_Includes\css\images\ui-icons_cc0000_256x240.png" />
     <Content Include="_Includes\css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="_Includes\css\jquery-ui.css" />
+    <Content Include="_Includes\css\main.css" />
     <Content Include="_Includes\js\vendor\jquery.cycle2.min.js" />
     <Content Include="_Includes\Scripts\colorbox\images\Thumbs.db" />
     <Content Include="_Includes\Scripts\Cycle2\jquery.cycle2.center.min.js" />
@@ -755,6 +758,13 @@
     <Compile Include="Administration\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\Resequence.aspx.cs">
+      <DependentUpon>Resequence.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Resequence.aspx.designer.cs">
+      <DependentUpon>Resequence.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\Setup.aspx.cs">
       <DependentUpon>Setup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -800,6 +810,13 @@
     </Compile>
     <Compile Include="items.aspx.designer.cs">
       <DependentUpon>items.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
