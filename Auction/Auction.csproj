@@ -72,16 +72,23 @@
   <ItemGroup>
     <Content Include="Administration\Category.aspx" />
     <Content Include="Administration\CategoryList.aspx" />
+    <Content Include="Administration\ItemBids.aspx" />
     <Content Include="Administration\logoff.aspx" />
     <Content Include="Administration\Reports.aspx" />
     <Content Include="Administration\Resequence.aspx" />
     <Content Include="Administration\Setup.aspx" />
     <Content Include="Administration\Test.aspx" />
+    <Content Include="Administration\User.aspx" />
+    <Content Include="Administration\UserItemsBidOn.aspx" />
+    <Content Include="Administration\UserList.aspx" />
     <Content Include="Administration\Winners.aspx" />
     <Content Include="Data.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\Auction2\Header.png" />
+    <Content Include="Images\Auction2\question.png" />
+    <Content Include="Images\Auction2\questionsmall.png" />
     <Content Include="items.aspx" />
+    <Content Include="ItemsInformation.aspx" />
     <Content Include="login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Auction.Master" />
@@ -361,7 +368,7 @@
     <Content Include="_Includes\Content\bootstrap-theme.min.css" />
     <Content Include="_Includes\Content\bootstrap.css" />
     <Content Include="_Includes\Content\bootstrap.min.css" />
-    <Content Include="_Includes\Content\main.css" />
+    <Content Include="_Includes\Content\Xmain.css" />
     <Content Include="_Includes\Scripts\addclear.min.js" />
     <Content Include="_Includes\Scripts\additional-methods.js" />
     <Content Include="_Includes\Scripts\additional-methods.min.js" />
@@ -730,6 +737,13 @@
     <Compile Include="Administration\DonorList.aspx.designer.cs">
       <DependentUpon>DonorList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\ItemBids.aspx.cs">
+      <DependentUpon>ItemBids.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\ItemBids.aspx.designer.cs">
+      <DependentUpon>ItemBids.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\ItemList.aspx.cs">
       <DependentUpon>ItemList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -779,6 +793,27 @@
     <Compile Include="Administration\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserItemsBidOn.aspx.cs">
+      <DependentUpon>UserItemsBidOn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserItemsBidOn.aspx.designer.cs">
+      <DependentUpon>UserItemsBidOn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserList.aspx.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserList.aspx.designer.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\Winners.aspx.cs">
       <DependentUpon>Winners.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -810,6 +845,13 @@
     </Compile>
     <Compile Include="items.aspx.designer.cs">
       <DependentUpon>items.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ItemsInformation.aspx.cs">
+      <DependentUpon>ItemsInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ItemsInformation.aspx.designer.cs">
+      <DependentUpon>ItemsInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

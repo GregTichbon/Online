@@ -21,7 +21,7 @@ namespace Auction
         public string title;
         public string shortdescription;
         public string description;
-        public string reserve;
+        public double reserve;
         public string retailprice;
         public string itemimages;
         public string donorimages;
@@ -39,6 +39,9 @@ namespace Auction
         public string displayregister;
         public string displayloggedin;
         public string displaylogin;
+        public string displayautobid = "None";
+        public string autobidamount = "";
+        public string autobidchecked = "";
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -49,10 +52,16 @@ namespace Auction
             user_ctr = (string)Session["Auction_user_ctr"] ?? "";
             fullname = (string)Session["Auction_Fullname"] ?? "";
 
-            if(user_ctr == "")
+            //user_ctr = user_ctr ?? "";
+            //fullname = fullname ?? "";
+
+            if (user_ctr == "")
             {
-                user_ctr = Request.Cookies["Auction_user_ctr"].Value ?? "";
-                fullname = Request.Cookies["Auction_Fullname"].Value ?? "";  
+                if (Request.Cookies["Auction_user_ctr"] != null)
+                {
+                    user_ctr = Request.Cookies["Auction_user_ctr"].Value;
+                    fullname = Request.Cookies["Auction_Fullname"].Value;
+                }
             }
 
             item_ctr = Request.QueryString["id"];
@@ -73,7 +82,7 @@ namespace Auction
                     title = dr["title"].ToString();
                     shortdescription = dr["shortdescription"].ToString();
                     description = dr["Description"].ToString();
-                    reserve = dr["Reserve"].ToString();
+                    reserve = Convert.ToDouble(dr["Reserve"]);
                     retailprice = dr["RetailPrice"].ToString();
                     increment = Convert.ToDouble(dr["increment"]);
                     if(increment == 0)
@@ -132,8 +141,15 @@ namespace Auction
                     dr.Read();
 
                     double currentbid = Convert.ToDouble(dr["amount"]);
+
+                    string reservenote = "";
+                    if (reserve > currentbid)
+                    {
+                        reservenote = " <span class=\"reservenote\">Reserve not met</span>";
+                    }
+
                     hf_highestbid = currentbid.ToString("#.00");
-                    highestbid = "$" + hf_highestbid;
+                    highestbid = "$" + hf_highestbid + reservenote;
                     if (dr["user_ctr"].ToString() == user_ctr)
                     {
                         you = " (YOU!)";
@@ -144,6 +160,9 @@ namespace Auction
                     }
                     highestbidder = dr["fullname"].ToString() + you;
                     yourbid = currentbid + increment;
+                    if (yourbid < startbid) {
+                        yourbid = startbid;
+                    }
                     nextminimum = yourbid.ToString("#.00");
                 }
                 else
@@ -179,6 +198,35 @@ namespace Auction
                 displayloggedin = "";
                 displaylogin = "none";
                 displayregister = "none";
+
+                con = new SqlConnection(strConnString);
+                cmd = new SqlCommand("Get_AutoBid", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@user_ctr", SqlDbType.VarChar).Value = user_ctr;
+                cmd.Parameters.Add("@item_ctr", SqlDbType.VarChar).Value = item_ctr;
+                cmd.Connection = con;
+                try
+                {
+                    con.Open();
+                    double autobid = Convert.ToDouble(cmd.ExecuteScalar());
+                    
+                    //Get the an auto bid for this user and item if it is greater than the current bid -- This will also need to be done in data.asmx
+                    if(autobid != 0)
+                    {
+                        displayautobid = "";
+                        autobidamount = autobid.ToString("#.00");
+                        autobidchecked = " checked";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
             }
         }
     }

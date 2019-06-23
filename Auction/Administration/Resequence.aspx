@@ -16,8 +16,8 @@
 
             updateIndex = function (e, ui) {
                 $('.index', ui.item.parent()).each(function (i) {
-                    $(this).val(i + 10);
-                    $(this).next().text(i + 10);
+                    $(this).val(i * 10);
+                    $(this).next().text(i * 10);
                 });
             };
 

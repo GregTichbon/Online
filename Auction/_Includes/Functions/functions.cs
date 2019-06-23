@@ -64,6 +64,27 @@ namespace General.Functions
 
             return parameters;
         }
+
+        public static string sendtext(string mobilenumber, string message)
+        {
+            string myresponse = "";
+            WebRequest wr = WebRequest.Create("http://office.datainn.co.nz/sms/send?O=S&P=" + mobilenumber + "&M=" + HttpUtility.UrlEncode(message));
+            wr.Timeout = 3500;
+
+            //Console.WriteLine(i);
+
+            WebResponse response = wr.GetResponse();
+            Stream data = response.GetResponseStream();
+            using (StreamReader sr = new StreamReader(data))
+            {
+                myresponse = sr.ReadToEnd();
+                
+            }
+
+            data.Dispose();
+            return myresponse;
+        }
+
         public static void sendemail(string emailsubject, string emailbody, string emailRecipient, string emailbcc)
         {
             //MailMessage mail = new MailMessage("noreply@whanganui.govt.nz", emailRecipient);

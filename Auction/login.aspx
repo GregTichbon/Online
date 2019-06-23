@@ -9,10 +9,9 @@
     <link href="_Includes/css/main.css" rel="stylesheet" />
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#btn_submit').click(function () {
+            $('#btn_login').click(function () {
                 if ($("#formLogin").valid()) {
-                    alert($('#r_keepmeloggedin').is(":checked"));
-                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "emailaddress", "value": $('#r_emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "keepmeloggedin", "value": $('#r_keepmeloggedin').is(":checked") }];
+                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "emailaddress", "value": $('#l_emailaddress').val() }, { "name": "passcode", "value": $('#l_passcode').val() }, { "name": "keepmeloggedin", "value": $('#l_keepmeloggedin').is(":checked") }];
                     var formData = JSON.stringify({ formVars: arForm });
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -29,7 +28,7 @@
                                 $('.displaylogin').hide();
                                 $('#dialog_login').dialog("close");
                                 /*
-                                if ($('#r_keepmeloggedin:checked')) {
+                                if ($('#l_keepmeloggedin:checked')) {
                                     alert('make cookie');
                                     document.cookie = "Auction_user_ctr=" + result.d.user_ctr + "; expires=Thu, 18 Dec 2013 12:00:00 UTC";
                                     Cookies.set('Auction_user_ctr', result.d.user_ctr);
@@ -63,13 +62,13 @@
     <form id="formLogin" runat="server">
 
         <p>
-            <input type="email" name="r_emailaddress" id="r_emailaddress" class="form-control" required="required" placeholder="Email address" /></p>
+            <input type="email" name="l_emailaddress" id="l_emailaddress" class="form-control" required="required" placeholder="Email address" /></p>
         <p>
-            <input type="text" name="r_passcode" id="r_passcode" class="form-control" required="required" placeholder="Password" /></p>
+            <input type="text" name="l_passcode" id="l_passcode" class="form-control" required="required" placeholder="Password" /></p>
         <p>
-            <input type="checkbox" class="xform-control" name="r_keepmeloggedin" id="r_keepmeloggedin" />
+            <input type="checkbox" class="xform-control" name="l_keepmeloggedin" id="l_keepmeloggedin" />
             Keep me logged in</p>
-                    <input type="button" name="btn_submit" id="btn_submit" class="xform-control" value="Submit" />
+                    <input type="button" name="btn_login" id="btn_login" class="xform-control" value="Submit" />
 
         
     </form>

@@ -10,9 +10,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#btn_submit').click(function () {
+            $('#btn_register').click(function () {
                 if ($("#formRegister").valid()) {
-                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#r_emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#r_mobilenumber').val() }, { "name": "textnotifications", "value": $('#r_textnotifications').val() }, { "name": "contactpermission", "value": $('#r_contactpermission').val() }];
+                    var arForm = [{ "name": "URL", "value": "<%=Request.Url.AbsoluteUri%>" }, { "name": "user_ctr", "value": 0 }, { "name": "fullname", "value": $('#r_fullname').val() }, { "name": "emailaddress", "value": $('#r_emailaddress').val() }, { "name": "passcode", "value": $('#r_passcode').val() }, { "name": "mobilenumber", "value": $('#r_mobilenumber').val() }, { "name": "textnotifications", "value": $('#r_textnotifications').val() }, { "name": "contactpermission", "value": $('#r_contactpermission').val() }, { "name": "keepmeloggedin", "value": $('#r_keepmeloggedin').is(":checked") }];
                     var formData = JSON.stringify({ formVars: arForm });
                     $.ajax({
                         type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
@@ -24,7 +24,7 @@
                             $('#hf_user_ctr').val(result.d.message);
                             $('#hf_fullname').val($('#r_fullname').val());
                             $("#fullname").html($('#r_fullname').val());
-                            $('#displayloggedin').show();
+                            $('.displayloggedin').show();
                             $('.displaylogin').hide();
                             $('#dialog_register').dialog("close");
                         },
@@ -135,7 +135,7 @@
            <p> <input type="checkbox" name="r_textnotifications" id="r_textnotifications" class="xform-control " value="Yes" checked="checked" /> Send a text to my mobile phone number if I have been outbid on an item.</p>
            <p> <input type="checkbox" name="r_contactpermission" id="r_contactpermission" class="xform-control" value="Yes" checked="checked" /> I give permission to The Whanganui Womens Refuge to send information to me by email and/or text message from time to time.</p>
             <p><input type="checkbox" name="r_viewtermsandconditions" id="r_viewtermsandconditions" class="xform-control" value="Yes" required="required" /> I have read and accept the terms and conditions.  <span id="viewtermsandconditions">View here</span></p>
-            <input type="button" name="btn_submit" id="btn_submit" class="xform-control" value="Submit" />
+            <input type="button" name="btn_register" id="btn_register" class="xform-control" value="Submit" />
              
             <!--
         <div class="rowx">

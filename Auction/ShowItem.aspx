@@ -23,6 +23,9 @@
                 width: auto;
                 height: 100%;
             }
+            .reservenote {
+                color:red;
+            }
 
             
     </style>
@@ -31,6 +34,7 @@
 
     <script type="text/javascript">
         var increment = <% =increment%>;
+        var startbid = <% =startbid %>;
         var minimumbid = <% =startbid %>;
 
         $(document).ready(function () {
@@ -51,6 +55,7 @@
                 //if a decimal has been added, disable the "."-button
 
             });
+            /*
             $("#help").click(function () {
                 mywidth = $(window).width() * .95;
                 if (mywidth > 500) {
@@ -68,6 +73,7 @@
                     }
                 });
             });
+            */
 
             $('body').on('click', '#logout', function () {
                 $.ajax({
@@ -91,7 +97,9 @@
             });
 
             function placebid() {
-                if (Number($("#bid").val()) <= Number($("#hf_highestbid").val())) {
+                var theautobid = Number($("#autobid").val());
+                var thebid = Number($("#bid").val());
+                if (thebid <= Number($("#hf_highestbid").val())) {
                     $("#response-message").html("<br />" + 'Your bid needs to be higher than the current highest bid');
                     mywidth = $(window).width() * .95;
                     if (mywidth > 500) {
@@ -108,10 +116,10 @@
                             }
                         }
                     });
-                    $("#bid").val(Number($("#hf_highestbid").val()) + increment);
-                    //alert('Your bid needs to be higher than the current highest bid');
+                    $("#bid").val(Number($("#hf_highestbid").val()) + increment + ".00");
+
                 } else if ($("#bid").val() % increment != 0) {
-                    $("#response-message").html("<br />" + 'Your bid should be to the nearest $' + increment + '.00');
+                    $("#response-message").html("<br />" + 'Your bid must be to the nearest $' + increment + '.00');
                     mywidth = $(window).width() * .95;
                     if (mywidth > 500) {
                         mywidth = 500;
@@ -128,7 +136,28 @@
                         }
                     });
                     $("#bid").val(Number($("#hf_highestbid").val()) + increment);
-                    //alert('Your bid should be to the nearest $10.00');
+//==================================================================================
+
+                } else if (thebid <= startbid) {
+                    $("#response-message").html("<br />" + 'Your bid must be greater than the starting bid of $' + startbid + ".00");
+                    mywidth = $(window).width() * .95;
+                    if (mywidth > 500) {
+                        mywidth = 500;
+                    }
+                    $("#dialog_response").dialog({
+                        resizable: false,
+                        height: 340,
+                        width: mywidth,
+                        modal: true,
+                        buttons: {
+                            "Continue": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                    $("#bid").val(startbid);
+//==================================================================================
+
                 } else if ($('#hf_user_ctr').val() == '' && $('#passcode').val() == '') {
                     $("#response-message").html("<br />" + 'You need to enter your pass code');
                     mywidth = $(window).width() * .95;
@@ -146,8 +175,62 @@
                             }
                         }
                     });
+                } else if (theautobid > 0 && theautobid < thebid + (2 * increment)) {
+                    $("#response-message").html("<br />" + 'Your autobid is too low.');
+                    mywidth = $(window).width() * .95;
+                    if (mywidth > 500) {
+                        mywidth = 500;
+                    }
+                    $("#dialog_response").dialog({
+                        resizable: false,
+                        height: 340,
+                        width: mywidth,
+                        modal: true,
+                        buttons: {
+                            "Continue": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                    $("#autobid").val(thebid + (2 * increment) + '.00');
+                } else if (theautobid % increment != 0) {
+                    $("#response-message").html("<br />" + 'Your autobid must be to the nearest $' + increment + '.00'),
+                        mywidth = $(window).width() * .95;
+                    if (mywidth > 500) {
+                        mywidth = 500;
+                    }
+                    $("#dialog_response").dialog({
+                        resizable: false,
+                        height: 340,
+                        width: mywidth,
+                        modal: true,
+                        buttons: {
+                            "Continue": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                    $("#autobid").val(parseInt((theautobid / increment) + 1) * increment + '.00');
+                } else if ($('#makeautobid').is(':checked') && theautobid == '') {
+                    $("#response-message").html("<br />" + "Your haven't specified an autobid"),
+                        mywidth = $(window).width() * .95;
+                    if (mywidth > 500) {
+                        mywidth = 500;
+                    }
+                    $("#dialog_response").dialog({
+                        resizable: false,
+                        height: 340,
+                        width: mywidth,
+                        modal: true,
+                        buttons: {
+                            "Continue": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
                 } else {
-                    $("#confirmation-message").html("<br />Please confirm that you would like to make a bid of $" + $("#bid").val() + ".00 on the following item:<br /><br /><b>" + $('#show_title').html() + "</b>");
+                    thebid = parseFloat($("#bid").val());
+                    $("#confirmation-message").html("<br />Please confirm that you would like to make a bid of $" + thebid + ".00 on the following item:<br /><br /><b>" + $("#dialog_showitem").dialog("option", "title") + "</b>");
                     $(function () {
                         mywidth = $(window).width() * .95;
                         if (mywidth > 500) {
@@ -162,11 +245,11 @@
                                 "Yes - Please place this bid": function () {
                                     $(this).dialog("close");
                                     $.ajax({
-                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val()+ "&increment=" + increment, success: function (returned) {
+                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val() + "&increment=" + increment + "&autobid=" + $("#autobid").val() + 0, success: function (returned) {
                                             returnedjson = $.parseJSON(returned);
                                             $("#response-message").html("<br />" + returnedjson.message);
-                                            $("#response-message").html("<br />" + returnedjson.message);
-                                            mywidth = $(window).width() * .95;
+                                            //$("#response-message").html("<br />" + returnedjson.message);
+                                            mywidth = ($(window).width() - 150) * .95;
                                             if (mywidth > 500) {
                                                 mywidth = 500;
                                             }
@@ -246,6 +329,7 @@
                     width: $(window).width() * .75,
                     height: 500,
                     close: function () {
+                        $(this).html('');
                         $('body').removeClass('stop-scrolling');
                     }
                 });
@@ -263,6 +347,7 @@
                     width: $(window).width() * .75,
                     height: 500,
                     close: function () {
+                        $(this).html('');
                         $('body').removeClass('stop-scrolling');
                     }
                 });
@@ -302,20 +387,24 @@
         <div id="dialog_response" title="Bid Response">
             <span id="response-message"></span>
         </div>
+        <!--
         <div id="dialog_help" title="HELP!" style="display: none">
             <br />
             <p>Welcome to the silent auction bidding page.</p>
             Making a bid is pretty simple!  You need to have a pass code to make a bid.  If you don't have a pass code, then you need to register.  Once you placed a bid, the system will remember you and you can continue to bid on all the items.  Remember to log out when you are finished.<p>If nobody is logged in, then you can either enter your pass code and make your bid or if you are not registered (don't have a pass code) then there is a REGISTER button to click and then enter your details.</p>
             <p>That's all, happy bidding and good luck.</p>
         </div>
+        -->
 
 
         <div id="dialog_register" title="Register"></div>
         <div id="dialog_login" title="Login"></div>
 
-        <p id="show_title"><%=title %></p>
+        <!--<p id="show_title"><%=title %></p>-->
         <p id="show_shortdescription"><%=shortdescription%></p>
         <%=itemimages %>
+        <p id="show_description"><%=description%></p>
+
 
         <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />
         <input name="hf_user_ctr" id="hf_user_ctr" type="hidden" value="<%=user_ctr%>" />
@@ -337,43 +426,38 @@
                     <input type="button" name="register" id="register" value="Register" /></td>
             </tr>
 
-
             <tr>
-                <td>
-                     Highest bid: 
+                <td>Highest bid: 
                 </td>
                 <td><span id="highestbid"><%=highestbid%></span></td>
             </tr>
             <tr>
-                <td>
-                     Highest bidder: 
+                <td>Highest bidder: 
                 </td>
                 <td><span id="highestbidder"><%=highestbidder%></span></td>
             </tr>
             <tr style="display: none">
-                <td>
-                     Next minimum bid: 
+                <td>Next minimum bid: 
                 </td>
                 <td><span id="nextminimum"><%=nextminimum%></span></td>
             </tr>
             <tr style="display: <%=displayloggedin%>" class="displayloggedin">
-                <td>
-                    Your bid 
+                <td>Your bid 
                 </td>
                 <td>$<input name="bid" type="text" id="bid" class="numeric" maxlength="5" value="<%=nextminimum%>" />
                 </td>
             </tr>
-           
+
             <tr style="display: <%=displayloggedin%>" class="displayloggedin">
                 <td>
-                        <input type="checkbox" id="makeautobid" value="Yes" />
-                        Make an AutoBid (?)
+                    <input type="checkbox" id="makeautobid" value="Yes" <%=autobidchecked%> />
+                    Make an AutoBid (?)
                 </td>
                 <td>
-                    <span id="span_autobid" style="display: none">$<input name="autobid" type="text" id="autobid" class="numeric" maxlength="5" /></span>
+                    <span id="span_autobid" style="display: <%=displayautobid%>">$<input name="autobid" type="text" id="autobid" class="numeric" maxlength="5" value="<%=autobidamount %>" /></span>
                 </td>
             </tr>
-                      <!--
+            <!--
             <tr>
                 <td>
                         

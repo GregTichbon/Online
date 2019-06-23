@@ -27,6 +27,16 @@ namespace Auction.Administration
         public string auctiontype;
         public string emailalerts;
         public string textalerts;
+        public string enablecategories;
+        public string bidemail;
+        public string bidtext;
+        public string emailfrom;
+        public string emailfromname;
+        public string emailhost;
+        public string emailpassword;
+        public string emailreplyto;
+        public string bidlog;
+
 
         public string[] auctiontype_values = new string[2] { "Silent", "Live" };
 
@@ -47,8 +57,19 @@ namespace Auction.Administration
                 termsandconditions = parameters["TermsAndConditions"];
                 url = parameters["URL"];
                 auctiontype = parameters["AuctionType"];
-                emailalerts = parameters["emailalerts"];
-                textalerts = parameters["textalerts"];
+                emailalerts = parameters["EmailAlerts"];
+                textalerts = parameters["TextAlerts"];
+                enablecategories = parameters["EnableCategories"];
+                bidemail = parameters["BidEmail"];
+                bidtext = parameters["BidText"];
+                emailfrom = parameters["EmailFrom"];
+                emailfromname = parameters["EmailFromName"];
+                emailhost = parameters["EmailHost"];
+                emailpassword = parameters["EmailPassword"];
+                emailreplyto = parameters["EmailReplyTo"];
+                bidlog = parameters["BidLog"];
+
+
             }
 
 
@@ -74,7 +95,17 @@ namespace Auction.Administration
             cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];
             cmd.Parameters.Add("@emailalerts", SqlDbType.VarChar).Value = Request.Form["emailalerts"];
             cmd.Parameters.Add("@textalerts", SqlDbType.VarChar).Value = Request.Form["textalerts"];
-
+            /*
+            cmd.Parameters.Add("@enablecategories", SqlDbType.VarChar).Value = Request.Form["enablecategories"];
+            cmd.Parameters.Add("@bidemail", SqlDbType.VarChar).Value = Request.Form["bidemail"];
+            cmd.Parameters.Add("@bidtext", SqlDbType.VarChar).Value = Request.Form["bidtext"];
+            cmd.Parameters.Add("@emailfrom", SqlDbType.VarChar).Value = Request.Form["emailfrom"];
+            cmd.Parameters.Add("@emailfromname", SqlDbType.VarChar).Value = Request.Form["emailfromname"];
+            cmd.Parameters.Add("@emailhost", SqlDbType.VarChar).Value = Request.Form["emailhost"];
+            cmd.Parameters.Add("@emailpassword", SqlDbType.VarChar).Value = Request.Form["emailpassword"];
+            cmd.Parameters.Add("@emailreplyto", SqlDbType.VarChar).Value = Request.Form["emailreplyto"];
+            cmd.Parameters.Add("@bidlog", SqlDbType.VarChar).Value = Request.Form["bidlog"];
+            */
 
             cmd.Connection = con;
             //try

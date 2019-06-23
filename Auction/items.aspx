@@ -32,6 +32,8 @@
         .categoryselected {
             background-color:green;
         }
+
+       
     </style>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
 
@@ -62,6 +64,7 @@
 
             $(".showitem, .canclick").click(function () {
                 itemid = this.id.substring(8);
+                title = $(this).attr('data-title');
                 //alert('The item id is: ' + itemid);
                 $('body').addClass('stop-scrolling');
                 $('#dialog_showitem').dialog({
@@ -69,12 +72,12 @@
                     open: function () {
                         $(this).load('showitem.aspx?id=' + itemid);
                     },
-                    width: $(window).width() * .95,
+                    width: ($(window).width() - 150) * .95,  //75 is the width of the question mark top right
                     height: 800,
                     close: function () {
                         $('body').removeClass('stop-scrolling');
-                    }
-                    //,                    title: 'xxxxx'
+                    },
+                    title: title
                 });
 
 
@@ -94,6 +97,21 @@
                 */
             });
 
+            $('#informationIcon').click(function () {
+               $('body').addClass('stop-scrolling');
+               $('#dialog_showinformation').dialog({
+                    modal: true,
+                    open: function () {
+                        $(this).load('ItemsInformation.aspx');
+                    },
+                    width: ($(window).width() - 150) * .95,  //75 is the width of the question mark top right
+                    height: 800,
+                    close: function () {
+                        $('body').removeClass('stop-scrolling');
+                    }, title: 'Bidding Information'
+                });
+            })
+
             $('.slideshow').cycle();
             $('.showitem, .canclick').css('cursor', 'pointer');
         });  //document.ready
@@ -101,9 +119,13 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   
+        <img id="informationIcon" src="Images/Auction<%=parameters["Auction_CTR"]%>/question.png" title="Click on me for information on bidding." />
+
     <%= categories %>
     <%=html%>
     <div id="dialog_showitem"></div>
+    <div id="dialog_showinformation"></div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 </asp:Content>

@@ -15,6 +15,7 @@ namespace Auction
     {
         public string html = "";
         public string categories = "";
+        public Dictionary<string, string> parameters;
         protected void Page_Load(object sender, EventArgs e)
         {
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
@@ -297,7 +298,7 @@ end if
         */
             #endregion
 
-            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+            parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
 
             //---------------------------------------
 
@@ -477,7 +478,7 @@ end if
                             }
                             if(images != "")
                             {
-                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine;
+                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-title=\"" + title + "\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine;
                                 html += images;
                                 html += "</div>" + System.Environment.NewLine; //slideshow
                             }

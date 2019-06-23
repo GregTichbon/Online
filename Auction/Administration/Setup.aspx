@@ -66,13 +66,13 @@
                 </select>
             </td>
         </tr>
-                <tr>
+        <tr>
             <td>Email alerts</td>
             <td>
-                <input type="text" name="emailalerts" id="emailalerts" value="<%=emailalerts%>"  /></td>
+                <input type="text" name="emailalerts" id="emailalerts" value="<%=emailalerts%>" /></td>
 
         </tr>
-                <tr>
+        <tr>
             <td>Text alerts</td>
             <td>
                 <input type="text" name="textalerts" id="textalerts" value="<%=textalerts%>" /></td>

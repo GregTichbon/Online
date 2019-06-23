@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 using System.Xml;
 //using OfficeOpenXml;
 using System.IO;
+using System.Configuration;
 //using Generic;
 
 namespace Auction
@@ -42,9 +43,10 @@ namespace Auction
             string mobilenumber = formVars.Form("mobilenumber");
             string textnotifications = formVars.Form("textnotifications");
             string contactpermission = formVars.Form("contactpermission");
+            Boolean keepmeloggedin = Convert.ToBoolean(formVars.Form("keepmeloggedin"));
 
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=Auction;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            string strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -61,16 +63,30 @@ namespace Auction
             
 
             con.Open();
-            string result = cmd.ExecuteScalar().ToString();
+            string user_ctr = cmd.ExecuteScalar().ToString();
             con.Close();
             con.Dispose();
 
-            HttpContext.Current.Session.Add("Auction_user_ctr", result);
+            HttpContext.Current.Session.Add("Auction_user_ctr", user_ctr);
             HttpContext.Current.Session.Add("Auction_Fullname", fullname);
+
+            if (keepmeloggedin)
+            {
+                DateTime expires = DateTime.Now.AddMonths(2);
+                HttpCookie Auction_user_ctr = new HttpCookie("Auction_user_ctr");
+                Auction_user_ctr.Value = user_ctr;
+                Auction_user_ctr.Expires = expires;
+                HttpContext.Current.Response.Cookies.Add(Auction_user_ctr);
+
+                HttpCookie Auction_Fullname = new HttpCookie("Auction_Fullname", fullname);
+                Auction_Fullname.Expires = expires;
+                HttpContext.Current.Response.Cookies.Add(Auction_Fullname);
+
+            }
 
             standardResponse resultclass = new standardResponse();
             resultclass.status = "Saved";
-            resultclass.message = result;
+            resultclass.message = user_ctr;
             //JavaScriptSerializer JS = new JavaScriptSerializer();
             //string passresult = JS.Serialize(resultclass);
             //return (passresult);
@@ -89,7 +105,8 @@ namespace Auction
             string passcode = formVars.Form("passcode");
             Boolean keepmeloggedin = Convert.ToBoolean(formVars.Form("keepmeloggedin"));
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=Auction;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            string strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
+
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -127,7 +144,6 @@ namespace Auction
                     Auction_Fullname.Expires = expires;
                     HttpContext.Current.Response.Cookies.Add(Auction_Fullname);
 
-                    //string xx = HttpContext.Current.Response.Cookies.Get("CookieName").ToString();
                 }
 
             } else

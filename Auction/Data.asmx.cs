@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Web.Script.Serialization;
+using Generic;
 
 namespace Auction
 {
@@ -35,6 +36,9 @@ namespace Auction
         {
             HttpContext.Current.Session.Remove("Auction_user_ctr");
             HttpContext.Current.Session.Remove("Auction_Fullname");
+
+            HttpContext.Current.Response.Cookies["Auction_user_ctr"].Expires = DateTime.Now.AddDays(-1);
+            HttpContext.Current.Response.Cookies["Auction_Fullname"].Expires = DateTime.Now.AddDays(-1);
         }
 
         [WebMethod]
@@ -73,7 +77,6 @@ namespace Auction
 
         }
 
-
         [WebMethod(EnableSession = true)]
         public void verifypasscode()
         {
@@ -81,8 +84,37 @@ namespace Auction
         }
 
         [WebMethod (EnableSession = true)]
-        public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname, double increment)
+        public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname, double increment, double autobid = 0)
         {
+            //http://localhost:50459/data.asmx/makebid?user_ctr=2&item_ctr=23&bid=140.00&fullname=Neo Tichbon&passcode=undefined&increment=10&autobid=
+            Dictionary<string, string> parameters;
+            parameters = General.Functions.Functions.get_Auction_Parameters(Context.Request.Url.AbsoluteUri);
+
+            Generic.Functions gFunctions = new Generic.Functions();
+            string emailBCC = parameters["EmailAlerts"];
+            string host = parameters["EmailHost"];
+            string emailfrom = parameters["EmailFrom"];
+            string emailfromname = parameters["EmailFromName"];
+            string password = parameters["EmailPassword"];
+            string bidemail = parameters["BidEmail"];
+            string bidtext = parameters["BidText"];
+            string bidlog = parameters["BidLog"];
+
+            Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+            /*
+            if (bidemail.Contains("log")) {
+                emailoptions.Add("log", "");
+            }
+            */
+            Dictionary<string, string> textoptions = new Dictionary<string, string>();
+            /*
+            if (bidtext.Contains("log"))
+            {
+                textoptions.Add("log", "");
+            }
+            */
+
+
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
           
             Boolean userok = true;
@@ -144,50 +176,145 @@ namespace Auction
                 //Should add bid item now if can  -- maybe not???
                 cmd.Parameters.Add("@user_ctr", SqlDbType.VarChar).Value = user_ctr;
                 cmd.Parameters.Add("@bid", SqlDbType.VarChar).Value = bid;
+                cmd.Parameters.Add("@autobid", SqlDbType.VarChar).Value = autobid;
                 cmd.Connection = con;
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                //if (dr.HasRows)
+                //{
+                dr.Read();
+
+                string response = dr["response"].ToString();
+                double db_reserve = Convert.ToDouble(dr["reserve"]);
+                string db_title = dr["title"].ToString();
+
+                string db_user_ctr = dr["user_ctr"].ToString();
+
+                double db_amount = 0;
+                string db_fullname = "";
+                string db_emailaddress = "";
+                string db_mobilenumber = "";
+
+                if (db_user_ctr != "")
                 {
-                    dr.Read();
+                     db_amount = Convert.ToDouble(dr["amount"]);
+                     db_fullname = dr["fullname"].ToString();
+                     db_emailaddress = dr["emailaddress"].ToString();
+                     db_mobilenumber = dr["mobilenumber"].ToString();
+                }
 
-                    double db_amount = Convert.ToDouble(dr["amount"]);
-                    string db_user_ctr = dr["user_ctr"].ToString();
-                    string title = dr["title"].ToString();
-                    //double increment = Convert.ToDouble(dr["increment"]);
+                string reservenote = "";
+                string reservemessage = "";
+                if (db_reserve > bid )
+                {
+                    reservenote = " <span class=\"reservenote\">Reserve not met</span>";
+                    reservemessage = ", however, the reserve price has not yet been reached.";
+                }
+                //double increment = Convert.ToDouble(dr["increment"]);
+                string body = "";
+                string subject = "";
+                string replyto = "";
+                string[] attachments = new string[0];
 
+                if (db_user_ctr != "")
+                {
                     if (bid > db_amount) {
                         status = "Success";
-                        message = "Your bid has been successful";
-                        highestbid = bid.ToString("#.00");
+                        message = "Your bid is leading." + reservemessage;
+                        highestbid = bid.ToString("#.00") + reservenote;
                         highestbidder = fullname + " (YOU!)";
                         nextbid = bid + increment;
                         nextminimum = nextbid.ToString("#.00");
                         //savebid = true;
                         if (db_user_ctr != user_ctr)
                         {
-                            string body = "<html>";
-                            body += "<head>";
-                            body += "<title>The Great Ball - Charity Auction - You have been out bid</title>";
-                            body += "</head>";
-                            body += "<body>";
-                            body += "<p>You have been outbid for the following</p>";
-                            body += "<p><b>Item:</b>" + title + "</p>";
-                            body += "<p><b>Your bid:</b> $" + db_amount.ToString("#.00") + "</p>";
-                            body += "<p><b>New bid:</b> $" + bid.ToString("#.00") + "</p>";
-                            body += "<p><b>Made by:</b> " + fullname + "</p>";
-                            body += "<p><b>Next minimum bid:</b> $" + nextminimum + "</p>";
-                            // body +="<p><a href=\"" + protocol + "://" + thissite + "/page.asp?item=" + rs("item_ctr") + "\"><b>MAKE A NEW BID</b></a></p>";
-                            body += "</body>";
-                            body += "</html>";
-                            //send email
+                            if (bidemail == "Yes")
+                            {
+                                body = "<html>";
+                                body += "<head>";
+                                body += "<title>" + parameters["Auction"] + " - You have been out bid</title>";
+                                body += "</head>";
+                                body += "<body>";
+                                body += "<p>You have been outbid for the following</p>";
+                                body += "<p><b>Item:</b>" + db_title + "</p>";
+                                body += "<p><b>Your bid:</b> $" + db_amount.ToString("#.00") + "</p>";
+                                body += "<p><b>New bid:</b> $" + bid.ToString("#.00") + reservenote + "</p>";
+                                body += "<p><b>Made by:</b> " + fullname + "</p>";
+                                body += "<p><b>Next minimum bid:</b> $" + nextminimum + "</p>";
+                                body +="<p><a href=\"" + parameters["URL"] + "><b>MAKE A NEW BID</b></a></p>"; //Would like to go to the item
+                                body += "</body>";
+                                body += "</html>";
+                                
+
+                                //Array.Resize(ref attachments, attachments.Length + 1);
+                                //attachments[attachments.GetUpperBound(0)] = filename;
+                                subject = parameters["Auction"] + " - Charity Auction - You have been out bid";
+                                replyto = "";
+                                gFunctions.sendemailV4(host, emailfrom, emailfromname, password, subject, body, db_emailaddress, emailBCC, replyto, attachments, emailoptions);
+                            }
+
+                            if(bidtext == "Yes" && db_mobilenumber != "")
+                            {
+                                string textmessage = parameters["Auction"] + " - You have been out bid on \"" + db_title + "\". Make a new bid at: " + parameters["URL"];
+                                //gFunctions.SendRemoteMessage(db_mobilenumber, textmessage, parameters["Auction"] + " out bid"); 
+                                General.Functions.Functions.sendtext(db_mobilenumber, textmessage);
+                            }
+
+                            if (bidlog == "Yes")
+                            {
+                                //item_ctr, user_ctr, bid, autobid, subject, body, db_emailaddress, emailBCC, replyto, attachments.ToString(), emailoptions.ToString()
+                            }
+                        }
+                    }
+                    else
+                    {
+                        status = "Failed";
+                        message = response;
+                        highestbid = db_amount.ToString("#.00");
+                        highestbidder = db_fullname;
+                        nextbid = db_amount + increment;
+                        nextminimum = nextbid.ToString("#.00");
+                        //Tell previous bidder that his bid has been incremented
+                        if (db_emailaddress != "")
+                        {
+                            if (bidemail == "Yes")
+                            {
+                                body = "<html>";
+                                body += "<head>";
+                                body += "<title>The Great Ball - Charity Auction - Your autobid has been actioned</title>";
+                                body += "</head>";
+                                body += "<body>";
+                                body += "<p>Your autobid has been actioned</p>";
+                                body += "<p><b>Item:</b>" + db_title + "</p>";
+                                body += "<p><b>Your bid:</b> $" + db_amount.ToString("#.00") + reservenote + "</p>";
+                                body += "<p><b>Next minimum bid:</b> $" + nextminimum + "</p>";
+                                // body +="<p><a href=\"" + protocol + "://" + thissite + "/page.asp?item=" + rs("item_ctr") + "\"><b>VIEW ITEM</b></a></p>";
+                                body += "</body>";
+                                body += "</html>";
+
+                                //Array.Resize(ref attachments, attachments.Length + 1);
+                                //attachments[attachments.GetUpperBound(0)] = filename;
+
+                                gFunctions.sendemailV4(host, emailfrom, emailfromname, password, "The Great Ball - Charity Auction - Your autobid has been actioned", body, db_emailaddress, emailBCC, "", attachments, emailoptions);
+                            }
+                            if(bidlog == "Yes")
+                            {
+                                //item_ctr, user_ctr, bid, autobid, subject, body, db_emailaddress, emailBCC, replyto, attachments.ToString(), emailoptions.ToString()
+                            }
+
+                            if (bidtext == "Yes" && db_mobilenumber != "")
+                            {
+                                string textmessage = parameters["Auction"] + " - Your autobid has been actioned on \"" + db_title + "\".";
+                                //gFunctions.SendRemoteMessage(db_mobilenumber, textmessage, parameters["Auction"] + " autobid");
+                                General.Functions.Functions.sendtext(db_mobilenumber, textmessage);
+                            }
                         }
                     }
                 }
                 else
                 {
                     status = "Success";
-                    message = "Thank you for starting the bidding, your bid has been successful";
+                    message = "Thank you for starting the bidding, your bid is leading" + reservemessage;
                     highestbid = bid.ToString("#.00");
                     highestbidder = fullname + " (YOU!)";
                     nextbid = bid + increment;

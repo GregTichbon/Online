@@ -8,7 +8,9 @@
     <p><a href="resequence.aspx">Resequence Items</a></p>
     <p><a href="donorlist.aspx">Donors</a></p>
     <!--<p><a href="donor.aspx?all=true">All Donors</a></p>-->
-      <p><a href="categorylist.aspx">Categories</a></p>
+    <p><a href="categorylist.aspx">Categories</a></p>
+    <p><a href="userlist.aspx">Users</a></p>
+
     <p></p>
 
     <p><a href="reports.aspx">Reports</a></p>
