@@ -84,7 +84,7 @@ namespace Auction
         }
 
         [WebMethod (EnableSession = true)]
-        public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname, double increment, double autobid = 0)
+        public void makebid(string item_ctr, double bid, string user_ctr, string passcode, string fullname, double increment, string autobid = "false")
         {
             //http://localhost:50459/data.asmx/makebid?user_ctr=2&item_ctr=23&bid=140.00&fullname=Neo Tichbon&passcode=undefined&increment=10&autobid=
             Dictionary<string, string> parameters;
@@ -176,7 +176,7 @@ namespace Auction
                 //Should add bid item now if can  -- maybe not???
                 cmd.Parameters.Add("@user_ctr", SqlDbType.VarChar).Value = user_ctr;
                 cmd.Parameters.Add("@bid", SqlDbType.VarChar).Value = bid;
-                cmd.Parameters.Add("@autobid", SqlDbType.VarChar).Value = autobid;
+                cmd.Parameters.Add("@autobidflag", SqlDbType.VarChar).Value = autobid;
                 cmd.Connection = con;
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();

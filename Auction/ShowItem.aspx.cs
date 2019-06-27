@@ -43,11 +43,11 @@ namespace Auction
         public string autobidamount = "";
         public string autobidchecked = "";
 
-
+        public Dictionary<string, string> parameters;
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            Dictionary<string, string> parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+            parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
 
             user_ctr = (string)Session["Auction_user_ctr"] ?? "";
             fullname = (string)Session["Auction_Fullname"] ?? "";

@@ -1,0 +1,155 @@
+<html lang="en">
+
+<head>
+    <title>
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Styles - You'll need all of these -->
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+
+</head>
+
+<body class="bg-near-white">
+
+    <div class="pa3 mw9 center">
+
+        <!-- Header -->
+        <div class="pa3 mb4">
+            <h1>Heading etc.</h1>
+        </div>
+
+        <!-- Jquery UI Dialog Box -->
+
+        <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-draggable ui-resizable"
+            tabindex="-1" role="dialog" aria-describedby="dialog_showitem" aria-labelledby="ui-id-1"
+            style="position: absolute; width: 1895.25px; top: 200px; left: 50px; display: block; z-index: 101;">
+            <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle">
+                <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
+                <button type="button" class="ui-dialog-titlebar-close">&times;</button></div>
+            <div id="dialog_showitem" class="ui-dialog-content ui-widget-content">
+
+                <!-- Help -->
+                <div id="dialog_help" title="HELP!" class="w-100 cf pa3 br3 mt2 bg-near-white" style="display: block;">
+                    <div class="w-100 w-third-ns pa3 fl">
+                        <h2>Welcome to the silent auction bidding page.</h2>
+                    </div>
+                    <div class="w-100 w-two-thirds-ns pa3 fl lh-copy">
+                        <p>Making a bid is pretty simple! You need to have a pass code to make a bid. If you don't have
+                            a pass code, then you need to register. Once you placed a bid, the system will remember you.
+                        </p>
+                        <p>
+                            If nobody is logged in, then you can either enter your pass code and make your bid or if
+                            you are not registered (don't have a pass code) then there is a REGISTER button to click
+                            and then enter your details.</p>
+                        <p>That's all, happy bidding and good luck.</p>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="cf">
+                    <div class="fl w-100 w-third-ns pa4">
+                        <div class="w-50 mb4">
+                            <img src="http://auction.datainn.co.nz/images/auction3/items/5/Wellington_NZ-cablecar-topview.jpg"
+                                class="w-100">
+                        </div>
+                        <h2 class="items_title f4 b">Cracket Ink Set of Five Prints (Set 2)</h2>
+                        <div class="items_shortdescription lh-copy f6">
+                            Whong thimpos ded bity ithence re inform gainto vole. The prell to brogive poseat
+                            me,
+                            ancin pagear slas andexply fre, asks of thood-mobing happed the ishive I poked ands,
+                            iticis ragans lat had to clacto wased sonsive ey ing thood nats wits th cor to
+                            uscrin
+                            the matinet tan the affall as inatte
+                        </div>
+                    </div>
+
+                    <!-- Bidding Form -->
+                    <div class="fl w-100 w-two-thirds-ns pa4">
+                        <table class="f6 w-100 center mb4" cellspacing="0">
+                            <tbody class="lh-copy">
+                                <tr style="display: none" id="displayloggedin">
+                                    <td class="pv3 pr3 bb b--black-20">Logged in as: <span id="fullname"></span>
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <input type="button" name="logout" id="logout" value="Log out"></td>
+                                </tr>
+
+                                <tr class="displaylogin">
+                                    <td class="pv3 pr3 bb b--black-20">Returning user?<br>
+                                        Enter your pass code to bid:
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <input name="passcode" type="text" id="passcode"
+                                            class="br2 pa2 input-reset ba bg-transparent w-100 measure b--silver"></td>
+                                </tr>
+
+                                <tr class="displaylogin">
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <div>Don't have a pass code?</div>
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <input type="button" name="register" id="register" value="Register here"
+                                            class="f6 grow no-underline br-pill ph3 pv2 dib white bg-blue pointer">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <div>Highest bid:</div>
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20"><span id="highestbid">No bids yet .... be the
+                                            first</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <div>Highest bidder:</div>
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20"><span id="highestbidder">Give it a go</span></td>
+                                </tr>
+                                <tr style="display: none">
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <div>Next minimum bid:</div>
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20"><span id="nextminimum">10.00</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="pv3 pr3 bb b--black-20">
+                                        <div>Your bid </div>
+                                    </td>
+                                    <td class="pv3 pr3 bb b--black-20">$ <input name="bid" type="text" id="bid"
+                                            maxlength="5" value="10.00"
+                                            class="br2 pa2 input-reset ba bg-transparent w-100 measure b--silver numeric">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="button" name="submit" id="submit" value="Place Your Bid"
+                                            class="f6 grow no-underline br-pill ph3 pv2 dib white bg-blue pointer">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

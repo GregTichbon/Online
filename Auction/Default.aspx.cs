@@ -164,7 +164,7 @@ namespace Auction
 
             if (parameters["EnableCategories"] == "Yes")
             {
-                categories += "<button class=\"categoryselect categoryselected\" id=\"btn_category_All\" type=\"button\">All</button>";
+                categories += "<button class=\"categoryselect f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 black categoryselected\" id=\"btn_category_All\" type=\"button\">All</button>";
 
                 string ctrl_category_ctr;
                 string ctrl_category;
@@ -186,7 +186,7 @@ namespace Auction
                             ctrl_category_ctr = dr["category_ctr"].ToString();
                             ctrl_category = dr["category"].ToString();
 
-                            categories += "<button class=\"categoryselect\" id=\"btn_category_" + ctrl_category_ctr + "\" type=\"button\">" + ctrl_category + "</button>";
+                            categories += "&nbsp;&nbsp;<button class=\"categoryselect f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 black\" id=\"btn_category_" + ctrl_category_ctr + "\" type=\"button\">" + ctrl_category + "</button>";
                         }
                     }
                 }
@@ -281,7 +281,7 @@ namespace Auction
                                         }
                                         else
                                         {
-                                            donors += delim + "<a href=\"" + donor_url + "\" target=\"_blank\" class=\"donor-link donor_name\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>" + System.Environment.NewLine;
+                                            donors += delim + "<a href=\"" + donor_url + "\" target=\"_blank\" class=\"donor-link donor_name\" data-id=\"" + id + "\">" + dr2["donorname"].ToString() + "</a>";
                                         }
                                         delim = "<br />";
                                         donorimages = "";
@@ -295,7 +295,7 @@ namespace Auction
                                                 string justfilename = System.IO.Path.GetFileName(filename);
                                                 //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                                                 //{
-                                                donorimages += "<img class=\"donor-link donor_image\" data-id=\"" + id + "\" src=\"images/auction" + parameters["Auction_CTR"] + "/donors/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                                                donorimages += "<img class=\"donor-link donor_image\" data-id=\"" + id + "\" src=\"images/auction" + parameters["Auction_CTR"] + "/donors/" + id + "/" + justfilename + "\" border=\"0\" />";
                                                 //}
                                             }
                                         }
@@ -310,17 +310,35 @@ namespace Auction
                             {
                                 con2.Close();
                             }
-                            //html += "<div class=\"row\">"; //; //& vbcrlf
-                            //html += "<div class=\"mycentered\">"; //& vbcrlf
-                            html += "<div class=\"div_category\" category=\"" + category + "\">";
+
+                           
+                   /*
+                            html += "<div class=\"items_title\">" + title + "</div>";
+                            html += "<div class=\"items_shortdescription\" > " + shortdescription + "</div>";
+
+
+                   
+
+                            html += "<div class=\"items_donated_head\">Generously Donated by";
+                            html += donors;
+                            if (donorimages != "")
+                            {
+                                html += "<div class=\"cycle-slideshow donor-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>";
+                                html += donorimages;
+                                html += "</div>"; //slideshow
+                            }
+                            html += "</div>"; //<div class=\"items_donated_head\">Generously Donated by
+
                             html += "<hr />";
-                            html += "<div class=\"items_title\">" + title + "</div>" + System.Environment.NewLine;
-                            html += "<div class=\"items_shortdescription\" > " + shortdescription + "</div>" + System.Environment.NewLine;
+                            html += "</div>";
+                            */
+                            //Joe start
 
-                            //html += "<div class=\"cycle-slideshow " + canclick + " id=\"viewitem" + id + " data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-center-vert=true>";
-
+                            html += "<div class=\"pa3 w-100 w-50-m w-third-l div_category\" category=\"" + category + "\">"; //D1 +
+                            html += "<div class=\"item canclick pointer bg-white shadow-5 grow\" id=\"viewitem4\">"; //D2 +
+                            //Item image / slideshow  
+                            html += " <div class=\"w-100 mb4\">"; //D3 Slidshow +
                             string images = "";
-
                             string thisimagefolder = imagefolder + "\\" + id;
                             if (Directory.Exists(thisimagefolder))
                             {
@@ -330,32 +348,34 @@ namespace Auction
                                     string justfilename = System.IO.Path.GetFileName(filename);
                                     //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                                     //{
-                                    //Classes are lost because of cycle-slide  -->  Can set style on cycle-style
-                                    images += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + id + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                                    images += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + id + "/" + justfilename + "\" border=\"0\" class=\"w-100\" />";
                                     //}
                                 }
                             }
                             if (images != "")
                             {
-                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-title=\"" + title + "\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine;
+                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-title=\"" + title + "\" data-cycle-timeout=2000 data-cycle-log=false>"; //D4
                                 html += images;
-                                html += "</div>" + System.Environment.NewLine; //slideshow
+                                html += "</div>"; // -D4
                             }
-                            //html += "</div>"; //mycentered
-                            //html += "</div>"; //row
 
-                            html += "<div class=\"items_donated_head\">Generously Donated by" + System.Environment.NewLine;
-                            html += donors;
-                            if (donorimages != "")
-                            {
-                                html += "<div class=\"cycle-slideshow donor-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine;
-                                html += donorimages;
-                                html += "</div>" + System.Environment.NewLine; //slideshow
-                            }
-                            html += "</div>"; //<div class=\"items_donated_head\">Generously Donated by
-
-                            html += "<hr />";
+                            html += " </div>"; // D3 Slideshow --
+                            //item details  
+                            html += "<div class=\"item_details ph4 pb4\">"; //D5
+                            html += "<h2 class=\"items_title f4 b\">" + title + "</h2>";
+                            html += "<div class=\"items_shortdescription lh-copy f6\">"; //D6
+                            html += shortdescription;
+                            html += "</div>"; //D6-
+                            html += "<div class=\"items_donated_head ttu f6 mt4 mb3 tracked bt pt3\">Generously Donated by</div>"; //D
+                            html += "<div class=\"items_donated_donor b\">" + donors +"</div>"; //D
+                            html += "</div>"; //D2-
+                            html += "</div>"; //D1-
                             html += "</div>";
+
+                            //Joe End
+
+
+
                         }
                     }
                     con2.Dispose();

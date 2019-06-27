@@ -1,10 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Auction.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Auction.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
     <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
         .item-slideshow {
             height: 250px;
         }
+
             .item-slideshow img {
                 width: auto;
                 height: 100%;
@@ -23,41 +31,35 @@
             height: 100%;
             overflow: hidden;
         }
+
         .stop-scrollingInfo {
             height: 100%;
             overflow: hidden;
         }
-        
 
         .cycle-slide {
-            height:200px;
-        }
-        .hidden {
-            display:none;
-        }
-        .categoryselected {
-            background-color:green;
+            height: 200px;
         }
 
-       
+        .hidden {
+            display: none;
+        }
+
+        .categoryselected {
+            background-color: green;
+            color: white;
+        }
     </style>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
 
-    
+
     <script>
         $(document).ready(function () {
-            //$('#debug').html('Start');
             var stopscrolling = 0;
             var showingitem = false;
-            //mywidth = $(window).width() * .95;
-            /*
-            if (mywidth > 800) {
-                mywidth = 800;
-            }
-            */
             $(window).scroll(function (e) {
                 if (stopscrolling != 0) {
-                    //$('html, body').animate({ scrollTop: stopscrolling }, "slow");
+                    $('html, body').animate({ scrollTop: stopscrolling }, "slow");
                     //$('#debug').html($('#debug').html() + '<br />scrolling=' + stopscrolling);                   
                 }
             });
@@ -103,21 +105,6 @@
                     title: title
                 });
 
-
-                /*
-                $.colorbox({
-                    href: 'showitem.aspx?id=' + itemid,
-                    iframe: false,
-                    overlayClose: false,
-                    width: '90%',
-                    height: '90%',
-                    onComplete: function () {
-                        $('.slideshowitem').cycle();
-                        //$(this).colorbox.resize();
-                    }
-                });
-                //$('#colorbox, #cboxOverlay, #cboxWrapper').css('z-index', 99);
-                */
             });
 
             $('#informationIcon').click(function () {
@@ -146,11 +133,13 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   
-        <img id="informationIcon" src="Images/Auction<%=parameters["Auction_CTR"]%>/question.png" title="Click on me for information on bidding." />
+
+    <img id="informationIcon" src="Images/Auction<%=parameters["Auction_CTR"]%>/question.png" title="Click on me for information on bidding." />
     <div id="debug"></div>
     <%= categories %>
-    <%=html%>
+    <div class="flex flex-wrap">
+        <%=html%>
+    </div>
     <div id="dialog_showitem"></div>
     <div id="dialog_showinformation"></div>
 </asp:Content>

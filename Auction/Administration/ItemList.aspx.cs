@@ -75,6 +75,7 @@ namespace Auction.Administration
             string title;
             string seq;
             string hide;
+            string bids;
             string donorname;
             string donors = "";
             string delim = "";
@@ -100,10 +101,23 @@ namespace Auction.Administration
                         //Item.Item_CTR, Item.seq, Item.Title, AuctionType.AuctionType
                         item_ctr = dr["item_ctr"].ToString();
                         title = dr["title"].ToString();
+                        if(title == "")
+                        {
+                            title = "UNTITLED";
+                        }
                         seq = dr["seq"].ToString();
                         hide = dr["hide"].ToString();
+                        bids = dr["bids"].ToString();
                         donors = "";
                         delim = "";
+
+                        if(bids == "0")
+                        {
+                            bids = "";
+                        } else
+                        {
+                            bids = "<span class=\"itembids\" id=\"item_" + item_ctr + "\">" + bids + " View</span>";
+                        }
 
                         cmd = new SqlCommand("Get_Item_Donors", con);
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -153,7 +167,7 @@ namespace Auction.Administration
 
                             images = "<div class=\"cycle-slideshow\" data-cycle-fx=scrollHorz data-cycle-timeout=2000 data-cycle-log=false>" + images + "</div>";
                         }
-                        html += "<tr><td><a href=item.aspx?id=" + item_ctr + ">" + title + "</a><td>" + seq + "</td><td>" + hide + "</td><td>" + donors + "</td><td>" + images + "</td></tr>";
+                        html += "<tr><td><a href=item.aspx?id=" + item_ctr + ">" + title + "</a><td>" + seq + "</td><td>" + hide + "</td><td>" + donors + "</td><td>" + images + "</td><td>" + bids + "</td></tr>";
                     }
                 }
             }

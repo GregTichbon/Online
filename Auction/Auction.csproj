@@ -114,6 +114,8 @@
     <Content Include="_Includes\css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="_Includes\css\jquery-ui.css" />
     <Content Include="_Includes\css\main.css" />
+    <Content Include="_Includes\Joe\dialogue.html" />
+    <Content Include="_Includes\Joe\index.html" />
     <Content Include="_Includes\js\vendor\jquery.cycle2.min.js" />
     <Content Include="_Includes\Scripts\colorbox\images\Thumbs.db" />
     <Content Include="_Includes\Scripts\Cycle2\jquery.cycle2.center.min.js" />
