@@ -40,12 +40,19 @@
     
     <script>
         $(document).ready(function () {
+            var stopscrolling = 0;
+            var showingitem = false;
             //mywidth = $(window).width() * .95;
             /*
             if (mywidth > 800) {
                 mywidth = 800;
             }
             */
+            $(window).scroll(function (e) {
+                if (stopscrolling != 0) {
+                    $('html, body').animate({ scrollTop: stopscrolling }, "slow");
+                }
+            });
 
             $('.categoryselect').click(function () {
                 $('.categoryselect').removeClass('categoryselected');
@@ -63,19 +70,27 @@
             })
 
             $(".showitem, .canclick").click(function () {
+                showingitem = true;
+                //alert($(document).scrollTop());
                 itemid = this.id.substring(8);
                 title = $(this).attr('data-title');
                 //alert('The item id is: ' + itemid);
                 $('body').addClass('stop-scrolling');
+                stopscrolling = window.pageYOffset;
+                $('#debug').html('stopscrolling=' + stopscrolling);
                 $('#dialog_showitem').dialog({
                     modal: true,
                     open: function () {
                         $(this).load('showitem.aspx?id=' + itemid);
                     },
-                    width: ($(window).width() - 150) * .95,  //75 is the width of the question mark top right
-                    height: 800,
+                    width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
+                    height: 400, //auto
+                    position: { my: "center", at: "top+75", of: window },
                     close: function () {
+                        $(this).html('');
                         $('body').removeClass('stop-scrolling');
+                        stopscrolling = 0;
+                        showingitem = false;
                     },
                     title: title
                 });
@@ -98,16 +113,20 @@
             });
 
             $('#informationIcon').click(function () {
-               $('body').addClass('stop-scrolling');
-               $('#dialog_showinformation').dialog({
+                $('body').addClass('stop-scrolling');
+                stopscrolling = window.pageYOffset;
+                $('#dialog_showinformation').dialog({
                     modal: true,
                     open: function () {
                         $(this).load('ItemsInformation.aspx');
                     },
-                    width: ($(window).width() - 150) * .95,  //75 is the width of the question mark top right
+                    width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
                     height: 800,
                     close: function () {
                         $('body').removeClass('stop-scrolling');
+                        if (!showingitem) {
+                            stopscrolling = 0;
+                        }
                     }, title: 'Bidding Information'
                 });
             })
@@ -121,7 +140,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
         <img id="informationIcon" src="Images/Auction<%=parameters["Auction_CTR"]%>/question.png" title="Click on me for information on bidding." />
-
+    <div id="debug"></div>
     <%= categories %>
     <%=html%>
     <div id="dialog_showitem"></div>

@@ -37,9 +37,6 @@
 
 
             $("#formRegister").validate({
-                onkeyup: false,
-                onclick: false,
-                onfocusout: false,
                 rules: {
                     r_passcode: {
                         minlength: 6//,

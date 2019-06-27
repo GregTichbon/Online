@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container" style="background-color: #FCF7EA">
-        <form method="post" action="./items.aspx" id="form1" class="form-horizontal" role="form">
+        <form method="post" action="./default.aspx" id="form1" class="form-horizontal" role="form">
         
             <div id="category_2">
                 <hr />

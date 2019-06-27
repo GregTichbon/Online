@@ -123,7 +123,7 @@ namespace Auction
             }
             if (itemimages != "")
             {
-                itemimages = "<div class=\"cycle-slideshow slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine + itemimages + "</div>" + System.Environment.NewLine;
+                itemimages = "<div class=\"cycle-slideshow showitem-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine + itemimages + "</div>" + System.Environment.NewLine;
             }
 
             double yourbid;

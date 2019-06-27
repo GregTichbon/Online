@@ -220,8 +220,8 @@ namespace Auction
                 {
                     if (bid > db_amount) {
                         status = "Success";
-                        message = "Your bid is leading." + reservemessage;
-                        highestbid = bid.ToString("#.00") + reservenote;
+                        message = "Your bid is leading." + reservenote;
+                        highestbid = bid.ToString("#.00");
                         highestbidder = fullname + " (YOU!)";
                         nextbid = bid + increment;
                         nextminimum = nextbid.ToString("#.00");
@@ -238,10 +238,10 @@ namespace Auction
                                 body += "<p>You have been outbid for the following</p>";
                                 body += "<p><b>Item:</b>" + db_title + "</p>";
                                 body += "<p><b>Your bid:</b> $" + db_amount.ToString("#.00") + "</p>";
-                                body += "<p><b>New bid:</b> $" + bid.ToString("#.00") + reservenote + "</p>";
+                                body += "<p><b>New bid:</b> $" + bid.ToString("#.00") + reservemessage + "</p>";
                                 body += "<p><b>Made by:</b> " + fullname + "</p>";
                                 body += "<p><b>Next minimum bid:</b> $" + nextminimum + "</p>";
-                                body +="<p><a href=\"" + parameters["URL"] + "><b>MAKE A NEW BID</b></a></p>"; //Would like to go to the item
+                                body +="<p><a href=\"" + parameters["URL"] + "\"><b>MAKE A NEW BID</b></a></p>"; //Would like to go to the item
                                 body += "</body>";
                                 body += "</html>";
                                 
@@ -270,7 +270,7 @@ namespace Auction
                     {
                         status = "Failed";
                         message = response;
-                        highestbid = db_amount.ToString("#.00");
+                        highestbid = db_amount.ToString("#.00") + reservemessage;
                         highestbidder = db_fullname;
                         nextbid = db_amount + increment;
                         nextminimum = nextbid.ToString("#.00");
@@ -286,7 +286,7 @@ namespace Auction
                                 body += "<body>";
                                 body += "<p>Your autobid has been actioned</p>";
                                 body += "<p><b>Item:</b>" + db_title + "</p>";
-                                body += "<p><b>Your bid:</b> $" + db_amount.ToString("#.00") + reservenote + "</p>";
+                                body += "<p><b>Your bid:</b> $" + db_amount.ToString("#.00") + reservemessage + "</p>";
                                 body += "<p><b>Next minimum bid:</b> $" + nextminimum + "</p>";
                                 // body +="<p><a href=\"" + protocol + "://" + thissite + "/page.asp?item=" + rs("item_ctr") + "\"><b>VIEW ITEM</b></a></p>";
                                 body += "</body>";
@@ -315,7 +315,7 @@ namespace Auction
                 {
                     status = "Success";
                     message = "Thank you for starting the bidding, your bid is leading" + reservemessage;
-                    highestbid = bid.ToString("#.00");
+                    highestbid = bid.ToString("#.00") + reservenote;
                     highestbidder = fullname + " (YOU!)";
                     nextbid = bid + increment;
                     nextminimum = nextbid.ToString("#.00");
@@ -356,6 +356,7 @@ namespace Auction
             resultclass.highestbid = highestbid;
             resultclass.highestbidder = highestbidder;
             resultclass.nextminimum = nextminimum;
+            //resultclass.reservenote = reservenote;
 
             JavaScriptSerializer JS = new JavaScriptSerializer();
             string passresult = JS.Serialize(resultclass);
@@ -415,32 +416,32 @@ namespace Auction
 
     }
 
-        /*
-        'on error resume next
+    /*
+    'on error resume next
 
-                        sqlstring = "insert into Notifications (user_ctr, bid_ctr, item_ctr, txtmessage, emailmessage, amount, sendtexts, TextNotifications, textresponse) " & _
-                                    "values (" & userid & ", " & rs("bid_ctr") & ", " & id & ", '" & replace(txtmessage, "'", "''") & "', '" & replace(body, "'", "''") & "', " & bid & ", '" & sendtexts & "', '" & rs("TextNotifications") & "', '" & textresponse & "')"
-                        'response.write sqlstring
-                        db.execute sqlstring
-        'db.execute "insert into [log] ([Text]) values ('" & err.number & "')"
-                    else
-                        status = "Outbid"
-                        message = "Another bid has been made before you, please try again."
-                        highestbid = rs("amount")
-                        highestbidder = rs("fullname")
-                        nextminimum = "$" & rs("amount") + 10 & ".00"
-                        nextbid = rs("amount") + 10
-                    }
-                }
-                rs.close
-                if( savebid )
-                    sqlstring = " insert into bid (user_ctr, item_ctr, amount) values (" & userid & ", " & id & ", " & bid & ")"
+                    sqlstring = "insert into Notifications (user_ctr, bid_ctr, item_ctr, txtmessage, emailmessage, amount, sendtexts, TextNotifications, textresponse) " & _
+                                "values (" & userid & ", " & rs("bid_ctr") & ", " & id & ", '" & replace(txtmessage, "'", "''") & "', '" & replace(body, "'", "''") & "', " & bid & ", '" & sendtexts & "', '" & rs("TextNotifications") & "', '" & textresponse & "')"
+                    'response.write sqlstring
                     db.execute sqlstring
+    'db.execute "insert into [log] ([Text]) values ('" & err.number & "')"
+                else
+                    status = "Outbid"
+                    message = "Another bid has been made before you, please try again."
+                    highestbid = rs("amount")
+                    highestbidder = rs("fullname")
+                    nextminimum = "$" & rs("amount") + 10 & ".00"
+                    nextbid = rs("amount") + 10
                 }
-        set rs = nothing
-        */
+            }
+            rs.close
+            if( savebid )
+                sqlstring = " insert into bid (user_ctr, item_ctr, amount) values (" & userid & ", " & id & ", " & bid & ")"
+                db.execute sqlstring
+            }
+    set rs = nothing
+    */
 
-        /*
+    /*
 db.close
 set db = nothing
 
@@ -458,16 +459,16 @@ member("bid") = nextbid
 member.Flush
 */
 
-        public class makeBidResponse
-        {
-            public string status;
-            public string message;
-            public string user_ctr;
-            public string fullname;
-            public string highestbid;
-            public string highestbidder;
-            public string nextminimum;
-
-        }
+    public class makeBidResponse
+    {
+        public string status;
+        public string message;
+        public string user_ctr;
+        public string fullname;
+        public string highestbid;
+        public string highestbidder;
+        public string nextminimum;
+        //public string reservenote;
+    }
 
 }

@@ -12,7 +12,7 @@
     border-color: inherit;
     border-width: 0;
     position: fixed;
-    top: 5px;
+    bottom: 5px;
     right: 15px;
     z-index: 9999;
 }
@@ -39,7 +39,7 @@ table {
         font-size: 13px;
     }
 
-    table tr:nth-child(even) {
+    table tr:nth-child(odd) {
         background: #D0E4F5;
     }
 
@@ -59,3 +59,15 @@ table {
             table thead th:first-child {
                 border-left: none;
             }
+
+#debug {
+    border-style: solid;
+    border-color: inherit;
+    border-width: 0;
+    position: fixed;
+    bottom: 5px;
+    right: 100px;
+    z-index: 9999;
+    width:100px;
+    height:100px;
+}

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="_Includes/css/main.css" rel="stylesheet" />
+
+
+    <script src="../_Includes/Scripts/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="../_Includes/Scripts/generic.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var s = window.pageYOffset;
+            
+            $(window).scroll(function (e) {
+                console.log(window.pageYOffset);
+                //window.scrollTo = 200;
+                $('html, body').animate({ scrollTop: s }, "slow");
+
+
+            });
+            
+            //$('body').addClass('stop-scrolling');
+            $("body").click(function () {
+                var s = window.pageYOffset + 500;
+                alert(s);
+                $('#dialog_showitem').dialog({
+                    modal: true,
+                    open: function () {
+                        $(this).load('showitem.aspx?id=23');
+                    },
+                    width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
+                    height: 'auto',
+                    position: { my: "center", at: "top+75", of: window },
+
+                    //position: 'center',
+                    //position: ,
+                    //position: { my: 'top center', at: 'top center', of: window },
+                    close: function () {
+                        $(this).html('');
+                        //$('body').removeClass('stop-scrolling');
+                    },
+                    title: "Test"
+                });
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+    <div id="dialog_showitem"></div>
+    <p>Start</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>x</p> <p>x</p> <p>x</p>  <p>x</p> <p>x</p><p>x</p> <p>x</p>  <p>x</p> <p>End</p>
+</body>
+</html>

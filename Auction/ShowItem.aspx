@@ -6,15 +6,16 @@
 <head runat="server">
     <title></title>
     <style>
-        .item-slideshow {
+       
+        .showitem-slideshow {
             height: 400px;
         }
-
-            .item-slideshow img {
+      
+            .showitem-slideshow img {
                 width: auto;
                 height: 100%;
             }
-
+               /*
         .donor-slideshow {
             height: 100px;
         }
@@ -23,10 +24,20 @@
                 width: auto;
                 height: 100%;
             }
-            .reservenote {
-                color:red;
-            }
+*/
+        .stop-scrolling2 {
+            height: 100%;
+            overflow: hidden;
+        }
+        .reservenote {
+            color: red;
+        }
 
+        .centered {
+            position: fixed; /* or absolute */
+            top: 20%;
+            left: 50%;
+        }
             
     </style>
 
@@ -98,6 +109,9 @@
 
             function placebid() {
                 var theautobid = Number($("#autobid").val());
+                if (theautobid > 0) {
+                    $('#autobid').val(theautobid + '.00');
+                }
                 var thebid = Number($("#bid").val());
                 if (thebid <= Number($("#hf_highestbid").val())) {
                     $("#response-message").html("<br />" + 'Your bid needs to be higher than the current highest bid');
@@ -138,7 +152,7 @@
                     $("#bid").val(Number($("#hf_highestbid").val()) + increment);
 //==================================================================================
 
-                } else if (thebid <= startbid) {
+                } else if (thebid < startbid) {
                     $("#response-message").html("<br />" + 'Your bid must be greater than the starting bid of $' + startbid + ".00");
                     mywidth = $(window).width() * .95;
                     if (mywidth > 500) {
@@ -244,12 +258,14 @@
                             buttons: {
                                 "Yes - Please place this bid": function () {
                                     $(this).dialog("close");
+                                    $('#processing').show();
                                     $.ajax({
-                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val() + "&increment=" + increment + "&autobid=" + $("#autobid").val() + 0, success: function (returned) {
+                                        url: "data.asmx/makebid?user_ctr=" + $("#hf_user_ctr").val() + "&item_ctr=" + $('#hf_item_ctr').val() + "&bid=" + $("#bid").val() + "&fullname=" + $("#hf_fullname").val() + "&passcode=" + $("#passcode").val() + "&increment=" + increment + "&autobid=" + Number($("#autobid").val()), success: function (returned) {
+                                            $('#processing').hide();
                                             returnedjson = $.parseJSON(returned);
                                             $("#response-message").html("<br />" + returnedjson.message);
                                             //$("#response-message").html("<br />" + returnedjson.message);
-                                            mywidth = ($(window).width() - 150) * .95;
+                                            mywidth = ($(window).width() - 0) * .95;
                                             if (mywidth > 500) {
                                                 mywidth = 500;
                                             }
@@ -274,6 +290,7 @@
 
                                                 $("#hf_highestbid").val(returnedjson.highestbid);
                                                 $("#highestbid").html(returnedjson.highestbid);
+                                                //$("#reservenote").html(returnedjson.reservenote);
                                                 $("#highestbidder").html(returnedjson.highestbidder);
                                                 $("#nextminimum").html(returnedjson.nextminimum);
                                                 $("#bid").val(returnedjson.nextminimum);
@@ -290,6 +307,7 @@
                                                 $("#hf_fullname").val(returnedjson.fullname);
                                                 $("#hf_highestbid").val(returnedjson.highestbid);
                                                 $("#highestbid").html(returnedjson.highestbid);
+                                                //$("#reservenote").html(returnedjson.reservenote);
                                                 $("#highestbidder").html(returnedjson.highestbidder);
                                                 $("#nextminimum").html(returnedjson.nextminimum);
                                                 $("#bid").val(returnedjson.nextminimum);
@@ -319,36 +337,36 @@
 
             // $('body').on('click', '#register', function () {
             $("#register").click(function () {
-                $('body').addClass('stop-scrolling');
+                $('body').addClass('stop-scrolling2');
               
                 $('#dialog_register').dialog({
                     modal: true,
                     open: function () {
                         $(this).load('register.aspx');
                     },
-                    width: $(window).width() * .75,
+                    width: $(window).width() * .90,
                     height: 500,
                     close: function () {
                         $(this).html('');
-                        $('body').removeClass('stop-scrolling');
+                        $('body').removeClass('stop-scrolling2');
                     }
                 });
               
             });
 
             $("#login").click(function () {
-                $('body').addClass('stop-scrolling');
+                $('body').addClass('stop-scrolling2');
               
                 $('#dialog_login').dialog({
                     modal: true,
                     open: function () {
                         $(this).load('login.aspx');
                     },
-                    width: $(window).width() * .75,
+                    width: $(window).width() * .90,
                     height: 500,
                     close: function () {
                         $(this).html('');
-                        $('body').removeClass('stop-scrolling');
+                        $('body').removeClass('stop-scrolling2');
                     }
                 });
               
@@ -361,7 +379,7 @@
                     placebid();
                 }
             });
-            $('.slideshow').cycle();
+            $('.showitem-slideshow').cycle();
 
             
             $('#makeautobid').change(function () {
@@ -403,7 +421,7 @@
         <!--<p id="show_title"><%=title %></p>-->
         <p id="show_shortdescription"><%=shortdescription%></p>
         <%=itemimages %>
-        <p id="show_description"><%=description%></p>
+ 
 
 
         <input name="hf_highestbid" id="hf_highestbid" type="hidden" value="<%=hf_highestbid%>" />
@@ -436,11 +454,13 @@
                 </td>
                 <td><span id="highestbidder"><%=highestbidder%></span></td>
             </tr>
+            <!--
             <tr style="display: none">
                 <td>Next minimum bid: 
                 </td>
                 <td><span id="nextminimum"><%=nextminimum%></span></td>
             </tr>
+            -->
             <tr style="display: <%=displayloggedin%>" class="displayloggedin">
                 <td>Your bid 
                 </td>
@@ -474,6 +494,10 @@
                     <input type="button" name="submit" id="submit" value="Place Your Bid" /></td>
             </tr>
         </table>
+        <p id="show_description"><%=description%></p>
+        <div id="processing" style="display: none">
+            <img src="_Includes/Images/processing.gif" class="centered" />
+        </div>
     </form>
 </body>
 </html>
