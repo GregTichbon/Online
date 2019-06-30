@@ -10,7 +10,7 @@
         }
 
         .item-slideshow {
-            height: 250px;
+            max-height: 250px;
         }
 
             .item-slideshow img {
@@ -51,6 +51,8 @@
         }
     </style>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
+    <script src="http://malsup.github.io/jquery.cycle2.center.js"></script>
+    <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.center.min.js")%>"></script>
 
 
     <script>
@@ -84,7 +86,6 @@
                 //alert($(document).scrollTop());
                 itemid = this.id.substring(8);
                 title = $(this).attr('data-title');
-                //alert('The item id is: ' + itemid);
                 $('body').addClass('stop-scrolling');
                 //stopscrolling = window.pageYOffset;
                 //$('#debug').html($('#debug').html() + '<br />stopscrolling=' + stopscrolling);
@@ -102,9 +103,9 @@
                         stopscrolling = 0;
                         showingitem = false;
                     },
-                    title: title
+                    title: title,
+                    closeText: false
                 });
-
             });
 
             $('#informationIcon').click(function () {
@@ -122,7 +123,8 @@
                         if (!showingitem) {
                             stopscrolling = 0;
                         }
-                    }, title: 'Bidding Information'
+                    }, title: 'Bidding Information',
+                    closeText: false
                 });
             })
 

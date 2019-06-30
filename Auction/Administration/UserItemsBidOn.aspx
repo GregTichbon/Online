@@ -21,7 +21,8 @@
                         height: 500,
                         close: function () {
                             $(this).html('');
-                        }
+                        },
+                        closeText: false
                     });
                 })
             });

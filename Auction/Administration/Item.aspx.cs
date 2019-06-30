@@ -128,10 +128,16 @@ namespace Auction.Administration
                             category_ctr = dr["category_ctr"].ToString();
                             bids = dr["bids"].ToString();
 
-                            if(bids != "0")
+                            if (bids == "0")
                             {
+                                bids = "";
                                 btn_delete.Visible = false;
                             }
+                            else
+                            {
+                                bids = "<span class=\"itembids\" id=\"item_" + item_ctr + "\">" + bids + " View</span>";
+                            }
+
                         }
                     }
                     catch (Exception ex)
@@ -304,6 +310,7 @@ end if
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.CommandText = "Update_item";
+
             cmd.Parameters.Add("@item_ctr", SqlDbType.VarChar).Value = item_ctr;
             cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["title"];
             cmd.Parameters.Add("@shortdescription", SqlDbType.VarChar).Value = Request.Form["shortdescription"];

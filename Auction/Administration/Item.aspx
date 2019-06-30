@@ -91,9 +91,24 @@
                     e.preventDefault();
                 }
             })
-            
-           
-  
+
+            $('.itembids').click(function () {
+                item_ctr = $(this).attr("id").substring(5);
+                $('#dialog_itemsbids').dialog({
+                    modal: true,
+                    open: function () {
+                        $(this).load('itembids.aspx?item=' + item_ctr);
+                    },
+                    width: $(window).width() * .75,
+                    height: 500,
+                    close: function () {
+                        $(this).html('');
+                    },
+                    closeText: false
+                });
+            })
+
+
 
 
             //$('#submit').click(function () {
@@ -107,18 +122,23 @@
             //});
         });  //document.ready
 
-       
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input name="item_ctr" id="item_ctr" type="hidden" value="<%=item_ctr%>" />
     <input name="_all" id="_all" type="hidden" value="All" />
+    <div id="dialog_itemsbids" title="Bids on an item"></div>
     <table class="table">
         <tr>
             <td>Title</td>
             <td>
-                <input type="text" name="Title" id="Title" value="<%=title%>" maxlength="255" /></td>
+                <input type="text" name="Title" id="Title" value="<%=title%>" maxlength="255" />&nbsp;&nbsp;&nbsp;<%= bids %></td>
         </tr>
+
+
+
+
         <tr>
             <td>Short description</td>
             <td>
@@ -218,7 +238,7 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-              
+
                 <asp:Button ID="btn_delete" myid="btn_delete" runat="server" OnClick="btn_submit_Delete" class="btn btn-info" Text="Delete" />&nbsp;&nbsp;&nbsp;&nbsp;
                   <asp:Button ID="btn_submit" myid="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
         </tr>

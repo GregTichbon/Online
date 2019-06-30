@@ -160,7 +160,7 @@ namespace General.Functions
                 optionparts = myoption.Split('\x0008');
                 label = optionparts[0];
                 value = optionparts[1];
-                if (value == label)
+                if (value == label || value == "")
                 {
                     value = "";
                     selectedcompare = label;

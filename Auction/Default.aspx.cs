@@ -239,7 +239,7 @@ namespace Auction
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@auction_ctr", SqlDbType.VarChar).Value = parameters["Auction_CTR"];
             cmd.Connection = con;
-            int c1 = 0;
+            //int c1 = 0;
             try
             {
                 con.Open();
@@ -248,18 +248,21 @@ namespace Auction
                 {
                     while (dr.Read())
                     {
-                        c1++;
-                        if (c1 < 30000)
+                        //c1++;
+                        //if (c1 < 30000)
+                        //{
+                        id = dr["item_ctr"].ToString();
+                        seq = dr["seq"].ToString();
+                        title = dr["title"].ToString();
+                        description = dr["description"].ToString();
+                        shortdescription = dr["shortdescription"].ToString();
+                        hide = dr["hide"].ToString();
+                        category = dr["category_ctr"].ToString();
+                        donors = "";
+                        delim = "";
+
+                        if (hide != "Yes")
                         {
-                            id = dr["item_ctr"].ToString();
-                            seq = dr["seq"].ToString();
-                            title = dr["title"].ToString();
-                            description = dr["description"].ToString();
-                            shortdescription = dr["shortdescription"].ToString();
-                            hide = dr["hide"].ToString();
-                            category = dr["category_ctr"].ToString();
-                            donors = "";
-                            delim = "";
 
                             cmd = new SqlCommand("Get_Item_Donors", con);
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -311,32 +314,32 @@ namespace Auction
                                 con2.Close();
                             }
 
-                           
-                   /*
-                            html += "<div class=\"items_title\">" + title + "</div>";
-                            html += "<div class=\"items_shortdescription\" > " + shortdescription + "</div>";
+
+                            /*
+                                     html += "<div class=\"items_title\">" + title + "</div>";
+                                     html += "<div class=\"items_shortdescription\" > " + shortdescription + "</div>";
 
 
-                   
 
-                            html += "<div class=\"items_donated_head\">Generously Donated by";
-                            html += donors;
-                            if (donorimages != "")
-                            {
-                                html += "<div class=\"cycle-slideshow donor-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>";
-                                html += donorimages;
-                                html += "</div>"; //slideshow
-                            }
-                            html += "</div>"; //<div class=\"items_donated_head\">Generously Donated by
 
-                            html += "<hr />";
-                            html += "</div>";
-                            */
+                                     html += "<div class=\"items_donated_head\">Generously Donated by";
+                                     html += donors;
+                                     if (donorimages != "")
+                                     {
+                                         html += "<div class=\"cycle-slideshow donor-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>";
+                                         html += donorimages;
+                                         html += "</div>"; //slideshow
+                                     }
+                                     html += "</div>"; //<div class=\"items_donated_head\">Generously Donated by
+
+                                     html += "<hr />";
+                                     html += "</div>";
+                                     */
                             //Joe start
 
                             html += "<div class=\"pa3 w-100 w-50-m w-third-l div_category\" category=\"" + category + "\">"; //D1 +
-                            html += "<div class=\"item canclick pointer bg-white shadow-5 grow\" id=\"viewitem4\">"; //D2 +
-                            //Item image / slideshow  
+                            html += "<div class=\"item pointer bg-white shadow-5 grow\" id=\"viewitem4\">"; //D2 +
+                                                                                                            //Item image / slideshow  
                             html += " <div class=\"w-100 mb4\">"; //D3 Slidshow +
                             string images = "";
                             string thisimagefolder = imagefolder + "\\" + id;
@@ -354,29 +357,29 @@ namespace Auction
                             }
                             if (images != "")
                             {
-                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-title=\"" + title + "\" data-cycle-timeout=2000 data-cycle-log=false>"; //D4
+                                html += "<div class=\"cycle-slideshow item-slideshow" + canclick + "\" id=\"viewitem" + id + "\" data-title=\"" + title + "\" data-cycle-timeout=2000 data-cycle-center-horz=true data-cycle-log=false>"; //D4
                                 html += images;
                                 html += "</div>"; // -D4
                             }
 
-                            html += " </div>"; // D3 Slideshow --
-                            //item details  
+                            html += " </div>"; // D3 Slideshow -
+                                               //item details  
                             html += "<div class=\"item_details ph4 pb4\">"; //D5
                             html += "<h2 class=\"items_title f4 b\">" + title + "</h2>";
                             html += "<div class=\"items_shortdescription lh-copy f6\">"; //D6
                             html += shortdescription;
                             html += "</div>"; //D6-
                             html += "<div class=\"items_donated_head ttu f6 mt4 mb3 tracked bt pt3\">Generously Donated by</div>"; //D
-                            html += "<div class=\"items_donated_donor b\">" + donors +"</div>"; //D
+                            html += "<div class=\"items_donated_donor b\">" + donors + "</div>"; //D
+                            html += "</div>"; //D5-
                             html += "</div>"; //D2-
                             html += "</div>"; //D1-
-                            html += "</div>";
 
                             //Joe End
 
-
-
                         }
+
+                        //}
                     }
                     con2.Dispose();
                 }

@@ -28,7 +28,8 @@
                     height: 500,
                     close: function () {
                         $(this).html('');
-                    }
+                    },
+                    closeText: false
                 });
             })
             //$.fn.cycle.defaults.autoSelector = '.slideshow';

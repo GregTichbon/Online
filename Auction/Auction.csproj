@@ -78,12 +78,14 @@
     <Content Include="Administration\Resequence.aspx" />
     <Content Include="Administration\Setup.aspx" />
     <Content Include="Administration\Test.aspx" />
+    <Content Include="Administration\TestBid.aspx" />
     <Content Include="Administration\User.aspx" />
     <Content Include="Administration\UserItemsBidOn.aspx" />
     <Content Include="Administration\UserList.aspx" />
     <Content Include="Administration\Winners.aspx" />
     <Content Include="Data.asmx" />
     <Content Include="Default.aspx" />
+    <Content Include="Images\Auction2\dollarsign.png" />
     <Content Include="Images\Auction2\Header.png" />
     <Content Include="Images\Auction2\question.png" />
     <Content Include="Images\Auction2\questionsmall.png" />
@@ -93,7 +95,7 @@
     <Content Include="packages.config" />
     <Content Include="Auction.Master" />
     <None Include="Properties\PublishProfiles\auction.thegreatball.nz.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\TOH-APP Auction.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -795,6 +797,13 @@
     </Compile>
     <Compile Include="Administration\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\TestBid.aspx.cs">
+      <DependentUpon>TestBid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\TestBid.aspx.designer.cs">
+      <DependentUpon>TestBid.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\User.aspx.cs">
       <DependentUpon>User.aspx</DependentUpon>

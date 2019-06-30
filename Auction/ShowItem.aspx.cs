@@ -27,9 +27,11 @@ namespace Auction
         public string donorimages;
         public double increment;
         public double startbid;
+        public double autobid;
 
         public string hf_highestbid;
-        public string highestbid;
+        public string hf_highestbidder;
+        public string highestbidmessage;
         public string you;
         public string highestbidder;
         public string nextminimum;
@@ -117,13 +119,13 @@ namespace Auction
                     string justfilename = System.IO.Path.GetFileName(filename);
                     //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                     //{
-                    itemimages += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + justfilename + "\" border=\"0\" />" + System.Environment.NewLine;
+                    itemimages += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + justfilename + "\" border=\"0\" />";
                     //}
                 }
             }
             if (itemimages != "")
             {
-                itemimages = "<div class=\"cycle-slideshow showitem-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + System.Environment.NewLine + itemimages + "</div>" + System.Environment.NewLine;
+                itemimages = "<div class=\"cycle-slideshow showitem-slideshow\" data-cycle-timeout=2000 data-cycle-log=false>" + itemimages + "</div>";
             }
 
             double yourbid;
@@ -148,16 +150,26 @@ namespace Auction
                         reservenote = " <span class=\"reservenote\">Reserve not met</span>";
                     }
 
+                    string autobidnote = "";
+
                     hf_highestbid = currentbid.ToString("#.00");
-                    highestbid = "$" + hf_highestbid + reservenote;
-                    if (dr["user_ctr"].ToString() == user_ctr)
+                    hf_highestbidder = dr["user_ctr"].ToString();
+
+
+                    if (hf_highestbidder == user_ctr)
                     {
-                        you = " (YOU!)";
+                        you = " <b>(YOU!)</b>";
+                        autobid = Convert.ToDouble(dr["autobid"]);
+                        if (autobid > currentbid)
+                        {
+                            autobidnote = " <b>Autobid</b>: $" + autobid.ToString("#.00");
+                        }
                     }
                     else
                     {
                         you = "";
                     }
+                    highestbidmessage = "$" + hf_highestbid + autobidnote + reservenote;
                     highestbidder = dr["fullname"].ToString() + you;
                     yourbid = currentbid + increment;
                     if (yourbid < startbid) {
@@ -168,7 +180,7 @@ namespace Auction
                 else
                 {
                     hf_highestbid = "0";
-                    highestbid = "No bids yet .... be the first";
+                    highestbidmessage = "No bids yet .... be the first";
                     highestbidder = "Give it a go";
                     yourbid = startbid;
                     nextminimum = yourbid.ToString("#.00");
@@ -215,7 +227,7 @@ namespace Auction
                     {
                         displayautobid = "";
                         autobidamount = autobid.ToString("#.00");
-                        autobidchecked = " checked";
+                        //autobidchecked = " checked";
                     }
                 }
                 catch (Exception ex)
