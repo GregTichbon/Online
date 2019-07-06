@@ -17,7 +17,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <a href="default.aspx" class="btn btn-info" role="button">Menu</a><br />
+    <a href="default.aspx" class="btn btn-info" role="button">Menu</a><br />
     <h2>Auction Setup</h2>
     <table class="table">
         <tr>
@@ -77,6 +77,63 @@
             <td>
                 <input type="text" name="textalerts" id="textalerts" value="<%=textalerts%>" /></td>
 
+        </tr>
+
+        <tr>
+            <td>Enable Categories</td>
+            <td>
+                <select name="enablecategories" id="enablecategories" size="1">
+                    <option value="">Please Select</option>
+                    <%=General.Functions.Functions.populateselect(yesno_values, enablecategories, "None")%>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Email from</td>
+            <td>
+                <input type="email" name="emailfrom" id="emailfrom" value="<%=emailfrom%>" /></td>
+        </tr>
+
+        <tr>
+            <td>Email from name</td>
+            <td>
+                <input type="text" name="emailfromname" id="emailfromname" value="<%=emailfromname%>" /></td>
+        </tr>
+      <tr>
+            <td>Email host</td>
+            <td>
+                <input type="text" name="emailhost" id="emailhost" value="<%=emailhost%>" /></td>
+        </tr>
+              <tr>
+            <td>Email password</td>
+            <td>
+                <input type="password" name="emailpassword" id="emailpassword" value="<%=emailpassword%>" /></td>
+        </tr>
+
+             
+              <tr>
+            <td>Email reply to</td>
+            <td>
+                <input type="email" name="emailreplyto" id="emailreplyto" value="<%=emailreplyto%>" /></td>
+        </tr>
+                <tr>
+            <td>Bid log</td>
+            <td>
+                <select name="bidlog" id="bidlog" size="1">
+                    <option value="">Please Select</option>
+                    <%=General.Functions.Functions.populateselect(yesno_values, bidlog, "None")%>
+                </select>
+            </td>
+        </tr>
+                <tr>
+            <td>Advise test mode</td>
+            <td>
+                <select name="advisetest" id="advisetest" size="1">
+                    <option value="">Please Select</option>
+                    <%=General.Functions.Functions.populateselect(yesno_values, advisetest, "None")%>
+                </select>
+            </td>
         </tr>
 
         <tr>

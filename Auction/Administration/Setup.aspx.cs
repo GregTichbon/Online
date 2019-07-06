@@ -36,9 +36,11 @@ namespace Auction.Administration
         public string emailpassword;
         public string emailreplyto;
         public string bidlog;
+        public string advisetest;
 
 
         public string[] auctiontype_values = new string[2] { "Silent", "Live" };
+        public string[] yesno_values = new string[2] { "Yes", "No" };
 
         public Dictionary<string, string> parameters;
 
@@ -68,6 +70,7 @@ namespace Auction.Administration
                 emailpassword = parameters["EmailPassword"];
                 emailreplyto = parameters["EmailReplyTo"];
                 bidlog = parameters["BidLog"];
+                advisetest = parameters["AdviseTest"];
 
 
             }
@@ -95,7 +98,7 @@ namespace Auction.Administration
             cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];
             cmd.Parameters.Add("@emailalerts", SqlDbType.VarChar).Value = Request.Form["emailalerts"];
             cmd.Parameters.Add("@textalerts", SqlDbType.VarChar).Value = Request.Form["textalerts"];
-            /*
+            
             cmd.Parameters.Add("@enablecategories", SqlDbType.VarChar).Value = Request.Form["enablecategories"];
             cmd.Parameters.Add("@bidemail", SqlDbType.VarChar).Value = Request.Form["bidemail"];
             cmd.Parameters.Add("@bidtext", SqlDbType.VarChar).Value = Request.Form["bidtext"];
@@ -105,7 +108,8 @@ namespace Auction.Administration
             cmd.Parameters.Add("@emailpassword", SqlDbType.VarChar).Value = Request.Form["emailpassword"];
             cmd.Parameters.Add("@emailreplyto", SqlDbType.VarChar).Value = Request.Form["emailreplyto"];
             cmd.Parameters.Add("@bidlog", SqlDbType.VarChar).Value = Request.Form["bidlog"];
-            */
+            cmd.Parameters.Add("@advisetest", SqlDbType.VarChar).Value = Request.Form["advisetest"];
+            
 
             cmd.Connection = con;
             //try

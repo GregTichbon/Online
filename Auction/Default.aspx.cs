@@ -186,7 +186,7 @@ namespace Auction
                             ctrl_category_ctr = dr["category_ctr"].ToString();
                             ctrl_category = dr["category"].ToString();
 
-                            categories += "&nbsp;&nbsp;<button class=\"categoryselect f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 black\" id=\"btn_category_" + ctrl_category_ctr + "\" type=\"button\">" + ctrl_category + "</button>";
+                            categories += "&nbsp;&nbsp;<button class=\"categoryselect f6 growx no-underline br-pill ba bw1 ph3 pv2 mb2 black\" id=\"btn_category_" + ctrl_category_ctr + "\" type=\"button\">" + ctrl_category + "</button>";
                         }
                     }
                 }
@@ -298,7 +298,7 @@ namespace Auction
                                                 string justfilename = System.IO.Path.GetFileName(filename);
                                                 //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                                                 //{
-                                                donorimages += "<img class=\"donor-link donor_image\" data-id=\"" + id + "\" src=\"images/auction" + parameters["Auction_CTR"] + "/donors/" + id + "/" + justfilename + "\" border=\"0\" />";
+                                                donorimages += "<img class=\"donor-link donor_image\" data-id=\"" + id + "\" src=\"images/auction" + parameters["Auction_CTR"] + "/donors/" + id + "/" + justfilename + "\" border=\"0\" alt=\"\" />";
                                                 //}
                                             }
                                         }
@@ -337,8 +337,9 @@ namespace Auction
                                      */
                             //Joe start
 
-                            html += "<div class=\"pa3 w-100 w-50-m w-third-l div_category\" category=\"" + category + "\">"; //D1 +
-                            html += "<div class=\"item pointer bg-white shadow-5 grow\" id=\"viewitem4\">"; //D2 +
+                            html += "<div class=\"pa3 w-100 w-50-m w-third-l div_category\" data-category=\"" + category + "\">"; //D1 +
+                            //html += "<div class=\"item pointer bg-white shadow-5 grow\" id=\"viewitem4\">"; //D2 +
+                            html += "<div class=\"item pointer bg-white shadow-5 growx\">"; //D2 +
                                                                                                             //Item image / slideshow  
                             html += " <div class=\"w-100 mb4\">"; //D3 Slidshow +
                             string images = "";
@@ -351,7 +352,7 @@ namespace Auction
                                     string justfilename = System.IO.Path.GetFileName(filename);
                                     //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                                     //{
-                                    images += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + id + "/" + justfilename + "\" border=\"0\" class=\"w-100\" />";
+                                    images += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + id + "/" + justfilename + "\" class=\"w-100\" alt=\"\" />";
                                     //}
                                 }
                             }

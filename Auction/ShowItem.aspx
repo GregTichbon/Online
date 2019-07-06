@@ -23,7 +23,9 @@
 
             .showitem-slideshow img {
                 width: auto;
-                height: 100%;
+                height: auto;
+                max-height:100%;
+                max-width:100%;
             }
         /*
         .donor-slideshow {
@@ -276,7 +278,7 @@
                     open: function () {
                         $(this).load('register.aspx');
                     },
-                    width: $(window).width() * .90,
+                    width: 400, //$(window).width() * .90,
                     height: 500,
                     close: function () {
                         $(this).html('');
@@ -294,8 +296,8 @@
                     open: function () {
                         $(this).load('login.aspx');
                     },
-                    width: $(window).width() * .90,
-                    height: 500,
+                    width: 400, //$(window).width() * .90,
+                    height: 400,
                     close: function () {
                         $(this).html('');
                         $('body').removeClass('stop-scrolling2');

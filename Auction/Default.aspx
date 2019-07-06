@@ -15,7 +15,9 @@
 
             .item-slideshow img {
                 width: auto;
-                height: 100%;
+                height: auto;
+                max-height:100%;
+                max-width:100%;
             }
 
         .donor-slideshow {
@@ -51,17 +53,19 @@
         }
     </style>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.min.js")%>"></script>
-    <script src="http://malsup.github.io/jquery.cycle2.center.js"></script>
     <script src="<%: ResolveUrl("~/_Includes/Scripts/cycle2/jquery.cycle2.center.min.js")%>"></script>
 
 
     <script>
         $(document).ready(function () {
-            var stopscrolling = 0;
+
+            var stopscrolling = -1;
             var showingitem = false;
+
             $(window).scroll(function (e) {
-                if (stopscrolling != 0) {
-                    $('html, body').animate({ scrollTop: stopscrolling }, "slow");
+                if (stopscrolling != -1) {
+                    //$('html, body').animate({ scrollTop: stopscrolling }, "fast");
+                    $('html, body').scrollTop(stopscrolling);
                     //$('#debug').html($('#debug').html() + '<br />scrolling=' + stopscrolling);                   
                 }
             });
@@ -71,7 +75,7 @@
                 $(this).addClass('categoryselected');
                 id = $(this).attr('id').substring(13);
                 $('.div_category').each(function () {
-                    if ($(this).attr('category') == id || id == 'All') {
+                    if ($(this).attr('data-category') == id || id == 'All') {
                         $(this).removeClass('hidden');
                     } else {
                         $(this).addClass('hidden');
@@ -87,7 +91,7 @@
                 itemid = this.id.substring(8);
                 title = $(this).attr('data-title');
                 $('body').addClass('stop-scrolling');
-                //stopscrolling = window.pageYOffset;
+                stopscrolling = window.pageYOffset;
                 //$('#debug').html($('#debug').html() + '<br />stopscrolling=' + stopscrolling);
                 $('#dialog_showitem').dialog({
                     modal: true,
@@ -100,7 +104,7 @@
                     close: function () {
                         $(this).html('');
                         $('body').removeClass('stop-scrolling');
-                        stopscrolling = 0;
+                        stopscrolling = -1;
                         showingitem = false;
                     },
                     title: title,
@@ -121,12 +125,16 @@
                     close: function () {
                         $('body').removeClass('stop-scrollingInfo');
                         if (!showingitem) {
-                            stopscrolling = 0;
+                            stopscrolling = -1;
                         }
                     }, title: 'Bidding Information',
                     closeText: false
                 });
             })
+
+           // $('.donor-link').click(function () {
+           //     alert($(this).prop('href'));
+           // });
 
             $('.slideshow').cycle();
             $('.showitem, .canclick').css('cursor', 'pointer');

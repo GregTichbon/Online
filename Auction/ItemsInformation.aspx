@@ -38,6 +38,14 @@
         <br />
         <br />
         There is also a facility to set an &quot;Auto Bid&quot; so that bids are made 
-        automatically if you should be out-bid. These will increase by the set amount that bids must increase by. </form>
+        automatically if you should be out-bid. These will increase by the set amount that bids must increase by. 
+        <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+    </form>
 </body>
 </html>

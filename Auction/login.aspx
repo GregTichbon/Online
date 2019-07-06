@@ -67,13 +67,13 @@
     <form id="formLogin" runat="server">
 
         <p>
-            <input type="email" name="l_emailaddress" id="l_emailaddress" class="form-control" required="required" placeholder="Email address" /></p>
+            <input type="email" name="l_emailaddress" id="l_emailaddress" class="form-control br2 pa2 input-reset ba bg-transparent measure b--silver w-100" required="required" placeholder="Email address" /></p>
         <p>
-            <input type="password" name="l_passcode" id="l_passcode" class="form-control" required="required" placeholder="Password" /></p>
+            <input type="password" name="l_passcode" id="l_passcode" class="form-control br2 pa2 input-reset ba bg-transparent measure b--silver w-100" required="required" placeholder="Password" /></p>
         <p>
             <input type="checkbox" class="xform-control" name="l_keepmeloggedin" id="l_keepmeloggedin" />
             Keep me logged in</p>
-                    <input type="button" name="btn_login" id="btn_login" class="xform-control" value="Submit" />
+                    <input type="button" name="btn_login" id="btn_login" class="xform-control f6 grow no-underline br-pill ph3 pv2 dib white bg-blue pointer" value="Submit" />
 
         
     </form>

@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Generic">
+      <HintPath>..\Generic\bin\Generic.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -67,14 +70,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\SignedUp.aspx" />
     <Content Include="BadHagrid.svg" />
     <Content Include="Default.aspx" />
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
+    <Content Include="Dependencies\jquery-2.2.0.min.js" />
+    <Content Include="Dependencies\jquery.validate.min.js" />
+    <Content Include="Posts.asmx" />
+    <Content Include="SendEmail.aspx" />
     <Content Include="Web.config" />
     <Content Include="x.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\SignedUp.aspx.cs">
+      <DependentUpon>SignedUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\SignedUp.aspx.designer.cs">
+      <DependentUpon>SignedUp.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -82,13 +97,25 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendEmail.aspx.cs">
+      <DependentUpon>SendEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SendEmail.aspx.designer.cs">
+      <DependentUpon>SendEmail.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dependencies\DownCount\bower.json" />
     <Content Include="Dependencies\DownCount\downCount.jquery.json" />
     <Content Include="Dependencies\DownCount\README.md" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\TOH-APP.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -58,7 +58,7 @@
 <body class="bg-near-white">
     <div class="pa3 mw9 center">
         <div class="pa3 mb4">
-            <img src="<%: ResolveUrl("~/Images/Auction" + parameters["Auction_CTR"] + "/Header.png") %>" />
+            <img src="<%: ResolveUrl("~/Images/Auction" + parameters["Auction_CTR"] + "/Header.png") %>" alt="" />
         </div>
         <form runat="server" id="form1" class="form-horizontal" role="form">
             <div id="upgrade-browser" style="display: none">

@@ -119,7 +119,7 @@ namespace Auction
                     string justfilename = System.IO.Path.GetFileName(filename);
                     //if (filename.EndsWith("gif") || filename.EndsWith("jpg") || filename.EndsWith("png"))
                     //{
-                    itemimages += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + justfilename + "\" border=\"0\" />";
+                    itemimages += "<img src=\"images/auction" + parameters["Auction_CTR"] + "/items/" + item_ctr + "/" + justfilename + "\" />";
                     //}
                 }
             }

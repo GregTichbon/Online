@@ -50,14 +50,14 @@
                 },
                 messages: {
                     r_passcode: {
-                        minlength: "Your pasword must be at least 6 characters long<br />"//,
+                        minlength: "<br />Your pasword must be at least 6 characters long"//,
                         //remote: " Your pasword must not already have been used<br />"
                     },
                     r_emailaddress: {
-                        remote: "This email address has already been registered"
+                        remote: "<br />This email address has already been registered"
                     },
                     r_mobilenumber: {
-                        required: "You must enter a mobile phone number if you want text notifications"
+                        required: "<br />You must enter a mobile phone number if you want text notifications"
                     }
                 }
             });
@@ -123,16 +123,25 @@
         <div class="xcontainer">
             <div id="dialog_termsandconditions" title="Terms and Conditions" style="display: none">
                 <%= TermsAndConditions %>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
             </div>
-            <p><input type="text" name="r_fullname" id="r_fullname" class="form-control" required="required" placeholder="Full name" /></p>
-            <p><input type="email" name="r_emailaddress" id="r_emailaddress" class="form-control" required="required" placeholder="Email address" /></p>
-           <p> <input type="password" name="r_passcode" id="r_passcode" class="form-control" required="required" placeholder="Password" /></p>
+            <p><input type="text" name="r_fullname" id="r_fullname" class="form-control br2 pa2 input-reset ba bg-transparent measure b--silver w-100" required="required" placeholder="Full name" /></p>
+            <p><input type="email" name="r_emailaddress" id="r_emailaddress" class="form-control br2 pa2 input-reset ba bg-transparent measure b--silver w-100" required="required" placeholder="Email address" /></p>
+           <p> <input type="password" name="r_passcode" id="r_passcode" class="form-control br2 pa2 input-reset ba bg-transparent measure b--silver w-100" required="required" placeholder="Password" /></p>
            <p> <input type="checkbox" class="xform-control" name="r_keepmeloggedin" id="r_keepmeloggedin" /> Keep me logged in</p>
-           <p> <input type="text" name="r_mobilenumber" id="r_mobilenumber" class="form-control" placeholder="Mobile number" /></p>
+           <p> <input type="text" name="r_mobilenumber" id="r_mobilenumber" class="form-control br2 pa2 input-reset ba bg-transparent measure b--silver w-100" placeholder="Mobile number" /></p>
            <p> <input type="checkbox" name="r_textnotifications" id="r_textnotifications" class="xform-control " value="Yes" checked="checked" /> Send a text to my mobile phone number if I have been outbid on an item.</p>
            <p> <input type="checkbox" name="r_contactpermission" id="r_contactpermission" class="xform-control" value="Yes" checked="checked" /> I give permission to The Whanganui Womens Refuge to send information to me by email and/or text message from time to time.</p>
             <p><input type="checkbox" name="r_viewtermsandconditions" id="r_viewtermsandconditions" class="xform-control" value="Yes" required="required" /> I have read and accept the terms and conditions.  <input class="f6 grow no-underline br-pill ph3 pv2 dib white bg-blue pointer" id="viewtermsandconditions" type="button" value="View here" /></p>
-            <input type="button" name="btn_register" id="btn_register" class="xform-control" value="Submit" />
+            <input type="button" name="btn_register" id="btn_register" class="xform-control f6 grow no-underline br-pill ph3 pv2 dib white bg-blue pointer" value="Submit" />
+
+         
              
             <!--
         <div class="rowx">

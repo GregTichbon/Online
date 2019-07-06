@@ -272,7 +272,7 @@ namespace Auction
                             body += "<p><b>Item:</b>" + db_title + "</p>";
                             body += "<p><b>Your bid:</b> $" + db_lastbid.ToString("#.00") + "</p>";
                             body += "<p><b>New bid:</b> $" + db_newbid.ToString("#.00") + reservemessage + ".</p>";
-                            body += "<p><b>Made by:</b> " + db_otherfullname + "</p>";
+                            body += "<p><b>Made by:</b> " + db_newfullname + "</p>";
                             body += "<p><b>Next minimum bid:</b> $" + nextminimum + "</p>";
                             body += "<p><a href=\"" + parameters["URL"] + "\"><b>MAKE A NEW BID</b></a></p>"; //Would like to go to the item
                             body += "</body>";

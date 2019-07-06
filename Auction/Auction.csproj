@@ -107,6 +107,7 @@
     <Content Include="ShowItem.aspx" />
     <Content Include="ShowItem2.aspx" />
     <Content Include="TestandPlay\JqueryPosition1.html" />
+    <Content Include="TestandPlay\Slideshow1.aspx" />
     <Content Include="TestandPlay\Test1.html" />
     <Content Include="_Includes\css\images\ui-icons_444444_256x240.png" />
     <Content Include="_Includes\css\images\ui-icons_555555_256x240.png" />
@@ -897,6 +898,13 @@
     </Compile>
     <Compile Include="ShowItem2.aspx.designer.cs">
       <DependentUpon>ShowItem2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestandPlay\Slideshow1.aspx.cs">
+      <DependentUpon>Slideshow1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestandPlay\Slideshow1.aspx.designer.cs">
+      <DependentUpon>Slideshow1.aspx</DependentUpon>
     </Compile>
     <Compile Include="_Includes\Functions\functions.cs" />
     <Compile Include="_Includes\Models\models.cs" />

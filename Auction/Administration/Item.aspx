@@ -2,6 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+    <style>
+        #table_donor thead  th {
+            color:black;
+        }
+    </style>
     <script>
         tinymce.init({
             selector: '#Description',
