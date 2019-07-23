@@ -1,0 +1,263 @@
+﻿<html>
+<head>
+    <title>
+    </title>
+    <link href="../Dependencies/fullcalendar/fullcalendar.min.css" rel="stylesheet">
+</head>
+<body>
+    <form>
+        I haven't worked out how the row spans work for placement of events
+
+        <div id="calendar" class="fc fc-unthemed fc-ltr">
+            <div class="fc-view-container">
+                <div class="fc-view">
+                    <table>
+                        <thead class="fc-head">
+                            <tr>
+                                <td class="fc-head-container fc-widget-header">
+                                    <div class="fc-row fc-widget-header">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Mon
+                                                    </th>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Tue
+                                                    </th>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Wed
+                                                    </th>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Thu
+                                                    </th>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Fri
+                                                    </th>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Sat
+                                                    </th>
+                                                    <th class="fc-day-header fc-widget-header">
+                                                        Sun
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="fc-body">
+                            <tr>
+                                <td class="fc-widget-content">
+                                    <div class="fc-scroller fc-day-grid-container" style="overflow: hidden; height: 1800px;">
+                                        <div class="fc-day-grid">
+                                            <!-- ======================================================= ROW ================================================ -->
+                                            <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 150px;">
+                                                <div class="fc-bg">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content"></td>
+                                                                <td class="fc-day fc-widget-content"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="fc-content-skeleton">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">1</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">2</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">3</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">4</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">5</a>
+                                                                </td>
+                                                                <td class="fc-day-top">
+                                                                    <a class="fc-day-number">6</a>
+                                                                </td>
+                                                                <td class="fc-day-top">
+                                                                    <a class="fc-day-number">7</a>
+                                                                </td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td rowspan="2"></td>
+                                                                <td rowspan="2"></td>
+                                                                <td rowspan="2"></td>
+                                                                <td class="fc-event-container" colspan="3">
+                                                                    <a class="fc-day-grid-event fc-h-event fc-event">
+                                                                        <div class="fc-content">
+                                                                            <span class="fc-title">Event 1</span>
+                                                                        </div>
+                                                                    </a>
+                                                                </td>
+                                                                <td rowspan="2"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td class="fc-event-container">
+                                                                    <a class="fc-day-grid-event fc-h-event fc-event">
+                                                                        <div class="fc-content">
+                                                                            <span class="fc-time">4pm</span> <span class="fc-title">Event 2</span>
+                                                                        </div>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- ======================================================= ROW ================================================ -->
+                                            <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 150px;">
+                                                <div class="fc-bg">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content"></td>
+                                                                <td class="fc-day fc-widget-content"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="fc-content-skeleton">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">1</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">2</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">3</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">4</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">5</a>
+                                                                </td>
+                                                                <td class="fc-day-top">
+                                                                    <a class="fc-day-number">6</a>
+                                                                </td>
+                                                                <td class="fc-day-top">
+                                                                    <a class="fc-day-number">7</a>
+                                                                </td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td class="fc-event-container">
+                                                                    <a class="fc-day-grid-event fc-h-event fc-event" href="http://google.com/">
+                                                                        <div class="fc-content">
+                                                                            <span class="fc-title">Click for Google</span>
+                                                                        </div>
+                                                                    </a>
+                                                                </td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- ======================================================= ROW ================================================ -->
+                                            <div class="fc-row fc-week fc-widget-content fc-rigid" style="height: 150px;">
+                                                <div class="fc-bg">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content fc-past"></td>
+                                                                <td class="fc-day fc-widget-content"></td>
+                                                                <td class="fc-day fc-widget-content"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="fc-content-skeleton">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">1</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">2</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">3</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">4</a>
+                                                                </td>
+                                                                <td class="fc-day-top fc-past">
+                                                                    <a class="fc-day-number">5</a>
+                                                                </td>
+                                                                <td class="fc-day-top">
+                                                                    <a class="fc-day-number">6</a>
+                                                                </td>
+                                                                <td class="fc-day-top">
+                                                                    <a class="fc-day-number">7</a>
+                                                                </td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- ====================================== END ========================================= -->
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

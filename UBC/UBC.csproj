@@ -497,6 +497,7 @@
     <Content Include="People\Reports\ComingEventsList.aspx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
+    <Content Include="People\Reports\Default.aspx" />
     <Content Include="People\Reports\EventSchedule.aspx" />
     <Content Include="People\Reports\Finance.aspx" />
     <Content Include="People\Reports\FriendsStatements.aspx" />
@@ -1017,6 +1018,13 @@
     <Compile Include="People\Reports\CurrentMembers.aspx.designer.cs">
       <DependentUpon>CurrentMembers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\EventSchedule.aspx.cs">
       <DependentUpon>EventSchedule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1058,6 +1066,12 @@
     </Compile>
     <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
       <DependentUpon>LoginRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\RaceFees.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RaceFees.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="People\Reports\RegattaList.aspx.cs">
       <DependentUpon>RegattaList.aspx</DependentUpon>
@@ -1288,6 +1302,10 @@
     <EmbeddedResource Include="People\Reports\Crystal\testNoData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>testNoData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\RaceFees.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RaceFees.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

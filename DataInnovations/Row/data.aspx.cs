@@ -21,7 +21,7 @@ namespace DataInnovations.Row
             functionoptions.Add("storedprocedure", "");
             functionoptions.Add("usevalues", "");
             functionoptions.Add("parameters", "|" + Discipline + "|");
-            html = genericfunctions.buildandpopulateselect(strConnString, "@boats", "", functionoptions, "None");
+            //html = genericfunctions.buildandpopulateselect(strConnString, "@boats", "", functionoptions, "None");
         }
     }
 }

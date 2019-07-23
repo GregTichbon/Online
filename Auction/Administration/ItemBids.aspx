@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
 <table class="table">
-        <tr><th>Date</th><th>User</th><th>Bid</th><th>Auto Bid</th></tr>
+        <tr><th>Date</th><th>User</th><th>Bid</th><th>Auto Bid</th><th>Response</th></tr>
           <%=html%>
     </table>
     </form>

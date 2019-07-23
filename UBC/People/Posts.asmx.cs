@@ -145,8 +145,9 @@ namespace UBC.People
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = con;
 
+            person_transaction_id = person_transaction_id.Substring(19);
             cmd.CommandText = "Update_Person_Transaction";
-            cmd.Parameters.Add("@person_transaction_id", SqlDbType.VarChar).Value = person_transaction_id.Substring(13);
+            cmd.Parameters.Add("@person_transaction_id", SqlDbType.VarChar).Value = person_transaction_id;
             cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
             cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = date;
             cmd.Parameters.Add("@amount", SqlDbType.VarChar).Value = amount;

@@ -41,6 +41,23 @@
         <h1>Union Boat Club - Bank Transaction Import
         </h1>
 
+        <table class="table">
+           <thead>
+               <tr>
+                   <th>Bank Account</th>
+                   <th>First Date</th>
+                   <th>Last Date</th>
+                   <th style="text-align: right">Transactions</th>
+                   <th style="text-align: right">Credits</th>
+                   <th style="text-align: right">Debits</th>
+                   <th style="text-align: right">Net</th>
+               </tr>
+           </thead>
+           <tbody>
+               <%= html %>
+           </tbody>
+       </table>
+
         <div class="form-group">
             <div class="col-sm-4">
                 Please upload the bank file

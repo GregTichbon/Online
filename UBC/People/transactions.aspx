@@ -53,7 +53,7 @@
                 mode = $(this).data('mode');
                 $("#dialog-transactions").find(':input').val(''); //clear all fields
                 if (mode == "add") {
-                    $('#dd_transactions_person_transaction_id').val('transactions_new');
+                    $('#tb_transactions_person_transaction_id').val('person_transaction_new');
                     /*
                     $('#dd_transactions_person_id').val('');
                     $('#tb_transactions_date').val('');
@@ -67,7 +67,7 @@
                 } else {
                     tr = $(this).closest('tr');
 
-                    $('#dd_transactions_person_transaction_id').val($(tr).attr('id'));
+                    $('#tb_transactions_person_transaction_id').val($(tr).attr('id'));
                     $('#dd_transactions_person_id').val($(tr).find('td').eq(0).attr('person_id'));
                     $('#tb_transactions_date').val($(tr).find('td').eq(1).text());
                     $('#dd_transactions_system').val($(tr).find('td').eq(2).text());
@@ -111,7 +111,7 @@
                         }
 
 
-                        person_transaction_id = $('#dd_transactions_person_transaction_id').val();
+                        person_transaction_id = $('#tb_transactions_person_transaction_id').val();
                         person = $('#dd_transactions_person_id option:selected').text();
                         person_id = $('#dd_transactions_person_id').val();
                         date = $('#tb_transactions_date').val();
@@ -160,7 +160,7 @@
                             $(tr).remove();
 
                             $(this).dialog("close");
-                            person_transaction_id = $('#dd_transactions_person_transaction_id').val();
+                            person_transaction_id = $('#tb_transactions_person_transaction_id').val();
                             var arForm = [{ "name": "person_transaction_id", "value": person_transaction_id }];
                             //console.log(arForm);
                             var formData = JSON.stringify({ formVars: arForm });
@@ -232,9 +232,9 @@
             <div id="dialog-transactions" title="Maintain Transactions" style="display: none" class="form-horizontal">
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_transactions_person_transaction_id">ID</label>
+                    <label class="control-label col-sm-4" for="tb_transactions_person_transaction_id">ID</label>
                     <div class="col-sm-8">
-                        <input id="dd_transactions_person_transaction_id" name="dd_transactions_person_transaction_id" type="text" class="form-control" readonly />
+                        <input id="tb_transactions_person_transaction_id" name="tb_transactions_person_transaction_id" type="text" class="form-control" readonly />
                     </div>
                 </div>
 

@@ -24,6 +24,7 @@ namespace Auction.Administration
             double amount;
             double autobid;
             string fullname;
+            string response;
 
             item_ctr = Request.QueryString["item"];
 
@@ -48,8 +49,9 @@ namespace Auction.Administration
                         amount = Convert.ToDouble(dr["amount"]);
                         autobid = Convert.ToDouble(dr["autobid"]);
                         fullname = dr["fullname"].ToString();
+                        response = dr["response"].ToString();
 
-                        html += "<tr><td>" + created + "</td><td>" + fullname + "</td><td>" + amount.ToString("0.00") + "</td><td>" + autobid.ToString("0.00") + "</td></tr>";
+                        html += "<tr><td>" + created + "</td><td>" + fullname + "</td><td>" + amount.ToString("0.00") + "</td><td>" + autobid.ToString("0.00") + "</td><td>" + response + "</td></tr>";
                     }
                 }
             }

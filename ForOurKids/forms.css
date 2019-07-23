@@ -1,0 +1,35 @@
+input, textarea {
+	width: 100%;
+	color: #000000;
+	background: #ffffff;
+	border: 1px solid #781351;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+select {
+	color: #000000;
+	background: #ffffff;
+	border: 1px solid #781351;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+input[type="submit"] {
+	width: 20%;
+	color: #ffffff;
+	background: #000000;
+	border: 2px outset #d7b9c9
+} 
+.date {
+	width: 200px;
+	color: #000000;
+	background: #ffffff;
+	border: 1px solid #781351
+}
+.normaltext {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 20px;
+}

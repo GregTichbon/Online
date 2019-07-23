@@ -335,9 +335,9 @@
             <!-- DIALOG PERSON TRANSACTIONS -->
             <div id="dialog_person_transactions" title="Maintain People Transactions" style="display: none" class="form-horizontal">
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_person_transactions_person_transaction_id">ID</label>
+                    <label class="control-label col-sm-4" for="tb_person_transactions_transaction_id">ID</label>
                     <div class="col-sm-8">
-                        <input id="dd_person_transactions_person_transaction_id" name="dd_person_transactions_person_transaction_id" type="text" class="form-control" readonly="readonly" />
+                        <input id="tb_person_transactions_transaction_id" name="tb_person_transactions_transaction_id" type="text" class="form-control" readonly="readonly" />
                     </div>
                 </div>
                 <div class="form-group">

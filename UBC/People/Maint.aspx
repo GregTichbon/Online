@@ -840,8 +840,11 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_schoolyear">School year</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" maxlength="2" />
+                        </div>
+                        <div class="col-sm-4">
+                            <input id="tb_schoolyearat" name="tb_schoolyearat" type="text" class="form-control numeric" value="<%:tb_schoolyearat%>" maxlength="4" />
                         </div>
                     </div>
 

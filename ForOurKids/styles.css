@@ -1,0 +1,22 @@
+.table {
+	font-family: Arial, Helvetica, sans-serif;
+	background-image:  url("Images/GREEN.jpg");
+	background-attachment: fixed;
+	font-size: 16px;
+	text-align: center;
+}
+a:link {
+	color: #353994;
+}
+a:visited {
+	color: #F08827;
+}
+a:hover {
+	color: #ED2424;
+}
+a:active {
+	color: #E8DB3D;
+	text-align: center;
+}
+#best a{ text-decoration:none; color:#000;}
+ #best a:hover{ text-decoration:none; color:#000;}

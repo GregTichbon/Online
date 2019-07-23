@@ -292,6 +292,8 @@
     <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
     <Content Include="Dependencies\StickyTableCells\README.md" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="YearPlanner\FullCalendarIO2.html" />
+    <Content Include="YearPlanner\FullCalendarIO2.aspx" />
     <Content Include="YearPlanner\FullCalendarIO_Original.html" />
     <Content Include="YearPlanner\FullCalendarIO.aspx" />
     <Content Include="YearPlanner\FullCalendarIO.html" />
@@ -1563,6 +1565,13 @@
     </Compile>
     <Compile Include="YearPlanner\FullCalendarIO.aspx.designer.cs">
       <DependentUpon>FullCalendarIO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YearPlanner\FullCalendarIO2.aspx.cs">
+      <DependentUpon>FullCalendarIO2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YearPlanner\FullCalendarIO2.aspx.designer.cs">
+      <DependentUpon>FullCalendarIO2.aspx</DependentUpon>
     </Compile>
     <Compile Include="YearPlanner\Test1.aspx.cs">
       <DependentUpon>Test1.aspx</DependentUpon>

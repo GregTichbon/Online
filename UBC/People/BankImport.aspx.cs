@@ -13,9 +13,51 @@ namespace UBC.People
 {
     public partial class BankImport : System.Web.UI.Page
     {
+        public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
 
+            con = new SqlConnection(strConnString);
+            //try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Accounts_Transaction_Summary";
+
+
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        string Account_number = dr["Account_number"].ToString();
+                        string FirstDate = dr["First Date"].ToString();
+                        string LastDate = dr["Last Date"].ToString();
+                        string transactions = dr["transactions"].ToString();
+                        string Credits = dr["Credits"].ToString();
+                        string Debits = dr["Debits"].ToString();
+                        string Net = dr["Net"].ToString();
+
+
+                        html += "<tr>";
+                        html += "<td>" + Account_number + "</td>";
+                        html += "<td>" + Convert.ToDateTime(FirstDate).ToShortDateString() + "</td>";
+                        html += "<td>" + Convert.ToDateTime(LastDate).ToShortDateString() + "</td>";
+                        html += "<td style=\"text-align:right\">" + transactions + "</td>";
+                        html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Credits).ToString("0.00") + "</td>";
+                        html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Debits).ToString("0.00") + "</td>";
+                        html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Net).ToString("0.00") + "</td>";
+                        html += "</tr>";
+
+                    }
+                }
+                dr.Close();
+            }
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)

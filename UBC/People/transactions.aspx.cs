@@ -87,7 +87,7 @@ namespace UBC.People
                 total += Convert.ToDouble(amount);
 
 
-                html_transactions += "<tr id=\"transactions_" + person_transaction_id + "\">";
+                html_transactions += "<tr id=\"person_transaction_" + person_transaction_id + "\">";
                 html_transactions += "<td person_id=\"" + person_id + "\">" + person + "</td>";
                 html_transactions += "<td>" + date + "</td>";
                 html_transactions += "<td>" + system + "</td>";

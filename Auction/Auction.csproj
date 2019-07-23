@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -74,7 +78,7 @@
     <Content Include="Administration\CategoryList.aspx" />
     <Content Include="Administration\ItemBids.aspx" />
     <Content Include="Administration\logoff.aspx" />
-    <Content Include="Administration\Reports.aspx" />
+    <Content Include="Administration\Reports\ItemBids.aspx" />
     <Content Include="Administration\Resequence.aspx" />
     <Content Include="Administration\Setup.aspx" />
     <Content Include="Administration\Test.aspx" />
@@ -771,12 +775,18 @@
     <Compile Include="Administration\logoff.aspx.designer.cs">
       <DependentUpon>logoff.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administration\Reports.aspx.cs">
-      <DependentUpon>Reports.aspx</DependentUpon>
+    <Compile Include="Administration\Reports\ItemBids.aspx.cs">
+      <DependentUpon>ItemBids.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administration\Reports.aspx.designer.cs">
-      <DependentUpon>Reports.aspx</DependentUpon>
+    <Compile Include="Administration\Reports\ItemBids.aspx.designer.cs">
+      <DependentUpon>ItemBids.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Reports\CR_ItemBids.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CR_ItemBids.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Administration\Resequence.aspx.cs">
       <DependentUpon>Resequence.aspx</DependentUpon>
@@ -932,6 +942,15 @@
     <Folder Include="Images\Auction1\Items\55\original\" />
     <Folder Include="Images\Auction1\Items\6\" />
     <Folder Include="_Includes\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Administration\Reports\CR_ItemBids.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CR_ItemBids.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

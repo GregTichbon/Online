@@ -1,0 +1,297 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D3C433A-EB5B-48C4-B3F4-0CEBF57918C8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ForOurKids</RootNamespace>
+    <AssemblyName>ForOurKids</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="%24emailtest.asp" />
+    <Content Include="%24template.asp" />
+    <Content Include="ambassadors.asp" />
+    <Content Include="carla.jpg" />
+    <Content Include="chronicle header.gif" />
+    <Content Include="community partners.jpg" />
+    <Content Include="Contact.asp" />
+    <Content Include="ContactAcknowledgment.htm" />
+    <Content Include="Contact_Process.asp" />
+    <Content Include="css\style.css" />
+    <Content Include="DBMaint.asp" />
+    <Content Include="default.asp" />
+    <Content Include="edit.gif" />
+    <Content Include="EmailFormat.htm" />
+    <Content Include="employers.jpg" />
+    <Content Include="events.asp" />
+    <Content Include="favicon.ico" />
+    <Content Include="FOK logo.jpg" />
+    <Content Include="forms.css" />
+    <Content Include="Images\155126_151924854854621_3398647_n.jpg" />
+    <Content Include="Images\action group button.jpg" />
+    <Content Include="Images\ambassadors.jpg" />
+    <Content Include="Images\carla profile pic.jpg" />
+    <Content Include="Images\childrens day.gif" />
+    <Content Include="Images\com events button.jpg" />
+    <Content Include="Images\com gath button.jpg" />
+    <Content Include="Images\com partners button.jpg" />
+    <Content Include="Images\community partners.jpg" />
+    <Content Include="Images\CommunityFoundation.JPG" />
+    <Content Include="Images\contact.jpg" />
+    <Content Include="Images\email button.jpg" />
+    <Content Include="Images\employers button.jpg" />
+    <Content Include="Images\Employers.gif" />
+    <Content Include="Images\employers.jpg" />
+    <Content Include="Images\events.jpg" />
+    <Content Include="Images\fams button.jpg" />
+    <Content Include="Images\FOK footer.jpg" />
+    <Content Include="Images\FOK header.jpg" />
+    <Content Include="Images\FOK logo.jpg" />
+    <Content Include="Images\GREEN.jpg" />
+    <Content Include="Images\home.jpg" />
+    <Content Include="Images\how does it work button.jpg" />
+    <Content Include="Images\Jay Rerekura.jpg" />
+    <Content Include="Images\judy.jpg" />
+    <Content Include="Images\letterhead_emailsignature.jpg" />
+    <Content Include="Images\letterhead_emailsignature600x.jpg" />
+    <Content Include="Images\logo_h_neg.jpg" />
+    <Content Include="Images\logo_v_neg.jpg" />
+    <Content Include="Images\now rollover.jpg" />
+    <Content Include="Images\Partners.gif" />
+    <Content Include="Images\partners.jpg" />
+    <Content Include="Images\phone button.jpg" />
+    <Content Include="Images\pic.php.jpeg" />
+    <Content Include="Images\register button.jpg" />
+    <Content Include="Images\side bar buttons.jpg" />
+    <Content Include="Images\sign up.jpg" />
+    <Content Include="Images\skype.gif" />
+    <Content Include="Images\skype.jpg" />
+    <Content Include="Images\star.gif" />
+    <Content Include="Images\taskforce button.jpg" />
+    <Content Include="Images\thermometer.gif" />
+    <Content Include="Images\TOH-logo.jpg" />
+    <Content Include="Images\trust board.jpg" />
+    <Content Include="Images\volunteers button.jpg" />
+    <Content Include="Images\volunteers.gif" />
+    <Content Include="Images\volunteers.jpg" />
+    <Content Include="Images\Wanganui.thumbnail.jpg" />
+    <Content Include="Images\wdhb_logo.jpg" />
+    <Content Include="Images\whanau2010.jpg" />
+    <Content Include="Images\what is it button.jpg" />
+    <Content Include="img\asp-net.png" />
+    <Content Include="img\blog.png" />
+    <Content Include="img\company-logo.png" />
+    <Content Include="img\facebook.png" />
+    <Content Include="img\forum.png" />
+    <Content Include="img\globe.png" />
+    <Content Include="img\google-plus.png" />
+    <Content Include="img\knowledge-base.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\ok.png" />
+    <Content Include="img\perl.png" />
+    <Content Include="img\php.png" />
+    <Content Include="img\python.png" />
+    <Content Include="img\twitter.png" />
+    <Content Include="img\warning.png" />
+    <Content Include="IMG_0690.JPG" />
+    <Content Include="inc_menu.html" />
+    <Content Include="index.asp" />
+    <Content Include="index.html" />
+    <Content Include="Involvement.asp" />
+    <Content Include="List.asp" />
+    <Content Include="menu.asp" />
+    <Content Include="partners.asp" />
+    <Content Include="registration.asp" />
+    <Content Include="RegistrationAcknowledgmentEmployer.htm" />
+    <Content Include="RegistrationAcknowledgmentPartner.htm" />
+    <Content Include="RegistrationAcknowledgmentVolunteer.htm" />
+    <Content Include="registration_e.asp" />
+    <Content Include="registration_p.asp" />
+    <Content Include="Registration_Process.asp" />
+    <Content Include="Registration_ProcessNEW.asp" />
+    <Content Include="Registration_ProcessOLD.asp" />
+    <Content Include="registration_v.asp" />
+    <Content Include="reports.asp" />
+    <Content Include="reports_process.asp" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\ToolTips\jquery.tools.min.js" />
+    <Content Include="Scripts\validateDate.js" />
+    <Content Include="Scripts\validateEmail.js" />
+    <Content Include="search.asp" />
+    <Content Include="sign_up.asp" />
+    <Content Include="styles.css" />
+    <Content Include="Taskforce.asp" />
+    <Content Include="test\aspnet\test.aspx" />
+    <Content Include="test\aspnet\trace_info.aspx" />
+    <Content Include="test\asp\test_mail.asp" />
+    <Content Include="test\asp\test_msaccess.asp" />
+    <Content Include="test\asp\test_mssql.asp" />
+    <Content Include="test\asp\test_mysql.asp" />
+    <Content Include="test\coldfusion\test.html" />
+    <Content Include="test\perl\test.html" />
+    <Content Include="test\php\test.html" />
+    <Content Include="test\php\test.php" />
+    <Content Include="test\python\test.html" />
+    <Content Include="tooltip.css" />
+    <Content Include="vnzLogo.gif" />
+    <Content Include="volunteerprofiles.asp" />
+    <Content Include="VolunteerProfiles\20100322.jpg" />
+    <Content Include="VolunteerProfiles\20100329.jpg" />
+    <Content Include="VolunteerProfiles\20100405.jpg" />
+    <Content Include="VolunteerProfiles\20100412.jpg" />
+    <Content Include="VolunteerProfiles\20100419.jpg" />
+    <Content Include="VolunteerProfiles\20100426.jpg" />
+    <Content Include="VolunteerProfiles\20100503.jpg" />
+    <Content Include="VolunteerProfiles\20100705.jpg" />
+    <Content Include="VolunteerProfiles\20100713.jpg" />
+    <Content Include="VolunteerProfiles\CarlaDonson.jpg" />
+    <Content Include="VolunteerProfiles\CraigYorston.jpg" />
+    <Content Include="VolunteerProfiles\DannyJonas.jpg" />
+    <Content Include="VolunteerProfiles\DesWarahi.jpg" />
+    <Content Include="VolunteerProfiles\DotGreenfield.jpg" />
+    <Content Include="VolunteerProfiles\JamesWest.jpg" />
+    <Content Include="VolunteerProfiles\JayRerekura.jpg" />
+    <Content Include="VolunteerProfiles\JudyKumeroa.jpg" />
+    <Content Include="VolunteerProfiles\MarieJoseph.jpg" />
+    <Content Include="volunteers.jpg" />
+    <Content Include="WC article  Carla.asp" />
+    <Content Include="WC article  Jay.asp" />
+    <Content Include="WC article  Judy.asp" />
+    <Content Include="Web.config" />
+    <Content Include="white-ribbon-no-text.jpg" />
+    <Content Include="working.asp" />
+    <Content Include="youthweeklogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".user.ini" />
+    <Content Include="Images\com events button.psd" />
+    <Content Include="img\Thumbs.db" />
+    <Content Include="test\coldfusion\test.cfm" />
+    <Content Include="test\perl\test.pl" />
+    <Content Include="test\python\test.py" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60029</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60029/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

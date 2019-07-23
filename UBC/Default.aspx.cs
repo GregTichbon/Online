@@ -23,8 +23,6 @@ namespace UBC
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
             {
                 html += "<br /><a href=\"people/communicate.aspx\">Communicate</a>";
-                html += "<br /><a href=\"people/reports/loginregister.aspx\">Login register</a>";
-                html += "<br /><a href=\"people/reports/tracker.aspx\">Tracker</a>";
                 html += "<br /><a href=\"people/bankimport.aspx\">Bank Import</a>";
                 html += "<br /><a href=\"people/bankallocate.aspx\">Bank alloction</a>";
                 html += "<br /><a href=\"people/transactions.aspx\">Transactions</a>";
@@ -66,6 +64,7 @@ namespace UBC
             html += "<br /><a href=\"people/reports/EventSchedule.aspx\">Event Schedule</a>";
             html += "<br /><a href=\"people/reports/ShowAttendees.aspx\">Show Attendees</a>";
             html += "<br /><a href=\"people/reports/ComingEventsList.aspx\">Coming Events List</a>";
+            html += "<br /><a href=\"people/reports/default.aspx\">REPORTS</a>";
 
         }
     }
