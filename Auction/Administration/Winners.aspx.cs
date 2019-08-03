@@ -69,14 +69,23 @@ namespace Auction.Administration
                         if (amounttext != "")
                         {
                             amount = Convert.ToDouble(amounttext);
+                        } else
+                        {
+                            amount = 0;
                         }
                         if (autobidtext != "")
                         {
                             autobid = Convert.ToDouble(autobidtext);
+                        } else
+                        {
+                            autobid = 0;
                         }
                         if (reservetext != "")
                         {
                             reserve = Convert.ToDouble(reservetext);
+                        } else
+                        {
+                            reserve = 0;
                         }
                         response = dr["response"].ToString();
 
@@ -101,7 +110,8 @@ namespace Auction.Administration
                         }
                         
 
-                        if (response != "Leading" && response != "Autobid actioned")
+                        //if (response != "Leading" && response != "Autobid actioned")
+                        if(response == "Not actioned")
                         {
                             myclass = "bidnotactioned";
                             space = " ";
@@ -115,12 +125,15 @@ namespace Auction.Administration
                             }
                             else
                             {
-                                myclass += space + "topbid";
-                                space = " ";
-                                topbiddone = true;
-                                if(reserve > amount)
+                                if (response == "Leading" || response == "Autobid actioned")
                                 {
-                                    reservenotmet = "Reserve not met ";
+                                    myclass += space + "topbid";
+                                    space = " ";
+                                    topbiddone = true;
+                                    if (reserve > amount)
+                                    {
+                                        reservenotmet = "Reserve not met ";
+                                    }
                                 }
                             }
                         }
@@ -146,7 +159,7 @@ namespace Auction.Administration
                         }
                        
 
-                        html += "<tr" + myclass + "><td></td><td>" + created + "</td><td>" + fullname + "</td><td class=\"numeric\">" + reservenotmet + reserve.ToString("0.00") + "</td><td class=\"numeric\">" + amount.ToString("0.00") + "</td><td class=\"numeric\">" + autobid.ToString("0.00") + "</td><td class=\"bidnotactionedtd\">" + response + "</td></tr>";
+                        html += "<tr" + myclass + "><td></td><td>" + created + "</td><td>" + fullname + "</td><td class=\"numeric\">" + reservenotmet + reserve.ToString("0.00") + "</td><td class=\"numeric\">" + amount.ToString("0.00") + "</td><td class=\"numeric\">" + autobid.ToString("0.00") + "</td><td class=\"bidnotactionedtdX\">" + response + "</td></tr>";
                     }
                 }
             }

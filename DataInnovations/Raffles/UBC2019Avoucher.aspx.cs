@@ -16,7 +16,7 @@ namespace DataInnovations.Raffles
         protected void Page_Load(object sender, EventArgs e)
         {
             string guid = Request.QueryString["id"] ?? "";
-            string[] status_values = new string[6] { "Winner", "Notified", "Ordered", "Collected", "Invoiced", "Paid" };
+            string[] status_values = new string[7] { "Winner", "Notified", "Received Notification", "Ordered", "Collected", "Invoiced", "Paid" };
 
             if (Request.Cookies["chefschoiceaccess"] == null)
             {

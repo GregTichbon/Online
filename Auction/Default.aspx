@@ -62,6 +62,8 @@
             var stopscrolling = -1;
             var showingitem = false;
 
+            <%=startupmessage%>
+
             $(window).scroll(function (e) {
                 if (stopscrolling != -1) {
                     //$('html, body').animate({ scrollTop: stopscrolling }, "fast");
@@ -138,8 +140,28 @@
 
             $('.slideshow').cycle();
             $('.showitem, .canclick').css('cursor', 'pointer');
+
         });  //document.ready
 
+        function startupmessage(pageurl,pagetitle) {
+            $('body').addClass('stop-scrollingInfo');
+                stopscrolling = window.pageYOffset;
+                $('#dialog_showinformation').dialog({
+                    modal: true,
+                    open: function () {
+                        $(this).load(pageurl);
+                    },
+                    width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
+                    height: 800,
+                    close: function () {
+                        $('body').removeClass('stop-scrollingInfo');
+                        if (!showingitem) {
+                            stopscrolling = -1;
+                        }
+                    }, title: pagetitle,
+                    closeText: false
+                });
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

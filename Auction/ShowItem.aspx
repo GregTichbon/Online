@@ -213,7 +213,8 @@
                                             });
 
 
-                                            if (returnedjson.status == "Invalid pass code") {
+                                            if (returnedjson.status == "Invalid pass code" || returnedjson.status == "Auction closed") {
+                                                
                                                 //not using passcodes
                                             }
                                             else {

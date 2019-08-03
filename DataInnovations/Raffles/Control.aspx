@@ -307,6 +307,7 @@
                                 <option></option>
                                 <option>Winner</option>
                                 <option>Notified</option>
+								<option>Received</option>
                                 <option>Ordered</option>
                                 <option>Collected</option>
                                 <option>Invoiced</option>

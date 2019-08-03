@@ -7,10 +7,10 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Xml;
-//using OfficeOpenXml;
+using OfficeOpenXml;
 using System.IO;
 using System.Configuration;
-//using Generic;
+using Generic;
 
 namespace Auction
 {
@@ -160,6 +160,119 @@ namespace Auction
             //string passresult = JS.Serialize(resultclass);
             return (resultclass);
         }
+
+        [WebMethod]
+        //public string TabletoExcelCSV(string table)    //you can't pass any querystring params
+        public standardResponse TabletoExcelCSV(string table)    //you can't pass any querystring params
+        {
+            #region old code
+            /*
+              Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+              if (xlApp == null)
+              {
+                  string error = ("Excel is not properly installed!!");
+              }
+              Microsoft.Office.Interop.Excel.Workbook xlWorkBook = xlApp.Workbooks.Add(Type.Missing);
+              Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+              xlWorkSheet.Name = "RowingExport";
+
+
+              int r1 = 0;
+              int c1 = 0;
+              XmlDocument doc = new XmlDocument();
+              doc.LoadXml(table);
+
+              foreach (XmlNode trnode in doc.DocumentElement.ChildNodes) //TR
+              {
+                  r1++;
+                  c1 = 0;
+                  foreach (XmlNode tdnode in trnode.ChildNodes)  //TD
+                  {
+                      c1++;
+                      string text = tdnode.InnerText;
+                      if (tdnode.Name == "th")
+                      {
+                          string x = tdnode.Name;
+                          xlWorkSheet.Cells[r1, c1].Font.Bold = true;
+                      }
+                      xlWorkSheet.Cells[r1, c1] = text;
+
+                      //string attr = tdnode.Attributes["colspan"]?.InnerText;
+                  }
+              }
+
+              //xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(2);
+              //xlWorkSheet.Cells[1, 1] = "Sheet 2 content";
+
+              xlWorkBook.SaveAs("exceltest1.xlsx");
+              xlWorkBook.Close();
+              xlApp.Quit();
+          */
+            #endregion
+            table = table.Replace("&", "&amp;");
+            Functions functions = new Functions();
+            string filename = functions.getReference() + ".xlsx";
+            string templatefilename = Server.MapPath(".") + "\\templates\\" + "winners.xlsx";
+            string fullfilename = Server.MapPath(".") + "\\downloads\\" + filename;
+            var fi = new FileInfo(templatefilename);
+            using (var p = new ExcelPackage(fi))
+            {
+                //var ws = p.Workbook.Worksheets.Add("TheGreatBall");
+                var ws = p.Workbook.Worksheets["TheGreatBall"];
+
+
+                int r1 = 0;
+                int c1 = 0;
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(table);
+
+                foreach (XmlNode trnode in doc.DocumentElement.ChildNodes) //TR
+                {
+                    r1++;
+                    c1 = 0;
+                    foreach (XmlNode tdnode in trnode.ChildNodes)  //TD
+                    {
+                        c1++;
+                        string text = tdnode.InnerText;
+
+                        if (tdnode.Name == "th")
+                        {
+                            //ws.Cells[r1, c1].Style.Font.Bold = true;
+                        }
+                        string numberformat = ws.Cells[r1, c1].Style.Numberformat.Format;
+                        if (numberformat == "@")
+                        {
+                            ws.Cells[r1, c1].Value = text;
+                        }
+                        else
+                        {
+                            double number;
+                            if (Double.TryParse(text, out number))
+                                ws.Cells[r1, c1].Value = number;
+                            else
+                                ws.Cells[r1, c1].Value = text;
+                        }
+
+
+                        //string attr = tdnode.Attributes["colspan"]?.InnerText;
+                    }
+                }
+                p.SaveAs(new FileInfo(fullfilename));
+
+            }
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Complete";
+            resultclass.message = filename;
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+            
+            return (resultclass);
+
+        }
+
     }
 }
 

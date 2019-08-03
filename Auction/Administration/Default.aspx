@@ -13,8 +13,7 @@
 
     <p></p>
 
-    <p><a href="reports.aspx">Reports</a></p>
-    <p><a href="winners.aspx">Winners</a></p>
+    <p><a href="reportmenu.aspx">Reports</a></p>
     <p><a href="setup.aspx">Setup</a></p>
     <p><a href="../default.aspx" target="_blank">Auction</a></p>
 

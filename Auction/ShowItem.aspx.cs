@@ -51,6 +51,21 @@ namespace Auction
 
             parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
 
+            if (parameters["Closeat"] != "")
+            {
+                if (DateTime.Now > Convert.ToDateTime(parameters["Closeat"]))
+                {
+                    //logout
+                    HttpContext.Current.Session.Remove("Auction_user_ctr");
+                    HttpContext.Current.Session.Remove("Auction_Fullname");
+
+                    HttpContext.Current.Response.Cookies["Auction_user_ctr"].Expires = DateTime.Now.AddDays(-1);
+                    HttpContext.Current.Response.Cookies["Auction_Fullname"].Expires = DateTime.Now.AddDays(-1);
+
+                }
+            }
+
+
             user_ctr = (string)Session["Auction_user_ctr"] ?? "";
             fullname = (string)Session["Auction_Fullname"] ?? "";
 
@@ -61,8 +76,8 @@ namespace Auction
             {
                 if (Request.Cookies["Auction_user_ctr"] != null)
                 {
-                    user_ctr = Request.Cookies["Auction_user_ctr"].Value;
-                    fullname = Request.Cookies["Auction_Fullname"].Value;
+                    user_ctr = Request.Cookies["Auction_user_ctr"].Value + "";
+                    fullname = Request.Cookies["Auction_Fullname"].Value + "";
                 }
             }
 

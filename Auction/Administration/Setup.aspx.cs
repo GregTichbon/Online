@@ -22,6 +22,7 @@ namespace Auction.Administration
         public string increment;
         public string openfrom;
         public string closeat;
+        public string closedmessage;
         public string termsandconditions;
         public string url;
         public string auctiontype;
@@ -55,7 +56,16 @@ namespace Auction.Administration
                 message = parameters["Message"];
                 increment = parameters["Increment"];
                 openfrom = parameters["OpenFrom"];
+                if (openfrom != "")
+                {
+                    openfrom = Convert.ToDateTime(openfrom).ToString("d-MMM-yy hh:mm");
+                }
                 closeat = parameters["Closeat"];
+                if(closeat != "")
+                {
+                    closeat = Convert.ToDateTime(closeat).ToString("d-MMM-yy hh:mm");
+                }
+                closedmessage = parameters["ClosedMessage"];
                 termsandconditions = parameters["TermsAndConditions"];
                 url = parameters["URL"];
                 auctiontype = parameters["AuctionType"];
@@ -93,6 +103,7 @@ namespace Auction.Administration
             cmd.Parameters.Add("@increment", SqlDbType.VarChar).Value = Request.Form["increment"];
             cmd.Parameters.Add("@openfrom", SqlDbType.VarChar).Value = Request.Form["openfrom"];
             cmd.Parameters.Add("@closeat", SqlDbType.VarChar).Value = Request.Form["closeat"];
+            cmd.Parameters.Add("@closedmessage", SqlDbType.VarChar).Value = Request.Form["closedmessage"];
             cmd.Parameters.Add("@termsandconditions", SqlDbType.VarChar).Value = Request.Form["termsandconditions"];
             cmd.Parameters.Add("@url", SqlDbType.VarChar).Value = Request.Form["url"];
             cmd.Parameters.Add("@auctiontype", SqlDbType.VarChar).Value = Request.Form["auctiontype"];

@@ -102,7 +102,7 @@
                 <th class="numeric">Reserve</th>
                 <th class="numeric">Bid</th>
                 <th class="numeric">Auto Bid</th>
-                <th class="bidnotactionedtd">Response</th>
+                <th class="bidnotactionedtdX">Response</th>
             </tr>
         </thead>
         <tbody>

@@ -90,6 +90,37 @@ namespace Auction
             Dictionary<string, string> parameters;
             parameters = General.Functions.Functions.get_Auction_Parameters(Context.Request.Url.AbsoluteUri);
 
+            
+
+
+            Boolean userok = true;
+            string status = "";
+            string message = "";
+            string highestbid = "";
+            string highestbidmessage = "";
+            string highestbidder_user_ctr = "";
+            string highestbidder_fullname = "";
+            string thisusersautobid = "";
+            double nextbid = 0;
+            string nextminimum = "";
+
+            if (parameters["Closeat"] != "")
+            {
+                if (DateTime.Now > Convert.ToDateTime(parameters["Closeat"]))
+                {
+                    //logout
+                    HttpContext.Current.Session.Remove("Auction_user_ctr");
+                    HttpContext.Current.Session.Remove("Auction_Fullname");
+
+                    HttpContext.Current.Response.Cookies["Auction_user_ctr"].Expires = DateTime.Now.AddDays(-1);
+                    HttpContext.Current.Response.Cookies["Auction_Fullname"].Expires = DateTime.Now.AddDays(-1);
+
+                    status = "Auction closed";
+                    message = "Your bid has not been accepted as the auction has now closed.";
+                    goto exit;
+                }
+            }
+
             Generic.Functions gFunctions = new Generic.Functions();
             string emailBCC = parameters["EmailAlerts"];
             string host = parameters["EmailHost"];
@@ -115,19 +146,7 @@ namespace Auction
             }
             */
 
-
             String strConnString = ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ConnectionString;
-
-            Boolean userok = true;
-            string status = "";
-            string message = "";
-            string highestbid = "";
-            string highestbidmessage = "";
-            string highestbidder_user_ctr = "";
-            string highestbidder_fullname = "";
-            string thisusersautobid = "";
-            double nextbid = 0;
-            string nextminimum = "";
 
             if (user_ctr == "" && passcode != "")
             {
@@ -447,6 +466,7 @@ namespace Auction
                 con.Dispose();
             }
 
+ exit:
             makeBidResponse resultclass = new makeBidResponse();
             resultclass.status = status;
             resultclass.message = message;

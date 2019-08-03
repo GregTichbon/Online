@@ -41,15 +41,23 @@
         <tr>
             <td>Open from</td>
             <td>
-                <input type="text" name="openfrom" id="openfrom" value="<%=openfrom%>" maxlength="2" /></td>
+                <input type="text" name="openfrom" id="openfrom" value="<%=openfrom%>" maxlength="20" /></td>
 
         </tr>
         <tr>
             <td>Close at</td>
             <td>
-                <input type="text" name="closeat" id="closeat" value="<%=closeat%>" maxlength="2" /></td>
+                <input type="text" name="closeat" id="closeat" value="<%=closeat%>" maxlength="20" /></td>
 
         </tr>
+
+        <tr>
+            <td>Closed Message</td>
+            <td>
+                <textarea name="closedmessage" id="closedmessage"><%=closedmessage%></textarea>
+                <code style="width: 400px"><%=closedmessage%></code>
+        </tr>
+
         <tr>
             <td>Terms and Conditions</td>
             <td>

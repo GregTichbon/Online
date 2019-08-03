@@ -16,6 +16,7 @@ namespace Auction
     {
         public string html = "";
         public string categories = "";
+        public string startupmessage = "";
         public Dictionary<string, string> parameters;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -156,6 +157,21 @@ namespace Auction
             #endregion
 
             parameters = General.Functions.Functions.get_Auction_Parameters(Request.Url.AbsoluteUri);
+
+            if (parameters["Closeat"] != "")
+            {
+                if (DateTime.Now > Convert.ToDateTime(parameters["Closeat"]))
+                {
+                    //logout
+                    HttpContext.Current.Session.Remove("Auction_user_ctr");
+                    HttpContext.Current.Session.Remove("Auction_Fullname");
+
+                    HttpContext.Current.Response.Cookies["Auction_user_ctr"].Expires = DateTime.Now.AddDays(-1);
+                    HttpContext.Current.Response.Cookies["Auction_Fullname"].Expires = DateTime.Now.AddDays(-1);
+
+                    startupmessage = "startupmessage('showmessage.aspx?id=closedmessage','This Auction has closed.')";
+                }
+            }
 
             //---------------------------------------
 

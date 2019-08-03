@@ -48,6 +48,9 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -56,6 +59,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -74,11 +79,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24ReadMe.txt" />
     <Content Include="Administration\Category.aspx" />
     <Content Include="Administration\CategoryList.aspx" />
     <Content Include="Administration\ItemBids.aspx" />
     <Content Include="Administration\logoff.aspx" />
+    <Content Include="Administration\Reportmenu.aspx" />
     <Content Include="Administration\Reports\ItemBids.aspx" />
+    <Content Include="Administration\Reports\Winners.aspx" />
     <Content Include="Administration\Resequence.aspx" />
     <Content Include="Administration\Setup.aspx" />
     <Content Include="Administration\Test.aspx" />
@@ -87,6 +95,7 @@
     <Content Include="Administration\UserItemsBidOn.aspx" />
     <Content Include="Administration\UserList.aspx" />
     <Content Include="Administration\Winners.aspx" />
+    <Content Include="bin\EPPlus.dll" />
     <Content Include="Data.asmx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\Auction2\dollarsign.png" />
@@ -100,6 +109,7 @@
     <Content Include="Auction.Master" />
     <None Include="Properties\PublishProfiles\auction.thegreatball.nz.pubxml" />
     <None Include="Properties\PublishProfiles\TOH-APP Auction.pubxml" />
+    <Content Include="Templates\winners.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,6 +120,7 @@
     <Content Include="Register.aspx" />
     <Content Include="ShowItem.aspx" />
     <Content Include="ShowItem2.aspx" />
+    <Content Include="showmessage.aspx" />
     <Content Include="TestandPlay\JqueryPosition1.html" />
     <Content Include="TestandPlay\Slideshow1.aspx" />
     <Content Include="TestandPlay\Test1.html" />
@@ -775,6 +786,13 @@
     <Compile Include="Administration\logoff.aspx.designer.cs">
       <DependentUpon>logoff.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\Reportmenu.aspx.cs">
+      <DependentUpon>Reportmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Reportmenu.aspx.designer.cs">
+      <DependentUpon>Reportmenu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\Reports\ItemBids.aspx.cs">
       <DependentUpon>ItemBids.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -787,6 +805,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CR_ItemBids.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Administration\Reports\Winners.aspx.cs">
+      <DependentUpon>Winners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Reports\Winners.aspx.designer.cs">
+      <DependentUpon>Winners.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\Resequence.aspx.cs">
       <DependentUpon>Resequence.aspx</DependentUpon>
@@ -908,6 +933,13 @@
     </Compile>
     <Compile Include="ShowItem2.aspx.designer.cs">
       <DependentUpon>ShowItem2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="showmessage.aspx.cs">
+      <DependentUpon>showmessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="showmessage.aspx.designer.cs">
+      <DependentUpon>showmessage.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestandPlay\Slideshow1.aspx.cs">
       <DependentUpon>Slideshow1.aspx</DependentUpon>
