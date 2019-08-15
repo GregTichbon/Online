@@ -292,6 +292,14 @@
     <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
     <Content Include="Dependencies\StickyTableCells\README.md" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="Row\CalculatePrognostic.aspx" />
+    <Content Include="Row\MaintainPrognostic.aspx" />
+    <Content Include="Vehicles\dailyreminder.asp" />
+    <Content Include="Vehicles\DailyReminder.aspx" />
+    <Content Include="Vehicles\default.asp" />
+    <Content Include="Vehicles\default.aspx" />
+    <Content Include="Vehicles\posts.asmx" />
+    <Content Include="Vehicles\Process.asp" />
     <Content Include="YearPlanner\FullCalendarIO2.html" />
     <Content Include="YearPlanner\FullCalendarIO2.aspx" />
     <Content Include="YearPlanner\FullCalendarIO_Original.html" />
@@ -1261,6 +1269,13 @@
     <Compile Include="Raffles\UBC2019A\Ticket.aspx.designer.cs">
       <DependentUpon>Ticket.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Row\CalculatePrognostic.aspx.cs">
+      <DependentUpon>CalculatePrognostic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\CalculatePrognostic.aspx.designer.cs">
+      <DependentUpon>CalculatePrognostic.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Row\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1299,6 +1314,13 @@
     </Compile>
     <Compile Include="Row\Entry3.aspx.designer.cs">
       <DependentUpon>Entry3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Row\MaintainPrognostic.aspx.cs">
+      <DependentUpon>MaintainPrognostic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Row\MaintainPrognostic.aspx.designer.cs">
+      <DependentUpon>MaintainPrognostic.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\posts.asmx.cs">
       <DependentUpon>posts.asmx</DependentUpon>
@@ -1558,6 +1580,21 @@
     </Compile>
     <Compile Include="UBC\ZoneTraining.aspx.designer.cs">
       <DependentUpon>ZoneTraining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicles\DailyReminder.aspx.cs">
+      <DependentUpon>DailyReminder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicles\DailyReminder.aspx.designer.cs">
+      <DependentUpon>DailyReminder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicles\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicles\posts.asmx.cs">
+      <DependentUpon>posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="YearPlanner\FullCalendarIO.aspx.cs">
       <DependentUpon>FullCalendarIO.aspx</DependentUpon>

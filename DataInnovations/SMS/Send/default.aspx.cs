@@ -17,8 +17,8 @@ namespace SMSChecker
 {
     public partial class _default : System.Web.UI.Page
     {
-        string IPAddress = "";
-        string Port = "";
+        //string IPAddress = "";
+        //string Port = "";
         //string UserName = "";
         //string Password = "";
         string Operation = "";
@@ -56,7 +56,31 @@ namespace SMSChecker
             }
             else
             {
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
                 String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlCommand cmd = new SqlCommand("Get_Parameters", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = con;
+                try
+                {
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read()) { 
+                        parameters.Add(dr["Name"].ToString(), dr["Value"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+                /*
                 SqlConnection con = new SqlConnection(strConnString);
 
                 SqlCommand cmd = new SqlCommand("GET_PARAMETER", con);
@@ -78,7 +102,7 @@ namespace SMSChecker
                     throw ex;
                 }
                 finally
-                {
+                {Message
                     con.Close();
                 }
                 cmd.Parameters.Clear();
@@ -102,9 +126,11 @@ namespace SMSChecker
                 {
                     con.Close();
                 }
+                */
 
                 Message = HttpUtility.UrlEncode(Message);
-                WebRequest wr = WebRequest.Create("http://192.168.10.21:8080/?number=" + PhoneNumber + "&text=" + Message);
+                //WebRequest wr = WebRequest.Create("http://192.168.10.21:8080/?number=" + PhoneNumber + "&text=" + Message);
+                WebRequest wr = WebRequest.Create("http://" + parameters["IPAddress"] + parameters["Port"] + parameters["url"] + "?" + parameters["FieldNumber"] + "=" + PhoneNumber + "&" + parameters["FieldMessage"] + "=" + Message);
                 wr.Timeout = 3500;
 
                 //Console.WriteLine(i);

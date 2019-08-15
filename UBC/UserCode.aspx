@@ -49,7 +49,7 @@
         <table style="width:100%">
             <tr>
                 <td style="width:350px">
-                    <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
+                    <img src="dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
                 <td style="text-align:center">
                     <h1>User Code Entry
                     </h1>

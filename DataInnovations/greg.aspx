@@ -40,7 +40,7 @@
         <a href="sms/log.aspx">SMS Log</a>
         <br />
         <br />
-        <a href="http://datainn.co.nz/vehiclereminders/default.asp">Vehicle Reminders</a>
+        <a href="http://office.datainn.co.nz/vehicles">Vehicle Reminders</a>
         <br />
         <br />
         <a href="log.aspx">Log</a>

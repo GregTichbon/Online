@@ -68,6 +68,39 @@ namespace DataInnovations.Row
             string passresult = JS.Serialize(resultclass);
             return (passresult);
         }
+
+        [WebMethod]
+        public standardResponse updateprognostic(NameValue[] formVars)
+        {
+
+            string field = formVars.Form("field");
+            string id = formVars.Form("id");
+            string value = formVars.Form("value");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Update_prognostic";
+            cmd.Parameters.Add("@key", SqlDbType.VarChar).Value = id;
+            cmd.Parameters.Add("@field", SqlDbType.VarChar).Value = field;
+            cmd.Parameters.Add("@value", SqlDbType.VarChar).Value = value;
+
+            con.Open();
+            string user_ctr = cmd.ExecuteScalar().ToString();
+            con.Close();
+            con.Dispose();
+
+
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Saved";
+
+            return (resultclass);
+        }
+
     }
 
     public class NameValue

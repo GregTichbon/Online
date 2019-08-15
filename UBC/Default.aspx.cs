@@ -23,6 +23,13 @@ namespace UBC
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
             {
                 html += "<br /><a href=\"people/communicate.aspx\">Communicate</a>";
+            }
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1000001")) 
+            {
+                html += "<br /><a href=\"people/Masterscommunicate.aspx\">Masters Communicate</a>";
+            }
+                if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
+            {
                 html += "<br /><a href=\"people/bankimport.aspx\">Bank Import</a>";
                 html += "<br /><a href=\"people/bankallocate.aspx\">Bank alloction</a>";
                 html += "<br /><a href=\"people/transactions.aspx\">Transactions</a>";

@@ -57,7 +57,7 @@ namespace UBC.People
         {
             if(Session["UBC_guid"] == null)
             {
-                Response.Redirect("../usercode.aspx");
+                Response.Redirect("registeraccess.aspx");
             }
             hf_guid = Session["UBC_guid"].ToString(); //   Request.QueryString["id"];
            

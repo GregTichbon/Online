@@ -465,6 +465,7 @@
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.woff" />
     <Content Include="Go\Doc1\default.aspx" />
     <Content Include="Go\Register\default.aspx" />
+    <Content Include="LearntoRow\default.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="People\Attendance.aspx" />
     <Content Include="People\Attendance24-28Jan2019.aspx" />
@@ -484,14 +485,21 @@
     <Content Include="People\Images\100.jpg" />
     <Content Include="People\Images\103.jpg" />
     <Content Include="People\Images\105.jpg" />
+    <Content Include="People\Images\107.jpg" />
     <Content Include="People\Images\109.jpg" />
     <Content Include="People\Images\139.jpg" />
+    <Content Include="People\Images\148.jpg" />
+    <Content Include="People\Images\149.jpg" />
+    <Content Include="People\Images\150.jpg" />
     <Content Include="People\Images\96.jpg" />
     <Content Include="People\%24Notes\%24Notes.txt" />
     <Content Include="Dependencies\Images\Scissors.png" />
+    <Content Include="People\LearntoRow\default.aspx" />
     <Content Include="People\main.aspx" />
+    <Content Include="People\MastersCommunicate.aspx" />
     <Content Include="People\message.aspx" />
     <Content Include="People\Posts.asmx" />
+    <Content Include="People\RegisterAccess.aspx" />
     <Content Include="People\RegisterDisplay.aspx" />
     <Content Include="People\Registration.aspx" />
     <Content Include="People\Reports\ComingEventsList.aspx" />
@@ -514,6 +522,8 @@
     <Content Include="People\Reports\Tracker.aspx" />
     <Content Include="People\Resources.aspx" />
     <Content Include="People\Security\LogOut.aspx" />
+    <Content Include="People\SignUp.aspx" />
+    <Content Include="People\SignUpComplete.aspx" />
     <Content Include="People\TestAndPlay\Email1.aspx" />
     <Content Include="People\TestAndPlay\Export1.aspx" />
     <Content Include="People\Transaction.aspx" />
@@ -526,6 +536,7 @@
     <Content Include="XMLFile1.xml" />
     <Content Include="XSLTFile1.xslt" />
     <Content Include="Dependencies\fullcalendar\demos\json\events.json" />
+    <Content Include="People\SchoolLearntoRowAug2019.pdf" />
     <None Include="packages.config" />
     <Content Include="Dependencies\UBC.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -757,6 +768,13 @@
     <Compile Include="Go\Register\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LearntoRow\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearntoRow\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="localfunctions.cs" />
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
@@ -874,6 +892,13 @@
     <Compile Include="People\FindPhone.aspx.designer.cs">
       <DependentUpon>FindPhone.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\LearntoRow\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\LearntoRow\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\List.aspx.cs">
       <DependentUpon>List.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -909,6 +934,13 @@
     <Compile Include="People\Maint2.aspx.designer.cs">
       <DependentUpon>Maint2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\MastersCommunicate.aspx.cs">
+      <DependentUpon>MastersCommunicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\MastersCommunicate.aspx.designer.cs">
+      <DependentUpon>MastersCommunicate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\message.aspx.cs">
       <DependentUpon>message.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -926,6 +958,13 @@
     </Compile>
     <Compile Include="People\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\RegisterAccess.aspx.cs">
+      <DependentUpon>RegisterAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\RegisterAccess.aspx.designer.cs">
+      <DependentUpon>RegisterAccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\RegisterDisplay.aspx.cs">
       <DependentUpon>RegisterDisplay.aspx</DependentUpon>
@@ -1163,6 +1202,20 @@
     </Compile>
     <Compile Include="People\Security\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\SignUp.aspx.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\SignUp.aspx.designer.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\SignUpComplete.aspx.cs">
+      <DependentUpon>SignUpComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\SignUpComplete.aspx.designer.cs">
+      <DependentUpon>SignUpComplete.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Test1.aspx.cs">
       <DependentUpon>Test1.aspx</DependentUpon>

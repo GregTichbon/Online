@@ -26,7 +26,7 @@
 <body>
     <form id="form1" runat="server">
         <table class="table table-striped">
-            <asp:Literal ID="lit_html" runat="server"></asp:Literal>
+          <%= html %>
         </table>
     </form>
 </body>

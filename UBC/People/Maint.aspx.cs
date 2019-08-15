@@ -66,6 +66,8 @@ namespace UBC.People
         public string[] transactions_system = new string[2] { "UBC", "Friends" };
         public string[] transactions_code = new string[9] { "Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees", "Fundraising", "Grant Allocation", "Subsidy" };
         public string[] invoiceaddresstypes = new string[4] { "Email", "Text", "Mail", "Hand Deliver" };
+        public string category_category;
+
         public string person_financial_events;
 
         public string html_tabs = "";
@@ -97,6 +99,16 @@ namespace UBC.People
             returnto = Request.QueryString["returnto"] + "";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            Dictionary<string, string> category_options = new Dictionary<string, string>();
+            category_options["usevalues"] = "";
+            category_options["selecttype"] = "Value";
+            //category_options["storedprocedure"] = "get_categories";
+            //category_options["storedprocedurename"] = "get_categories";
+            //category_options["parameters"] = parameters["Auction_CTR"];
+            Generic.Functions gFunctions = new Generic.Functions();
+            category_category = gFunctions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
+
             if (hf_guid != "new")
             {
                 SqlConnection con = new SqlConnection(strConnString);
@@ -337,6 +349,7 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     //-------------------------------------------------------------------------------------
                     html_arrangements = "TO DO";
                 }
+
 
                 //-------------------------------------------------------------------------------------
                 //RELATIONSHIPS
@@ -602,7 +615,23 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     throw ex;
                 }
                 //-------------------------------------------------------------------------------------
-                html_category = "<tr><th>Category</th><th>From</th><th>To</th><th>Note</th></tr>";
+                //CATEGORY
+
+                html_category = "<thead>";
+                html_category += "<tr><th style=\"width:50px;text-align:center\"></th><th>Category</th><th>Start</th><th>End</th><th>Notes</th><th style=\"width:100px\">Action / <a class=\"categoryedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                html_category += "</thead>";
+                html_category += "<tbody>";
+
+                //hidden row, used for creating new rows client side
+                html_category += "<tr style=\"display:none\">";
+                html_category += "<td></td>";
+                html_category += "<td></td>";
+                html_category += "<td></td>";
+                html_category += "<td></td>";
+                html_category += "<td></td>";
+                html_category += "<td><a href=\"javascript:void(0)\" class=\"categoryedit\" data-mode=\"edit\">Edit</td>";
+                html_category += "</tr>";
+
 
                 cmd.CommandText = "get_person_category";
                 cmd.Parameters.Clear();
@@ -626,22 +655,29 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                         string enddate = "";// Convert.ToDateTime(dr["startdate"]).ToString("dd MMM yy");
                         string note = dr["note"].ToString();
 
-                        html_category += "<tr>";
-                        html_category += "<td>" + category + "</td>";
+
+                        html_category += "<tr id=\"category_" + person_category_id + "\">";
+                        html_category += "<td style=\"text-align:center\"></td>";
+                        html_category += "<td category_id=\"" + category_id + "\">" + category + "</td>";
                         html_category += "<td>" + startdate + "</td>";
                         html_category += "<td>" + enddate + "</td>";
                         html_category += "<td>" + note + "</td>";
-
+                        html_category += "<td><a href=\"javascript:void(0)\" class=\"categoryedit\" data-mode=\"edit\">Edit</td>";
+                        //html_finance += "<td style=\"text-align:center\">').html(action) 
+                        //action = '<a class="a_delete" href="javascript:void(0)">Delete</a>';
                         html_category += "</tr>";
 
 
                     }
                     dr.Close();
+                    html_category += "</tbody>";
+
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
+                //-------------------------------------------------------------------------------------
 
                 //-------------------------------------------------------------------------------------
                 html_results = "<thead><tr>";
@@ -867,6 +903,31 @@ tb_caregiverlandline = dr["caregiverlandline"].ToString();
                     result = cmd.ExecuteScalar().ToString();
                     con.Close();
                 }
+
+                if (key.StartsWith("category_"))
+                {
+                    string person_category_id = key.Substring(9);
+                    if (person_category_id.StartsWith("new"))
+                    {
+                        person_category_id = "new";
+                    }
+
+                    string[] valuesSplit = Request.Form[key].Split('\x00FE');
+                    cmd.CommandText = "Update_Person_category";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@person_category_id", SqlDbType.VarChar).Value = person_category_id;
+                    cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
+                    cmd.Parameters.Add("@category_id", SqlDbType.VarChar).Value = valuesSplit[0];
+                    cmd.Parameters.Add("@startdate", SqlDbType.VarChar).Value = valuesSplit[1];
+                    cmd.Parameters.Add("@enddate", SqlDbType.VarChar).Value = valuesSplit[2];
+                    cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[3];
+
+                    con.Open();
+                    result = cmd.ExecuteScalar().ToString();
+                    con.Close();
+                }
+
+
             }
             //finally
             //{

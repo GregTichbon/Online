@@ -28,8 +28,8 @@ namespace DataInnovations.Row
 
             string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Select [Discipline_CTR] as [Value], [Discipline] as [Label] from [Discipline] order by [Sequence]", con);
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = new SqlCommand("Get_discipline_DD", con);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Connection = con;
             try
@@ -66,13 +66,13 @@ namespace DataInnovations.Row
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void category(string discipline)
+        public void boat(string discipline)
         {
             List<dropdownClass> dropdown = new List<dropdownClass>();
 
             string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Category_DD", con);
+            SqlCommand cmd = new SqlCommand("Get_boat_DD", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
 
@@ -109,9 +109,12 @@ namespace DataInnovations.Row
             Context.Response.Write(JS.Serialize(dropdown));
         }
 
+        
+        
+
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void division(string discipline, string category)
+        public void division(string discipline, string boat)
         {
             List<dropdownClass> dropdown = new List<dropdownClass>();
 
@@ -119,8 +122,9 @@ namespace DataInnovations.Row
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("Get_Division_DD", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
             cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
-            cmd.Parameters.Add("@category_ctr", SqlDbType.Int).Value = category;
+            cmd.Parameters.Add("@boat_ctr", SqlDbType.Int).Value = boat;
 
             cmd.Connection = con;
             try
@@ -158,17 +162,17 @@ namespace DataInnovations.Row
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void gender(string discipline, string category, string division)
+        public void gender(string discipline, string boat, string division)
         {
             List<dropdownClass> dropdown = new List<dropdownClass>();
 
             string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_Gender_DD", con);
+            SqlCommand cmd = new SqlCommand("Get_gender_DD", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
-            cmd.Parameters.Add("@category_ctr", SqlDbType.Int).Value = category;
-            cmd.Parameters.Add("@division_id", SqlDbType.VarChar).Value = division;
+            cmd.Parameters.Add("@boat_ctr", SqlDbType.Int).Value = boat;
+            cmd.Parameters.Add("@division_ctr", SqlDbType.Int).Value = division;
 
             cmd.Connection = con;
             try
@@ -204,20 +208,21 @@ namespace DataInnovations.Row
         }
 
 
+
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void subcategory(string discipline, string division, string gender, string category)
+        public void prognostic(string discipline, string boat, string division, string gender)
         {
-            List<dropdownClass> dropdown = new List<dropdownClass>();
+            List<prognosticClass> dropdown = new List<prognosticClass>();
 
             string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand("Get_SubCategory_DD", con);
+            SqlCommand cmd = new SqlCommand("Get_prognostic", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@discipline_ctr", SqlDbType.Int).Value = discipline;
-            cmd.Parameters.Add("@division_id", SqlDbType.VarChar).Value = division;
-            cmd.Parameters.Add("@gender_id", SqlDbType.VarChar).Value = gender;
-            cmd.Parameters.Add("@category_ctr", SqlDbType.Int).Value = category;
+            cmd.Parameters.Add("@boat_ctr", SqlDbType.Int).Value = boat;
+            cmd.Parameters.Add("@division_ctr", SqlDbType.Int).Value = division;
+            cmd.Parameters.Add("@gender_ctr", SqlDbType.Int).Value = gender;
 
 
             cmd.Connection = con;
@@ -229,10 +234,14 @@ namespace DataInnovations.Row
                 {
                     while (dr.Read())
                     {
-                        dropdown.Add(new dropdownClass
+                        dropdown.Add(new prognosticClass
                         {
-                            label = dr["label"].ToString(),
-                            value = dr["value"].ToString()
+                            prognostic_ctr = dr["prognostic_ctr"].ToString(),
+                            description = dr["description"].ToString(),
+                            code = dr["code"].ToString(),
+                            seats = dr["seats"].ToString(),
+                            coxed = dr["coxed"].ToString(),
+                            prognostictime = dr["prognostictime"].ToString()
                         });
                     }
 
@@ -350,6 +359,16 @@ namespace DataInnovations.Row
     {
         public string label;
         public string value;
+    }
+
+    public class prognosticClass
+    {
+        public string prognostic_ctr;
+        public string description;
+        public string code;
+        public string seats;
+        public string coxed;
+        public string prognostictime;
     }
     public class subcategorydetailsClass
     {

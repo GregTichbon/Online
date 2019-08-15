@@ -90,6 +90,22 @@
                     }).appendTo('#form1');
                 });
 
+                $('#categorytable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_category = $(this).find('td:eq(1)').attr('category_id');
+                    tr_startdate = $(this).find('td:eq(2)').text();
+                    tr_enddate = $(this).find('td:eq(3)').text();
+                    tr_note = $(this).find('td:eq(4)').text();
+                   
+                    value = tr_category + delim + tr_startdate + delim + tr_enddate + delim + tr_note;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
+
+                });
+
                 /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
                      $(tr).find('td.item').each(function (i2, td) {
                          id = $(td).attr('id');
@@ -179,6 +195,7 @@
 
             });
 
+            /* ========================================= TRANSACTIONS ===========================================*/
             $(document).on('click', '.transactionsedit', function () {
                 mode = $(this).data('mode');
                 if (mode == "add") {
@@ -252,6 +269,75 @@
 
 
                 $("#dialog-transactions").dialog('option', 'buttons', myButtons);
+            })
+
+             /* ========================================= CATEGORY ===========================================*/
+
+            $(document).on('click', '.categoryedit', function () {
+                mode = $(this).data('mode');
+                if (mode == "add") {
+                    $("#dialog-category").find(':input').val('');
+                } else {
+                    tr = $(this).closest('tr');
+                    $('#dd_category_category').val($(tr).find('td').eq(1).attr('category_id'));
+                    $('#tb_category_startdate').val($(tr).find('td').eq(2).text());
+                    $('#tb_category_enddate').val($(tr).find('td').eq(3).text());
+                    $('#tb_category_note').val($(tr).find('td').eq(4).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-category").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true
+                });
+
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if (mode == "add") {
+                            tr = $('#div_category > table > tbody tr:first').clone();
+                            $(tr).removeAttr('style');
+                            $('#div_category > table > tbody > tr:last').before(tr);
+                            $(tr).attr('id', 'category_new_' + get_newctr());
+                            $(tr).find('td:first').attr("class", "inserted");
+                        } else {
+                            $(tr).find('td:first').attr("class", "changed");
+
+                        }
+                        $(tr).attr('maint', 'changed');
+                        $(tr).find('td').eq(1).text($('#dd_category_category option:selected').text());
+                        $(tr).find('td').eq(1).attr('category_id', $('#dd_category_category').val());
+                        $(tr).find('td').eq(2).text($('#tb_category_startdate').val());
+                        $(tr).find('td').eq(3).text($('#tb_category_enddate').val());
+                        $(tr).find('td').eq(4).text($('#tb_category_note').val());
+                        alert("Database will be updated when record submited");
+                        $(this).dialog("close");
+                    }
+                }
+
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this category?")) {
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            alert('To do: Delete in database');
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+
+
+                $("#dialog-category").dialog('option', 'buttons', myButtons);
             })
 
             /* ========================================= PHONE ===========================================*/
@@ -696,6 +782,51 @@
                 -->
             </div>
 
+            <!-- =================================CATEGORY===================================  -->
+            <div id="dialog-category" title="Maintain category" style="display: none" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_category_category">System</label>
+                    <div class="col-sm-8">
+                        <select id="dd_category_category" name="dd_category_category" class="form-control">
+                            <%=  category_category  %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tb_category_startdate" class="control-label col-sm-4">
+                        Start Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_category_startdate" name="tb_category_startdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tb_category_enddate" class="control-label col-sm-4">
+                        End Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_category_enddate" name="tb_category_enddate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_category_note">Note</label>
+                    <div class="col-sm-8">
+                        <input id="tb_category_note" name="tb_category_note" type="text" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+
             <!-- ================================= PHONE ===================================  -->
             <div id="dialog-phones" title="Maintain phones" style="display: none" class="form-horizontal">
                 <div class="form-group">
@@ -892,7 +1023,7 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_category" class="tab-pane fade in">
                     <h3>Category</h3>
-                    <table class="table">
+                    <table id="categorytable" class="table">
                         <%= html_category %>
                     </table>
                 </div>
