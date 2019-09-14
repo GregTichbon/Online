@@ -50,6 +50,9 @@
         <a href="http://iti.ninja/post.asmx">Iti.ninja Create Link</a><br />
         <br />
         <a href="accounts">Personal Accounts</a>
+        <br />
+        <a href="http://ubc.org.nz/people/signupList.aspx">Schools Learn to Row 2019</a>
+        
 
     </form>
 </body>

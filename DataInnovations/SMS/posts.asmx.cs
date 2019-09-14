@@ -65,7 +65,6 @@ namespace DataInnovations.SMS
 
         }
         
-
         [WebMethod]
         public standardResponse2 updatenumber(NameValue[] formVars)    //you can't pass any querystring params
         {

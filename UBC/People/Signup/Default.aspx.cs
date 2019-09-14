@@ -13,9 +13,9 @@ using System.Xml.Linq;
 using System.Xml.Xsl;
 using Generic;
 
-namespace UBC.People
+namespace UBC.People.Signup
 {
-    public partial class SignUp : System.Web.UI.Page
+    public partial class Default : System.Web.UI.Page
     {
         public string hf_guid = "";
         public string hf_signup_ctr;
@@ -54,13 +54,10 @@ namespace UBC.People
         public string[] schoolyear = new string[5] { "9", "10", "11", "12", "13" };
         public string[] swimmer = new string[2] { "I CAN swim 50 meters in light clothes unassisted", "I CAN NOT swim 50 meters in light clothes unassisted" };
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
             hf_guid = Request.QueryString["id"] + "";
-
-
             if (hf_guid != "")
             {
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -70,7 +67,6 @@ namespace UBC.People
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "get_signup";
                 cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
-
 
                 cmd.Connection = con;
                 try
@@ -104,7 +100,7 @@ namespace UBC.People
                         //tb_parentcaregiver2 = dr["parentcaregiver2"].ToString();
                         //tb_parentcaregiver2mobilephone = dr["parentcaregiver2_mobilephone"].ToString();
                         //tb_parentcaregiver2emailaddress = dr["parentcaregiver2_emailaddress"].ToString();
-
+                        tb_notes = dr["notes"].ToString();
 
                         //if (tb_birthdate != "")
                         //{
@@ -123,12 +119,14 @@ namespace UBC.People
                     con.Close();
                     con.Dispose();
                 }
-
             }
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+            Boolean sendEmail = false;
+            Boolean sendText = false;
+
             Functions gfunctions = new Functions();
 
             if (hf_guid == "")
@@ -175,7 +173,7 @@ namespace UBC.People
 
             #region setup specific data
             cmd.CommandText = "Update_signup";
-            cmd.Parameters.Add("@signupevent_ctr", SqlDbType.Int).Value = 2;
+            cmd.Parameters.Add("@signupprogram_ctr", SqlDbType.Int).Value = 2;
 
             cmd.Parameters.Add("@signup_ctr", SqlDbType.VarChar).Value = hf_signup_ctr;
             cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
@@ -229,161 +227,168 @@ namespace UBC.People
                 con.Dispose();
             }
 
-            if(1 == 2) { 
-
-            #region BuildXML
-            XElement rootXml = new XElement("root");
-            DataTable repeatertable = new DataTable("Repeater");
-
-            repeatertable.Columns.Add("Name", typeof(string));
-            repeatertable.Columns.Add("Index", typeof(int));
-            repeatertable.Columns.Add("Field", typeof(string));
-            repeatertable.Columns.Add("Value", typeof(string));
-
-            rootXml.Add(new XElement("reference", hf_signup_ctr));
-
-            string[] keynames = new string[11] { "name", "breed1", "breed2", "years", "months", "colour1", "colour2", "gender", "neutered", "chip", "marks" };
-
-            foreach (string key in Request.Form)
+            if (1 == 2)
             {
-                //if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
-                if (!key.StartsWith("__") && !key.StartsWith("ctl") && !key.StartsWith("clientsideonly_") && !key.StartsWith("btn_"))
-                {
 
-                    string[] keyparts = key.Split('_');
-                    if (key.StartsWith("item_"))
+                #region BuildXML
+                XElement rootXml = new XElement("root");
+                DataTable repeatertable = new DataTable("Repeater");
+
+                repeatertable.Columns.Add("Name", typeof(string));
+                repeatertable.Columns.Add("Index", typeof(int));
+                repeatertable.Columns.Add("Field", typeof(string));
+                repeatertable.Columns.Add("Value", typeof(string));
+
+                rootXml.Add(new XElement("reference", hf_signup_ctr));
+
+                string[] keynames = new string[11] { "name", "breed1", "breed2", "years", "months", "colour1", "colour2", "gender", "neutered", "chip", "marks" };
+
+                foreach (string key in Request.Form)
+                {
+                    //if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
+                    if (!key.StartsWith("__") && !key.StartsWith("ctl") && !key.StartsWith("clientsideonly_") && !key.StartsWith("btn_"))
                     {
 
-                        string ctr = keyparts[2];
-
-                        string[] values = Request.Form[key].Split(new char[] { 'þ' });
-
-                        for (int i = 0; i <= values.Length - 2; i++)
+                        string[] keyparts = key.Split('_');
+                        if (key.StartsWith("item_"))
                         {
-                            repeatertable.Rows.Add("Dog", ctr, keynames[i], values[i]);
+
+                            string ctr = keyparts[2];
+
+                            string[] values = Request.Form[key].Split(new char[] { 'þ' });
+
+                            for (int i = 0; i <= values.Length - 2; i++)
+                            {
+                                repeatertable.Rows.Add("Dog", ctr, keynames[i], values[i]);
+                            }
+                        }
+                        else
+                        {
+                            rootXml.Add(new XElement(keyparts[1], Request.Form[key]));
                         }
                     }
-                    else
+                }
+
+                Functions functions = new Functions();
+                functions.populateXML(repeatertable, rootXml);
+                #endregion //BuildXML
+
+                string emailbodyTemplate = "SignupEmail.xslt";
+                string emailSubject = "Union Boat Club Rower Registration";
+                string emailBCC = "";
+                string screenTemplate = "RegisterScreen.xslt";
+                //string host = "datainn.co.nz";
+                string host = "70.35.207.87";
+                string emailfrom = "ltr@datainn.co.nz";
+                string emailfromname = "Union Boat Club";
+                string password = "m33t1ng";
+                string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
+
+
+                string path = Server.MapPath(".");
+                XmlDocument reader = new XmlDocument();
+                reader.LoadXml(rootXml.ToString());
+
+                #region email
+                XslCompiledTransform EmailXslTrans = new XslCompiledTransform();
+                EmailXslTrans.Load(path + "\\" + emailbodyTemplate);
+
+                StringBuilder EmailOutput = new StringBuilder();
+                TextWriter EmailWriter = new StringWriter(EmailOutput);
+
+                EmailXslTrans.Transform(reader, null, EmailWriter);
+                string emailbodydocument = EmailOutput.ToString();
+
+                //THE EMAIL TEMPLATE
+                string emailtemplate = Server.MapPath("..") + "\\EmailTemplate\\standard.html";
+                string emaildocument = "";
+
+                try
+                {
+                    using (StreamReader sr = new StreamReader(emailtemplate))
                     {
-                        rootXml.Add(new XElement(keyparts[1], Request.Form[key]));
+                        emaildocument = sr.ReadToEnd();
                     }
                 }
+                catch (Exception ex)
+                {
+                    functions.Log("", Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+
+                }
+
+                emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
+
+                string emailtext = functions.HTMLtoText(emaildocument);
+
+
+
+                #endregion //email
+
+                #region send email
+                //functions.sendemail(emailSubject, emaildocument, "xxxx", emailBCC, "");
+                functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
+                #endregion
+
+
+                XslCompiledTransform ScreenXslTrans = new XslCompiledTransform();
+                ScreenXslTrans.Load(path + "\\" + screenTemplate);
+
+                StringBuilder ScreenOutput = new StringBuilder();
+                TextWriter ScreenWriter = new StringWriter(ScreenOutput);
+
+                ScreenXslTrans.Transform(reader, null, ScreenWriter);
+
+
+                //save a copy of formatdocument in submissions
+                /*
+                try
+                {
+                    using (StreamWriter outfile = new StreamWriter(hf_person_id + ".html"))
+                    {
+                        outfile.Write(ScreenOutput.ToString());
+                    }
+                }
+                catch (Exception ex)
+                           {
+                    functions.Log(Request.RawUrl, ex.Message,"greg@datainn.co.nz");
+                }
+                */
+
+                Session["UBC_body"] = ScreenOutput.ToString();
+                Response.Redirect("../completed/default.aspx");
+
             }
 
-            Functions functions = new Functions();
-            functions.populateXML(repeatertable, rootXml);
-            #endregion //BuildXML
-
-            string emailbodyTemplate = "SignupEmail.xslt";
-            string emailSubject = "Union Boat Club Rower Registration";
-            string emailBCC = "";
-            string screenTemplate = "RegisterScreen.xslt";
-            //string host = "datainn.co.nz";
-            string host = "70.35.207.87";
-            string emailfrom = "ltr@datainn.co.nz";
-            string emailfromname = "Union Boat Club";
-            string password = "m33t1ng";
-            string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
-
-
-            string path = Server.MapPath(".");
-            XmlDocument reader = new XmlDocument();
-            reader.LoadXml(rootXml.ToString());
-
-            #region email
-            XslCompiledTransform EmailXslTrans = new XslCompiledTransform();
-            EmailXslTrans.Load(path + "\\" + emailbodyTemplate);
-
-            StringBuilder EmailOutput = new StringBuilder();
-            TextWriter EmailWriter = new StringWriter(EmailOutput);
-
-            EmailXslTrans.Transform(reader, null, EmailWriter);
-            string emailbodydocument = EmailOutput.ToString();
-
-            //THE EMAIL TEMPLATE
-            string emailtemplate = Server.MapPath("..") + "\\EmailTemplate\\standard.html";
-            string emaildocument = "";
-
-            try
+            if (sendText)
             {
-                using (StreamReader sr = new StreamReader(emailtemplate))
+                string messageresponse = gfunctions.SendRemoteMessage("0272495088", "Learn to Row registration: " + tb_firstname + " " + tb_lastname + " " + dd_school, "School Learn to Row registration");
+                if (tb_mobilephone != "")
                 {
-                    emaildocument = sr.ReadToEnd();
+                    //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
+                    string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
+                    //message = HttpUtility.UrlEncode(message);
+                    messageresponse = gfunctions.SendRemoteMessage(tb_mobilephone, message, "School Learn to Row registration");
                 }
             }
-            catch (Exception ex)
+            if (sendEmail)
             {
-                functions.Log("", Request.RawUrl, ex.Message, "greg@datainn.co.nz");
-
-            }
-
-            emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
-
-            string emailtext = functions.HTMLtoText(emaildocument);
-
-
-
-            #endregion //email
-
-            #region send email
-            //functions.sendemail(emailSubject, emaildocument, "xxxx", emailBCC, "");
-            functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
-            #endregion
-
-
-            XslCompiledTransform ScreenXslTrans = new XslCompiledTransform();
-            ScreenXslTrans.Load(path + "\\" + screenTemplate);
-
-            StringBuilder ScreenOutput = new StringBuilder();
-            TextWriter ScreenWriter = new StringWriter(ScreenOutput);
-
-            ScreenXslTrans.Transform(reader, null, ScreenWriter);
-
-
-            //save a copy of formatdocument in submissions
-            /*
-            try
-            {
-                using (StreamWriter outfile = new StreamWriter(hf_person_id + ".html"))
+                if (tb_emailaddress != "")
                 {
-                    outfile.Write(ScreenOutput.ToString());
+                    string emailBCC = "greg@datainn.co.nz";
+                    string host = "70.35.207.87";
+                    string emailfrom = "UnionBoatClub@datainn.co.nz";
+                    string emailfromname = "Union Boat Club";
+                    string password = "39%3Zxon";
+
+                    string emailhtml = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.</p><p>Information can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
+
+                    emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+                    gfunctions.sendemailV3(host, emailfrom, emailfromname, password, "School Learn to Row registration", emailhtml, tb_emailaddress, emailBCC, "");
                 }
             }
-            catch (Exception ex)
-                       {
-                functions.Log(Request.RawUrl, ex.Message,"greg@datainn.co.nz");
-            }
-            */
-
-            Session["UBC_body"] = ScreenOutput.ToString();
-            Response.Redirect("../completed/default.aspx");
-
-            }
-
-            string messageresponse = gfunctions.SendRemoteMessage("0272495088", "Learn to Row registration: " + tb_firstname + " " + tb_lastname + " " + dd_school, "School Learn to Row registration");
-            if (tb_mobilephone != "")
-            {
-                //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
-                string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
-                //message = HttpUtility.UrlEncode(message);
-                messageresponse = gfunctions.SendRemoteMessage(tb_mobilephone, message, "School Learn to Row registration");
-            }
-            if(tb_emailaddress != "") {
-                string emailBCC = "greg@datainn.co.nz";
-                string host = "70.35.207.87";
-                string emailfrom = "UnionBoatClub@datainn.co.nz";
-                string emailfromname = "Union Boat Club";
-                string password = "39%3Zxon";
-
-                string emailhtml = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.</p><p>Information can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
-
-                emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                gfunctions.sendemailV3(host, emailfrom, emailfromname, password, "School Learn to Row registration", emailhtml, tb_emailaddress, emailBCC, "");
-            }
 
 
-          
-            Response.Redirect("signupcomplete.aspx");
+            Response.Redirect("complete.aspx");
         }
 
     }

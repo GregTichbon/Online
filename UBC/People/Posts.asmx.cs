@@ -25,6 +25,166 @@ namespace UBC.People
     public class Posts : System.Web.Services.WebService
     {
         [WebMethod]
+        public standardResponseID send_email_text(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            //"name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject}, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": text }];
+
+            string type = formVars.Form("type");
+            string id = formVars.Form("id");
+            string emailsubject = formVars.Form("emailsubject");   
+            string emailhtml = formVars.Form("emailhtml");
+            string text = formVars.Form("text");
+            string recipient = formVars.Form("recipient");
+
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Get_person";
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = id;
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string firstname = dr["firstname"].ToString();
+            con.Close();
+
+            con.Dispose();
+
+            string response = "";
+            Generic.Functions gFunctions = new Generic.Functions();
+
+            if (type == "email")
+            {
+                string emailbodyTemplate = "RegisterEmail.xslt";
+                string emailBCC = "";
+                string screenTemplate = "RegisterScreen.xslt";
+                //string host = "datainn.co.nz";
+                string host = "70.35.207.87";
+                string emailfrom = "UnionBoatClub@datainn.co.nz";
+                string emailfromname = "Union Boat Club";
+                string password = "39%3Zxon";
+
+                //emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
+                emailhtml = emailhtml.Replace("||firstname||", firstname);
+                //emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
+                //emailhtml = emailhtml.Replace("||username||", username);
+                //emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
+                //emailhtml = emailhtml.Replace("||attendance||", attendance);
+                //emailhtml = emailhtml.Replace("||role||", role);
+                //emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
+                //emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
+                //emailhtml = emailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+                emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, recipient, emailBCC, "");
+                response = "Ok";
+            }
+
+            if (type == "text")
+            {
+                //text = text.Replace("||link||", link);
+                text = text.Replace("||firstname||", firstname);
+                //text = text.Replace("||accesscode||", person_guid.Substring(0, 5));
+                //text = text.Replace("||username||", username);
+                //text = text.Replace("||tempphrase||", tempphrase);
+                //text = text.Replace("||attendance||", attendance);
+                //text = text.Replace("||role||", role);
+                //text = text.Replace("||folder||", "Folder" + id);
+                //text = text.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
+                //text = text.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+                foreach (string mobile in recipient.Split(';'))
+                {
+                    response = gFunctions.SendRemoteMessage(mobile, text, "UBC Masters Communications") + "<br />";
+                }
+            }
+
+            standardResponseID resultclass = new standardResponseID();
+            resultclass.status = response;
+            resultclass.message = "";
+            resultclass.id = id;
+
+            return (resultclass);
+
+        }
+
+        [WebMethod]
+        public standardResponseID send_signup_email_text(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            //{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject}, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": text }];
+
+            string type = formVars.Form("type");
+            string id = formVars.Form("id");
+            string emailsubject = formVars.Form("emailsubject");
+            string emailhtml = formVars.Form("emailhtml");
+            string text = formVars.Form("text");
+            string recipient = formVars.Form("recipient");
+
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "Get_signup";
+            cmd.Parameters.Add("@signup_ctr", SqlDbType.VarChar).Value = id;
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string firstname = dr["firstname"].ToString();
+            string guid = dr["guid"].ToString();
+            con.Close();
+
+            con.Dispose();
+
+            string response = "";
+            Generic.Functions gFunctions = new Generic.Functions();
+
+            if (type == "email")
+            {
+                string emailbodyTemplate = "RegisterEmail.xslt";
+                string emailBCC = "";
+                string screenTemplate = "RegisterScreen.xslt";
+                //string host = "datainn.co.nz";
+                string host = "70.35.207.87";
+                string emailfrom = "UnionBoatClub@datainn.co.nz";
+                string emailfromname = "Union Boat Club";
+                string password = "39%3Zxon";
+
+                emailhtml = emailhtml.Replace("||firstname||", firstname);
+                emailhtml = emailhtml.Replace("||guid||", guid);
+                emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, recipient, emailBCC, "");
+                response = "Ok";
+            }
+
+            if (type == "text")
+            {
+                text = text.Replace("||firstname||", firstname);
+                text = text.Replace("||guid||", guid);
+                foreach (string mobile in recipient.Split(';'))
+                {
+                    response = gFunctions.SendRemoteMessage(mobile, text, "UBC Signup Communicate") + "<br />";
+                }
+            }
+
+            standardResponseID resultclass = new standardResponseID();
+            resultclass.status = response;
+            resultclass.message = "";
+            resultclass.id = id;
+
+            return (resultclass);
+
+        }
+        [WebMethod]
         public standardResponseID update_othertransaction(NameValue[] formVars)    //you can't pass any querystring params
         {
             string othertransaction_id = formVars.Form("othertransaction_id");
@@ -381,6 +541,107 @@ namespace UBC.People
             string passresult = JS.Serialize(resultclass);
             return (passresult);
         }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public standardResponse SaveImage(string imageData, string id)    //you can't pass any querystring params
+        {
+            //string dt = DateTime.Now.ToString("ddMMyyHHss");
+            if(1 == 1) { 
+            string path = Server.MapPath(".\\images");
+
+            //string path = @"F:\InetPub\Online\Assets\Cemetery\Images\" + id;
+            Directory.CreateDirectory(path + "\\original");
+            //string fileName = "\\" + id + "_" + dt + ".jpg";
+            string fileName = "\\" + id + ".jpg";
+            using (FileStream fs = new FileStream(path + "\\original" + fileName, FileMode.Create))
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    byte[] data = Convert.FromBase64String(imageData);
+                    bw.Write(data);
+                    bw.Close();
+                }
+            }
+
+            using (System.Drawing.Image original = System.Drawing.Image.FromFile(path + "\\original" + fileName))
+            {
+                double scaler = Convert.ToDouble(original.Width / 640.000000);
+                int newHeight = Convert.ToInt16(original.Height / scaler);
+                int newWidth = 640;
+
+
+
+                using (System.Drawing.Bitmap newPic = new System.Drawing.Bitmap(newWidth, newHeight))
+                {
+                    using (System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(newPic))
+                    {
+                        gr.DrawImage(original, 0, 0, (newWidth), (newHeight));
+                        newPic.Save(path + fileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
+                }
+            }
+
+
+            }
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Saved";
+            resultclass.message = "";
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+            return (resultclass);
+        }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public standardResponse SaveSignupImage(string imageData, string id)    //you can't pass any querystring params
+        {
+            //string dt = DateTime.Now.ToString("ddMMyyHHss");
+            if (1 == 1)
+            {
+                string path = Server.MapPath(".\\images\\signup");
+
+                //string path = @"F:\InetPub\Online\Assets\Cemetery\Images\" + id;
+                Directory.CreateDirectory(path + "\\original");
+                //string fileName = "\\" + id + "_" + dt + ".jpg";
+                string fileName = "\\" + id + ".jpg";
+                using (FileStream fs = new FileStream(path + "\\original" + fileName, FileMode.Create))
+                {
+                    using (BinaryWriter bw = new BinaryWriter(fs))
+                    {
+                        byte[] data = Convert.FromBase64String(imageData);
+                        bw.Write(data);
+                        bw.Close();
+                    }
+                }
+
+                using (System.Drawing.Image original = System.Drawing.Image.FromFile(path + "\\original" + fileName))
+                {
+                    double scaler = Convert.ToDouble(original.Width / 640.000000);
+                    int newHeight = Convert.ToInt16(original.Height / scaler);
+                    int newWidth = 640;
+
+
+
+                    using (System.Drawing.Bitmap newPic = new System.Drawing.Bitmap(newWidth, newHeight))
+                    {
+                        using (System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(newPic))
+                        {
+                            gr.DrawImage(original, 0, 0, (newWidth), (newHeight));
+                            newPic.Save(path + fileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        }
+                    }
+                }
+
+
+            }
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Saved";
+            resultclass.message = "";
+            return (resultclass);
+        }
+
     }
 }
 

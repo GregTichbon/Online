@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="UBC.People.SignUp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.css" />
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -20,7 +21,7 @@
     <script src="<%: ResolveUrl("~/Dependencies/additional-methods.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.js"></script>
 
 
     <script type="text/javascript">
@@ -29,6 +30,86 @@
                 position: {
                     my: "right center",
                     at: "left center"
+                }
+            });
+
+            var canvas = $("#canvas"),
+                context = canvas.get(0).getContext("2d"),
+                $result = $('#result');
+
+            $('#getphoto').click(function () {
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+                $("#dialog-getphoto").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Restore": function () {
+                            canvas.cropper('reset');
+                            //$result.empty();
+                        },
+                        "Cancel": function () {
+                            canvas.cropper("destroy");
+                            $(this).dialog("close");
+                        },
+                        "Upload": function () {
+                            var image = canvas.cropper('getCroppedCanvas').toDataURL("image/jpg");
+                            image = image.replace('data:image/png;base64,', '');
+                            $.ajax({
+                                type: "POST",
+                                //async: false,
+                                url: "posts.asmx/SaveSignupImage",
+                                data: '{"imageData": "' + image + '", "id": "' + <%: hf_signup_ctr %> + '"}',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (result) {
+                                    //alert(result);
+                                    d = new Date();
+                                    $("#img_photo").attr("src", "images/signup/<%:hf_signup_ctr %>.jpg?" + d.getTime());
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                }
+                            });
+                            canvas.cropper("destroy");
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            })
+            $('#fileInput').on('change', function () {
+                if (this.files && this.files[0]) {
+                    if (this.files[0].type.match(/^image\//)) {
+                        var reader = new FileReader();
+                        reader.onload = function (evt) {
+                            var img = new Image();
+                            img.onload = function () {
+                                context.canvas.height = img.height;
+                                context.canvas.width = img.width;
+                                context.drawImage(img, 0, 0);
+                                var cropper = canvas.cropper({
+                                    preview: '#preview',
+                                    dragMode: 'crop',
+                                    autoCropArea: 0.65,
+                                    rotatable: true,
+                                    cropBoxMovable: true,
+                                    cropBoxResizable: true
+                                });
+                            };
+                            img.src = evt.target.result;
+                        };
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    else {
+                        alert("Invalid file type! Please select an image file.");
+                    }
+                }
+                else {
+                    alert('No file(s) selected.');
                 }
             });
 
@@ -124,7 +205,7 @@
                 thisyear = moment().year();
                 var jan1 = moment([thisyear, 1, 1]);
                 $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
-                 
+
                 //if (years < 18) {
                 //    $('#div_parent').show();
                 //} else {
@@ -135,33 +216,56 @@
                 //    $('#tb_parentcaregiver2').val('');
                 //    $('#tb_parentcaregiver2mobilephone').val('');
                 //    $('#tb_parentcaregiver2emailaddress').val('');
-    
+
                 //}
-    
-                
+
+
             }
         }
         */
 
     </script>
     <style type="text/css">
-          .style1 {
+        .style1 {
             text-align: center;
             font-size: xx-large;
-        }       
+        }
+            .imagecontainer {
+            max-width: 800px;
+            max-height: 800px;
+            margin: 20px auto;
+        }
+
+        #preview {
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        #canvas {
+            background-color: #ffffff;
+            cursor: default;
+            border: 1px solid black;
+            width: 1200px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-            <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
+    <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
 
-    <div class="container" style="background-color:#B1C9E6" >
+    <div class="container" style="background-color: #B1C9E6">
         <p></p>
-        <table style="width:100%">
+        <table style="width: 100%">
             <tr>
-                <td style="width:350px">
-                    <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
-                <td style="text-align:center">
-                    <h1>Schools Learn to Row<br />Friday 23 - Sunday 25 August 2019
+                <td style="width: 350px">
+                    <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
+                <td style="text-align: center">
+                    <h1>Schools Learn to Row<br />
+                        Friday 23 - Sunday 25 August 2019
                     </h1>
                 </td>
             </tr>
@@ -172,7 +276,7 @@
         <p class="style1">Read the <a href="SchoolLearntoRowAug2019.pdf" target="_blank">brochure</a></p>
 
         <div class="panel panel-danger">
-            <div class="panel-heading">Student</div> 
+            <div class="panel-heading">Student</div>
             <div class="panel-body">
 
                 <!------------------------------------------------------>
@@ -237,7 +341,7 @@
                     </div>
                 </div>
 
-                
+
 
 
                 <div class="form-group">
@@ -262,10 +366,10 @@
                     </div>
                 </div>
 
-                 <div class="form-group">
+                <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_notes">Anything else you want to let us know?</label>
                     <div class="col-sm-8">
-                        <textarea id="tb_notes" name="tb_notes" class="form-control"><%:tb_notes%></textarea>  
+                        <textarea id="tb_notes" name="tb_notes" class="form-control"><%:tb_notes%></textarea>
                     </div>
                 </div>
                 <!--
@@ -337,20 +441,36 @@
                 </div>
             </div>
      -->
-        </div>
-   
-       
-
-       
-        <div class="form-group">
-            <div class="col-sm-4">
             </div>
-            <div class="col-sm-8">
-                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+
+
+
+
+            <div class="form-group">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-8">
+                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+                </div>
+            </div>
+
+            <img id="img_photo" alt="" src="Images/Signup/<%: hf_signup_ctr %>.jpg" style="width: 200px" /><br />
+            <a id="getphoto">Upload Photo</a>
+
+
+            <div id="dialog-getphoto" title="Upload Photo" style="display: none">
+                <div class="imagecontainer">
+                    <input type="file" id="fileInput" accept="image/*" />
+                    <canvas id="canvas" style="display: none">Your browser does not support the HTML5 canvas element.
+                    </canvas>
+                    <br />
+                    <input type="button" id="btn_Crop" class="btn btn-info" value="Crop" style="display: none" />
+                    <div id="preview"></div>
+                    <div id="result"></div>
+                </div>
+
             </div>
         </div>
 
     </div>
-
-
 </asp:Content>

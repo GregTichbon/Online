@@ -24,11 +24,11 @@ namespace UBC
             {
                 html += "<br /><a href=\"people/communicate.aspx\">Communicate</a>";
             }
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1000001")) 
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1000001"))
             {
                 html += "<br /><a href=\"people/Masterscommunicate.aspx\">Masters Communicate</a>";
             }
-                if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
             {
                 html += "<br /><a href=\"people/bankimport.aspx\">Bank Import</a>";
                 html += "<br /><a href=\"people/bankallocate.aspx\">Bank alloction</a>";
@@ -50,7 +50,7 @@ namespace UBC
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
             {
                 html += "<br /><a href=\"people/reports/CheckList.aspx\">Check List</a>";
-                html += "<br /><a href=\"people/reports/currentmembers.aspx\">Current Members</a>";
+                html += "<br /><a href=\"people/reports/currentmembers.aspx\">Registered members for given year</a>";
                 html += "<br /><a href=\"people/findphone.aspx\">Find a phone number</a>";
                 html += "<br /><a href=\"people/reports/SchoolRowers.aspx\">School Rowers</a>";
 
@@ -67,12 +67,16 @@ namespace UBC
             html += "<br /><a href=\"people/reports/CurrentCategoriesMatrix.aspx\">Current Categories Matrix</a>";
 
 
-            
+
             html += "<br /><a href=\"people/reports/EventSchedule.aspx\">Event Schedule</a>";
             html += "<br /><a href=\"people/reports/ShowAttendees.aspx\">Show Attendees</a>";
             html += "<br /><a href=\"people/reports/ComingEventsList.aspx\">Coming Events List</a>";
             html += "<br /><a href=\"people/reports/default.aspx\">REPORTS</a>";
 
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            {
+                html += "<br /><a href=\"people/signup/menu.aspx\">SIGNUP</a>";
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    html = "<tr><th>Checkbox</th><th>Name</th><th>Status</th><th>Edit</th><th>Image</th></tr>";
+                    html = "<tr><th>Checkbox</th><th>Name</th><th>Category</th><th>Edit</th><th>Image</th></tr>";
 
                     while (dr.Read())
                     {
@@ -48,7 +48,8 @@ namespace UBC.People
                         string person_id = dr["person_id"].ToString();
                         string firstname = dr["firstname"].ToString();
                         string lastname = dr["lastname"].ToString();
-                        string status = "Status - based on category and currency";
+                        string categories = dr["categories"].ToString();
+                        //string status = "Status - based on category and currency";
        
 
                         /*
@@ -76,10 +77,12 @@ namespace UBC.People
                         string link = "<a href=\"maint.aspx?id=" + guid + "\">Edit</a>";
                         string image = "<img src=\"Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
 
+                        
+
 
 
                         html += "<tr>";
-                        html += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + status + "</td><td>" + link + "</td><td>" + image + "</td>";
+                        html += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + categories.Replace("|","<br />") + "</td><td>" + link + "</td><td>" + image + "</td>";
                         html += "</tr>";
                     }
                 }

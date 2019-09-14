@@ -465,6 +465,7 @@
     <Content Include="Dependencies\GijGo\fonts\gijgo-material.woff" />
     <Content Include="Go\Doc1\default.aspx" />
     <Content Include="Go\Register\default.aspx" />
+    <Content Include="LearntoRow\XCommunicate.aspx" />
     <Content Include="LearntoRow\default.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="People\Attendance.aspx" />
@@ -494,7 +495,6 @@
     <Content Include="People\Images\96.jpg" />
     <Content Include="People\%24Notes\%24Notes.txt" />
     <Content Include="Dependencies\Images\Scissors.png" />
-    <Content Include="People\LearntoRow\default.aspx" />
     <Content Include="People\main.aspx" />
     <Content Include="People\MastersCommunicate.aspx" />
     <Content Include="People\message.aspx" />
@@ -522,10 +522,30 @@
     <Content Include="People\Reports\Tracker.aspx" />
     <Content Include="People\Resources.aspx" />
     <Content Include="People\Security\LogOut.aspx" />
-    <Content Include="People\SignUp.aspx" />
-    <Content Include="People\SignUpComplete.aspx" />
+    <Content Include="People\Signup\menu.aspx" />
+    <Content Include="People\TestAndPlay\cROPPER3.aspx" />
+    <Content Include="People\xSignUp.aspx" />
+    <Content Include="People\XSignUpComplete.aspx" />
+    <Content Include="People\XSignupList.aspx" />
+    <Content Include="People\Signup\Checklist.aspx" />
+    <Content Include="People\Signup\Communicate.aspx" />
+    <Content Include="People\Signup\Complete.aspx" />
+    <Content Include="People\Signup\Default.aspx" />
+    <Content Include="People\Signup\List.aspx" />
+    <Content Include="People\TestAndPlay\Async1.aspx" />
+    <Content Include="People\TestAndPlay\Async2.aspx" />
+    <Content Include="People\TestAndPlay\Async3.aspx" />
+    <Content Include="People\TestAndPlay\Canvas1.aspx" />
+    <Content Include="People\TestAndPlay\Canvas2.aspx" />
+    <Content Include="People\TestAndPlay\Cropper1.aspx" />
+    <Content Include="People\TestAndPlay\Cropper2.aspx" />
+    <Content Include="People\TestAndPlay\Cropper\jquery-cropper.js" />
+    <Content Include="People\TestAndPlay\Cropper\main2.js" />
+    <Content Include="People\TestAndPlay\Cropper\main.css" />
+    <Content Include="People\TestAndPlay\Cropper\main.js" />
     <Content Include="People\TestAndPlay\Email1.aspx" />
     <Content Include="People\TestAndPlay\Export1.aspx" />
+    <Content Include="People\TestAndPlay\posts.asmx" />
     <Content Include="People\Transaction.aspx" />
     <Content Include="People\transactions.aspx" />
     <Content Include="redirect.aspx" />
@@ -652,6 +672,7 @@
     <Content Include="People\Documents\TasterFlyer.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
+    <None Include="Properties\PublishProfiles\TOH-APP Makaranui.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -767,6 +788,13 @@
     </Compile>
     <Compile Include="Go\Register\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LearntoRow\XCommunicate.aspx.cs">
+      <DependentUpon>XCommunicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearntoRow\XCommunicate.aspx.designer.cs">
+      <DependentUpon>XCommunicate.aspx</DependentUpon>
     </Compile>
     <Compile Include="LearntoRow\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -891,13 +919,6 @@
     </Compile>
     <Compile Include="People\FindPhone.aspx.designer.cs">
       <DependentUpon>FindPhone.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="People\LearntoRow\default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="People\LearntoRow\default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\List.aspx.cs">
       <DependentUpon>List.aspx</DependentUpon>
@@ -1203,19 +1224,75 @@
     <Compile Include="People\Security\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="People\SignUp.aspx.cs">
-      <DependentUpon>SignUp.aspx</DependentUpon>
+    <Compile Include="People\Signup\menu.aspx.cs">
+      <DependentUpon>menu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="People\SignUp.aspx.designer.cs">
-      <DependentUpon>SignUp.aspx</DependentUpon>
+    <Compile Include="People\Signup\menu.aspx.designer.cs">
+      <DependentUpon>menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="People\SignUpComplete.aspx.cs">
-      <DependentUpon>SignUpComplete.aspx</DependentUpon>
+    <Compile Include="People\TestAndPlay\cROPPER3.aspx.cs">
+      <DependentUpon>cROPPER3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="People\SignUpComplete.aspx.designer.cs">
-      <DependentUpon>SignUpComplete.aspx</DependentUpon>
+    <Compile Include="People\TestAndPlay\cROPPER3.aspx.designer.cs">
+      <DependentUpon>cROPPER3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\xSignUp.aspx.cs">
+      <DependentUpon>xSignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\xSignUp.aspx.designer.cs">
+      <DependentUpon>xSignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\XSignUpComplete.aspx.cs">
+      <DependentUpon>XSignUpComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\XSignUpComplete.aspx.designer.cs">
+      <DependentUpon>XSignUpComplete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\XSignupList.aspx.cs">
+      <DependentUpon>XSignupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\XSignupList.aspx.designer.cs">
+      <DependentUpon>XSignupList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Checklist.aspx.cs">
+      <DependentUpon>Checklist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Checklist.aspx.designer.cs">
+      <DependentUpon>Checklist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Communicate.aspx.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Communicate.aspx.designer.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Complete.aspx.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Complete.aspx.designer.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Test1.aspx.cs">
       <DependentUpon>Test1.aspx</DependentUpon>
@@ -1223,6 +1300,48 @@
     </Compile>
     <Compile Include="People\Test1.aspx.designer.cs">
       <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async1.aspx.cs">
+      <DependentUpon>Async1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async1.aspx.designer.cs">
+      <DependentUpon>Async1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async2.aspx.cs">
+      <DependentUpon>Async2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async2.aspx.designer.cs">
+      <DependentUpon>Async2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async3.aspx.cs">
+      <DependentUpon>Async3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async3.aspx.designer.cs">
+      <DependentUpon>Async3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas1.aspx.cs">
+      <DependentUpon>Canvas1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas1.aspx.designer.cs">
+      <DependentUpon>Canvas1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas2.aspx.cs">
+      <DependentUpon>Canvas2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas2.aspx.designer.cs">
+      <DependentUpon>Canvas2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Cropper2.aspx.cs">
+      <DependentUpon>Cropper2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Cropper2.aspx.designer.cs">
+      <DependentUpon>Cropper2.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\TestAndPlay\Email1.aspx.cs">
       <DependentUpon>Email1.aspx</DependentUpon>
@@ -1237,6 +1356,10 @@
     </Compile>
     <Compile Include="People\TestAndPlay\Export1.aspx.designer.cs">
       <DependentUpon>Export1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\posts.asmx.cs">
+      <DependentUpon>posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="People\Transaction.aspx.cs">
       <DependentUpon>Transaction.aspx</DependentUpon>
@@ -1325,6 +1448,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="People\Images\Signup\" />
     <Folder Include="People\Uploads\Bank\" />
   </ItemGroup>
   <ItemGroup>

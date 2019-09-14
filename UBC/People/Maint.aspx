@@ -10,11 +10,13 @@
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.css")%>" rel="stylesheet" />
     <link href="<%: ResolveUrl("~/Dependencies/UBC.css")%>" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.css" />
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="<%: ResolveUrl("~/Dependencies/UBC.js")%>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.0.0/cropper.min.js"></script>
 
     <script type="text/javascript">
         // Change JQueryUI plugin names to fix name collision with Bootstrap.
@@ -31,7 +33,34 @@
 
     <!--additional-methods.min.js-->
 
+    <style>
+         .imagecontainer {
+            max-width: 800px;
+            max-height: 800px;
+            margin: 20px auto;
+        }
+
+        #preview {
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        #canvas {
+            background-color: #ffffff;
+            cursor: default;
+            border: 1px solid black;
+            width: 1200px;
+        }
+    </style>
+
     <script type="text/javascript">
+
+
 
         var tr;
         var mode;
@@ -44,6 +73,10 @@
                     at: "left center"
                 }
             });
+
+            var canvas = $("#canvas"),
+                context = canvas.get(0).getContext("2d")//,
+                //$result = $('#result');
 
             $(".nav-tabs a").click(function () {
                 $(this).tab('show');
@@ -67,6 +100,8 @@
                     }
                 }
             });
+            $("#form2").validate();
+            
 
 
 
@@ -90,6 +125,7 @@
                     }).appendTo('#form1');
                 });
 
+
                 $('#categorytable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_category = $(this).find('td:eq(1)').attr('category_id');
@@ -103,6 +139,57 @@
                         name: tr_id,
                         value: value
                     }).appendTo('#form1');
+
+                });
+
+                $('#phonetable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_phone = $(this).find('td:eq(1)').text();
+                    tr_mobile = $(this).find('td:eq(2)').text();
+                    tr_note = $(this).find('td:eq(3)').text();
+                    tr_text = $(this).find('td:eq(4)').text();
+
+                    value = tr_phone + delim + tr_mobile + delim + tr_note + delim + tr_text;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
+
+                });
+                $('#phonetable > tbody > tr[maint="deleted"]').each(function () {
+                    //don't do if new
+                    tr_id = $(this).attr('id') + '_delete';
+                    if (tr_id.substring(0, 3) != 'new') {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: ""
+                        }).appendTo('#form1'); 
+                    }
+                });
+
+                $('#emailtable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_emailaddress = $(this).find('td:eq(1)').text();
+                    tr_note = $(this).find('td:eq(2)').text();
+
+                    value = tr_emailaddress + delim + tr_note;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
+
+                });
+                $('#emailtable > tbody > tr[maint="deleted"]').each(function () {
+                    tr_id = $(this).attr('id') + '_delete';
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: ""
+                    }).appendTo('#form1');
+                    alert(value);
 
                 });
 
@@ -220,7 +307,12 @@
                     resizable: false,
                     height: 600,
                     width: mywidth,
-                    modal: true
+                    modal: true 
+                    /*
+                    ,open: function (type, data) {
+                        $(this).appendTo($('form')); // reinsert the dialog to the form       
+                    }*/
+                    ,appendTo: "#form2"  
                 });
 
                 var myButtons = {
@@ -228,28 +320,30 @@
                         $(this).dialog("close");
                     },
                     "Save": function () {
-                        if (mode == "add") {
-                            tr = $('#div_transactions > table > tbody tr:first').clone();
-                            $(tr).removeAttr('style');
-                            $('#div_transactions > table > tbody > tr:last').before(tr);
-                            $(tr).attr('id', 'transactions_new_' + get_newctr());
-                            $(tr).find('td:first').attr("class", "inserted");
-                        } else {
-                            $(tr).find('td:first').attr("class", "changed");
+                        if ($("#form2").valid()) {
+                            if (mode == "add") {
+                                tr = $('#div_transactions > table > tbody tr:first').clone();
+                                $(tr).removeAttr('style');
+                                $('#div_transactions > table > tbody > tr:last').before(tr);
+                                $(tr).attr('id', 'transactions_new_' + get_newctr());
+                                $(tr).find('td:first').attr("class", "inserted");
+                            } else {
+                                $(tr).find('td:first').attr("class", "changed");
 
+                            }
+                            $(tr).attr('maint', 'changed');
+                            $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
+                            $(tr).find('td').eq(2).text($('#dd_transactions_system').val());
+                            $(tr).find('td').eq(3).text($('#dd_transactions_code').val());
+                            $(tr).find('td').eq(4).text($('#dd_transactions_event option:selected').text());
+                            $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
+                            $(tr).find('td').eq(5).text(formatcurrency($('#tb_transactions_amount').val()));
+                            $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
+                            totaltransactions();
+                            //$(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
+                            //alert("Database will be updated when record submited");
+                            $(this).dialog("close");
                         }
-                        $(tr).attr('maint', 'changed');
-                        $(tr).find('td').eq(1).text($('#tb_transactions_date').val());
-                        $(tr).find('td').eq(2).text($('#dd_transactions_system').val());
-                        $(tr).find('td').eq(3).text($('#dd_transactions_code').val());
-                        $(tr).find('td').eq(4).text($('#dd_transactions_event option:selected').text());
-                        $(tr).find('td').eq(4).attr('event_id', $('#dd_transactions_event').val());
-                        $(tr).find('td').eq(5).text(formatcurrency($('#tb_transactions_amount').val()));
-                        $(tr).find('td').eq(6).text($('#tb_transactions_note').val());
-                        totaltransactions();
-                        //$(tr).find('td').eq(7).text($('#tb_transactions_banked').val());
-                        alert("Database will be updated when record submited");
-                        $(this).dialog("close");
                     }
                 }
 
@@ -318,7 +412,7 @@
                         $(tr).find('td').eq(2).text($('#tb_category_startdate').val());
                         $(tr).find('td').eq(3).text($('#tb_category_enddate').val());
                         $(tr).find('td').eq(4).text($('#tb_category_note').val());
-                        alert("Database will be updated when record submited");
+                        //alert("Database will be updated when record submited");
                         $(this).dialog("close");
                     }
                 }
@@ -381,7 +475,7 @@
                             $(tr).removeAttr('style');
                             //$('#div_phone > table > tbody > tr:last').before(tr);
                             $('#div_phone > table > tbody').append(tr);
-                            $(tr).attr('id', 'phones_new_' + get_newctr());
+                            $(tr).attr('id', 'phone_new_' + get_newctr());
                             $(tr).find('td:first').attr("class", "inserted");
                         } else {
                             $(tr).find('td:first').attr("class", "changed");
@@ -397,11 +491,10 @@
                         } else {
                             $(tr).find('td').eq(5).html('');
                         }
-                        alert("Database will be updated when record submited");
+                        //alert("Database will be updated when record submited");
                         $(this).dialog("close");
                     }
                 }
-
 
                 if (mode != 'add') {
                     myButtons["Delete"] = function () {
@@ -409,15 +502,11 @@
                             $(tr).find('td:first').attr("class", "deleted");
                             $(tr).attr('maint', 'deleted');
                             //$(tr).remove
-                            alert('To do: Delete in database');
                             $(this).dialog("close");
                         }
                     }
                 }
-
-
                 $("#dialog-phones").dialog('option', 'buttons', myButtons);
-
             })
 
             $('#dd_phones_mobile').change(function () {
@@ -459,26 +548,28 @@
                         $(this).dialog("close");
                     },
                     "Save": function () {
-                        if (mode == "add") {
-                            tr = $('#div_email > table > tbody tr:first').clone();
-                            $(tr).removeAttr('style');
-                            //$('#div_email > table > tbody > tr:last').before(tr);
-                            $('#div_email > table > tbody').append(tr);
-                            $(tr).attr('id', 'email_new_' + get_newctr());
-                            $(tr).find('td:first').attr("class", "inserted");
-                        } else {
-                            $(tr).find('td:first').attr("class", "changed");
+                        //if ($("#dialog-email").valid()) {
+                            if (mode == "add") {
+                                tr = $('#div_email > table > tbody tr:first').clone();
+                                $(tr).removeAttr('style');
+                                //$('#div_email > table > tbody > tr:last').before(tr);
+                                $('#div_email > table > tbody').append(tr);
+                                $(tr).attr('id', 'email_new_' + get_newctr());
+                                $(tr).find('td:first').attr("class", "inserted");
+                            } else {
+                                $(tr).find('td:first').attr("class", "changed");
 
-                        }
-                        $(tr).attr('maint', 'changed');
-                        $(tr).find('td').eq(1).text($('#tb_email_emailaddress').val());
-                        $(tr).find('td').eq(2).text($('#tb_email_note').val());
-                        $(tr).find('td').eq(3).html('<a class="send_email_system">Send</a>');
-                        //$(tr).find('td').eq(4).html('<a class="send_email_local" href="mailto:' + $('#tb_email_emailaddress').val() + '?subject=Union Boat Club&amp;body=Hi ' + 'Greg' + '">Send</a>');
-                        $(tr).find('td').eq(4).html('<a class="send_email_local">Send</a>');
-                        
-                        alert("Database will be updated when record submited");
-                        $(this).dialog("close");
+                            }
+                            $(tr).attr('maint', 'changed');
+                            $(tr).find('td').eq(1).text($('#tb_email_emailaddress').val());
+                            $(tr).find('td').eq(2).text($('#tb_email_note').val());
+                            $(tr).find('td').eq(3).html('<a class="send_email_system">Send</a>');
+                            //$(tr).find('td').eq(4).html('<a class="send_email_local" href="mailto:' + $('#tb_email_emailaddress').val() + '?subject=Union Boat Club&amp;body=Hi ' + 'Greg' + '">Send</a>');
+                            $(tr).find('td').eq(4).html('<a class="send_email_local">Send</a>');
+
+                            //alert("Database will be updated when record submited");
+                            $(this).dialog("close");
+                        //}
                     }
                 }
 
@@ -489,7 +580,6 @@
                             $(tr).find('td:first').attr("class", "deleted");
                             $(tr).attr('maint', 'deleted');
                             //$(tr).remove
-                            alert('To do: Delete in database');
                             $(this).dialog("close");
                         }
                     }
@@ -580,16 +670,70 @@
                     width: mywidth,
                     modal: true,
                     buttons: {
+                        "Restore": function () {
+                            canvas.cropper('reset');
+                            //$result.empty();
+                        },
                         "Cancel": function () {
+                            canvas.cropper("destroy");
                             $(this).dialog("close");
                         },
                         "Upload": function () {
-                            alert("to do");
+                            var image = canvas.cropper('getCroppedCanvas').toDataURL("image/jpg");
+                            image = image.replace('data:image/png;base64,', '');
+                            $.ajax({
+                                type: "POST",
+                                //async: false,
+                                url: "posts.asmx/SaveImage",
+                                data: '{"imageData": "' + image + '", "id": "' + <%: hf_person_id %> + '"}',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (result) {
+                                    //alert(result);
+                                    d = new Date();
+                                    $("#img_photo").attr("src", "images/<%:hf_person_id %>.jpg?" + d.getTime());
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                }
+                            });
+                            canvas.cropper("destroy");
                             $(this).dialog("close");
                         }
                     }
                 });
             })
+            $('#fileInput').on('change', function () {
+                if (this.files && this.files[0]) {
+                    if (this.files[0].type.match(/^image\//)) {
+                        var reader = new FileReader();
+                        reader.onload = function (evt) {
+                            var img = new Image();
+                            img.onload = function () {
+                                context.canvas.height = img.height;
+                                context.canvas.width = img.width;
+                                context.drawImage(img, 0, 0);
+                                var cropper = canvas.cropper({
+                                    preview: '#preview',
+                                    dragMode: 'crop',
+                                    autoCropArea: 0.65,
+                                    rotatable: true,
+                                    cropBoxMovable: true,
+                                    cropBoxResizable: true
+                                });
+                            };
+                            img.src = evt.target.result;
+                        };
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    else {
+                        alert("Invalid file type! Please select an image file.");
+                    }
+                }
+                else {
+                    alert('No file(s) selected.');
+                }
+            });
 
             $('.registration_view').click(function () {
                 alert('To do: ajax aspx return dialog, not editable OR dialog iframe');
@@ -639,11 +783,11 @@
             $('#div_transactions > table > tbody > tr:last').find('td').eq(0).html('<b>' + parseFloat(transactionstotal).toFixed(2) + Cr + '</b>');
         }
 
+    
+
 
     </script>
-    <style type="text/css">
-               
-    </style>
+
 </head>
 <body>
 
@@ -663,7 +807,7 @@
                     <div class="row form-group">
                         <label class="control-label col-md-6" for="tb_firstname">First name</label>
                         <div class="col-md-6">
-                            <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
+                            <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required="required" />
                         </div>
 
                     </div>
@@ -681,13 +825,23 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <img alt="" src="Images/<%: hf_person_id %>.jpg" style="width: 200px" /><br />
+                    <img id="img_photo" alt="" src="Images/<%: hf_person_id %>.jpg" style="width: 200px" /><br />
                     <a id="getphoto">Upload Photo</a>
                 </div>
             </div>
 
             <div id="dialog-getphoto" title="Upload Photo" style="display: none">
-                <iframe height="95%" width="95%" frameborder="0" scrolling="no" src="uploadphoto.aspx?id=<%: hf_person_id %>"></iframe>
+                <div class="imagecontainer">
+                    <input type="file" id="fileInput" class="btn btn-info" accept="image/*" />
+                    <canvas id="canvas" style="display: none">Your browser does not support the HTML5 canvas element.
+                    </canvas>
+                    <br />
+                    <input type="button" id="btn_Crop" class="btn btn-info" value="Crop" style="display: none" />
+                    <div id="preview"></div>
+                    <div id="result"></div>
+                </div>
+
+                <!--<iframe height="95%" width="95%" frameborder="0" scrolling="no" src="uploadphoto.aspx?id=<%: hf_person_id %>"></iframe>-->
             </div>
 
             <div id="dialog-sendtext" title="Send Text" style="display: none" class="form-horizontal">
@@ -721,7 +875,7 @@
                     </label>
                     <div class="col-sm-8">
                         <div class="input-group standarddate">
-                            <input id="tb_transactions_date" name="tb_transactions_date" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <input id="tb_transactions_date" name="tb_transactions_date" placeholder="eg: 23 Jun 1985" type="text" class="form-control" required="required" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -731,7 +885,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_transactions_system">System</label>
                     <div class="col-sm-8">
-                        <select id="dd_transactions_system" name="dd_transactions_system" class="form-control">
+                        <select id="dd_transactions_system" name="dd_transactions_system" class="form-control" required="required">
                             <%= Generic.Functions.populateselect(transactions_system, "","None") %>
                         </select>
                     </div>
@@ -739,7 +893,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_transactions_code">Code</label>
                     <div class="col-sm-8">
-                        <select id="dd_transactions_code" name="dd_transactions_code" class="form-control">
+                        <select id="dd_transactions_code" name="dd_transactions_code" class="form-control" required="required">
                             <%= Generic.Functions.populateselect(transactions_code, "","None") %>
                         </select>
                     </div>
@@ -749,6 +903,7 @@
                     <label class="control-label col-sm-4" for="dd_transactions_event">Event</label>
                     <div class="col-sm-8">
                         <select id="dd_transactions_event" name="dd_transactions_event" class="form-control">
+                            <option value="">None</option>
                             <%= person_financial_events %>
                         </select>
                     </div>
@@ -756,7 +911,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_transactions_amount">Amount</label>
                     <div class="col-sm-8">
-                        <input id="tb_transactions_amount" name="tb_transactions_amount" type="text" class="form-control" />
+                        <input id="tb_transactions_amount" name="tb_transactions_amount" type="text" class="form-control" required="required" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -868,7 +1023,7 @@
                         Email Address
                     </label>
                     <div class="col-sm-8">
-                        <input id="tb_email_emailaddress" name="tb_email_emailaddress" type="text" class="form-control" />
+                        <input id="tb_email_emailaddress" name="tb_email_emailaddress" type="email" required="required" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -917,6 +1072,7 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_general" class="tab-pane fade in">
                     <h3>General</h3>
+                   
                     <div class="form-group">
                         <label for="tb_birthdate" class="control-label col-sm-4">
                             Date of birth
@@ -940,7 +1096,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_dietry">Dietry requirements</label>
+                        <label class="control-label col-sm-4" for="tb_dietry">Dietary requirements</label>
                         <div class="col-sm-8">
                             <textarea id="tb_dietry" name="tb_dietry" class="form-control"><%: tb_dietry %></textarea>
                         </div>
@@ -961,6 +1117,20 @@
                             </select>
                         </div>
                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-sm-4" for="dd_lastseasonregistered">Last Season Registered</label>
+                        <div class="col-sm-8">
+                            <select id="dd_lastseasonregistered" name="dd_lastseasonregistered" class="form-control">
+                                <%= Generic.Functions.populateselect(seasons, dd_lastseasonregistered,"") %>
+                            </select>
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_boatstorage">Boat Storage Annual Fee</label>
+                        <div class="col-sm-8">
+                            <input id="tb_boatstorage" name="tb_boatstorage" type="text" class="form-control numeric" value="<%:tb_boatstorage%>" maxlength="4" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_school">School</label>
                         <div class="col-sm-8">
@@ -974,13 +1144,14 @@
                         <div class="col-sm-4">
                             <input id="tb_schoolyear" name="tb_schoolyear" type="text" class="form-control numeric" value="<%:tb_schoolyear%>" maxlength="2" />
                         </div>
-                        <div class="col-sm-4">
+                        <label class="control-label col-sm-1" for="tb_schoolyearat">At</label>
+                        <div class="col-sm-3">
                             <input id="tb_schoolyearat" name="tb_schoolyearat" type="text" class="form-control numeric" value="<%:tb_schoolyearat%>" maxlength="4" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_school">Can swim 50m with clothes</label>
+                        <label class="control-label col-sm-4" for="dd_swimmer">Can swim 50m with clothes</label>
                         <div class="col-sm-8">
                             <select id="dd_swimmer" name="dd_swimmer" class="form-control">
                                 <%= Generic.Functions.populateselect(yesno, dd_swimmer,"") %>
@@ -988,11 +1159,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_schoolyear">RowIt ID</label>
-                        <div class="col-sm-8">
+                        <label class="control-label col-sm-4" for="tb_rowit_id">RowIt ID</label>
+                        <div class="col-sm-4">
                             <input id="tb_rowit_id" name="tb_rowit_id" type="text" class="form-control numeric" value="<%:tb_rowit_id%>" maxlength="10" />
                         </div>
                     </div>
+                     
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="tb_rowingnzid">Rowing NZ ID</label>
+                        <div class="col-sm-3">
+                            <input id="tb_rowingnzid" name="tb_rowingnzid" type="text" class="form-control numeric" value="<%:tb_rowingnzid%>" maxlength="10" />
+                        </div>
+                         
+                            <label class="control-label col-sm-1" for="tb_rowingnzid">Season</label>
+                       
+                        <div class="col-sm-4">
+                            <select id="dd_rowingnzseason" name="dd_rowingnzseason" class="form-control">
+                                <%= Generic.Functions.populateselect(seasons, dd_rowingnzseason,"") %>
+                            </select>
+                        </div>
+                    </div>
+                         
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_schoolyear">Key number</label>
                         <div class="col-sm-8">
@@ -1013,6 +1200,7 @@
                         </div>
                     </div>
                 </div>
+                    
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_attendance" class="tab-pane fade in">
                     <h3>Attendance</h3>
@@ -1074,14 +1262,14 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_phone" class="tab-pane fade in">
                     <h3>Phone</h3>
-                    <table class="table">
-                        <%= html_phone %>
+                  <table id="phonetable" class="table">
+                      <%= html_phone %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_email" class="tab-pane fade in">
                     <h3>Email</h3>
-                    <table class="table">
+                    <table id="emailtable" class="table">
                         <%= html_email %>
                     </table>
                 </div>
@@ -1180,6 +1368,7 @@
                 </div>
             </div>
         </form>
+        <form id="form2"></form>
     </div>
 
 

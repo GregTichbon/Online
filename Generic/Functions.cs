@@ -311,7 +311,7 @@ namespace Generic
             }
             catch (Exception e)
             {
-                Log("", @"generic/functions.cs/sendemailV3", "Error: Message; " + e.Message + ", StackTrace; " + e.StackTrace, "");
+                Log("", @"generic/functions.cs/sendemailV4", "Error: Message; " + e.Message + ", StackTrace; " + e.StackTrace, "");
             }
         }
         public void Log(string guid, string location, string message, string EmailAddress)

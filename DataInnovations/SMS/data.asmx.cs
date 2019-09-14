@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -188,6 +189,50 @@ namespace DataInnovations.SMS
             Context.Response.Write(JS.Serialize(NameList));
         }
 
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void monitor(string phone, string text)
+        {
+            /*
+            string time = DateTime.Now.ToShortTimeString();
+            string html = time + "," + phone + "," + text;
+            
+
+            string path = @"c:\temp\smsmonitor.txt";
+            TextWriter tw = new StreamWriter(path, true);
+            tw.WriteLine(html);
+            tw.Close();
+            */
+         
+
+           
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Update_SMSLog", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@direction", SqlDbType.VarChar).Value = "Received";
+            cmd.Parameters.Add("@phonenumber", SqlDbType.VarChar).Value = phone;
+            cmd.Parameters.Add("@message", SqlDbType.VarChar).Value = text;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                cmd.ExecuteScalar();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+
+        }
     }
     public class NameClass
     {

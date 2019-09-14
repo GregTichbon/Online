@@ -11,7 +11,14 @@ namespace UBC.LearntoRow
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("../people/signup.aspx");
+            string redirect = "../people/signup";
+            string id = Request.QueryString["ID"] ?? "";
+            if(id != "")
+            {
+                redirect += "?id=" + id;
+            }
+
+            Response.Redirect(redirect);
         }
     }
 }

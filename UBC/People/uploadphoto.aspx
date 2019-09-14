@@ -101,30 +101,25 @@
                                     $result.empty();
                                 });
                                 $('#btn_Save').click(function () {
-                                    if (!$("input[name='rb_use']:checked").val()) {
-                                        alert('You must choose a person before saving');
-                                    } else {
-                                        $('#div_search').hide();
+                                    var image = canvas.cropper('getCroppedCanvas').toDataURL("image/jpg");
+                                    image = image.replace('data:image/png;base64,', '');
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "posts.asmx/SaveImage",
+                                        data: '{"imageData": "' + image + '", "id": "' + 'X' + '"}',
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function (result) {
+                                            //alert(result);
+                                            details = $.parseJSON(result.d);
+                                            alert(details.status);
+                                            window.location.reload();
+                                        },
+                                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                            alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                        }
+                                    });
 
-                                        var image = canvas.cropper('getCroppedCanvas').toDataURL("image/jpg");
-                                        image = image.replace('data:image/png;base64,', '');
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "posts.asmx/SaveImage",
-                                            data: '{"imageData": "' + image + '", "id": "' + id + '"}',
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            success: function (result) {
-                                                //alert(result);
-                                                details = $.parseJSON(result.d);
-                                                alert(details.status);
-                                                window.location.reload();
-                                            },
-                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                alert("Status: " + textStatus); alert("Error: " + errorThrown);
-                                            }
-                                        });
-                                    }
                                     //location.reload();
                                 });
                             };

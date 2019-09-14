@@ -370,7 +370,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\70.35.207.87.pubxml" />
+    <None Include="Properties\PublishProfiles\TOH-App.pubxml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -402,7 +403,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\Generic.pubxml" />
     <Content Include="Scripts\colorbox\images\Thumbs.db" />
     <Content Include="Scripts\fullcalendar\demos\json\events.json" />
     <Content Include="Scripts\fullcalendar\demos\php\calendar.json" />

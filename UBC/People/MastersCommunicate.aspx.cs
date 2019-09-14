@@ -22,7 +22,7 @@ namespace UBC.People
 
             if (!IsPostBack)
             {
-
+                 
                 if (Session["UBC_person_id"] == null)
                 {
                     Response.Redirect("~/people/security/login.aspx");
@@ -31,6 +31,7 @@ namespace UBC.People
                 {
                     Response.Redirect("~/default.aspx");
                 }
+                
 
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
@@ -48,7 +49,7 @@ namespace UBC.People
                     if (dr.HasRows)
                     {
 
-                        html = "<tr><td colspan=\"2\">Person</td><td>Send Text</td><td>Send Email</td>"; 
+                        html = "";
 
                         while (dr.Read())
                         {
@@ -60,7 +61,7 @@ namespace UBC.People
                             string person_guid = dr["person_guid"].ToString();
 
 
-                            string person = "<a href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
+                            string person = "<a id=\"name_" + id + "\" href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
                             string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
 
                             string sendemail = "";
@@ -77,7 +78,7 @@ namespace UBC.People
                                     {
                                         note = " - " + note;
                                     }
-                                    sendemail += delim + "<input name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
+                                    sendemail += delim + "<input id=\"cb_email_" + id + "\"name=\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
                                     //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
                                     delim = "<br />";
                                 }
@@ -95,12 +96,12 @@ namespace UBC.People
                                     {
                                         note = " - " + note;
                                     }
-                                    sendtext = delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
+                                    sendtext += delim + "<input id=\"cb_text_" + id + "\" name=\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /> <a href=\"tel:" + number + "\">" + number + "</a>" + note;
                                     //mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
                                     delim = "<br />";
                                 }
                             }
-                            html += "<tr class=\"tr_person\">";
+                            html += "<tr class=\"tr_person\" id=\"tr_person_id_" + id + "\">";
                             html += "<td>" + image + "</td>";
                             html += "<td>" + person + "</td><td>" + sendtext + "</td><td>" + sendemail + "</td>";
 
@@ -125,108 +126,7 @@ namespace UBC.People
             }
         }
 
-        protected void btn_submit_Click(object sender, EventArgs e)
-        {
-           
-            if (1 == 1)
-            {
-                //Functions funcs = new Functions();
-                Generic.Functions gFunctions = new Generic.Functions();
-
-                //string emailbodyTemplate = "RegisterEmail.xslt";
-                string emailBCC = "";
-                //string screenTemplate = "RegisterScreen.xslt";
-                //string host = "datainn.co.nz";
-                string host = "70.35.207.87";
-                string emailfrom = "UnionBoatClub@datainn.co.nz";
-                string emailfromname = "Union Boat Club";
-                string password = "39%3Zxon";
-
-                string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497;MultipleActiveResultSets=True";
-
-                SqlConnection con = new SqlConnection(strConnString);
-                SqlCommand cmd1 = new SqlCommand("Get_MastersCommunications", con);
-
-                cmd1.CommandType = CommandType.StoredProcedure;
-                cmd1.Connection = con;
-                try
-                {
-                    con.Open();
-                    SqlDataReader dr = cmd1.ExecuteReader();
-                    if (dr.HasRows)
-                    {
-                        //html = "<tr><td>Student</td><td>Send Text</td><td>Send Email</td><td>Facebook</td><td>Caregiver</td><td>Send mobile</td><td>Send Email</td><td>Facebook</td><td>Link</td><td>Coming</td><td>Modified</td></tr>";
-                        while (dr.Read())
-                        {
-                            string id = dr["person_id"].ToString();
-                            string name = dr["name"].ToString();
-                            string firstname = dr["firstname"].ToString();
-                            //string mobile = dr["mobile"].ToString();
-                            //string email = dr["email"].ToString();
-                            //string category = dr["category"].ToString();
-                            //string categories = dr["categories"].ToString();
-                            string person_guid = dr["person_guid"].ToString();
-                            string emailhtml = "";
-                            string textmessage = "";
-
-                            string link = "<a href=\"http://private.unionboatclub.co.nz/person/maint.aspx?id=" + person_guid + "\" target=\"link\">Link</a>";
-
-                            if (Request.Form["cb_email_" + id] + "" != "")
-                            {
-                                string emailRecipient = Request.Form["cb_email_" + id];
-
-
-                                emailhtml = tb_htmlbody.Text;
-                                emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
-                                emailhtml = emailhtml.Replace("||firstname||", firstname);
-                                emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-
-                                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, tb_subject.Text, emailhtml, emailRecipient, emailBCC, "");
-                            }
-                            if (Request.Form["cb_text_" + id] + "" != "")
-                            {
-                                string mobiles = Request.Form["cb_text_" + id];
-                                textmessage = tb_txt.Text;
-                                textmessage = textmessage.Replace("||link||", link);
-                                textmessage = textmessage.Replace("||firstname||", firstname);
-                                foreach (string mobile in mobiles.Split(';'))
-                                {
-                                    response += gFunctions.SendRemoteMessage(mobile, textmessage, "UBC Communications") + "<br />";
-                                }
-                            }
-
-                            if (emailhtml != "" || textmessage != "")
-                            {
-                                SqlCommand cmd2 = new SqlCommand("Insert_Person_communication", con);
-                                cmd2.Parameters.Add("@person_id", SqlDbType.VarChar).Value = id;
-                                cmd2.Parameters.Add("@emailtext", SqlDbType.VarChar).Value = Request.Form["cb_email_" + id] + "<br />"; // + emailtext;
-                                cmd2.Parameters.Add("@emailhtml", SqlDbType.VarChar).Value = Request.Form["cb_email_" + id] + "<br />" + emailhtml;
-                                cmd2.Parameters.Add("@textmessage", SqlDbType.VarChar).Value = Request.Form["cb_text_" + id] + "<br />" + textmessage;
-                                cmd2.Parameters.Add("@facebookmessage", SqlDbType.VarChar).Value = "";
-                                cmd2.CommandType = CommandType.StoredProcedure;
-                                cmd2.Connection = con;
-                                //con.Open();
-                                string result = cmd2.ExecuteScalar().ToString();
-                                //SqlDataReader dr2 = cmd1.ExecuteReader();
-                                cmd2.Dispose();
-                            }
-                        }
-                    }
-
-                    dr.Close();
-                }
-
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    con.Close();
-                    con.Dispose();
-                }
-            }
-        }
+        
 
     }
 }

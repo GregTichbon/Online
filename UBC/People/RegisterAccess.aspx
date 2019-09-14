@@ -42,8 +42,10 @@
                     $('#div_submit').show();
                 } else if($(this).val() == "No") {
                     $('#div_exising').hide();
+                    $('#div_submit').show();
                 } else {
                     $('#div_exising').hide();
+                    $('#div_submit').hide();
                 }
             })
 

@@ -25,94 +25,101 @@ namespace UBC.People.Reports
             {
                 Response.Redirect("~/default.aspx");
             }
-
-            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd1 = new SqlCommand("get_current_registrations", con);
-
-            cmd1.CommandType = CommandType.StoredProcedure;
-            cmd1.Connection = con;
-            try
+            string year = Request.Form["dd_year"] ?? "";
+            if (year != "")
             {
-                con.Open();
-                SqlDataReader dr = cmd1.ExecuteReader();
-                if (dr.HasRows)
+                string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlCommand cmd1 = new SqlCommand("get_current_registrations", con);
+                cmd1.Parameters.Add("@year", SqlDbType.VarChar).Value = year;
+
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Connection = con;
+                try
                 {
-                    Boolean firsttime = true;
-                    while (dr.Read())
+                    con.Open();
+                    SqlDataReader dr = cmd1.ExecuteReader();
+                    if (dr.HasRows)
                     {
-                        if(firsttime)
+                        Boolean firsttime = true;
+                        while (dr.Read())
                         {
-                            html = "<thead><tr><th>Image</th>";
+                            if (firsttime)
+                            {
+                                html = "<thead><tr><th>Image</th>";
+                                for (int f1 = 2; f1 < dr.FieldCount; f1++)
+                                {
+                                    html += "<th>" + dr.GetName(f1) + "</th>";
+                                }
+                                html += "</tr></thead>";
+                                firsttime = false;
+                                html += "<tbody>";
+                            }
+
+
+                            //string id = dr["ltr_ctr"].ToString();
+                            string person_id = dr["person_id"].ToString();
+                            string guid = dr["guid"].ToString();
+
+                            //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
+                            string link = "<br /><a href=\"../maint.aspx?id=" + guid + "\">Edit</a>  <a href=\"../registerdisplay.aspx?id=" + guid + "\">Display</a>";
+                            string image = "<img src=\"../Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
+
+
+
+                            html += "<tr>";
+                            html += "<td>" + image + "</td>";
                             for (int f1 = 2; f1 < dr.FieldCount; f1++)
                             {
-                                html += "<th>" + dr.GetName(f1) + "</th>";
+                                string useval = dr[f1].ToString();
+                                switch (f1)
+                                {
+                                    case 2:
+                                        useval = useval + link;
+                                        break;
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                        useval = useval.Replace("|", "<br />");
+                                        break;
+                                    case 4:
+                                    case 11:
+                                    case 13:
+                                        /*
+                                        if (useval != "")
+                                        {
+                                            useval = Convert.ToDateTime(useval).ToString("dd MMM yy");
+                                        }  */
+                                        break;
+                                      
+
+                                }
+                                if (f1 == 7 || f1 == 8 || f1 == 9)
+                                {
+
+                                }
+                                html += "<td>" + useval + "</td>";
                             }
-                            html += "</tr></thead>";
-                            firsttime = false;
-                            html += "<tbody>";
+
+
+                            html += "</tr>";
                         }
-                        
-                        
-                        //string id = dr["ltr_ctr"].ToString();
-                        string person_id = dr["person_id"].ToString();
-                        string guid = dr["guid"].ToString();
-
-                        //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
-                        string link = "<br /><a href=\"../maint.aspx?id=" + guid + "\">Edit</a>  <a href=\"../registerdisplay.aspx?id=" + guid + "\">Display</a>";
-                        string image = "<img src=\"../Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
-
-
-
-                        html += "<tr>";
-                        html += "<td>" + image + "</td>";
-                        for (int f1 = 2; f1 < dr.FieldCount; f1++)
-                        {
-                            string useval = dr[f1].ToString();
-                            switch (f1)
-                            {
-                                case 2:
-                                    useval = useval + link;
-                                    break;
-                                case 8:
-                                case 9:
-                                case 10:
-                                    useval = useval.Replace("|", "<br />");
-                                    break;
-                                case 4:
-                                case 11:
-                                case 13:
-                                    if(useval != "") { 
-                                    useval = Convert.ToDateTime(useval).ToString("dd MMM yy");
-                                    }
-                                    break;
-
-                            }
-                            if (f1 == 7 || f1 == 8 || f1 == 9)
-                            {
-                                
-                            }
-                            html += "<td>" + useval + "</td>";
-                        }
-
-
-                        html += "</tr>";
+                        html += "</tbody>";
                     }
-                    html += "</tbody>";
+
+                    dr.Close();
                 }
 
-                dr.Close();
-            }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    con.Close();
+                    con.Dispose();
+                }
             }
         }
     }

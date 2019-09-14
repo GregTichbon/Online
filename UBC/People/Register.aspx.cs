@@ -55,7 +55,12 @@ namespace UBC.People
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["UBC_guid"] == null)
+            string id = Request.QueryString["id"] ?? "";
+            if (id != "")
+            {
+                Session["UBC_guid"] = id;
+            }
+            if (Session["UBC_guid"] == null)
             {
                 Response.Redirect("registeraccess.aspx");
             }

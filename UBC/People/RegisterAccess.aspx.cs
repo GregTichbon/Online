@@ -16,7 +16,13 @@ namespace UBC.People
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
-
+            string usercode = Request.Form["tb_usercode"] ?? "";
+            if(usercode == "")
+            {
+                usercode = "new";
+            }
+            Session["UBC_guid"] = usercode;
+            Response.Redirect("register.aspx");
         }
     }
 }

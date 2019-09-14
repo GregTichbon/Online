@@ -36,7 +36,7 @@ namespace UBC.People.Security
 
             System.Web.HttpBrowserCapabilities browser = Request.Browser;
 
-            string browserdetails = functions.BrowserDetails (browser);
+            string browserdetails = functions.BrowserDetails(browser);
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);

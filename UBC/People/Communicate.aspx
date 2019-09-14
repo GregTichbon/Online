@@ -20,9 +20,14 @@
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
+   <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
-
+        tinymce.init({
+            selector: '.tinymce',
+            plugins: "code paste",
+            menubar: "tools edit format view",
+            paste_as_text: true
+        });
         $(document).ready(function () {
             $('.fb_clipboard').click(function () {
                 link = $(this).data('link');
@@ -44,6 +49,82 @@
                 //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories_filter').val());
                 processrows();
             })
+
+            $('#btn_submit').click(function (e) {
+                e.preventDefault();
+                $("#tbl_results > tbody").empty();
+                $('#dialog_sending').dialog({
+                    modal: true,
+                    width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
+                    height: 600, //auto
+                    position: { my: "center", at: "100", of: window }
+                });
+
+                //$('#tbl_people > tbody  > tr').each(function () {
+                $("#tbl_people > tbody > tr > td > input:checked").each(function () {
+                    id = $(this).attr("id");
+                    recipient = $(this).val();
+                    if (id.substring(0, 9) == 'cb_email_') {
+                        type = 'email';
+                        id = id.substring(9);
+                        emailsubject = $('#tb_subject').val();
+                        emailhtml = $('#tb_htmlbody').val();
+                        text = '';
+                    } else if (id.substring(0, 8) == 'cb_text_') {
+                        type = 'text';
+                        id = id.substring(8);
+                        emailsubject = '';
+                        emailhtml = '';
+                        text = $('#tb_txt').val();
+                    }
+                    name = $('#name_' + id).text();
+
+                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }];
+                    var formData = JSON.stringify({ formVars: arForm });
+                    //console.log(formData);
+
+                    $.ajax({
+                        type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                        contentType: "application/json; charset=utf-8",
+                        url: "posts.asmx/send_email_text",
+                        async: false,
+                        data: formData,
+                        dataType: 'json', // what type of data do we expect back from the server
+                        success: function (data) {
+                            //$('.scrollable').prepend(name + ' ' + recipient + ' ' + data.d.status + '<br />');
+                            $('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + data.d.status + '</td></tr>');
+                        },
+                        error: function (XMLHttpRequest, textStatus, error) {
+                            alert("AJAX error: " + textStatus + "; " + error);
+                        }
+                    });
+                });
+                //$('.scrollable').prepend('Complete' + '<br />');
+                $('#tbl_results tbody').prepend('<tr><td colspan="3">Complete</td>');
+            });
+
+            $('#cb_emailall').click(function (event) {
+                if (this.checked) {
+                    $('[id^=cb_email_]').each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    $('[id^=cb_email_]').each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+            $('#cb_textall').click(function (event) {
+                if (this.checked) {
+                    $('[id^=cb_text_]').each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    $('[id^=cb_text_]').each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
 
         });
 
@@ -107,7 +188,7 @@
                     &nbsp;<asp:TextBox ID="tb_subject" runat="server" Width="512px">Union Boat Club  </asp:TextBox><br />
                     <br />
                     Email Body (HTML):<br />
-                    &nbsp;<asp:TextBox ID="tb_htmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
+                    &nbsp;<asp:TextBox class="tinymce" ID="tb_htmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
 &lt;p&gt;
 &lt;/p&gt;</asp:TextBox><br />
                     <br />
@@ -139,7 +220,7 @@
                     &nbsp;<asp:TextBox ID="tb_rsubject" runat="server" Width="512px">Union Boat Club  </asp:TextBox><br />
                     <br />
                     Email Body (HTML):<br />
-                    &nbsp;<asp:TextBox ID="tb_rhtmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||rfirstname||&lt;/p&gt;
+                    &nbsp;<asp:TextBox class="tinymce" ID="tb_rhtmlbody" runat="server" Height="110px" TextMode="MultiLine" Width="901px">&lt;p&gt;Hi ||rfirstname||&lt;/p&gt;
 &lt;p&gt;
 ||firstname||
 &lt;/p&gt;</asp:TextBox><br />
@@ -186,5 +267,17 @@
             </div>
         </div>
         <br />
+        <div id="dialog_sending" title="Sending ..." style="display: none">
+            <table id="tbl_results" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </asp:Content>

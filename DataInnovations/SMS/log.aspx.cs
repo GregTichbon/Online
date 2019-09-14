@@ -29,10 +29,10 @@ namespace DataInnovations.SMS
             switch (type.ToUpper())
             {
                 case "R":
-                    type = " and Direction = 'Received'";
+                    type = " and L.Direction = 'Received'";
                     break;
                 case "S":
-                    type = " and MessageType = 'Sent'";
+                    type = " and L.MessageType = 'Sent'";
                     break;
                 default:
                     type = "";
@@ -41,9 +41,10 @@ namespace DataInnovations.SMS
 
             string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
-            string sql = "select * from smslog";
-            sql += " where datetime > dateadd(d, -" + days + ", getdate())" + type + " " ;
-            sql += "order by Datetime";
+            string sql = "select L.*, N.Name, N.source from smslog L";
+            sql += " left outer join number N on dbo.FormatMobileNumber(N.Number,'') = dbo.FormatMobileNumber(L.PhoneNumber,'')";
+            sql += " where L.datetime > dateadd(d, -" + days + ", getdate())" + type + " " ;
+            sql += "order by L.Datetime";
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
             try
@@ -52,12 +53,17 @@ namespace DataInnovations.SMS
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    string name = "";
+                    if(dr["Name"].ToString() != "")
+                    {
+                        name = "<br />" + dr["Name"].ToString();
+                    }
                     html += "<tr class=\"select\">";
                     html += "<td>" + dr["smsLog_ID"] + "</td>";
                     html += "<td>" + dr["ID"] + "</td>";
                     html += "<td>" + dr["DateTime"] + "</td>";
                     html += "<td>" + dr["Direction"] + "</td>";
-                    html += "<td>" + dr["PhoneNumber"] + "</td>";
+                    html += "<td>" + dr["PhoneNumber"] + name + "</td>";
                     html += "<td>" + dr["Message"] + "</td>";
                     html += "<td>" + dr["Description"] + "</td>";
                     html += "<td>" + dr["Response"] + "</td>";
