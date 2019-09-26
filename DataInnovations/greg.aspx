@@ -39,6 +39,8 @@
         <br />
         <a href="sms/log.aspx">SMS Log</a>
         <br />
+        <a href="sms/data.asmx/SMSPhoneStatus">SMS Phone Status</a>
+        <br />
         <br />
         <a href="http://office.datainn.co.nz/vehicles">Vehicle Reminders</a>
         <br />

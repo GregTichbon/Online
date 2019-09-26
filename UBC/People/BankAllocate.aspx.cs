@@ -31,7 +31,8 @@ namespace UBC.People
             //functionoptions.Add("storedprocedure", "");
             //functionoptions.Add("storedprocedurename", "");
             functionoptions.Add("usevalues", "");
-            people = genericfunctions.buildandpopulateselect(strConnString, "select person_id as [value], dbo.get_name(person_id,'') as [Label] from person order by dbo.get_name(person_id,'')", "", functionoptions, "None");
+            //people = genericfunctions.buildandpopulateselect(strConnString, "select person_id as [value], dbo.get_name(person_id,'') as [Label] from person order by dbo.get_name(person_id,'')", "", functionoptions, "None");
+            people = Functions.buildandpopulateselect(strConnString, "select person_id as [value], dbo.get_name(person_id,'') as [Label] from person order by dbo.get_name(person_id,'')", "", functionoptions, "None");
 
 
             string sql1 = "get_bank_transactions";

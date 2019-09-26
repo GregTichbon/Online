@@ -34,7 +34,7 @@
        $(document).ready(function () {
            $('.span_name').click(function () {
                id = $(this).attr('id');
-               window.open("../maint.aspx?id=" + id, "_ubc_people_maint");
+               window.open("default.aspx?id=" + id, "startupperson");
 
            });
 

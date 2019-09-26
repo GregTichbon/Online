@@ -23,6 +23,8 @@ using System.Net.Http.Headers;
 using SMSProcessing.Model;
 using System.Xml.Linq;
 using HtmlAgilityPack;
+using System.Security.Cryptography;
+using System.Threading;
 
 namespace Generic
 {
@@ -663,20 +665,30 @@ namespace Generic
             string id = cmd.ExecuteScalar().ToString();
 
             string response = "";
+            int c1 = 0;
             Message = Message.Replace("&", "^^");
             Message = HttpUtility.UrlEncode(Message);
             string url = "http://office.datainn.co.nz/sms/send/?O=S&P=" + PhoneNumber + "&M=" + Message;
 
-            try
+            while (!response.Contains("OK") && c1 < 3)
             {
-                var webClient = new WebClient();
-                Uri uri = new Uri(url);
-                response = webClient.DownloadString(uri);
-            }
-            catch (Exception e)
-            {
-                response = "Could not send text:" + e.ToString();
-                Log("", "Generic Functions SendRemoteMessage", "Error", "");
+                c1++;
+                try
+                {
+                    var webClient = new WebClient();
+                    Uri uri = new Uri(url);
+                    response = webClient.DownloadString(uri);
+                }
+                catch (Exception e)
+                {
+                    response = "Could not send text:" + e.ToString();
+                    Log("", "Generic Functions SendRemoteMessage", "Error", "");
+                }
+                if(!response.Contains("OK"))
+                {
+                    Thread.Sleep(500);
+                }
+
             }
             /*
             WebRequest wr = WebRequest.Create(url);
@@ -1093,6 +1105,56 @@ namespace Generic
                 rootXml.Add(repeaterXml);
             }
         }
+
+        private static byte[] GetKey(string password)
+        {
+            string pwd = null;
+
+            if (Encoding.UTF8.GetByteCount(password) < 24)
+            {
+                pwd = password.PadRight(24, ' ');
+            }
+            else
+            {
+                pwd = password.Substring(0, 24);
+            }
+            return Encoding.UTF8.GetBytes(pwd);
+        }
+
+        /// <summary>
+        /// Crypto strings using 3DES (192 bits)
+        /// </summary>
+        public string Encrypt(string data)
+        {
+            TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+            DES.Mode = CipherMode.ECB;
+            DES.Key = GetKey("a1!B78s!5(");
+
+            DES.Padding = PaddingMode.PKCS7;
+            ICryptoTransform DESEncrypt = DES.CreateEncryptor();
+            Byte[] Buffer = ASCIIEncoding.ASCII.GetBytes(data);
+
+            return Convert.ToBase64String(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length));
+        }
+
+        /// <summary>
+        /// Descrypto strings using 3DES (192 bits)
+        /// </summary>
+        public string Decrypt(string data)
+        {
+            TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+            DES.Mode = CipherMode.ECB;
+            DES.Key = GetKey("a1!B78s!5(");
+
+            DES.Padding = PaddingMode.PKCS7;
+            ICryptoTransform DESEncrypt = DES.CreateDecryptor();
+            Byte[] Buffer = Convert.FromBase64String(data.Replace(" ", "+"));
+
+            return Encoding.UTF8.GetString(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length));
+        }
+
     }
 
 

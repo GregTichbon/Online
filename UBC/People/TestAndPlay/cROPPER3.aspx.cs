@@ -112,7 +112,8 @@ namespace UBC.People.TestAndPlay
                 //category_options["storedprocedurename"] = "get_categories";
                 //category_options["parameters"] = parameters["Auction_CTR"];
                 Generic.Functions gFunctions = new Generic.Functions();
-                category_category = gFunctions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
+                //category_category = gFunctions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
+                category_category = Functions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
 
                 if (hf_guid != "new")
                 {
@@ -754,7 +755,8 @@ namespace UBC.People.TestAndPlay
                     functionoptions.Add("storedprocedurename", "");
                     functionoptions.Add("parameters", hf_person_id);
                     functionoptions.Add("usevalues", "");
-                    person_financial_events = genericfunctions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
+                    //person_financial_events = genericfunctions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
+                    person_financial_events = Functions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
                 }
 
 

@@ -92,7 +92,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Generic.dll" />
+    <Content Include="bin\Generic.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="BookingCalendar.aspx" />
     <Content Include="BookingCalendarNew.aspx" />
     <Content Include="Completed\default.aspx" />
@@ -477,6 +479,7 @@
     <Content Include="Booking.aspx" />
     <Content Include="BookingList.aspx" />
     <Content Include="People\Communicate2.aspx" />
+    <Content Include="People\CommunicateNew.aspx" />
     <Content Include="People\data.aspx" />
     <Content Include="People\EventDialog.aspx" />
     <Content Include="People\eventdialogclose.html" />
@@ -503,6 +506,7 @@
     <Content Include="People\RegisterDisplay.aspx" />
     <Content Include="People\Registration.aspx" />
     <Content Include="People\Reports\ComingEventsList.aspx" />
+    <Content Include="People\Reports\ContactDetails.aspx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\Default.aspx" />
@@ -874,6 +878,13 @@
     <Compile Include="People\Communicate2.aspx.designer.cs">
       <DependentUpon>Communicate2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\CommunicateNew.aspx.cs">
+      <DependentUpon>CommunicateNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\CommunicateNew.aspx.designer.cs">
+      <DependentUpon>CommunicateNew.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1021,6 +1032,13 @@
     </Compile>
     <Compile Include="People\Reports\ComingEventsList.aspx.designer.cs">
       <DependentUpon>ComingEventsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\ContactDetails.aspx.cs">
+      <DependentUpon>ContactDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\ContactDetails.aspx.designer.cs">
+      <DependentUpon>ContactDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\Crystal\AllEmail.cs">
       <AutoGen>True</AutoGen>

@@ -63,7 +63,7 @@ namespace DataInnovations.SMS
                     html += "<td>" + dr["ID"] + "</td>";
                     html += "<td>" + dr["DateTime"] + "</td>";
                     html += "<td>" + dr["Direction"] + "</td>";
-                    html += "<td>" + dr["PhoneNumber"] + name + "</td>";
+                    html += "<td><span class=\"phone\">" + dr["PhoneNumber"] + "</span>" + name + "</td>";
                     html += "<td>" + dr["Message"] + "</td>";
                     html += "<td>" + dr["Description"] + "</td>";
                     html += "<td>" + dr["Response"] + "</td>";

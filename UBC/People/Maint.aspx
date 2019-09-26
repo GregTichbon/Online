@@ -227,6 +227,9 @@
             $('#menu').click(function () {
                 window.location.href = '../default.aspx';
             })
+            $('#search').click(function () {
+                window.location.href = 'search.aspx';
+            })
 
             $('.registrationview').click(function () {
                 id = $(this).attr('id');
@@ -795,9 +798,11 @@
         <form id="form1" runat="server" class="form-horizontal" role="form">
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
 
+             <div class="toprighticon">
+            <input type="button" id="search" class="btn btn-info" value="Search" />
 
-
-            <input type="button" id="menu" class="toprighticon btn btn-info" value="MENU" />
+            <input type="button" id="menu" class="btn btn-info" value="MENU" />
+                 </div>
 
             <h1>Union Boat Club - Person Maintenance
             </h1>
@@ -1251,6 +1256,7 @@
                     <table id="transactionstable" class="table">
                         <%= html_transactions %>
                     </table>
+                    <a href="reports/FriendsStatementsPreview.aspx?id=<%: hf_person_id %>" target="_blank">Statement</a>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_relationships" class="tab-pane fade in">

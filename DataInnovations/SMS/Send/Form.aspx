@@ -9,10 +9,20 @@
 <body>
     <form id="form1" runat="server">
      
-
-        Mobile Number:
-        <br />
-        <asp:TextBox ID="tb_mobilenumber" runat="server" Width="301px"></asp:TextBox>
+        <table>
+            <tr>
+                <td>Recipient(s)<br />
+                    <asp:TextBox ID="tb_mobilenumber" runat="server" Width="691px" Height="134px" TextMode="MultiLine"></asp:TextBox>
+                </td>
+                <td>Enter data in lines.&nbsp;
+                    <br />
+                    Use commas to delimit the fields.<br />
+                    The first field must be the mobile number.<br />
+                    You can refer to the fields by their position
+                    <br />
+                    eg: ||1|| would include the mobile number in the message</td>
+            </tr>
+        </table>
         <br />
         <br />
         Message:<br />

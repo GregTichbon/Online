@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
@@ -230,9 +231,81 @@ namespace DataInnovations.SMS
                 con.Close();
                 con.Dispose();
             }
+        }
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string SMSPhoneStatus()
+        {
 
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("Get_Parameters", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    parameters.Add(dr["Name"].ToString(), dr["Value"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            string html = "";
+            Boolean success = false;
+            int failed = 0;
+            WebRequest wr = WebRequest.Create("http://" + parameters["IPAddress"] + parameters["Port"] + "/v1/device/status");
+            //WebRequest wr = WebRequest.Create("http://" + parameters["IPAddress"] + ":1234" + "/v1/device/status");
+            wr.Timeout = 3500;
+
+            while (!success && failed < 2)
+            {
+                try
+                {
+                    WebResponse response = wr.GetResponse();
+                    Stream data = response.GetResponseStream();
+                    using (StreamReader sr = new StreamReader(data))
+                    {
+                        html += sr.ReadToEnd();
+                    }
+                    success = true;
+                    data.Dispose();
+                }
+                catch (Exception e)
+                {
+                    failed++;
+                    Generic.Functions gFunctions = new Generic.Functions();
+
+                    string host = "70.35.207.87";
+                    string password = gFunctions.Decrypt("rPqCkZXW2bhc0HuBUHATwg==");
+                    string body = "<html><body>" + e.InnerException + "</body></html>";
+
+                    gFunctions.sendemailV3(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", body, "greg@datainn.co.nz;gtichbon@teorahou.org.nz;greg.tichbon@whanganui.govt.nz", "", "");
+                    //gFunctions.sendemailV4(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", "", db_otheremailaddress, emailBCC, replyto, attachments, emailoptions);
+
+                    html += "Error";
+                    //send email
+                }
+            }
+
+            return (html);
+        
 
         }
+
     }
     public class NameClass
     {

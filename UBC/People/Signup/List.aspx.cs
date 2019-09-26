@@ -57,7 +57,7 @@ namespace UBC.People.Signup
 
 
 
-                        string person = "<a href=\"signup?id=" + GUID + "\" target=\"link\">" + Firstname + "</a>";
+                        string person = "<a href=\"default.aspx?id=" + GUID + "\" target=\"startupperson\">" + Firstname + "</a>";
 
 
 

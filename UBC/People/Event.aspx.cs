@@ -154,7 +154,8 @@ namespace UBC.People
                             functionoptions.Clear();
                             functionoptions.Add("storedprocedure", "");
                             functionoptions.Add("usevalues", "");
-                            categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                            //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                            categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
                             html_persons += "<select class=\"form-control\" id=\"dd_categories_filter\" name=\"dd_categories_filter\" multiple=\"multiple\">" + categories_values + "</select>";
 
                             html_persons += "<div class=\"form-inline\">";
@@ -229,7 +230,8 @@ namespace UBC.People
                 functionoptions.Clear();
                 functionoptions.Add("storedprocedure", "");
                 functionoptions.Add("usevalues", "");
-                categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
             }
         }
 

@@ -79,7 +79,7 @@
                 transaction_tr = this;
                 smslog_id = $(this).find('td').eq(0).text();
                 id = $(this).find('td').eq(1).text();
-                phone = $(this).find('td').eq(4).text();
+                phone = $(this).find('td').eq(4).find('.phone').text();
                 message = $(this).find('td').eq(5).text();
                 description = $(this).find('td').eq(6).text();
 

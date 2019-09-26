@@ -25,6 +25,11 @@ namespace UBC.People.Reports
             SqlConnection con1 = new SqlConnection(strConnString);
             SqlDataAdapter adp1 = new SqlDataAdapter("Report_Person_Transactions", con1);
             //SqlDataAdapter adp1 = new SqlDataAdapter("Report_RegattaTransactions", con1);
+            string person_id = Request.QueryString["id"].ToString();
+            if (person_id != "")
+            {
+                adp1.SelectCommand.Parameters.Add("@person_id", SqlDbType.VarChar,10).Value = person_id;
+            }
 
             adp1.Fill(ds);
             report = Server.MapPath("~/people/reports/crystal/FriendsStatements.rpt");

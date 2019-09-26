@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace UBC.People
 {
-    public partial class Communicate : System.Web.UI.Page
+    public partial class CommunicateNew : System.Web.UI.Page
     {
         public string html;
         public string html_facebook;
@@ -103,7 +103,7 @@ namespace UBC.People
                                     {
                                         note = " - " + note;
                                     }
-                                    sendemail += delim + "<input name=\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
+                                    sendemail += delim + "<input name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
                                     //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
                                     delim = "<br />";
                                 }
@@ -121,7 +121,7 @@ namespace UBC.People
                                     {
                                         note = " - " + note;
                                     }
-                                    sendtext += delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
+                                    sendtext = delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
                                     //mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
                                     delim = "<br />";
                                 }
@@ -363,6 +363,7 @@ namespace UBC.People
                                 client.Credentials = new System.Net.NetworkCredential("ltr@datainn.co.nz", "m33t1ng");
                                 client.Send(message);
                                 */
+
                                 foreach (string email in emailRecipient.Split(','))
                                 {
                                     //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, emailtext, emailhtml, emailRecipient, emailBCC, "");
@@ -460,6 +461,7 @@ namespace UBC.People
                                         remailhtml = remailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                                         remailhtml = "<html><head></head><body>" + remailhtml + "</body></html>";
+
                                         foreach (string email in remailRecipient.Split(','))
                                         {
                                             //gFunctions.sendemailV2(host, emailfrom, emailfromname, password, tb_subject.Text, remailtext, remailhtml, remailRecipient, remailBCC, "");

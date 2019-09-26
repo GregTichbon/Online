@@ -41,7 +41,8 @@ namespace UBC.People
             functionoptions.Clear();
             functionoptions.Add("storedprocedure", "");
             functionoptions.Add("usevalues", "");
-            categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+            //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+            categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
 
 
             SqlConnection con = new SqlConnection(strConnString);
