@@ -752,6 +752,12 @@ namespace Generic
                 }
                 html = html + ("<option" + selected + ">" + option + "</option>");
             }
+            if(selectedoption != "" && options.Contains(selectedoption))
+            {
+                html = html + ("<option selected>" + selectedoption + "</option>");
+            }
+
+
             return html;
         }
 

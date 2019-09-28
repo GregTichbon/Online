@@ -39,12 +39,14 @@ namespace UBC.People
         public string html_persons;
         public string showattendees;
         public string finance;
+        public string startday = "";
+        public string endday = "";
         public string format = "'D MMM YYYY HH:mm'";
         public string extraFormats = "['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm']";
 
 
 
-        public string[] attendance_values = new string[7] { "No", "Yes", "Partial", "Maybe", "Expected", "Going", "Not Going" };
+        public string[] attendance_values = new string[8] { "No", "Yes", "Partial", "Maybe", "Expected", "Going", "Not Going", "Will be late" };
         public string[] type_values = new string[7] { "Training", "Regatta", "Social Row", "Social Event", "Promotion", "Committee Meeting", "Other" };
         public string[] role_values = new string[7] { "Rower", "Coach", "Coach/Rower", "Cox", "Gym/Excercise", "Coach Support", "Support" };
         public string[] noyes_values = new string[2] { "No", "Yes" };
@@ -103,6 +105,15 @@ namespace UBC.People
                             showattendees = dr["showattendees"].ToString();
                             finance = dr["finance"].ToString();
 
+                            if(startdatetime != "")
+                            {
+                                startday = Convert.ToDateTime(startdatetime).ToString("dddd");
+                            }
+                            if (enddatetime != "")
+                            {
+                                endday = Convert.ToDateTime(enddatetime).ToString("dddd");
+                            }
+
                             if (allday == "Yes")
                             {
                                 datetime = "";
@@ -116,10 +127,11 @@ namespace UBC.People
                             {
                                 datetime = "/time";
                                 startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy HH:mm");
-                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy HH:mm");
+                                if (enddatetime != "")
+                                {
+                                    enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy HH:mm");
+                                }
                             }
-
-
                         }
 
                         dr.Close();
@@ -251,7 +263,14 @@ namespace UBC.People
             cmd1.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["tb_title"].Trim();
             cmd1.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["tb_description"].Trim();
             cmd1.Parameters.Add("@startdatetime", SqlDbType.VarChar).Value = Request.Form["tb_startdatetime"].Trim();
-            cmd1.Parameters.Add("@enddatetime", SqlDbType.VarChar).Value = Request.Form["tb_enddatetime"].Trim();
+            if (Request.Form["tb_enddatetime"].Trim() != "")
+            {
+                cmd1.Parameters.Add("@enddatetime", SqlDbType.VarChar).Value = Request.Form["tb_enddatetime"].Trim();
+            }
+            else
+            {
+                cmd1.Parameters.Add("@enddatetime", SqlDbType.VarChar).Value = DBNull.Value;
+            }
             cmd1.Parameters.Add("@allday", SqlDbType.VarChar).Value = Request.Form["cb_allday"];
             cmd1.Parameters.Add("@type", SqlDbType.VarChar).Value = Request.Form["dd_type"];
             cmd1.Parameters.Add("@categories", SqlDbType.VarChar).Value = Request.Form["dd_categories"];

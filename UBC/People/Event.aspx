@@ -39,6 +39,15 @@
 
             $("#myForm").dirty();
 
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            if ($('#hf_event_id').val() != 'new') {
+                $('#togglepeople').show();
+                $('#export').show();
+            }
+
             $('#export').click(function () {
                 var table = "<table>";
                 $('table > tbody  > tr').each(function () {
@@ -103,6 +112,18 @@
                 }
             }
         });
+
+            $("#div_startdatetime").on("dp.change", function (e) {
+                theday = moment(e.date).format('dddd');
+                $('#startday').text(theday);
+            });
+
+            $("#div_enddatetime").on("dp.change", function (e) {
+                theday = moment(e.date).format('dddd');
+                $('#endday').text(theday);
+            });
+
+            
 
 
         $('#togglepeople').click(function () {
@@ -240,6 +261,8 @@ switch (option) {
 
         });
 
+
+
         function processrows() {
 
             //This code should be in the loop below ----- START
@@ -347,7 +370,7 @@ switch (option) {
     <input type="hidden" id="hf_event_id" name="hf_event_id" value="<%: event_id %>" />
     <div class="container" style="background-color: #FCF7EA">
         <div class="toprighticon">
-            <input type="button" id="export" class="btn btn-info" value="Export" />
+            <input type="button" id="export" style="display:none" class="btn btn-info" value="Export" />
             <input type="button" id="eventlist" class="btn btn-info" value="Event List" />
             <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>
@@ -374,6 +397,7 @@ switch (option) {
             <div class="col-sm-8">
                 <div class="input-group date" id="div_startdatetime">
                     <input id="tb_startdatetime" name="tb_startdatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: startdatetime %>" maxlength="20" required />
+                   <span id="startday" class="input-group-addon"><%= startday %></span> 
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -385,7 +409,8 @@ switch (option) {
             <label class="control-label col-sm-4" for="tb_enddatetime">End date<span class="usetime"><%:datetime %></span></label>
             <div class="col-sm-8">
                 <div class="input-group date" id="div_enddatetime">
-                    <input id="tb_enddatetime" name="tb_enddatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: enddatetime %>" maxlength="20" required />
+                    <input id="tb_enddatetime" name="tb_enddatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: enddatetime %>" maxlength="20" />
+                    <span id="endday" class="input-group-addon"><%= endday %></span> 
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -414,7 +439,7 @@ switch (option) {
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_categories">Categories</label>
+            <label class="control-label col-sm-4" for="dd_categories"><img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Select the categories of those that should attend.  You can add other people outside of these cateories by changing the people view below." /> Categories</label>
             <div class="col-sm-8">
                 <select id="dd_categories" name="dd_categories" class="form-control" multiple="multiple">
                     <%= categories_values %>
@@ -423,7 +448,7 @@ switch (option) {
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_showattendees">Show on Attendees</label>
+            <label class="control-label col-sm-4" for="dd_showattendees"><img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Use this mainly for regattas etc where management type lists are required.  There is a page to view these type of events." /> Show on Attendees</label>
             <div class="col-sm-8">
                 <select id="dd_showattendees" name="dd_showattendees" class="form-control">
                     <%= Generic.Functions.populateselect(noyes_values, showattendees,"None") %>
@@ -440,7 +465,7 @@ switch (option) {
             </div>
         </div>
 
-        <input type="button" id="togglepeople" class="btn btn-info" value="Hide people" />
+        <input type="button" id="togglepeople" class="btn btn-info" style="display:none" value ="Hide people" />
         <div id="div_people">
 
             <%=html_persons %>

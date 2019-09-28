@@ -47,8 +47,14 @@ namespace UBC.People
                         string description = dr["description"].ToString().Replace("\r\n", "<br />"); ;
                         string participants = dr["Participants"].ToString();
                         string categories = dr["categories"].ToString().Replace("|","<br />");
+                        string CopiedFrom_Event_ID = dr["CopiedFrom_Event_ID"].ToString();
 
                         string link = "<a href=\"event.aspx?id=" + event_id + "\">Edit</a>";
+                        if(CopiedFrom_Event_ID == "")
+                        {
+                            link += "<br /><a class=\"createrecurring\" data-id=\"" + event_id + "\" href=\"javascript:void(0);\">Create recurring events</a>";
+                        }
+
                         string thedate = daterange.Substring(4, 9).Insert(7, "20");
 
                         html += "<tr class=\"title\" title=\"" + description + "\" data-date=\"" + thedate + "\">";

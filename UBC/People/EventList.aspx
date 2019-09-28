@@ -31,6 +31,13 @@
                 filterbydate();
             });
 
+
+
+
+            $('.createrecurring').click(function () {
+                alert('Will show dialog box - for params and then on submit will run a service to execute SP: create_recurring_events and return message and/or number of occurences created.  Then will refresh page')
+            })
+
             $('.date').datetimepicker({
                 format: 'D MMM YYYY',
                 extraFormats: ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'],

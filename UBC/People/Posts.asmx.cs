@@ -341,6 +341,48 @@ namespace UBC.People
         }
 
         [WebMethod]
+        public standardResponseID updateattendance(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            //see also posts.asmx/update_event_person
+            //var arForm = [{ "name": "event_id", "value": event_id }, { "name": "person_id", "value": <%=person_id%> }, { "name": "attendance", "value": $('#attendance').val() }, { "name": "personnote", "value": $('#personnote').val() }];
+
+            string event_id = formVars.Form("event_id");
+            string person_id = formVars.Form("person_id");
+            string attendance = formVars.Form("attendance");
+            string personnote = formVars.Form("personnote");
+            
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            
+            cmd.CommandText = "update_person_event_attendance";
+            cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+            cmd.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
+            cmd.Parameters.Add("@personnote", SqlDbType.VarChar).Value = personnote;
+            cmd.Parameters.Add("@personresponded", SqlDbType.VarChar).Value = DateTime.Now.ToString("dd-MMMM-yyyy HH:mm:ss");
+
+            con.Open();
+            string result = cmd.ExecuteScalar().ToString();
+            con.Close();
+            con.Dispose();
+
+            standardResponseID resultclass = new standardResponseID();
+            resultclass.status = result;
+            resultclass.message = "";
+            resultclass.id = "";
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+            return (resultclass);
+
+        }
+
+        [WebMethod]
         public string delete_person_transaction(NameValue[] formVars)    //you can't pass any querystring params
         {
             string person_transaction_id = formVars.Form("person_transaction_id");
@@ -401,7 +443,8 @@ namespace UBC.People
         [WebMethod]
         public string update_event_person(NameValue[] formVars)    //you can't pass any querystring params
         {
-            
+            //see also posts.asmx/updateattendance
+
 
             /*PROCEDURE [dbo].[update_event_person] (
             @event_id int,

@@ -80,6 +80,7 @@
     <Content Include="HuiOct2019\Default.aspx" />
     <Content Include="HuiOct2019\Register.aspx" />
     <Content Include="HuiOct2019\Test.aspx" />
+    <Content Include="Images\Makaranui1.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

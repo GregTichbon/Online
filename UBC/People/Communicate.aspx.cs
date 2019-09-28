@@ -330,6 +330,7 @@ namespace UBC.People
                                 emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                                 emailhtml = emailhtml.Replace("||firstname||", firstname);
                                 emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
+                                emailhtml = emailhtml.Replace("||guid||", person_guid);
                                 emailhtml = emailhtml.Replace("||username||", username);
                                 emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
                                 emailhtml = emailhtml.Replace("||attendance||", attendance);
@@ -376,6 +377,7 @@ namespace UBC.People
                                 textmessage = textmessage.Replace("||link||", link);
                                 textmessage = textmessage.Replace("||firstname||", firstname);
                                 textmessage = textmessage.Replace("||accesscode||", person_guid.Substring(0, 5));
+                                textmessage = textmessage.Replace("||guid||", person_guid);
                                 textmessage = textmessage.Replace("||username||", username);
                                 textmessage = textmessage.Replace("||tempphrase||", tempphrase);
                                 textmessage = textmessage.Replace("||attendance||", attendance);
@@ -396,6 +398,7 @@ namespace UBC.People
                                 facebookmessage = facebookmessage.Replace("||link||", link);
                                 facebookmessage = facebookmessage.Replace("||firstname||", firstname);
                                 facebookmessage = facebookmessage.Replace("||accesscode||", person_guid.Substring(0, 5));
+                                facebookmessage = facebookmessage.Replace("||guid||", person_guid);
                                 facebookmessage = facebookmessage.Replace("||username||", username);
                                 facebookmessage = facebookmessage.Replace("||tempphrase||", tempphrase);
                                 facebookmessage = facebookmessage.Replace("||attendance||", attendance);

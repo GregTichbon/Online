@@ -470,6 +470,7 @@
     <Content Include="LearntoRow\XCommunicate.aspx" />
     <Content Include="LearntoRow\default.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="People\Attend.aspx" />
     <Content Include="People\Attendance.aspx" />
     <Content Include="People\Attendance24-28Jan2019.aspx" />
     <Content Include="People\BankAllocate.aspx" />
@@ -478,6 +479,7 @@
     <Content Include="Dependencies\Images\questionsmall.png" />
     <Content Include="Booking.aspx" />
     <Content Include="BookingList.aspx" />
+    <Content Include="People\Categories.aspx" />
     <Content Include="People\Communicate2.aspx" />
     <Content Include="People\CommunicateNew.aspx" />
     <Content Include="People\data.aspx" />
@@ -815,6 +817,13 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Attend.aspx.cs">
+      <DependentUpon>Attend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attend.aspx.designer.cs">
+      <DependentUpon>Attend.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Attendance.aspx.cs">
       <DependentUpon>Attendance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -856,6 +865,13 @@
     </Compile>
     <Compile Include="BookingList.aspx.designer.cs">
       <DependentUpon>BookingList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Check.aspx.cs">
       <DependentUpon>Check.aspx</DependentUpon>

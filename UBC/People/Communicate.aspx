@@ -103,10 +103,10 @@
             <tr>
                 <td>Use ||link|| to include the link, it will be displayed as &quot;here&quot; in the body of the email.<br />
                     Also can use ||firstname||, ||caregivername||<br />
-                    ||accesscode||<br />
+                    ||guid|| - Person&#39;s GUID<br />
+                    ||accesscode||&nbsp; 1st 5 characters of Person&#39;s GUID<br />
                     ||username||<br />
-                    ||tempphrase||
-         <br />
+                    ||tempphrase|| <br />
                     ||attendance|| - requires Event ID<br />
                     ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
                     ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
