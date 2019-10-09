@@ -75,10 +75,13 @@
     <Content Include="Default.aspx" />
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
+    <Content Include="Dependencies\Images\Title.jpg" />
     <Content Include="Dependencies\jquery-2.2.0.min.js" />
     <Content Include="Dependencies\jquery.validate.min.js" />
+    <Content Include="New.aspx" />
     <Content Include="Posts.asmx" />
     <Content Include="SendEmail.aspx" />
+    <Content Include="Test.aspx" />
     <Content Include="Web.config" />
     <Content Include="x.png" />
   </ItemGroup>
@@ -97,6 +100,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="New.aspx.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="New.aspx.designer.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -108,6 +118,13 @@
     </Compile>
     <Compile Include="SendEmail.aspx.designer.cs">
       <DependentUpon>SendEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace UBC.Go.Register
+namespace UBC.People
 {
-    public partial class _default : System.Web.UI.Page
+    public partial class EventSelector : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("http://private.unionboatclub.co.nz/people/register.aspx");
+
         }
     }
 }

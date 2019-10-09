@@ -40,7 +40,10 @@
             $('table tbody tr').click(function () {
                 tr = this;
                 $('#attendance').val($(this).find('td:eq(2)').text());
-                $('#personnote').val($(this).find('td:eq(3)').text());
+                myval = $(this).find('td:eq(3)').text();
+                if (myval != "") {
+                    $('#personnote').val(myval);
+                }
 
                 $("#div_edit").dialog({
                     resizable: false,
@@ -57,7 +60,7 @@
                             $(tr).find('td:eq(3)').text($('#personnote').val());
                             $("#div_edit").dialog("close");
 
-                            var arForm = [{ "name": "event_id", "value": event_id }, { "name": "person_id", "value": <%=person_id%> }, { "name": "attendance", "value": $('#attendance').val() }, { "name": "personnote", "value": $('#personnote').val() }];
+                            var arForm = [{ "name": "event_id", "value": event_id }, { "name": "person_id", "value": "<%=person_id%>" }, { "name": "person_guid", "value": "<%=guid%>" }, { "name": "attendance", "value": $('#attendance').val() }, { "name": "personnote", "value": $('#personnote').val() }];
                             var formData = JSON.stringify({ formVars: arForm });
 
                             $.ajax({
@@ -78,15 +81,22 @@
                     }
                 });
             })
+            $('#login').click(function () {
+                window.location.href = "<%: ResolveUrl("security/login.aspx")%>";
+            })
+            $('#menu').click(function () {
+                window.location.href = "<%: ResolveUrl("default.aspx")%>";
+            })
         }) //document.ready
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="background-color: #FCF7EA">
+         <%=html_button %>
         <h1><%=name %></h1>
         <p id="blurb">To advance in your rowing, and for the sake of your team and crew, and out of respect for the coaches, you are expected to be at all training sessions on time, unless there is good reason which is communicated as early as possible.<br />Please complete the form below for the next 7 days.</p>
-        <p>Click on a row to update.</p>
+        <h3>Click on a row to update.</h3>
         <table class="table">
             <thead>
                 <tr>

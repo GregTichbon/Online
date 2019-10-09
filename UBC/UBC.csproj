@@ -62,10 +62,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Bin\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Ical.Net, Version=4.1.8.0, Culture=neutral, PublicKeyToken=65c0446cd019ea53, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.4.1.11\lib\net46\Ical.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NodaTime, Version=2.0.2.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.2.0.2\lib\net45\NodaTime.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
@@ -73,6 +79,13 @@
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.1.0\lib\net46\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -92,11 +105,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24Test\Temp1.html" />
     <Content Include="bin\Generic.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="BookingCalendar.aspx" />
     <Content Include="BookingCalendarNew.aspx" />
+    <Content Include="Calendar.aspx" />
     <Content Include="Completed\default.aspx" />
     <Content Include="data.asmx" />
     <Content Include="Default.aspx" />
@@ -473,6 +488,7 @@
     <Content Include="People\Attend.aspx" />
     <Content Include="People\Attendance.aspx" />
     <Content Include="People\Attendance24-28Jan2019.aspx" />
+    <Content Include="People\Attending.aspx" />
     <Content Include="People\BankAllocate.aspx" />
     <Content Include="People\BankImport.aspx" />
     <Content Include="Dependencies\Images\question.png" />
@@ -483,10 +499,12 @@
     <Content Include="People\Communicate2.aspx" />
     <Content Include="People\CommunicateNew.aspx" />
     <Content Include="People\data.aspx" />
+    <Content Include="People\Documents\UBCCalendar.ics" />
     <Content Include="People\EventDialog.aspx" />
     <Content Include="People\eventdialogclose.html" />
     <Content Include="People\EventPlanner2.js" />
     <Content Include="People\EventPlanner1.js" />
+    <Content Include="People\EventSelector.aspx" />
     <Content Include="People\FindPhone.aspx" />
     <Content Include="People\Images\100.jpg" />
     <Content Include="People\Images\103.jpg" />
@@ -503,6 +521,9 @@
     <Content Include="People\main.aspx" />
     <Content Include="People\MastersCommunicate.aspx" />
     <Content Include="People\message.aspx" />
+    <Content Include="People\News.aspx" />
+    <Content Include="People\NewsList.aspx" />
+    <Content Include="People\NewsViewer.aspx" />
     <Content Include="People\Posts.asmx" />
     <Content Include="People\RegisterAccess.aspx" />
     <Content Include="People\RegisterDisplay.aspx" />
@@ -559,6 +580,7 @@
     <Content Include="Test2a.aspx" />
     <Content Include="Test3.html" />
     <Content Include="TestEmail.aspx" />
+    <Content Include="UpdateICS.aspx" />
     <Content Include="XMLFile1.xml" />
     <Content Include="XSLTFile1.xslt" />
     <Content Include="Dependencies\fullcalendar\demos\json\events.json" />
@@ -756,6 +778,13 @@
     <Compile Include="BookingCalendarNew.aspx.designer.cs">
       <DependentUpon>BookingCalendarNew.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Completed\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -781,6 +810,7 @@
     <Compile Include="Dependencies\fullcalendar\demos\Greg2.aspx.designer.cs">
       <DependentUpon>Greg2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dependencies\functions.cs" />
     <Compile Include="Go\Doc1\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -837,6 +867,13 @@
     </Compile>
     <Compile Include="People\Attendance24-28Jan2019.aspx.designer.cs">
       <DependentUpon>Attendance24-28Jan2019.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Attending.aspx.cs">
+      <DependentUpon>Attending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attending.aspx.designer.cs">
+      <DependentUpon>Attending.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\BankAllocate.aspx.cs">
       <DependentUpon>BankAllocate.aspx</DependentUpon>
@@ -940,6 +977,13 @@
     <Compile Include="People\EventPlanner.aspx.designer.cs">
       <DependentUpon>EventPlanner.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\EventSelector.aspx.cs">
+      <DependentUpon>EventSelector.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\EventSelector.aspx.designer.cs">
+      <DependentUpon>EventSelector.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\FindPhone.aspx.cs">
       <DependentUpon>FindPhone.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -995,6 +1039,27 @@
     </Compile>
     <Compile Include="People\message.aspx.designer.cs">
       <DependentUpon>message.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\NewsList.aspx.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\NewsList.aspx.designer.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\NewsViewer.aspx.cs">
+      <DependentUpon>NewsViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\NewsViewer.aspx.designer.cs">
+      <DependentUpon>NewsViewer.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>
@@ -1472,6 +1537,13 @@
     </Compile>
     <Compile Include="UBC.Master.designer.cs">
       <DependentUpon>UBC.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateICS.aspx.cs">
+      <DependentUpon>UpdateICS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateICS.aspx.designer.cs">
+      <DependentUpon>UpdateICS.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserCode.aspx.cs">
       <DependentUpon>UserCode.aspx</DependentUpon>

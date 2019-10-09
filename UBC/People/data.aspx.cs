@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using Generic;
 
 namespace UBC.People
 {
@@ -15,6 +16,9 @@ namespace UBC.People
         protected void Page_Load(object sender, EventArgs e)
         {
             string strConnString;
+            SqlConnection con;
+            SqlCommand cmd;
+            SqlDataReader dr;
             string mode = Request.QueryString["mode"];
 
             switch (mode)
@@ -25,17 +29,17 @@ namespace UBC.People
                     //get_event_person event_id mode='Recorded'
                     strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
-                    SqlConnection con = new SqlConnection(strConnString);
-                    SqlCommand cmd1 = new SqlCommand("[get_event_person]", con);
-                    cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
-                    cmd1.Parameters.Add("@mode", SqlDbType.VarChar).Value = "Recorded";
+                    con = new SqlConnection(strConnString);
+                    cmd = new SqlCommand("[get_event_person]", con);
+                    cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+                    cmd.Parameters.Add("@mode", SqlDbType.VarChar).Value = "Recorded";
 
-                    cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
                     try
                     {
                         con.Open();
-                        SqlDataReader dr = cmd1.ExecuteReader();
+                        dr = cmd.ExecuteReader();
                         if (dr.HasRows)
                         {
 
@@ -72,16 +76,16 @@ namespace UBC.People
 
                     strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
-                    SqlConnection con2 = new SqlConnection(strConnString);
-                    SqlCommand cmd2 = new SqlCommand("get_kiwibank_transaction1", con2);
-                    cmd2.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
+                    con = new SqlConnection(strConnString);
+                    cmd = new SqlCommand("get_kiwibank_transaction1", con);
+                    cmd.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
 
-                    cmd2.CommandType = CommandType.StoredProcedure;
-                    cmd2.Connection = con2;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
                     try
                     {
-                        con2.Open();
-                        SqlDataReader dr = cmd2.ExecuteReader();
+                        con.Open();
+                        dr = cmd.ExecuteReader();
                         if (dr.HasRows)
                         {
                             dr.Read();
@@ -136,12 +140,13 @@ namespace UBC.People
                             html += "<tr><th>Person</th><th class=\"number\">Amount</th><th>Edit / <span class=\"person_transaction\">Add</span></th>";
                             html += "</thead>";
                             html += "<tbody>";
-                            SqlCommand cmd2B = new SqlCommand("get_transaction_person_allocations", con2);
+
+                            SqlCommand cmd2B = new SqlCommand("get_transaction_person_allocations", con);
                             cmd2B.Parameters.Add("@Source", SqlDbType.VarChar).Value = "Kiwibank1";
                             cmd2B.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
 
                             cmd2B.CommandType = CommandType.StoredProcedure;
-                            cmd2B.Connection = con2;
+                            cmd2B.Connection = con;
                             //try
                             {
                                 //con2.Open();
@@ -169,12 +174,12 @@ namespace UBC.People
                             html += "<tr><th>Code</th><th class=\"number\">Amount</th><th>Edit / <span class=\"othertransaction\">Add</span></th>";
                             html += "</thead>";
                             html += "<tbody>";
-                            SqlCommand cmd2C = new SqlCommand("get_transaction_other_allocations", con2);
+                            SqlCommand cmd2C = new SqlCommand("get_transaction_other_allocations", con);
                             cmd2C.Parameters.Add("@Source", SqlDbType.VarChar).Value = "Kiwibank1";
                             cmd2C.Parameters.Add("@transaction_id", SqlDbType.VarChar).Value = transaction_id;
 
                             cmd2C.CommandType = CommandType.StoredProcedure;
-                            cmd2C.Connection = con2;
+                            cmd2C.Connection = con;
                             //try
                             {
                                 //con2.Open();
@@ -201,10 +206,128 @@ namespace UBC.People
                     }
                     finally
                     {
-                        con2.Close();
-                        con2.Dispose();
+                        con.Close();
+                        con.Dispose();
                     }
 
+                    break;
+                case "eventselector":
+                    string date = Request.QueryString["date"];
+                    string days = Request.QueryString["days"];
+
+                    strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+                    con = new SqlConnection(strConnString);
+                    cmd = new SqlCommand("get_all_events", con);
+                    cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = date;
+                    cmd.Parameters.Add("@days", SqlDbType.VarChar).Value = days;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+                    try
+                    {
+                        con.Open();
+                        dr = cmd.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+
+                            //html = "<table><thead><tr><th>Date/Time</th><th>Title</th></tr></thead><tbody>";
+                            html = "";
+
+                            while (dr.Read())
+                            {
+                                string event_id2 = dr["event_id"].ToString();
+                                string daterange = dr["daterange"].ToString();
+                                string title = dr["title"].ToString();
+                                string description = dr["description"].ToString();
+
+                                html += "<tr id=\"" + event_id2 + "\"><td>" + daterange + "</td><td>" + title + "</td><td class=\"select\">Select</td></tr>";
+
+                            }
+                            //html += "</tbody></table>";
+                        }
+                        dr.Close();
+                    }
+
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        con.Close();
+                        con.Dispose();
+                    }
+                    break;
+                case "get_event_and_attendance":
+
+                    Boolean access = Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"); 
+
+                    string event_id3 = Request.Form["Event_ID"];
+                    strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+                    con = new SqlConnection(strConnString);
+                    con.Open();
+
+                    SqlCommand cmd1 = new SqlCommand("get_event", con);
+                    cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id3;
+
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Connection = con;
+
+                    dr = cmd1.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        string title = dr["title"].ToString();
+                        string daterange = dr["daterange"].ToString();
+                        string description = dr["description"].ToString();
+
+                        html += "<div id=\"div_head\">" + daterange + " " + title + "</div>";
+                        dr.Close();
+
+                        string showphone = "";
+                        if (access)
+                        {
+                            showphone = "<th>Phone</th>";
+                        }
+                        html += "<table class=\"table\"><thead><tr><th style=\"width:15%\">Person</th><th style=\"width:15%\">Attendance</th><th>Note</th>" + showphone + "<tbody>";
+
+                        cmd1 = new SqlCommand("get_attending", con);
+                        cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id3;
+                        //cmd1.Parameters.Clear();
+                        cmd1.CommandType = CommandType.StoredProcedure;
+                        cmd1.Connection = con;
+                        dr = cmd1.ExecuteReader();
+
+                        while (dr.Read())
+                        {
+                            string person_id = dr["person_id"].ToString();
+                            string person_guid = dr["guid"].ToString();
+                            string firstname = dr["firstname"].ToString();
+                            string name = dr["name"].ToString();
+                            string attendance = dr["attendance"].ToString();
+                            string phone = dr["phone"].ToString();
+                            string personnote = dr["personnote"].ToString();
+
+                            string selectperson = "";
+                            showphone = "";
+                            if (access)
+                            {
+                                selectperson = " class=\"selectperson\"";
+                                showphone = "<td><a href=\"tel:" + phone + "\">" + phone + "</a></td>";
+                            }
+
+                            html += "<tr id=\"tr_" + person_guid + "\"><td" + selectperson + ">" + name + "</td><td class=\"attendance\">" + attendance + "</td><td>" + personnote + "</td>" + showphone + "</tr>";
+                        }
+
+                        html += "</tbody></table>";
+                    }
+
+                    dr.Close();
+
+                    con.Close();
+                    con.Dispose();
                     break;
             }
         }

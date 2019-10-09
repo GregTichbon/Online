@@ -38,7 +38,7 @@
             <!--<div class="panel-heading">Rower</div>-->
             <div class="style1">
                 <br />
-                Thanks for your registration<--, we look forward to seeing you.<br />
+                Thanks for your registration<!--, we look forward to seeing you.<br />
                 <br />
                 Get more information from the <a href="http://ubc.org.nz/people/SchoolLearntoRowAug2019.pdf" target="_blank">brochure</a>
                 <br />-->

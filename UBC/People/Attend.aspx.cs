@@ -18,6 +18,8 @@ namespace UBC.People
         public string name = "";
         public string[] attendance_values = new string[4] { "No", "Yes", "Maybe", "Will be late" };
         public string person_id;
+        public string html_button;
+        public string guid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,14 +30,53 @@ namespace UBC.People
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
+            guid = Request.QueryString["id"];
             //string guid = "09DB9E21-D49E-441F-9076-2626B37E099C";
-            string guid = Request.QueryString["id"];
+            if (Session["UBC_person_id"] == null && guid == null)
+            {
+                if (Request.Cookies["UBC-GUID"] != null)
+                {
+                    guid = Request.Cookies["UBC-GUID"].Value;
+                }
+            }
+
+            if (guid != null)
+            {
+                Session.Remove("UBC_person_id");
+                Session.Remove("UBC_name");
+                Session.Remove("UBC_AccessString");
+                Session.Remove("UBC_Colour");
+
+                //Response.Cookies["UBC-GUID"].Value = guid;
+                HttpCookie cookie = new HttpCookie("UBC-GUID");
+                cookie.Value = guid;
+                cookie.Expires = DateTime.Now.AddMonths(3);
+                Response.SetCookie(cookie);
+            }
+
+            if (Session["UBC_person_id"] == null && guid == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
+
+            Dependencies.functions.tracker((string)Session["UBC_person_id"], guid ?? "", HttpContext.Current.Request.Url.PathAndQuery);
+
+            if (Session["UBC_person_id"] == null)
+            {
+                html_button = "<input type=\"button\" id=\"login\" class=\"toprighticon btn btn-info\" value=\"Log in\" />";
+            }
+            else
+            {
+                html_button = "<input type=\"button\" id=\"menu\" class=\"toprighticon btn btn-info\" value=\"MENU\" />";
+
+            }
 
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
 
             SqlCommand cmd1 = new SqlCommand("get_person_event_attendance_byperson", con);
-            cmd1.Parameters.Add("@personguid", SqlDbType.VarChar).Value = guid;
+            cmd1.Parameters.Add("@person_id", SqlDbType.VarChar).Value = Session["UBC_person_id"];
+            cmd1.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = guid;
             cmd1.Parameters.Add("@days", SqlDbType.Int).Value = daysUntilDay;
 
             cmd1.CommandType = CommandType.StoredProcedure;

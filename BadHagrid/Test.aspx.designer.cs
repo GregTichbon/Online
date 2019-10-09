@@ -7,9 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UBC.People {
+namespace BadHagrid {
     
     
-    public partial class Communicate {
+    public partial class Test {
+        
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

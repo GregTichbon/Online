@@ -52,6 +52,10 @@ namespace UBC.People
             dr.Read();
 
             string firstname = dr["firstname"].ToString();
+            string person_guid = dr["guid"].ToString();
+            string username = dr["username"].ToString();
+            string tempphrase = dr["tempphrase"].ToString();
+            
             con.Close();
 
             con.Dispose();
@@ -72,16 +76,17 @@ namespace UBC.People
 
                 //emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
                 emailhtml = emailhtml.Replace("||firstname||", firstname);
-                //emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
-                //emailhtml = emailhtml.Replace("||username||", username);
-                //emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
+                emailhtml = emailhtml.Replace("||guid||", person_guid);
+                emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
+                emailhtml = emailhtml.Replace("||username||", username);
+                emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
                 //emailhtml = emailhtml.Replace("||attendance||", attendance);
                 //emailhtml = emailhtml.Replace("||role||", role);
-                //emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
-                //emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
+                emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
+                emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
                 //emailhtml = emailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
                 emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, recipient, emailBCC, "");
+                //.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, recipient, emailBCC, "");
                 response = "Ok";
             }
 
@@ -89,17 +94,18 @@ namespace UBC.People
             {
                 //text = text.Replace("||link||", link);
                 text = text.Replace("||firstname||", firstname);
-                //text = text.Replace("||accesscode||", person_guid.Substring(0, 5));
-                //text = text.Replace("||username||", username);
-                //text = text.Replace("||tempphrase||", tempphrase);
+                text = text.Replace("||guid||", person_guid);
+                text = text.Replace("||accesscode||", person_guid.Substring(0, 5));
+                text = text.Replace("||username||", username);
+                text = text.Replace("||tempphrase||", tempphrase);
                 //text = text.Replace("||attendance||", attendance);
                 //text = text.Replace("||role||", role);
-                //text = text.Replace("||folder||", "Folder" + id);
-                //text = text.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
+                text = text.Replace("||folder||", "Folder" + id);
+                text = text.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
                 //text = text.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
                 foreach (string mobile in recipient.Split(';'))
                 {
-                    response = gFunctions.SendRemoteMessage(mobile, text, "UBC Masters Communications") + "<br />";
+                    response = gFunctions.SendRemoteMessage(mobile, text, "UBC Communications") + "<br />";
                 }
             }
 
@@ -348,6 +354,7 @@ namespace UBC.People
 
             string event_id = formVars.Form("event_id");
             string person_id = formVars.Form("person_id");
+            string person_guid = formVars.Form("person_guid");
             string attendance = formVars.Form("attendance");
             string personnote = formVars.Form("personnote");
             
@@ -362,6 +369,7 @@ namespace UBC.People
             cmd.CommandText = "update_person_event_attendance";
             cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
             cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
+            cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = person_guid;
             cmd.Parameters.Add("@attendance", SqlDbType.VarChar).Value = attendance;
             cmd.Parameters.Add("@personnote", SqlDbType.VarChar).Value = personnote;
             cmd.Parameters.Add("@personresponded", SqlDbType.VarChar).Value = DateTime.Now.ToString("dd-MMMM-yyyy HH:mm:ss");

@@ -227,7 +227,7 @@ namespace Makaranui.HuiOct2019
             string emailhtml = "<html><body>";
 
             emailhtml += "<p>Thanks for your registration for Makaranui hui, see your details below.</p>";
-            emailhtml += "<p>You can make changes to your registration <a href=\"http://makaranui.nz/huiOct2019?id=" + guid + "\">here</a>.</p>";
+            emailhtml += "<p>You can make changes to your registration <a href=\"http://makaranui.nz/huiOct2019/register.aspx?id=" + guid + "\">here</a>.</p>";
             emailhtml += "<p>Registration is payable to:  Kotahitanga Tribal Committee  38-9014-0036435-00</p>";
             emailhtml += "<p>Reference:  your name, so we can match the payment to the registration</p>";
             emailhtml += "<p>Note that Tshirt orders must be paid by 17th October so they can be ordered.</p>";
@@ -388,7 +388,7 @@ namespace Makaranui.HuiOct2019
             {
                 if (textRecipient.StartsWith("02"))
                 {
-                    gFunctions.SendRemoteMessage(textRecipient, "Thanks for you Wananga Registration.  You can maintain your details at: http://makaranui.nz/huiOct2019?id=" + guid, "Makaranui Wananga");
+                    gFunctions.SendRemoteMessage(textRecipient, "Thanks for you Wananga Registration.  You can maintain your details at: http://makaranui.nz/huiOct2019/register.aspx?id=" + guid, "Makaranui Wananga");
                 }
             }
 

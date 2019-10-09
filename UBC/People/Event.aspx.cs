@@ -57,10 +57,9 @@ namespace UBC.People
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
-            Boolean access = false;
-            if (new[] { "1", "3", "4" }.Contains(Session["UBC_person_id"]))
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1000001"))
             {
-                access = true;
+                //Response.Redirect("~/default.aspx");
             }
 
             if (!IsPostBack)
@@ -239,11 +238,14 @@ namespace UBC.People
                     con.Dispose();
                 }
 
-                functionoptions.Clear();
-                functionoptions.Add("storedprocedure", "");
-                functionoptions.Add("usevalues", "");
-                //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
-                categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                else
+                {
+                    functionoptions.Clear();
+                    functionoptions.Add("storedprocedure", "");
+                    functionoptions.Add("usevalues", "");
+                    //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                    categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+                }
             }
         }
 

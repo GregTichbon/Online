@@ -72,6 +72,7 @@ namespace UBC.People
         public string[] invoiceaddresstypes = new string[4] { "Email", "Text", "Mail", "Hand Deliver" };
         public string[] seasons = new string[3] { "2017/18", "2018/19", "2019/20" };
         public string category_category;
+        public string relationships_relationshiptypes;
 
         public string person_financial_events;
 
@@ -108,15 +109,23 @@ namespace UBC.People
 
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
+                Generic.Functions gFunctions = new Generic.Functions();
+
                 Dictionary<string, string> category_options = new Dictionary<string, string>();
                 category_options["usevalues"] = "";
                 category_options["selecttype"] = "Value";
                 //category_options["storedprocedure"] = "get_categories";
                 //category_options["storedprocedurename"] = "get_categories";
                 //category_options["parameters"] = parameters["Auction_CTR"];
-                Generic.Functions gFunctions = new Generic.Functions();
                 //category_category = gFunctions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
                 category_category = Functions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
+
+                
+                Dictionary<string, string> relationships_options = new Dictionary<string, string>();
+                relationships_options["usevalues"] = "";
+                relationships_options["selecttype"] = "Value";
+                relationships_relationshiptypes = Functions.buildandpopulateselect(strConnString, "exec get_relationshiptypes", "", relationships_options, "None");
+               
 
                 if (hf_guid != "new")
                 {
@@ -250,7 +259,10 @@ namespace UBC.People
                             string event_id = dr["event_id"].ToString();
                             string title = dr["title"].ToString();
                             string startdatetime = Convert.ToDateTime(dr["startdatetime"]).ToString("dd MMM yy hh:mm");
-                            string enddatetime = Convert.ToDateTime(dr["enddatetime"]).ToString("dd MMM yy hh:mm");
+                            string enddatetime = dr["enddatetime"].ToString();
+                            if(enddatetime != "") { 
+                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy hh:mm");
+                            }
                             string daterange = dr["daterange"].ToString();
                             string attendance = dr["attendance"].ToString();
                             string note = dr["note"].ToString();
@@ -373,9 +385,19 @@ namespace UBC.People
                     //{
 
                     html_relationships = "<thead>";
-                    html_relationships += "<tr><th>Relationship</th><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"relationshipedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    //html_relationships += "<tr><th>Relationship</th><th>Person</th><th>Status</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"relationshipsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_relationships += "<tr><th style=\"width:50px;text-align:center\"></th><th>Relationship</th><th>Person</th><th>Note</th><th style=\"width:100px\">Action / <a class=\"relationshipsedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
                     html_relationships += "</thead>";
                     html_relationships += "<tbody>";
+
+                    //hidden row, used for creating new rows client side
+                    html_relationships += "<tr style=\"display:none\">";
+                    html_relationships += "<td style=\"text-align:center\"></td>";
+                    html_relationships += "<td></td>";
+                    html_relationships += "<td></td>";
+                    html_relationships += "<td></td>";
+                    html_relationships += "<td><a href=\"javascript:void(0)\" class=\"relationshipsedit\" data-mode=\"edit\">Edit</td>";
+                    html_relationships += "</tr>";
 
                     cmd.CommandText = "get_person_relationships";
                     cmd.Parameters.Clear();
@@ -390,15 +412,15 @@ namespace UBC.People
                             string person_guid = dr["person_guid"].ToString();
                             string person = dr["person"].ToString();
                             string relationship = dr["Relationship"].ToString();
-                            string status = dr["status"].ToString();
+                            //string status = dr["status"].ToString();
                             string note = dr["note"].ToString();
                             string PrimaryRecordat = dr["PrimaryRecordat"].ToString();
 
                             html_relationships += "<tr id=\"relationships_" + relationship_id + "\">";
-                            //html_relationships += "<td style=\"text-align:center\"></td>";
-                            html_relationships += "<td> is the " + relationship + " of</td>";
+                            html_relationships += "<td style=\"text-align:center\"></td>";
+                            html_relationships += "<td relationship_id=\"" + relationship_id + "\">> is the " + relationship + " of</td>";
                             html_relationships += "<td><a href=\"maint.aspx?id=" + person_guid + "\">" + person + "</a></td>";
-                            html_relationships += "<td>" + status + "</td>";
+                            //html_relationships += "<td>" + status + "</td>";
                             html_relationships += "<td>" + note + "</td>";
                             html_relationships += "<td><a href=\"javascript:void(0)\" class=\"relationshipsedit\" data-mode=\"edit\">Edit</td>";
                             //html_relationships += "<td style=\"text-align:center\">').html(action) 
@@ -652,6 +674,7 @@ namespace UBC.People
                     cmd.CommandText = "get_person_category";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+                    cmd.Parameters.Add("@onlycurrent", SqlDbType.VarChar).Value = "No";
 
                     try
                     {
@@ -661,6 +684,12 @@ namespace UBC.People
                             string person_category_id = dr["person_category_id"].ToString();
                             string category_id = dr["category_id"].ToString();
                             string category = dr["category"].ToString();
+                            string current = dr["current"].ToString();
+                            string currentcategory = "";
+                            if (current == "0")
+                            {
+                                currentcategory = " class=\"notcurrentcategory\"";
+                            }
 
                             string startdate = dr["startdate"].ToString();
                             if (startdate != "")
@@ -671,8 +700,7 @@ namespace UBC.People
                             string enddate = "";// Convert.ToDateTime(dr["startdate"]).ToString("dd MMM yy");
                             string note = dr["note"].ToString();
 
-
-                            html_category += "<tr id=\"category_" + person_category_id + "\">";
+                            html_category += "<tr" + currentcategory + " id=\"category_" + person_category_id + "\">";
                             html_category += "<td style=\"text-align:center\"></td>";
                             html_category += "<td category_id=\"" + category_id + "\">" + category + "</td>";
                             html_category += "<td>" + startdate + "</td>";
@@ -930,21 +958,29 @@ namespace UBC.People
                 if (key.StartsWith("category_"))
                 {
                     string person_category_id = key.Substring(9);
-                    if (person_category_id.StartsWith("new"))
+                    if (person_category_id.EndsWith("_delete"))
                     {
-                        person_category_id = "new";
+                        cmd.CommandText = "Delete_Person_category";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@person_category_id", SqlDbType.VarChar).Value = person_category_id.Substring(0, person_category_id.Length - 7);
                     }
+                    else
+                    {
+                        if (person_category_id.StartsWith("new"))
+                        {
+                            person_category_id = "new";
+                        }
 
-                    string[] valuesSplit = Request.Form[key].Split('\x00FE');
-                    cmd.CommandText = "Update_Person_category";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.Add("@person_category_id", SqlDbType.VarChar).Value = person_category_id;
-                    cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
-                    cmd.Parameters.Add("@category_id", SqlDbType.VarChar).Value = valuesSplit[0];
-                    cmd.Parameters.Add("@startdate", SqlDbType.VarChar).Value = valuesSplit[1];
-                    cmd.Parameters.Add("@enddate", SqlDbType.VarChar).Value = valuesSplit[2];
-                    cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[3];
-
+                        string[] valuesSplit = Request.Form[key].Split('\x00FE');
+                        cmd.CommandText = "Update_Person_category";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@person_category_id", SqlDbType.VarChar).Value = person_category_id;
+                        cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
+                        cmd.Parameters.Add("@category_id", SqlDbType.VarChar).Value = valuesSplit[0];
+                        cmd.Parameters.Add("@startdate", SqlDbType.VarChar).Value = valuesSplit[1];
+                        cmd.Parameters.Add("@enddate", SqlDbType.VarChar).Value = valuesSplit[2];
+                        cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[3];
+                    }
                     con.Open();
                     result = cmd.ExecuteScalar().ToString();
                     con.Close();
@@ -953,10 +989,11 @@ namespace UBC.People
                 if (key.StartsWith("phone_"))
                 {
                     string person_phone_id = key.Substring(6);
-                    if (person_phone_id.EndsWith("_delete")) {
+                    if (person_phone_id.EndsWith("_delete"))
+                    {
                         cmd.CommandText = "Delete_Person_phone";
                         cmd.Parameters.Clear();
-                        cmd.Parameters.Add("@person_phone_id", SqlDbType.VarChar).Value = person_phone_id.Substring(0,person_phone_id.Length - 7);
+                        cmd.Parameters.Add("@person_phone_id", SqlDbType.VarChar).Value = person_phone_id.Substring(0, person_phone_id.Length - 7);
                     }
                     else
                     {

@@ -25,7 +25,7 @@ namespace UBC.People
         public string tb_birthdate;
         public string dd_gender;
         public string tb_medical;
-        public string tb_dietry;
+        public string tb_dietary;
         public string tb_emailaddress;
         public string tb_homephone;
         public string tb_mobilephone;
@@ -41,6 +41,7 @@ namespace UBC.People
         public string tb_parentcaregiver2mobilephone;
         public string tb_parentcaregiver1emailaddress;
         public string tb_parentcaregiver2emailaddress;
+        public string tb_previousclub;
 
         public string dd_agreement;
         public string dd_correspondence;
@@ -92,7 +93,7 @@ namespace UBC.People
                         tb_birthdate = dr["birthdate"].ToString();
                         dd_gender = dr["gender"].ToString();
                         tb_medical = dr["medical"].ToString();
-                        tb_dietry = dr["dietry"].ToString();
+                        tb_dietary = dr["tb_dietary"].ToString();
                         //tb_facebook = dr["facebook"].ToString();
                         dd_school = dr["school"].ToString();
                         dd_schoolyear = dr["schoolyear"].ToString();
@@ -149,7 +150,7 @@ namespace UBC.People
             dd_gender = Request.Form["dd_gender"].Trim();
             dd_school = Request.Form["dd_school"].Trim();
             dd_schoolyear = Request.Form["dd_schoolyear"].Trim();
-            tb_dietry = Request.Form["tb_dietry"].Trim();
+            tb_dietary = Request.Form["tb_dietary"].Trim();
             tb_medical = Request.Form["tb_medical"].Trim();
             tb_residentialaddress = Request.Form["tb_residentialaddress"].Trim();
             //tb_postaladdress = Request.Form["tb_postaladdress"].Trim();
@@ -180,7 +181,7 @@ namespace UBC.People
             cmd.Parameters.Add("@birthdate", SqlDbType.VarChar).Value = tb_birthdate;
             cmd.Parameters.Add("@school", SqlDbType.VarChar).Value = dd_school;
             cmd.Parameters.Add("@schoolyear", SqlDbType.VarChar).Value = dd_schoolyear;
-            cmd.Parameters.Add("@dietry", SqlDbType.VarChar).Value = tb_dietry;
+            cmd.Parameters.Add("@dietary", SqlDbType.VarChar).Value = tb_dietary;
             cmd.Parameters.Add("@medical", SqlDbType.VarChar).Value = tb_medical;
             cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = dd_gender;
             cmd.Parameters.Add("@residentialaddress", SqlDbType.VarChar).Value = tb_residentialaddress;

@@ -56,6 +56,11 @@
             border: 1px solid black;
             width: 1200px;
         }
+
+        .notcurrentcategory {
+            background-color: grey;
+        }
+
     </style>
 
     <script type="text/javascript">
@@ -125,7 +130,7 @@
                     }).appendTo('#form1');
                 });
 
-
+                /*----------------------------------------------CATEGORY-----------------------------------------*/
                 $('#categorytable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_category = $(this).find('td:eq(1)').attr('category_id');
@@ -139,9 +144,20 @@
                         name: tr_id,
                         value: value
                     }).appendTo('#form1');
-
+                });
+                $('#categorytable > tbody > tr[maint="deleted"]').each(function () {
+                    //don't do if new
+                    tr_id = $(this).attr('id') + '_delete';
+                    if (tr_id.substring(0, 3) != 'new') {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: ""
+                        }).appendTo('#form1');
+                    }
                 });
 
+                /*----------------------------------------------PHONE-----------------------------------------*/
                 $('#phonetable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_phone = $(this).find('td:eq(1)').text();
@@ -155,7 +171,6 @@
                         name: tr_id,
                         value: value
                     }).appendTo('#form1');
-
                 });
                 $('#phonetable > tbody > tr[maint="deleted"]').each(function () {
                     //don't do if new
@@ -169,7 +184,8 @@
                     }
                 });
 
-                $('#emailtable > tbody > tr[maint="changed"]').each(function () {
+               /*----------------------------------------------EMAIL-----------------------------------------*/
+               $('#emailtable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_emailaddress = $(this).find('td:eq(1)').text();
                     tr_note = $(this).find('td:eq(2)').text();
@@ -191,6 +207,32 @@
                     }).appendTo('#form1');
                     alert(value);
 
+                });
+
+                /*----------------------------------------------RELATIONSHIP-----------------------------------------*/
+                $('#relationshiptable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_relationship = $(this).find('td:eq(1)').attr('relationship_id');
+                    tr_person = $(this).find('td:eq(2)').text();
+                    tr_note = $(this).find('td:eq(3)').text();
+                   
+                    value = tr_relationship + delim + tr_person + delim + tr_note;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
+                });
+                $('#relationshiptable > tbody > tr[maint="deleted"]').each(function () {
+                    //don't do if new
+                    tr_id = $(this).attr('id') + '_delete';
+                    if (tr_id.substring(0, 3) != 'new') {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: ""
+                        }).appendTo('#form1');
+                    }
                 });
 
                 /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
@@ -423,11 +465,10 @@
 
                 if (mode != 'add') {
                     myButtons["Delete"] = function () {
-                        if (window.confirm("Are you sure you want to delete this category?")) {
+                        if (window.confirm("It may be better to use the 'End Date'.  Are you sure you want to delete this category?")) {
                             $(tr).find('td:first').attr("class", "deleted");
                             $(tr).attr('maint', 'deleted');
                             //$(tr).remove
-                            alert('To do: Delete in database');
                             $(this).dialog("close");
                         }
                     }
@@ -521,6 +562,72 @@
                 }
             });
 
+            /* ========================================= RELATIONSHIPS ===========================================*/
+            $(document).on('click', '.relationshipsedit', function () {
+                //$('.relationshipsedit').click(function () {
+                $('#div_relationships_person').text($('#tb_firstname').val());
+                mode = $(this).data('mode');
+                if (mode == "add") {
+                    $("#dialog-relationships").find(':input').val('');
+                } else {
+                    tr = $(this).closest('tr');
+                    $('#dd_relationships_relationship').val($(tr).find('td').eq(1).attr('relationship_id'));
+                    $('#tb_relationships_person').val($(tr).find('td').eq(2).text());
+                    //$('#dd_relationships_status').val($(tr).find('td').eq(3).text());
+                    $('#tb_relationships_note').val($(tr).find('td').eq(3).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-relationships").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true
+                });
+
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if (mode == "add") {
+                            tr = $('#div_relationships > table > tbody tr:first').clone();
+                            $(tr).removeAttr('style');
+                            //$('#div_relationship > table > tbody > tr:last').before(tr);
+                            $('#div_relationships > table > tbody').append(tr);
+                            $(tr).attr('id', 'relationships_new_' + get_newctr());
+                            $(tr).find('td:first').attr("class", "inserted");
+                        } else {
+                            $(tr).find('td:first').attr("class", "changed");
+
+                        }
+                        $(tr).attr('maint', 'changed');
+                        $(tr).find('td').eq(1).attr('relationship_id', $('#dd_relationships_relationship').val());
+                        $(tr).find('td').eq(2).text($('#tb_relationships_person').val());
+                        //$(tr).find('td').eq(3).text($('#dd_relationships_status').val());
+                        $(tr).find('td').eq(3).text($('#tb_relationships_note').val());
+                        $(this).dialog("close");
+                    }
+                }
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this relationship?")) {
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+                $("#dialog-relationships").dialog('option', 'buttons', myButtons);
+            })
+
+            
 
 /* ========================================= EMAIL ===========================================*/
             $(document).on('click', '.emailedit', function () {
@@ -1038,7 +1145,54 @@
                     </div>
                 </div>
             </div>
-                        <!-- ================================= END ===================================  -->
+            <!-- ================================= RELATIONSHIPS ===================================  -->
+            <div id="dialog-relationships" title="Maintain relationship" style="display: none" class="form-horizontal">
+                <h2>Not fully done</h2>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        </div>
+                    <div id="div_relationships_person" class="col-sm-8">
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="dd_relationships_relationship" class="control-label col-sm-4">
+                        Is the
+                    </label>
+                    <div class="col-sm-8">
+                         <select id="dd_relationships_relationship" name="dd_relationships_relationship" class="form-control">
+                            <%=  relationships_relationshiptypes  %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tb_relationships_person" class="control-label col-sm-4">
+                        Of
+                    </label>
+                    <div class="col-sm-8">
+                        <input id="tb_relationships_person" name="tb_relationships_person" type="text" required="required" class="form-control" />
+                    </div>
+                </div>
+                <!--
+                <div class="form-group">
+                    <label for="tb_relationships_status" class="control-label col-sm-4">
+                        Status
+                    </label>
+                    <div class="col-sm-8">
+                        <input id="tb_relationships_status" name="tb_relationships_status" type="text" required="required" class="form-control" />
+                    </div>
+                </div>
+                -->
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_relationships_note">Note</label>
+                    <div class="col-sm-8">
+                        <input id="tb_relationships_note" name="tb_relationships_note" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- ================================= END ===================================  -->
 
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#div_basic">Basic</a></li>
@@ -1072,6 +1226,13 @@
                         <div class="col-sm-1">
                             <a class="btn btn-info" role="button" href="<%: tb_facebook %>" target="UBC_Facebook">Go</a>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="div_guid">GUID</label>
+                        <div class="col-sm-8">
+                            <div id="div_guid"><%=hf_guid%></div>
+                        </div>
+                     
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
