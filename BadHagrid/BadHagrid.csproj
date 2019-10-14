@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BadHagrid</RootNamespace>
     <AssemblyName>BadHagrid</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
@@ -23,6 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,26 +44,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileBrowser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MB.FileBrowser.1.1.8\lib\net35\FileBrowser.dll</HintPath>
+    </Reference>
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
+    <Reference Include="IZ.WebFileManager, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MB.FileBrowser.1.1.8\lib\net35\IZ.WebFileManager.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -70,28 +76,286 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\Newslist.aspx" />
+    <Content Include="Administration\NewsMaint.aspx" />
     <Content Include="Administration\SignedUp.aspx" />
     <Content Include="BadHagrid.svg" />
+    <Content Include="Data.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Dependencies\additional-methods.js" />
+    <Content Include="Dependencies\bootstrap-datetimepicker.min.css" />
+    <Content Include="Dependencies\bootstrap-datetimepicker.min.js" />
+    <Content Include="Dependencies\bootstrap.min.css" />
+    <Content Include="Dependencies\bootstrap.min.js" />
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
-    <Content Include="Dependencies\Images\Title.jpg" />
+    <Content Include="Dependencies\Images\Title.png" />
     <Content Include="Dependencies\jquery-2.2.0.min.js" />
     <Content Include="Dependencies\jquery.validate.min.js" />
+    <Content Include="Dependencies\moment.min.js" />
+    <Content Include="FileBrowser\css\style.css" />
+    <Content Include="FileBrowser\css\style.min.css" />
+    <Content Include="FileBrowser\FileBrowser.aspx" />
+    <Content Include="FileBrowser\img\16\camera.png" />
+    <Content Include="FileBrowser\img\16\file-bookmark.png" />
+    <Content Include="FileBrowser\img\16\file-code.png" />
+    <Content Include="FileBrowser\img\16\file-empty.png" />
+    <Content Include="FileBrowser\img\16\file-excel-alt.png" />
+    <Content Include="FileBrowser\img\16\file-excel.png" />
+    <Content Include="FileBrowser\img\16\file-exe.png" />
+    <Content Include="FileBrowser\img\16\file-font.png" />
+    <Content Include="FileBrowser\img\16\file-illustrator.png" />
+    <Content Include="FileBrowser\img\16\file-indesign.png" />
+    <Content Include="FileBrowser\img\16\file-link.png" />
+    <Content Include="FileBrowser\img\16\file-note.png" />
+    <Content Include="FileBrowser\img\16\file-pdf-alt.png" />
+    <Content Include="FileBrowser\img\16\file-pdf.png" />
+    <Content Include="FileBrowser\img\16\file-photoshop.png" />
+    <Content Include="FileBrowser\img\16\file-picture.png" />
+    <Content Include="FileBrowser\img\16\file-powerpoint-alt.png" />
+    <Content Include="FileBrowser\img\16\file-powerpoint.png" />
+    <Content Include="FileBrowser\img\16\file-premiere.png" />
+    <Content Include="FileBrowser\img\16\file-sound.png" />
+    <Content Include="FileBrowser\img\16\file-text.png" />
+    <Content Include="FileBrowser\img\16\file-video.png" />
+    <Content Include="FileBrowser\img\16\file-word-alt.png" />
+    <Content Include="FileBrowser\img\16\file-word.png" />
+    <Content Include="FileBrowser\img\16\file-zip-alt.png" />
+    <Content Include="FileBrowser\img\16\file-zip.png" />
+    <Content Include="FileBrowser\img\16\folder-document-alt.png" />
+    <Content Include="FileBrowser\img\16\folder-document.png" />
+    <Content Include="FileBrowser\img\16\folder-flash.png" />
+    <Content Include="FileBrowser\img\16\folder-house-alt.png" />
+    <Content Include="FileBrowser\img\16\folder-house.png" />
+    <Content Include="FileBrowser\img\16\folder-music.png" />
+    <Content Include="FileBrowser\img\16\folder-picture-alt.png" />
+    <Content Include="FileBrowser\img\16\folder-picture.png" />
+    <Content Include="FileBrowser\img\16\folder-video-alt.png" />
+    <Content Include="FileBrowser\img\16\folder-video.png" />
+    <Content Include="FileBrowser\img\16\folder.png" />
+    <Content Include="FileBrowser\img\32\camera.png" />
+    <Content Include="FileBrowser\img\32\file-bookmark.png" />
+    <Content Include="FileBrowser\img\32\file-code.png" />
+    <Content Include="FileBrowser\img\32\file-empty.png" />
+    <Content Include="FileBrowser\img\32\file-excel-alt.png" />
+    <Content Include="FileBrowser\img\32\file-excel.png" />
+    <Content Include="FileBrowser\img\32\file-exe.png" />
+    <Content Include="FileBrowser\img\32\file-font.png" />
+    <Content Include="FileBrowser\img\32\file-illustrator.png" />
+    <Content Include="FileBrowser\img\32\file-indesign.png" />
+    <Content Include="FileBrowser\img\32\file-link.png" />
+    <Content Include="FileBrowser\img\32\file-note.png" />
+    <Content Include="FileBrowser\img\32\file-pdf-alt.png" />
+    <Content Include="FileBrowser\img\32\file-pdf.png" />
+    <Content Include="FileBrowser\img\32\file-photoshop.png" />
+    <Content Include="FileBrowser\img\32\file-picture.png" />
+    <Content Include="FileBrowser\img\32\file-powerpoint-alt.png" />
+    <Content Include="FileBrowser\img\32\file-powerpoint.png" />
+    <Content Include="FileBrowser\img\32\file-premiere.png" />
+    <Content Include="FileBrowser\img\32\file-sound.png" />
+    <Content Include="FileBrowser\img\32\file-text.png" />
+    <Content Include="FileBrowser\img\32\file-video.png" />
+    <Content Include="FileBrowser\img\32\file-word-alt.png" />
+    <Content Include="FileBrowser\img\32\file-word.png" />
+    <Content Include="FileBrowser\img\32\file-zip-alt.png" />
+    <Content Include="FileBrowser\img\32\file-zip.png" />
+    <Content Include="FileBrowser\img\32\folder-document-alt.png" />
+    <Content Include="FileBrowser\img\32\folder-document.png" />
+    <Content Include="FileBrowser\img\32\folder-flash.png" />
+    <Content Include="FileBrowser\img\32\folder-house-alt.png" />
+    <Content Include="FileBrowser\img\32\folder-house.png" />
+    <Content Include="FileBrowser\img\32\folder-music.png" />
+    <Content Include="FileBrowser\img\32\folder-picture-alt.png" />
+    <Content Include="FileBrowser\img\32\folder-picture.png" />
+    <Content Include="FileBrowser\img\32\folder-video-alt.png" />
+    <Content Include="FileBrowser\img\32\folder-video.png" />
+    <Content Include="FileBrowser\img\32\folder.png" />
+    <Content Include="FileBrowser\img\cmd\box-out.png" />
+    <Content Include="FileBrowser\img\cmd\cloud-up.png" />
+    <Content Include="FileBrowser\img\cmd\Copy.png" />
+    <Content Include="FileBrowser\img\cmd\Delete.png" />
+    <Content Include="FileBrowser\img\cmd\FileLarge.png" />
+    <Content Include="FileBrowser\img\cmd\FileSmall.png" />
+    <Content Include="FileBrowser\img\cmd\FolderLarge.png" />
+    <Content Include="FileBrowser\img\cmd\FolderSmall.png" />
+    <Content Include="FileBrowser\img\cmd\FolderUp.png" />
+    <Content Include="FileBrowser\img\cmd\Move.png" />
+    <Content Include="FileBrowser\img\cmd\NewFolder.png" />
+    <Content Include="FileBrowser\img\cmd\Process.gif" />
+    <Content Include="FileBrowser\img\cmd\Refresh.png" />
+    <Content Include="FileBrowser\img\cmd\Rename.png" />
+    <Content Include="FileBrowser\img\cmd\RootFolderLarge.png" />
+    <Content Include="FileBrowser\img\cmd\RootFolderSmall.png" />
+    <Content Include="FileBrowser\img\cmd\Show.png" />
+    <Content Include="FileBrowser\img\cmd\View.png" />
+    <Content Include="FileBrowser\img\cmd\_View.png" />
+    <Content Include="FileBrowser\js\FileManager.js" />
+    <Content Include="FileBrowser\js\FileManager.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="New.aspx" />
     <Content Include="Posts.asmx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\plugins\bootbox.js" />
+    <Content Include="Scripts\plugins\bootstrap\affix.js" />
+    <Content Include="Scripts\plugins\bootstrap\alert.js" />
+    <Content Include="Scripts\plugins\bootstrap\button.js" />
+    <Content Include="Scripts\plugins\bootstrap\carousel.js" />
+    <Content Include="Scripts\plugins\bootstrap\collapse.js" />
+    <Content Include="Scripts\plugins\bootstrap\dropdown.js" />
+    <Content Include="Scripts\plugins\bootstrap\modal.js" />
+    <Content Include="Scripts\plugins\bootstrap\popover.js" />
+    <Content Include="Scripts\plugins\bootstrap\scrollspy.js" />
+    <Content Include="Scripts\plugins\bootstrap\tab.js" />
+    <Content Include="Scripts\plugins\bootstrap\tooltip.js" />
+    <Content Include="Scripts\plugins\bootstrap\transition.js" />
+    <Content Include="Scripts\plugins\fineuploader\edit.gif" />
+    <Content Include="Scripts\plugins\fineuploader\fineuploader.css" />
+    <Content Include="Scripts\plugins\fineuploader\jquery.fineuploader.js" />
+    <Content Include="Scripts\plugins\fineuploader\jquery.fineuploader.min.js" />
+    <Content Include="Scripts\plugins\fineuploader\loading.gif" />
+    <Content Include="Scripts\plugins\fineuploader\processing.gif" />
+    <Content Include="Scripts\plugins\jquery.mb-waitspinner.js" />
+    <Content Include="Scripts\plugins\jquery.prettySocial.js" />
+    <Content Include="Scripts\plugins\plugins.js" />
+    <Content Include="Scripts\plugins\plugins.min.js" />
+    <Content Include="Scripts\plugins\plugins.min.js.map" />
+    <Content Include="Scripts\plugins\plugins.js.bundle" />
+    <Content Include="Scripts\jquery-1.11.1.min.map" />
+    <Content Include="FileBrowser\MyUpload.ashx" />
+    <Content Include="FileBrowser\js\FileManager.min.js.map" />
+    <Content Include="FileBrowser\js\FileManager.js.bundle" />
+    <Content Include="FileBrowser\IZWebFileManagerThumbnailHandler.ashx" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\plugins\spin\jquery.spin.js" />
+    <Content Include="Scripts\plugins\spin\spin.js" />
     <Content Include="SendEmail.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="userfiles\image\dummy.jpg" />
     <Content Include="Web.config" />
     <Content Include="x.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\Newslist.aspx.cs">
+      <DependentUpon>Newslist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Newslist.aspx.designer.cs">
+      <DependentUpon>Newslist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\NewsMaint.aspx.cs">
+      <DependentUpon>NewsMaint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\NewsMaint.aspx.designer.cs">
+      <DependentUpon>NewsMaint.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\SignedUp.aspx.cs">
       <DependentUpon>SignedUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Administration\SignedUp.aspx.designer.cs">
       <DependentUpon>SignedUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.cs.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.cs.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.es.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.fr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.he.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.he.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.it.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.it.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.nl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.nl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.no.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.no.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.pt.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.pt.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.ru.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sk.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.sk.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sr-Cyrl-CS.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.sr-Cyrl-CS.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sr-Latn-CS.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.sr-Latn-CS.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sv.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.sv.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.tr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.tr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.zh-CN.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IZWebFileManagerResource.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Data.aspx.cs">
+      <DependentUpon>Data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Data.aspx.designer.cs">
+      <DependentUpon>Data.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -139,6 +403,108 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.zh-CN.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.zh-CN.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.tr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.tr.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sv.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.sv.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sr-Latn-CS.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.sr-Latn-CS.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sr-Cyrl-CS.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.sr-Cyrl-CS.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.sk.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.sk.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.ru.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.ru.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.pt.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.pt.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.no.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.no.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.nl.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.nl.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.it.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.it.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.he.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.he.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.fr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.fr.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.es.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.es.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.de.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\WebFileManager\IZWebFileManagerResource.cs.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IZWebFileManagerResource.cs.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

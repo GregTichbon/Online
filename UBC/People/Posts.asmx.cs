@@ -35,6 +35,7 @@ namespace UBC.People
             string emailhtml = formVars.Form("emailhtml");
             string text = formVars.Form("text");
             string recipient = formVars.Form("recipient");
+            string attendance = formVars.Form("attendance");
 
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -80,7 +81,7 @@ namespace UBC.People
                 emailhtml = emailhtml.Replace("||accesscode||", person_guid.Substring(0, 5));
                 emailhtml = emailhtml.Replace("||username||", username);
                 emailhtml = emailhtml.Replace("||tempphrase||", tempphrase);
-                //emailhtml = emailhtml.Replace("||attendance||", attendance);
+                emailhtml = emailhtml.Replace("||attendance||", attendance);
                 //emailhtml = emailhtml.Replace("||role||", role);
                 emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
                 emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
@@ -98,7 +99,7 @@ namespace UBC.People
                 text = text.Replace("||accesscode||", person_guid.Substring(0, 5));
                 text = text.Replace("||username||", username);
                 text = text.Replace("||tempphrase||", tempphrase);
-                //text = text.Replace("||attendance||", attendance);
+                text = text.Replace("||attendance||", attendance);
                 //text = text.Replace("||role||", role);
                 text = text.Replace("||folder||", "Folder" + id);
                 text = text.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");

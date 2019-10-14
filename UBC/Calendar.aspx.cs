@@ -47,20 +47,33 @@ namespace UBC
                 if (dr.HasRows)
                 {
 
-
+                    DateTime today = DateTime.Now.Date;
+                    string anchor = "";
+                    string anchorclass = "";
                     while (dr.Read())
                     {
                         string calendar_id = dr["calendar_id"].ToString();
                         string eventDesc = dr["event"].ToString();
                         string daterange = dr["daterange"].ToString();
                         string colour = dr["colour"].ToString();
+                        DateTime startdate = (DateTime)dr["startdate"];
+                        if(startdate >= today && anchor == "")
+                        {
+                            anchor = "Done";
+                            //anchorclass = " anchor";
+                            anchorclass = " id=\"anchor\"";
+                        }
+                        else
+                        {
+                            anchor = "";
+                        }
 
-                        if(colour == "")
+                        if (colour == "")
                         {
                             colour = "None";
                         }
 
-                        html += "<tr class=\"" + colour + "\">";
+                        html += "<tr" + anchorclass + " class=\"" + colour + "\">";
                         html += "<td>" + daterange + "</td><td>" + eventDesc + "</td>";
                         html += "</tr>";
                     }

@@ -22,10 +22,13 @@
     <script src="<%: ResolveUrl("~/Dependencies/moment.min.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap-datetimepicker.min.js")%>"></script>
 
-
-
     <script type="text/javascript">
         $(document).ready(function () {
+
+            var phonectr = <%=phonectr%>;
+            var parentctr = <%=parentctr%>;
+            var parentphonectr = <%=parentphonectr%>;
+
             $(document).uitooltip({
                 position: {
                     my: "right center",
@@ -58,23 +61,56 @@
             });
 
             $('#btn_addphone').click(function () {
+                phonectr++;
                 tr = $('#tbl_phone>tbody>tr:first').clone();
+                $(tr).find('td :input:not(:button)').each(function () {
+                    id = $(this).data('name');
+                    //lastdelim = id.lastIndexOf("_");
+                    //newid = id.substring(0, lastdelim + 1) + phonectr;
+                    newid = id + phonectr;
+                    $(this).prop('name', newid);
+                })
+
                 $('#tbl_phone>tbody').append(tr);
                 $(tr).show();
             })
 
             $('#btn_addparent').click(function () {
+                parentctr++;
                 tr = $('#tbl_parent>tbody>tr:first').clone();
+                $(tr).find('td :input:not(:button)').each(function () {
+                    id = $(this).data('name');
+                    alert(id);
+                    //lastdelim = id.lastIndexOf("_");
+                    //newid = id.substring(0, lastdelim + 1) + parentctr;
+                    newid = id + parentctr;
+                    $(this).prop('name', newid);
+                })
                 $('#tbl_parent>tbody').append(tr);
                 $(tr).show();
                 tr = $('#tbl_parent>tbody>tr:nth-child(2)').clone();
+                $(tr).find('td :input:not(:button)').each(function () {
+                    id = $(this).data('name');
+                    //lastdelim = id.lastIndexOf("_");
+                    //newid = id.substring(0, lastdelim + 1) + parentctr;
+                    newid = id + parentctr;
+                    $(this).prop('name', newid);
+                })
                 $('#tbl_parent>tbody').append(tr);
                 $(tr).show();
             })
 
             $('body').on('click', '.btn_parent_add_phone', function () {
                 alert('to do');
+                parentphonectr++;
                 tr = $('#tbl_parent_phone>tbody>tr:first').clone();
+                $(tr).find('td :input:not(:button)').each(function () {
+                    id = $(this).data('name');
+                    //lastdelim = id.lastIndexOf("_");
+                    //newid = id.substring(0, lastdelim + 1) + parentctr + parentphonectr;
+                    newid = id + parentctr + parentphonectr;
+                    $(this).prop('name', newid);
+                })
                 $('#tbl_parent_phone>tbody').append(tr);
                 $(tr).show();
             });
@@ -85,7 +121,7 @@
                     $(tr).remove();
                 }
             });
-
+            /*
             $('body').on('click', '.btn_parent_add_email', function () {
                 alert('to do');
                 tr = $('#tbl_parent_email>tbody>tr:first').clone();
@@ -99,6 +135,7 @@
                     $(tr).remove();
                 }
             });
+            */
 
             $('body').on('click', '.btn_phone_remove', function () {
                 if (confirm('Are you sure you want to remove this phone?')) {
@@ -114,7 +151,6 @@
                     $(tr).remove();
                 }
             });
-
 
             $('#dd_invoicetype').change(function () {
                 switch ($(this).val()) {
@@ -192,7 +228,6 @@
 
             });
 
-
             //$('[required]').css('border', '1px solid red');
             //$('[required]').addClass('required');
         });
@@ -216,7 +251,6 @@
                 $('#tb_parentcaregiver2').val('');
                 $('#tb_parentcaregiver2mobilephone').val('');
                 $('#tb_parentcaregiver2emailaddress').val('');
-
             }
         }
 
@@ -272,7 +306,6 @@
                         <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="30" />
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <label class="control-label col-sm-5" for="dd_gender">Gender</label>
@@ -335,7 +368,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label class="control-label col-sm-5" for="tb_emailaddress">Email address</label>
                     <div class="col-sm-7">
@@ -359,9 +391,9 @@
                             <tbody>
                                 <tr style="display: none">
                                     <td>
-                                        <input type="text" class="form-control" name="phone_number_" /></td>
+                                        <input type="text" class="form-control" data-name="repeat_phonenumber_" /></td>
                                     <td>
-                                        <select class="form-control" name="phone_type_">
+                                        <select class="form-control" data-name="repeat_phonetype_">
                                             <option></option>
                                             <option>Home</option>
                                             <option>Work</option>
@@ -370,43 +402,12 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="phone_note_" /></td>
-                                    <td>
-                                        <input type="button" value="Remove" class="btn_phone_remove btn btn-info btn-sm" /></td>
-                                </tr>
-                                <tr>
-                                    <td>x</td>
-                                    <td>x</td>
-                                    <td>x</td>
-                                    <td>
-                                        <input type="button" value="Remove" class="btn_phone_remove btn btn-info btn-sm" /></td>
-                                </tr>
-                                <tr>
-                                    <td>x</td>
-                                    <td>x</td>
-                                    <td>x</td>
+                                        <input type="text" class="form-control" data-name="repeat_phonenote_" /></td>
                                     <td>
                                         <input type="button" value="Remove" class="btn_phone_remove btn btn-info btn-sm" /></td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-
-                <div style="display: none">
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_homephone">Home phone</label>
-                        <div class="col-sm-7">
-                            <input id="tb_homephone" name="tb_homephone" type="text" class="form-control numeric" value="<%:tb_homephone%>" maxlength="20" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_mobilephone">Mobile phone</label>
-                        <div class="col-sm-7">
-                            <input id="tb_mobilephone" name="tb_mobilephone" type="text" class="form-control numeric" value="<%:tb_mobilephone%>" maxlength="20" />
-                        </div>
                     </div>
                 </div>
 
@@ -422,20 +423,16 @@
                         <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Rowers should be comfortable swimming in open water and able to swim 50m in light clothes unassisted. If you are unsure or not confident with your swimming ability please let us know. Your safety is most important to us." />
                         Swimming ability</label>
                     <div class="col-sm-7">
-
                         <select id="dd_swimmer" name="dd_swimmer" class="form-control" required>
                             <%= Generic.Functions.populateselect(swimmer, dd_swimmer,"") %>
                         </select>
-
                     </div>
                 </div>
                 <!------------------------------------------------------>
-
             </div>
         </div>
 
-
-        <div class="panel panel-danger" id="div_parent" style="display: nonex">
+        <div class="panel panel-danger" id="div_parent" style="display: none">
             <div class="panel-heading">Parent/Caregivers</div>
             <div class="panel-body">
                 <table id="tbl_parent" class="table table-condensed table-striped table-bordered">
@@ -452,9 +449,9 @@
                     <tbody>
                         <tr style="display: none">
                             <td>
-                                <input type="text" class="form-control" name="parent_name_" /></td>
+                                <input type="text" class="form-control" data-name="repeat_parent_name_" /></td>
                             <td>
-                                <select class="form-control" name="parent_relationship_">
+                                <select class="form-control" data-name="repeat_parent_relationship_">
                                     <option></option>
                                     <option>Mother</option>
                                     <option>Father</option>
@@ -463,18 +460,13 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="parent_email_" /></td>
+                                <input type="text" class="form-control" data-name="repeat_parent_email_" /></td>
                             <td>
-                                <input type="text" class="form-control" name="parent_note_" /></td>
+                                <input type="text" class="form-control" data-name="repeat_parent_note_" /></td>
                             <td>
                                 <input type="button" value="Remove Person" class="btn_parent_remove btn btn-info btn-sm" /></td>
                         </tr>
-                        <!--
-                        <tr style="display: none">
-                            <td colspan="5">
-                                <input type="button" value="Edit" class="btn_parent_phone_edit btn btn-info btn-sm" />
-                                Phone Details: xxxxxx</td>
-                        </tr>   -->
+
                         <tr style="display: none">
                             <td colspan="5">
                                 <table id="tbl_parent_phone" class="table table-condensed table-bordered">
@@ -490,9 +482,9 @@
                                     <tbody>
                                         <tr style="display: none">
                                             <td>
-                                                <input type="text" class="form-control" name="phone_number_" /></td>
+                                                <input type="text" class="form-control" data-name="repeat_parent_phone_number_" /></td>
                                             <td>
-                                                <select class="form-control" name="parent_phone_type_">
+                                                <select class="form-control" name="repeat_parent_phone_type_">
                                                     <option></option>
                                                     <option>Home</option>
                                                     <option>Work</option>
@@ -501,16 +493,15 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="parent_phone_note_" /></td>
+                                                <input type="text" class="form-control" data-name="repeat_parent_phone_note_" /></td>
                                             <td>
                                                 <input type="button" value="Remove Phone" class="btn_parent_remove_phone btn btn-info btn-sm" /></td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
-
+                        <!--
                         <tr style="display: none">
                             <td colspan="5">
                                 <table id="tbl_parent_email" class="table table-condensed table-bordered">
@@ -525,67 +516,20 @@
                                     <tbody>
                                         <tr style="display: none">
                                             <td>
-                                                <input type="text" class="form-control" name="email_address_" /></td>
+                                                <input type="text" class="form-control" name="repeat_parent_email_address_" /></td>
                                             <td>
-                                                <input type="text" class="form-control" name="parent_email_note_" /></td>
+                                                <input type="text" class="form-control" name="repeat_parent_email_note_" /></td>
                                             <td>
                                                 <input type="button" value="Remove email" class="btn_parent_remove_email btn btn-info btn-sm" /></td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
-
-
+                        -->
                     </tbody>
                 </table>
-
-
-                <div style="display: none">
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_parentcaregiver1">Name (1)</label>
-                        <div class="col-sm-7">
-                            <input id="tb_parentcaregiver1" name="tb_parentcaregiver1" type="text" class="form-control" value="<%:tb_parentcaregiver1%>" maxlength="100" required />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_parentcaregiver1mobilephone">Mobile phone (1)</label>
-                        <div class="col-sm-7">
-                            <input id="tb_parentcaregiver1mobilephone" name="tb_parentcaregiver1mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver1mobilephone%>" required maxlength="20" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_parentcaregiver1emailaddress">Email address (1)</label>
-                        <div class="col-sm-7">
-                            <input id="tb_parentcaregiver1emailaddress" name="tb_parentcaregiver1emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_parentcaregiver1emailaddress%>" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_parentcaregiver">Name (2)</label>
-                        <div class="col-sm-7">
-                            <input id="tb_parentcaregiver2" name="tb_parentcaregiver2" type="text" class="form-control" value="<%:tb_parentcaregiver2%>" maxlength="100" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_parentcaregiver2mobilephone">Mobile phone (2)</label>
-                        <div class="col-sm-7">
-                            <input id="tb_parentcaregiver2mobilephone" name="tb_parentcaregiver2mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2mobilephone%>" maxlength="20" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="tb_parentcaregiver2emailaddress">Email address (2)</label>
-                        <div class="col-sm-7">
-                            <input id="tb_parentcaregiver2emailaddress" name="tb_parentcaregiver2emailaddress" type="email" class="form-control" maxlength="100" value="<%:tb_parentcaregiver2emailaddress%>" />
-                        </div>
-                    </div>
-                </div>
             </div>
-
         </div>
 
         <div class="panel panel-danger">
@@ -632,22 +576,17 @@
             </div>
         </div>
 
-
         <div class="panel panel-danger">
             <div class="panel-heading">Membership</div>
             <div class="panel-body">
-
-
-
-
                 <div class="form-group">
                     <label class="control-label col-sm-5" for="dd_membershiptype">
                         <img id="qm_membershiptype" src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="" />
                         Membership type</label>
                     <div class="col-sm-7">
-                        <select name="dd_invoicetype" id="dd_membershiptype" class="form-control" required>
+                        <select name="dd_membershiptype" id="dd_membershiptype" class="form-control" required>
                             <option></option>
-                            <option value="Full Email">Full Membership</option>
+                            <option value="Full Email">Full Membership - Competitive</option>
                             <option value="Club Recreation Membership">Club Recreation Membership</option>
                             <option value="Novice Membership">Novice Membership</option>
                             <option value="Coxswain Membership">Coxswain Membership</option>
@@ -697,7 +636,6 @@
             </div>
         </div>
 
-
         <!------------------------------------------------------------------------------------------------------>
 
         <div class="panel panel-danger">
@@ -739,8 +677,6 @@
                 <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
             </div>
         </div>
-
-
     </div>
 </asp:Content>
 

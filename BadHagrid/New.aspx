@@ -9,6 +9,7 @@
     <title>Bad Hagrid</title>
 
     <!-- Style Sheets -->
+    <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
     <!-- Javascript -->
@@ -16,6 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="<%: ResolveUrl("~/Dependencies/jquery.validate.min.js")%>"></script>
     <script type="text/javascript" src="<%: ResolveUrl("~/dependencies/downcount/jquery.downCount.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
 
 
     <style type="text/css">
@@ -51,7 +53,7 @@
 
         ul.countdown {
             list-style: none;
-            margin: 75px 0;
+            margin: 10px 0;
             padding: 0;
             display: block;
             text-align: center;
@@ -96,19 +98,59 @@
             margin-top:-10px;
         }
         
-        .center {
+        .titlecenter {
   display: block;
   margin-left: auto;
   margin-right: auto;
+            height: 245px;
+            width: 1250px;
+        }
 
-}
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .navbar-nav.navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translatex(-50%);
+        }
+
+        #personal_p {
+            margin: 10px;
+            /*overflow-y: scroll;*/
+            width: 600px;
+            height: 400px;
+            top: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color:blue;
+        }
+
+        #personal_div {
+            position: relative;
+            left: 0px;
+            /*border:2px solid red;*/
+        }   
 
     </style>
     <script>
         $(document).ready(function () {
 
-            if ("<%:response%>" != "") {
-                $('#dialog_result').html('<%:response%>');
+            $(window).bind('scroll', function () {
+                if ($(window).scrollTop() >= $('.posts').offset().top + $('.posts').outerHeight() - window.innerHeight) {
+                    alert('end reached');
+                }
+            });
+
+            $.get("../data.aspx?id=3", function (data) {
+                $("#personal_div").append(data);
+            });
+
+
+            if ("<%:result%>" != "") {
+                $('dialog_result').html('<%:result%>');
                 $('#dialog_result').dialog({
                     modal: true,
                     width: 400,
@@ -209,22 +251,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <img alt="Title Image" src="Dependencies/Images/Title.jpg" class="center" />
-        <table style="width:100%">
-            <tr>
-                <td>News/Homepage</td>
-                <td>Info/About</td>
-                <td>Imagery/Video</td>
-                <td>Tour/Dates</td>
-                <td>Shop/Merch</td>
-                <td>Contact</td>
-            </tr>
-        </table>
-
-
-
-
-
+        <img alt="Title Image" src="Dependencies/Images/Title.png" class="titlecenter" />
+    
         <ul class="countdown">
             <li>
                 <span class="days">00</span>
@@ -247,12 +275,48 @@
             </li>
         </ul>
 
-    
 
-        <div id="signup" class="signup">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse center" id="navbar1">
+                    <ul class="nav navbar-nav navbar-center">
+                        <li class="active"><a href="#">News/Homepage<span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Info/About</a></li>
+                        <li><a href="#">Imagery/Video</a></li>
+                        <li><a href="#">Tour/Dates</a></li>
+                        <li><a href="#">Shop/Merch</a></li>
+                        <li><a href="#">Contact</a></li>
+                        
+                    </ul>
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <div id="personal_p">
+            <div id="personal_div"></div>
+        </div>
+
+       
+        <div id="signup" class="signup" style="display:none">
             Give us your details and we&#39;ll keep you notified<br />
             <button id="keen" type="button">I'm keen</button>
         </div>
+        
 
         <div id="dialog_signup" style="display: none; text-align: center">
             <input class="input" type="text" id="name" name="name" placeholder="Name" required />

@@ -47,6 +47,11 @@ namespace UBC.People
         public string dd_correspondence;
 
 
+        public string phonectr = "0";
+        public string parentctr = "0";
+        public string parentphonectr = "0";
+
+
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] yesno = new string[2] { "Yes", "No" };
@@ -65,165 +70,191 @@ namespace UBC.People
             {
                 Response.Redirect("registeraccess.aspx");
             }
-            hf_guid = Session["UBC_guid"].ToString(); //   Request.QueryString["id"];
-           
-      
-            if (hf_guid != "new")
+            if (!Page.IsPostBack)
             {
-                string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-                SqlConnection con = new SqlConnection(strConnString);
-                con.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "get_Registration";
-                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
-
-
-                cmd.Connection = con;
-                try
+                string scripts = "";
+                if (Request.QueryString["populate"] != null)
                 {
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.HasRows)
+                    scripts += "$.getScript('../Dependencies/populate.js');";
+                }
+                if (Request.QueryString["showfields"] != null)
+                {
+                    scripts += "$.getScript('../Dependencies/showfields.js');";
+                }
+                if (Request.QueryString["showhidden"] != null)
+                {
+                    scripts += "$.getScript('../Dependencies/showhidden.js');";
+                }
+                if (scripts != "")
+                {
+                    scripts = "<script type='text/javascript'>" + scripts + "</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ConfirmSubmit", scripts);
+                }
+
+                hf_guid = Session["UBC_guid"].ToString(); //   Request.QueryString["id"];
+
+
+                if (hf_guid != "new")
+                {
+                    string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+                    SqlConnection con = new SqlConnection(strConnString);
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "get_Registration";
+                    cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+
+                    cmd.Connection = con;
+                    try
                     {
-                        dr.Read();
-                        hf_person_id = dr["person_id"].ToString();
-                        tb_firstname = dr["firstname"].ToString();
-                        tb_lastname = dr["lastname"].ToString();
-                        //tb_knownas = dr["knownas"].ToString();
-                        tb_birthdate = dr["birthdate"].ToString();
-                        dd_gender = dr["gender"].ToString();
-                        tb_medical = dr["medical"].ToString();
-                        tb_dietary = dr["tb_dietary"].ToString();
-                        //tb_facebook = dr["facebook"].ToString();
-                        dd_school = dr["school"].ToString();
-                        dd_schoolyear = dr["schoolyear"].ToString();
-                        tb_residentialaddress = dr["residentialaddress"].ToString();
-                        //tb_postaladdress = dr["postaladdress"].ToString();
-                        tb_emailaddress = dr["emailaddress"].ToString();
-                        tb_homephone = dr["homephone"].ToString();
-                        tb_mobilephone = dr["mobilephone"].ToString();
-                        dd_swimmer = dr["swimmer"].ToString();
-                        tb_parentcaregiver1 = dr["parentcaregiver1"].ToString();
-                        tb_parentcaregiver1mobilephone = dr["parentcaregiver1_mobilephone"].ToString();
-                        tb_parentcaregiver1emailaddress = dr["parentcaregiver1_emailaddress"].ToString();
-                        tb_parentcaregiver2 = dr["parentcaregiver2"].ToString();
-                        tb_parentcaregiver2mobilephone = dr["parentcaregiver2_mobilephone"].ToString();
-                        tb_parentcaregiver2emailaddress = dr["parentcaregiver2_emailaddress"].ToString();
-
-
-                        if (tb_birthdate != "")
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.HasRows)
                         {
-                            tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
-                        }
-                    } else
-                    {
-                        Response.Redirect("../usercode.aspx");
-                    }
-                    dr.Close();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    con.Close();
-                    con.Dispose();
-                }
+                            dr.Read();
+                            hf_person_id = dr["person_id"].ToString();
+                            tb_firstname = dr["firstname"].ToString();
+                            tb_lastname = dr["lastname"].ToString();
+                            //tb_knownas = dr["knownas"].ToString();
+                            tb_birthdate = dr["birthdate"].ToString();
+                            dd_gender = dr["gender"].ToString();
+                            tb_medical = dr["medical"].ToString();
+                            tb_dietary = dr["tb_dietary"].ToString();
+                            //tb_facebook = dr["facebook"].ToString();
+                            dd_school = dr["school"].ToString();
+                            dd_schoolyear = dr["schoolyear"].ToString();
+                            tb_residentialaddress = dr["residentialaddress"].ToString();
+                            //tb_postaladdress = dr["postaladdress"].ToString();
+                            tb_emailaddress = dr["emailaddress"].ToString();
+                            tb_homephone = dr["homephone"].ToString();
+                            tb_mobilephone = dr["mobilephone"].ToString();
+                            dd_swimmer = dr["swimmer"].ToString();
+                            tb_parentcaregiver1 = dr["parentcaregiver1"].ToString();
+                            tb_parentcaregiver1mobilephone = dr["parentcaregiver1_mobilephone"].ToString();
+                            tb_parentcaregiver1emailaddress = dr["parentcaregiver1_emailaddress"].ToString();
+                            tb_parentcaregiver2 = dr["parentcaregiver2"].ToString();
+                            tb_parentcaregiver2mobilephone = dr["parentcaregiver2_mobilephone"].ToString();
+                            tb_parentcaregiver2emailaddress = dr["parentcaregiver2_emailaddress"].ToString();
 
+
+                            if (tb_birthdate != "")
+                            {
+                                tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
+                            }
+                        }
+                        else
+                        {
+                            Response.Redirect("../usercode.aspx");
+                        }
+                        dr.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        con.Close();
+                        con.Dispose();
+                    }
+                }
             }
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
+
+            Functions functions = new Functions();
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
 
             #region fields
-            //hf_guid = Request.Form["hf_guid"].Trim();
-            tb_firstname = Request.Form["tb_firstname"].Trim();
-            tb_lastname = Request.Form["tb_lastname"].Trim();
-            //tb_knownas = Request.Form["tb_knownas"].Trim();
-            tb_birthdate = Request.Form["tb_birthdate"].Trim();
-            dd_gender = Request.Form["dd_gender"].Trim();
-            dd_school = Request.Form["dd_school"].Trim();
-            dd_schoolyear = Request.Form["dd_schoolyear"].Trim();
-            tb_dietary = Request.Form["tb_dietary"].Trim();
-            tb_medical = Request.Form["tb_medical"].Trim();
-            tb_residentialaddress = Request.Form["tb_residentialaddress"].Trim();
-            //tb_postaladdress = Request.Form["tb_postaladdress"].Trim();
-            //tb_facebook = Request.Form["tb_facebook"].Trim();
-            tb_emailaddress = Request.Form["tb_emailaddress"].Trim();
-            tb_homephone = Request.Form["tb_homephone"].Trim();
-            tb_mobilephone = Request.Form["tb_mobilephone"].Trim();
-            dd_swimmer = Request.Form["dd_swimmer"].Trim();
+            /*
+           //hf_guid = Request.Form["hf_guid"].Trim();
+           tb_firstname = Request.Form["tb_firstname"].Trim();
+           tb_lastname = Request.Form["tb_lastname"].Trim();
+           //tb_knownas = Request.Form["tb_knownas"].Trim();
+           tb_birthdate = Request.Form["tb_birthdate"].Trim();
+           dd_gender = Request.Form["dd_gender"].Trim();
+           dd_school = Request.Form["dd_school"].Trim();
+           dd_schoolyear = Request.Form["dd_schoolyear"].Trim();
+           tb_dietary = Request.Form["tb_dietary"].Trim();
+           tb_medical = Request.Form["tb_medical"].Trim();
+           tb_residentialaddress = Request.Form["tb_residentialaddress"].Trim();
+           //tb_postaladdress = Request.Form["tb_postaladdress"].Trim();
+           //tb_facebook = Request.Form["tb_facebook"].Trim();
+           tb_emailaddress = Request.Form["tb_emailaddress"].Trim();
+           tb_homephone = Request.Form["tb_homephone"].Trim();
+           tb_mobilephone = Request.Form["tb_mobilephone"].Trim();
+           dd_swimmer = Request.Form["dd_swimmer"].Trim();
 
-            tb_parentcaregiver1 = Request.Form["tb_parentcaregiver1"].Trim();
-            tb_parentcaregiver1mobilephone = Request.Form["tb_parentcaregiver1mobilephone"].Trim();
-            tb_parentcaregiver1emailaddress = Request.Form["tb_parentcaregiver1emailaddress"].Trim();
-            tb_parentcaregiver2 = Request.Form["tb_parentcaregiver2"].Trim();
-            tb_parentcaregiver2mobilephone = Request.Form["tb_parentcaregiver2mobilephone"].Trim();
-            tb_parentcaregiver2emailaddress = Request.Form["tb_parentcaregiver2emailaddress"].Trim();
 
-            dd_agreement = Request.Form["dd_agreement"].Trim();
-            dd_correspondence = Request.Form["dd_correspondence"].Trim();
+           tb_parentcaregiver1 = Request.Form["tb_parentcaregiver1"].Trim();
+           tb_parentcaregiver1mobilephone = Request.Form["tb_parentcaregiver1mobilephone"].Trim();
+           tb_parentcaregiver1emailaddress = Request.Form["tb_parentcaregiver1emailaddress"].Trim();
+           tb_parentcaregiver2 = Request.Form["tb_parentcaregiver2"].Trim();
+           tb_parentcaregiver2mobilephone = Request.Form["tb_parentcaregiver2mobilephone"].Trim();
+           tb_parentcaregiver2emailaddress = Request.Form["tb_parentcaregiver2emailaddress"].Trim();
+
+
+           dd_agreement = Request.Form["dd_agreement"].Trim();
+           dd_correspondence = Request.Form["dd_correspondence"].Trim();
+
+
+           cmd.CommandText = "Update_Registration";
+           cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = hf_person_id;
+           cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+           cmd.Parameters.Add("@firstname", SqlDbType.VarChar).Value = tb_firstname;
+           cmd.Parameters.Add("@lastname", SqlDbType.VarChar).Value = tb_lastname;
+           //cmd.Parameters.Add("@knownas", SqlDbType.VarChar).Value = tb_knownas;
+           cmd.Parameters.Add("@birthdate", SqlDbType.VarChar).Value = tb_birthdate;
+           cmd.Parameters.Add("@school", SqlDbType.VarChar).Value = dd_school;
+           cmd.Parameters.Add("@schoolyear", SqlDbType.VarChar).Value = dd_schoolyear;
+           cmd.Parameters.Add("@dietary", SqlDbType.VarChar).Value = tb_dietary;
+           cmd.Parameters.Add("@medical", SqlDbType.VarChar).Value = tb_medical;
+           cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = dd_gender;
+           cmd.Parameters.Add("@residentialaddress", SqlDbType.VarChar).Value = tb_residentialaddress;
+           //cmd.Parameters.Add("@postaladdress", SqlDbType.VarChar).Value = tb_postaladdress;
+           //cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
+           cmd.Parameters.Add("@emailaddress", SqlDbType.VarChar).Value = tb_emailaddress;
+           cmd.Parameters.Add("@mobilephone", SqlDbType.VarChar).Value = tb_mobilephone;
+           cmd.Parameters.Add("@homephone", SqlDbType.VarChar).Value = tb_homephone;
+           cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
+
+           cmd.Parameters.Add("parentcaregiver1", SqlDbType.VarChar).Value = tb_parentcaregiver1;
+           cmd.Parameters.Add("parentcaregiver1_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver1mobilephone;
+           cmd.Parameters.Add("parentcaregiver1_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver1emailaddress;
+           cmd.Parameters.Add("parentcaregiver2", SqlDbType.VarChar).Value = tb_parentcaregiver2;
+           cmd.Parameters.Add("parentcaregiver2_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver2mobilephone;
+           cmd.Parameters.Add("parentcaregiver2_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver2emailaddress;
+
+           cmd.Parameters.Add("@agreement", SqlDbType.VarChar).Value = dd_agreement;
+           cmd.Parameters.Add("@correspondence", SqlDbType.VarChar).Value = dd_correspondence;
+
+
+
+
+           cmd.Connection = con;
+           try
+           {
+               con.Open();
+               string result = cmd.ExecuteScalar().ToString();
+           }
+           catch (Exception ex)
+           {
+               throw ex;
+           }
+           finally
+           {
+               con.Close();
+               con.Dispose();
+           }
+           */
+
             #endregion
-
-            #region setup specific data
-            cmd.CommandText = "Update_Registration";
-            cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = hf_person_id;
-            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
-            cmd.Parameters.Add("@firstname", SqlDbType.VarChar).Value = tb_firstname;
-            cmd.Parameters.Add("@lastname", SqlDbType.VarChar).Value = tb_lastname;
-            //cmd.Parameters.Add("@knownas", SqlDbType.VarChar).Value = tb_knownas;
-            cmd.Parameters.Add("@birthdate", SqlDbType.VarChar).Value = tb_birthdate;
-            cmd.Parameters.Add("@school", SqlDbType.VarChar).Value = dd_school;
-            cmd.Parameters.Add("@schoolyear", SqlDbType.VarChar).Value = dd_schoolyear;
-            cmd.Parameters.Add("@dietary", SqlDbType.VarChar).Value = tb_dietary;
-            cmd.Parameters.Add("@medical", SqlDbType.VarChar).Value = tb_medical;
-            cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = dd_gender;
-            cmd.Parameters.Add("@residentialaddress", SqlDbType.VarChar).Value = tb_residentialaddress;
-            //cmd.Parameters.Add("@postaladdress", SqlDbType.VarChar).Value = tb_postaladdress;
-            //cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
-            cmd.Parameters.Add("@emailaddress", SqlDbType.VarChar).Value = tb_emailaddress;
-            cmd.Parameters.Add("@mobilephone", SqlDbType.VarChar).Value = tb_mobilephone;
-            cmd.Parameters.Add("@homephone", SqlDbType.VarChar).Value = tb_homephone;
-            cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
-
-            cmd.Parameters.Add("parentcaregiver1", SqlDbType.VarChar).Value = tb_parentcaregiver1;
-            cmd.Parameters.Add("parentcaregiver1_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver1mobilephone;
-            cmd.Parameters.Add("parentcaregiver1_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver1emailaddress;
-            cmd.Parameters.Add("parentcaregiver2", SqlDbType.VarChar).Value = tb_parentcaregiver2;
-            cmd.Parameters.Add("parentcaregiver2_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver2mobilephone;
-            cmd.Parameters.Add("parentcaregiver2_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver2emailaddress;
-
-            cmd.Parameters.Add("@agreement", SqlDbType.VarChar).Value = dd_agreement;
-            cmd.Parameters.Add("@correspondence", SqlDbType.VarChar).Value = dd_correspondence;
-
-
-
-            #endregion
-
-            cmd.Connection = con;
-            try
-            {
-                con.Open();
-                string result = cmd.ExecuteScalar().ToString();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
-            }
-
-
-            #region BuildXML
             XElement rootXml = new XElement("root");
             DataTable repeatertable = new DataTable("Repeater");
 
@@ -232,39 +263,62 @@ namespace UBC.People
             repeatertable.Columns.Add("Field", typeof(string));
             repeatertable.Columns.Add("Value", typeof(string));
 
-            rootXml.Add(new XElement("reference", hf_person_id));
-
-            string[] keynames = new string[11] { "name", "breed1", "breed2", "years", "months", "colour1", "colour2", "gender", "neutered", "chip", "marks" };
-
             foreach (string key in Request.Form)
             {
                 //if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
                 if (!key.StartsWith("__") && !key.StartsWith("ctl") && !key.StartsWith("clientsideonly_") && !key.StartsWith("btn_"))
                 {
-                    
-                    string[] keyparts = key.Split('_');
-                    if (key.StartsWith("item_"))
+                    if (key.StartsWith("repeat_"))
                     {
+                        string[] keyparts = key.Split('_');
+                        string keypartname = keyparts[1];
 
-                        string ctr = keyparts[2];
+                        string keypartindex = keyparts[keyparts.Length - 1];
+                        string keypartfield = "";
+                        string keypartsdelim = "";
 
-                        string[] values = Request.Form[key].Split(new char[] { 'þ' });
-
-                        for (int i = 0; i <= values.Length - 2; i++)
+                        for (int i = 3; i <= keyparts.Length - 2; i++)
                         {
-                            repeatertable.Rows.Add("Dog", ctr, keynames[i], values[i]);
+                            keypartfield += keypartsdelim + keyparts[i];
+                            keypartsdelim = "_";
                         }
+
+                        repeatertable.Rows.Add(keypartname, keypartindex, keypartfield, Request.Form[key]);
                     }
                     else
                     {
-                        rootXml.Add(new XElement(keyparts[1], Request.Form[key]));
+                        rootXml.Add(new XElement(key, Request.Form[key]));
                     }
                 }
             }
+            DataView dv2 = new DataView(repeatertable);
+            DataTable dvSites = dv2.ToTable(true, "Name");
+            foreach (DataRow siterow in dvSites.Rows)
+            {
+                XElement repeaterXml = new XElement(siterow["Name"].ToString() + "Repeater");
 
-            Functions functions = new Functions();
-            functions.populateXML(repeatertable, rootXml);
-            #endregion //BuildXML
+                string sel = "[Name] = '" + siterow["Name"] + "'";
+                DataView dv3 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                DataTable dvindexess = dv3.ToTable(true, "Index");
+                foreach (DataRow indexrow in dvindexess.Rows)
+                {
+                    XElement subXml = new XElement(siterow["Name"].ToString());
+
+                    subXml.Add(new XElement(siterow["Name"].ToString() + "Index", indexrow["Index"].ToString()));
+
+                    sel = "[Name] = '" + siterow["Name"] + "' AND [Index] = '" + indexrow["Index"] + "'";
+                    DataView dv4 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                    DataTable dvfields = dv4.ToTable();
+                    foreach (DataRow fieldrow in dvfields.Rows)
+                    {
+                        string field = fieldrow["Field"].ToString();
+                        string value = fieldrow["Value"].ToString();
+                        subXml.Add(new XElement(field, value));
+                    }
+                    repeaterXml.Add(subXml);
+                }
+                rootXml.Add(repeaterXml);
+            }
 
             string emailbodyTemplate = "RegisterEmail.xslt";
             string emailSubject = "Union Boat Club Rower Registration";
@@ -276,7 +330,7 @@ namespace UBC.People
             string emailfromname = "Union Boat Club";
             string password = "m33t1ng";
             string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
- 
+
 
             string path = Server.MapPath(".");
             XmlDocument reader = new XmlDocument();
@@ -305,7 +359,7 @@ namespace UBC.People
             }
             catch (Exception ex)
             {
-                functions.Log("",Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                functions.Log("", Request.RawUrl, ex.Message, "greg@datainn.co.nz");
 
             }
 

@@ -57,8 +57,16 @@ namespace Generic
         {
             int personaccesslength = personaccess.Length;
             int requiredaccesslength = requiredaccess.Length;
-            string pad = new String('0', personaccesslength - requiredaccesslength);
-            requiredaccess = requiredaccess + pad;
+            if(personaccesslength < requiredaccesslength)
+            {
+                string pad = new String('0', requiredaccesslength - personaccesslength);
+                personaccess = personaccess + pad;
+            } else
+            {
+                string pad = new String('0', personaccesslength - requiredaccesslength);
+                requiredaccess = requiredaccess + pad;
+            }
+
 
             int result = Convert.ToInt32(personaccess, 2) & Convert.ToInt32(requiredaccess, 2);
 

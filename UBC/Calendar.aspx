@@ -51,6 +51,11 @@
     <script>
         $(document).ready(function () {
 
+            var elm = document.getElementById('anchor');
+            elm.scrollIntoView(true);
+
+           
+
             $('#login').click(function () {
                 window.location.href = "people/security/login.aspx";
             })

@@ -10,14 +10,13 @@ using System.Xml;
 //using OfficeOpenXml;
 using System.IO;
 using System.Configuration;
-
 using System.Web.UI.WebControls;
 
 namespace BadHagrid
 {
     public partial class New : System.Web.UI.Page
     {
-        public string response = "";
+        public string result;
         protected void Page_Load(object sender, EventArgs e)
         {
             string guid = Request.QueryString["id"];
@@ -33,7 +32,7 @@ namespace BadHagrid
                 cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = guid;
 
                 con.Open();
-                response = cmd.ExecuteScalar().ToString();
+                result = cmd.ExecuteScalar().ToString();
                 con.Close();
                 con.Dispose();
             }

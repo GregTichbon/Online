@@ -366,6 +366,8 @@
     <Content Include="Dependencies\QueryBuilder\tests\plugins.not-group.module.js" />
     <Content Include="Dependencies\QueryBuilder\tests\plugins.sql-support.module.js" />
     <Content Include="Dependencies\QueryBuilder\tests\utils.module.js" />
+    <Content Include="Dependencies\showfields.js" />
+    <Content Include="Dependencies\ShowHidden.js" />
     <Content Include="Dependencies\StickyTableCells\bootstrap.min.css" />
     <Content Include="Dependencies\StickyTableCells\example-ltr.html" />
     <Content Include="Dependencies\StickyTableCells\example-popup.html" />
@@ -395,6 +397,7 @@
     <Content Include="Dependencies\StickyTableCells\sample-table.txt" />
     <Content Include="Dependencies\TableHeadFixer\.gitignore" />
     <Content Include="Dependencies\TableHeadFixer\package.json" />
+    <Content Include="Dependencies\populate.js" />
     <Content Include="Dependencies\TableHeadFixer\README.md" />
     <Content Include="Dependencies\QueryBuilder\.editorconfig" />
     <Content Include="Dependencies\QueryBuilder\.github\CONTRIBUTING.md" />

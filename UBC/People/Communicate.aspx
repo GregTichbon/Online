@@ -87,6 +87,7 @@
                 $("#tbl_people > tbody > tr > td > input:checked").each(function () {
                     id = $(this).attr("id");
                     recipient = $(this).val();
+                    attendance = $(this).closest('tr').find('td').eq(6).text();
                     if (id.substring(0, 9) == 'cb_email_') {
                         type = 'email';
                         id = id.substring(9);
@@ -102,7 +103,8 @@
                     }
                     name = $('#name_' + id).text();
 
-                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }];
+
+                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }];
                     var formData = JSON.stringify({ formVars: arForm });
                     //console.log(formData);
 

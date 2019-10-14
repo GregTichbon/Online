@@ -261,7 +261,7 @@ namespace UBC.People
                     break;
                 case "get_event_and_attendance":
 
-                    Boolean access = Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"); 
+                    Boolean access = Functions.accessstringtest(Convert.ToString(Session["UBC_AccessString"]), "1011"); 
 
                     string event_id3 = Request.Form["Event_ID"];
                     strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -308,6 +308,9 @@ namespace UBC.People
                             string name = dr["name"].ToString();
                             string attendance = dr["attendance"].ToString();
                             string phone = dr["phone"].ToString();
+
+                            
+
                             string personnote = dr["personnote"].ToString();
 
                             string selectperson = "";
@@ -315,7 +318,22 @@ namespace UBC.People
                             if (access)
                             {
                                 selectperson = " class=\"selectperson\"";
-                                showphone = "<td><a href=\"tel:" + phone + "\">" + phone + "</a></td>";
+                                showphone = "<td>";
+                                string delim = "";
+                                foreach(string eachphone in phone.Split('|'))
+                                {
+                                    string myphone = eachphone;
+                                    string phonenote = "";
+                                    int notestartsat = myphone.IndexOf(" (");
+                                    if(notestartsat > 1)
+                                    {
+                                        phonenote =  myphone.Substring(notestartsat);
+                                        myphone = myphone.Substring(0, notestartsat);
+                                    }
+                                    showphone += delim + "<a href=\"tel:" + myphone + "\">" + myphone + "</a>" + phonenote;
+                                    delim = "<br />";
+                                }
+                                showphone += "</td>";
                             }
 
                             html += "<tr id=\"tr_" + person_guid + "\"><td" + selectperson + ">" + name + "</td><td class=\"attendance\">" + attendance + "</td><td>" + personnote + "</td>" + showphone + "</tr>";
