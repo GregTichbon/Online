@@ -74,14 +74,15 @@
             <input type="button" id="export" class="btn btn-info" value="Export" />
             <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>
-        <h1>Union Boat Club - Registered members
+        <h1>Union Boat Club - Registered members <%=html_year %>
         </h1>
-
+        <!--
         <select id="dd_year" name="dd_year"><option value="">Please select the season</option>
             <option value="2019/20">2019/20</option>
             <option value="2018/19">2018/19</option>
             <option value="2017/18">2017/18</option>
         </select> <input type="submit" id="btn_go" value="Go" />
+        -->
         <table class="table">
             <%= html %>
         </table>

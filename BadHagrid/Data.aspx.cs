@@ -21,12 +21,15 @@ namespace BadHagrid
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
-            string news_ctr = Request.QueryString["id"] ?? "1";
+            string news_ctr = Request.QueryString["id"] ?? "0";
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
 
             SqlCommand cmd1 = new SqlCommand("badhagrid_get_news", con);
             cmd1.Parameters.Add("@news_ctr", SqlDbType.VarChar).Value = news_ctr;
+            cmd1.Parameters.Add("@onlyactive", SqlDbType.VarChar).Value = "Yes";
+            cmd1.Parameters.Add("@nofuture", SqlDbType.VarChar).Value = "Yes";
+            cmd1.Parameters.Add("@next", SqlDbType.VarChar).Value = "Next";
 
             cmd1.CommandType = CommandType.StoredProcedure;
             cmd1.Connection = con;
@@ -39,13 +42,21 @@ namespace BadHagrid
                 {
                     dr.Read();
 
-                    string title = dr["title"].ToString();
-                    string article = dr["article"].ToString();
-                    //string datetime = Convert.ToDateTime(dr["datetime"].ToString()).ToString("ddd dd MMM yyyy HH:mm");
+                    string news_id = dr["badhagrid_news_ctr"].ToString();
+                    if (news_id == "-1")
+                    {
+                        html = news_id + "|";
+                    }
+                    else
+                    {
+                        string title = dr["title"].ToString();
+                        string article = dr["article"].ToString();
+                        //string datetime = Convert.ToDateTime(dr["datetime"].ToString()).ToString("ddd dd MMM yyyy HH:mm");
 
-                    html = "<h2>" + title + "</h2>";
-                    html += article;
-
+                        html = news_id + "|<h2>" + title + "</h2>";
+                        //html += "<input type=\"hidden\" id=\"hf_news_id\" value=\"" + news_id + "\" />";
+                        html += article;
+                    }
                 }
 
                 dr.Close();

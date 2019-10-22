@@ -54,8 +54,7 @@
     <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="Generic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
@@ -106,9 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="%24Test\Temp1.html" />
-    <Content Include="bin\Generic.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="BookingCalendar.aspx" />
     <Content Include="BookingCalendarNew.aspx" />
     <Content Include="Calendar.aspx" />
@@ -282,6 +278,17 @@
     <Content Include="Dependencies\GijGo\js\tree.js" />
     <Content Include="Dependencies\GijGo\js\tree.min.js" />
     <Content Include="Dependencies\Images\cross1.png" />
+    <Content Include="Dependencies\Images\Email\Email.png" />
+    <Content Include="Dependencies\Images\Email\Emmetts.png" />
+    <Content Include="Dependencies\Images\Email\FaceBook.png" />
+    <Content Include="Dependencies\Images\Email\FourRegions.png" />
+    <Content Include="Dependencies\Images\Email\GuthrieBowron.png" />
+    <Content Include="Dependencies\Images\Email\Header.jpg" />
+    <Content Include="Dependencies\Images\Email\Ignition.jpg" />
+    <Content Include="Dependencies\Images\Email\Image1.jpg" />
+    <Content Include="Dependencies\Images\Email\NZCT.jpg" />
+    <Content Include="Dependencies\Images\Email\PubCharity.jpg" />
+    <Content Include="Dependencies\Images\Email\WebSite.png" />
     <Content Include="Dependencies\Images\Logo-Page-Head-350.png" />
     <Content Include="Dependencies\Images\Logo-Page-Head.png" />
     <Content Include="Dependencies\Images\pencil.png" />
@@ -475,6 +482,8 @@
     <Content Include="Dependencies\QueryBuilder\src\scss\dark.scss" />
     <Content Include="Dependencies\QueryBuilder\src\scss\default.scss" />
     <Content Include="Dependencies\UBC.js" />
+    <Content Include="EmailTemplate\Full - Copy.html" />
+    <Content Include="EmailTemplate\Full.html" />
     <Content Include="EmailTemplate\Standard.html" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -531,6 +540,7 @@
     <Content Include="People\RegisterAccess.aspx" />
     <Content Include="People\RegisterDisplay.aspx" />
     <Content Include="People\Registration.aspx" />
+    <Content Include="People\RegistrationDisplay.aspx" />
     <Content Include="People\Reports\ComingEventsList.aspx" />
     <Content Include="People\Reports\ContactDetails.aspx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
@@ -554,6 +564,9 @@
     <Content Include="People\Security\LogOut.aspx" />
     <Content Include="People\Signup\menu.aspx" />
     <Content Include="People\TestAndPlay\cROPPER3.aspx" />
+    <Content Include="People\TestAndPlay\MailChimp1.html" />
+    <Content Include="People\TestAndPlay\XMLCreate1.aspx" />
+    <Content Include="People\TestAndPlay\XMLTranslate1.aspx" />
     <Content Include="People\xSignUp.aspx" />
     <Content Include="People\XSignUpComplete.aspx" />
     <Content Include="People\XSignupList.aspx" />
@@ -673,7 +686,9 @@
     <Content Include="People\Lists.aspx" />
     <Content Include="People\Maint2.aspx" />
     <Content Include="People\Register.aspx" />
-    <Content Include="People\RegisterEmail.xslt" />
+    <Content Include="People\RegisterEmail.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="People\RegisterScreen.xslt" />
     <Content Include="People\Reports\AttendanceMatrix.aspx" />
     <Content Include="People\Reports\CheckList.aspx" />
@@ -1096,6 +1111,13 @@
     <Compile Include="People\Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\RegistrationDisplay.aspx.cs">
+      <DependentUpon>RegistrationDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\RegistrationDisplay.aspx.designer.cs">
+      <DependentUpon>RegistrationDisplay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\AttendanceMatrix.aspx.cs">
       <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1340,6 +1362,20 @@
     <Compile Include="People\TestAndPlay\cROPPER3.aspx.designer.cs">
       <DependentUpon>cROPPER3.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\TestAndPlay\XMLCreate1.aspx.cs">
+      <DependentUpon>XMLCreate1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLCreate1.aspx.designer.cs">
+      <DependentUpon>XMLCreate1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLTranslate1.aspx.cs">
+      <DependentUpon>XMLTranslate1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLTranslate1.aspx.designer.cs">
+      <DependentUpon>XMLTranslate1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\xSignUp.aspx.cs">
       <DependentUpon>xSignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1557,6 +1593,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\" />
     <Folder Include="People\Images\Signup\" />
     <Folder Include="People\Uploads\Bank\" />
   </ItemGroup>

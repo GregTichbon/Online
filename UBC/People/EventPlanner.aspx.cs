@@ -124,7 +124,10 @@ namespace UBC.People
                                 }
                                 else
                                 {
-                                    time = Convert.ToDateTime(startdatetime).ToString("HH:mm") + " - " + Convert.ToDateTime(enddatetime).ToString("HH:mm");
+                                    time = Convert.ToDateTime(startdatetime).ToString("HH:mm");
+                                    if(enddatetime != "") {
+                                        time += " - " + Convert.ToDateTime(enddatetime).ToString("HH:mm");
+                                    }
                                 }
 
                                 html += "<div id=\"event_" + event_id + "\" class=\"event\">";

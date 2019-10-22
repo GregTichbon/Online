@@ -3,196 +3,276 @@
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" omit-xml-declaration="yes" />
   <xsl:template match="/">
-    <html>
-      <body bgcolor="#B1C9E6">
-        <table width="100%" border="1" cellpadding="10" cellspacing="0" align="center">
-          <td>
-            <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head-350.png" />
-          </td>
-          <td>
 
+    <table width="100%" border="1" cellpadding="10" cellspacing="0" align="center">
+      <tr>
+        <td>
+          <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head-350.png" />
+        </td>
+        <td>
           <h2> Union Boat Club Rower Registration</h2>
-
           <h4> Thank you for your registration.</h4>
+        </td>
+      </tr>
+    </table>
+
+    <table width="95%" border="1" cellpadding="10" cellspacing="0" align="center">
+      <td align="right" width="30%">Use this ID / link to make changes to your registration</td>
+      <td>
+        <a>
+          <xsl:attribute name="href">
+            http://ubc.org.nz/people/register.aspx?id=<xsl:value-of select="root/guid"/>
+          </xsl:attribute>
+          <xsl:attribute name="target">_blank</xsl:attribute>
+          <xsl:value-of select="root/guid"/>
+        </a>
+      </td>
+      <tr>
+        <td align="right" width="30%">First name</td>
+        <td>
+          <xsl:value-of select="root/firstname"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Last name</td>
+        <td>
+          <xsl:value-of select="root/lastname"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Gender</td>
+        <td>
+          <xsl:value-of select="root/gender"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Date of birth</td>
+        <td>
+          <xsl:value-of select="root/birthdate"/>
+        </td>
+      </tr>
+      <xsl:if test="string(root/school)">
+        <tr>
+          <td align="right" width="30%">School</td>
+          <td>
+            <xsl:value-of select="root/school"/>
           </td>
-        </table>
-
-        <table width="95%" border="1" cellpadding="10" cellspacing="0" align="center">
-          
-          <tr>
-            <td align="right" width="50%">First name</td>
-            <td>
-              <xsl:value-of select="root/firstname"/>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Last name</td>
-            <td>
-              <xsl:value-of select="root/lastname"/>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Gender</td>
-            <td>
-              <xsl:value-of select="root/gender"/>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Date of birth</td>
-            <td>
-              <xsl:value-of select="root/birthdate"/>
-            </td>
-          </tr>
-
-          <xsl:if test="string(root/school)">
-            <tr>
-              <td align="right" width="50%">School</td>
-              <td>
-                <xsl:value-of select="root/school"/>
-              </td>
-            </tr>
-
-            <tr>
-              <td align="right" width="50%">School year</td>
-              <td>
-                <xsl:value-of select="root/schoolyear"/>
-              </td>
-            </tr>
-          </xsl:if>
-
-          <tr>
-            <td align="right" width="50%">Medical needs</td>
-            <td>
-              <xsl:value-of select="root/medical"/>
-            </td>
-          </tr>
-          <tr>
-            <td align="right" width="50%">Special Dietry requirements</td>
-            <td>
-              <xsl:value-of select="root/dietry"/>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Email address</td>
-            <td>
-              <a>
-                <xsl:attribute name="href">
-                  mailto:<xsl:value-of select="root/emailaddress"/>
-                </xsl:attribute>
-                <xsl:value-of select="root/emailaddress"/>
-              </a>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Home phone</td>
-            <td>
-              <xsl:value-of select="root/homephone"/>
-            </td>
-          </tr>
-          <tr>
-            <td align="right" width="50%">Mobile phone</td>
-            <td>
-              <xsl:value-of select="root/mobilephone"/>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Home address</td>
-            <td>
-
-
-              <xsl:call-template name="break">
-                <xsl:with-param name="text" select="root/residentialaddress" />
-              </xsl:call-template>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">Swimming ability</td>
-            <td>
-              <xsl:value-of select="root/swimmer"/>
-            </td>
-          </tr>
-
-          <xsl:if test="string(root/parentcaregiver1)">
-
-            <tr>
-              <td colspan="2" align="left">
-                <h2>Parent/Caregivers</h2></td>
-            </tr>
-
-            <tr>
-              <td align="right" width="50%">Name (1)</td>
-              <td>
-                <xsl:value-of select="root/parentcaregiver1"/>
-              </td>
-            </tr>
-            <tr>
-              <td align="right" width="50%">Mobile phone (1)</td>
-              <td>
-                <xsl:value-of select="root/parentcaregiver1mobilephone"/>
-              </td>
-            </tr>
-            <tr>
-              <td align="right" width="50%">Email address (1)</td>
-              <td>
-                <xsl:value-of select="root/parentcaregiver1emailaddress"/>
-              </td>
-            </tr>
-          </xsl:if>
-
-          <xsl:if test="string(root/parentcaregiver2)">
-
- 
-            <tr>
-              <td align="right" width="50%">Name (2)</td>
-              <td>
-                <xsl:value-of select="root/parentcaregiver2"/>
-              </td>
-            </tr>
-            <tr>
-              <td align="right" width="50%">Mobile phone (2)</td>
-              <td>
-                <xsl:value-of select="root/parentcaregiver2mobilephone"/>
-              </td>
-            </tr>
-            <tr>
-              <td align="right" width="50%">Email address (2)</td>
-              <td>
-                <xsl:value-of select="root/parentcaregiver2emailaddress"/>
-              </td>
-            </tr>
-          </xsl:if>
-
-          <tr>
-            <td colspan="2" align="left">
-              Declaration
-              <ul>
-                <li>I hereby apply for membership of the Union Boat Club. - I agree to be bound by the rules of the Club and to pay the annual subscription fees as set at the Annual General Meeting.</li>
-                <li>I also agree to pay such additional fees and levies which may be set from time to time to cover such items as: plant replacement, regatta entries and travel expenses.</li>
-                <li>I understand that there may be risk of personal injury involved in participating in the sport of rowing and hereby indemnify the Union Boat Club, its Executive, fellow members and coaches from any liability.</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td align="right" width="50%">I agree with the above statements.</td>
-            <td>
-              <xsl:value-of select="root/agreement"/>
-            </td>
-          </tr>
-
-          <tr>
-            <td align="right" width="50%">I also agree, for my email address to added to the Union Boat Club database to receive email newsletters and updates.</td>
-            <td>
-              <xsl:value-of select="root/correspondence"/>
-            </td>
-          </tr>
-          <!--
+        </tr>
+        <tr>
+          <td align="right" width="30%">School year</td>
+          <td>
+            <xsl:value-of select="root/schoolyear"/>
+          </td>
+        </tr>
+      </xsl:if>
+      <tr>
+        <td align="right" width="30%">Medical needs</td>
+        <td>
+          <xsl:value-of select="root/medical"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Special Dietary requirements</td>
+        <td>
+          <xsl:value-of select="root/dietary"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Email address</td>
+        <td>
+          <a>
+            <xsl:attribute name="href">
+              mailto:<xsl:value-of select="root/emailaddress"/>
+            </xsl:attribute>
+            <xsl:value-of select="root/emailaddress"/>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Phone</td>
+        <td>
+          <table width="100%" border="1" cellpadding="10" cellspacing="0" align="center">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Type</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <xsl:for-each select="root/PhoneRepeater/Phone">
+                <tr>
+                  <td style="text-align:left">
+                    <xsl:value-of select="number"/>
+                  </td>
+                  <td style="text-align:left">
+                    <xsl:value-of select="type"/>
+                  </td>
+                  <td style="text-align:left">
+                    <xsl:value-of select="note"/>
+                  </td>
+                </tr>
+              </xsl:for-each>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Home address</td>
+        <td>
+          <xsl:call-template name="break">
+            <xsl:with-param name="text" select="root/residentialaddress" />
+          </xsl:call-template>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Swimming ability</td>
+        <td>
+          <xsl:value-of select="root/swimmer"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h2>Financial</h2>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Invoices/statements etc sent to</td>
+        <td>
+          <xsl:value-of select="root/invoicerecipient"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Sent by</td>
+        <td>
+          <xsl:value-of select="root/invoicetype"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Address</td>
+        <td>
+          <xsl:value-of select="root/invoiceaddress"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Note</td>
+        <td>
+          <xsl:value-of select="root/invoicenote"/>
+        </td>
+      </tr>
+      <xsl:if test="string(root/ParentRepeater)">
+        <tr>
+          <td colspan="2">
+            <h2>Parent(s) / Caregiver(s)</h2>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table width="100%" border="1" cellpadding="10" cellspacing="0" align="center">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Relationship</th>
+                  <th>Email</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <xsl:for-each select="root/ParentRepeater/Parent">
+                  <tr>
+                    <td style="text-align:left">
+                      <b>
+                        <xsl:value-of select="name"/>
+                      </b>
+                    </td>
+                    <td style="text-align:left">
+                      <xsl:value-of select="relationship"/>
+                    </td>
+                    <td style="text-align:left">
+                      <xsl:value-of select="email"/>
+                    </td>
+                    <td style="text-align:left">
+                      <xsl:value-of select="note"/>
+                    </td>
+                  </tr>
+                  <xsl:for-each select="Phone">
+                    <tr>
+                      <td style="text-align:left">
+                        <xsl:value-of select="number"/>
+                      </td>
+                      <td style="text-align:left">
+                        <xsl:value-of select="type"/>
+                      </td>
+                      <td style="text-align:left"  colspan="2">
+                        <xsl:value-of select="note"/>
+                      </td>
+                    </tr>
+                  </xsl:for-each>
+                </xsl:for-each>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </xsl:if>
+      <tr>
+        <td colspan="2">
+          <h2>Membership</h2>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Type</td>
+        <td>
+          <xsl:value-of select="root/membershiptype"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Other immediate family who are members of Union Boat Club</td>
+        <td>
+          <xsl:value-of select="root/familydiscount"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Previous Club</td>
+        <td>
+          <xsl:value-of select="root/previousclub"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Boat currently stored at UBC</td>
+        <td>
+          <xsl:value-of select="root/boatinstorage"/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="left">
+          <h2>Declaration</h2>
+          <ul>
+            <li>I hereby apply for membership of the Union Boat Club.</li>
+            <li>I agree to be bound by the rules of the Club and to pay the annual subscription fees as set at the Annual General Meeting.</li>
+            <li>I also agree to pay such additional fees and levies which may be set from time to time to cover such items as: regatta entries, racing seat fees and travel expenses.</li>
+            <li>I understand that there may be risk of personal injury involved in participating in the sport of rowing and hereby indemnify the Union Boat Club, its Executive, fellow members and coaches from any liability.</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">I agree with the above statements.</td>
+        <td>
+          <xsl:value-of select="root/agreement"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">I also agree, for my information to held in the Union Boat Club database to receive email and text messages from the club.</td>
+        <td>
+          <xsl:value-of select="root/correspondence"/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right" width="30%">Submitted</td>
+        <td>
+          <xsl:value-of select="root/submitted"/>
+        </td>
+      </tr>
+      <!--
         <tr>
             <td>Attachments</td>
             <td>
@@ -209,14 +289,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
             </td>
           </tr>
             -->
-        </table>
-        <p> </p>
-      </body>
-    </html>
+    </table>
+    <p> </p>
 
   </xsl:template>
-
-
   <xsl:template name="break">
     <xsl:param name="text" select="string(.)"/>
     <xsl:choose>
@@ -234,16 +310,5 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <xsl:value-of select="$text"/>
       </xsl:otherwise>
     </xsl:choose>
-
-
-
-
   </xsl:template>
 </xsl:stylesheet>
-
-
-
-
-
-
-

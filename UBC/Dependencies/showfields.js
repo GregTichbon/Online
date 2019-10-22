@@ -1,5 +1,5 @@
-﻿var fieldsdiv = $("<div>", { id: "fields" });
-$("body").append(fieldsdiv);
+﻿//var fieldsdiv = $("<div>", { id: "fields" });
+//$("body").append(fieldsdiv);
 
 var x = '';
 $('input, textarea, select').each(function (index) {
@@ -9,7 +9,7 @@ $('input, textarea, select').each(function (index) {
         x = x + '<br>' + $myLabel.html() + "=" + this.name;
     }
 
-})
+});
 var fieldsdiv = '<div id="fields">' + x + '</div>';
 $("body").append(fieldsdiv);
 //$('#fields').html(x);

@@ -25,40 +25,78 @@ namespace UBC.People
     public class Posts : System.Web.Services.WebService
     {
         [WebMethod]
+        public string send_text(string PhoneNumber, string Message)
+        {
+            Generic.Functions gFunctions = new Generic.Functions();
+            string response = gFunctions.SendRemoteMessage(PhoneNumber, Message, "UBC Communications");
+            return response;
+        }
+
+
+        [WebMethod]
         public standardResponseID send_email_text(NameValue[] formVars)    //you can't pass any querystring params
         {
             //"name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject}, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": text }];
 
-            string type = formVars.Form("type");
+            string type = formVars.Form("type"); //email or text  or   remail or rtext
             string id = formVars.Form("id");
             string emailsubject = formVars.Form("emailsubject");   
             string emailhtml = formVars.Form("emailhtml");
             string text = formVars.Form("text");
-            string recipient = formVars.Form("recipient");
+            string recipient = formVars.Form("recipient");  //phone number or email address
             string attendance = formVars.Form("attendance");
 
+            string rid = "";
+            string rfirstname = "";
+            string rperson_guid = "";
+            string rusername = "";
+            string rtempphrase = "";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = con;
+            con.Open();
+            SqlDataReader dr;
 
             cmd.CommandText = "Get_person";
+
+            if (type.StartsWith("r"))
+            {
+                string[] recipientparts = recipient.Split('|');
+                rid = recipientparts[0];
+                //rfirstname = recipientparts[1];
+                recipient = recipientparts[2];
+                type = type.Substring(1);
+
+                cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = rid;
+                dr = cmd.ExecuteReader();
+                dr.Read();
+
+                rfirstname = dr["firstname"].ToString();
+                rperson_guid = dr["guid"].ToString();
+                rusername = dr["username"].ToString();
+                rtempphrase = dr["tempphrase"].ToString();
+                dr.Close();
+            }
+
+
+            cmd.Parameters.Clear();
             cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = id;
 
-            con.Open();
+
             //string result = cmd.ExecuteScalar().ToString();
-            SqlDataReader dr = cmd.ExecuteReader();
+            dr = cmd.ExecuteReader();
             dr.Read();
 
             string firstname = dr["firstname"].ToString();
             string person_guid = dr["guid"].ToString();
             string username = dr["username"].ToString();
             string tempphrase = dr["tempphrase"].ToString();
-            
-            con.Close();
 
+            dr.Close();
+            con.Close();
             con.Dispose();
 
             string response = "";
@@ -86,8 +124,25 @@ namespace UBC.People
                 emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
                 emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
                 //emailhtml = emailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
-                emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                //.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, recipient, emailBCC, "");
+
+                emailhtml = emailhtml.Replace("||rfirstname||", rfirstname);
+                emailhtml = emailhtml.Replace("||rguid||", rperson_guid);
+                emailhtml = emailhtml.Replace("||raccesscode||", (rperson_guid + "     ").Substring(0, 5));
+                emailhtml = emailhtml.Replace("||rusername||", rusername);
+                emailhtml = emailhtml.Replace("||rtempphrase||", rtempphrase);
+
+                string emailtemplate = Server.MapPath("..") + "\\EmailTemplate\\full.html";
+                string emaildocument = "";
+
+                using (StreamReader sr = new StreamReader(emailtemplate))
+                {
+                    emaildocument = sr.ReadToEnd();
+                }
+
+                emaildocument = emaildocument.Replace("||Content||", emailhtml);
+
+                //emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "");
                 response = "Ok";
             }
 
@@ -104,6 +159,13 @@ namespace UBC.People
                 text = text.Replace("||folder||", "Folder" + id);
                 text = text.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
                 //text = text.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
+
+                text = text.Replace("||rfirstname||", rfirstname);
+                text = text.Replace("||rguid||", rperson_guid);
+                text = text.Replace("||raccesscode||", (rperson_guid + "     ").Substring(0, 5));
+                text = text.Replace("||rusername||", rusername);
+                text = text.Replace("||rtempphrase||", rtempphrase);
+
                 foreach (string mobile in recipient.Split(';'))
                 {
                     response = gFunctions.SendRemoteMessage(mobile, text, "UBC Communications") + "<br />";
@@ -168,8 +230,20 @@ namespace UBC.People
 
                 emailhtml = emailhtml.Replace("||firstname||", firstname);
                 emailhtml = emailhtml.Replace("||guid||", guid);
-                emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, recipient, emailBCC, "");
+
+                string emailtemplate = Server.MapPath("..") + "\\EmailTemplate\\full.html";
+                string emaildocument = "";
+
+                using (StreamReader sr = new StreamReader(emailtemplate))
+                {
+                    emaildocument = sr.ReadToEnd();
+                }
+
+                emaildocument = emaildocument.Replace("||Content||", emailhtml);
+
+
+                //emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
+                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "");
                 response = "Ok";
             }
 

@@ -78,8 +78,9 @@
   <ItemGroup>
     <Content Include="Administration\Newslist.aspx" />
     <Content Include="Administration\NewsMaint.aspx" />
+    <Content Include="Administration\PageList.aspx" />
+    <Content Include="Administration\PageMaint.aspx" />
     <Content Include="Administration\SignedUp.aspx" />
-    <Content Include="BadHagrid.svg" />
     <Content Include="Data.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Dependencies\additional-methods.js" />
@@ -89,6 +90,25 @@
     <Content Include="Dependencies\bootstrap.min.js" />
     <Content Include="Dependencies\DownCount\index.html" />
     <Content Include="Dependencies\DownCount\jquery.downCount.js" />
+    <Content Include="Dependencies\Images\about.png" />
+    <Content Include="Dependencies\Images\ABOUT.svg" />
+    <Content Include="Dependencies\Images\BadHagrid.PNG" />
+    <Content Include="Dependencies\Images\CONTACT.png" />
+    <Content Include="Dependencies\Images\CONTACT.svg" />
+    <Content Include="Dependencies\Images\DATES.png" />
+    <Content Include="Dependencies\Images\DATES.svg" />
+    <Content Include="Dependencies\Images\facebook.svg" />
+    <Content Include="Dependencies\Images\IMAGERY %281%29.png" />
+    <Content Include="Dependencies\Images\IMAGERY.png" />
+    <Content Include="Dependencies\Images\IMAGERY.svg" />
+    <Content Include="Dependencies\Images\instagram.svg" />
+    <Content Include="Dependencies\Images\MERCH.png" />
+    <Content Include="Dependencies\Images\MERCH.svg" />
+    <Content Include="Dependencies\Images\NEWS.png" />
+    <Content Include="Dependencies\Images\NEWS.svg" />
+    <Content Include="Dependencies\Images\spotify.svg" />
+    <Content Include="Dependencies\Images\TEST2.jpg" />
+    <Content Include="Dependencies\Images\TitleOLD.png" />
     <Content Include="Dependencies\Images\Title.png" />
     <Content Include="Dependencies\jquery-2.2.0.min.js" />
     <Content Include="Dependencies\jquery.validate.min.js" />
@@ -257,6 +277,20 @@
     </Compile>
     <Compile Include="Administration\NewsMaint.aspx.designer.cs">
       <DependentUpon>NewsMaint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\PageList.aspx.cs">
+      <DependentUpon>PageList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\PageList.aspx.designer.cs">
+      <DependentUpon>PageList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\PageMaint.aspx.cs">
+      <DependentUpon>PageMaint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\PageMaint.aspx.designer.cs">
+      <DependentUpon>PageMaint.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\SignedUp.aspx.cs">
       <DependentUpon>SignedUp.aspx</DependentUpon>

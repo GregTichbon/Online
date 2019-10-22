@@ -64,10 +64,20 @@
             })
 
             $('[name^="cb_email_"]').click(function () {
-                name = $(this).attr('name');
+                name = "disp_" + $(this).attr('name');
                 address = $(this).val();
                 if ($(this).is(':checked')) {
                     $('#emailaddresses').append('<span id="' + name + '">' + address + ';</span>');
+                } else {
+                    $('#' + name).remove();
+                }
+            })
+
+            $('[name^="cb_remail_"]').click(function () {
+                name = "disp_" + $(this).attr('name');
+                address = $(this).val().split('|');
+                if ($(this).is(':checked')) {
+                    $('#remailaddresses').append('<span id="' + name + '">' + address[2] + ';</span>');
                 } else {
                     $('#' + name).remove();
                 }
@@ -92,7 +102,8 @@
                         type = 'email';
                         id = id.substring(9);
                         emailsubject = $('#tb_subject').val();
-                        emailhtml = $('#tb_htmlbody').val();
+                        //emailhtml = $('#tb_htmlbody').val();
+                        emailhtml = tinyMCE.get('tb_htmlbody').getContent();
                         text = '';
                     } else if (id.substring(0, 8) == 'cb_text_') {
                         type = 'text';
@@ -100,6 +111,20 @@
                         emailsubject = '';
                         emailhtml = '';
                         text = $('#tb_txt').val();
+                    } else if (id.substring(0, 10) == 'cb_remail_') {
+                        type = 'remail';
+                        id = id.substring(10);
+                        emailsubject = $('#tb_rsubject').val();
+                        //emailhtml = $('#tb_rhtmlbody').val();
+                        emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
+
+                        text = '';
+                    } else if (id.substring(0, 9) == 'cb_rtext_') {
+                        type = 'rtext';
+                        id = id.substring(9);
+                        emailsubject = '';
+                        emailhtml = '';
+                        text = $('#tb_rtxt').val();
                     }
                     name = $('#name_' + id).text();
 
@@ -280,18 +305,18 @@
                     <br />
                     <br />
                     Email Body (HTML):<br />
-                    <textarea class="tinymce" id="tb_rhtmlbody" name="tb_rhtmlbody" rows="10" style="width: 100%">&lt;p&gt;Hi ||rfirstname||&lt;/p&gt;
-&lt;p&gt;||firstname||&lt;/p&gt;</textarea><br />
+                    <textarea class="tinymce" id="tb_rhtmlbody" name="tb_rhtmlbody" rows="10" style="width: 100%">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
+&lt;p&gt;||rfirstname||&lt;/p&gt;</textarea><br />
                     <br />
                     Facebook (Text):<br />
-                    <textarea id="tb_rtextbody" name="tb_rtextbody" rows="5" style="width: 100%">Hi ||rfirstname||
-||firstname||
+                    <textarea id="tb_rtextbody" name="tb_rtextbody" rows="5" style="width: 100%">Hi ||firstname||
+||rfirstname||
                     </textarea>
                     <br />
                     <br />
                     Mobile Text Body:<br />
-                    <textarea id="tb_rtxt" name="tb_rtxt" rows="5" style="width: 100%">Hi ||rfirstname||
-||firstname||</textarea>
+                    <textarea id="tb_rtxt" name="tb_rtxt" rows="5" style="width: 100%">Hi ||firstname||
+||rfirstname||</textarea>
                 </td>
             </tr>
         </table>
@@ -326,6 +351,7 @@
             </tbody>
         </table>
         <div id="emailaddresses"></div>
+        <div id="remailaddresses"></div>
         <div class="form-group">
             <div class="col-sm-4">
             </div>

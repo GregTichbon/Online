@@ -66,7 +66,7 @@ namespace UBC.People
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "get_Registration";
-            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = id;
+            cmd.Parameters.Add("@registration_id", SqlDbType.VarChar).Value = id;
 
 
             cmd.Connection = con;

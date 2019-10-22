@@ -61,14 +61,14 @@
             }
 
                 ul.countdown li span {
-                    font-size: 80px;
+                    font-size: 50px;
                     font-weight: 300;
-                    line-height: 80px;
+                    line-height: 50px;
                 }
 
                 ul.countdown li.seperator {
-                    font-size: 80px;
-                    line-height: 70px;
+                    font-size: 50px;
+                    line-height: 45px;
                     vertical-align: top;
                 }
 

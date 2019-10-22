@@ -121,7 +121,7 @@ namespace UBC.People
                                 {
                                     note = " - " + note;
                                 }
-                                sendemail += delim + "<input name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
+                                sendemail += delim + "<input id=\"cb_email_" + id + "\" name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
                                 //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
                                 delim = "<br />";
                             }
@@ -213,7 +213,7 @@ namespace UBC.People
                                         {
                                             rphonenote = " - " + rphonenote;
                                         }
-                                        rline += "<input name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + rfirstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
+                                        rline += "<input id=\"cb_rtext_" + rid + "\" name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
                                     }
                                 }
                                 string remails = relation.Split('^')[6];
@@ -227,7 +227,7 @@ namespace UBC.People
                                         {
                                             remailnote = " - " + remailnote;
                                         }
-                                        rline += "<input name =\"cb_remail_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + rfirstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
+                                        rline += "<input id=\"cb_remail_" + rid + "\" name =\"cb_remail_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
                                     }
                                 }
                             }

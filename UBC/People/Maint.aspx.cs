@@ -46,6 +46,7 @@ namespace UBC.People
         public string tb_invoiceaddress;
         public string tb_financialnote;
         public string tb_boatstorage;
+        public string tb_boatstoragefee;
         public string tb_rowingnzid;
         public string dd_rowingnzseason;
 
@@ -173,6 +174,7 @@ namespace UBC.People
                             tb_invoiceaddress = dr["InvoiceAddress"].ToString();
                             tb_financialnote = dr["financialnote"].ToString();
                             tb_boatstorage = dr["boatstorage"].ToString();
+                            tb_boatstoragefee = dr["boatstoragefee"].ToString();
                             tb_rowingnzid = dr["rowingnzid"].ToString();
                             dd_rowingnzseason = dr["rowingnzseason"].ToString();
 
@@ -193,9 +195,9 @@ namespace UBC.People
                             {
                                 tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
                             }
-                            if (tb_boatstorage != "")
+                            if (tb_boatstoragefee != "")
                             {
-                                tb_boatstorage = Convert.ToDecimal(tb_boatstorage).ToString("0.00");
+                                tb_boatstoragefee = Convert.ToDecimal(tb_boatstoragefee).ToString("0.00");
                             }
                         }
                         dr.Close();
@@ -418,7 +420,7 @@ namespace UBC.People
 
                             html_relationships += "<tr id=\"relationships_" + relationship_id + "\">";
                             html_relationships += "<td style=\"text-align:center\"></td>";
-                            html_relationships += "<td relationship_id=\"" + relationship_id + "\">> is the " + relationship + " of</td>";
+                            html_relationships += "<td relationship_id=\"" + relationship_id + "\"> is the " + relationship + " of</td>";
                             html_relationships += "<td><a href=\"maint.aspx?id=" + person_guid + "\">" + person + "</a></td>";
                             //html_relationships += "<td>" + status + "</td>";
                             html_relationships += "<td>" + note + "</td>";
@@ -440,26 +442,40 @@ namespace UBC.People
 
                     //-------------------------------------------------------------------------------------
 
-                    html_registration = "<tr><th>Season</th><th>Submitted</th><th>View</th></tr>";
+                    html_registration = "<tr><th>Season</th><th>Submitted</th><th>Status</th><th>Status<br />Date</th><th>Status<br />Person</th><th>View</th></tr>";
 
                     cmd.CommandText = "get_person_registration";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
 
+                    string edit = "";
                     try
                     {
                         SqlDataReader dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
-                            //string registration_id = dr["registration_id"].ToString();
+
+                            string registration_id = dr["registration_id"].ToString();
                             string CreatedDate = Convert.ToDateTime(dr["CreatedDate"]).ToString("dd MMM yy");
                             string season = dr["season"].ToString();
-
-
+                            string Status = dr["Status"].ToString();
+                            string StatusUpdatedDateTime = dr["StatusUpdatedDateTime"].ToString();
+                            string StatusUpdatedperson = dr["StatusUpdatedperson"].ToString();
+                            if (StatusUpdatedDateTime != "")
+                            {
+                                StatusUpdatedDateTime = Convert.ToDateTime(StatusUpdatedDateTime).ToString("dd MMM yy");
+                            }
+                            if (edit == "")
+                            {
+                                edit = "<a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">";
+                            }
                             html_registration += "<tr>";
                             html_registration += "<td>" + season + "</td>";
                             html_registration += "<td>" + CreatedDate + "</td>";
-                            html_registration += "<td><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"" + hf_guid + "\"> View</td>";
+                            html_registration += "<td>" + Status + "</td>";
+                            html_registration += "<td>" + StatusUpdatedDateTime + "</td>";
+                            html_registration += "<td>" + StatusUpdatedperson + "</td>";
+                            html_registration += "<td><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"registerview_" + registration_id + "_" + season + "\"> View" + edit + "</td>";
                             html_registration += "</tr>";
 
 
@@ -696,8 +712,12 @@ namespace UBC.People
                             {
                                 startdate = Convert.ToDateTime(startdate).ToString("dd MMM yy");
                             }
+                            string enddate = dr["enddate"].ToString();
+                            if (enddate != "")
+                            {
+                                enddate = Convert.ToDateTime(enddate).ToString("dd MMM yy");
+                            }
 
-                            string enddate = "";// Convert.ToDateTime(dr["startdate"]).ToString("dd MMM yy");
                             string note = dr["note"].ToString();
 
                             html_category += "<tr" + currentcategory + " id=\"category_" + person_category_id + "\">";
@@ -850,6 +870,7 @@ namespace UBC.People
             tb_rowingnzid = Request.Form["tb_rowingnzid"].Trim();
             dd_rowingnzseason = Request.Form["dd_rowingnzseason"].Trim();
             tb_boatstorage = Request.Form["tb_boatstorage"].Trim();
+            tb_boatstoragefee = Request.Form["tb_boatstoragefee"].Trim();
 
             /*
             tb_email = Request.Form["tb_email"].Trim();
@@ -900,6 +921,7 @@ namespace UBC.People
             cmd.Parameters.Add("@rowingnzid", SqlDbType.VarChar).Value = tb_rowingnzid;
             cmd.Parameters.Add("@rowingnzseason", SqlDbType.VarChar).Value = dd_rowingnzseason;
             cmd.Parameters.Add("@boatstorage", SqlDbType.VarChar).Value = tb_boatstorage;
+            cmd.Parameters.Add("@boatstoragefee", SqlDbType.VarChar).Value = tb_boatstoragefee;
 
 
             /*

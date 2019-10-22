@@ -131,6 +131,17 @@
                 </div>
             </div>
 
+             <div class="form-group">
+                <label class="control-label col-sm-4" for="dd_active">Active</label>
+                <div class="col-sm-8">
+<select id="dd_active" name="dd_active" class="form-control">
+                            <%= Generic.Functions.populateselect(yesno, active,"None") %>
+                        </select>
+
+                    
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="tb_article">Article</label>
                 <div class="col-sm-8">
@@ -143,7 +154,7 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-8">
-                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" /> <asp:Button ID="btn_delete" runat="server" OnClick="btn_delete_Click" class="btn btn-info" style="display:none" Text="Delete" />
                 </div>
             </div>
         </div>

@@ -41,24 +41,60 @@
 
             $('#qm_membershiptype').prop('title', '<table><tr><td>Full</td><td>$400.00*</td></tr><tr><td>Club Recreation</td><td>$300.00</td></tr><tr><td>Novice</td><td>$300.00*</td></tr><tr><td>Coxswain</td><td>$0.00*</td></tr><tr><td>* Rowing NZ Competition License Fee</td><td>$96.00</td></tr></table>');
 
-            if ($('#dd_school').val() != "") {
+            if ($('#school').val() != "") {
                 $("#div_schoolyear").show();
             }
 
             $('#qm_boatinstorage').prop('title', 'If you have a boat and wish to store it at the club, please contact <a href="mailto:secretary@unionboatclub.co.nz">secretary@unionboatclub.co.nz</a>');
 
             $("#form1").validate({
+                ignore: ":hidden:not('.validate')",
                 rules: {
-                    tb_birthdate: {
+                    birthdate: {
                         pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+                    },
+                    phone_validator: {
+                        phone_validator: true
+                    },
+                    parent_validator: {
+                        parent_validator: true
                     }
                 },
                 messages: {
-                    tb_birthdate: {
+                    birthdate: {
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
                     }
-                }
+                }/*,
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('errorplacement');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }*/
             });
+
+           
+
+            $.validator.addMethod("phone_validator", function (value, element) {
+                if ($('#tbl_phone>tbody>tr').length > 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            }, "You must enter at least one phone number.");
+
+            $.validator.addMethod("parent_validator", function (value, element) {
+                //alert($('#div_parent').is(":hidden"));
+                //alert($('#tbl_parent>tbody>tr').length);
+                if($('#div_parent').is(":hidden") || $('#tbl_parent>tbody>tr').length > 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }, "You must enter at least one parent/caregiver and a phone number");
 
             $('#btn_addphone').click(function () {
                 phonectr++;
@@ -78,51 +114,61 @@
             $('#btn_addparent').click(function () {
                 parentctr++;
                 tr = $('#tbl_parent>tbody>tr:first').clone();
+
                 $(tr).find('td :input:not(:button)').each(function () {
                     id = $(this).data('name');
-                    alert(id);
-                    //lastdelim = id.lastIndexOf("_");
-                    //newid = id.substring(0, lastdelim + 1) + parentctr;
                     newid = id + parentctr;
                     $(this).prop('name', newid);
                 })
                 $('#tbl_parent>tbody').append(tr);
                 $(tr).show();
+
+                parentphonectr++;
                 tr = $('#tbl_parent>tbody>tr:nth-child(2)').clone();
+                table = $(tr).find('table');
+                $(table).prop("id", "tbl_parent_ctr_" + parentctr);
+
                 $(tr).find('td :input:not(:button)').each(function () {
                     id = $(this).data('name');
-                    //lastdelim = id.lastIndexOf("_");
-                    //newid = id.substring(0, lastdelim + 1) + parentctr;
-                    newid = id + parentctr;
+                    newid = id + parentctr + "_" + parentphonectr;
                     $(this).prop('name', newid);
                 })
+
                 $('#tbl_parent>tbody').append(tr);
                 $(tr).show();
+
             })
 
-            $('body').on('click', '.btn_parent_add_phone', function () {
-                alert('to do');
+            $('body').on('click', '.btn_parent_aphone', function () {
+                table = $(this).closest('table');
+                trthis = $(table).find('tr:last');
                 parentphonectr++;
                 tr = $('#tbl_parent_phone>tbody>tr:first').clone();
+                table = $(trthis).closest('table');
+                var thisparentctr = $(table).prop('id').substring(15);
                 $(tr).find('td :input:not(:button)').each(function () {
                     id = $(this).data('name');
-                    //lastdelim = id.lastIndexOf("_");
-                    //newid = id.substring(0, lastdelim + 1) + parentctr + parentphonectr;
-                    newid = id + parentctr + parentphonectr;
+                    newid = id + thisparentctr + "_" + parentphonectr;
                     $(this).prop('name', newid);
                 })
-                $('#tbl_parent_phone>tbody').append(tr);
+                tr.insertAfter($(trthis));
                 $(tr).show();
             });
 
             $('body').on('click', '.btn_parent_remove_phone', function () {
-                if (confirm('Are you sure you want to remove this phone?')) {
-                    tr = $(this).closest('tr');
-                    $(tr).remove();
-                }
+                tr = $(this).closest('tr');
+                //alert($(tr).closest('table').find('tbody tr').length);
+                //if ($(tr).closest('table').find('tbody tr').length == 1) {
+                //    alert('You must have at least one parent');
+               // } else {
+                    if (confirm('Are you sure you want to remove this phone?')) {
+                        $(tr).remove();
+                    }
+                //}
             });
+
             /*
-            $('body').on('click', '.btn_parent_add_email', function () {
+            $('body').on('click', '.btn_parent_aemail', function () {
                 alert('to do');
                 tr = $('#tbl_parent_email>tbody>tr:first').clone();
                 $('#tbl_parent_email>tbody').append(tr);
@@ -152,7 +198,7 @@
                 }
             });
 
-            $('#dd_invoicetype').change(function () {
+            $('#invoicetype').change(function () {
                 switch ($(this).val()) {
                     case "Email":
                         $('#div_invoiceaddress').show();
@@ -213,18 +259,18 @@
 
             });
 
-            $('#dd_school').change(function () {
+            $('#school').change(function () {
                 school = $(this).val();
                 //alert('*' + school + '*');
                 if (school != "") {
                     $("#div_schoolyear").show();
                 } else {
                     $("#div_schoolyear").hide();
-                    $("#dd_schoolyear").prop('selectedIndex', 0);
+                    $("#schoolyear").prop('selectedIndex', 0);
                 }
             });
 
-            $('#tb_birthdate').change(function () {
+            $('#birthdate').change(function () {
 
             });
 
@@ -235,7 +281,7 @@
         function calculateage(e) {
             if (moment().diff(e, 'seconds') < 0) {
                 e.date = moment(e).subtract(100, 'years');
-                $("#tb_birthdate").val(moment(e).format('D MMM YYYY'));
+                $("#birthdate").val(moment(e).format('D MMM YYYY'));
             }
             var years = moment().diff(e, 'years');
             thisyear = moment().year();
@@ -243,24 +289,27 @@
             $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
             if (years < 18) {
                 $('#div_parent').show();
+                $('#invoicerecipient').rules('add',  { required: true });
+                $('#invoicetype').rules('add',  { required: true });
+                $('#invoiceaddress').rules('add',  { required: true });
             } else {
                 $('#div_parent').hide();
-                $('#tb_parentcaregiver1').val('');
-                $('#tb_parentcaregiver1mobilephone').val('');
-                $('#tb_parentcaregiver1emailaddress').val('');
-                $('#tb_parentcaregiver2').val('');
-                $('#tb_parentcaregiver2mobilephone').val('');
-                $('#tb_parentcaregiver2emailaddress').val('');
+                $('#invoicerecipient').rules('remove', 'required')
+                $('#invoicetype').rules('remove', 'required')
+                $('#invoiceaddress').rules('remove', 'required')
             }
         }
 
     </script>
     <style type="text/css">
+        .validate {
+            display:none;
+        }
                
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
+    <input id="guid" name="guid" type="hidden" value="<%:guid%>" />
 
     <div class="container" style="background-color: #B1C9E6">
         <p></p>
@@ -294,36 +343,36 @@
 
                 <!------------------------------------------------------>
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_firstname">First name</label>
+                    <label class="control-label col-sm-5" for="firstname">First name</label>
                     <div class="col-sm-7">
-                        <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
+                        <input id="firstname" name="firstname" type="text" class="form-control" value="<%:firstname%>" maxlength="20" required />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_lastname">Last name</label>
+                    <label class="control-label col-sm-5" for="lastname">Last name</label>
                     <div class="col-sm-7">
-                        <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="30" />
+                        <input id="lastname" name="lastname" type="text" class="form-control" value="<%:lastname%>" maxlength="30" required />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_gender">Gender</label>
+                    <label class="control-label col-sm-5" for="gender">Gender</label>
                     <div class="col-sm-7">
-                        <select id="dd_gender" name="dd_gender" class="form-control" required>
+                        <select id="gender" name="gender" class="form-control" required>
                             <option></option>
-                            <%= Generic.Functions.populateselect(gender, dd_gender,"None") %>
+                            <%= Generic.Functions.populateselect(gendervalues, gender,"None") %>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="tb_birthdate" class="control-label col-sm-5">
+                    <label for="birthdate" class="control-label col-sm-5">
                         Date of birth
                     </label>
                     <div class="col-sm-7">
                         <div class="input-group date" id="div_birthdate">
-                            <input id="tb_birthdate" name="tb_birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: tb_birthdate %>" required />
+                            <input id="birthdate" name="birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: birthdate %>" required />
 
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -335,49 +384,50 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_school">School (if applicable)</label>
+                    <label class="control-label col-sm-5" for="school">School (if applicable)</label>
                     <div class="col-sm-7">
-                        <select id="dd_school" name="dd_school" class="form-control">
-                            <%= Generic.Functions.populateselect(school, dd_school,"") %>
+                        <select id="school" name="school" class="form-control">
+                            <%= Generic.Functions.populateselect(schoolvalues, school,"") %>
                         </select>
                     </div>
                 </div>
                 <div id="div_schoolyear" class="form-group" style="display: none">
-                    <label class="control-label col-sm-5" for="dd_schoolyear">School year</label>
+                    <label class="control-label col-sm-5" for="schoolyear">School year</label>
                     <div class="col-sm-7">
-                        <select id="dd_schoolyear" name="dd_schoolyear" class="form-control" required>
-                            <%= Generic.Functions.populateselect(schoolyear, dd_schoolyear,"") %>
+                        <select id="schoolyear" name="schoolyear" class="form-control" required>
+                            <%= Generic.Functions.populateselect(schoolyearvalues, schoolyear,"") %>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_medical">
+                    <label class="control-label col-sm-5" for="medical">
                         <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Please provide any information that maybe useful, such as asthma, seizures, etc" />
                         Medical needs</label>
                     <div class="col-sm-7">
-                        <textarea id="tb_medical" name="tb_medical" class="form-control" maxlength="500"><%: tb_medical %></textarea>
+                        <textarea id="medical" name="medical" class="form-control" maxlength="500"><%: medical %></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_dietary">
+                    <label class="control-label col-sm-5" for="dietary">
                         <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="This information is useful for catering at regattas and other catered events." />
                         Special Dietary requirements</label>
                     <div class="col-sm-7">
-                        <textarea id="tb_dietary" name="tb_dietary" class="form-control" maxlength="500"><%: tb_dietary %></textarea>
+                        <textarea id="dietary" name="dietary" class="form-control" maxlength="500"><%: dietary %></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_emailaddress">Email address</label>
+                    <label class="control-label col-sm-5" for="emailaddress">Email address</label>
                     <div class="col-sm-7">
-                        <input id="tb_emailaddress" name="tb_emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_emailaddress%>" />
+                        <input id="emailaddress" name="emailaddress" type="email" class="form-control" maxlength="100" required value="<%:emailaddress%>" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_homephone">Phone</label>
+                    <label class="control-label col-sm-5" for="tbl_phone">Phone</label>
                     <div class="col-sm-7">
+                        <input name="phone_validator" class="validate" />
                         <table id="tbl_phone" class="table table-condensed table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -391,40 +441,38 @@
                             <tbody>
                                 <tr style="display: none">
                                     <td>
-                                        <input type="text" class="form-control" data-name="repeat_phonenumber_" /></td>
+                                        <input type="text" class="form-control" data-name="repeat_phone_number_" required /></td>
                                     <td>
-                                        <select class="form-control" data-name="repeat_phonetype_">
+                                        <select class="form-control" data-name="repeat_phone_type_" required>
                                             <option></option>
-                                            <option>Home</option>
-                                            <option>Work</option>
-                                            <option>Mobile</option>
-                                            <option>Other</option>
+                                            <%= Generic.Functions.populateselect(phonetypevalues, "","None") %>
                                         </select>
                                     </td>
-                                    <td>
-                                        <input type="text" class="form-control" data-name="repeat_phonenote_" /></td>
+                                     <td>
+                                        <input type="text" class="form-control" data-name="repeat_phone_note_" /></td>
                                     <td>
                                         <input type="button" value="Remove" class="btn_phone_remove btn btn-info btn-sm" /></td>
                                 </tr>
+                                <%=html_phone %>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_residentialaddress">Home address</label>
+                    <label class="control-label col-sm-5" for="residentialaddress">Home address</label>
                     <div class="col-sm-7">
-                        <textarea id="tb_residentialaddress" name="tb_residentialaddress" class="form-control" rows="6" maxlength="500" required><%: tb_residentialaddress %></textarea>
+                        <textarea id="residentialaddress" name="residentialaddress" class="form-control" rows="6" maxlength="500" required><%: residentialaddress %></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_school">
+                    <label class="control-label col-sm-5" for="school">
                         <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Rowers should be comfortable swimming in open water and able to swim 50m in light clothes unassisted. If you are unsure or not confident with your swimming ability please let us know. Your safety is most important to us." />
                         Swimming ability</label>
                     <div class="col-sm-7">
-                        <select id="dd_swimmer" name="dd_swimmer" class="form-control" required>
-                            <%= Generic.Functions.populateselect(swimmer, dd_swimmer,"") %>
+                        <select id="swimmer" name="swimmer" class="form-control" required>
+                            <%= Generic.Functions.populateselect(swimmervalues, swimmer,"") %>
                         </select>
                     </div>
                 </div>
@@ -435,6 +483,7 @@
         <div class="panel panel-danger" id="div_parent" style="display: none">
             <div class="panel-heading">Parent/Caregivers</div>
             <div class="panel-body">
+                <input name="parent_validator" class="validate" />
                 <table id="tbl_parent" class="table table-condensed table-striped table-bordered">
                     <thead>
                         <tr>
@@ -449,18 +498,16 @@
                     <tbody>
                         <tr style="display: none">
                             <td>
-                                <input type="text" class="form-control" data-name="repeat_parent_name_" /></td>
+                                <input type="text" class="form-control" data-name="repeat_parent_name_" required /></td>
                             <td>
-                                <select class="form-control" data-name="repeat_parent_relationship_">
+                                <select class="form-control" data-name="repeat_parent_relationship_" required>
                                     <option></option>
-                                    <option>Mother</option>
-                                    <option>Father</option>
-                                    <option>Caregiver</option>
-                                    <option>Other</option>
+
+                                    <%= Generic.Functions.populateselect(relationshipvalues, "","None") %>
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control" data-name="repeat_parent_email_" /></td>
+                                <input type="text" class="form-control" data-name="repeat_parent_email_" required /></td>
                             <td>
                                 <input type="text" class="form-control" data-name="repeat_parent_note_" /></td>
                             <td>
@@ -472,26 +519,23 @@
                                 <table id="tbl_parent_phone" class="table table-condensed table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Number</th>
+                                            <th>Phone Number</th>
                                             <th>Type</th>
                                             <th>Note</th>
                                             <th style="width: 10px">
-                                                <input type="button" class="btn_parent_add_phone btn btn-info btn-sm" value="Add Phone" /></th>
+                                                <input type="button" class="btn_parent_aphone btn btn-info btn-sm" value="Add Phone" /></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="display: none">
+                                        <tr>
                                             <td>
-                                                <input type="text" class="form-control" data-name="repeat_parent_phone_number_" /></td>
+                                                <input type="text" class="form-control" data-name="repeat_parent_phone_number_" required /></td>
                                             <td>
-                                                <select class="form-control" name="repeat_parent_phone_type_">
+                                                <select class="form-control" data-name="repeat_parent_phone_type_" required>
                                                     <option></option>
-                                                    <option>Home</option>
-                                                    <option>Work</option>
-                                                    <option>Mobile</option>
-                                                    <option>Other</option>
+                                                    <%= Generic.Functions.populateselect(phonetypevalues, "","None") %>
                                                 </select>
-                                            </td>
+                                            </td> 
                                             <td>
                                                 <input type="text" class="form-control" data-name="repeat_parent_phone_note_" /></td>
                                             <td>
@@ -501,32 +545,7 @@
                                 </table>
                             </td>
                         </tr>
-                        <!--
-                        <tr style="display: none">
-                            <td colspan="5">
-                                <table id="tbl_parent_email" class="table table-condensed table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Email Address</th>
-                                            <th>Note</th>
-                                            <th style="width: 10px">
-                                                <input type="button" class="btn_parent_add_email btn btn-info btn-sm" value="Add Address" /></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr style="display: none">
-                                            <td>
-                                                <input type="text" class="form-control" name="repeat_parent_email_address_" /></td>
-                                            <td>
-                                                <input type="text" class="form-control" name="repeat_parent_email_note_" /></td>
-                                            <td>
-                                                <input type="button" value="Remove email" class="btn_parent_remove_email btn btn-info btn-sm" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                        -->
+                        <%=html_parent %>
                     </tbody>
                 </table>
             </div>
@@ -536,40 +555,37 @@
             <div class="panel-heading">Financial</div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_invoicerecipient">
+                    <label class="control-label col-sm-5" for="invoicerecipient">
                         Who should we address invoices/statements etc to?</label>
                     <div class="col-sm-7">
-                        <input id="tb_invoicerecipient" name="tb_invoicerecipient" type="text" class="form-control" value="<%:tb_previousclub%>" maxlength="100" />
+                        <input id="invoicerecipient" name="invoicerecipient" type="text" class="form-control" value="<%:invoicerecipient%>" maxlength="100" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_invoicetype">
+                    <label class="control-label col-sm-5" for="invoicetype">
                         How should we send invoices/statements?</label>
                     <div class="col-sm-7">
-                        <select name="dd_invoicetype" id="dd_invoicetype" class="form-control" required>
+                        <select name="invoicetype" id="invoicetype" class="form-control">
                             <option></option>
-                            <option value="Email">Email</option>
-                            <option value="Text">Text</option>
-                            <option value="Mail">Mail</option>
-                            <option value="Hand deliver">Hand deliver</option>
+                            <%= Generic.Functions.populateselect(invoicetypevalues, invoicetype,"None") %>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group" id="div_invoiceaddress">
-                    <label class="control-label col-sm-5" for="tb_invoiceaddress">
+                    <label class="control-label col-sm-5" for="invoiceaddress">
                         <span id="span_invoiceaddress">Address</span></label>
                     <div class="col-sm-7">
-                        <textarea id="tb_invoiceaddress" name="tb_invoiceaddress" class="form-control" maxlength="100"><%:tb_previousclub%></textarea>
+                        <textarea id="invoiceaddress" name="invoiceaddress" class="form-control" maxlength="100"><%:invoiceaddress%></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_invoicenote">
+                    <label class="control-label col-sm-5" for="invoicenote">
                         Note</label>
                     <div class="col-sm-7">
-                        <textarea id="tb_invoicenote" name="tb_invoicenote" class="form-control" maxlength="100"><%:tb_previousclub%></textarea>
+                        <textarea id="invoicenote" name="invoicenote" class="form-control" maxlength="100"><%:invoicenote%></textarea>
                     </div>
                 </div>
 
@@ -580,18 +596,13 @@
             <div class="panel-heading">Membership</div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_membershiptype">
+                    <label class="control-label col-sm-5" for="membershiptype">
                         <img id="qm_membershiptype" src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="" />
                         Membership type</label>
                     <div class="col-sm-7">
-                        <select name="dd_membershiptype" id="dd_membershiptype" class="form-control" required>
+                        <select name="membershiptype" id="membershiptype" class="form-control" required>
                             <option></option>
-                            <option value="Full Email">Full Membership - Competitive</option>
-                            <option value="Club Recreation Membership">Club Recreation Membership</option>
-                            <option value="Novice Membership">Novice Membership</option>
-                            <option value="Coxswain Membership">Coxswain Membership</option>
-                            <option value="Life Membership">Life Membership</option>
-                            <option value="Honorary Membership">Honorary Membership</option>
+                            <%= Generic.Functions.populateselect(membershipvalues, membershiptype,"None") %>
                             <!--<option value="Non-Rower/Supporter">Non-Rower/Supporter</option>-->
                             <option value="Gym Membership Only">Gym Membership Only</option>
                         </select>
@@ -599,37 +610,35 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_familydiscount">
+                    <label class="control-label col-sm-5" for="familydiscount">
                         <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="The club offers discounts to families with multiple members." />
                         Do you have other immediate family who are members of Union Boat Club?</label>
                     <div class="col-sm-7">
-                        <select id="dd_familydiscount" name="dd_familydiscount" class="form-control" required>
+                        <select id="familydiscount" name="familydiscount" class="form-control" required>
                             <option></option>
-                            <option>No</option>
-                            <option>Yes</option>
+                            <%= Generic.Functions.populateselect(yesnovalues, familydiscount,"None") %>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="tb_previousclub">
+                    <label class="control-label col-sm-5" for="previousclub">
                         <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="If you are joining Union Boat Club from another club, you may need to provide a Clearance/Transfer from your previous club. This form will need to be acknowledged and signed by our Club Secretary." />
                         Previous club (if applicable)</label>
                     <div class="col-sm-7">
-                        <input id="tb_previousclub" name="tb_previousclub" type="text" class="form-control" value="<%:tb_previousclub%>" maxlength="100" />
+                        <input id="previousclub" name="previousclub" type="text" class="form-control" value="<%:previousclub%>" maxlength="100" />
 
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_boatinstorage">
+                    <label class="control-label col-sm-5" for="boatinstorage">
                         <img id="qm_boatinstorage" src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="" />
                         Do you currently have a boat stored at the club and want to continue to store it for this season?</label>
                     <div class="col-sm-7">
-                        <select id="dd_boatinstorage" name="dd_boatinstorage" class="form-control" required>
+                        <select id="boatinstorage" name="boatinstorage" class="form-control" required>
                             <option></option>
-                            <option>No</option>
-                            <option>Yes</option>
+                            <%= Generic.Functions.populateselect(yesnovalues, boatinstorage,"None") %>
                         </select>
                     </div>
                 </div>
@@ -648,18 +657,18 @@
                     <li>I understand that there may be risk of personal injury involved in participating in the sport of rowing and hereby indemnify the Union Boat Club, its Executive, fellow members and coaches from any liability.</li>
                 </ul>
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_agreement">I agree with the above statements</label>
+                    <label class="control-label col-sm-5" for="agreement">I agree with the above statements</label>
                     <div class="col-sm-7">
-                        <select id="dd_agreement" name="dd_agreement" class="form-control" required>
+                        <select id="agreement" name="agreement" class="form-control" required>
                             <option></option>
                             <option>Yes</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-5" for="dd_correspondence">I also agree, for my information to held in the Union Boat Club database to receive email and text messages from the club.</label>
+                    <label class="control-label col-sm-5" for="correspondence">I also agree, for my information to held in the Union Boat Club database to receive email and text messages from the club.</label>
                     <div class="col-sm-7">
-                        <select id="dd_correspondence" name="dd_correspondence" class="form-control" required>
+                        <select id="correspondence" name="correspondence" class="form-control" required>
                             <option></option>
                             <option>Yes</option>
                         </select>

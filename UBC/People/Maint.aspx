@@ -275,8 +275,19 @@
 
             $('.registrationview').click(function () {
                 id = $(this).attr('id');
-                window.open("RegisterDisplay.aspx?id=" + id, 'Register');
+                idparts = id.split("_");
+                if (idparts[2] == '2017/18' || idparts[2] == '2018/19') {
+                    window.open("RegisterDisplay.aspx?id=" + idparts[1], 'Register');
+                } else {
+                    window.open("RegistrationDisplay.aspx?id=" + idparts[1], 'Register');
+                }
             });
+
+             $('.registrationedit').click(function () {
+                id = $(this).attr('id');
+                idparts = id.split("_");
+                alert('To do: Update Status information: ie: Have updated the main record from this registration - Person can be logged in user');
+            });           
 
             $('.standarddate').datetimepicker({
                 format: 'D MMM YYYY',
@@ -714,6 +725,7 @@
 
             //$('.send_text').click(function () {
             $(document).on('click', '.send_text', function () {
+                phonenumber = $(this).closest('tr').find('td').eq(1).text();
                 mywidth = $(window).width() * .95;
                 if (mywidth > 800) {
                     mywidth = 800;
@@ -728,7 +740,11 @@
                             $(this).dialog("close");
                         },
                         "Send": function () {
-                            alert("to do");
+                            $.post("posts.asmx/send_text", { PhoneNumber: phonenumber, Message: $('#tb_textmessage').val() }, function (data) {
+                                alert(data);
+                            },
+                                'html'
+                            );
                             $(this).dialog("close");
                         }
                     }
@@ -1276,7 +1292,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_familymember">Family member</label>
+                        <label class="control-label col-sm-4" for="dd_familymember">
+                            <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="If there are more than 1 family member registered with UBC record a number otherwise leave blank" /> Family member</label>
                         <div class="col-sm-8">
                             <select id="dd_familymember" name="dd_familymember" class="form-control">
                                 <%= Generic.Functions.populateselect(familymember, dd_familymember,"") %>
@@ -1292,9 +1309,13 @@
                         </div>
                      </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_boatstorage">Boat Storage Annual Fee</label>
-                        <div class="col-sm-8">
-                            <input id="tb_boatstorage" name="tb_boatstorage" type="text" class="form-control numeric" value="<%:tb_boatstorage%>" maxlength="4" />
+                        <label class="control-label col-sm-4" for="tb_boatstorage"><img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Record a description of the boat or leave blank" /> Boat Storage</label>
+                        <div class="col-sm-4">
+                            <input id="tb_boatstorage" name="tb_boatstorage" type="text" class="form-control" value="<%:tb_boatstorage%>" maxlength="100" />
+                        </div>
+                        <label class="control-label col-sm-2" for="tb_boatstoragefee">Annual fee</label>
+                        <div class="col-sm-2">
+                            <input id="tb_boatstoragefee" name="tb_boatstoragefee" type="text" class="form-control numeric" value="<%:tb_boatstoragefee%>" maxlength="4" />
                         </div>
                     </div>
                     <div class="form-group">

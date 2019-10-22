@@ -39,7 +39,7 @@ $("#populate").click(function () {
                                 this.value = '027 123456';
                             } else {
                                 //alert(this.id + ', ' + thetype);
-                                this.value = this.id;
+                                this.value = $(this).attr('name');
                             }
                     }
                     maxlen = $(this).attr('maxLength');

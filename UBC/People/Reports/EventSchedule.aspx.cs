@@ -120,7 +120,11 @@ namespace UBC.People.Reports
                                 }
                                 else
                                 {
-                                    time = Convert.ToDateTime(startdatetime).ToString("HH:mm") + " - " + Convert.ToDateTime(enddatetime).ToString("HH:mm");
+                                    time = Convert.ToDateTime(startdatetime).ToString("HH:mm");
+                                    if (enddatetime != "")
+                                    {
+                                        time += " - " + Convert.ToDateTime(enddatetime).ToString("HH:mm");
+                                    }
                                 }
 
                                 string past = "";
