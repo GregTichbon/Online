@@ -155,11 +155,11 @@
 
             $('#cb_emailall').click(function (event) {
                 if (this.checked) {
-                    $('[id^=cb_email_]').each(function () {
+                    $('[id^=cb_email_]:visible').each(function () {
                         this.checked = true;
                     });
                 } else {
-                    $('[id^=cb_email_]').each(function () {
+                    $('[id^=cb_email_]:visible').each(function () {
                         this.checked = false;
                     });
                 }

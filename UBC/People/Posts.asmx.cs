@@ -220,11 +220,11 @@ namespace UBC.People
             if (type == "email")
             {
                 string emailbodyTemplate = "RegisterEmail.xslt";
-                string emailBCC = "";
                 string screenTemplate = "RegisterScreen.xslt";
                 //string host = "datainn.co.nz";
                 string host = "70.35.207.87";
                 string emailfrom = "UnionBoatClub@datainn.co.nz";
+                string emailBCC = emailfrom;
                 string emailfromname = "Union Boat Club";
                 string password = "39%3Zxon";
 

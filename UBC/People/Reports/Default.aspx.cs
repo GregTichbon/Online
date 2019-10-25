@@ -31,7 +31,9 @@ namespace UBC.People.Reports
 
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
             {
-                html += "<br /><a href=\"people/reports/currentmembers.aspx\">Registered members for given year</a>";
+                html += "<br /><a href=\"currentmembers.aspx\">Registered members for given year</a>";
+                html += "<br /><a href=\"registrations.aspx\">All registrations</a>";
+
                 html += "<br /><a href=\"ContactDetails.aspx\">Contact Details</a>";
             }
         }

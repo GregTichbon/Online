@@ -553,6 +553,7 @@
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
+    <Content Include="People\Reports\Registrations.aspx" />
     <Content Include="People\Reports\Report.aspx" />
     <Content Include="People\Reports\SchoolRowers.aspx" />
     <Content Include="People\Reports\ShowAttendees.aspx" />
@@ -1263,6 +1264,13 @@
     </Compile>
     <Compile Include="People\Reports\RegattaList.aspx.designer.cs">
       <DependentUpon>RegattaList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Registrations.aspx.cs">
+      <DependentUpon>Registrations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Registrations.aspx.designer.cs">
+      <DependentUpon>Registrations.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\Report.aspx.cs">
       <DependentUpon>Report.aspx</DependentUpon>

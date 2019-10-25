@@ -329,9 +329,9 @@ namespace UBC.People
 
                         html_phone += "<tr>";
                         html_phone += "<td>";
-                        html_phone += "<input type=\"text\" class=\"form-control\" name=\"repeat_phone_number_" + phonectr.ToString() + "\" value=\"" + phonenumber + "\"></td>";
+                        html_phone += "<input type=\"text\" class=\"form-control\" name=\"repeat_phone_number_" + phonectr.ToString() + "\" value=\"" + phonenumber + "\" required></td>";
                         html_phone += "<td>";
-                        html_phone += "<select class=\"form-control\" name=\"repeat_phone_type_" + phonectr.ToString() + "\">";
+                        html_phone += "<select class=\"form-control\" name=\"repeat_phone_type_" + phonectr.ToString() + "\" required>";
                         html_phone += "<option></option>";
                         html_phone += Generic.Functions.populateselect(phonetypevalues, phonetype, "None");
                         html_phone += "</select>";
@@ -354,15 +354,15 @@ namespace UBC.People
 
                         html_parent += "<tr>";
                         html_parent += "<td>";
-                        html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_name_" + parentctr.ToString() + "\" value=\"" + parentname + "\"></td>";
+                        html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_name_" + parentctr.ToString() + "\" value=\"" + parentname + "\"  required></td>";
                         html_parent += "<td>";
-                        html_parent += "<select class=\"form-control\" name=\"repeat_parent_relationship_" + parentctr.ToString() + "\" value=\"" + parentrelationship + "\">";
+                        html_parent += "<select class=\"form-control\" name=\"repeat_parent_relationship_" + parentctr.ToString() + "\" value=\"" + parentrelationship + "\" required>";
                         html_parent += "<option></option>";
                         html_parent += Generic.Functions.populateselect(relationshipvalues, parentrelationship, "None");
                         html_parent += "</select>";
                         html_parent += "</td>";
                         html_parent += "<td>";
-                        html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_email_" + parentctr.ToString() + "\" value=\"" + parentemail + "\"></td>";
+                        html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_email_" + parentctr.ToString() + "\" value=\"" + parentemail + "\" required></td>";
                         html_parent += "<td>";
                         html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_note_" + parentctr.ToString() + "\" value=\"" + parentnote + "\"></td>";
                         html_parent += "<td>";
@@ -392,9 +392,9 @@ namespace UBC.People
 
                             html_parent += "<tr>";
                             html_parent += "<td>";
-                            html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_phone_number_" + parentctr + "_" + parentphonectr + "\" value=\"" + parentphonenumber + "\"></td>";
+                            html_parent += "<input type=\"text\" class=\"form-control\" name=\"repeat_parent_phone_number_" + parentctr + "_" + parentphonectr + "\" value=\"" + parentphonenumber + "\" required></td>";
                             html_parent += "<td>";
-                            html_parent += "<select class=\"form-control\" name=\"repeat_parent_phone_type_" + parentctr + "_" + parentphonectr + "\">";
+                            html_parent += "<select class=\"form-control\" name=\"repeat_parent_phone_type_" + parentctr + "_" + parentphonectr + "\" required>";
                             html_parent += "<option></option>";
                             html_parent += Generic.Functions.populateselect(phonetypevalues, parentphonetype, "None");
                             html_parent += "</select>";
@@ -427,6 +427,8 @@ namespace UBC.People
         {
 
             Functions functions = new Functions();
+
+            string EmailRecipients = Request.Form["emailaddress"];
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -523,11 +525,13 @@ namespace UBC.People
                     sel = "[Name] = 'Phone' and [ParentIndex] = 0 and [index] = " + indexrow["Index"];
                     DataView dv4 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
                     DataTable dvfields = dv4.ToTable();
+
                     foreach (DataRow fieldrow in dvfields.Rows)
                     {
                         string field = fieldrow["Field"].ToString();
                         string value = fieldrow["Value"].ToString();
                         subXml.Add(new XElement(field, value));
+ 
                     }
                     repeaterXml.Add(subXml);
                 }
@@ -549,11 +553,16 @@ namespace UBC.People
                     sel = "[Name] = 'Parent' and [Index] = " + indexrow["Index"];
                     DataView dv4 = new DataView(repeatertable, sel, "[Index]", DataViewRowState.CurrentRows);
                     DataTable dvfields = dv4.ToTable();
+
                     foreach (DataRow fieldrow in dvfields.Rows)
                     {
                         string field = fieldrow["Field"].ToString();
                         string value = fieldrow["Value"].ToString();
                         subXml.Add(new XElement(field, value));
+                        if (field == "email")
+                        {
+                            EmailRecipients += ";" + fieldrow["Value"].ToString();
+                        }
                     }
                     sel = "[Parent] = 'Parent' and [ParentIndex] = " + indexrow["Index"] + " and [Name] = 'Phone'";
                     DataView dv1 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
@@ -640,18 +649,19 @@ namespace UBC.People
             }
 
             string emailSubject = "Union Boat Club Rower Registration";
-            string emailBCC = "";
             string screenTemplate = "RegisterScreen.xslt";
             //string host = "datainn.co.nz";
             string host = "70.35.207.87";
-            string emailfrom = "ltr@datainn.co.nz";
+            string emailfrom = "UnionBoatClub@datainn.co.nz";
+            string emailBCC = emailfrom + ";greg@datainn.co.nz;gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";
             string emailfromname = "Union Boat Club";
-            string password = "m33t1ng";
-            string emailRecipient = "greg@datainn.co.nz;gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
+            string password = "39%3Zxon";
+            //string emailRecipient = Request.Form["emailaddress"];
+
             string emailtext = functions.HTMLtoText(emaildocument);
 
-            //functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
-            functions.sendemailV3(host, emailfrom, emailfromname, password, emailSubject, emaildocument, emailRecipient, emailBCC, "");
+             //functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
+            functions.sendemailV3(host, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "");
 
             XslCompiledTransform ScreenXslTrans = new XslCompiledTransform();
             ScreenXslTrans.Load(path + "\\" + screenTemplate);
