@@ -74,7 +74,7 @@ namespace UBC.People.Reports
                             displaylink = "../registrationdisplay.aspx";
                             //}
 
-                            string link = "<br /><a href=\"../maint.aspx?id=" + guid + "\">Edit</a>  <a href=\"" + displaylink + "?id=" + guid + "\">Display</a>";
+                            string link = "<br /><a href=\"../maint.aspx?id=" + guid + "\" target=\"_Blank\">Edit</a>  <a href=\"" + displaylink + "?guid=" + guid + "\" target=\"_Blank\">Display</a>";
                             string image = "<img src=\"../Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
 
                         /*  0 year

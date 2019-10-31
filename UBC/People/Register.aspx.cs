@@ -411,16 +411,13 @@ namespace UBC.People
                         html_parent += "</tr>";
                     }
 
-
-
+                }
+                else
+                {
+                    guid = Guid.NewGuid().ToString();
                 }
             }
-            else
-            {
-                Guid g;
-                g = Guid.NewGuid();
-                guid = g.ToString();
-            }
+            
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
@@ -628,7 +625,7 @@ namespace UBC.People
             emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
 
             cmd.CommandText = "Update_Registration";
-            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = Request.Form["guid"].ToString();
+            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = Request.Form["guid"].ToString(); ;
             cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
             cmd.Parameters.Add("@document", SqlDbType.VarChar).Value = emaildocument;
 

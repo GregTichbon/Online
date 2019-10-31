@@ -58,7 +58,8 @@ namespace UBC.People
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
-            string id = Request.QueryString["id"];
+            string id = Request.QueryString["id"] ?? "";
+            string guid = Request.QueryString["guid"] ?? "";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -67,6 +68,7 @@ namespace UBC.People
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "get_Registration";
             cmd.Parameters.Add("@registration_id", SqlDbType.VarChar).Value = id;
+            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = guid;
 
 
             cmd.Connection = con;

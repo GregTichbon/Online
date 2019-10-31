@@ -208,7 +208,7 @@ namespace Generic
 
 
                 SmtpClient client = new SmtpClient();
-                client.Port = 587; //993; // 25 587;
+                client.Port = 25; // 587; //993; // 25 587;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new NetworkCredential(emailfrom, password);

@@ -200,23 +200,24 @@
                 });
                 $('#emailtable > tbody > tr[maint="deleted"]').each(function () {
                     tr_id = $(this).attr('id') + '_delete';
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: tr_id,
-                        value: ""
-                    }).appendTo('#form1');
-                    alert(value);
+                    if (tr_id.substring(0, 3) != 'new') {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: ""
+                        }).appendTo('#form1');
+                    }
 
                 });
 
                 /*----------------------------------------------RELATIONSHIP-----------------------------------------*/
                 $('#relationshiptable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
-                    tr_relationship = $(this).find('td:eq(1)').attr('relationship_id');
-                    tr_person = $(this).find('td:eq(2)').text();
+                    tr_relationshiptype_id = $(this).find('td:eq(1)').attr('relationshiptype_id');
+                    tr_person_id = $(this).find('td:eq(2)').attr('relationshipperson_id');
                     tr_note = $(this).find('td:eq(3)').text();
                    
-                    value = tr_relationship + delim + tr_person + delim + tr_note;
+                    value = tr_relationshiptype_id + delim + tr_person_id + delim + tr_note;
                     $('<input>').attr({
                         type: 'hidden',
                         name: tr_id,
@@ -234,35 +235,8 @@
                         }).appendTo('#form1');
                     }
                 });
-
-                /* $('#transactionstable > tbody > tr').each(function (i1, tr) {
-                     $(tr).find('td.item').each(function (i2, td) {
-                         id = $(td).attr('id');
-                         name = $(td).closest('td').next('td').text();
-                         breed1 = $(td).attr('breed1');
-                         breed2 = $(td).attr('breed2');
-                         years = $(td).attr('years');
-                         months = $(td).attr('months');
-                         colour1 = $(td).attr('colour1');
-                         colour2 = $(td).attr('colour2');
-                         gender = $(td).attr('gender');
-                         neutered = $(td).attr('neutered');
-                         chip = $(td).attr('chip');
-                         marks = $(td).attr('marks');
-                         value = name + delim + breed1 + delim + breed2 + delim + years + delim + months + delim + colour1 + delim + colour2 + delim + gender + delim + neutered + delim + chip + delim + marks;
-                         $('<input>').attr({
-                             type: 'hidden',
-                             name: id,
-                             value: value
-                         }).appendTo('#form1');
-                     });
-                     
-                 });*/
-                //event.preventDefault();
             });
-            //alert(JSON.stringify(results_grid.getChanges()));
-            //alert(JSON.stringify(results_grid.getAll(true)));
-            //  alert(1);
+
 
 
 
@@ -582,7 +556,7 @@
                     $("#dialog-relationships").find(':input').val('');
                 } else {
                     tr = $(this).closest('tr');
-                    $('#dd_relationships_relationship').val($(tr).find('td').eq(1).attr('relationship_id'));
+                    $('#dd_relationships_relationship').val($(tr).find('td').eq(1).attr('relationshiptype_id'));
                     $('#tb_relationships_person').val($(tr).find('td').eq(2).text());
                     //$('#dd_relationships_status').val($(tr).find('td').eq(3).text());
                     $('#tb_relationships_note').val($(tr).find('td').eq(3).text());
@@ -617,8 +591,10 @@
 
                         }
                         $(tr).attr('maint', 'changed');
-                        $(tr).find('td').eq(1).attr('relationship_id', $('#dd_relationships_relationship').val());
+                        $(tr).find('td').eq(1).text('is the ' + $('#dd_relationships_relationship option:selected').text() + ' of');
+                        $(tr).find('td').eq(1).attr('relationshiptype_id', $('#dd_relationships_relationship').val());
                         $(tr).find('td').eq(2).text($('#tb_relationships_person').val());
+                        $(tr).find('td').eq(2).attr('relationshipperson_id', $('#tb_relationships_person').attr('relationshipperson_id'));
                         //$(tr).find('td').eq(3).text($('#dd_relationships_status').val());
                         $(tr).find('td').eq(3).text($('#tb_relationships_note').val());
                         $(this).dialog("close");
@@ -637,8 +613,20 @@
                 }
                 $("#dialog-relationships").dialog('option', 'buttons', myButtons);
             })
+            $("#tb_relationships_person").autocomplete({
+                appendTo: "#dialog-relationships",
+                source: "../data.asmx/person_name_autocomplete",
+                minLength: 2,
+                select: function (event, ui) {
+                    //event.preventDefault();
+                    selected = ui.item;
+                    //alert(selected.guid);
+                    $(this).attr('relationshipperson_id', selected.person_id);
 
-            
+                }
+            })
+
+    
 
 /* ========================================= EMAIL ===========================================*/
             $(document).on('click', '.emailedit', function () {
@@ -1163,7 +1151,7 @@
             </div>
             <!-- ================================= RELATIONSHIPS ===================================  -->
             <div id="dialog-relationships" title="Maintain relationship" style="display: none" class="form-horizontal">
-                <h2>Not fully done</h2>
+                
                 <div class="form-group">
                     <div class="col-sm-4">
                         </div>

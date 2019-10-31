@@ -26,6 +26,7 @@ namespace UBC.People.Reports
             {
                 Response.Redirect("~/default.aspx");
             }
+            List<string> guids = new List<string>();
 
             html_registration = "<tr><th>Name</th><th>Season</th><th>Submitted</th><th>Status</th><th>Status<br />Date</th><th>Status<br />Person</th><th>View</th></tr>";
 
@@ -46,6 +47,7 @@ namespace UBC.People.Reports
                 {
                     name = dr["firstname"].ToString() + " " + dr["lastname"].ToString();
                 }
+                string guid = dr["guid"].ToString();
                 string CreatedDate = Convert.ToDateTime(dr["CreatedDate"]).ToString("dd MMM yy");
                 string season = dr["season"].ToString();
                 string Status = dr["Status"].ToString();
@@ -56,6 +58,11 @@ namespace UBC.People.Reports
                     StatusUpdatedDateTime = Convert.ToDateTime(StatusUpdatedDateTime).ToString("dd MMM yy");
                 }
                 string edit = "";
+                if(!guids.Contains(guid))
+                {
+                    guids.Add(guid);
+                    edit = " <a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">Edit</a>";
+                }
 
                // if(registration_id )
                 //if (edit == "")

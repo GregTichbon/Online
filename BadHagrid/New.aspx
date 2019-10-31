@@ -11,6 +11,7 @@
     <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet" />
 
     <!-- Javascript -->
     <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
@@ -18,10 +19,12 @@
     <script src="<%: ResolveUrl("~/Dependencies/jquery.validate.min.js")%>"></script>
     <script type="text/javascript" src="<%: ResolveUrl("~/dependencies/downcount/jquery.downCount.js")%>"></script>
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
-
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
 
     <style type="text/css">
-        @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+         body {
+            font-family: 'Roboto';
+        }
 
         .input {
             width: 100%;
@@ -140,6 +143,11 @@
 
             .div_content h2 {
                 color: #29648A;
+                font-family: 'Roboto Slab';
+            }
+            .div_content h1 {
+                color: #29648A;
+                font-family: 'Roboto Slab';
             }
 
         .footer {
@@ -202,6 +210,13 @@
                 $("#div_news").append(content);
             };
             */
+
+            $('#div_imagery').infiniteScroll({
+                // options
+                path: '.pagination__next',
+                append: '.post',
+                history: false,
+            });
 
             $('#navbar1 > ul > li').click(function () {
                 id = $(this).prop('id');
@@ -448,7 +463,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div xclass="center" style="display: inline-block; padding-top: 25px">
-                        Fan Club mailing list - <a id="keen" href="javascript:void(0)">sign</a> up to get told
+                        <a id="keen" href="javascript:void(0)">Fan Club mailing list - sign up to get told</a>
                     </div>
 
                 </div>

@@ -212,6 +212,7 @@
     <Content Include="FileBrowser\js\FileManager.js" />
     <Content Include="FileBrowser\js\FileManager.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Imagery.aspx" />
     <Content Include="New.aspx" />
     <Content Include="Posts.asmx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -397,6 +398,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Imagery.aspx.cs">
+      <DependentUpon>Imagery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Imagery.aspx.designer.cs">
+      <DependentUpon>Imagery.aspx</DependentUpon>
     </Compile>
     <Compile Include="New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>

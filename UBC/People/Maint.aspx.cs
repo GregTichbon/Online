@@ -412,16 +412,18 @@ namespace UBC.People
                         {
                             string relationship_id = dr["relationship_id"].ToString();
                             string person_guid = dr["person_guid"].ToString();
+                            string person_id = dr["person_id"].ToString();
                             string person = dr["person"].ToString();
-                            string relationship = dr["Relationship"].ToString();
+                            string relationshiptype_id = dr["Relationshiptype_id"].ToString();
+                            string relationshiptype = dr["Relationshiptype"].ToString();
                             //string status = dr["status"].ToString();
                             string note = dr["note"].ToString();
-                            string PrimaryRecordat = dr["PrimaryRecordat"].ToString();
+                            //string PrimaryRecordat = dr["PrimaryRecordat"].ToString();
 
                             html_relationships += "<tr id=\"relationships_" + relationship_id + "\">";
                             html_relationships += "<td style=\"text-align:center\"></td>";
-                            html_relationships += "<td relationship_id=\"" + relationship_id + "\"> is the " + relationship + " of</td>";
-                            html_relationships += "<td><a href=\"maint.aspx?id=" + person_guid + "\">" + person + "</a></td>";
+                            html_relationships += "<td relationshiptype_id=\"" + relationshiptype_id + "\"> is the " + relationshiptype + " of</td>";
+                            html_relationships += "<td relationshipperson_id=\"" + person_id + "\"><a href=\"maint.aspx?id=" + person_guid + "\">" + person + "</a></td>";
                             //html_relationships += "<td>" + status + "</td>";
                             html_relationships += "<td>" + note + "</td>";
                             html_relationships += "<td><a href=\"javascript:void(0)\" class=\"relationshipsedit\" data-mode=\"edit\">Edit</td>";
@@ -1062,6 +1064,35 @@ namespace UBC.People
                         cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
                         cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = valuesSplit[0];
                         cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[1];
+                    }
+                    con.Open();
+                    result = cmd.ExecuteScalar().ToString();
+                    con.Close();
+                }
+                if (key.StartsWith("relationships_"))
+                {
+                    string relationship_id = key.Substring(14);
+                    if (relationship_id.EndsWith("_delete"))
+                    {
+                        cmd.CommandText = "Delete_relationship";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@relationship_id", SqlDbType.VarChar).Value = relationship_id.Substring(0, relationship_id.Length - 7);
+                    }
+                    else
+                    {
+                        if (relationship_id.StartsWith("new"))
+                        {
+                            relationship_id = "new";
+                        }
+
+                        string[] valuesSplit = Request.Form[key].Split('\x00FE');
+                        cmd.CommandText = "Update_relationship";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@relationship_id", SqlDbType.VarChar).Value = relationship_id;
+                        cmd.Parameters.Add("@relationshiptype_id", SqlDbType.VarChar).Value = valuesSplit[0];
+                        cmd.Parameters.Add("@person1_guid", SqlDbType.VarChar).Value = hf_guid;
+                        cmd.Parameters.Add("@person2_id", SqlDbType.VarChar).Value = valuesSplit[1];
+                        cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[2];
                     }
                     con.Open();
                     result = cmd.ExecuteScalar().ToString();

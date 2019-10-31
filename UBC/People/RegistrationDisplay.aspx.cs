@@ -22,7 +22,8 @@ namespace UBC.People
         public string documenthtml = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            string registration_id = Request.QueryString["id"];
+            string registration_id = Request.QueryString["id"] ?? "";
+            string guid = Request.QueryString["guid"] ?? "";
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
@@ -30,6 +31,7 @@ namespace UBC.People
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "get_Registration";
             cmd.Parameters.Add("@registration_id", SqlDbType.VarChar).Value = registration_id;
+            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = guid;
             cmd.Connection = con;
 
             SqlDataReader dr = cmd.ExecuteReader();
@@ -37,6 +39,9 @@ namespace UBC.People
             {
                 dr.Read();
                 documenthtml = dr["document"].ToString();
+            } else
+            {
+                documenthtml = "There is no registration record";
             }
 
             dr.Close();

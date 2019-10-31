@@ -5,14 +5,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script src="Dependencies/jquery-2.2.0.min.js"></script>
-    <script src="Dependencies/fittext.js"></script>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
+
+    <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/fittext.js")%>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $("#div_menu").fitText(1.1, {
                 minFontSize: '20px',
                 maxFontSize: '75px'
             });
+
+            <%=script%>
+
+            $(document).tooltip({
+                position: {
+                    my: "right center",
+                    at: "left center"
+                },
+                content: function () {
+                    return $(this).prop('title');
+                }
+            });
+
+           
 
 
         });
