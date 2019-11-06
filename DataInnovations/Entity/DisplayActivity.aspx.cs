@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Online.Entity
         {
             if (Request.QueryString["id"] != null)
             {
-                Generic.Functions gFunctions = new Generic.Functions();
+                Functions gFunctions = new Functions();
 
                 char[] bar = { '|' };
                 string[] parts = Request.QueryString["id"].Split(bar);

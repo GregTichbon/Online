@@ -111,15 +111,10 @@
        
             $('.countdown').downCount({
                 date: '11/04/2019 12:00:00',
-                offset: +10
+                offset: +13
             }, function () {
-                $('#dialog_result').html("It's happening");
-                $('#dialog_result').dialog({
-                    modal: true,
-                    width: 400,
-                    title: "Sign up",
-                    closeText: false
-                });
+                window.open("http://badhagrid.com/new.aspx","_self" );
+                
             })
         
 

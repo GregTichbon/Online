@@ -1,5 +1,4 @@
-﻿using Generic;
-using MessagingApp.Model;
+﻿using MessagingApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;

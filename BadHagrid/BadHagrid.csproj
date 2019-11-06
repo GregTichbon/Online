@@ -76,10 +76,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\Default.aspx" />
     <Content Include="Administration\Newslist.aspx" />
     <Content Include="Administration\NewsMaint.aspx" />
     <Content Include="Administration\PageList.aspx" />
     <Content Include="Administration\PageMaint.aspx" />
+    <Content Include="Administration\SendText.aspx" />
     <Content Include="Administration\SignedUp.aspx" />
     <Content Include="Data.aspx" />
     <Content Include="Default.aspx" />
@@ -98,6 +100,32 @@
     <Content Include="Dependencies\Images\DATES.png" />
     <Content Include="Dependencies\Images\DATES.svg" />
     <Content Include="Dependencies\Images\facebook.svg" />
+    <Content Include="Dependencies\Images\FavIcon\android-icon-144x144.png" />
+    <Content Include="Dependencies\Images\FavIcon\android-icon-192x192.png" />
+    <Content Include="Dependencies\Images\FavIcon\android-icon-36x36.png" />
+    <Content Include="Dependencies\Images\FavIcon\android-icon-48x48.png" />
+    <Content Include="Dependencies\Images\FavIcon\android-icon-72x72.png" />
+    <Content Include="Dependencies\Images\FavIcon\android-icon-96x96.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-114x114.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-120x120.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-144x144.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-152x152.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-180x180.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-57x57.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-60x60.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-72x72.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-76x76.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon-precomposed.png" />
+    <Content Include="Dependencies\Images\FavIcon\apple-icon.png" />
+    <Content Include="Dependencies\Images\FavIcon\browserconfig.xml" />
+    <Content Include="Dependencies\Images\FavIcon\favicon-16x16.png" />
+    <Content Include="Dependencies\Images\FavIcon\favicon-32x32.png" />
+    <Content Include="Dependencies\Images\FavIcon\favicon-96x96.png" />
+    <Content Include="Dependencies\Images\FavIcon\favicon.ico" />
+    <Content Include="Dependencies\Images\FavIcon\ms-icon-144x144.png" />
+    <Content Include="Dependencies\Images\FavIcon\ms-icon-150x150.png" />
+    <Content Include="Dependencies\Images\FavIcon\ms-icon-310x310.png" />
+    <Content Include="Dependencies\Images\FavIcon\ms-icon-70x70.png" />
     <Content Include="Dependencies\Images\IMAGERY %281%29.png" />
     <Content Include="Dependencies\Images\IMAGERY.png" />
     <Content Include="Dependencies\Images\IMAGERY.svg" />
@@ -213,6 +241,9 @@
     <Content Include="FileBrowser\js\FileManager.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Imagery.aspx" />
+    <Content Include="Imagery1.aspx" />
+    <Content Include="Masonry1.aspx" />
+    <Content Include="Masonry2.aspx" />
     <Content Include="New.aspx" />
     <Content Include="Posts.asmx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -240,6 +271,27 @@
     <Content Include="Scripts\plugins\fineuploader\jquery.fineuploader.min.js" />
     <Content Include="Scripts\plugins\fineuploader\loading.gif" />
     <Content Include="Scripts\plugins\fineuploader\processing.gif" />
+    <Content Include="Scripts\plugins\galereya\css\jquery.galereya.css" />
+    <Content Include="Scripts\plugins\galereya\css\jquery.galereya.ie.css" />
+    <Content Include="Scripts\plugins\galereya\img\black_lozenge.png" />
+    <Content Include="Scripts\plugins\galereya\img\black_lozenge_%402X.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_down%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_down.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_next%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_next.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_prev%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_prev.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_up%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-arrow_up.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-close%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-close.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-pause%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-pause.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-play%402x.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-play.png" />
+    <Content Include="Scripts\plugins\galereya\img\galereya-slider-loader.gif" />
+    <Content Include="Scripts\plugins\galereya\js\jquery.galereya.js" />
+    <Content Include="Scripts\plugins\galereya\js\jquery.galereya.min.js" />
     <Content Include="Scripts\plugins\jquery.mb-waitspinner.js" />
     <Content Include="Scripts\plugins\jquery.prettySocial.js" />
     <Content Include="Scripts\plugins\plugins.js" />
@@ -255,16 +307,36 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\plugins\galereya\.gitignore" />
+    <Content Include="Scripts\plugins\galereya\galereya.jquery.json" />
+    <Content Include="Scripts\plugins\galereya\LICENSE.md" />
+    <Content Include="Scripts\plugins\galereya\README.md" />
+    <Content Include="Dependencies\Images\FavIcon\manifest.json" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\plugins\spin\jquery.spin.js" />
     <Content Include="Scripts\plugins\spin\spin.js" />
     <Content Include="SendEmail.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="TestPost1.aspx" />
     <Content Include="userfiles\image\dummy.jpg" />
+    <Content Include="userfiles\image\Gallery\1.jpg" />
+    <Content Include="userfiles\image\Gallery\2.jpg" />
+    <Content Include="userfiles\image\Gallery\3.jpg" />
+    <Content Include="userfiles\image\Gallery\4.jpg" />
+    <Content Include="userfiles\image\Gallery\5.jpg" />
+    <Content Include="userfiles\image\Gallery\6.jpg" />
+    <Content Include="userfiles\image\Gallery\7.jpg" />
     <Content Include="Web.config" />
     <Content Include="x.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\Newslist.aspx.cs">
       <DependentUpon>Newslist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +364,13 @@
     </Compile>
     <Compile Include="Administration\PageMaint.aspx.designer.cs">
       <DependentUpon>PageMaint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\SendText.aspx.cs">
+      <DependentUpon>SendText.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\SendText.aspx.designer.cs">
+      <DependentUpon>SendText.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administration\SignedUp.aspx.cs">
       <DependentUpon>SignedUp.aspx</DependentUpon>
@@ -406,6 +485,27 @@
     <Compile Include="Imagery.aspx.designer.cs">
       <DependentUpon>Imagery.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Imagery1.aspx.cs">
+      <DependentUpon>Imagery1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Imagery1.aspx.designer.cs">
+      <DependentUpon>Imagery1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masonry1.aspx.cs">
+      <DependentUpon>Masonry1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masonry1.aspx.designer.cs">
+      <DependentUpon>Masonry1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masonry2.aspx.cs">
+      <DependentUpon>Masonry2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masonry2.aspx.designer.cs">
+      <DependentUpon>Masonry2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -431,6 +531,13 @@
     </Compile>
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestPost1.aspx.cs">
+      <DependentUpon>TestPost1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestPost1.aspx.designer.cs">
+      <DependentUpon>TestPost1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

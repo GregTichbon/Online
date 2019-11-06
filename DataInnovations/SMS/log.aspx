@@ -139,7 +139,7 @@
 <body>
     <form id="form1" runat="server">
 
-        <p>days=[int]  type=[R/S]</p>
+        <p>days=[int]  type=[R/S] description=?</p>
 
         <table>
             <thead>

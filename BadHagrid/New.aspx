@@ -1,12 +1,38 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="BadHagrid.New" %>
 
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113505480-2"></script>
+
+    <script>
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-113505480-2');
+    </script>
+
     <title>Bad Hagrid</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/Dependencies/Images/FavIcon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/Dependencies/Images/FavIcon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/Dependencies/Images/FavIcon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/Dependencies/Images/FavIcon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/Dependencies/Images/FavIcon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/Dependencies/Images/FavIcon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/Dependencies/Images/FavIcon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/Dependencies/Images/FavIcon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Dependencies/Images/FavIcon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/Dependencies/Images/FavIcon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Dependencies/Images/FavIcon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/Dependencies/Images/FavIcon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Dependencies/Images/FavIcon/favicon-16x16.png">
+    <link rel="manifest" href="/Dependencies/Images/FavIcon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
@@ -22,7 +48,7 @@
     <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
 
     <style type="text/css">
-         body {
+        body {
             font-family: 'Roboto';
         }
 
@@ -83,9 +109,9 @@
                     font-size: 14px;
                 }
 
-                ul li img {
-                    height:20px;
-                }
+        ul li img {
+            height: 20px;
+        }
 
         .signup {
             text-align: center;
@@ -145,6 +171,7 @@
                 color: #29648A;
                 font-family: 'Roboto Slab';
             }
+
             .div_content h1 {
                 color: #29648A;
                 font-family: 'Roboto Slab';
@@ -194,11 +221,19 @@
         }
 
         .socialmedia {
-            height:80px;
-            padding:12px;
+            height: 80px;
+            padding: 12px;
+        }
+
+        #div_imagery img {
+            width: 100%;
+            padding: 12px;
         }
     </style>
-    <script>
+
+
+   <script>
+
         $(document).ready(function () {
             var newsid = 0;
             var last_newsid = -1;
@@ -211,12 +246,14 @@
             };
             */
 
+            /*
             $('#div_imagery').infiniteScroll({
                 // options
                 path: '.pagination__next',
                 append: '.post',
                 history: false,
             });
+            */
 
             $('#navbar1 > ul > li').click(function () {
                 id = $(this).prop('id');
@@ -286,8 +323,8 @@
 
 
             $('.countdown').downCount({
-                date: '11/04/2019 12:00:00',
-                offset: +10
+                date: '12/03/2019 12:00:00',
+                offset: +12
             }, function () {
                 $('#dialog_result').html("It's happening");
                 $('#dialog_result').dialog({
@@ -384,22 +421,22 @@
 
             <div class="div_content" id="div_about" style="display: <%=none%>">
                 <%=pages["1"] %>
-                 </div>
-
+            </div>
+         
             <div class="div_content" id="div_imagery" style="display: <%=none%>">
-                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-<div class="elfsight-app-5991429f-3dbe-4dbb-bd99-8dd2401f5445"></div>
+                   <% =images %>
+               
             </div>
 
             <div class="div_content" id="div_dates" style="display: <%=none%>">
-                  <%=pages["2"] %>
+                <%=pages["2"] %>
             </div>
 
             <div class="div_content" id="div_merch" style="display: <%=none%>">
-                <a href="https://badhagrid.bandcamp.com/merch">https://badhagrid.bandcamp.com/merch</a>           
+                <a href="https://badhagrid.bandcamp.com/merch">https://badhagrid.bandcamp.com/merch</a>
             </div>
             <div class="div_content" id="div_contact" style="display: <%=none%>">
-                  <%=pages["3"] %>
+                <%=pages["3"] %>
             </div>
 
         </div>
@@ -433,12 +470,18 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse center" id="navbar1">
                     <ul class="nav navbar-nav navbar-center">
-                        <li id="nav_news" class="active"><a href="#"><img src="Dependencies/Images/news.png" /><span class="sr-only">(current)</span></a></li>
-                        <li id="nav_about"><a><img src="Dependencies/Images/about.png" /></a></li>
-                        <li id="nav_imagery"><a href="#"><img src="Dependencies/Images/imagery.png" /></a></li>
-                        <li id="nav_dates"><a href="#"><img src="Dependencies/Images/dates.png" /></a></li>
-                        <li id="nav_merch"><a href="#"><img src="Dependencies/Images/merch.png" /></a></li>
-                        <li id="nav_contact"><a href="#"><img src="Dependencies/Images/contact.png" /></a></li>
+                        <li id="nav_news" class="active"><a href="#">
+                            <img src="Dependencies/Images/news.png" /><span class="sr-only">(current)</span></a></li>
+                        <li id="nav_about"><a>
+                            <img src="Dependencies/Images/about.png" /></a></li>
+                        <li id="nav_imagery"><a href="#">
+                            <img src="Dependencies/Images/imagery.png" /></a></li>
+                        <li id="nav_dates"><a href="#">
+                            <img src="Dependencies/Images/dates.png" /></a></li>
+                        <li id="nav_merch"><a href="#">
+                            <img src="Dependencies/Images/merch.png" /></a></li>
+                        <li id="nav_contact"><a href="#">
+                            <img src="Dependencies/Images/contact.png" /></a></li>
                     </ul>
 
                 </div>
@@ -449,11 +492,11 @@
     </div>
     <div class="footer">
 
-        <div class="container" style="width:100%">
+        <div class="container" style="width: 100%">
             <div class="row">
                 <div class="col-sm-4">
                     <div xstyle="float: left">
-                        <a href="#" target="_blank">
+                        <a href="https://open.spotify.com/artist/3MDwxDxEbZUmTaTwZ1KGg5?si=kxAbVB2rRYq9USVRysNVRg" target="_blank">
                             <img src="Dependencies/Images/spotify.svg" class="socialmedia" /></a>
                         <a href="https://www.facebook.com/badhagrid/" target="_blank">
                             <img src="Dependencies/Images/facebook.svg" class="socialmedia" /></a>
@@ -461,6 +504,7 @@
                             <img src="Dependencies/Images/instagram.svg" class="socialmedia" /></a>
                     </div>
                 </div>
+                fnews
                 <div class="col-sm-4">
                     <div xclass="center" style="display: inline-block; padding-top: 25px">
                         <a id="keen" href="javascript:void(0)">Fan Club mailing list - sign up to get told</a>

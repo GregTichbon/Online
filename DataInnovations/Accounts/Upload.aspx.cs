@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -64,7 +65,7 @@ namespace DataInnovations.Accounts
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
-            Generic.Functions gFunctions = new Generic.Functions();
+            Functions gFunctions = new Functions();
 
             //string datetimestamp = new DateTime().ToString("ddMMyyHHmmss");
 

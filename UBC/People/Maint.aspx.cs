@@ -65,7 +65,7 @@ namespace UBC.People
 
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
-        public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };
+        public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };  //Have added a new table - not yet using
         public string[] yesno = new string[2] { "Yes", "No" };
         public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
         public string[] transactions_system = new string[2] { "UBC", "Friends" };

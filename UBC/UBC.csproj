@@ -1153,6 +1153,12 @@
       <DependentUpon>AllEmail.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="People\Reports\Crystal\AnnualInvoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnualInvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="People\Reports\Crystal\KeyRegister.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1609,6 +1615,10 @@
     <EmbeddedResource Include="People\Reports\Crystal\AllEmail.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AllEmail.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\AnnualInvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AnnualInvoice.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="People\Reports\Crystal\KeyRegister.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

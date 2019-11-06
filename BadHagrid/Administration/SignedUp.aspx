@@ -141,13 +141,15 @@
                 columns: [
                     { title: "ID", field: "BadHagrid_CTR", visible: false },
                     { title: "Name", field: "Name", editor: "input" },
+                    { title: "Greeting", field: "Greeting", editor: "input" },
                     { title: "Email Address", field: "EmailAddress", editor: "input" },
                     { title: "Mobile Number", field: "MobileNumber", editor: "input" },
                     { title: "GUID", field: "GUID" },
                     { title: "Created", field: "DateCreated"  },
                     { title: "Confirmed", field: "Confirmed"  },
                     { title: "Unsubscribed", field: "Unsubscribed", editor: "input" },
-                    
+                    { title: "Notes", field: "Notes", editor: "input" },
+                   
                     
                     /*
                     { title: "Winner Status", field: "WinnerStatus", editor: "input" },

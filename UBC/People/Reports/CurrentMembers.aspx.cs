@@ -46,16 +46,17 @@ namespace UBC.People.Reports
                         Boolean firsttime = true;
                         while (dr.Read())
                         {
-                            if (firsttime)
+                        if (firsttime)
+                        {
+                            html_year = dr["year"].ToString();
+                            html = "<thead><tr><th>Image</th>";
+                            for (int f1 = 3; f1 < dr.FieldCount; f1++)
                             {
-                                html_year = dr["year"].ToString();
-                                html = "<thead><tr><th>Image</th>";
-                                for (int f1 = 3; f1 < dr.FieldCount; f1++)
-                                {
-                                    html += "<th>" + dr.GetName(f1) + "</th>";
-                                }
-                                html += "</tr></thead>";
-                                firsttime = false;
+                                html += "<th>" + dr.GetName(f1) + "</th>";
+                            }
+                            html += "<th class=\"noexport\">Display</th>";
+                            html += "</tr></thead>";
+                            firsttime = false;
                                 html += "<tbody>";
                             }
 
@@ -102,20 +103,21 @@ namespace UBC.People.Reports
                                 string useval = dr[f1].ToString();
                                 switch (f1)
                                 {
-                                    case 3:
-                                        useval = useval + link;
-                                        break;
+                                case 3:
+                                    useval = "<a href=\"../maint.aspx?id=" + guid + "\" target=\"_Blank\">" + useval + "</a>";
+                                    //useval = useval + link;
+                                    break;
                                 case 8:
                                 case 9:
                                 case 10:
-                                        useval = useval.Replace("|", "<br />");
-                                        break;
-                                    
-                                }
+                                    useval = useval.Replace("|", "<br />");
+                                    break;
+
+                            }
                                 html += "<td>" + useval + "</td>";
                             }
 
-
+                            html += "<td class=\"noexport\"><a href=\"" + displaylink + "?guid=" + guid + "\" target=\"_Blank\">Display</a></td>";
                             html += "</tr>";
                         }
                         html += "</tbody>";

@@ -23,16 +23,29 @@
         $(document).ready(function () {
             $('#export').click(function () {
                 var table = "<table>";
+                $('table > thead  > tr').each(function () {
+                    table += "<tr>";
+                    $(this).find('th').each(function () {
+                        if (!$(this).hasClass("noexport")) {
+                            table += "<td>";
+                            table += $(this).text();
+                            table += "</td>";
+                        }
+                    });
+                    table += "</tr>";
+                });
                 $('table > tbody  > tr').each(function () {
                     table += "<tr>";
                     $(this).find('td').each(function () {
-                        table += "<td>";
-                        if ($(this).find('select').length > 0) {
-                            table += $("option:selected", this).text();
-                        } else {
-                            table += $(this).text();
+                        if (!$(this).hasClass("noexport")) {
+                            table += "<td>";
+                            if ($(this).find('select').length > 0) {
+                                table += $("option:selected", this).text();
+                            } else {
+                                table += $(this).text();
+                            }
+                            table += "</td>";
                         }
-                        table += "</td>";
                     });
                     table += "</tr>";
                 });

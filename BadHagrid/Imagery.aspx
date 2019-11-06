@@ -73,8 +73,6 @@
 
     <h1>Infinite Scroll - Loading JSON + Masonry</h1>
 
-    <p>Loading photos from the <a href="https://unsplash.com/developers?utm_source=infinite-scroll-demos&utm_medium=referral&utm_campaign=api-credit">Unsplash API</a></p>
-
     <div class="grid">
         <div class="grid__col-sizer"></div>
         <div class="grid__gutter-sizer"></div>
@@ -143,8 +141,7 @@
             var $items = $(itemsHTML);
             // append item elements
             $items.imagesLoaded(function () {
-                $grid.infiniteScroll('appendItems', $items)
-                    .masonry('appended', $items);
+                $grid.infiniteScroll('appendItems', $items).masonry('appended', $items);
             })
         });
 

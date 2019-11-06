@@ -11,6 +11,7 @@ using System.Configuration;
 
 using System.IO;
 using System.Text.RegularExpressions;
+using Generic;
 
 namespace Online.Entity
 {
@@ -113,7 +114,7 @@ namespace Online.Entity
                     }
                     else
                     {
-                        Generic.Functions gFunctions = new Generic.Functions();
+                        Functions gFunctions = new Functions();
                         tb_reference.Text = gFunctions.getReference();
                     }
                 }

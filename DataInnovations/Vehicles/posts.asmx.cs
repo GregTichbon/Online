@@ -9,7 +9,6 @@ using System.Web.Script.Serialization;
 using System.Xml;
 using System.IO;
 using System.Configuration;
-using Generic;
 
 namespace DataInnovations.Vehicles
 {

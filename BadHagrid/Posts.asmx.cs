@@ -7,9 +7,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Xml;
-//using OfficeOpenXml;
 using System.IO;
-using System.Configuration;
 using Generic;
 
 
@@ -25,18 +23,46 @@ namespace BadHagrid
     [System.Web.Script.Services.ScriptService]   //GREG  -  THIS IS REQUIRED FOR POSTS
     public class Posts : System.Web.Services.WebService
     {
+        [WebMethod]
+        public string send_text(string PhoneNumber, string Message, string Inject, string Greeting)
+        {
+            Message = Message.Replace("||greeting||", Greeting);
+            string[] fields = Inject.Split(',');
+            int c1 = 0;
+            foreach (string field in fields)
+            {
+                c1++;
+
+                Message = Message.Replace("||" + c1.ToString() + "||", field);
+            }
+
+
+            Generic.Functions gFunctions = new Generic.Functions();
+            string response = gFunctions.SendRemoteMessage(PhoneNumber, Message, "Bad Hagrid Bulk");
+            //string response = Message;
+            return response;
+        }
 
         [WebMethod]
         public string HelloWorld()
         {
             return "Hello World";
         }
+        [WebMethod]
+        public string HelloWorld1(string param1)
+        {
+            return (param1);
+        }
+        [WebMethod]
+        public string HelloWorld2(string param1, string param2)
+        {
+
+            return (param1 + " " + param2);
+        }
 
         [WebMethod]
         public standardResponse Update_BadHagrid(NameValue[] formVars)    //you can't pass any querystring params
         {
-
-
             string name = formVars.Form("name");
             string emailaddress = formVars.Form("emailaddress");
             string mobilenumber = formVars.Form("mobilenumber");

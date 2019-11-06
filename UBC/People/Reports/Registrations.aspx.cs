@@ -15,6 +15,9 @@ namespace UBC.People.Reports
     public partial class Registrations : System.Web.UI.Page
     {
         public string html_registration;
+        public string[] statuses = new string[2] { "Working on", "Completed" };
+        public string[] persons = new string[2] { "Greg", "Lis" };
+        public string personName;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,9 +29,10 @@ namespace UBC.People.Reports
             {
                 Response.Redirect("~/default.aspx");
             }
+            personName = Session["UBC_name"].ToString();
             List<string> guids = new List<string>();
 
-            html_registration = "<tr><th>Name</th><th>Season</th><th>Submitted</th><th>Status</th><th>Status<br />Date</th><th>Status<br />Person</th><th>View</th></tr>";
+            html_registration = "<tr><th>Name</th><th>Season</th><th>Submitted</th><th>Status</th><th>Status<br />Date</th><th>Status<br />Person</th><th>Note</th><th>View</th></tr>";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -53,15 +57,16 @@ namespace UBC.People.Reports
                 string Status = dr["Status"].ToString();
                 string StatusUpdatedDateTime = dr["StatusUpdatedDateTime"].ToString();
                 string StatusUpdatedperson = dr["StatusUpdatedperson"].ToString();
+                string StatusNote = dr["StatusNote"].ToString();
                 if (StatusUpdatedDateTime != "")
                 {
                     StatusUpdatedDateTime = Convert.ToDateTime(StatusUpdatedDateTime).ToString("dd MMM yy");
                 }
-                string edit = "";
+                string update = "";
                 if(!guids.Contains(guid))
                 {
                     guids.Add(guid);
-                    edit = " <a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">Edit</a>";
+                    update = " <a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">Update</a>";
                 }
 
                // if(registration_id )
@@ -70,13 +75,14 @@ namespace UBC.People.Reports
                 //    edit = "<a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">";
                 //}
                 html_registration += "<tr>";
-                html_registration += "<td>" + name + "</td>";
+                html_registration += "<td><a href=\"../maint.aspx?id=" + guid + "\" target=\"_blank\">" + name + "</a></td>";
                 html_registration += "<td>" + season + "</td>";
                 html_registration += "<td>" + CreatedDate + "</td>";
                 html_registration += "<td>" + Status + "</td>";
                 html_registration += "<td>" + StatusUpdatedDateTime + "</td>";
                 html_registration += "<td>" + StatusUpdatedperson + "</td>";
-                html_registration += "<td><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"registerview_" + registration_id + "_" + season + "\"> View" + edit + "</td>";
+                html_registration += "<td>" + StatusNote + "</td>";
+                html_registration += "<td class=\"noexport\"><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"registerview_" + registration_id + "_" + season + "\"> View" + update + "</td>";
                 html_registration += "</tr>";
 
 

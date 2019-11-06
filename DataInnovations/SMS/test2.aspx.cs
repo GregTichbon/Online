@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace DataInnovations.SMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Generic.Functions gFunctions = new Generic.Functions();
+            Functions gFunctions = new Functions();
             string html = gFunctions.SendRemoteMessage("0272495088", "1" + System.Environment.NewLine + "2", "Test");
             Response.Write(html);
         }

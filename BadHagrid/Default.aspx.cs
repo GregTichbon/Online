@@ -18,6 +18,12 @@ namespace BadHagrid
         public string response = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            DateTime changeat = new DateTime(2019, 11, 4, 12, 0, 0);
+            if(DateTime.Now > changeat)
+            {
+                Response.Redirect("new.aspx");
+            }
+
             string guid = Request.QueryString["id"];
             if(!string.IsNullOrEmpty(guid))
             {

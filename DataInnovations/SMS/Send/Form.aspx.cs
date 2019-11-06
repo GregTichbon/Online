@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Generic;
 using HtmlAgilityPack;
 
 namespace DataInnovations.SMS.Send
@@ -62,7 +63,7 @@ namespace DataInnovations.SMS.Send
                     }
                     else if (dd_mode.SelectedValue == "Generic Function")
                     {
-                        Generic.Functions gFunctions = new Generic.Functions();
+                        Functions gFunctions = new Functions();
                         string[] numbers = mobile.Split(';');
                         foreach (string number in numbers)
                         {

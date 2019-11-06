@@ -21,6 +21,7 @@ namespace BadHagrid
         public string html_about = "";
         public string html_contact = "";
         public string html_dates = "";
+        public string images = "";
         public Dictionary<string, string> pages;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -67,6 +68,13 @@ namespace BadHagrid
             }
             con.Close();
             con.Dispose();
+
+            string path = Server.MapPath("~/userfiles/image/Gallery");
+            foreach (string file in Directory.GetFiles(path))
+            {
+                images += "<img src=\"userfiles/image/Gallery/" + Path.GetFileName(file) + "\" /><br />";
+            }
+
         }
     }
 }

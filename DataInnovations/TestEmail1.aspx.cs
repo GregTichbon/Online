@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Generic;
 using HtmlAgilityPack;
 
 namespace DataInnovations
@@ -83,7 +84,7 @@ namespace DataInnovations
 
                 client.Send(mail);
                 */
-                Generic.Functions gFunctions = new Generic.Functions();
+                Functions gFunctions = new Functions();
 
                 gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emailhtml, emailRecipient, emailbcc, replyto);
 

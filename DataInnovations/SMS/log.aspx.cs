@@ -39,12 +39,18 @@ namespace DataInnovations.SMS
                     break;
             }
 
+            string description = Request.QueryString["description"] + "";
+            if(description != "")
+            {
+                description = " and description like '%" + description + "%'";
+            }
+
             string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             string sql = "select L.*, N.Name, N.source from smslog L";
             sql += " left outer join number N on dbo.FormatMobileNumber(N.Number,'') = dbo.FormatMobileNumber(L.PhoneNumber,'')";
-            sql += " where L.datetime > dateadd(d, -" + days + ", getdate())" + type + " " ;
-            sql += "order by L.Datetime";
+            sql += " where L.datetime > dateadd(d, -" + days + ", getdate())" + type + " " + description ;
+            sql += " order by L.Datetime";
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
             try
