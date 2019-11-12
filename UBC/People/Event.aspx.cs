@@ -39,6 +39,7 @@ namespace UBC.People
         public string html_persons;
         public string showattendees;
         public string finance;
+        public string showonattend;
         public string startday = "";
         public string endday = "";
         public string format = "'D MMM YYYY HH:mm'";
@@ -103,8 +104,9 @@ namespace UBC.People
                             categories = dr["categories"].ToString();
                             showattendees = dr["showattendees"].ToString();
                             finance = dr["finance"].ToString();
+                            showonattend = dr["showonattend"].ToString();
 
-                            if(startdatetime != "")
+                            if (startdatetime != "")
                             {
                                 startday = Convert.ToDateTime(startdatetime).ToString("dddd");
                             }
@@ -117,7 +119,9 @@ namespace UBC.People
                             {
                                 datetime = "";
                                 startdatetime = Convert.ToDateTime(startdatetime).ToString("dd MMM yy");
-                                enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
+                                if (enddatetime != "") { 
+                                    enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy");
+                                }
                                 allday_checked = " checked";
                                 format = "'D MMM YYYY'";
                                 extraFormats = "['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY']";
@@ -278,6 +282,7 @@ namespace UBC.People
             cmd1.Parameters.Add("@categories", SqlDbType.VarChar).Value = Request.Form["dd_categories"];
             cmd1.Parameters.Add("@showattendees", SqlDbType.VarChar).Value = Request.Form["dd_showattendees"];
             cmd1.Parameters.Add("@finance", SqlDbType.VarChar).Value = Request.Form["dd_finance"];
+            cmd1.Parameters.Add("@showonattend", SqlDbType.VarChar).Value = Request.Form["dd_showonattend"];
 
             cmd1.Connection = con;
             try

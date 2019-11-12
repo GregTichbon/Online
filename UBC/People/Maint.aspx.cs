@@ -60,9 +60,6 @@ namespace UBC.People
         */
         public string tb_notes;
 
-
-
-
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };  //Have added a new table - not yet using
@@ -86,6 +83,7 @@ namespace UBC.People
         public string html_tracker = "";
         public string html_attendance = "";
         public string html_phone = "";
+        public string html_note = "";
         public string html_category = "";
         public string html_results = "";
         public string html_arrangements = "";
@@ -121,12 +119,12 @@ namespace UBC.People
                 //category_category = gFunctions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
                 category_category = Functions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
 
-                
+
                 Dictionary<string, string> relationships_options = new Dictionary<string, string>();
                 relationships_options["usevalues"] = "";
                 relationships_options["selecttype"] = "Value";
                 relationships_relationshiptypes = Functions.buildandpopulateselect(strConnString, "exec get_relationshiptypes", "", relationships_options, "None");
-               
+
 
                 if (hf_guid != "new")
                 {
@@ -244,6 +242,8 @@ namespace UBC.People
                             html_tabs += "<li><a data-target=\"#div_tracker\">Tracker</a></li>";
                         }
                     }
+                    html_tabs += "<li><a data-target=\"#div_note\">Notes</a></li>";
+
 
 
                     html_attendance = "<tr><th>When</th><th>What</th><th>Attendance</th><th>Note</th></tr>";
@@ -262,7 +262,8 @@ namespace UBC.People
                             string title = dr["title"].ToString();
                             string startdatetime = Convert.ToDateTime(dr["startdatetime"]).ToString("dd MMM yy hh:mm");
                             string enddatetime = dr["enddatetime"].ToString();
-                            if(enddatetime != "") { 
+                            if (enddatetime != "")
+                            {
                                 enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy hh:mm");
                             }
                             string daterange = dr["daterange"].ToString();
@@ -443,7 +444,7 @@ namespace UBC.People
                     //}
 
                     //-------------------------------------------------------------------------------------
-
+                    //REGISTRATION
                     html_registration = "<tr><th>Season</th><th>Submitted</th><th>Status</th><th>Status<br />Date</th><th>Status<br />Person</th><th>View</th></tr>";
 
                     cmd.CommandText = "get_person_registration";
@@ -557,6 +558,64 @@ namespace UBC.People
                             throw ex;
                         }
                     }
+                    //-------------------------------------------------------------------------------------
+                    //NOTES
+                    //if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                    //{
+                    html_note = "<thead>";
+
+                    html_note += "<tr><th style=\"width:50px;text-align:center\"></th><th>Date/Time</th><th>Made By</th><th>Note</th><th>Followup</th><th>Followup Done</th><th style=\"width:100px\">Action / <a class=\"noteedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_note += "</thead>";
+                    html_note += "<tbody>";
+
+                    //hidden row, used for creating new rows client side
+                    html_note += "<tr style=\"display:none\">";
+                    html_note += "<td style=\"text-align:center\"></td>";
+                    html_note += "<td></td>";
+                    html_note += "<td></td>";
+                    html_note += "<td></td>";
+                    html_note += "<td></td>";
+                    html_note += "<td></td>";
+                    html_note += "<td><a href=\"javascript:void(0)\" class=\"noteedit\" data-mode=\"edit\">Edit</td>";
+                    html_note += "</tr>";
+                    cmd.CommandText = "get_person_note";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                    try
+                    {
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            string person_note_id = dr["Person_note_ID"].ToString();
+                            string DateTime = Convert.ToDateTime(dr["DateTime"]).ToString("dd MMM yyyy HH:mm");
+                            string Made_By_Person_Name = dr["Made_By_Person_Name"].ToString();
+                            string Note = dr["Note"].ToString();
+                            string followupDate = dr["followupDate"].ToString();
+                            if(followupDate != "")
+                            {
+                                followupDate = Convert.ToDateTime(followupDate).ToString("dd MMM yyyy");
+                            }
+                            string FollowupActioned = dr["FollowupActioned"].ToString();
+
+                            html_note += "<tr id=\"note_" + person_note_id + "\">";
+                            html_note += "<td style=\"text-align:center\"></td>";
+                            html_note += "<td>" + DateTime + "</td>";
+                            html_note += "<td>" + Made_By_Person_Name + "</td>";
+                            html_note += "<td>" + Note + "</td>";
+                            html_note += "<td>" + followupDate + "</td>";
+                            html_note += "<td>" + FollowupActioned + "</td>";
+                            html_note += "<td><a href=\"javascript:void(0)\" class=\"noteedit\" data-mode=\"edit\">Edit</td>";
+                            html_note += "</tr>";
+
+                        }
+                        dr.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    //}
                     //------------------------------------PHONE-------------------------------------------------
                     html_phone = "<thead>";
 
@@ -1010,6 +1069,41 @@ namespace UBC.People
                     con.Close();
                 }
 
+                if (key.StartsWith("note_"))
+                {
+
+                    string person_note_id = key.Substring(5);
+
+                    if (person_note_id.EndsWith("_delete"))
+                    {
+                        cmd.CommandText = "Delete_Person_note";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@person_note_id", SqlDbType.VarChar).Value = person_note_id.Substring(0, person_note_id.Length - 7);
+                    }
+                    else
+                    {
+                        if (person_note_id.StartsWith("new"))
+                        {
+                            person_note_id = "new";
+                        }
+
+                        string[] valuesSplit = Request.Form[key].Split('\x00FE');
+                        cmd.CommandText = "Update_Person_note";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@person_note_id", SqlDbType.VarChar).Value = person_note_id;
+                        cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
+                        cmd.Parameters.Add("@made_by_person_id", SqlDbType.VarChar).Value = Session["UBC_person_id"].ToString();
+                        cmd.Parameters.Add("@datetime", SqlDbType.VarChar).Value = valuesSplit[0];
+                        cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[1];
+                        cmd.Parameters.Add("@followupdate", SqlDbType.VarChar).Value = valuesSplit[2];
+                        cmd.Parameters.Add("@followupactioned", SqlDbType.VarChar).Value = valuesSplit[3];
+                    }
+                    con.Open();
+                    result = cmd.ExecuteScalar().ToString();
+                    con.Close();
+
+                }
+
                 if (key.StartsWith("phone_"))
                 {
                     string person_phone_id = key.Substring(6);
@@ -1069,6 +1163,7 @@ namespace UBC.People
                     result = cmd.ExecuteScalar().ToString();
                     con.Close();
                 }
+
                 if (key.StartsWith("relationships_"))
                 {
                     string relationship_id = key.Substring(14);
@@ -1111,13 +1206,15 @@ namespace UBC.People
             {
                 returnto = "maint.aspx?id=" + result;
             }
+        
             else
             {
                 if (returnto == "")
                 {
-                    returnto = "list";
+                    returnto = "search";
                 }
             }
+         
 
             Response.Redirect(returnto + ".aspx");
         }

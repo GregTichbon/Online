@@ -19,7 +19,7 @@
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
 
     <style>
-        #blurb {color:red; font-weight:bold;}
+       .blurb {color:red; font-weight:bold;}
     </style>
 
     <script>
@@ -95,7 +95,8 @@
     <div class="container" style="background-color: #FCF7EA">
          <%=html_button %>
         <h1><%=name %></h1>
-        <p id="blurb">To advance in your rowing, and for the sake of your team and crew, and out of respect for the coaches, you are expected to be at all training sessions on time, unless there is good reason which is communicated as early as possible.<br />Please complete the form below for the next 7 days.</p>
+        <p class="blurb">To advance in your rowing, and for the sake of your team and crew, and out of respect for the coaches, you are expected to be at all training sessions on time, unless there is good reason which is communicated as early as possible.<br />Please complete the form below for the next 7 days.</p>
+         <p class="blurb">There may also be upcoming regattas that you need to update.&nbsp; Please do so as soon as possible.</p>
         <h3>Click on a row to update.</h3>
         <table class="table">
             <thead>

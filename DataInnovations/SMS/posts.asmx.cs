@@ -24,6 +24,44 @@ namespace DataInnovations.SMS
     {
 
         [WebMethod]
+        public standardResponse update_sms_description(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string SMSLog_ID = formVars.Form("SMSLog_ID");
+            string description = formVars.Form("description");
+
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "update_sms_description";
+            cmd.Parameters.Add("@SMSLog_ID", SqlDbType.VarChar).Value = SMSLog_ID;
+            cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = description;
+
+
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            cmd.ExecuteScalar();
+
+            con.Close();
+            con.Dispose();
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Done";
+            resultclass.message = "";
+
+            //JavaScriptSerializer JS = new JavaScriptSerializer();
+            //string passresult = JS.Serialize(resultclass);
+            //return (passresult);
+
+            return (resultclass);
+            //Context.Response.Write(resultclass);
+
+        }
+
+        [WebMethod]
         public standardResponse2 creategroup(NameValue[] formVars)    //you can't pass any querystring params
         {
             

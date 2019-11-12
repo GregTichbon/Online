@@ -37,6 +37,7 @@ namespace UBC.People
                 {
                     while (dr.Read())
                     {
+                        string person_category_id = dr["person_category_id"].ToString();
                         string person_id = dr["person_id"].ToString();
                         string name = dr["name"].ToString();
                         string category_id = dr["category_id"].ToString();
@@ -53,10 +54,10 @@ namespace UBC.People
                         {
                             enddate = Convert.ToDateTime(enddate).ToString("dd MMM yyyyy");
                         }
-                        string currentclass = "";
+                        string theclass = "";
                         if (current == "0")
                         {
-                            currentclass = " class=\"notcurrent\"";
+                            theclass += "notcurrent";
                         }
                         if (name == lastname)
                         {
@@ -65,20 +66,21 @@ namespace UBC.People
                         else
                         {
 
-                            html += "<tr><td colspan=\"5\"><b>" + name + "</b></td></tr>";
+                            html += "<tr><td colspan=\"5\"><b>" + name + "</b></td><td><a href=\"javascript:void(0)\" class=\"add\" data-mode=\"add\">Add</a></td></tr>";
                             lastname = name;
                         }
 
-                        html += "<tr" + currentclass + " data-person=\"" + person_id + "\">";
+                        //html += "<tr class=\"" + theclass + "\" data-person=\"" + person_id + "\">";
+                        html += "<tr class=\"" + theclass + "\" id=\"id_" + person_category_id + "\" data-category=\"category_" + category_id + "\">";
                         //html += "<td><b>" + name + "</b></td>";
-                        html += "<td></td>";
+                        html += "<td style=\"text-align:center\"></td>";
                         html += "<td>" + category + "</td>";
                         html += "<td><input type=\"text\" class=\"form-control\" name=\"start_" + person_id + "_" + category_id + "\" value=\"" + startdate + "\" /></td>";
                         html += "<td><input type=\"text\" class=\"form-control\" name=\"end_" + person_id + "_" + category_id + "\" value=\"" + enddate + "\" /></td>";
                         html += "<td><input type=\"text\" class=\"form-control\" name=\"note_" + person_id + "_" + category_id + "\" value=\"" + note + "\" /></td>";
-                    html += "<td>" + "DELETE" + "</td>";
-                    html += "</tr>";
-                }
+                        html += "<td><a href=\"javascript:void(0)\" class=\"delete\" data-mode=\"delete\">Delete</a></td>";
+                        html += "</tr>";
+                    }
                 }
 
                 dr.Close();
@@ -93,6 +95,11 @@ namespace UBC.People
                 con.Close();
                 con.Dispose();
             }
+        }
+
+        protected void btn_submit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

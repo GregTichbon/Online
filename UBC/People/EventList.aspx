@@ -35,7 +35,44 @@
 
 
             $('.createrecurring').click(function () {
-                alert('Will show dialog box - for params and then on submit will run a service to execute SP: create_recurring_events and return message and/or number of occurences created.  Then will refresh page')
+                event_id = $(this).attr('data-id');
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+                $("#dialog-createrecurring").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Create": function () {
+                            var arForm = { event_id: event_id, period: 'D', frequency: 7, upto: $('#tb_createrecurring_upto').val() };
+                            mydata = JSON.stringify(arForm);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "posts.asmx/create_recurring_events",
+                                data: mydata,
+                                contentType: "application/json",
+                                datatype: "json",
+                                success: function (response) {
+                                    console.log(response);
+                                    //alert(responseFromServer.d.);
+                                }
+                            });
+                            /*
+                            $.post("posts.asmx/create_recurring_events", { event_id: event_id, period: 'D', frequency: 7, upto: $('#tb_createrecurring_upto').val() }, function (data) {
+                            //alert(data);
+                            });
+                            */
+                            $(this).dialog("close");
+                        }
+                    }
+                });
             })
 
             $('.date').datetimepicker({
@@ -112,5 +149,41 @@
         <table class="table">
             <%=html %>
         </table>
+
+        <div id="dialog-createrecurring" title="Create Recurring Events" style="display: none" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="tb_notes_datetime" class="control-label col-sm-4">
+                        Type
+                    </label>
+                    <div class="col-sm-8">
+                        Days
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="span_notes_madeby">Period</label>
+                    <div class="col-sm-8">
+                        7
+                    </div>
+                </div>
+  
+                <div class="form-group">
+                    <label for="tb_createrecurring_upto" class="control-label col-sm-4">
+                        Date upto
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_createrecurring_upto" name="tb_createrecurring_upto" placeholder="eg: 23 Jun 1985" type="text" class="form-control date"  />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
     </div>
 </asp:Content>

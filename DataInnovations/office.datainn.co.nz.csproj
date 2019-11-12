@@ -299,6 +299,7 @@
     <Content Include="Row\Login.aspx" />
     <Content Include="Row\MaintainPrognostic.aspx" />
     <Content Include="SMS\Monitor\default.aspx" />
+    <Content Include="TestandPlay\Attorny.aspx" />
     <Content Include="Vehicles\dailyreminder.asp" />
     <Content Include="Vehicles\DailyReminder.aspx" />
     <Content Include="Vehicles\default.asp" />
@@ -1564,6 +1565,13 @@
     </Compile>
     <Compile Include="StrengthFinders\RecalcMatches.aspx.designer.cs">
       <DependentUpon>RecalcMatches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestandPlay\Attorny.aspx.cs">
+      <DependentUpon>Attorny.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestandPlay\Attorny.aspx.designer.cs">
+      <DependentUpon>Attorny.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestEmail1.aspx.cs">
       <DependentUpon>TestEmail1.aspx</DependentUpon>

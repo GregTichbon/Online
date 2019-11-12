@@ -16,7 +16,6 @@ namespace UBC.People.Reports
     {
         public string html_registration;
         public string[] statuses = new string[2] { "Working on", "Completed" };
-        public string[] persons = new string[2] { "Greg", "Lis" };
         public string personName;
 
         protected void Page_Load(object sender, EventArgs e)

@@ -43,7 +43,7 @@
                 Ustatus = $(this).find('td:eq(3)').text();
                 if (Ustatus != "") {
                     Udate = $(this).find('td:eq(4)').text();
-                    Uperson = $(this).find('td:eq(5)').text();
+                    Uperson = '<%=Session["UBC_person_id"]%>';  //This should always be the logged in person
                     Unote = $(this).find('td:eq(6)').text();
                 } else {
                     Udate = moment(new Date()).format("DD MMM YYYY");
@@ -55,8 +55,6 @@
                 $('#tb_statusdate').val(Udate);
                 $('#tb_statusperson').val(Uperson);
                 $('#tb_statusnote').val(Unote);
-
-                $
 
                 $("#dialog-edit").dialog({
                     resizable: false,
@@ -188,11 +186,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-4" for="dd_statusperson">Person</label>
+                <label class="control-label col-sm-4" for="span_statusperson">Person</label>
                 <div class="col-sm-8">
-                    <select id="dd_statusperson" name="dd_statusperson" class="form-control" required="required">
-                        <%= Generic.Functions.populateselect(persons, "","None") %>
-                    </select>
+                    <span id="span_statusperson" class="form-control"></span>
                 </div>
             </div>
             <div class="form-group">

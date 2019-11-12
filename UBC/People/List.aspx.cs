@@ -74,7 +74,7 @@ namespace UBC.People
 
                         string guid = dr["guid"].ToString();
                         //string link = "<a href=\"maint.aspx?id=" + guid + "\" target=\"edit\">Edit</a>";
-                        string link = "<a href=\"maint.aspx?id=" + guid + "\">Edit</a>";
+                        string link = "<a href=\"maint.aspx?id=" + guid + "&returnto=list\">Edit</a>";
                         string image = "<img src=\"Images/" + person_id + ".jpg\" style=\"height: 50px\" />";
 
                         

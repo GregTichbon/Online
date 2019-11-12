@@ -24,6 +24,61 @@ namespace UBC.People
 
     public class Posts : System.Web.Services.WebService
     {
+[       WebMethod]
+        public string create_recurring_events(string event_id, string period, string frequency, string upto)
+        {
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Connection = con;
+
+            cmd.CommandText = "create_recurring_events";
+            cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
+            cmd.Parameters.Add("@period", SqlDbType.VarChar).Value = period;
+            cmd.Parameters.Add("@frequency", SqlDbType.VarChar).Value = frequency;  
+            cmd.Parameters.Add("@upto", SqlDbType.VarChar).Value = upto;
+            
+            con.Open();
+            //string result = cmd.ExecuteScalar().ToString();
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+
+            string returned = dr["count"].ToString();
+            con.Close();
+
+            con.Dispose();
+            return (returned);
+        }
+
+        [WebMethod]
+        public string send_sms(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string SMSLog_ID = formVars.Form("SMSLog_ID");
+            string PhoneNumber = formVars.Form("PhoneNumber");
+            string Message = formVars.Form("Message");
+            string ID = formVars.Form("ID");
+            string Description = formVars.Form("Description");
+
+            Generic.Functions gFunctions = new Generic.Functions();
+            string result = "";
+            foreach (string mobilex in PhoneNumber.Split(';'))
+            {
+                result += gFunctions.SendRemoteMessage(mobilex, Message, Description, SMSLog_ID) + "<br />";
+            }
+
+            /*
+            standardResponse resultclass = new standardResponse();
+            resultclass.status = "Sent";
+            resultclass.message = result;
+            //resultclass.id = "";
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+            */
+            return (result);
+        }
+
         [WebMethod]
         public string send_text(string PhoneNumber, string Message)
         {
@@ -31,7 +86,6 @@ namespace UBC.People
             string response = gFunctions.SendRemoteMessage(PhoneNumber, Message, "UBC Communications");
             return response;
         }
-
 
         [WebMethod]
         public standardResponseID send_email_text(NameValue[] formVars)    //you can't pass any querystring params

@@ -90,28 +90,35 @@
                 //alert(table);
             });
 
-        $('#eventlist').click(function () {
-            window.location.href = "<%: ResolveUrl("eventlist.aspx")%>";
-        })
+            $('#eventlist').click(function () {
+                window.location.href = "<%: ResolveUrl("eventlist.aspx")%>";
+            })
 
-        $("#form1").validate({
-            rules: {
-                tb_startdatetime: {
-                    pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
-                },
-                tb_enddatetime: {
-                    pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+            $("#form1").submit(function (event) {
+                if ($("#cb_createasnew").is(':checked')) {
+                    $('#hf_event_id').val('new');
+                    //event.preventDefault();
                 }
-            },
-            messages: {
-                tb_startdatetime: {
-                    pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+            });
+
+            $("#form1").validate({
+                rules: {
+                    tb_startdatetime: {
+                        pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+                    },
+                    tb_enddatetime: {
+                        pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+                    }
                 },
-                tb_enddatetime: {
-                    pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+                messages: {
+                    tb_startdatetime: {
+                        pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+                    },
+                    tb_enddatetime: {
+                        pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+                    }
                 }
-            }
-        });
+            });
 
             $("#div_startdatetime").on("dp.change", function (e) {
                 theday = moment(e.date).format('dddd');
@@ -123,21 +130,21 @@
                 $('#endday').text(theday);
             });
 
-            
 
 
-        $('#togglepeople').click(function () {
-            if ($(this).val() == "Show people") {
-                $('#div_people').show();
-                $(this).val('Hide people');
-            } else {
-                $('#div_people').hide();
-                $(this).val('Show people');
-            }
-        })
 
-        $('#div_startdatetime').datetimepicker({
-            format: <%= format%>,
+            $('#togglepeople').click(function () {
+                if ($(this).val() == "Show people") {
+                    $('#div_people').show();
+                    $(this).val('Hide people');
+                } else {
+                    $('#div_people').hide();
+                    $(this).val('Show people');
+                }
+            })
+
+            $('#div_startdatetime').datetimepicker({
+                format: <%= format%>,
             extraFormats: <%= extraFormats %>,
             //daysOfWeekDisabled: [0, 6],
             showClear: true,
@@ -149,8 +156,8 @@
             //,maxDate: moment().add(-1, 'year')
         });
 
-        $('#div_enddatetime').datetimepicker({
-            format: <%= format%>,
+            $('#div_enddatetime').datetimepicker({
+                format: <%= format%>,
             extraFormats: <%=extraFormats %>,
             //daysOfWeekDisabled: [0, 6],
             showClear: true,
@@ -162,8 +169,8 @@
             //,maxDate: moment().add(-1, 'year')
         });
 
-        $('#dd_categories').select2();
-        $('#dd_categories_filter').select2();
+            $('#dd_categories').select2();
+            $('#dd_categories_filter').select2();
 
             $('#cb_allday').change(function () {
                 if ($(this).is(":checked")) {
@@ -206,58 +213,58 @@
                 }
             })
 
-        /*
-$('#dd_categories_filter').change(function () {
-alert($(this).val());
-})
+            /*
+    $('#dd_categories_filter').change(function () {
+    alert($(this).val());
+    })
+    
+    $('#dd_show').change(function () {
+     
+    option = $(this).val();
+    
+    switch (option) {
+        case "Only noted":
+            $('#tbl_attendance tr[id^=tr_]').each(function () {
+                personid = $(this).attr("id").substring(3);
+                if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '') {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+            break;
+        case "All":
+            $('#tbl_attendance tr[id^=tr_]').show()
+            break;
+        case "Not noted":
+            $('#tbl_attendance tr[id^=tr_]').each(function () {
+                personid = $(this).attr("id").substring(3);
+                if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '') {
+                    $(this).show();
+                }
+                else {
+                    $(this).hide();
+                }
+            });
+            break;
+    }
+    });
+    */
 
-$('#dd_show').change(function () {
- 
-option = $(this).val();
-
-switch (option) {
-    case "Only noted":
-        $('#tbl_attendance tr[id^=tr_]').each(function () {
-            personid = $(this).attr("id").substring(3);
-            if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '') {
-                $(this).hide();
-            } else {
-                $(this).show();
-            }
-        });
-        break;
-    case "All":
-        $('#tbl_attendance tr[id^=tr_]').show()
-        break;
-    case "Not noted":
-        $('#tbl_attendance tr[id^=tr_]').each(function () {
-            personid = $(this).attr("id").substring(3);
-            if ($("#dd_attendance_" + personid).val() == 'No' && $("#tb_note_" + personid).val() == '') {
-                $(this).show();
-            }
-            else {
-                $(this).hide();
-            }
-        });
-        break;
-}
-});
-*/
-
-        processrows();
-
-        $('.tr_field').change(function () {
-            //id = $(this).parent().parent().attr('id').substring(3);
-            id = $(this).data('id');
-            tr_changed.indexOf(id) === -1 ? tr_changed.push(id) : null;
-            $("#hf_tr_changed").val(tr_changed.toString());
-        });
-
-
-        $('#btn_refresh').click(function () {
-            //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories_filter').val());
             processrows();
-        })
+
+            $('.tr_field').change(function () {
+                //id = $(this).parent().parent().attr('id').substring(3);
+                id = $(this).data('id');
+                tr_changed.indexOf(id) === -1 ? tr_changed.push(id) : null;
+                $("#hf_tr_changed").val(tr_changed.toString());
+            });
+
+
+            $('#btn_refresh').click(function () {
+                //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories_filter').val());
+                processrows();
+            })
 
         });
 
@@ -370,7 +377,7 @@ switch (option) {
     <input type="hidden" id="hf_event_id" name="hf_event_id" value="<%: event_id %>" />
     <div class="container" style="background-color: #FCF7EA">
         <div class="toprighticon">
-            <input type="button" id="export" style="display:none" class="btn btn-info" value="Export" />
+            <input type="button" id="export" style="display: none" class="btn btn-info" value="Export" />
             <input type="button" id="eventlist" class="btn btn-info" value="Event List" />
             <input type="button" id="menu" class="btn btn-info" value="MENU" />
         </div>
@@ -397,7 +404,7 @@ switch (option) {
             <div class="col-sm-8">
                 <div class="input-group date" id="div_startdatetime">
                     <input id="tb_startdatetime" name="tb_startdatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: startdatetime %>" maxlength="20" required />
-                   <span id="startday" class="input-group-addon"><%= startday %></span> 
+                    <span id="startday" class="input-group-addon"><%= startday %></span>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -410,7 +417,7 @@ switch (option) {
             <div class="col-sm-8">
                 <div class="input-group date" id="div_enddatetime">
                     <input id="tb_enddatetime" name="tb_enddatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: enddatetime %>" maxlength="20" />
-                    <span id="endday" class="input-group-addon"><%= endday %></span> 
+                    <span id="endday" class="input-group-addon"><%= endday %></span>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -429,7 +436,7 @@ switch (option) {
                 <button class="btn btn-info" style="display: none" type="button" id="btn_regattalist">Regatta List</button>
             </div>
         </div>
-     
+
 
         <div class="form-group">
             <label class="control-label col-sm-4" for="tb_description">Description</label>
@@ -439,7 +446,9 @@ switch (option) {
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_categories"><img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Select the categories of those that should attend.  You can add other people outside of these cateories by changing the people view below." /> Categories</label>
+            <label class="control-label col-sm-4" for="dd_categories">
+                <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Select the categories of those that should attend.  You can add other people outside of these cateories by changing the people view below." />
+                Categories</label>
             <div class="col-sm-8">
                 <select id="dd_categories" name="dd_categories" class="form-control" multiple="multiple">
                     <%= categories_values %>
@@ -448,7 +457,9 @@ switch (option) {
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" for="dd_showattendees"><img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Use this mainly for regattas etc where management type lists are required.  There is a page to view these type of events." /> Show on Attendees</label>
+            <label class="control-label col-sm-4" for="dd_showattendees">
+                <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Use this mainly for regattas etc where management type lists are required.  There is a page to view these type of events." />
+                Show on Attendees</label>
             <div class="col-sm-8">
                 <select id="dd_showattendees" name="dd_showattendees" class="form-control">
                     <%= Generic.Functions.populateselect(noyes_values, showattendees,"None") %>
@@ -464,8 +475,18 @@ switch (option) {
                 </select>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="dd_showonattend">
+                <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="The attend form shows upcoming events for the next x days.  By setting this option, it will always show, if it is a future event" />
+                Always show on "Attend" form</label>
+            <div class="col-sm-8">
+                <select id="dd_showonattend" name="dd_showonattend" class="form-control">
+                    <%= Generic.Functions.populateselect(noyes_values, showonattend,"None") %>
+                </select>
+            </div>
+        </div>
 
-        <input type="button" id="togglepeople" class="btn btn-info" style="display:none" value ="Hide people" />
+        <input type="button" id="togglepeople" class="btn btn-info" style="display: none" value="Hide people" />
         <div id="div_people">
 
             <%=html_persons %>
@@ -474,7 +495,7 @@ switch (option) {
             <div class="col-sm-4">
             </div>
             <div class="col-sm-8">
-                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" /> <input id="cb_createasnew" type="checkbox" /> Create new record
             </div>
         </div>
     </div>

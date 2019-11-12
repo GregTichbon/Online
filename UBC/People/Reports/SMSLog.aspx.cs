@@ -8,13 +8,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace DataInnovations.SMS
+namespace UBC.People.Reports
 {
-    public partial class log : System.Web.UI.Page
+    public partial class SMSLog : System.Web.UI.Page
     {
         public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["UBC_person_id"] == null)
+            {
+                string url = "../reports/smslog.aspx";
+                Response.Redirect("~/people/security/login.aspx?return=" + url);
+
+            }
             string days = Request.QueryString["days"] + "";
             if (days == "")
             {
@@ -39,17 +46,15 @@ namespace DataInnovations.SMS
                     break;
             }
 
-            string description = Request.QueryString["description"] + "";
-            if(description != "")
-            {
-                description = " and description like '%" + description + "%'";
-            }
+            
+           string     description = " and description like '%UBC%'";
+        
 
             string strConnString = "Data Source=toh-app;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             string sql = "select L.*, N.Name, N.source from smslog L";
             sql += " left outer join number N on dbo.FormatMobileNumber(N.Number,'') = dbo.FormatMobileNumber(L.PhoneNumber,'')";
-            sql += " where L.datetime > dateadd(d, -" + days + ", getdate())" + type + " " + description ;
+            sql += " where L.datetime > dateadd(d, -" + days + ", getdate())" + type + " " + description;
             sql += " order by L.Datetime";
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -60,7 +65,7 @@ namespace DataInnovations.SMS
                 while (dr.Read())
                 {
                     string name = "";
-                    if(dr["Name"].ToString() != "")
+                    if (dr["Name"].ToString() != "")
                     {
                         name = "<br />" + dr["Name"].ToString();
                     }
@@ -75,7 +80,6 @@ namespace DataInnovations.SMS
                     html += "<td>" + dr["Response"] + "</td>";
                     html += "<td>" + dr["Resend_ID"] + "</td>";
                     html += "<td>" + dr["ResendOF_ID"] + "</td>";
-                    html += "<td><a class=\"send\">Send</a><br /><a class=\"edit\">Edit</a></td>";
                     html += "</tr>";
                 }
                 html += "</table>";

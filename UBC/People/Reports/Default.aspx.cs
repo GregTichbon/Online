@@ -20,7 +20,7 @@ namespace UBC.People.Reports
                 Response.Redirect("~/people/security/login.aspx");
             }
             html = "";
-            
+
 
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
             {
@@ -29,6 +29,7 @@ namespace UBC.People.Reports
                 script += "$('#link1').prop('title', 'A register of all login attempts whether successful or failure');";
                 html += "<br /><a href=\"tracker.aspx\">Tracker</a>";
                 html += "<br /><a href=\"FriendsStatementsPreview.aspx\">Friends Statemens Preiew</a>";
+                html += "<br /><a href=\"RelationshipAudit.aspx\">Relationship Audit</a>";
 
             }
 
@@ -40,6 +41,10 @@ namespace UBC.People.Reports
                 html += "<br /><a href=\"registrations.aspx\">All registrations</a>";
 
                 html += "<br /><a href=\"ContactDetails.aspx\">Contact Details</a>";
+            }
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111101"))
+            {
+                html += "<br /><a href=\"smslog.aspx\">SMS Log</a>";
             }
         }
     }

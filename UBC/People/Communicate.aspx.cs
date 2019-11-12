@@ -200,9 +200,11 @@ namespace UBC.People
                                 {
                                     rnote = " - " + rnote;
                                 }
-                                rline += "<b>" + rname + "</b> " + rrelationship + rnote + "<br />";
+                                string rguid = relation.Split('^')[5];
 
-                                string rphones = relation.Split('^')[5];
+                                rline += "<b><a href=\"maint.aspx?id=" + rguid + "\" target=\"link\">" + rname + "</a></b> " + rrelationship + rnote + "<br />";
+
+                                string rphones = relation.Split('^')[6];
                                 if (rphones != "")
                                 {
                                     foreach (string rphone in rphones.Split('|'))
@@ -216,7 +218,7 @@ namespace UBC.People
                                         rline += "<input id=\"cb_rtext_" + rid + "\" name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
                                     }
                                 }
-                                string remails = relation.Split('^')[6];
+                                string remails = relation.Split('^')[7];
                                 if (remails != "")
                                 {
                                     foreach (string remail in remails.Split('|'))

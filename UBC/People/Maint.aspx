@@ -81,7 +81,7 @@
 
             var canvas = $("#canvas"),
                 context = canvas.get(0).getContext("2d")//,
-                //$result = $('#result');
+            //$result = $('#result');
 
             $(".nav-tabs a").click(function () {
                 $(this).tab('show');
@@ -106,9 +106,17 @@
                 }
             });
             $("#form2").validate();
-            
-
-
+            $("#form3").validate({
+                rules: {
+                    tb_notes_followup: {
+                        required: function () {
+                            return $('#dd_notes_followupactioned').val() != '';
+                        },
+                        date: true,
+                        greaterThan: '#tb_notes_datetime'
+                    }
+                }
+            })
 
             $('.submit').click(function () {
                 delim = String.fromCharCode(254);
@@ -173,6 +181,32 @@
                     }).appendTo('#form1');
                 });
                 $('#phonetable > tbody > tr[maint="deleted"]').each(function () {
+                    //don't do if new
+                    tr_id = $(this).attr('id') + '_delete';
+                    if (tr_id.substring(0, 3) != 'new') {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: ""
+                        }).appendTo('#form1'); 
+                    }
+                });
+                 /*----------------------------------------------NOTE-----------------------------------------*/
+                $('#notetable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_datetime = $(this).find('td:eq(1)').text();
+                    tr_note = $(this).find('td:eq(3)').text();
+                    tr_followup = $(this).find('td:eq(4)').text();
+                    tr_followupactioned = $(this).find('td:eq(5)').text();
+
+                    value = tr_datetime + delim + tr_note + delim + tr_followup + delim + tr_followupactioned;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
+                });
+                $('#notetable > tbody > tr[maint="deleted"]').each(function () {
                     //don't do if new
                     tr_id = $(this).attr('id') + '_delete';
                     if (tr_id.substring(0, 3) != 'new') {
@@ -273,6 +307,15 @@
                 //,maxDate: moment().add(-1, 'year')
             });
 
+            $('.datetime').datetimepicker({
+                format: 'D MMM YYYY hh:mm',
+                extraFormats: ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'],
+                //daysOfWeekDisabled: [0, 6],
+                showClear: true,
+                viewDate: false,
+                useCurrent: true
+                //,maxDate: moment().add(-1, 'year')
+            });
 
             $('#div_birthdate').datetimepicker({
                 format: 'D MMM YYYY',
@@ -546,6 +589,78 @@
                     $('#dd_phones_sendtexts').removeAttr("disabled");
                 }
             });
+
+            /* ========================================= NOTE ===========================================*/
+            $(document).on('click', '.noteedit', function () {
+                //$('.notesedit').click(function () {
+                alert('Still working on - you should be able to view all notes but only edit your own.  Only use followupactioned if followup date set')
+                mode = $(this).data('mode');
+                if (mode == "add") {
+                    $("#dialog-notes").find(':input').val('');
+                    $('#span_notes_madeby').text('<%:Session["UBC_name"] %>');
+                } else {
+                    tr = $(this).closest('tr');
+                    $('#tb_notes_datetime').val($(tr).find('td').eq(1).text());
+                    $('#span_notes_madeby').text($(tr).find('td').eq(2).text());
+                    $('#tb_notes_note').val($(tr).find('td').eq(3).text());
+                    $('#tb_notes_followup').val($(tr).find('td').eq(4).text());  //this is a date
+                    $('#dd_notes_followupactioned').val($(tr).find('td').eq(5).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-notes").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true
+                      ,appendTo: "#form3"  
+              });
+
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if ($("#form3").valid()) {
+                            if (mode == "add") {
+                                tr = $('#div_note > table > tbody tr:first').clone();
+                                $(tr).removeAttr('style');
+                                $('#div_note > table > tbody').append(tr);
+                                $(tr).attr('id', 'note_new_' + get_newctr());
+                                $(tr).find('td:first').attr("class", "inserted");
+                            } else {
+                                $(tr).find('td:first').attr("class", "changed");
+
+                            }
+                            $(tr).attr('maint', 'changed');
+
+                            $(tr).find('td').eq(1).text($('#tb_notes_datetime').val());
+                            $(tr).find('td').eq(2).text($('#span_notes_madeby').val());
+                            $(tr).find('td').eq(3).text($('#tb_notes_note').val());
+                            $(tr).find('td').eq(4).text($('#tb_notes_followup').val());
+                            $(tr).find('td').eq(5).text($('#dd_notes_followupactioned').val());
+                            //alert("Database will be updated when record submited");
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this note?")) {
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+                $("#dialog-notes").dialog('option', 'buttons', myButtons);
+            })
 
             /* ========================================= RELATIONSHIPS ===========================================*/
             $(document).on('click', '.relationshipsedit', function () {
@@ -907,6 +1022,7 @@
 
     <div class="container" style="background-color: #FCF7EA">
         <form id="form1" runat="server" class="form-horizontal" role="form">
+
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
 
              <div class="toprighticon">
@@ -1129,6 +1245,60 @@
                     <label class="control-label col-sm-4" for="tb_phones_note">Note</label>
                     <div class="col-sm-8">
                         <input id="tb_phones_note" name="tb_phones_note" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <!-- ================================= NOTE ===================================  -->
+            <div id="dialog-notes" title="Maintain notes" style="display: none" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="tb_notes_datetime" class="control-label col-sm-4">
+                        Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group datetime">
+                            <input id="tb_notes_datetime" name="tb_notes_datetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" required="required" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="span_notes_madeby">Made by</label>
+                    <div class="col-sm-8">
+                        <span id="span_notes_madeby" class="form-control"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_notes_note">Note</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_notes_note" name="tb_notes_note" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tb_notes_followup" class="control-label col-sm-4">
+                        Followup Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_notes_followup" name="tb_notes_followup" placeholder="eg: 23 Jun 1985" type="text" class="form-control"  />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_notes_followupactioned">Followup Actioned</label>
+                    <div class="col-sm-8">
+                        <select id="dd_notes_followupactioned" name="dd_notes_followupactioned" class="form-control">
+                            <%= Generic.Functions.populateselect(yesno, "","") %>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -1509,6 +1679,16 @@
                 <p></p>
                 <p></p>
                 <!------------------------------------------------------------------------------------------------------>
+                <div id="div_note" class="tab-pane fade in">
+                    <h3>Notes</h3>
+                    <table id="notetable" class="table" style="width: 100%">
+                        <%= html_note %>
+                    </table>
+                </div>
+
+                <p></p>
+                <p></p>
+                <!------------------------------------------------------------------------------------------------------>
                 <div id="div_tracker" class="tab-pane fade in">
                     <h3>Tracker</h3>
                     <table class="table" style="width: 100%">
@@ -1545,6 +1725,7 @@
             </div>
         </form>
         <form id="form2"></form>
+        <form id="form3"></form>
     </div>
 
 

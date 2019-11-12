@@ -554,9 +554,12 @@
     <Content Include="People\Reports\LoginRegister.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
     <Content Include="People\Reports\Registrations.aspx" />
+    <Content Include="People\Reports\Relationship Audit.aspx" />
+    <Content Include="People\Reports\RelationshipAudit.aspx" />
     <Content Include="People\Reports\Report.aspx" />
     <Content Include="People\Reports\SchoolRowers.aspx" />
     <Content Include="People\Reports\ShowAttendees.aspx" />
+    <Content Include="People\Reports\SMSLog.aspx" />
     <Content Include="People\Reports\Test1.html" />
     <Content Include="People\Reports\Test2.html" />
     <Content Include="People\Reports\TestCrystal.aspx" />
@@ -1278,6 +1281,20 @@
     <Compile Include="People\Reports\Registrations.aspx.designer.cs">
       <DependentUpon>Registrations.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\Relationship Audit.aspx.cs">
+      <DependentUpon>Relationship Audit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Relationship Audit.aspx.designer.cs">
+      <DependentUpon>Relationship Audit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\RelationshipAudit.aspx.cs">
+      <DependentUpon>RelationshipAudit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\RelationshipAudit.aspx.designer.cs">
+      <DependentUpon>RelationshipAudit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\Report.aspx.cs">
       <DependentUpon>Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1298,6 +1315,13 @@
     </Compile>
     <Compile Include="People\Reports\ShowAttendees.aspx.designer.cs">
       <DependentUpon>ShowAttendees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\SMSLog.aspx.cs">
+      <DependentUpon>SMSLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\SMSLog.aspx.designer.cs">
+      <DependentUpon>SMSLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\TestCrystal.aspx.cs">
       <DependentUpon>TestCrystal.aspx</DependentUpon>
