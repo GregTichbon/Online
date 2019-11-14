@@ -24,7 +24,35 @@ namespace UBC.People
 
     public class Posts : System.Web.Services.WebService
     {
-[       WebMethod]
+        [WebMethod]
+        public string updatefield(string table, string field, string id, string value, string keyfield)
+        {
+            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            value = value.Replace("'", "''");
+            string sql1 = "update [" + table + "] set [" + field + "] = '" + value + "' where [" + keyfield + "] = '" + id + "'";
+            
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand(sql1, con);
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = con;
+
+            con.Open();
+            //SqlDataReader dr = cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
+
+            cmd.Dispose();
+            con.Close();
+            con.Dispose();
+           
+            return ("Ok");
+        }
+
+
+
+
+        [WebMethod]
         public string create_recurring_events(string event_id, string period, string frequency, string upto)
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -36,9 +64,9 @@ namespace UBC.People
             cmd.CommandText = "create_recurring_events";
             cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
             cmd.Parameters.Add("@period", SqlDbType.VarChar).Value = period;
-            cmd.Parameters.Add("@frequency", SqlDbType.VarChar).Value = frequency;  
+            cmd.Parameters.Add("@frequency", SqlDbType.VarChar).Value = frequency;
             cmd.Parameters.Add("@upto", SqlDbType.VarChar).Value = upto;
-            
+
             con.Open();
             //string result = cmd.ExecuteScalar().ToString();
             SqlDataReader dr = cmd.ExecuteReader();
@@ -94,7 +122,7 @@ namespace UBC.People
 
             string type = formVars.Form("type"); //email or text  or   remail or rtext
             string id = formVars.Form("id");
-            string emailsubject = formVars.Form("emailsubject");   
+            string emailsubject = formVars.Form("emailsubject");
             string emailhtml = formVars.Form("emailhtml");
             string text = formVars.Form("text");
             string recipient = formVars.Form("recipient");  //phone number or email address
@@ -319,6 +347,7 @@ namespace UBC.People
             return (resultclass);
 
         }
+
         [WebMethod]
         public standardResponseID update_othertransaction(NameValue[] formVars)    //you can't pass any querystring params
         {
@@ -361,7 +390,7 @@ namespace UBC.People
             con.Close();
 
             con.Dispose();
-            
+
             standardResponseID resultclass = new standardResponseID();
             resultclass.status = "Saved";
             resultclass.message = "";
@@ -486,7 +515,7 @@ namespace UBC.People
             string person_guid = formVars.Form("person_guid");
             string attendance = formVars.Form("attendance");
             string personnote = formVars.Form("personnote");
-            
+
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -494,7 +523,7 @@ namespace UBC.People
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = con;
 
-            
+
             cmd.CommandText = "update_person_event_attendance";
             cmd.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
             cmd.Parameters.Add("@person_id", SqlDbType.VarChar).Value = person_id;
@@ -727,40 +756,41 @@ namespace UBC.People
         public standardResponse SaveImage(string imageData, string id)    //you can't pass any querystring params
         {
             //string dt = DateTime.Now.ToString("ddMMyyHHss");
-            if(1 == 1) { 
-            string path = Server.MapPath(".\\images");
-
-            //string path = @"F:\InetPub\Online\Assets\Cemetery\Images\" + id;
-            Directory.CreateDirectory(path + "\\original");
-            //string fileName = "\\" + id + "_" + dt + ".jpg";
-            string fileName = "\\" + id + ".jpg";
-            using (FileStream fs = new FileStream(path + "\\original" + fileName, FileMode.Create))
+            if (1 == 1)
             {
-                using (BinaryWriter bw = new BinaryWriter(fs))
+                string path = Server.MapPath(".\\images");
+
+                //string path = @"F:\InetPub\Online\Assets\Cemetery\Images\" + id;
+                Directory.CreateDirectory(path + "\\original");
+                //string fileName = "\\" + id + "_" + dt + ".jpg";
+                string fileName = "\\" + id + ".jpg";
+                using (FileStream fs = new FileStream(path + "\\original" + fileName, FileMode.Create))
                 {
-                    byte[] data = Convert.FromBase64String(imageData);
-                    bw.Write(data);
-                    bw.Close();
-                }
-            }
-
-            using (System.Drawing.Image original = System.Drawing.Image.FromFile(path + "\\original" + fileName))
-            {
-                double scaler = Convert.ToDouble(original.Width / 640.000000);
-                int newHeight = Convert.ToInt16(original.Height / scaler);
-                int newWidth = 640;
-
-
-
-                using (System.Drawing.Bitmap newPic = new System.Drawing.Bitmap(newWidth, newHeight))
-                {
-                    using (System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(newPic))
+                    using (BinaryWriter bw = new BinaryWriter(fs))
                     {
-                        gr.DrawImage(original, 0, 0, (newWidth), (newHeight));
-                        newPic.Save(path + fileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        byte[] data = Convert.FromBase64String(imageData);
+                        bw.Write(data);
+                        bw.Close();
                     }
                 }
-            }
+
+                using (System.Drawing.Image original = System.Drawing.Image.FromFile(path + "\\original" + fileName))
+                {
+                    double scaler = Convert.ToDouble(original.Width / 640.000000);
+                    int newHeight = Convert.ToInt16(original.Height / scaler);
+                    int newWidth = 640;
+
+
+
+                    using (System.Drawing.Bitmap newPic = new System.Drawing.Bitmap(newWidth, newHeight))
+                    {
+                        using (System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(newPic))
+                        {
+                            gr.DrawImage(original, 0, 0, (newWidth), (newHeight));
+                            newPic.Save(path + fileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        }
+                    }
+                }
 
 
             }

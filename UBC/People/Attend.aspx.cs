@@ -104,10 +104,21 @@ namespace UBC.People
                         string personnote = dr["personnote"].ToString();
                         name = dr["name"].ToString();
                         string modifieddate = dr["AttendanceUpdated"].ToString();
+                        string stopattendanceentrydatetime = dr["stopattendanceentrydatetime"].ToString();
+                        string myclass = "";
+                        string closes = "";
+                        if(stopattendanceentrydatetime != "")
+                        {
+                            closes = " - Entries close: " + Convert.ToDateTime(stopattendanceentrydatetime).ToString("d MMM yy HH: mm");
+                            if (Convert.ToDateTime(stopattendanceentrydatetime) <= DateTime.Now)
+                            {
+                                myclass = " class=\"closed\"";
+                            }
+                        }
 
-                        html += "<tr id=\"event_" + event_id + "\">";
+                        html += "<tr" + myclass + " id=\"event_" + event_id + "\">";
                         html += "<td><b>" + datetimedesc + "</b></td>";
-                        html += "<td><b>" + title + "</b><br />" + description + "</td>";
+                        html += "<td><b>" + title + closes + "</b><br />" + description + "</td>";
                         /*
                                                 string dd_attendance = "<select class=\"form-control tr_field\" id=\"dd_attendance_" + event_id + "\" data-id=\"" + event_id + "\" name=\"dd_attendance_" + event_id + "\">";
                                                 dd_attendance += "<option></option>";

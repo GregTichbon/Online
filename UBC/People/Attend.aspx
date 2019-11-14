@@ -38,48 +38,54 @@
             })
             */
             $('table tbody tr').click(function () {
-                tr = this;
-                $('#attendance').val($(this).find('td:eq(2)').text());
-                myval = $(this).find('td:eq(3)').text();
-                if (myval != "") {
-                    $('#personnote').val(myval);
-                }
+                if ($(this).hasClass('closed')) {
+                    alert('This can not be amended, if there is a change to your status please contact ')
+                } else {
 
-                $("#div_edit").dialog({
-                    resizable: false,
-                    width: "auto",
-                    modal: true,
-                    appendTo: "#form1",
-                    buttons: {
-                        "Cancel": function () {
-                            $(this).dialog("close");
-                        },
-                        "Save": function () {
-                            event_id = $(tr).prop('id').substring(6);
-                            $(tr).find('td:eq(2)').text($('#attendance').val());
-                            $(tr).find('td:eq(3)').text($('#personnote').val());
-                            $("#div_edit").dialog("close");
 
-                            var arForm = [{ "name": "event_id", "value": event_id }, { "name": "person_id", "value": "<%=person_id%>" }, { "name": "person_guid", "value": "<%=guid%>" }, { "name": "attendance", "value": $('#attendance').val() }, { "name": "personnote", "value": $('#personnote').val() }];
-                            var formData = JSON.stringify({ formVars: arForm });
-
-                            $.ajax({
-                                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                                contentType: "application/json; charset=utf-8",
-                                url: 'posts.asmx/updateattendance', // the url where we want to POST
-                                data: formData,
-                                dataType: 'json', // what type of data do we expect back from the server
-                                success: function (result) {
-
-                                },
-                                error: function (xhr, status) {
-                                    alert('error');
-
-                                }
-                            });
-                        }
+                    tr = this;
+                    $('#attendance').val($(this).find('td:eq(2)').text());
+                    myval = $(this).find('td:eq(3)').text();
+                    if (myval != "") {
+                        $('#personnote').val(myval);
                     }
-                });
+
+                    $("#div_edit").dialog({
+                        resizable: false,
+                        width: "auto",
+                        modal: true,
+                        appendTo: "#form1",
+                        buttons: {
+                            "Cancel": function () {
+                                $(this).dialog("close");
+                            },
+                            "Save": function () {
+                                event_id = $(tr).prop('id').substring(6);
+                                $(tr).find('td:eq(2)').text($('#attendance').val());
+                                $(tr).find('td:eq(3)').text($('#personnote').val());
+                                $("#div_edit").dialog("close");
+
+                                var arForm = [{ "name": "event_id", "value": event_id }, { "name": "person_id", "value": "<%=person_id%>" }, { "name": "person_guid", "value": "<%=guid%>" }, { "name": "attendance", "value": $('#attendance').val() }, { "name": "personnote", "value": $('#personnote').val() }];
+                                var formData = JSON.stringify({ formVars: arForm });
+
+                                $.ajax({
+                                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                                    contentType: "application/json; charset=utf-8",
+                                    url: 'posts.asmx/updateattendance', // the url where we want to POST
+                                    data: formData,
+                                    dataType: 'json', // what type of data do we expect back from the server
+                                    success: function (result) {
+
+                                    },
+                                    error: function (xhr, status) {
+                                        alert('error');
+
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
             })
             $('#login').click(function () {
                 window.location.href = "<%: ResolveUrl("security/login.aspx")%>";

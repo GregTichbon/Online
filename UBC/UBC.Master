@@ -29,5 +29,7 @@
             </asp:ContentPlaceHolder>
         </div>
     </form>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            </asp:ContentPlaceHolder>
 </body>
 </html>

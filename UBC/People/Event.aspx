@@ -108,6 +108,9 @@
                     },
                     tb_enddatetime: {
                         pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+                    },
+                    tb_stopattendanceentry: {
+                        pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
                     }
                 },
                 messages: {
@@ -115,6 +118,9 @@
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
                     },
                     tb_enddatetime: {
+                        pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+                    },
+                    tb_stopattendanceentry: {
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
                     }
                 }
@@ -128,6 +134,10 @@
             $("#div_enddatetime").on("dp.change", function (e) {
                 theday = moment(e.date).format('dddd');
                 $('#endday').text(theday);
+            });
+            $("#div_stopattendanceentry").on("dp.change", function (e) {
+                theday = moment(e.date).format('dddd');
+                $('#stopattendanceentryday').text(theday);
             });
 
 
@@ -145,29 +155,42 @@
 
             $('#div_startdatetime').datetimepicker({
                 format: <%= format%>,
-            extraFormats: <%= extraFormats %>,
-            //daysOfWeekDisabled: [0, 6],
-            showClear: true,
-            viewDate: false,
-            useCurrent: false,
-            sideBySide: true,
-            viewMode: 'days',
-            stepping: 15
-            //,maxDate: moment().add(-1, 'year')
-        });
+                extraFormats: <%= extraFormats %>,
+                //daysOfWeekDisabled: [0, 6],
+                showClear: true,
+                viewDate: false,
+                useCurrent: false,
+                sideBySide: true,
+                viewMode: 'days',
+                stepping: 15
+                //,maxDate: moment().add(-1, 'year')
+            });
 
             $('#div_enddatetime').datetimepicker({
                 format: <%= format%>,
-            extraFormats: <%=extraFormats %>,
-            //daysOfWeekDisabled: [0, 6],
-            showClear: true,
-            viewDate: false,
-            useCurrent: false,
-            sideBySide: true,
-            viewMode: 'days',
-            stepping: 15
-            //,maxDate: moment().add(-1, 'year')
-        });
+                extraFormats: <%=extraFormats %>,
+                //daysOfWeekDisabled: [0, 6],
+                showClear: true,
+                viewDate: false,
+                useCurrent: false,
+                sideBySide: true,
+                viewMode: 'days',
+                stepping: 15
+                //,maxDate: moment().add(-1, 'year')
+            });
+
+            $('#div_stopattendanceentry').datetimepicker({
+                format: 'D MMM YYYY HH:mm',
+                extraFormats: ['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm'],
+                //daysOfWeekDisabled: [0, 6],
+                showClear: true,
+                viewDate: false,
+                useCurrent: false,
+                sideBySide: true,
+                viewMode: 'days',
+                stepping: 15
+                //,maxDate: moment().add(-1, 'year')
+            });
 
             $('#dd_categories').select2();
             $('#dd_categories_filter').select2();
@@ -446,6 +469,13 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_notes">Notes</label>
+            <div class="col-sm-8">
+                <textarea id="tb_notes" name="tb_notes" class="form-control"><%: notes %></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="control-label col-sm-4" for="dd_categories">
                 <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Select the categories of those that should attend.  You can add other people outside of these cateories by changing the people view below." />
                 Categories</label>
@@ -485,6 +515,20 @@
                 </select>
             </div>
         </div>
+        
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="tb_stopattendanceentrydatetime">Stop attendance entry at<span class="usetime"><%:datetime %></span></label>
+            <div class="col-sm-8">
+                <div class="input-group date" id="div_stopattendanceentry">
+                    <input id="tb_stopattendanceentrydatetime" name="tb_stopattendanceentrydatetime" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: stopattendanceentrydatetime %>" maxlength="20" required />
+                    <span id="stopattendanceentryday" class="input-group-addon"><%= stopattendanceentryday %></span>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
 
         <input type="button" id="togglepeople" class="btn btn-info" style="display: none" value="Hide people" />
         <div id="div_people">

@@ -32,16 +32,60 @@
 
     <script>
         $(document).ready(function () {
-
+            /*
             $('td').click(function () {
                 $(this).parent().toggleClass('selectedrow');
             })
-            $('th').click(function () {
-                var pattern = /c[0-9]*/;
-                thisclass = $(this).attr('class');
-                thisclass = thisclass.match(pattern);
-                $('.' + thisclass).toggleClass('selectedcol');
-            })
+             */
+            $('td').mousedown(function (event) {
+                switch (event.which) {
+                    case 1:
+                        $(this).parent().toggleClass('selectedrow');
+                        break;
+                    case 2:
+                        alert('Middle Mouse button pressed.');
+                        break;
+                    case 3:
+                        alert('Right Mouse button pressed.');
+                        break;
+                    default:
+                        alert('You have a strange Mouse!');
+                }
+            });
+
+
+           
+           // $('th').click(function () {
+           //     var pattern = /c[0-9]*/;
+           //     thisclass = $(this).attr('class');
+           //     thisclass = thisclass.match(pattern);
+           //     $('.' + thisclass).toggleClass('selectedcol');
+           //  })
+
+
+            $('th').mousedown(function (event) {
+                switch (event.which) {
+                    case 1:
+                        var pattern = /c[0-9]*/;
+                        thisclass = $(this).attr('class');
+                        thisclass = thisclass.match(pattern);
+                        $('.' + thisclass).toggleClass('selectedcol');
+                        break;
+                    case 2:
+                        alert('Middle Mouse button pressed.');
+                        break;
+                    case 3:
+                        var pattern = /c[0-9]*/;
+                        thisclass = $(this).attr('class');
+                        thisclass = thisclass.match(pattern);
+                        $('.' + thisclass).toggle();
+                        break;
+                    default:
+                        alert('You have a strange Mouse!');
+                }
+            });
+
+
 
         });
 

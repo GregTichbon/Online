@@ -60,7 +60,6 @@ namespace UBC
                 html += "<br /><a href=\"people/reports/CheckList.aspx\">Check List</a>";
 
                 html += "<br /><a href=\"people/findphone.aspx\">Find a phone number</a>";
-                html += "<br /><a href=\"people/reports/SchoolRowers.aspx\">School Rowers</a>";
 
             }
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))

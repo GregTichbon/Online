@@ -28,12 +28,14 @@ namespace UBC.People
         //public string guid;
         public string title;
         public string description;
+        public string notes;
         public string allday;
         public string allday_checked;
         public string startdatetime;
         public string enddatetime;
         public string datetime;
         public string type;
+        public string stopattendanceentrydatetime;
         public string role;
         public string categories;
         public string html_persons;
@@ -41,7 +43,9 @@ namespace UBC.People
         public string finance;
         public string showonattend;
         public string startday = "";
+        public string stopattendanceentryday = "";
         public string endday = "";
+
         public string format = "'D MMM YYYY HH:mm'";
         public string extraFormats = "['D MMM YY HH:mm', 'D MMM YYYY HH:mm', 'DD/MM/YY HH:mm', 'DD/MM/YYYY HH:mm', 'DD.MM.YY HH:mm', 'DD.MM.YYYY HH:mm', 'DD MM YY HH:mm', 'DD MM YYYY HH:mm']";
 
@@ -96,6 +100,7 @@ namespace UBC.People
 
                             title = dr["title"].ToString();
                             description = dr["description"].ToString();
+                            notes = dr["notes"].ToString();
 
                             allday = dr["allday"].ToString();
                             startdatetime = dr["startdatetime"].ToString();
@@ -105,6 +110,7 @@ namespace UBC.People
                             showattendees = dr["showattendees"].ToString();
                             finance = dr["finance"].ToString();
                             showonattend = dr["showonattend"].ToString();
+                            stopattendanceentrydatetime = dr["stopattendanceentrydatetime"].ToString();
 
                             if (startdatetime != "")
                             {
@@ -134,6 +140,11 @@ namespace UBC.People
                                 {
                                     enddatetime = Convert.ToDateTime(enddatetime).ToString("dd MMM yy HH:mm");
                                 }
+                            }
+                            if (stopattendanceentrydatetime != "")
+                            {
+                                stopattendanceentrydatetime = Convert.ToDateTime(stopattendanceentrydatetime).ToString("dd MMM yy HH:mm");
+                                stopattendanceentryday = Convert.ToDateTime(stopattendanceentrydatetime).ToString("dddd");
                             }
                         }
 
@@ -268,6 +279,7 @@ namespace UBC.People
             cmd1.Parameters.Add("@event_id", SqlDbType.VarChar).Value = event_id;
             cmd1.Parameters.Add("@title", SqlDbType.VarChar).Value = Request.Form["tb_title"].Trim();
             cmd1.Parameters.Add("@description", SqlDbType.VarChar).Value = Request.Form["tb_description"].Trim();
+            cmd1.Parameters.Add("@notes", SqlDbType.VarChar).Value = Request.Form["tb_notes"].Trim();
             cmd1.Parameters.Add("@startdatetime", SqlDbType.VarChar).Value = Request.Form["tb_startdatetime"].Trim();
             if (Request.Form["tb_enddatetime"].Trim() != "")
             {
@@ -283,6 +295,15 @@ namespace UBC.People
             cmd1.Parameters.Add("@showattendees", SqlDbType.VarChar).Value = Request.Form["dd_showattendees"];
             cmd1.Parameters.Add("@finance", SqlDbType.VarChar).Value = Request.Form["dd_finance"];
             cmd1.Parameters.Add("@showonattend", SqlDbType.VarChar).Value = Request.Form["dd_showonattend"];
+            if (Request.Form["tb_stopattendanceentrydatetime"].Trim() != "")
+            {
+                cmd1.Parameters.Add("@stopattendanceentrydatetime", SqlDbType.VarChar).Value = Request.Form["tb_stopattendanceentrydatetime"].Trim();
+            }
+            else
+            {
+                cmd1.Parameters.Add("@stopattendanceentrydatetime", SqlDbType.VarChar).Value = DBNull.Value;
+            }
+
 
             cmd1.Connection = con;
             try

@@ -15,9 +15,21 @@ namespace UBC.People
     public partial class Categories : System.Web.UI.Page
     {
         public string html = "";
+        public string categories;
+        public string categories_values;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+            Functions genericfunctions = new Functions();
+            Dictionary<string, string> functionoptions = new Dictionary<string, string>();
+            categories = "";
+            functionoptions.Clear();
+            functionoptions.Add("storedprocedure", "");
+            functionoptions.Add("usevalues", "");
+            //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
+            categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
 
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
@@ -48,16 +60,16 @@ namespace UBC.People
                         string note = dr["note"].ToString();
                         if (startdate != "")
                         {
-                            startdate = Convert.ToDateTime(startdate).ToString("dd MMM yyyyy");
+                            startdate = Convert.ToDateTime(startdate).ToString("dd MMM yyyy");
                         }
                         if (enddate != "")
                         {
-                            enddate = Convert.ToDateTime(enddate).ToString("dd MMM yyyyy");
+                            enddate = Convert.ToDateTime(enddate).ToString("dd MMM yyyy");
                         }
-                        string theclass = "";
+                        string theclass = "tr_category";
                         if (current == "0")
                         {
-                            theclass += "notcurrent";
+                            theclass += " notcurrent";
                         }
                         if (name == lastname)
                         {
@@ -71,13 +83,14 @@ namespace UBC.People
                         }
 
                         //html += "<tr class=\"" + theclass + "\" data-person=\"" + person_id + "\">";
-                        html += "<tr class=\"" + theclass + "\" id=\"id_" + person_category_id + "\" data-category=\"category_" + category_id + "\">";
+                        html += "<tr class=\"" + theclass + "\" id=\"id_" + person_category_id + "\" data-category=\"" + category_id + "\">";
                         //html += "<td><b>" + name + "</b></td>";
                         html += "<td style=\"text-align:center\"></td>";
                         html += "<td>" + category + "</td>";
-                        html += "<td><input type=\"text\" class=\"form-control\" name=\"start_" + person_id + "_" + category_id + "\" value=\"" + startdate + "\" /></td>";
-                        html += "<td><input type=\"text\" class=\"form-control\" name=\"end_" + person_id + "_" + category_id + "\" value=\"" + enddate + "\" /></td>";
-                        html += "<td><input type=\"text\" class=\"form-control\" name=\"note_" + person_id + "_" + category_id + "\" value=\"" + note + "\" /></td>";
+                        string idname= "_" + person_id + "_" + category_id;
+                        html += "<td class=\"div_input\"><input class=\"date\" type=\"text\" class=\"form-control\" name=\"start" + idname + "\" id=\"start" + idname + "\" value =\"" + startdate + "\" /></td>";
+                        html += "<td class=\"div_input\"><input class=\"date\" type=\"text\" class=\"form-control\" name=\"end" + idname + "\" id=\"end" + idname + "\" value=\"" + enddate + "\" /></td>";
+                        html += "<td><input type=\"text\" class=\"form-control note\" name=\"note_" + person_id + "_" + category_id + "\" value=\"" + note + "\" /></td>";
                         html += "<td><a href=\"javascript:void(0)\" class=\"delete\" data-mode=\"delete\">Delete</a></td>";
                         html += "</tr>";
                     }
