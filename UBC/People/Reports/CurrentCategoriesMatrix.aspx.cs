@@ -15,6 +15,7 @@ namespace UBC.People.Reports
     public partial class CurrentCategoriesMatrix : System.Web.UI.Page
     {
         public string html;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UBC_person_id"] == null)
@@ -23,12 +24,14 @@ namespace UBC.People.Reports
             }
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
+           
+
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("Person_Category_Matrix", con);
 
             cmd1.CommandType = CommandType.StoredProcedure;
             cmd1.Connection = con;
-            try
+            //try
             {
                 con.Open();
                 SqlDataReader dr = cmd1.ExecuteReader();
@@ -46,9 +49,10 @@ namespace UBC.People.Reports
                             html += "<tr class=\"sticky-header\">";
                             html += "<th class=\"sticky-cell\">Name</th>";
 
-                            for (int f1 = 2; f1 < dr.FieldCount; f1++)
+                            for (int f1 = 3; f1 < dr.FieldCount; f1++)
                             {
-                                html += "<th nowrap class=\"c" + f1 + "\">" + dr.GetName(f1) + "</th>";
+                                string[] category = dr.GetName(f1).Split('|');
+                                html += "<th nowrap class=\"c" + category[1] + "\">" + category[0] + "</th>";
                             }
                             html += "</tr>";
                             html += "</thead>";
@@ -58,6 +62,7 @@ namespace UBC.People.Reports
                         }
 
                         //string person_id = dr["person_id"].ToString();
+                        string person_guid = dr["guid"].ToString();
                         string name = dr["name"].ToString();
 
                         string trclass = "";
@@ -66,11 +71,12 @@ namespace UBC.People.Reports
                             trclass = " class=\"me\"";
                         }
                         html += "<tr" + trclass + ">";
-                        html += "<td nowrap class=\"sticky-cell\">" + name + "</td>";
+                        html += "<td nowrap class=\"sticky-cell\"><a href=\"../maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a></td>";
 
-                        for (int f1 = 2; f1 < dr.FieldCount; f1++)
+                        for (int f1 = 3; f1 < dr.FieldCount; f1++)
                         {
-                            html += "<td class=\"c" + f1 + "\">" + dr[f1] + "</td>";
+                            string[] category = dr.GetName(f1).Split('|');
+                            html += "<td class=\"c" + category[1] + "\">" + dr[f1] + "</td>";
                         }
 
                         html += "</tr>";
@@ -82,13 +88,15 @@ namespace UBC.People.Reports
 
 
                 dr.Close();
+          
             }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
+            /*
+          catch (Exception ex)
+          {
+              throw ex;
+          }
+          finally
+          */
             {
                 con.Close();
                 con.Dispose();
