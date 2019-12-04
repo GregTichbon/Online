@@ -91,7 +91,7 @@
         }); //document ready
 
         function sendtext(i, items) {
-            console.log(i + ',' + items);
+            //console.log(i + ',' + items);
             thisobj = newobj[i];
             id = $(thisobj).attr("id").substring(8);
             PhoneNumber = $(thisobj).val();

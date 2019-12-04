@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,7 +16,14 @@ namespace UBC.People
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
+            {
+                Response.Redirect("~/default.aspx");
+            }
         }
     }
 }

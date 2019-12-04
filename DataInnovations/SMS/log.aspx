@@ -209,16 +209,17 @@
         <table>
             <thead>
                 <tr>
-                    <td>SMS ID</td>
-                    <td>ID</td>
-                    <td>When</td>
-                    <td>Direction</td>
-                    <td>Phone</td>
-                    <td>Message</td>
-                    <td>Description</td>
-                    <td>Response</td>
-                    <td>Resend ID</td>
-                    <td>Resend Of ID</td>
+                    <th>SMS ID</th>
+                    <th>ID</th>
+                    <th>When</th>
+                    <th>Direction</th>
+                    <th>Phone</th>
+                    <th>Message</th>
+                    <th>Description</th>
+                    <th>Response</th>
+                    <th>Resend ID</th>
+                    <th>Resend Of ID</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>

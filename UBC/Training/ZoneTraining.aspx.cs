@@ -17,10 +17,12 @@ namespace UBC.Training
                 string url = "../../training/zonetraining.aspx";
                 Response.Redirect("~/people/security/login.aspx?return=" + url);
             }
+            /*
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "101"))
             {
                 Response.Redirect("~/default.aspx");
             }
+            */
         }
     }
 }

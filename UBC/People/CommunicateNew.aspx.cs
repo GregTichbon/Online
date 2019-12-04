@@ -33,16 +33,16 @@ namespace UBC.People
                     </httpErrors>
              */
 
-            /*
-                            if (Session["UBC_person_id"] == null)
-                            {
-                                Response.Redirect("~/people/security/login.aspx");
-                            }
-                            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
-                            {
-                                Response.Redirect("~/default.aspx");
-                            }
-            */
+
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            {
+                Response.Redirect("~/default.aspx");
+            }
+
 
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -74,7 +74,8 @@ namespace UBC.People
                     html = "";
                     dr.Read();
 
-                    if(Request.QueryString["id"] != null) {
+                    if (Request.QueryString["id"] != null)
+                    {
                         html_event = dr["event_datetime"].ToString() + " <a href=\"event.aspx?id=" + Request.QueryString["id"] + "\" target=\"_blank\">" + dr["event_title"].ToString() + "</a>";
                     }
                     do
@@ -120,7 +121,7 @@ namespace UBC.People
                                 {
                                     note = " - " + note;
                                 }
-                                sendemail += delim + "<input name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
+                                sendemail += delim + "<input id=\"cb_email_" + id + "\" name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
                                 //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
                                 delim = "<br />";
                             }
@@ -199,9 +200,11 @@ namespace UBC.People
                                 {
                                     rnote = " - " + rnote;
                                 }
-                                rline += "<b>" + rname + "</b> " + rrelationship + rnote + "<br />";
+                                string rguid = relation.Split('^')[5];
 
-                                string rphones = relation.Split('^')[5];
+                                rline += "<b><a href=\"maint.aspx?id=" + rguid + "\" target=\"link\">" + rname + "</a></b> " + rrelationship + rnote + "<br />";
+
+                                string rphones = relation.Split('^')[6];
                                 if (rphones != "")
                                 {
                                     foreach (string rphone in rphones.Split('|'))
@@ -212,10 +215,10 @@ namespace UBC.People
                                         {
                                             rphonenote = " - " + rphonenote;
                                         }
-                                        rline += "<input name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + rfirstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
+                                        rline += "<input id=\"cb_rtext_" + rid + "\" name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
                                     }
                                 }
-                                string remails = relation.Split('^')[6];
+                                string remails = relation.Split('^')[7];
                                 if (remails != "")
                                 {
                                     foreach (string remail in remails.Split('|'))
@@ -226,7 +229,7 @@ namespace UBC.People
                                         {
                                             remailnote = " - " + remailnote;
                                         }
-                                        rline += "<input name =\"cb_remail_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + rfirstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
+                                        rline += "<input id=\"cb_remail_" + rid + "\" name =\"cb_remail_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
                                     }
                                 }
                             }

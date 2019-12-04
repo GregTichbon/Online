@@ -323,14 +323,14 @@
 
 
             $('.countdown').downCount({
-                date: '12/03/2019 12:00:00',
-                offset: +12
+                date: '01/01/2020 12:00:00',
+                offset: +13
             }, function () {
                 $('#dialog_result').html("It's happening");
                 $('#dialog_result').dialog({
                     modal: true,
                     width: 400,
-                    title: "Sign up",
+                    title: "Release",
                     closeText: false
                 });
             })
@@ -504,7 +504,7 @@
                             <img src="Dependencies/Images/instagram.svg" class="socialmedia" /></a>
                     </div>
                 </div>
-                fnews
+                
                 <div class="col-sm-4">
                     <div xclass="center" style="display: inline-block; padding-top: 25px">
                         <a id="keen" href="javascript:void(0)">Fan Club mailing list - sign up to get told</a>

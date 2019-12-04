@@ -127,6 +127,7 @@ namespace UBC.People
             string text = formVars.Form("text");
             string recipient = formVars.Form("recipient");  //phone number or email address
             string attendance = formVars.Form("attendance");
+            string mode = formVars.Form("mode");
 
             string rid = "";
             string rfirstname = "";
@@ -186,13 +187,18 @@ namespace UBC.People
 
             if (type == "email")
             {
-                string emailbodyTemplate = "RegisterEmail.xslt";
-                string screenTemplate = "RegisterScreen.xslt";
                 //string host = "datainn.co.nz";
-                string host = "70.35.207.87";
-                string emailfrom = "UnionBoatClub@datainn.co.nz";
+                //string host = "70.35.207.87";
+                //string emailfrom = "UnionBoatClub@datainn.co.nz";
+                //string password = "39%3Zxon";
+
+                string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+                string emailfrom = "info@unionboatclub.co.nz";
+                string password = "R0wtheboat";
+                int port = 587; // 465; // 25;
+                Boolean enableSsl = true;
+
                 string emailfromname = "Union Boat Club";
-                string password = "39%3Zxon";
                 string emailBCC = emailfrom;
 
                 //emailhtml = emailhtml.Replace("||link||", "<a href=\"" + link + "\">here</a>");
@@ -222,10 +228,20 @@ namespace UBC.People
                 }
 
                 emaildocument = emaildocument.Replace("||Content||", emailhtml);
-
+                string[] attachments = new string[0];
+                Dictionary<string, string> emailoptions = new Dictionary<string, string>();
                 //emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "");
-                response = "Ok";
+                //gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "");
+                if (mode == "test")
+                {
+                    response = "test mode";
+                }
+                else
+                {
+                    gFunctions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "", attachments, emailoptions);
+                    response = "Ok";
+                }
+ 
             }
 
             if (type == "text")
@@ -250,7 +266,13 @@ namespace UBC.People
 
                 foreach (string mobile in recipient.Split(';'))
                 {
-                    response = gFunctions.SendRemoteMessage(mobile, text, "UBC Communications") + "<br />";
+                    if (mode == "test")
+                    {
+                        response = "test mode";
+                    }
+                    else { 
+                        response = gFunctions.SendRemoteMessage(mobile, text, "UBC Communications") + "<br />";
+                    }
                 }
             }
 
@@ -304,11 +326,18 @@ namespace UBC.People
                 string emailbodyTemplate = "RegisterEmail.xslt";
                 string screenTemplate = "RegisterScreen.xslt";
                 //string host = "datainn.co.nz";
-                string host = "70.35.207.87";
-                string emailfrom = "UnionBoatClub@datainn.co.nz";
-                string emailBCC = emailfrom;
+                //string host = "70.35.207.87";
+                //string password = "39%3Zxon";
+
+                string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+                string emailfrom = "info@unionboatclub.co.nz";
+                string password = "R0wtheboat";
+                int port = 587; // 465; // 25;
+                Boolean enableSsl = true;
+
                 string emailfromname = "Union Boat Club";
-                string password = "39%3Zxon";
+                string emailBCC = emailfrom;
+
 
                 emailhtml = emailhtml.Replace("||firstname||", firstname);
                 emailhtml = emailhtml.Replace("||guid||", guid);
@@ -325,7 +354,10 @@ namespace UBC.People
 
 
                 //emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "");
+                string[] attachments = new string[0];
+                Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+                gFunctions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "", attachments, emailoptions);
+                //gFunctions.sendemailV3(host, emailfrom, emailfromname, password, emailsubject, emaildocument, recipient, emailBCC, "");
                 response = "Ok";
             }
 

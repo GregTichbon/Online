@@ -67,8 +67,8 @@ namespace UBC
                 html += "<br /><a href=\"people/attending.aspx\">Attending</a>";
                 html += "<br /><a href=\"people/EventPlanner.aspx\">Event Planner</a>";
                 html += "<br /><a href=\"people/EventList.aspx\">Event List</a>";    //not sure about this one!  Coaches to update attendance?
-                html += "<br /><a href=\"Training/ZoneTraining.aspx\">Zone Training</a>";
             }
+            html += "<br /><a href=\"Training/ZoneTraining.aspx\">Zone Training</a>";
             html += "<br /><a href=\"people/Attend.aspx\">Record Your Attendance</a>";    
 
 

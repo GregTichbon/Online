@@ -33,16 +33,16 @@ namespace UBC.People
                     </httpErrors>
              */
 
-            /*
-                            if (Session["UBC_person_id"] == null)
-                            {
-                                Response.Redirect("~/people/security/login.aspx");
-                            }
-                            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
-                            {
-                                Response.Redirect("~/default.aspx");
-                            }
-            */
+
+            if (Session["UBC_person_id"] == null)
+            {
+                Response.Redirect("~/people/security/login.aspx");
+            }
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            {
+                Response.Redirect("~/default.aspx");
+            }
+
 
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";

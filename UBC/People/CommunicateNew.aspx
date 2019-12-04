@@ -64,10 +64,20 @@
             })
 
             $('[name^="cb_email_"]').click(function () {
-                name = $(this).attr('name');
+                name = "disp_" + $(this).attr('name');
                 address = $(this).val();
                 if ($(this).is(':checked')) {
-                    $('#emailaddresses').append('<span id="' + name + '">' + address + ';</span>');
+                    $('#emailaddresses').append('<span id="' + name + '">' + address + ';</span> ');
+                } else {
+                    $('#' + name).remove();
+                }
+            })
+
+            $('[name^="cb_remail_"]').click(function () {
+                name = "disp_" + $(this).attr('name');
+                address = $(this).val().split('|');
+                if ($(this).is(':checked')) {
+                    $('#remailaddresses').append('<span id="' + name + '">' + address[2] + ';</span> ');
                 } else {
                     $('#' + name).remove();
                 }
@@ -83,15 +93,22 @@
                     position: { my: "center", at: "100", of: window }
                 });
 
-                //$('#tbl_people > tbody  > tr').each(function () {
+                newobj = $("#tbl_people > tbody > tr > td > input:checked").toArray()
+                //console.log(newobj);
+                sendtext(0, $(newobj).length);
+
+                /*
+
                 $("#tbl_people > tbody > tr > td > input:checked").each(function () {
                     id = $(this).attr("id");
                     recipient = $(this).val();
+                    attendance = $(this).closest('tr').find('td').eq(6).text();
                     if (id.substring(0, 9) == 'cb_email_') {
                         type = 'email';
                         id = id.substring(9);
                         emailsubject = $('#tb_subject').val();
-                        emailhtml = $('#tb_htmlbody').val();
+                        //emailhtml = $('#tb_htmlbody').val();
+                        emailhtml = tinyMCE.get('tb_htmlbody').getContent();
                         text = '';
                     } else if (id.substring(0, 8) == 'cb_text_') {
                         type = 'text';
@@ -99,10 +116,25 @@
                         emailsubject = '';
                         emailhtml = '';
                         text = $('#tb_txt').val();
+                    } else if (id.substring(0, 10) == 'cb_remail_') {
+                        type = 'remail';
+                        id = id.substring(10);
+                        emailsubject = $('#tb_rsubject').val();
+                        //emailhtml = $('#tb_rhtmlbody').val();
+                        emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
+
+                        text = '';
+                    } else if (id.substring(0, 9) == 'cb_rtext_') {
+                        type = 'rtext';
+                        id = id.substring(9);
+                        emailsubject = '';
+                        emailhtml = '';
+                        text = $('#tb_rtxt').val();
                     }
                     name = $('#name_' + id).text();
 
-                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }];
+
+                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }];
                     var formData = JSON.stringify({ formVars: arForm });
                     //console.log(formData);
 
@@ -124,16 +156,23 @@
                 });
                 //$('.scrollable').prepend('Complete' + '<br />');
                 $('#tbl_results tbody').prepend('<tr><td colspan="3">Complete</td>');
+                */
             });
 
             $('#cb_emailall').click(function (event) {
                 if (this.checked) {
-                    $('[id^=cb_email_]').each(function () {
+                    $('[id^=cb_email_]:visible').each(function () {
                         this.checked = true;
+                        name = "disp_" + $(this).attr('name');
+                        address = $(this).val().split('|');
+                        $('#emailaddresses').append('<span id="' + name + '">' + address + ';</span>');
                     });
                 } else {
-                    $('[id^=cb_email_]').each(function () {
+                    $('[id^=cb_email_]:visible').each(function () {
                         this.checked = false;
+                        name = "disp_" + $(this).attr('name');
+                        //address = $(this).val().split('|');
+                        $('#' + name).remove();
                     });
                 }
             });
@@ -148,6 +187,37 @@
                     });
                 }
             });
+
+            $('#cb_remailall').click(function (event) {
+                if (this.checked) {
+                    $('[id^=cb_remail_]:visible').each(function () {
+                        this.checked = true;
+                        name = "disp_" + $(this).attr('name');
+                        address = $(this).val().split('|');
+                        $('#remailaddresses').append('<span id="' + name + '">' + address[2] + ';</span> ');
+                    });
+                } else {
+                    $('[id^=cb_remail_]:visible').each(function () {
+                        this.checked = false;
+                        name = "disp_" + $(this).attr('name');
+                        //address = $(this).val().split('|');
+                        $('#' + name).remove();
+                    });
+                }
+            });
+            $('#cb_rtextall').click(function (event) {
+                if (this.checked) {
+                    $('[id^=cb_rtext_]:visible').each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    $('[id^=cb_rtext_]:visible').each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+
+
             $('#cb_na').click(function (event) {
                 if (this.checked) {
                     $('.na').each(function () {
@@ -168,6 +238,70 @@
             $('#tb_event_id').change(function () {
                 reloadpage();
             })
+
+            function sendtext(i, items) {
+                //console.log(i + ',' + items);
+                thisobj = newobj[i];
+                id = $(thisobj).attr("id");
+                name = $(thisobj).closest('tr').find('td').eq(1).text();
+                recipient = $(thisobj).val();
+                attendance = $(thisobj).closest('tr').find('td').eq(6).text();
+
+                if (id.substring(0, 9) == 'cb_email_') {
+                    type = 'email';
+                    id = id.substring(9);
+                    emailsubject = $('#tb_subject').val();
+                    emailhtml = tinyMCE.get('tb_htmlbody').getContent();
+                    text = '';
+                } else if (id.substring(0, 8) == 'cb_text_') {
+                    type = 'text';
+                    id = id.substring(8);
+                    emailsubject = '';
+                    emailhtml = '';
+                    text = $('#tb_txt').val();
+                } else if (id.substring(0, 10) == 'cb_remail_') {
+                    type = 'remail';
+                    id = id.substring(10);
+                    emailsubject = $('#tb_rsubject').val();
+                    emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
+                    text = '';
+                } else if (id.substring(0, 9) == 'cb_rtext_') {
+                    type = 'rtext';
+                    id = id.substring(9);
+                    emailsubject = '';
+                    emailhtml = '';
+                    text = $('#tb_rtxt').val();
+                }
+
+                //use this for named parameters
+                //var arForm = { type: type, id: id, emailsubject: emailsubject, emailhtml: emailhtml, text: text, recipient: recipient, attendance: attendance };
+                //mydata = JSON.stringify(arForm);
+
+                //use this for NameValue[] formVars
+                var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }, { "name": "mode", "value": "" }];
+                var mydata = JSON.stringify({ formVars: arForm });
+
+                //$('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + 'responseFromServer.d' + '</td></tr>');
+               
+                $.ajax({
+                    type: "POST",
+                    url: "posts.asmx/send_email_text",
+                    data: mydata,
+                    contentType: "application/json",
+                    datatype: "json",
+                    async: false,
+                    success: function (responseFromServer) {
+                        $('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + responseFromServer.d.status + '</td></tr>');
+                    }
+                });
+                
+                i++;
+                if (i < items) {
+                    setTimeout(function () { sendtext(i, items); }, 100);
+                    //} else {
+                    //    $('#tbl_results tbody').prepend('<tr><td>Complete</td></tr>');
+                }
+            }
 
         });  //document.ready
 
@@ -278,18 +412,18 @@
                     <br />
                     <br />
                     Email Body (HTML):<br />
-                    <textarea class="tinymce" id="tb_rhtmlbody" name="tb_rhtmlbody" rows="10" style="width: 100%">&lt;p&gt;Hi ||rfirstname||&lt;/p&gt;
-&lt;p&gt;||firstname||&lt;/p&gt;</textarea><br />
+                    <textarea class="tinymce" id="tb_rhtmlbody" name="tb_rhtmlbody" rows="10" style="width: 100%">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
+&lt;p&gt;||rfirstname||&lt;/p&gt;</textarea><br />
                     <br />
                     Facebook (Text):<br />
-                    <textarea id="tb_rtextbody" name="tb_rtextbody" rows="5" style="width: 100%">Hi ||rfirstname||
-||firstname||
+                    <textarea id="tb_rtextbody" name="tb_rtextbody" rows="5" style="width: 100%">Hi ||firstname||
+||rfirstname||
                     </textarea>
                     <br />
                     <br />
                     Mobile Text Body:<br />
-                    <textarea id="tb_rtxt" name="tb_rtxt" rows="5" style="width: 100%">Hi ||rfirstname||
-||firstname||</textarea>
+                    <textarea id="tb_rtxt" name="tb_rtxt" rows="5" style="width: 100%">Hi ||firstname||
+||rfirstname||</textarea>
                 </td>
             </tr>
         </table>
@@ -315,7 +449,7 @@
                         <input id="cb_emailall" type="checkbox" />
                         Send Email</th>
                     <th>Facebook</th>
-                    <th>Relations</th>
+                    <th>Relations <input id="cb_rtextall" type="checkbox" /> Send Text <input id="cb_remailall" type="checkbox" /> Send Email </th>
                     <th>Attendance<br /><input id="cb_na" type="checkbox" checked />N/A Filter: <select id="dd_attendancefilter"></select></th>
                 </tr>
             </thead>
@@ -323,7 +457,9 @@
                 <%=html %>
             </tbody>
         </table>
-        <div id="emailaddresses"></div>
+        <div id="emailaddresses" style="max-width:100%"></div>
+        <br />
+        <div id="remailaddresses" style="max-width:100%"></div>
         <div class="form-group">
             <div class="col-sm-4">
             </div>

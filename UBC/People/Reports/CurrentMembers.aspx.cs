@@ -20,7 +20,8 @@ namespace UBC.People.Reports
         {
             if (Session["UBC_person_id"] == null)
             {
-                Response.Redirect("~/people/security/login.aspx");
+                string url = "../reports/currentmembers.aspx";
+                Response.Redirect("~/people/security/login.aspx?return=" + url);
             }
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
             {
@@ -93,6 +94,7 @@ namespace UBC.People.Reports
                          * 12 Invoice Recipient	
                          * 13 Invoice Address Type	
                          * 14 Invoice Address
+                         * 15 Invoice Note
                          */
 
 
