@@ -18,7 +18,6 @@ namespace UBC.People.Security
 {
     public partial class Login : System.Web.UI.Page
     {
-        public string url;
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Remove("UBC_person_id");
@@ -26,7 +25,6 @@ namespace UBC.People.Security
             Session.Remove("UBC_AccessString");
             Session.Remove("UBC_Colour");
 
-            url = Request.QueryString["return"] ?? "";
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
@@ -74,11 +72,21 @@ namespace UBC.People.Security
             }
             if (Session["UBC_person_id"] != null)
             {
-                string redirect = "../../default.aspx";
-                if (url != "")
+                string redirect = Session["UBC_URL"] + ""; // ?? "";
+                Session.Remove("UBC_URL");
+                if (redirect == "")
                 {
-                    redirect = url;
+                    string url = Request.QueryString["return"] ?? "";
+                    if (url != "")
+                    {
+                        redirect = url;
+                    }
+                    else
+                    {
+                        redirect = "../../default.aspx";
+                    }
                 }
+
                 Response.Redirect(redirect);
             }
             else

@@ -28,6 +28,8 @@ namespace UBC.People.Reports
             {
                 string url = "../reports/ShowAttendees.aspx?id=" + guid;
                 Response.Redirect("~/people/security/login.aspx?return=" + url);
+                //Session["UBC_URL"] = HttpContext.Current.Request.Url.PathAndQuery;
+                //Response.Redirect("~/people/security/login.aspx");
             }
 
             Boolean access = false;

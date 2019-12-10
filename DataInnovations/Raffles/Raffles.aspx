@@ -128,7 +128,8 @@
                     { title: "Detail", field: "Detail", editor: "input" },
                     { title: "Columns", field: "Columns", editor: "input" },
                     { title: "Bank Account", field: "BankAccount", editor: "input" },
-                    { title: "Mobile To Text", field: "MobileToText", editor: "input" }
+                    { title: "Mobile To Text", field: "MobileToText", editor: "input" },
+                    { title: "Named", field: "Named", editor: "input" }
 
 
                 ]

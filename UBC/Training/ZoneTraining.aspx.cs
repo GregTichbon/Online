@@ -14,9 +14,11 @@ namespace UBC.Training
         {
             if (Session["UBC_person_id"] == null)
             {
-                string url = "../../training/zonetraining.aspx";
-                Response.Redirect("~/people/security/login.aspx?return=" + url);
-            }
+                //string url = "../../training/zonetraining.aspx";
+                //Response.Redirect("~/people/security/login.aspx?return=" + url);
+				Session["UBC_URL"] = HttpContext.Current.Request.Url.PathAndQuery;
+                Response.Redirect("~/people/security/login.aspx");            
+			}
             /*
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "101"))
             {

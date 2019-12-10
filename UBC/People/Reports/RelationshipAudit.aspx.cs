@@ -19,6 +19,7 @@ namespace UBC.People.Reports
         {
             if (Session["UBC_person_id"] == null)
             {
+                Session["UBC_URL"] = HttpContext.Current.Request.Url.PathAndQuery;
                 Response.Redirect("~/people/security/login.aspx");
             }
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
@@ -45,7 +46,7 @@ namespace UBC.People.Reports
                         if (firsttime)
                         {
                             html = "<thead><tr>"; //<th>Image</th>";
-                            for (int f1 = 2; f1 < dr.FieldCount; f1++)
+                            for (int f1 = 0; f1 < dr.FieldCount; f1++)
                             {
                                 html += "<th>" + dr.GetName(f1) + "</th>";
                             }
@@ -69,7 +70,7 @@ namespace UBC.People.Reports
 
                         html += "<tr>";
                         //html += "<td>" + image + "</td>";
-                        for (int f1 = 2; f1 < dr.FieldCount; f1++)
+                        for (int f1 = 0; f1 < dr.FieldCount; f1++)
                         {
                             string useval = dr[f1].ToString();
 

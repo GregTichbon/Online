@@ -73,7 +73,7 @@ namespace UBC.People
         public string[] phonetypevalues = new string[4] { "Home", "Work", "Mobile", "Other" };
         //public string[] phonetypevalues = new string[] { };
         public string[] relationshipvalues = new string[4] { "Mother", "Father", "Caregiver", "Other" };
-        public string[] invoicetypevalues = new string[4] { "Email", "Text", "Mail", "Hand deliver" };
+        public string[] invoicetypevalues = new string[3] { "Email", "Mail", "Hand deliver" }; //[4] { "Email", "Text", "Mail", "Hand deliver" };
         public string[] membershipvalues = new string[7] { "Full (Competitive) Membership", "Club Recreation Membership", "Novice Membership", "Coxswain Membership", "Life Membership", "Honorary Membership", "Gym Membership Only" };
 
         protected void Page_Load(object sender, EventArgs e)

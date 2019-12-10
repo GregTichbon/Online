@@ -20,8 +20,10 @@ namespace UBC.People.Reports
         {
             if (Session["UBC_person_id"] == null)
             {
-                string url = "../reports/currentmembers.aspx";
-                Response.Redirect("~/people/security/login.aspx?return=" + url);
+                //string url = "../reports/currentmembers.aspx";
+                //Response.Redirect("~/people/security/login.aspx?return=" + url);
+				Session["UBC_URL"] = HttpContext.Current.Request.Url.PathAndQuery;
+                Response.Redirect("~/people/security/login.aspx");
             }
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
             {

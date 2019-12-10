@@ -93,6 +93,21 @@
                 $(".prev span").text(y);
             });
 
+            $.validator.addMethod("DateisAfter", function (value, element, params) {
+                console.log(value);
+                console.log(element);
+                console.log($(params[0]).val());
+
+                otherdate = $(params[0]).val();
+                returnval = true;
+                if (value != "") {
+                    if (moment(value) <= moment(otherdate)) {
+                        returnval = false;
+                    }
+                }
+                return returnval;
+            }, 'This date must be after the date noted');
+
             $("#form1").validate({
                 rules: {
                     tb_birthdate: {
@@ -113,7 +128,8 @@
                             return $('#dd_notes_followupactioned').val() != '';
                         },
                         date: true,
-                        greaterThan: '#tb_notes_datetime'
+                        //DateisAfter: ["#tb_eventfrom", "#tb_eventto"]
+                        DateisAfter: ['#tb_notes_datetime']
                     }
                 }
             })

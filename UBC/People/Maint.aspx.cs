@@ -67,7 +67,7 @@ namespace UBC.People
         public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
         public string[] transactions_system = new string[2] { "UBC", "Friends" };
         public string[] transactions_code = new string[9] { "Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees", "Fundraising", "Grant Allocation", "Subsidy" };
-        public string[] invoiceaddresstypes = new string[4] { "Email", "Text", "Mail", "Hand Deliver" };
+        public string[] invoiceaddresstypes = new string[3] { "Email", "Mail", "Hand Deliver" }; //[4] { "Email", "Text", "Mail", "Hand Deliver" };
         public string[] seasons = new string[3] { "2017/18", "2018/19", "2019/20" };
         public string category_category;
         public string relationships_relationshiptypes;
@@ -98,12 +98,17 @@ namespace UBC.People
             {
                 if (Session["UBC_person_id"] == null)
                 {
-                    string url = "../search.aspx";
-                    Response.Redirect("~/people/security/login.aspx?return=" + url);
-
+                    //string url = "../search.aspx";
+                    //Response.Redirect("~/people/security/login.aspx?return=" + url);
+                    Session["UBC_URL"] = HttpContext.Current.Request.Url.PathAndQuery;
+                    Response.Redirect("~/people/security/login.aspx");
                 }
 
-                hf_guid = Request.QueryString["id"];
+                hf_guid = Request.QueryString["id"] ?? "";
+                if (hf_guid == "")
+                {
+                    Response.Redirect("search.aspx");
+                }
 
 
                 string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -805,6 +810,7 @@ namespace UBC.People
                     //-------------------------------------------------------------------------------------
 
                     //-------------------------------------------------------------------------------------
+                    /*
                     html_results = "<thead><tr>";
                     html_results += "<th data-hidden='true'>person_event_id</th>";
                     //html_results += "<th data-hidden='true'>ID2</th>";
@@ -861,7 +867,7 @@ namespace UBC.People
                         throw ex;
                     }
                     html_results += "</tbody>";
-
+                    */
                     //-------------------------------------------------------------------------------------
 
                     con.Close();

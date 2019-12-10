@@ -23,6 +23,15 @@ namespace UBC.People
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
+            To record my attendance
+
+            person guid maybe passed in querystring
+            if not signed on and no person guid, get the person guid from a cookie
+            if person guid exists, sign out any logged in user, save person guid to cookie
+
+            */
+
             //when is the next sunday?
             DateTime today = DateTime.Today;
             int daysUntilDay = ((int)DayOfWeek.Sunday - (int)today.DayOfWeek + 7) + 8;
@@ -56,6 +65,7 @@ namespace UBC.People
 
             if (Session["UBC_person_id"] == null && guid == null)
             {
+                Session["UBC_URL"] = HttpContext.Current.Request.Url.PathAndQuery;
                 Response.Redirect("~/people/security/login.aspx");
             }
 
