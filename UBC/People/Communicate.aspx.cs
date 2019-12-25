@@ -17,10 +17,14 @@ namespace UBC.People
         public string html;
         public string html_facebook;
         public string html_event;
+        public string event_id = "";
         public string response = "";
         public string categories;
 
         public string categories_values;
+        public string attendance_values;
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,7 +59,7 @@ namespace UBC.People
             functionoptions.Add("usevalues", "");
             //categories_values = genericfunctions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
             categories_values = Functions.buildandpopulateselect(strConnString, "@category", categories, functionoptions, "None");
-
+            HashSet<string> attendance_list = new HashSet<string>();
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("Get_Communications", con);
@@ -76,6 +80,7 @@ namespace UBC.People
 
                     if (Request.QueryString["id"] != null)
                     {
+                        event_id = Request.QueryString["id"];
                         html_event = dr["event_datetime"].ToString() + " <a href=\"event.aspx?id=" + Request.QueryString["id"] + "\" target=\"_blank\">" + dr["event_title"].ToString() + "</a>";
                     }
                     do
@@ -92,13 +97,15 @@ namespace UBC.People
                         string person_guid = dr["person_guid"].ToString();
                         string attendance = dr["attendance"].ToString();
                         string incategory = dr["incategory"].ToString();
+                        string age = dr["age"].ToString();
 
-                        string attendanceclass = "";
-                        if (attendance == "" && incategory == "0")
+                        if (attendance == "") // && incategory == "0")
                         {
-                            attendance = "N/A";
-                            attendanceclass = " na";
+                            attendance = "NA";
                         }
+
+                        attendance_list.Add(attendance);
+
 
                         string role = dr["role"].ToString();
                         string relationships = dr["relationships"].ToString();
@@ -189,6 +196,7 @@ namespace UBC.People
                         string rline = "";
                         if (relationships != "")
                         {
+                            rline += "<div class=\"age\" age=\"" + age + "\">";
                             foreach (string relation in relationships.Split('\\'))
                             {
                                 string rid = relation.Split('^')[0];
@@ -233,10 +241,11 @@ namespace UBC.People
                                     }
                                 }
                             }
+                            rline += "</div>";
                         }
 
 
-                        html += "<tr id=\"tr_person_id_" + id + "\" class =\"tr_person" + attendanceclass + "\" data-category=\"" + categories + "\">";
+                        html += "<tr id=\"tr_person_id_" + id + "\" class =\"tr_person " + attendance + "\" data-category=\"" + categories + "\">";
                         html += "<td>" + image + "</td>";
                         //html += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + sendfacebook + "</td><td>" + firstname + " " + lastname + " - " + school + " (" + schoolyear + ")</td><td>" + facebooklink + "</td><td><a href=\"mailto:" + email + "\"</a>" + email + "</td><td>" + dr["mobile"] + "</td><td>" + caregivername + "</td><td>" + sendcaregiveremail + "</td><td>" + sendcaregivertext + "</td><td>" + caregiversendfacebook + "</td><td>" + caregiver + "</td>";
                         //html += "<td>" + name + "</td><td>" + sendtext + " " + mobile + "</td><td>" + sendemail + " " + sendemaillink + "</td><td>" + sendfacebook + " " + facebooklink + "</td>";
@@ -244,10 +253,19 @@ namespace UBC.People
                         html += "<td>" + rline + "</td>";
 
                         //<td>" + caregivername + "</td><td>" + sendcaregivertext + " " + caregivermobile + "</td><td>" + sendcaregiveremail + " " + sendcaregiveremaillink + "</td><td>" + sendcaregiverfacebook + " " + caregiverfacebooklink + "</td><td>" + coming + "</td><td>" + modified + "</td>";
-                        html += "<td>" + attendance + "</td>";
+                        if(event_id != "") { 
+                            html += "<td>" + attendance + "</td>";
+                        }
                         html += "</tr>" + "\r\n";
 
                     } while (dr.Read());
+
+                    attendance_values = "";
+                    foreach (string option in attendance_list)
+                    {
+                        attendance_values = "<option>" + option + "</option>";
+                    }
+                    
                 }
 
                 dr.Close();

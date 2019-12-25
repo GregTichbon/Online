@@ -1004,7 +1004,10 @@
             if (thismonth >= 9) {
                 thisyear = thisyear + 1;
             }
-            var jan1 = moment([thisyear, 1, 1]);
+            var jan1 = moment([thisyear, 0, 1]);
+
+            //age = moment().diff(birthday, 'years');
+
             $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
         }
 

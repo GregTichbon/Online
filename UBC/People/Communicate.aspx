@@ -41,6 +41,25 @@
                 //alert("Copied to clipboard");
             });
 
+            $(".numeric").keydown(function (event) {
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || (event.keyCode == 190 && 1 == 2)) {
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+                //if a decimal has been added, disable the "."-button
+
+            });
+
             $('#dd_categories_filter').select2();
 
             processrows();
@@ -48,7 +67,7 @@
             $('#btn_event').click(function () {
                 $("#eventselector").attr('src', 'eventselector.aspx');
                 $("#div_eventselector").dialog({
-                    width: 600,
+                    width: 800,
                     height: 600,
                     modal: true,
                     close: function () {
@@ -58,7 +77,7 @@
             })
 
 
-            $('#btn_refresh').click(function () {
+            $('.btn_refresh').click(function () {
                 //Now will have all data but just hidden alert('Get data from server for categories: ' + $('#dd_categories_filter').val());
                 processrows();
             })
@@ -440,7 +459,7 @@
         <select class="form-control" id="dd_categories_filter" name="dd_categories_filter" multiple="multiple">
             <%= categories_values %>
         </select>
-        <button type="button" id="btn_refresh">Refresh</button><br />
+        <button type="button" class="btn_refresh">Refresh</button><br />
 
         <table id="tbl_people" class="table table-hover">
             <thead>
@@ -453,8 +472,10 @@
                         <input id="cb_emailall" type="checkbox" />
                         Send Email</th>
                     <th>Facebook</th>
-                    <th>Relations <input id="cb_rtextall" type="checkbox" /> Send Text <input id="cb_remailall" type="checkbox" /> Send Email </th>
-                    <th>Attendance<br /><input id="cb_na" type="checkbox" checked />N/A Filter: <select id="dd_attendancefilter"></select></th>
+                    <th>Relations - show those under <input type="text" class="numeric" id="tb_age" maxlength="2" value="0" style="width:24px"/> <button type="button" class="btn_refresh">Apply</button><br /><input id="cb_rtextall" type="checkbox" /> Send Text <input id="cb_remailall" type="checkbox" /> Send Email </th>
+                    <% if (event_id != "") { %>
+                    <th>Attendance<br /><select><%=attendance_values %></select></th>
+                    <%} %>
                 </tr>
             </thead>
             <tbody>

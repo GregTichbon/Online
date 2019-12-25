@@ -18,48 +18,51 @@ namespace DataInnovations.Accounts
         public string html;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-            SqlConnection con = new SqlConnection(strConnString);
-
-            con = new SqlConnection(strConnString);
-            //try
+            if (!IsPostBack)
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Accounts_Transaction_Summary";
+                string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+                SqlConnection con = new SqlConnection(strConnString);
 
-
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                con = new SqlConnection(strConnString);
+                //try
                 {
-                    while (dr.Read())
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "Accounts_Transaction_Summary";
+
+
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
                     {
-                        string bank_account = dr["bank_account"].ToString();
-                        string FirstDate = dr["First Date"].ToString();
-                        string LastDate = dr["Last Date"].ToString();
-                        string transactions = dr["transactions"].ToString();
-                        string Credits = dr["Credits"].ToString();
-                        string Debits = dr["Debits"].ToString();
-                        string Net = dr["Net"].ToString();
+                        while (dr.Read())
+                        {
+                            string bank_account = dr["bank_account"].ToString();
+                            string FirstDate = dr["First Date"].ToString();
+                            string LastDate = dr["Last Date"].ToString();
+                            string transactions = dr["transactions"].ToString();
+                            string Credits = dr["Credits"].ToString();
+                            string Debits = dr["Debits"].ToString();
+                            string Net = dr["Net"].ToString();
+                            string Name = dr["Name"].ToString();
 
 
-                        html += "<tr>";
-                        html += "<td>" + bank_account + "</td>";
-                        html += "<td>" + Convert.ToDateTime(FirstDate).ToShortDateString() + "</td>";
-                        html += "<td>" + Convert.ToDateTime(LastDate).ToShortDateString() + "</td>";
-                        html += "<td style=\"text-align:right\">" + transactions + "</td>";
-                        html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Credits).ToString("0.00") + "</td>";
-                        html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Debits).ToString("0.00") + "</td>";
-                        html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Net).ToString("0.00") + "</td>";
-                        html += "</tr>";
+                            html += "<tr>";
+                            html += "<td>" + bank_account + " " + Name + "</td>";
+                            html += "<td>" + Convert.ToDateTime(FirstDate).ToShortDateString() + "</td>";
+                            html += "<td>" + Convert.ToDateTime(LastDate).ToShortDateString() + "</td>";
+                            html += "<td style=\"text-align:right\">" + transactions + "</td>";
+                            html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Credits).ToString("0.00") + "</td>";
+                            html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Debits).ToString("0.00") + "</td>";
+                            html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Net).ToString("0.00") + "</td>";
+                            html += "</tr>";
 
+                        }
                     }
+                    dr.Close();
                 }
-                dr.Close();
             }
         }
 
@@ -100,71 +103,72 @@ namespace DataInnovations.Accounts
 
                     con = new SqlConnection(strConnString);
                     //try
+                    //{
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "Accounts_Upload";
+
+
+                    //Boolean firstline = true;
+
+                    using (var reader = new StreamReader(filename))
                     {
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.Connection = con;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "Accounts_Upload";
-
-
-                        //Boolean firstline = true;
-
-                        using (var reader = new StreamReader(filename))
+                        while (!reader.EndOfStream)
                         {
-                            while (!reader.EndOfStream)
+                            c0++;
+                            var line = reader.ReadLine();
+                            line = line.Replace("\"", "");
+                            var values = line.Split('\t');
+
+
+                            if (!new[] { "Card", "Type" }.Contains(values[0].ToString()))
                             {
-                                c0++;
-                                var line = reader.ReadLine();
-                                line = line.Replace("\"", "");
-                                var values = line.Split('\t');
+                                cmd.Parameters.Clear();
+                                cmd.Parameters.Add("@format", SqlDbType.VarChar).Value = dd_format.SelectedItem.ToString();
+                                cmd.Parameters.Add("@filename", SqlDbType.VarChar).Value = file.FileName;
 
-
-                                if (!new[] { "Card", "Type" }.Contains(values[0].ToString()))
+                                int c1 = 0;
+                                foreach (string value in values)
                                 {
-                                    cmd.Parameters.Clear();
-                                    cmd.Parameters.Add("@format", SqlDbType.VarChar).Value = dd_format.SelectedItem.ToString();
-                                    cmd.Parameters.Add("@filename", SqlDbType.VarChar).Value = file.FileName;
-
-                                    int c1 = 0;
-                                    foreach (string value in values)
+                                    string usevalue = value;
+                                    c1++;
+                                    /*
+                                    if (c1 == 2)
                                     {
-                                        string usevalue = value;
-                                        c1++;
-                                        /*
-                                        if (c1 == 2)
-                                        {
-                                            usevalue = DateTime.Parse(value).ToString("dd-MMM-yyyy");
-                                        }
-
-                                        */
-                                        Regex regex = new Regex(@"^([0-3][0-9][/][0-1][0-9][/]20[0-9][0-9])$");
-                                        Match match = regex.Match(usevalue);
-                                        if (match.Success)
-                                        {
-                                            usevalue = DateTime.Parse(usevalue).ToString("dd-MMM-yyyy");
-                                        }
-
-                                        cmd.Parameters.Add("@Parameter" + c1.ToString(), SqlDbType.VarChar).Value = usevalue;
+                                        usevalue = DateTime.Parse(value).ToString("dd-MMM-yyyy");
                                     }
-                                    string response = cmd.ExecuteScalar().ToString();
+
+                                    */
+                                    Regex regex = new Regex(@"^([0-3][0-9][/][0-1][0-9][/]20[0-9][0-9])$");
+                                    Match match = regex.Match(usevalue);
+                                    if (match.Success)
+                                    {
+                                        usevalue = DateTime.Parse(usevalue).ToString("dd-MMM-yyyy");
+                                    }
+
+                                    cmd.Parameters.Add("@Parameter" + c1.ToString(), SqlDbType.VarChar).Value = usevalue;
                                 }
+                                string response = cmd.ExecuteScalar().ToString();
+                                //gFunctions.Log("","Upload.aspx.cs",response,"");
                             }
                         }
-                        //catch (Exception ex)
-                        {
-                            //lit_response.Text = ex.Message;
-                        }
-                        //finally
-                        {
-                            con.Close();
-                            con.Dispose();
-                        }
-
-                        Response.Write(c0.ToString() + " lines processed.<br /><a href=\"Allocate.aspx\">Allocate</a>");
-
-                        //Response.Redirect("BankAllocate.aspx");
                     }
+
+                    con.Close();
+                    con.Dispose();
+
+
+                    Response.Write(c0.ToString() + " lines processed.<br /><a href=\"Allocate.aspx\">Allocate</a>");
+
+                    //Response.Redirect("BankAllocate.aspx");
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Response.Write(ex.Message);
+                    //}
                 }
             }
         }

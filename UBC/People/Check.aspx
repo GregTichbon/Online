@@ -98,7 +98,7 @@
             }
             var years = moment().diff(e, 'years');
             thisyear = moment().year();
-            var jan1 = moment([thisyear, 1, 1]);
+            var jan1 = moment([thisyear, 0, 1]);
             $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
         }
 

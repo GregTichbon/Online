@@ -720,6 +720,9 @@
     <Content Include="People\Documents\NICCandCTC2019Travel.pdf" />
     <Content Include="People\Documents\NISS2019.pdf" />
     <Content Include="People\Documents\TasterFlyer.pdf" />
+    <Content Include="People\Documents\ChristmasRegatta2019.pdf" />
+    <Content Include="People\Documents\TrainingPlan16Dec19.pdf" />
+    <Content Include="People\Documents\Exercises.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
     <None Include="Properties\PublishProfiles\TOH-APP Makaranui.pubxml" />
