@@ -52,8 +52,16 @@ namespace DataInnovations.Raffles.UBC2019B
                 }
                 else
                 {
+                    string select = "";
+                    if (guid != "")
+                    {
+                        select = "cast([guid] as varchar(50)) = '" + guid + "'";
+                    } else if(named != "")
+                    {
+                        select = "named = '" + named + "'";
+                    }
 
-                    string sql1 = "select * from raffle where cast([guid] as varchar(50)) = '" + guid + "' or named = '" + named + "'";
+                    string sql1 = "select * from raffle where " + select;
                     cmd = new SqlCommand(sql1, con);
 
                     cmd.CommandType = CommandType.Text;

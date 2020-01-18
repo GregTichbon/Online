@@ -41,14 +41,12 @@
                 if ($(this).hasClass('closed')) {
                     alert('This can not be amended, if there is a change to your status please contact ')
                 } else {
-
-
                     tr = this;
                     $('#attendance').val($(this).find('td:eq(2)').text());
                     myval = $(this).find('td:eq(3)').text();
-                    if (myval != "") {
+                    //if (myval != "") {
                         $('#personnote').val(myval);
-                    }
+                    //}
 
                     $("#div_edit").dialog({
                         resizable: false,

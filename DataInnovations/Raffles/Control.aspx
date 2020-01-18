@@ -56,12 +56,14 @@
     </style>
     <script>
         var mywidth;
+        var myheight;
         $(document).ready(function () {
 
             mywidth = $(window).width() * .95;
             if (mywidth > 800) {
                 mywidth = 800;
             }
+            myheight = $(window).height() * .99;
 
             var dateEditor = function (cell, onRendered, success, cancel) {
                 //cell - the cell component for the editable cell
@@ -118,6 +120,7 @@
 
             var table = new Tabulator("#rt", {
                 data: tableData,
+                height: myheight,
                 dataEdited: function (data) {
                     //console.log(data);
                 },
@@ -281,7 +284,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
+        <%=head %>
         <div id="rt"></div>
         <div id="dialog_items" title="Wins" style="display: none" class="form-horizontal">
             <div id="div_items"></div>

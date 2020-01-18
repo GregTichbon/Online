@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace DataInnovations.Raffles
 {
-    public partial class Control : System.Web.UI.Page
+    public partial class Maint : System.Web.UI.Page
     {
         public string html = "";
         public string head = "";
@@ -64,14 +64,13 @@ namespace DataInnovations.Raffles
             dr.Close();
             head = "<h3>" + rafflename + "</h3>";
             head += "<a href=\"UBC2019B?id=" + guid + "\">Purchase by ID</a>";
-            if(named != "")
+            if (named != "")
             {
                 head += " | <a href=\"UBC2019B?n=" + named + "\">Purchase by name</a>";
             }
-            head += " | <a href=\"maint.aspx?id=" + guid + "\">Seller Maintain</a>";
 
             html += "<tr><td><h2>" + rafflename + "</h2></td></tr>";
-           
+
 
             string sql2 = "select * from raffleticket where raffle_id = " + raffle + " order by ticketnumber ";
             cmd = new SqlCommand(sql2, con)
@@ -127,4 +126,3 @@ namespace DataInnovations.Raffles
         }
     }
 }
- 

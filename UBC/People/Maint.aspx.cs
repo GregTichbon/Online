@@ -27,6 +27,7 @@ namespace UBC.People
         public string tb_mobile;
         public string tb_landline;
         public string dd_feecategory;
+        public string dd_rowingrole;
         public string dd_familymember;
         public string dd_lastseasonregistered;
         public string dd_school;
@@ -63,6 +64,7 @@ namespace UBC.People
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };  //Have added a new table - not yet using
+        public string[] rowingrole = new string[4] { "Rower", "Novice Rower", "Cox", "N/A" };  
         public string[] yesno = new string[2] { "Yes", "No" };
         public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
         public string[] transactions_system = new string[2] { "UBC", "Friends" };
@@ -165,6 +167,7 @@ namespace UBC.People
                             tb_postaladdress = dr["postaladdress"].ToString();
                             tb_colour = dr["colour"].ToString();
                             dd_feecategory = dr["feecategory"].ToString();
+                            dd_rowingrole = dr["rowingrole"].ToString();
                             dd_familymember = dr["familymember"].ToString();
                             dd_lastseasonregistered = dr["lastseasonregistered"].ToString();
                             dd_swimmer = dr["swimmer"].ToString();
@@ -921,6 +924,7 @@ namespace UBC.People
             tb_colour = Request.Form["tb_colour"].Trim();
             tb_facebook = Request.Form["tb_facebook"].Trim();
             dd_feecategory = Request.Form["dd_feecategory"].Trim();
+            dd_rowingrole = Request.Form["dd_rowingrole"].Trim();
             dd_familymember = Request.Form["dd_familymember"].Trim();
             dd_lastseasonregistered = Request.Form["dd_lastseasonregistered"].Trim();
 
@@ -989,6 +993,7 @@ namespace UBC.People
             cmd.Parameters.Add("@rowingnzseason", SqlDbType.VarChar).Value = dd_rowingnzseason;
             cmd.Parameters.Add("@boatstorage", SqlDbType.VarChar).Value = tb_boatstorage;
             cmd.Parameters.Add("@boatstoragefee", SqlDbType.VarChar).Value = tb_boatstoragefee;
+            cmd.Parameters.Add("@rowingrole", SqlDbType.VarChar).Value = dd_rowingrole;
 
 
             /*

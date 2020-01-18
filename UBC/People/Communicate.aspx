@@ -22,6 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
+        var newobj;
+
         tinymce.init({
             selector: '.tinymce',
             plugins: "code paste",
@@ -104,17 +106,22 @@
 
             $('.btn_submit').click(function (e) {
                 e.preventDefault();
-                $("#tbl_results > tbody").empty();
-                $('#dialog_sending').dialog({
-                    modal: true,
-                    width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
-                    height: 600, //auto
-                    position: { my: "center", at: "100", of: window }
-                });
-
-                newobj = $("#tbl_people > tbody > tr > td > input:checked").toArray()
-                //console.log(newobj);
-                sendtext(0, $(newobj).length);
+                var cont = true;
+                if ($("#tbl_people > tbody > tr:hidden > td > div > input:checked").length > 0) {
+                    cont = confirm("There are hidden people with flags set to send.  Do you wish to continue?");
+                }
+                if (cont) {
+                    $("#tbl_results > tbody").empty();
+                    $('#dialog_sending').dialog({
+                        modal: true,
+                        width: ($(window).width() - 0) * .95,  //75 x 2 is the width of the question mark top right
+                        height: 600, //auto
+                        position: { my: "center", at: "100", of: window }
+                    });
+                    newobj = $("#tbl_people > tbody > tr > td > div > input:checked").toArray()
+                    //console.log(newobj);
+                    sendtext(0, $(newobj).length);
+                }
 
                 /*
 
@@ -254,7 +261,8 @@
             });
 
             $('#dd_attendancefilter').change(function () {
-                alert('todo: hide/show needs to take into account category filter.  Could mean some selected options could be hidden????')
+                alert('todo: Only works if there is a category filter.  Could mean some selected options could be hidden????')
+                processrows();
             })
 
 
@@ -263,67 +271,69 @@
             })
 
             function sendtext(i, items) {
-                //console.log(i + ',' + items);
-                thisobj = newobj[i];
-                id = $(thisobj).attr("id");
-                name = $(thisobj).closest('tr').find('td').eq(1).text();
-                recipient = $(thisobj).val();
-                attendance = $(thisobj).closest('tr').find('td').eq(6).text();
 
-                if (id.substring(0, 9) == 'cb_email_') {
-                    type = 'email';
-                    id = id.substring(9);
-                    emailsubject = $('#tb_subject').val();
-                    emailhtml = tinyMCE.get('tb_htmlbody').getContent();
-                    text = '';
-                } else if (id.substring(0, 8) == 'cb_text_') {
-                    type = 'text';
-                    id = id.substring(8);
-                    emailsubject = '';
-                    emailhtml = '';
-                    text = $('#tb_txt').val();
-                } else if (id.substring(0, 10) == 'cb_remail_') {
-                    type = 'remail';
-                    id = id.substring(10);
-                    emailsubject = $('#tb_rsubject').val();
-                    emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
-                    text = '';
-                } else if (id.substring(0, 9) == 'cb_rtext_') {
-                    type = 'rtext';
-                    id = id.substring(9);
-                    emailsubject = '';
-                    emailhtml = '';
-                    text = $('#tb_rtxt').val();
-                }
-
-                //use this for named parameters
-                //var arForm = { type: type, id: id, emailsubject: emailsubject, emailhtml: emailhtml, text: text, recipient: recipient, attendance: attendance };
-                //mydata = JSON.stringify(arForm);
-
-                //use this for NameValue[] formVars
-                var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }, { "name": "mode", "value": "" }];
-                var mydata = JSON.stringify({ formVars: arForm });
-
-                //$('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + 'responseFromServer.d' + '</td></tr>');
-               
-                $.ajax({
-                    type: "POST",
-                    url: "posts.asmx/send_email_text",
-                    data: mydata,
-                    contentType: "application/json",
-                    datatype: "json",
-                    async: false,
-                    success: function (responseFromServer) {
-                        $('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + responseFromServer.d.status + '</td></tr>');
-                    }
-                });
                 
-                i++;
-                if (i < items) {
-                    setTimeout(function () { sendtext(i, items); }, 100);
-                    //} else {
-                    //    $('#tbl_results tbody').prepend('<tr><td>Complete</td></tr>');
-                }
+                    //console.log(i + ',' + items);
+                    thisobj = newobj[i];
+                    //console.log(thisobj);
+                    id = $(thisobj).attr("id");
+                    name = $(thisobj).closest('tr').find('td').eq(1).text();
+                    recipient = $(thisobj).val();
+                    attendance = $(thisobj).closest('tr').find('td').eq(6).text();
+                    if (id.substring(0, 9) == 'cb_email_') {
+                        type = 'email';
+                        id = id.substring(9);
+                        emailsubject = $('#tb_subject').val();
+                        emailhtml = tinyMCE.get('tb_htmlbody').getContent();
+                        text = '';
+                    } else if (id.substring(0, 8) == 'cb_text_') {
+                        type = 'text';
+                        id = id.substring(8);
+                        emailsubject = '';
+                        emailhtml = '';
+                        text = $('#tb_txt').val();
+                    } else if (id.substring(0, 10) == 'cb_remail_') {
+                        type = 'remail';
+                        id = id.substring(10);
+                        emailsubject = $('#tb_rsubject').val();
+                        emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
+                        text = '';
+                    } else if (id.substring(0, 9) == 'cb_rtext_') {
+                        type = 'rtext';
+                        id = id.substring(9);
+                        emailsubject = '';
+                        emailhtml = '';
+                        text = $('#tb_rtxt').val();
+                    }
+
+                    //use this for named parameters
+                    //var arForm = { type: type, id: id, emailsubject: emailsubject, emailhtml: emailhtml, text: text, recipient: recipient, attendance: attendance };
+                    //mydata = JSON.stringify(arForm);
+
+                    //use this for NameValue[] formVars
+                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }, { "name": "mode", "value": "" }];
+                    var mydata = JSON.stringify({ formVars: arForm });
+
+                    //$('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + 'responseFromServer.d' + '</td></tr>');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "posts.asmx/send_email_text",
+                        data: mydata,
+                        contentType: "application/json",
+                        datatype: "json",
+                        async: false,
+                        success: function (responseFromServer) {
+                            $('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + responseFromServer.d.status + '</td></tr>');
+                        }
+                    });
+
+                    i++;
+                    if (i < items) {
+                        setTimeout(function () { sendtext(i, items); }, 100);
+                        //} else {
+                        //    $('#tbl_results tbody').prepend('<tr><td>Complete</td></tr>');
+                    }
             }
 
         });  //document.ready
@@ -348,10 +358,8 @@
                     for (f1 = 0; f1 < category.length; f1++) {
                         usecategory = '|' + category[f1] + '|';
                         person_category = '|' + $(this).attr('data-category') + '|';
-                        //console.log(person_category + '-' + usecategory + '=' + person_category.indexOf(usecategory));
-                        if (person_category.indexOf(usecategory) != -1) {
+                        if (person_category.indexOf(usecategory) != -1 && ($('#tb_event_id').val() == '' || $('#dd_attendancefilter').val() == 'All' || $(this).hasClass($('#dd_attendancefilter').val()))) {
                             found = true;
-                            //console.log('found');
                             break;
                         }
                     }
@@ -376,7 +384,7 @@
         </div>
         <% = response %>
         Event ID:
-        <input type="text" id="tb_event_id" name="tb_event_id" />
+        <input type="text" id="tb_event_id" name="tb_event_id" value="<%=event_id %>" />
         <input type="button" id="btn_event" class="btn btn-info" value="Select Event" /><%=html_event %>
         <table>
             <tr>
@@ -474,7 +482,7 @@
                     <th>Facebook</th>
                     <th>Relations - show those under <input type="text" class="numeric" id="tb_age" maxlength="2" value="0" style="width:24px"/> <button type="button" class="btn_refresh">Apply</button><br /><input id="cb_rtextall" type="checkbox" /> Send Text <input id="cb_remailall" type="checkbox" /> Send Email </th>
                     <% if (event_id != "") { %>
-                    <th>Attendance<br /><select><%=attendance_values %></select></th>
+                    <th>Attendance<br /><select id="dd_attendancefilter"><option>All</option><%=attendance_values %></select></th>
                     <%} %>
                 </tr>
             </thead>

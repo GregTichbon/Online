@@ -50,7 +50,7 @@ namespace UBC.People.Reports
                     html = "<table id=\"rower\" class=\"table table-striped\">";
                     html += "<thead>";
                     html += "<tr>";
-                    html += "<th>School</th><th>Person</th><th>Gender</th><th>Age</th>";
+                    html += "<th>School</th><th>Person</th><th>Role</th><th>Gender</th><th>Age</th>";
                     html += "</tr>";
                     html += "</thead><tbody>";
 
@@ -61,13 +61,15 @@ namespace UBC.People.Reports
                             atdate = dr["atdate"].ToString();
                             html = "<h2>Ages as at " + atdate + "</h2>" + html;
                         }
+                        string person_guid = dr["guid"].ToString();
                         string person = dr["person"].ToString();
                         string school = dr["school"].ToString();
                         string ageatdate = dr["ageatdate"].ToString();
                         string gender = dr["gender"].ToString();
+                        string rowingrole = dr["rowingrole"].ToString();
 
                         html += "<tr>";
-                        html += "<td>" + school + "</td><td>" + person + "</td><td>" + gender + "</td><td>" + ageatdate + "</td>";
+                        html += "<td>" + school + "</td><td><a href=\"../maint.aspx?id=" + person_guid + "\" target=\"link\">" + person + "</a></td><td>" + rowingrole + "</td><td>" + gender + "</td><td>" + ageatdate + "</td>";
 
                         html += "</tr>";
                     }

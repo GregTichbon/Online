@@ -146,7 +146,8 @@ namespace UBC.People
                                 {
                                     note = " - " + note;
                                 }
-                                sendtext += delim + "<input id=\"cb_text_" + id + "\" name=\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /> <a href=\"tel:" + number + "\">" + number + "</a>" + note;
+
+                                sendtext += delim + "<div><input id=\"cb_text_" + id + "\" name=\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /> <a href=\"tel:" + number + "\">" + number + "</a>" + note + "</div>";
 
                                 //sendtext = delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
                                 //mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
@@ -263,7 +264,7 @@ namespace UBC.People
                     attendance_values = "";
                     foreach (string option in attendance_list)
                     {
-                        attendance_values = "<option>" + option + "</option>";
+                        attendance_values += "<option>" + option + "</option>";
                     }
                     
                 }

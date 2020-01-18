@@ -119,7 +119,7 @@ namespace UBC.People
                         string closes = "";
                         if(stopattendanceentrydatetime != "")
                         {
-                            closes = " - Entries close: " + Convert.ToDateTime(stopattendanceentrydatetime).ToString("d MMM yy HH: mm");
+                            closes = " - Entries close: " + Convert.ToDateTime(stopattendanceentrydatetime).ToString("d MMM yy HH:mm");
                             if (Convert.ToDateTime(stopattendanceentrydatetime) <= DateTime.Now)
                             {
                                 myclass = " class=\"closed\"";

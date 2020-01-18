@@ -511,6 +511,7 @@
     <Content Include="People\Communicate2.aspx" />
     <Content Include="People\CommunicateNew.aspx" />
     <Content Include="People\data.aspx" />
+    <Content Include="People\Documents\NICC2019.jpg" />
     <Content Include="People\Documents\UBCCalendar.ics" />
     <Content Include="People\EventDialog.aspx" />
     <Content Include="People\eventdialogclose.html" />
