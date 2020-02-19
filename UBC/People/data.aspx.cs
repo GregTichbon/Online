@@ -215,6 +215,8 @@ namespace UBC.People
                     string date = Request.QueryString["date"];
                     string days = Request.QueryString["days"];
 
+                    html += "<tr><td colspan=\"3\"><b>" + date + "</b></td></tr>";
+
                     strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
                     con = new SqlConnection(strConnString);

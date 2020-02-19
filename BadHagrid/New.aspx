@@ -323,7 +323,7 @@
 
 
             $('.countdown').downCount({
-                date: '01/01/2020 12:00:00',
+                date: '02/06/2020 12:00:00',
                 offset: +13
             }, function () {
                 $('#dialog_result').html("It's happening");

@@ -25,6 +25,7 @@ using System.Xml.Linq;
 using HtmlAgilityPack;
 using System.Security.Cryptography;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Generic
 {
@@ -46,6 +47,12 @@ namespace Generic
             text.LoadHtml(source);
             string pageText = text.DocumentNode.InnerText;
             return pageText;
+        }
+
+        public string formatphonenumber(string phonenumber)
+        {
+            phonenumber = Regex.Replace(phonenumber, "[^0-9]", "");
+            return phonenumber;
         }
 
         public string test()

@@ -10,6 +10,7 @@
     <form id="form1" runat="server">
         <p><a href="SR.aspx">Stroke Rate</a></p>
         <p><a href="Prognostics.aspx">Prognostics</a></p>
+        <p><a href="PrognosticHandicaps.aspx">Prognostic Handicaps</a></p>
         <p><a href="MaintainPrognostic.aspx">Maintain Prognostics</a></p>
         <p><a href="CalculatePrognostic.aspx">Calculate Prognostic</a></p>
         <p><a href="Entry.aspx">Entry</a></p>

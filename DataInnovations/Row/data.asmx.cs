@@ -109,9 +109,6 @@ namespace DataInnovations.Row
             Context.Response.Write(JS.Serialize(dropdown));
         }
 
-        
-        
-
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void division(string discipline, string boat)
@@ -206,8 +203,6 @@ namespace DataInnovations.Row
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(dropdown));
         }
-
-
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -352,6 +347,52 @@ namespace DataInnovations.Row
             JavaScriptSerializer JS = new JavaScriptSerializer();
             Context.Response.Write(JS.Serialize(dropdown));
         }
+
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void code_autocomplete(string term)
+        {
+            List<CodeClass> CodeList = new List<CodeClass>();
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=Rowing;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("code_autocomplete", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@search", SqlDbType.VarChar).Value = term;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        CodeList.Add(new CodeClass
+                        {
+                            Code_CTR = dr["code_ctr"].ToString(),
+                            name = dr["code"].ToString(),
+                            label = dr["code"].ToString()
+                        });
+                    }
+
+                    dr.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            Context.Response.Write(JS.Serialize(CodeList));
+        }
     }
     #region classes
 
@@ -377,7 +418,13 @@ namespace DataInnovations.Row
         public string coxed;
         public string prognostictime;
     }
+    public class CodeClass
+    {
+        public string Code_CTR;
+        public string name;
+        public string label;
 
+    }
 
     #endregion
 }

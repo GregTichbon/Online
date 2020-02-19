@@ -99,9 +99,22 @@ namespace UBC.People
                         string incategory = dr["incategory"].ToString();
                         string age = dr["age"].ToString();
 
-                        if (attendance == "") // && incategory == "0")
+                        if (attendance != "")
                         {
-                            attendance = "NA";
+                            if (incategory == "0")
+                            {
+                                attendance = "*" + attendance;
+                            }
+                        }
+                        else
+                        {
+                            if (incategory == "0")
+                            {
+                                attendance = "NA";
+                            } else
+                            {
+                                attendance = "???";
+                            }
                         }
 
                         attendance_list.Add(attendance);

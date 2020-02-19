@@ -1,0 +1,1730 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6313BBDF-E79E-4DA0-A983-FFD0CC0AA0CC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UBC</RootNamespace>
+    <AssemblyName>UBC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Generic">
+      <HintPath>..\Generic\bin\Generic.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Ical.Net, Version=4.1.8.0, Culture=neutral, PublicKeyToken=65c0446cd019ea53, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.4.1.11\lib\net46\Ical.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NodaTime, Version=2.0.2.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.2.0.2\lib\net45\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.1.0\lib\net46\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="%24Test\Temp1.html" />
+    <Content Include="BookingCalendar.aspx" />
+    <Content Include="BookingCalendarNew.aspx" />
+    <Content Include="Calendar.aspx" />
+    <Content Include="Completed\default.aspx" />
+    <Content Include="data.asmx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Dependencies\bootstrap-datetimepicker.min.css" />
+    <Content Include="Dependencies\bootstrap-datetimepicker.min.js" />
+    <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="Dependencies\dirty.js" />
+    <Content Include="Dependencies\fittext.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\fullcalendar\CHANGELOG.txt" />
+    <Content Include="Dependencies\fullcalendar\CONTRIBUTING.txt" />
+    <Content Include="Dependencies\fullcalendar\demos\agenda-views.html" />
+    <Content Include="Dependencies\fullcalendar\demos\background-events.html" />
+    <Content Include="Dependencies\fullcalendar\demos\basic-views.html" />
+    <Content Include="Dependencies\fullcalendar\demos\default.html" />
+    <Content Include="Dependencies\fullcalendar\demos\external-dragging.html" />
+    <Content Include="Dependencies\fullcalendar\demos\gcal.html" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg1.html" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg2.aspx" />
+    <Content Include="Dependencies\fullcalendar\demos\Greg2.html" />
+    <Content Include="Dependencies\fullcalendar\demos\json.html" />
+    <Content Include="Dependencies\fullcalendar\demos\js\theme-chooser.js" />
+    <Content Include="Dependencies\fullcalendar\demos\list-views.html" />
+    <Content Include="Dependencies\fullcalendar\demos\locales.html" />
+    <Content Include="Dependencies\fullcalendar\demos\php\get-events.php" />
+    <Content Include="Dependencies\fullcalendar\demos\php\get-timezones.php" />
+    <Content Include="Dependencies\fullcalendar\demos\php\utils.php" />
+    <Content Include="Dependencies\fullcalendar\demos\selectable.html" />
+    <Content Include="Dependencies\fullcalendar\demos\themes.html" />
+    <Content Include="Dependencies\fullcalendar\demos\timezones.html" />
+    <Content Include="Dependencies\fullcalendar\demos\week-numbers.html" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.css" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.js" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Dependencies\fullcalendar\fullcalendar.print.min.css" />
+    <Content Include="Dependencies\fullcalendar\gcal.js" />
+    <Content Include="Dependencies\fullcalendar\gcal.min.js" />
+    <Content Include="Dependencies\fullcalendar\lib\jquery-ui.min.js" />
+    <Content Include="Dependencies\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Dependencies\fullcalendar\lib\moment.min.js" />
+    <Content Include="Dependencies\fullcalendar\LICENSE.txt" />
+    <Content Include="Dependencies\fullcalendar\locale-all.js" />
+    <Content Include="Dependencies\fullcalendar\locale\af.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-dz.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-kw.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-ly.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-ma.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-sa.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar-tn.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ar.js" />
+    <Content Include="Dependencies\fullcalendar\locale\bg.js" />
+    <Content Include="Dependencies\fullcalendar\locale\bs.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ca.js" />
+    <Content Include="Dependencies\fullcalendar\locale\cs.js" />
+    <Content Include="Dependencies\fullcalendar\locale\da.js" />
+    <Content Include="Dependencies\fullcalendar\locale\de-at.js" />
+    <Content Include="Dependencies\fullcalendar\locale\de-ch.js" />
+    <Content Include="Dependencies\fullcalendar\locale\de.js" />
+    <Content Include="Dependencies\fullcalendar\locale\el.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-au.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-ca.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-gb.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-ie.js" />
+    <Content Include="Dependencies\fullcalendar\locale\en-nz.js" />
+    <Content Include="Dependencies\fullcalendar\locale\es-do.js" />
+    <Content Include="Dependencies\fullcalendar\locale\es-us.js" />
+    <Content Include="Dependencies\fullcalendar\locale\es.js" />
+    <Content Include="Dependencies\fullcalendar\locale\et.js" />
+    <Content Include="Dependencies\fullcalendar\locale\eu.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fa.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fi.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fr-ca.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fr-ch.js" />
+    <Content Include="Dependencies\fullcalendar\locale\fr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\gl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\he.js" />
+    <Content Include="Dependencies\fullcalendar\locale\hi.js" />
+    <Content Include="Dependencies\fullcalendar\locale\hr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\hu.js" />
+    <Content Include="Dependencies\fullcalendar\locale\id.js" />
+    <Content Include="Dependencies\fullcalendar\locale\is.js" />
+    <Content Include="Dependencies\fullcalendar\locale\it.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ja.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ka.js" />
+    <Content Include="Dependencies\fullcalendar\locale\kk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ko.js" />
+    <Content Include="Dependencies\fullcalendar\locale\lb.js" />
+    <Content Include="Dependencies\fullcalendar\locale\lt.js" />
+    <Content Include="Dependencies\fullcalendar\locale\lv.js" />
+    <Content Include="Dependencies\fullcalendar\locale\mk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ms-my.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ms.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nb.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nl-be.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\nn.js" />
+    <Content Include="Dependencies\fullcalendar\locale\pl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\pt-br.js" />
+    <Content Include="Dependencies\fullcalendar\locale\pt.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ro.js" />
+    <Content Include="Dependencies\fullcalendar\locale\ru.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sq.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sr-cyrl.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\sv.js" />
+    <Content Include="Dependencies\fullcalendar\locale\th.js" />
+    <Content Include="Dependencies\fullcalendar\locale\tr.js" />
+    <Content Include="Dependencies\fullcalendar\locale\uk.js" />
+    <Content Include="Dependencies\fullcalendar\locale\vi.js" />
+    <Content Include="Dependencies\fullcalendar\locale\zh-cn.js" />
+    <Content Include="Dependencies\fullcalendar\locale\zh-tw.js" />
+    <Content Include="Dependencies\GijGo\css\checkbox.css" />
+    <Content Include="Dependencies\GijGo\css\checkbox.min.css" />
+    <Content Include="Dependencies\GijGo\css\colorpicker.css" />
+    <Content Include="Dependencies\GijGo\css\colorpicker.min.css" />
+    <Content Include="Dependencies\GijGo\css\core.css" />
+    <Content Include="Dependencies\GijGo\css\core.min.css" />
+    <Content Include="Dependencies\GijGo\css\datepicker.css" />
+    <Content Include="Dependencies\GijGo\css\datepicker.min.css" />
+    <Content Include="Dependencies\GijGo\css\datetimepicker.css" />
+    <Content Include="Dependencies\GijGo\css\datetimepicker.min.css" />
+    <Content Include="Dependencies\GijGo\css\dialog.css" />
+    <Content Include="Dependencies\GijGo\css\dialog.min.css" />
+    <Content Include="Dependencies\GijGo\css\dropdown.css" />
+    <Content Include="Dependencies\GijGo\css\dropdown.min.css" />
+    <Content Include="Dependencies\GijGo\css\editor.css" />
+    <Content Include="Dependencies\GijGo\css\editor.min.css" />
+    <Content Include="Dependencies\GijGo\css\grid.css" />
+    <Content Include="Dependencies\GijGo\css\grid.min.css" />
+    <Content Include="Dependencies\GijGo\css\slider.css" />
+    <Content Include="Dependencies\GijGo\css\slider.min.css" />
+    <Content Include="Dependencies\GijGo\css\timepicker.css" />
+    <Content Include="Dependencies\GijGo\css\timepicker.min.css" />
+    <Content Include="Dependencies\GijGo\css\tree.css" />
+    <Content Include="Dependencies\GijGo\css\tree.min.css" />
+    <Content Include="Dependencies\GijGo\fonts\gijgo-material.svg" />
+    <Content Include="Dependencies\GijGo\js\checkbox.js" />
+    <Content Include="Dependencies\GijGo\js\checkbox.min.js" />
+    <Content Include="Dependencies\GijGo\js\colorpicker.js" />
+    <Content Include="Dependencies\GijGo\js\colorpicker.min.js" />
+    <Content Include="Dependencies\GijGo\js\core.js" />
+    <Content Include="Dependencies\GijGo\js\core.min.js" />
+    <Content Include="Dependencies\GijGo\js\datepicker.js" />
+    <Content Include="Dependencies\GijGo\js\datepicker.min.js" />
+    <Content Include="Dependencies\GijGo\js\datetimepicker.js" />
+    <Content Include="Dependencies\GijGo\js\datetimepicker.min.js" />
+    <Content Include="Dependencies\GijGo\js\dialog.js" />
+    <Content Include="Dependencies\GijGo\js\dialog.min.js" />
+    <Content Include="Dependencies\GijGo\js\draggable.js" />
+    <Content Include="Dependencies\GijGo\js\draggable.min.js" />
+    <Content Include="Dependencies\GijGo\js\dropdown.js" />
+    <Content Include="Dependencies\GijGo\js\dropdown.min.js" />
+    <Content Include="Dependencies\GijGo\js\droppable.js" />
+    <Content Include="Dependencies\GijGo\js\droppable.min.js" />
+    <Content Include="Dependencies\GijGo\js\editor.js" />
+    <Content Include="Dependencies\GijGo\js\editor.min.js" />
+    <Content Include="Dependencies\GijGo\js\grid.js" />
+    <Content Include="Dependencies\GijGo\js\grid.min.js" />
+    <Content Include="Dependencies\GijGo\js\slider.js" />
+    <Content Include="Dependencies\GijGo\js\slider.min.js" />
+    <Content Include="Dependencies\GijGo\js\timepicker.js" />
+    <Content Include="Dependencies\GijGo\js\timepicker.min.js" />
+    <Content Include="Dependencies\GijGo\js\tree.js" />
+    <Content Include="Dependencies\GijGo\js\tree.min.js" />
+    <Content Include="Dependencies\Images\cross1.png" />
+    <Content Include="Dependencies\Images\Email\Email.png" />
+    <Content Include="Dependencies\Images\Email\Emmetts.png" />
+    <Content Include="Dependencies\Images\Email\FaceBook.png" />
+    <Content Include="Dependencies\Images\Email\FourRegions.png" />
+    <Content Include="Dependencies\Images\Email\GuthrieBowron.png" />
+    <Content Include="Dependencies\Images\Email\Header.jpg" />
+    <Content Include="Dependencies\Images\Email\Ignition.jpg" />
+    <Content Include="Dependencies\Images\Email\Image1.jpg" />
+    <Content Include="Dependencies\Images\Email\NZCT.jpg" />
+    <Content Include="Dependencies\Images\Email\PubCharity.jpg" />
+    <Content Include="Dependencies\Images\Email\WebSite.png" />
+    <Content Include="Dependencies\Images\Logo-Page-Head-350.png" />
+    <Content Include="Dependencies\Images\Logo-Page-Head.png" />
+    <Content Include="Dependencies\Images\pencil.png" />
+    <Content Include="Dependencies\Images\qm1.png" />
+    <Content Include="Dependencies\Images\star.png" />
+    <Content Include="Dependencies\Images\tick1.png" />
+    <Content Include="Dependencies\jscolor-example.html" />
+    <Content Include="Dependencies\jscolor.js" />
+    <Content Include="Dependencies\moment.min.js" />
+    <Content Include="Dependencies\pwstrength-bootstrap.min.js" />
+    <Content Include="Dependencies\QueryBuilder\build\cleanLn.js" />
+    <Content Include="Dependencies\QueryBuilder\build\initConfig.js" />
+    <Content Include="Dependencies\QueryBuilder\build\jsdoc.js" />
+    <Content Include="Dependencies\QueryBuilder\build\processLang.js" />
+    <Content Include="Dependencies\QueryBuilder\build\removeJshint.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.dark.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.dark.min.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.default.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\css\query-builder.default.min.css" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ar.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.az.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.bg.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.cs.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.da.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.de.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.el.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.en.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.es.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.fa-IR.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.fr.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.he.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.it.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.nl.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.no.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.pl.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.pt-BR.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.pt-PT.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ro.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ru.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.sq.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.tr.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.ua.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\i18n\query-builder.zh-CN.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.min.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.standalone.js" />
+    <Content Include="Dependencies\QueryBuilder\dist\js\query-builder.standalone.min.js" />
+    <Content Include="Dependencies\QueryBuilder\examples\index.html" />
+    <Content Include="Dependencies\QueryBuilder\examples\screenshot.png" />
+    <Content Include="Dependencies\QueryBuilder\Gruntfile.js" />
+    <Content Include="Dependencies\QueryBuilder\src\.wrapper.js" />
+    <Content Include="Dependencies\QueryBuilder\src\core.js" />
+    <Content Include="Dependencies\QueryBuilder\src\data.js" />
+    <Content Include="Dependencies\QueryBuilder\src\defaults.js" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\.wrapper.js" />
+    <Content Include="Dependencies\QueryBuilder\src\jquery.js" />
+    <Content Include="Dependencies\QueryBuilder\src\main.js" />
+    <Content Include="Dependencies\QueryBuilder\src\model.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-checkbox\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-selectpicker\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-tooltip-errors\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\change-filters\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\chosen-selectpicker\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\filter-description\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\mongodb-support\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\sql-support\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\unique-filter\plugin.js" />
+    <Content Include="Dependencies\QueryBuilder\src\public.js" />
+    <Content Include="Dependencies\QueryBuilder\src\template.js" />
+    <Content Include="Dependencies\QueryBuilder\src\utils.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\common.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\core.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\data.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\index.html" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins-gui.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.mongo-support.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.not-group.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\plugins.sql-support.module.js" />
+    <Content Include="Dependencies\QueryBuilder\tests\utils.module.js" />
+    <Content Include="Dependencies\showfields.js" />
+    <Content Include="Dependencies\ShowHidden.js" />
+    <Content Include="Dependencies\StickyTableCells\bootstrap.min.css" />
+    <Content Include="Dependencies\StickyTableCells\example-ltr.html" />
+    <Content Include="Dependencies\StickyTableCells\example-popup.html" />
+    <Content Include="Dependencies\StickyTableCells\example-rtl.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-ltr.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-popup.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\bootstrap.min.css" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\fancybox_loading%402x.gif" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\fancybox_loading.gif" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\fancybox_overlay.png" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\fancybox_sprite%402x.png" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\fancybox_sprite.png" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\jquery-3.2.0.min.js" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\jquery.fancybox.css" />
+    <Content Include="Dependencies\StickyTableCells\Examples\libs\jquery.fancybox.js" />
+    <Content Include="Dependencies\StickyTableCells\Examples\sample-table.txt" />
+    <Content Include="Dependencies\StickyTableCells\fancybox_loading%402x.gif" />
+    <Content Include="Dependencies\StickyTableCells\fancybox_loading.gif" />
+    <Content Include="Dependencies\StickyTableCells\fancybox_overlay.png" />
+    <Content Include="Dependencies\StickyTableCells\fancybox_sprite%402x.png" />
+    <Content Include="Dependencies\StickyTableCells\fancybox_sprite.png" />
+    <Content Include="Dependencies\StickyTableCells\jquery-3.2.0.min.js" />
+    <Content Include="Dependencies\StickyTableCells\jquery.fancybox.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.fancybox.js" />
+    <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
+    <Content Include="Dependencies\StickyTableCells\README.md" />
+    <Content Include="Dependencies\StickyTableCells\sample-table.txt" />
+    <Content Include="Dependencies\TableHeadFixer\.gitignore" />
+    <Content Include="Dependencies\TableHeadFixer\package.json" />
+    <Content Include="Dependencies\populate.js" />
+    <Content Include="Dependencies\TableHeadFixer\README.md" />
+    <Content Include="Dependencies\QueryBuilder\.editorconfig" />
+    <Content Include="Dependencies\QueryBuilder\.github\CONTRIBUTING.md" />
+    <Content Include="Dependencies\QueryBuilder\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="Dependencies\QueryBuilder\.github\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="Dependencies\QueryBuilder\.gitignore" />
+    <Content Include="Dependencies\QueryBuilder\.jscsrc" />
+    <Content Include="Dependencies\QueryBuilder\.jsdoc.json" />
+    <Content Include="Dependencies\QueryBuilder\.jshintrc" />
+    <Content Include="Dependencies\QueryBuilder\.npmignore" />
+    <Content Include="Dependencies\QueryBuilder\.sass-lint.yml" />
+    <Content Include="Dependencies\QueryBuilder\.travis.yml" />
+    <Content Include="Dependencies\QueryBuilder\bower.json" />
+    <Content Include="Dependencies\QueryBuilder\build\jsdoc.md" />
+    <Content Include="Dependencies\QueryBuilder\composer.json" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\dark.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\default.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\bt-tooltip-errors.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\filter-description.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\invert.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\sortable.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_bt-checkbox.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_bt-tooltip-errors.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_filter-description.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_invert.scss" />
+    <Content Include="Dependencies\QueryBuilder\dist\scss\plugins\_sortable.scss" />
+    <Content Include="Dependencies\QueryBuilder\LICENSE" />
+    <Content Include="Dependencies\QueryBuilder\package.json" />
+    <Content Include="Dependencies\QueryBuilder\README.md" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ar.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\az.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\bg.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\cs.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\da.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\de.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\el.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\en.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\es.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\fa-IR.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\fr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\he.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\it.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\nl.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\no.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\pl.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\pt-BR.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\pt-PT.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ro.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ru.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\sq.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\tr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\ua.json" />
+    <Content Include="Dependencies\QueryBuilder\src\i18n\zh-CN.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-checkbox\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\bt-tooltip-errors\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\filter-description\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\ar.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\az.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\cs.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\el.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\en.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\fr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\he.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\pl.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\pt-BR.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\ru.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\tr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\ua.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\i18n\zh-CN.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\invert\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\i18n\en.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\i18n\fr.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\not-group\i18n\he.json" />
+    <Content Include="Dependencies\QueryBuilder\src\plugins\sortable\plugin.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\scss\dark.scss" />
+    <Content Include="Dependencies\QueryBuilder\src\scss\default.scss" />
+    <Content Include="Dependencies\UBC.js" />
+    <Content Include="EmailTemplate\Full - Copy.html" />
+    <Content Include="EmailTemplate\Full.html" />
+    <Content Include="EmailTemplate\Standard.html" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Dependencies\GijGo\fonts\gijgo-material.eot" />
+    <Content Include="Dependencies\GijGo\fonts\gijgo-material.ttf" />
+    <Content Include="Dependencies\GijGo\fonts\gijgo-material.woff" />
+    <Content Include="Go\Doc1\default.aspx" />
+    <Content Include="Go\Register\default.aspx" />
+    <Content Include="LearntoRow\XCommunicate.aspx" />
+    <Content Include="LearntoRow\default.aspx" />
+    <Content Include="Main.aspx" />
+    <Content Include="People\Attend.aspx" />
+    <Content Include="People\Attendance.aspx" />
+    <Content Include="People\Attendance24-28Jan2019.aspx" />
+    <Content Include="People\Attending.aspx" />
+    <Content Include="People\BankAllocate.aspx" />
+    <Content Include="People\BankImport.aspx" />
+    <Content Include="Dependencies\Images\question.png" />
+    <Content Include="Dependencies\Images\questionsmall.png" />
+    <Content Include="Booking.aspx" />
+    <Content Include="BookingList.aspx" />
+    <Content Include="People\Categories.aspx" />
+    <Content Include="People\Communicate2.aspx" />
+    <Content Include="People\CommunicateNew.aspx" />
+    <Content Include="People\data.aspx" />
+    <Content Include="People\Documents\wtcc2020Crews.PNG" />
+    <Content Include="People\Documents\NICC2019.jpg" />
+    <Content Include="People\Documents\UBCCalendar.ics" />
+    <Content Include="People\EventDialog.aspx" />
+    <Content Include="People\eventdialogclose.html" />
+    <Content Include="People\EventPlanner2.js" />
+    <Content Include="People\EventPlanner1.js" />
+    <Content Include="People\EventSelector.aspx" />
+    <Content Include="People\FindPhone.aspx" />
+    <Content Include="People\Images\100.jpg" />
+    <Content Include="People\Images\103.jpg" />
+    <Content Include="People\Images\105.jpg" />
+    <Content Include="People\Images\107.jpg" />
+    <Content Include="People\Images\109.jpg" />
+    <Content Include="People\Images\139.jpg" />
+    <Content Include="People\Images\148.jpg" />
+    <Content Include="People\Images\149.jpg" />
+    <Content Include="People\Images\150.jpg" />
+    <Content Include="People\Images\96.jpg" />
+    <Content Include="People\%24Notes\%24Notes.txt" />
+    <Content Include="Dependencies\Images\Scissors.png" />
+    <Content Include="People\main.aspx" />
+    <Content Include="People\MastersCommunicate.aspx" />
+    <Content Include="People\message.aspx" />
+    <Content Include="People\News.aspx" />
+    <Content Include="People\NewsList.aspx" />
+    <Content Include="People\NewsViewer.aspx" />
+    <Content Include="People\Posts.asmx" />
+    <Content Include="People\RegisterAccess.aspx" />
+    <Content Include="People\RegisterDisplay.aspx" />
+    <Content Include="People\Registration.aspx" />
+    <Content Include="People\RegistrationDisplay.aspx" />
+    <Content Include="People\Reports\ComingEventsList.aspx" />
+    <Content Include="People\Reports\ContactDetails.aspx" />
+    <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
+    <Content Include="People\Reports\CurrentMembers.aspx" />
+    <Content Include="People\Reports\Default.aspx" />
+    <Content Include="People\Reports\EventSchedule.aspx" />
+    <Content Include="People\Reports\Finance.aspx" />
+    <Content Include="People\Reports\FriendsStatements.aspx" />
+    <Content Include="People\Reports\FriendsStatementsPreview.aspx" />
+    <Content Include="People\Reports\FullReport.aspx" />
+    <Content Include="People\Reports\LoginRegister.aspx" />
+    <Content Include="People\Reports\RegattaList.aspx" />
+    <Content Include="People\Reports\Registrations.aspx" />
+    <Content Include="People\Reports\Relationship Audit.aspx" />
+    <Content Include="People\Reports\RelationshipAudit.aspx" />
+    <Content Include="People\Reports\Report.aspx" />
+    <Content Include="People\Reports\SchoolRowers.aspx" />
+    <Content Include="People\Reports\ShowAttendees.aspx" />
+    <Content Include="People\Reports\SMSLog.aspx" />
+    <Content Include="People\Reports\Test1.html" />
+    <Content Include="People\Reports\Test2.html" />
+    <Content Include="People\Reports\TestCrystal.aspx" />
+    <Content Include="People\Reports\Tracker.aspx" />
+    <Content Include="People\Resources.aspx" />
+    <Content Include="People\Security\LogOut.aspx" />
+    <Content Include="People\Signup\menu.aspx" />
+    <Content Include="People\TestAndPlay\cROPPER3.aspx" />
+    <Content Include="People\TestAndPlay\MailChimp1.html" />
+    <Content Include="People\TestAndPlay\XMLCreate1.aspx" />
+    <Content Include="People\TestAndPlay\XMLTranslate1.aspx" />
+    <Content Include="People\xSignUp.aspx" />
+    <Content Include="People\XSignUpComplete.aspx" />
+    <Content Include="People\XSignupList.aspx" />
+    <Content Include="People\Signup\Checklist.aspx" />
+    <Content Include="People\Signup\Communicate.aspx" />
+    <Content Include="People\Signup\Complete.aspx" />
+    <Content Include="People\Signup\Default.aspx" />
+    <Content Include="People\Signup\List.aspx" />
+    <Content Include="People\TestAndPlay\Async1.aspx" />
+    <Content Include="People\TestAndPlay\Async2.aspx" />
+    <Content Include="People\TestAndPlay\Async3.aspx" />
+    <Content Include="People\TestAndPlay\Canvas1.aspx" />
+    <Content Include="People\TestAndPlay\Canvas2.aspx" />
+    <Content Include="People\TestAndPlay\Cropper1.aspx" />
+    <Content Include="People\TestAndPlay\Cropper2.aspx" />
+    <Content Include="People\TestAndPlay\Cropper\jquery-cropper.js" />
+    <Content Include="People\TestAndPlay\Cropper\main2.js" />
+    <Content Include="People\TestAndPlay\Cropper\main.css" />
+    <Content Include="People\TestAndPlay\Cropper\main.js" />
+    <Content Include="People\TestAndPlay\Email1.aspx" />
+    <Content Include="People\TestAndPlay\Export1.aspx" />
+    <Content Include="People\TestAndPlay\posts.asmx" />
+    <Content Include="People\Transaction.aspx" />
+    <Content Include="People\transactions.aspx" />
+    <Content Include="redirect.aspx" />
+    <Content Include="Test2.aspx" />
+    <Content Include="Test2a.aspx" />
+    <Content Include="Test3.html" />
+    <Content Include="TestEmail.aspx" />
+    <Content Include="UpdateICS.aspx" />
+    <Content Include="XMLFile1.xml" />
+    <Content Include="XSLTFile1.xslt" />
+    <Content Include="Dependencies\fullcalendar\demos\json\events.json" />
+    <Content Include="People\SchoolLearntoRowAug2019.pdf" />
+    <None Include="packages.config" />
+    <Content Include="Dependencies\UBC.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="People\Check.aspx" />
+    <Content Include="People\Communicate.aspx" />
+    <Content Include="People\data.asmx" />
+    <Content Include="People\Event.aspx" />
+    <Content Include="People\EventList.aspx" />
+    <Content Include="People\EventPlanner.aspx" />
+    <Content Include="People\Images\1.jpg" />
+    <Content Include="People\Images\101.JPG" />
+    <Content Include="People\Images\102.JPG" />
+    <Content Include="People\Images\2.jpg" />
+    <Content Include="People\Images\20.jpg" />
+    <Content Include="People\Images\24.JPG" />
+    <Content Include="People\Images\24b.jpg" />
+    <Content Include="People\Images\27.JPG" />
+    <Content Include="People\Images\29.jpg" />
+    <Content Include="People\Images\30.JPG" />
+    <Content Include="People\Images\31.JPG" />
+    <Content Include="People\Images\33.jpg" />
+    <Content Include="People\Images\33b.jpg" />
+    <Content Include="People\Images\38.jpg" />
+    <Content Include="People\Images\39.jpg" />
+    <Content Include="People\Images\39b.jpg" />
+    <Content Include="People\Images\42.jpg" />
+    <Content Include="People\Images\42A.JPG" />
+    <Content Include="People\Images\43.jpg" />
+    <Content Include="People\Images\45.jpg" />
+    <Content Include="People\Images\47.JPG" />
+    <Content Include="People\Images\48.jpg" />
+    <Content Include="People\Images\48b.jpg" />
+    <Content Include="People\Images\51.jpg" />
+    <Content Include="People\Images\52.jpg" />
+    <Content Include="People\Images\53.JPG" />
+    <Content Include="People\Images\55.jpg" />
+    <Content Include="People\Images\56.JPG" />
+    <Content Include="People\Images\57.JPG" />
+    <Content Include="People\Images\58.jpg" />
+    <Content Include="People\Images\59.JPG" />
+    <Content Include="People\Images\60.JPG" />
+    <Content Include="People\Images\61.jpg" />
+    <Content Include="People\Images\61b.jpg" />
+    <Content Include="People\Images\62.JPG" />
+    <Content Include="People\Images\63.jpg" />
+    <Content Include="People\Images\64.jpg" />
+    <Content Include="People\Images\65.jpg" />
+    <Content Include="People\Images\66.jpg" />
+    <Content Include="People\Images\66b.jpg" />
+    <Content Include="People\Images\67.jpg" />
+    <Content Include="People\Images\68.JPG" />
+    <Content Include="People\Images\69.jpg" />
+    <Content Include="People\Images\69b.jpg" />
+    <Content Include="People\Images\70.JPG" />
+    <Content Include="People\Images\71.jpg" />
+    <Content Include="People\Images\71a.jpg" />
+    <Content Include="People\Images\72.jpg" />
+    <Content Include="People\Images\72b.JPG" />
+    <Content Include="People\Images\73.jpg" />
+    <Content Include="People\Images\74.jpg" />
+    <Content Include="People\Images\75.jpg" />
+    <Content Include="People\Images\76.jpg" />
+    <Content Include="People\Images\77.jpg" />
+    <Content Include="People\Images\79.jpg" />
+    <Content Include="People\Images\80.jpg" />
+    <Content Include="People\Images\81.jpg" />
+    <Content Include="People\Images\81b.JPG" />
+    <Content Include="People\Images\84.jpg" />
+    <Content Include="People\Images\85.JPG" />
+    <Content Include="People\Images\86.JPG" />
+    <Content Include="People\Images\87.JPG" />
+    <Content Include="People\Images\89.jpg" />
+    <Content Include="People\Images\92.jpg" />
+    <Content Include="People\Images\93.jpg" />
+    <Content Include="People\Images\95.jpg" />
+    <Content Include="People\Images\97.JPG" />
+    <Content Include="People\Images\98.JPG" />
+    <Content Include="People\Images\DSC_0008.JPG" />
+    <Content Include="People\Images\DSC_0009 - Copy.JPG" />
+    <Content Include="People\Images\DSC_0015 - Copy.JPG" />
+    <Content Include="People\Images\DSC_0016.JPG" />
+    <Content Include="People\Images\IMG_0674.jpg" />
+    <Content Include="People\Lists.aspx" />
+    <Content Include="People\Maint2.aspx" />
+    <Content Include="People\Register.aspx" />
+    <Content Include="People\RegisterEmail.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="People\RegisterScreen.xslt" />
+    <Content Include="People\Reports\AttendanceMatrix.aspx" />
+    <Content Include="People\Reports\CheckList.aspx" />
+    <Content Include="People\Schedule.aspx" />
+    <Content Include="People\Search.aspx" />
+    <Content Include="People\Security\Login.aspx" />
+    <Content Include="People\Security\LoginAssistance.aspx" />
+    <Content Include="People\Security\ResetPassword.aspx" />
+    <Content Include="People\Test1.aspx" />
+    <Content Include="People\uploadphoto.aspx" />
+    <Content Include="SurveySep2018.aspx" />
+    <Content Include="Temp.html" />
+    <Content Include="Test.aspx" />
+    <Content Include="Training\ZoneTraining.aspx" />
+    <Content Include="UBC.Master" />
+    <Content Include="People\Documents\Parent Information 2018.pdf" />
+    <Content Include="People\Documents\JohnTrophyRegatta.pdf" />
+    <Content Include="People\Documents\WaitaraTravel.pdf" />
+    <Content Include="People\Documents\WaitaraPhone.pdf" />
+    <Content Include="People\Documents\Update5Dec2018.pdf" />
+    <Content Include="People\Documents\ChristmasRegatta2018.pdf" />
+    <Content Include="People\Documents\Update23Dec2018.pdf" />
+    <Content Include="People\Documents\NICCandCTCEntries2019.pdf" />
+    <Content Include="People\Documents\NICCandCTC2019.pdf" />
+    <Content Include="People\Documents\NICCandCTC2019Travel.pdf" />
+    <Content Include="People\Documents\NISS2019.pdf" />
+    <Content Include="People\Documents\TasterFlyer.pdf" />
+    <Content Include="People\Documents\ChristmasRegatta2019.pdf" />
+    <Content Include="People\Documents\TrainingPlan16Dec19.pdf" />
+    <Content Include="People\Documents\Exercises.pdf" />
+    <Content Include="People\Documents\Training20-26Jan20.pdf" />
+    <Content Include="People\Documents\NICC2020.pdf" />
+    <Content Include="People\Documents\Training27Jan-9Feb20.pdf" />
+    <Content Include="People\Documents\Training10-16Feb20.pdf" />
+    <Content Include="People\Documents\wtcc2020Crews.pdf" />
+    <Content Include="People\Documents\WhanganuiChamps2020Races.pdf" />
+    <Content Include="People\Documents\Training17-23Feb20.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Training\Documents\Programme Oct 2018 - 19.pdf" />
+    <None Include="Properties\PublishProfiles\TOH-APP Makaranui.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dependencies\additional-methods.js" />
+    <Content Include="Dependencies\bootstrap.min.css" />
+    <Content Include="Dependencies\bootstrap.min.js" />
+    <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Dependencies\colorbox\colorbox.css" />
+    <Content Include="Dependencies\colorbox\images\border.png" />
+    <Content Include="Dependencies\colorbox\images\controls.png" />
+    <Content Include="Dependencies\colorbox\images\loading.gif" />
+    <Content Include="Dependencies\colorbox\images\loading_background.png" />
+    <Content Include="Dependencies\colorbox\images\overlay.png" />
+    <Content Include="Dependencies\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\css\ScrollTabla.css" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo3.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo4.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example1.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example2.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example3.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example4.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example5.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example6.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logoN.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logonit.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Images\processing1.gif" />
+    <Content Include="Dependencies\jquery-2.2.0.min.js" />
+    <Content Include="Dependencies\jquery.validate.min.js" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.js" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.js" />
+    <Content Include="Dependencies\TableHeadFixer\examples\cutomStyleHeight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeader.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiHead.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiTable.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\gulpfile.js" />
+    <Content Include="Dependencies\TableHeadFixer\index.html" />
+    <Content Include="Dependencies\TableHeadFixer\tableHeadFixer.js" />
+    <Content Include="People\List.aspx" />
+    <Content Include="People\Maint.aspx" />
+    <Content Include="UserCode.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BookingCalendar.aspx.cs">
+      <DependentUpon>BookingCalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BookingCalendar.aspx.designer.cs">
+      <DependentUpon>BookingCalendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BookingCalendarNew.aspx.cs">
+      <DependentUpon>BookingCalendarNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BookingCalendarNew.aspx.designer.cs">
+      <DependentUpon>BookingCalendarNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Completed\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Completed\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\fullcalendar\demos\Greg2.aspx.cs">
+      <DependentUpon>Greg2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dependencies\fullcalendar\demos\Greg2.aspx.designer.cs">
+      <DependentUpon>Greg2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dependencies\functions.cs" />
+    <Compile Include="Go\Doc1\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Go\Doc1\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Go\Register\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Go\Register\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LearntoRow\XCommunicate.aspx.cs">
+      <DependentUpon>XCommunicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearntoRow\XCommunicate.aspx.designer.cs">
+      <DependentUpon>XCommunicate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LearntoRow\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearntoRow\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="localfunctions.cs" />
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Attend.aspx.cs">
+      <DependentUpon>Attend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attend.aspx.designer.cs">
+      <DependentUpon>Attend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Attendance.aspx.cs">
+      <DependentUpon>Attendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attendance.aspx.designer.cs">
+      <DependentUpon>Attendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Attendance24-28Jan2019.aspx.cs">
+      <DependentUpon>Attendance24-28Jan2019.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attendance24-28Jan2019.aspx.designer.cs">
+      <DependentUpon>Attendance24-28Jan2019.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Attending.aspx.cs">
+      <DependentUpon>Attending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Attending.aspx.designer.cs">
+      <DependentUpon>Attending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\BankAllocate.aspx.cs">
+      <DependentUpon>BankAllocate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\BankAllocate.aspx.designer.cs">
+      <DependentUpon>BankAllocate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\BankImport.aspx.cs">
+      <DependentUpon>BankImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\BankImport.aspx.designer.cs">
+      <DependentUpon>BankImport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Booking.aspx.cs">
+      <DependentUpon>Booking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Booking.aspx.designer.cs">
+      <DependentUpon>Booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BookingList.aspx.cs">
+      <DependentUpon>BookingList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BookingList.aspx.designer.cs">
+      <DependentUpon>BookingList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Check.aspx.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Check.aspx.designer.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Communicate.aspx.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Communicate.aspx.designer.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Communicate2.aspx.cs">
+      <DependentUpon>Communicate2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Communicate2.aspx.designer.cs">
+      <DependentUpon>Communicate2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\CommunicateNew.aspx.cs">
+      <DependentUpon>CommunicateNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\CommunicateNew.aspx.designer.cs">
+      <DependentUpon>CommunicateNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Event.aspx.cs">
+      <DependentUpon>Event.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Event.aspx.designer.cs">
+      <DependentUpon>Event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\EventDialog.aspx.cs">
+      <DependentUpon>EventDialog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\EventDialog.aspx.designer.cs">
+      <DependentUpon>EventDialog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\EventList.aspx.cs">
+      <DependentUpon>EventList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\EventList.aspx.designer.cs">
+      <DependentUpon>EventList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\EventPlanner.aspx.cs">
+      <DependentUpon>EventPlanner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\EventPlanner.aspx.designer.cs">
+      <DependentUpon>EventPlanner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\EventSelector.aspx.cs">
+      <DependentUpon>EventSelector.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\EventSelector.aspx.designer.cs">
+      <DependentUpon>EventSelector.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\FindPhone.aspx.cs">
+      <DependentUpon>FindPhone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\FindPhone.aspx.designer.cs">
+      <DependentUpon>FindPhone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Lists.aspx.cs">
+      <DependentUpon>Lists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Lists.aspx.designer.cs">
+      <DependentUpon>Lists.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\main.aspx.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\main.aspx.designer.cs">
+      <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Maint.aspx.cs">
+      <DependentUpon>Maint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Maint.aspx.designer.cs">
+      <DependentUpon>Maint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Maint2.aspx.cs">
+      <DependentUpon>Maint2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Maint2.aspx.designer.cs">
+      <DependentUpon>Maint2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\MastersCommunicate.aspx.cs">
+      <DependentUpon>MastersCommunicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\MastersCommunicate.aspx.designer.cs">
+      <DependentUpon>MastersCommunicate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\message.aspx.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\message.aspx.designer.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\NewsList.aspx.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\NewsList.aspx.designer.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\NewsViewer.aspx.cs">
+      <DependentUpon>NewsViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\NewsViewer.aspx.designer.cs">
+      <DependentUpon>NewsViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\RegisterAccess.aspx.cs">
+      <DependentUpon>RegisterAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\RegisterAccess.aspx.designer.cs">
+      <DependentUpon>RegisterAccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\RegisterDisplay.aspx.cs">
+      <DependentUpon>RegisterDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\RegisterDisplay.aspx.designer.cs">
+      <DependentUpon>RegisterDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Registration.aspx.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Registration.aspx.designer.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\RegistrationDisplay.aspx.cs">
+      <DependentUpon>RegistrationDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\RegistrationDisplay.aspx.designer.cs">
+      <DependentUpon>RegistrationDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\AttendanceMatrix.aspx.cs">
+      <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\AttendanceMatrix.aspx.designer.cs">
+      <DependentUpon>AttendanceMatrix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\CheckList.aspx.cs">
+      <DependentUpon>CheckList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CheckList.aspx.designer.cs">
+      <DependentUpon>CheckList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\ComingEventsList.aspx.cs">
+      <DependentUpon>ComingEventsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\ComingEventsList.aspx.designer.cs">
+      <DependentUpon>ComingEventsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\ContactDetails.aspx.cs">
+      <DependentUpon>ContactDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\ContactDetails.aspx.designer.cs">
+      <DependentUpon>ContactDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\AllEmail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllEmail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\AnnualInvoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnualInvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\KeyRegister.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyRegister.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\FriendsStatements.cs">
+      <DependentUpon>FriendsStatements.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\RegattaStatements.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegattaStatements.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\Simple1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Simple1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\Subs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Subs.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Crystal\testNoData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>testNoData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CurrentCategoriesMatrix.aspx.cs">
+      <DependentUpon>CurrentCategoriesMatrix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CurrentCategoriesMatrix.aspx.designer.cs">
+      <DependentUpon>CurrentCategoriesMatrix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\CurrentMembers.aspx.cs">
+      <DependentUpon>CurrentMembers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\CurrentMembers.aspx.designer.cs">
+      <DependentUpon>CurrentMembers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\EventSchedule.aspx.cs">
+      <DependentUpon>EventSchedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\EventSchedule.aspx.designer.cs">
+      <DependentUpon>EventSchedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Finance.aspx.cs">
+      <DependentUpon>Finance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Finance.aspx.designer.cs">
+      <DependentUpon>Finance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatements.aspx.cs">
+      <DependentUpon>FriendsStatements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatements.aspx.designer.cs">
+      <DependentUpon>FriendsStatements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatementsPreview.aspx.cs">
+      <DependentUpon>FriendsStatementsPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\FriendsStatementsPreview.aspx.designer.cs">
+      <DependentUpon>FriendsStatementsPreview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\FullReport.aspx.cs">
+      <DependentUpon>FullReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\FullReport.aspx.designer.cs">
+      <DependentUpon>FullReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\LoginRegister.aspx.cs">
+      <DependentUpon>LoginRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
+      <DependentUpon>LoginRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\RaceFees.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RaceFees.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Reports\RegattaList.aspx.cs">
+      <DependentUpon>RegattaList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\RegattaList.aspx.designer.cs">
+      <DependentUpon>RegattaList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Registrations.aspx.cs">
+      <DependentUpon>Registrations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Registrations.aspx.designer.cs">
+      <DependentUpon>Registrations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Relationship Audit.aspx.cs">
+      <DependentUpon>Relationship Audit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Relationship Audit.aspx.designer.cs">
+      <DependentUpon>Relationship Audit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\RelationshipAudit.aspx.cs">
+      <DependentUpon>RelationshipAudit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\RelationshipAudit.aspx.designer.cs">
+      <DependentUpon>RelationshipAudit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\SchoolRowers.aspx.cs">
+      <DependentUpon>SchoolRowers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\SchoolRowers.aspx.designer.cs">
+      <DependentUpon>SchoolRowers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\ShowAttendees.aspx.cs">
+      <DependentUpon>ShowAttendees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\ShowAttendees.aspx.designer.cs">
+      <DependentUpon>ShowAttendees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\SMSLog.aspx.cs">
+      <DependentUpon>SMSLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\SMSLog.aspx.designer.cs">
+      <DependentUpon>SMSLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\TestCrystal.aspx.cs">
+      <DependentUpon>TestCrystal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\TestCrystal.aspx.designer.cs">
+      <DependentUpon>TestCrystal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\Tracker.aspx.cs">
+      <DependentUpon>Tracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Tracker.aspx.designer.cs">
+      <DependentUpon>Tracker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Resources.aspx.cs">
+      <DependentUpon>Resources.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Resources.aspx.designer.cs">
+      <DependentUpon>Resources.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Schedule.aspx.cs">
+      <DependentUpon>Schedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Schedule.aspx.designer.cs">
+      <DependentUpon>Schedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Security\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Security\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Security\LoginAssistance.aspx.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Security\LoginAssistance.aspx.designer.cs">
+      <DependentUpon>LoginAssistance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Security\LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Security\LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Security\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Security\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\menu.aspx.cs">
+      <DependentUpon>menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\menu.aspx.designer.cs">
+      <DependentUpon>menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\cROPPER3.aspx.cs">
+      <DependentUpon>cROPPER3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\cROPPER3.aspx.designer.cs">
+      <DependentUpon>cROPPER3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLCreate1.aspx.cs">
+      <DependentUpon>XMLCreate1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLCreate1.aspx.designer.cs">
+      <DependentUpon>XMLCreate1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLTranslate1.aspx.cs">
+      <DependentUpon>XMLTranslate1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\XMLTranslate1.aspx.designer.cs">
+      <DependentUpon>XMLTranslate1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\xSignUp.aspx.cs">
+      <DependentUpon>xSignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\xSignUp.aspx.designer.cs">
+      <DependentUpon>xSignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\XSignUpComplete.aspx.cs">
+      <DependentUpon>XSignUpComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\XSignUpComplete.aspx.designer.cs">
+      <DependentUpon>XSignUpComplete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\XSignupList.aspx.cs">
+      <DependentUpon>XSignupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\XSignupList.aspx.designer.cs">
+      <DependentUpon>XSignupList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Checklist.aspx.cs">
+      <DependentUpon>Checklist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Checklist.aspx.designer.cs">
+      <DependentUpon>Checklist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Communicate.aspx.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Communicate.aspx.designer.cs">
+      <DependentUpon>Communicate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Complete.aspx.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Complete.aspx.designer.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Signup\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Signup\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async1.aspx.cs">
+      <DependentUpon>Async1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async1.aspx.designer.cs">
+      <DependentUpon>Async1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async2.aspx.cs">
+      <DependentUpon>Async2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async2.aspx.designer.cs">
+      <DependentUpon>Async2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async3.aspx.cs">
+      <DependentUpon>Async3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Async3.aspx.designer.cs">
+      <DependentUpon>Async3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas1.aspx.cs">
+      <DependentUpon>Canvas1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas1.aspx.designer.cs">
+      <DependentUpon>Canvas1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas2.aspx.cs">
+      <DependentUpon>Canvas2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Canvas2.aspx.designer.cs">
+      <DependentUpon>Canvas2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Cropper2.aspx.cs">
+      <DependentUpon>Cropper2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Cropper2.aspx.designer.cs">
+      <DependentUpon>Cropper2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Email1.aspx.cs">
+      <DependentUpon>Email1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Email1.aspx.designer.cs">
+      <DependentUpon>Email1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Export1.aspx.cs">
+      <DependentUpon>Export1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\TestAndPlay\Export1.aspx.designer.cs">
+      <DependentUpon>Export1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\TestAndPlay\posts.asmx.cs">
+      <DependentUpon>posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="People\Transaction.aspx.cs">
+      <DependentUpon>Transaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Transaction.aspx.designer.cs">
+      <DependentUpon>Transaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\transactions.aspx.cs">
+      <DependentUpon>transactions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\transactions.aspx.designer.cs">
+      <DependentUpon>transactions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\uploadphoto.aspx.cs">
+      <DependentUpon>uploadphoto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\uploadphoto.aspx.designer.cs">
+      <DependentUpon>uploadphoto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="redirect.aspx.cs">
+      <DependentUpon>redirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="redirect.aspx.designer.cs">
+      <DependentUpon>redirect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SurveySep2018.aspx.cs">
+      <DependentUpon>SurveySep2018.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveySep2018.aspx.designer.cs">
+      <DependentUpon>SurveySep2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test2.aspx.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test2.aspx.designer.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test2a.aspx.cs">
+      <DependentUpon>Test2a.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test2a.aspx.designer.cs">
+      <DependentUpon>Test2a.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestEmail.aspx.cs">
+      <DependentUpon>TestEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestEmail.aspx.designer.cs">
+      <DependentUpon>TestEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training\ZoneTraining.aspx.cs">
+      <DependentUpon>ZoneTraining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Training\ZoneTraining.aspx.designer.cs">
+      <DependentUpon>ZoneTraining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UBC.Master.cs">
+      <DependentUpon>UBC.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UBC.Master.designer.cs">
+      <DependentUpon>UBC.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateICS.aspx.cs">
+      <DependentUpon>UpdateICS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateICS.aspx.designer.cs">
+      <DependentUpon>UpdateICS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserCode.aspx.cs">
+      <DependentUpon>UserCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserCode.aspx.designer.cs">
+      <DependentUpon>UserCode.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="People\Images\Signup\" />
+    <Folder Include="People\Uploads\Bank\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="People\Reports\Crystal\AllEmail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AllEmail.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\AnnualInvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AnnualInvoice.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\KeyRegister.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>KeyRegister.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\FriendsStatements.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FriendsStatements.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\RegattaStatements.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RegattaStatements.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\Simple1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Simple1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\Subs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Subs.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\Crystal\testNoData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>testNoData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="People\Reports\RaceFees.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RaceFees.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51431</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51431/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
