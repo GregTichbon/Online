@@ -26,7 +26,7 @@ namespace DataInnovations.Raffles.UBC2019B
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
 
-            string sql = @"select R.identifier, T.purchaser, t.TicketNumber, w.guid, W.Draw, W.drawndate
+            string sql = @"select R.identifier, T.purchaser, t.TicketNumber, w.guid, W.Draw, W.drawndate, W.Voucher
                 from RaffleWinner W
                 inner join raffleticket T on T.RaffleTicket_ID = W.RaffleTicket_ID
                 inner join Raffle R on R.Raffle_ID = T.Raffle_ID where isnull(W.status,'') = 'Winner'
@@ -52,6 +52,7 @@ namespace DataInnovations.Raffles.UBC2019B
                         string guid = dr["guid"].ToString();
                         string identifier = dr["identifier"].ToString();
                         string draw = dr["draw"].ToString();
+                        string voucher = dr["voucher"].ToString();
                         string drawndate = "";
                         if (dr["drawndate"] != DBNull.Value)
                         {
@@ -116,7 +117,7 @@ namespace DataInnovations.Raffles.UBC2019B
                         b1.Height = 100;
                         b1.Width = 400;
 
-                        System.Drawing.Image BarCodeimage = b1.Encode(BarcodeLib.TYPE.CODE39Extended, "20200218005005");
+                        System.Drawing.Image BarCodeimage = b1.Encode(BarcodeLib.TYPE.CODE39Extended, voucher);
                         imageGraphics.DrawImage(BarCodeimage, 1250, 2300);
 
 

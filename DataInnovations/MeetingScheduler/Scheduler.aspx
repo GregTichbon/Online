@@ -21,6 +21,9 @@
         .s3 {
             background-color: yellow;
         }
+        .s4 {
+            background-color:brown;
+        }
 
         .save {
             padding: 10px;
@@ -35,9 +38,10 @@
         .selector {
             padding: 10px;
             text-align: center;
-            font: normal 10px Arial, sans-serif;
+            font: bold 12px Arial, sans-serif;
             border: solid 2px;
             border-color: white;
+            height: 50px;
             width: 100px;
         }
 
@@ -237,6 +241,7 @@
                     days.removeClass('s1');
                     days.removeClass('s2');
                     days.removeClass('s3');
+                    days.removeClass('s4');
                     days.addClass('s' + newrank);
 
                 }
@@ -409,16 +414,17 @@
         <table>
             <tr>
                 <td></td>
-                <td colspan="3" style="text-align: center">Availability options</td>
+                <td colspan="4" style="text-align: center">Availability options</td>
                 <td></td>
             </tr>
             <tr>
                 <td class="selector" data-rank="" style="background-color: aqua; border-color: red">Click</td>
                 <td class="selector s1" data-rank="1" style="color: white">Unavailable</td>
+                <td class="selector s4" data-rank="4" style="color: white">Unlikely</td>
                 <td class="selector s3" data-rank="3">Possibly</td>
                 <td class="selector s2" data-rank="2">OK</td>
                 <td>
-                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" Height="34px" Width="156px" />
+                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" Text="Save" class="selector" />
                 </td>
             </tr>
         </table>
@@ -428,7 +434,7 @@
             Notes:<br />
             <br />
             Complete the form as soon as possible.<br />
-            To work effectively every slot should be identified as Unavailable, Possibly or OK.<br />
+            To work effectively every slot should be identified as Unavailable, Unlikely, Possibly or OK.<br />
             There are potentially time slots to the right, use the scroll bar to access these.<br />
             You may change your availability as often as you need.<br />
             Select an availability option and click on the day to set all the time slots on that day.&nbsp; (You can still amend individual time slots)<br />

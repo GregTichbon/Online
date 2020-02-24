@@ -85,6 +85,10 @@ namespace UBC
             html += "<br /><a href=\"people/reports/EventSchedule.aspx\">Event Schedule</a>";
             html += "<br /><a href=\"people/reports/ShowAttendees.aspx\">Show Attendees</a>";
             html += "<br /><a href=\"people/reports/ComingEventsList.aspx\">Coming Events List</a>";
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11"))
+            {
+                html += "<br /><a href=\"people/upload.aspx\">Upload</a>";
+            }
             html += "<br /><a href=\"people/reports/default.aspx\">REPORTS</a>";
 
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))

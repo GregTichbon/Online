@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.3.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.4.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -50,24 +49,15 @@
       <HintPath>..\packages\BarcodeLib.2.2.3\lib\netstandard2.0\BarcodeStandard.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.Web">
-      <HintPath>..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
-    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.8.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\UBC\Bin\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.19.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.19\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -79,9 +69,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net451\System.Data.SQLite.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
@@ -751,72 +740,6 @@
     <Content Include="YourPassing\_Includes\jquery-ui-themes-1.12.1\themes\vader\jquery-ui.min.css" />
     <Content Include="YourPassing\_Includes\jquery-ui-themes-1.12.1\themes\vader\theme.css" />
     <Content Include="YourPassing\_Includes\Main.css" />
-    <Content Include="YourPassing\_Includes\tinymce\changelog.txt" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\jquery.tinymce.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\license.txt" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\advlist\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\anchor\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\autolink\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\autoresize\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\autosave\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\bbcode\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\charmap\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\codesample\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\code\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\colorpicker\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\contextmenu\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\directionality\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\emoticons\js\emojis.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\emoticons\js\emojis.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\emoticons\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\fullpage\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\fullscreen\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\help\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\hr\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\imagetools\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\image\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\importcss\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\insertdatetime\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\legacyoutput\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\link\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\lists\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\media\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\nonbreaking\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\noneditable\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\pagebreak\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\paste\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\preview\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\print\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\quickbars\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\save\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\searchreplace\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\spellchecker\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\tabfocus\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\table\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\template\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\textcolor\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\textpattern\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\toc\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\visualblocks\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\visualchars\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\plugins\wordcount\plugin.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\content\default\content.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\content\document\content.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\content\writer\content.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide-dark\content.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide-dark\content.mobile.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide-dark\skin.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide-dark\skin.mobile.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide\content.inline.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide\content.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide\content.mobile.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide\skin.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide\skin.mobile.min.css" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\themes\mobile\theme.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\themes\silver\theme.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\tinymce.min.js" />
-    <Content Include="YourPassing\_Includes\tinymce\LICENSE.TXT" />
     <Content Include="Dependencies\fullcalendar\demos\json\events.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -827,20 +750,6 @@
     <Content Include="Raffles\DrawText.aspx" />
     <Content Include="Raffles\Images\3logos.jpg" />
     <Content Include="Raffles\Images\ChefsChoiceWinningTicket2019A.jpg" />
-    <Content Include="Raffles\Images\vouchers\0ee0c0a3-0fe6-4935-b316-746e57415ef2.jpg" />
-    <Content Include="Raffles\Images\vouchers\17c27094-956c-4512-afdf-e460e1128ed6.jpg" />
-    <Content Include="Raffles\Images\vouchers\1bfdf09a-4d1a-466b-ab83-29edfdce5180.jpg" />
-    <Content Include="Raffles\Images\vouchers\1ceb9b08-4a61-4280-ae12-3397a1c51a83.jpg" />
-    <Content Include="Raffles\Images\vouchers\347f09aa-86ee-42cd-9cc6-eb382d5ddf99.jpg" />
-    <Content Include="Raffles\Images\vouchers\40394b71-cd00-490f-9497-14ee8e33d995.jpg" />
-    <Content Include="Raffles\Images\vouchers\69380dae-fd01-40eb-90d8-43f6b736ab8a.jpg" />
-    <Content Include="Raffles\Images\vouchers\701a4373-acf4-4caf-9d2e-cd949e2f5ac7.jpg" />
-    <Content Include="Raffles\Images\vouchers\ad9e8430-80fd-4f81-8b9f-aba3b12c07ec.jpg" />
-    <Content Include="Raffles\Images\vouchers\c6e1bcf6-edcf-4c71-b06f-48c56831ec44.jpg" />
-    <Content Include="Raffles\Images\vouchers\ca7a5836-01f3-4366-bb8b-2ecbffeb0354.jpg" />
-    <Content Include="Raffles\Images\vouchers\de8df6a5-086b-435e-9101-53bd0c024563.jpg" />
-    <Content Include="Raffles\Images\vouchers\eafe000c-7760-43b5-9f79-6af2b43fe127.jpg" />
-    <Content Include="Raffles\Images\vouchers\f8031967-4df6-4563-a76d-ceb7ded1d3f8.jpg" />
     <Content Include="Raffles\Maadi08Mar2018G.aspx" />
     <Content Include="Raffles\Maadi08Mar2018.aspx" />
     <Content Include="Raffles\Raffles.aspx" />
@@ -893,8 +802,6 @@
     <Content Include="YourPassing\agentregister.aspx" />
     <Content Include="YourPassing\Default.aspx" />
     <Content Include="YourPassing\Main.Master" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\langs\readme.md" />
-    <Content Include="YourPassing\_Includes\tinymce\js\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Raffles\Data.asmx" />
@@ -1859,6 +1766,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Accounts\Uploads\Bank\" />
+    <Folder Include="Raffles\Images\vouchers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Accounts\Accountant.rpt">
@@ -1903,16 +1811,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.7.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net451\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
   </Target>
-  <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net451\System.Data.SQLite.Core.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
 </Project>

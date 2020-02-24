@@ -109,6 +109,7 @@
     <None Include="Properties\PublishProfiles\auction.thegreatball.nz.pubxml" />
     <None Include="Properties\PublishProfiles\TOH-APP Auction.pubxml" />
     <Content Include="Templates\winners.xlsx" />
+    <None Include="Properties\PublishProfiles\TOH-APP VS2019.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
