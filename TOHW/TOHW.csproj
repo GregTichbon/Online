@@ -68,6 +68,11 @@
   <ItemGroup>
     <Content Include="2Talk\default.asp" />
     <Content Include="2Talk\default.aspx" />
+    <Content Include="AFace1\face-api.min.js" />
+    <Content Include="AFace1\index.html" />
+    <Content Include="AFace1\script.js" />
+    <Content Include="AFace\Default.html" />
+    <Content Include="AFace\face-api.min.js" />
     <Content Include="Auction\Admin\Default.aspx" />
     <Content Include="Auction\%24OLD\item.aspx" />
     <Content Include="Auction\%24OLD\donor.aspx" />
@@ -323,6 +328,52 @@
     <Content Include="Bpop\assets\test.html" />
     <Content Include="Bpop\Test1.aspx" />
     <Content Include="Bpop\Test2.aspx" />
+    <Content Include="CheckinOut\app.js" />
+    <Content Include="Face-Recognition\face-api.min.js" />
+    <Content Include="Face-Recognition\index.html" />
+    <Content Include="Face-Recognition\labeled_images\Black Widow\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Black Widow\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain America\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain America\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain Marvel\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain Marvel\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Hawkeye\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Hawkeye\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Jim Rhodes\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Jim Rhodes\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Thor\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Thor\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Tony Stark\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Tony Stark\2.jpg" />
+    <Content Include="Face-Recognition\script.js" />
+    <Content Include="Face-Recognition\test_images\1.png" />
+    <Content Include="Face-Recognition\test_images\2.jpg" />
+    <Content Include="Face-Recognition\test_images\3.jpg" />
+    <Content Include="CheckinOut\instascan.min.js" />
+    <Content Include="CheckinOut\jsqrcode\alignpat.js" />
+    <Content Include="CheckinOut\jsqrcode\bitmat.js" />
+    <Content Include="CheckinOut\jsqrcode\bmparser.js" />
+    <Content Include="CheckinOut\jsqrcode\datablock.js" />
+    <Content Include="CheckinOut\jsqrcode\databr.js" />
+    <Content Include="CheckinOut\jsqrcode\datamask.js" />
+    <Content Include="CheckinOut\jsqrcode\decoder.js" />
+    <Content Include="CheckinOut\jsqrcode\detector.js" />
+    <Content Include="CheckinOut\jsqrcode\errorlevel.js" />
+    <Content Include="CheckinOut\jsqrcode\findpat.js" />
+    <Content Include="CheckinOut\jsqrcode\formatinf.js" />
+    <Content Include="CheckinOut\jsqrcode\gf256.js" />
+    <Content Include="CheckinOut\jsqrcode\gf256poly.js" />
+    <Content Include="CheckinOut\jsqrcode\grid.js" />
+    <Content Include="CheckinOut\jsqrcode\qrcode.js" />
+    <Content Include="CheckinOut\jsqrcode\rsdecoder.js" />
+    <Content Include="CheckinOut\jsqrcode\test.html" />
+    <Content Include="CheckinOut\jsqrcode\version.js" />
+    <Content Include="CheckinOut\Posts.asmx" />
+    <Content Include="CheckinOut\style.css" />
+    <Content Include="CheckinOut\New.html" />
+    <Content Include="CheckinOut\Test1.aspx" />
+    <Content Include="CheckinOut\Test1.html" />
+    <Content Include="CheckinOut\default.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -394,6 +445,7 @@
     <Content Include="images\LeoneandMellisa.jpg" />
     <Content Include="images\MahangaWilliams.jpg" />
     <Content Include="Index.aspx" />
+    <Content Include="Information.aspx" />
     <Content Include="MySite\default.html" />
     <Content Include="MySite\fblogin.png" />
     <Content Include="MySite\login.aspx" />
@@ -781,6 +833,47 @@
     <Content Include="Dependencies\TableHeadFixer\package.json" />
     <Content Include="Dependencies\TableHeadFixer\README.md" />
     <Content Include="Pickups\GetImage.ashx" />
+    <Content Include="Face-Recognition\models\face_landmark_68_model-shard1" />
+    <Content Include="Face-Recognition\models\face_landmark_68_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\face_recognition_model-shard1" />
+    <Content Include="Face-Recognition\models\face_recognition_model-shard2" />
+    <Content Include="Face-Recognition\models\face_recognition_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\mtcnn_model-shard1" />
+    <Content Include="Face-Recognition\models\mtcnn_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\ssd_mobilenetv1_model-shard1" />
+    <Content Include="Face-Recognition\models\ssd_mobilenetv1_model-shard2" />
+    <Content Include="Face-Recognition\models\ssd_mobilenetv1_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\tiny_face_detector_model-shard1" />
+    <Content Include="Face-Recognition\models\tiny_face_detector_model-weights_manifest.json" />
+    <Content Include="AFace\Models\age_gender_model-shard1" />
+    <Content Include="AFace\Models\age_gender_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_expression_model-shard1" />
+    <Content Include="AFace\Models\face_expression_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_landmark_68_model-shard1" />
+    <Content Include="AFace\Models\face_landmark_68_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_landmark_68_tiny_model-shard1" />
+    <Content Include="AFace\Models\face_landmark_68_tiny_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_recognition_model-shard1" />
+    <Content Include="AFace\Models\face_recognition_model-shard2" />
+    <Content Include="AFace\Models\face_recognition_model-weights_manifest.json" />
+    <Content Include="AFace\Models\mtcnn_model-shard1" />
+    <Content Include="AFace\Models\mtcnn_model-weights_manifest.json" />
+    <Content Include="AFace\Models\ssd_mobilenetv1_model-shard1" />
+    <Content Include="AFace\Models\ssd_mobilenetv1_model-shard2" />
+    <Content Include="AFace\Models\ssd_mobilenetv1_model-weights_manifest.json" />
+    <Content Include="AFace\Models\tiny_face_detector_model-shard1" />
+    <Content Include="AFace\Models\tiny_face_detector_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_expression_model-shard1" />
+    <Content Include="AFace1\models\face_expression_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_landmark_68_model-shard1" />
+    <Content Include="AFace1\models\face_landmark_68_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_landmark_68_tiny_model-shard1" />
+    <Content Include="AFace1\models\face_landmark_68_tiny_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_recognition_model-shard1" />
+    <Content Include="AFace1\models\face_recognition_model-shard2" />
+    <Content Include="AFace1\models\face_recognition_model-weights_manifest.json" />
+    <Content Include="AFace1\models\tiny_face_detector_model-shard1" />
+    <Content Include="AFace1\models\tiny_face_detector_model-weights_manifest.json" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />
@@ -852,6 +945,17 @@
     <Compile Include="2Talk\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CheckinOut\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CheckinOut\Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckinOut\Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Database\data.asmx.cs">
       <DependentUpon>data.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -882,6 +986,13 @@
     </Compile>
     <Compile Include="Database\TodaysBirthdays.aspx.designer.cs">
       <DependentUpon>TodaysBirthdays.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Information.aspx.cs">
+      <DependentUpon>Information.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Information.aspx.designer.cs">
+      <DependentUpon>Information.aspx</DependentUpon>
     </Compile>
     <Compile Include="MySite\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

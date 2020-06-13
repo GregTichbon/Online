@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Client</title>
+    <style type="text/css">
+        .container {
+            background-color: #99CCFF;
+            border: thick solid #808080;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            right: 0;
+            background-color: lightgreen;
+        }
+
+        .answer {
+            width: 200px;
+            height: 200px;
+        }
+
+        #A {
+            background-color: red;
+        }
+
+        #B {
+            background-color: blue;
+        }
+
+        #C {
+            background-color: yellow;
+        }
+
+        #D {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="split left">
+        <input type="text" id="id" />
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Send" />
+        <div id="panel" style="display:none">
+            <div id="question"></div>
+            <div id="timer"></div>
+            <div id="answers">
+                <div id="A" class="answer"></div>
+                <div id="B" class="answer"></div>
+                <div id="C" class="answer"></div>
+                <div id="D" class="answer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="split right">
+        <div id="status">
+        </div>
+    </div>
+
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script type="text/javascript">
+        var time;
+        $(function () {
+
+            var chat = $.connection.chatHub;
+            chat.client.broadcastMessage = function (detail) {
+                parts = detail.split('|');
+                code = parts[0];
+                if (code == "1") {
+                    question = parts[2];
+                    time = parts[1];
+                    $('#panel').hide();
+                    $('#question').html(question);
+                    $('#status').html('Question is ready: You will have ' + time / 1000 + ' seconds to answer<br />');
+                } else if (code == "2") {
+                    $('#answers').show();
+                    $('#panel').show();
+                    var start = Date.now();
+                    timer = setInterval(function () {
+                        var delta = Date.now() - start; // milliseconds elapsed since start
+                        if (delta >= time) {  //shouldn't be hardcoded
+                            delta = time;  //shouldn't be hardcoded
+                            clearTimeout(timer);
+                            $('#status').html("Timed out");
+                            $('#answers').hide();
+                        }
+                        $("#timer").html(delta);
+                    }, 50); // update about every second
+                } else if (code == "3") {
+                    $('#status').prepend("Someone answered " + parts[1] + " in " + parts[2] / 1000 + 'seconds<br />');
+                } else if (code == "9") {
+                    $('#status').prepend("Individual Message: " + parts[1] + '<br />');
+                }
+            };
+
+            $.connection.hub.start().done(function () {
+                var connectionID = $.connection.hub.id;
+                alert(connectionID);
+
+                $('#sendmessage').click(function () {
+                    //chat.server.send("9|" + $('#message').val());
+
+                    chat.server.test($('#id').val(), "9|" + $('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+
+
+
+            $(".answer").click(function () {
+                clearTimeout(timer);
+                $('#answers').hide();
+                $('#status').prepend("<br />Sending: " + $(this).attr("id") + ", timer: " + $("#timer").html() + "<br />");
+                chat.server.send("3" + "|" + $(this).attr("id") + "|" + $("#timer").html());
+            });
+        });
+    </script>
+</body>
+</html>

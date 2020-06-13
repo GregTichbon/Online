@@ -234,7 +234,7 @@ namespace DataInnovations.SMS
         }
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string SMSPhoneStatus()
+        public string SMSPhoneStatus(string options)
         {
 
 
@@ -287,15 +287,17 @@ namespace DataInnovations.SMS
                 catch (Exception e)
                 {
                     failed++;
-                    Generic.Functions gFunctions = new Generic.Functions();
+                    if (options.Contains("|SendEmail|"))
+                    {
+                        Generic.Functions gFunctions = new Generic.Functions();
 
-                    string host = "70.35.207.87";
-                    string password = gFunctions.Decrypt("rPqCkZXW2bhc0HuBUHATwg==");
-                    string body = "<html><body>" + e.InnerException + "</body></html>";
+                        string host = "70.35.207.87";
+                        string password = gFunctions.Decrypt("rPqCkZXW2bhc0HuBUHATwg==");
+                        string body = "<html><body>" + e.InnerException + "</body></html>";
 
-                    gFunctions.sendemailV3(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", body, "greg@datainn.co.nz;gtichbon@teorahou.org.nz;greg.tichbon@whanganui.govt.nz", "", "");
-                    //gFunctions.sendemailV4(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", "", db_otheremailaddress, emailBCC, replyto, attachments, emailoptions);
-
+                        gFunctions.sendemailV3(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", body, "greg@datainn.co.nz;gtichbon@teorahou.org.nz;greg.tichbon@whanganui.govt.nz", "", "");
+                        //gFunctions.sendemailV4(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", "", db_otheremailaddress, emailBCC, replyto, attachments, emailoptions);
+                    }
                     html += "Error";
                     //send email
                 }

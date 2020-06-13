@@ -58,7 +58,7 @@
                 $('#processing').show();
 
                 $.ajax({
-                    url: "data.asmx/updaterafflestatus?id=" + $('#hf_id').val() + "&status=" + $(this).val(), success: function (result) {
+                    url: "../data.asmx/updaterafflestatus?id=" + $('#hf_id').val() + "&status=" + $(this).val(), success: function (result) {
                         //alert('Success');
                     }, error: function (XMLHttpRequest, textStatus, error) {
                         alert("AJAX error: " + textStatus + "; " + error);
@@ -101,7 +101,7 @@
         </div>
 
         <div id="processing" style="display: none">
-            <img src="../Dependencies/Images/processing2.gif" class="centered" />
+            <img src="../../Dependencies/Images/processing2.gif" class="centered" />
         </div>
 
 

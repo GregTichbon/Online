@@ -40,7 +40,10 @@ namespace DataInnovations.YourPassing
                 html += "<td>" + dr["lastname"].ToString() + "</td>";
                 html += "<td>" + "" + "</td>";
                 html += "<td>" + "" + "</td>";
-                html += "<td><button data-id=\"btn_view\" type=\"button\">" + "View 1" + "</button>  <button data-id=\"btn_view2\" type=\"button\">" + "View 2" + "</button></td>";
+                html += "<td>";
+                //html += "<button data-id=\"btn_view\" type=\"button\">" + "View 1" + "</button>";
+                html += "<button data-id=\"btn_view2\" type=\"button\">" + "View 2" + "</button>";
+                html += "</td>";
                 html += "</tr>";
             }
             dr.Close();

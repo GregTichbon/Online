@@ -16,10 +16,10 @@
 	<input type="hidden" name="autologin" value="0" />
 	<input type="hidden" name="server_key" value="courier" />
 	
-	<input name="imapuser" type="text" id="imapuser" value="063447860">
+	<input name="imapuser" type="text" id="imapuser" value="063447860" />
 	<br />
 	<input name="pass" type="password" id="pass" value="wanganui" />
-	<input type="image" src="https://live.2talk.co.nz/loginbutton.png" name="submit">
+	<input type="image" src="https://live.2talk.co.nz/loginbutton.png" name="submit" />
 
 </form>
 </div>

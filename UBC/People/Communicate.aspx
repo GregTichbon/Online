@@ -26,9 +26,11 @@
 
         tinymce.init({
             selector: '.tinymce',
-            plugins: "code paste",
+            plugins: "code, paste, lists, advlist",
             menubar: "tools edit format view",
-            paste_as_text: true
+            paste_as_text: true,
+            relative_urls: false,
+            remove_script_host : false
         });
         $(document).ready(function () {
             $('.fb_clipboard').click(function () {
@@ -119,8 +121,8 @@
                         position: { my: "center", at: "100", of: window }
                     });
                     newobj = $("#tbl_people > tbody > tr > td > div > input:checked").toArray()
-                    //console.log(newobj);
-                    sendtext(0, $(newobj).length);
+                    console.log(newobj);
+                    send(0, $(newobj).length);
                 }
 
                 /*
@@ -217,8 +219,8 @@
             });
 
             $('#cb_remailall').click(function (event) {
-               //$('#remailaddresses').html('');
-               if (this.checked) {
+                //$('#remailaddresses').html('');
+                if (this.checked) {
                     $('[id^=cb_remail_]:visible').each(function () {
                         this.checked = true;
                         name = "disp_" + $(this).attr('name');
@@ -270,70 +272,69 @@
                 reloadpage();
             })
 
-            function sendtext(i, items) {
+            function send(i, items) {
+                //console.log(i + ',' + items);
+                thisobj = newobj[i];
+                console.log(thisobj);
+                id = $(thisobj).attr("id");
+                console.log(id);
+                name = $(thisobj).closest('tr').find('td').eq(1).text();
+                recipient = $(thisobj).val();
+                attendance = $(thisobj).closest('tr').find('td').eq(6).text();
+                if (id.substring(0, 9) == 'cb_email_') {
+                    type = 'email';
+                    id = id.substring(9).split('_')[0];
+                    emailsubject = $('#tb_subject').val();
+                    emailhtml = tinyMCE.get('tb_htmlbody').getContent();
+                    text = '';
+                } else if (id.substring(0, 8) == 'cb_text_') {
+                    type = 'text';
+                    id = id.substring(8).split('_')[0];
+                    emailsubject = '';
+                    emailhtml = '';
+                    text = $('#tb_txt').val();
+                } else if (id.substring(0, 10) == 'cb_remail_') {
+                    type = 'remail';
+                    id = id.substring(10).split('_')[0];
+                    emailsubject = $('#tb_rsubject').val();
+                    emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
+                    text = '';
+                } else if (id.substring(0, 9) == 'cb_rtext_') {
+                    type = 'rtext';
+                    id = id.substring(9).split('_')[0];
+                    emailsubject = '';
+                    emailhtml = '';
+                    text = $('#tb_rtxt').val();
+                }
 
-                
-                    //console.log(i + ',' + items);
-                    thisobj = newobj[i];
-                    //console.log(thisobj);
-                    id = $(thisobj).attr("id");
-                    name = $(thisobj).closest('tr').find('td').eq(1).text();
-                    recipient = $(thisobj).val();
-                    attendance = $(thisobj).closest('tr').find('td').eq(6).text();
-                    if (id.substring(0, 9) == 'cb_email_') {
-                        type = 'email';
-                        id = id.substring(9);
-                        emailsubject = $('#tb_subject').val();
-                        emailhtml = tinyMCE.get('tb_htmlbody').getContent();
-                        text = '';
-                    } else if (id.substring(0, 8) == 'cb_text_') {
-                        type = 'text';
-                        id = id.substring(8);
-                        emailsubject = '';
-                        emailhtml = '';
-                        text = $('#tb_txt').val();
-                    } else if (id.substring(0, 10) == 'cb_remail_') {
-                        type = 'remail';
-                        id = id.substring(10);
-                        emailsubject = $('#tb_rsubject').val();
-                        emailhtml = tinyMCE.get('tb_rhtmlbody').getContent();
-                        text = '';
-                    } else if (id.substring(0, 9) == 'cb_rtext_') {
-                        type = 'rtext';
-                        id = id.substring(9);
-                        emailsubject = '';
-                        emailhtml = '';
-                        text = $('#tb_rtxt').val();
+                //use this for named parameters
+                //var arForm = { type: type, id: id, emailsubject: emailsubject, emailhtml: emailhtml, text: text, recipient: recipient, attendance: attendance };
+                //mydata = JSON.stringify(arForm);
+
+                //use this for NameValue[] formVars
+                var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }, { "name": "mode", "value": "" }];
+                var mydata = JSON.stringify({ formVars: arForm });
+
+                //$('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + 'responseFromServer.d' + '</td></tr>');
+
+                $.ajax({
+                    type: "POST",
+                    url: "posts.asmx/send_email_text",
+                    data: mydata,
+                    contentType: "application/json",
+                    datatype: "json",
+                    async: false,
+                    success: function (responseFromServer) {
+                        $('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + responseFromServer.d.status + '</td></tr>');
                     }
+                });
 
-                    //use this for named parameters
-                    //var arForm = { type: type, id: id, emailsubject: emailsubject, emailhtml: emailhtml, text: text, recipient: recipient, attendance: attendance };
-                    //mydata = JSON.stringify(arForm);
-
-                    //use this for NameValue[] formVars
-                    var arForm = [{ "name": "type", "value": type }, { "name": "id", "value": id }, { "name": "emailsubject", "value": emailsubject }, { "name": "emailhtml", "value": emailhtml }, { "name": "text", "value": text }, { "name": "recipient", "value": recipient }, { "name": "attendance", "value": attendance }, { "name": "mode", "value": "" }];
-                    var mydata = JSON.stringify({ formVars: arForm });
-
-                    //$('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + 'responseFromServer.d' + '</td></tr>');
-
-                    $.ajax({
-                        type: "POST",
-                        url: "posts.asmx/send_email_text",
-                        data: mydata,
-                        contentType: "application/json",
-                        datatype: "json",
-                        async: false,
-                        success: function (responseFromServer) {
-                            $('#tbl_results tbody').prepend("<tr><td>" + name + '</td><td>' + recipient + '</td><td>' + responseFromServer.d.status + '</td></tr>');
-                        }
-                    });
-
-                    i++;
-                    if (i < items) {
-                        setTimeout(function () { sendtext(i, items); }, 100);
-                        //} else {
-                        //    $('#tbl_results tbody').prepend('<tr><td>Complete</td></tr>');
-                    }
+                i++;
+                if (i < items) {
+                    setTimeout(function () { send(i, items); }, 100);
+                    //} else {
+                    //    $('#tbl_results tbody').prepend('<tr><td>Complete</td></tr>');
+                }
             }
 
         });  //document.ready
@@ -480,9 +481,19 @@
                         <input id="cb_emailall" type="checkbox" />
                         Send Email</th>
                     <th>Facebook</th>
-                    <th>Relations - show those under <input type="text" class="numeric" id="tb_age" maxlength="2" value="0" style="width:24px"/> <button type="button" class="btn_refresh">Apply</button><br /><input id="cb_rtextall" type="checkbox" /> Send Text <input id="cb_remailall" type="checkbox" /> Send Email </th>
-                    <% if (event_id != "") { %>
-                    <th>Attendance<br /><select id="dd_attendancefilter"><option>All</option><%=attendance_values %></select></th>
+                    <th>Relations - show those under
+                        <input type="text" class="numeric" id="tb_age" maxlength="2" value="0" style="width: 24px" />
+                        <button type="button" class="btn_refresh">Apply</button><br />
+                        <input id="cb_rtextall" type="checkbox" />
+                        Send Text
+                        <input id="cb_remailall" type="checkbox" />
+                        Send Email </th>
+                    <% if (event_id != "")
+                        { %>
+                    <th>Attendance<br />
+                        <select id="dd_attendancefilter">
+                            <option>All</option>
+                            <%=attendance_values %></select></th>
                     <%} %>
                 </tr>
             </thead>
@@ -490,9 +501,9 @@
                 <%=html %>
             </tbody>
         </table>
-        <div id="emailaddresses" style="max-width:100%"></div>
+        <div id="emailaddresses" style="max-width: 100%"></div>
         <br />
-        <div id="remailaddresses" style="max-width:100%"></div>
+        <div id="remailaddresses" style="max-width: 100%"></div>
         <div class="form-group">
             <div class="col-sm-4">
             </div>

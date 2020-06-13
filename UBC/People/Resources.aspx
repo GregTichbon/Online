@@ -46,6 +46,8 @@
         <p>7. <a href="https://www.youtube.com/watch?v=cP0bMkApHT0" target="Recources">Video - Tips from an Olympic Coach on how to improve your sculling crew</a></p>
         <p>8. <a href="https://www.youtube.com/watch?v=NYvXRNQmGI0" target="Recources">Video - Five mistakes beginners make at the catch</a></p>
         <p>9. <a href="https://www.youtube.com/watch?v=lRhLi8eglDM" target="Recources">Video - How to get the blade connected before the drive</a></p>
+        <p>10. <a href="https://www.youtube.com/watch?v=ID6fHRVwKNs" target="Recources">Video - Roll up with modification to help understand handle height</a></p>
+
         <p>&nbsp;</p>
 
     </div>

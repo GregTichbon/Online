@@ -70,23 +70,26 @@ namespace DataInnovations.Raffles
                     string winnernote = dr["notes"].ToString();
                     string draw = dr["draw"].ToString();
                     string drawndate = "";
-                    if (dr["drawndate"] != DBNull.Value) { 
+                    if (dr["drawndate"] != DBNull.Value)
+                    {
                         drawndate = Convert.ToDateTime(dr["drawndate"]).ToString("dd MMM yy");
                     }
 
                     string itininjahtml = "";
-                    
-                    string url = "http://iti.ninja/data.aspx?mode=Track_link&link=" + itininjaid + "&format=simple";
-                    HttpWebRequest httprequest = WebRequest.Create(url) as HttpWebRequest;
-                    HttpWebResponse httpresponse = (HttpWebResponse)httprequest.GetResponse();
-                    WebHeaderCollection header = httpresponse.Headers;
-
-                    var httpencoding = System.Text.ASCIIEncoding.ASCII;
-                    using (var reader = new System.IO.StreamReader(httpresponse.GetResponseStream(), httpencoding))
+                    if (itininjaid != "")
                     {
-                        itininjahtml = reader.ReadToEnd();
-                    }
 
+                        string url = "http://iti.ninja/data.aspx?mode=Track_link&link=" + itininjaid + "&format=simple";
+                        HttpWebRequest httprequest = WebRequest.Create(url) as HttpWebRequest;
+                        HttpWebResponse httpresponse = (HttpWebResponse)httprequest.GetResponse();
+                        WebHeaderCollection header = httpresponse.Headers;
+
+                        var httpencoding = System.Text.ASCIIEncoding.ASCII;
+                        using (var reader = new System.IO.StreamReader(httpresponse.GetResponseStream(), httpencoding))
+                        {
+                            itininjahtml = reader.ReadToEnd();
+                        }
+                    }
                     html += "<tr><td><input class=\"checkbox\" id=\"cb_" + id + "\" name=\"cb_" + id + "\" value=\"x\" type=\"checkbox\" /><a href=\"" + link + guid + "\" target=\"order\">" + identifier + " " + draw + "</a><br />" + drawndate + "</td><td>" + ticketnumber + "</td><td>" + purchaser + "</td><td>" + greeting + "</td><td>" + mobile + "</td><td>" + emailaddress + "</td><td class=\"itininja\">" + itininjahtml + "</td><td>" + winnerstatus + "</td><td>" + winnerresponse + "</td><td>" + winnernote + "</td></tr>";
 
                     if (IsPostBack)

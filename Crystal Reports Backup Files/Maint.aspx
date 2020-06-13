@@ -136,7 +136,10 @@
 
             $('.submit').click(function () {
                 delim = String.fromCharCode(254);
-                $('#transactionstable > tbody > tr[maint="changed"]').each(function () {
+
+
+               /*----------------------------------------------TRANSACTIONS-----------------------------------------*/
+               $('#transactionstable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_date = $(this).find('td:eq(1)').text();
                     tr_system = $(this).find('td:eq(2)').text();
@@ -285,8 +288,8 @@
                         }).appendTo('#form1');
                     }
                 });
-            });
-
+            });  //.submit end
+            
 
 
 
@@ -633,8 +636,8 @@
                     height: 600,
                     width: mywidth,
                     modal: true
-                      ,appendTo: "#form3"  
-              });
+                    , appendTo: "#form3"
+                });
 
                 var myButtons = {
                     "Cancel": function () {
@@ -993,7 +996,7 @@
             $('[required]').addClass('required');
         });
 
-        function calculateage(e) {
+        function calculateage(e) {   
             if (moment().diff(e, 'seconds') < 0) {
                 e.date = moment(e).subtract(100, 'years');
                 $("#tb_birthdate").val(moment(e).format('D MMM YYYY'));

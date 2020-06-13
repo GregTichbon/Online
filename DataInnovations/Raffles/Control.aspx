@@ -195,6 +195,7 @@
                     $('#drawndate').val($(tr).find('td').eq(1).text());
                     $('#status').val($(tr).find('td').eq(2).text());
                     $('#notes').val($(tr).find('td').eq(3).text());
+                    $('#voucher').val($(tr).find('td').eq(4).text());
                 }
 
                 $("#dialog_Wins").dialog({
@@ -220,14 +221,16 @@
                         drawndate = $('#drawndate').val();
                         status = $('#status').val();
                         notes = $('#notes').val();
+                        voucher = $('#voucher').val();
  
                         $(tr).find('td').eq(0).text(draw);
                         $(tr).find('td').eq(1).text(drawndate);
                         $(tr).find('td').eq(2).text(status);
                         $(tr).find('td').eq(3).text(notes);
+                        $(tr).find('td').eq(4).text(voucher);
 
                         $(this).dialog("close");
-                        var arForm = [{ "name": "rafflewinner_id", "value": itemid }, { "name": "raffleticket_id", "value": id }, { "name": "draw", "value": draw }, { "name": "drawndate", "value": drawndate }, { "name": "status", "value": status }, { "name": "notes", "value": notes }];
+                        var arForm = [{ "name": "rafflewinner_id", "value": itemid }, { "name": "raffleticket_id", "value": id }, { "name": "draw", "value": draw }, { "name": "drawndate", "value": drawndate }, { "name": "status", "value": status }, { "name": "notes", "value": notes }, { "name": "voucher", "value": voucher }];
                         var formData = JSON.stringify({ formVars: arForm });
 
                         $.ajax({
@@ -321,6 +324,11 @@
                         <td>Notes</td>
                         <td>
                             <textarea id="notes" name="notes"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Voucher</td>
+                        <td>
+                            <input type="text" id="voucher" name="voucher" /></td>
                     </tr>
                 </tbody>
             </table>

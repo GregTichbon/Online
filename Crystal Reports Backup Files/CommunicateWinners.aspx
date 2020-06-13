@@ -74,11 +74,18 @@
         ||voucher||<br />
         <br />
 &nbsp;<asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
+Your ticket, ||identifier||/||ticketnumber||, is a winner in the Union Boat Club's Chef's Choice Maadi rowing raffle.
+Please contact Greg (0272495088) to collect your voucher.
+Thanks for your support
+    
+ 
+      </asp:TextBox>
+        <!--   Hi ||greeting||
 Your ticket, ||identifier||/||ticketnumber||, is a winner in the Maadi rowing raffle.
 Please go to: ||voucher|| to view/download your Chef's Choice Voucher.
 Thanks for your support.
 Please contact Greg (0272495088) if you need assistance.
-      </asp:TextBox>
+            -->
         <table style="width:100%">
             <%=html %>
         </table>

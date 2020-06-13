@@ -66,16 +66,20 @@ namespace DataInnovations.Row
                         string crew_ctr = dr["crew_ctr"].ToString();
                         string event_ctr = dr["event_ctr"].ToString();
                         string title = dr["title"].ToString();
+                        string discipline_ctr = dr["discipline_ctr"].ToString();
                         string club_ctr = dr["club_ctr"].ToString();
                         string club = dr["club"].ToString();
                         string members = dr["members"].ToString();
                         string boat = dr["boat"].ToString();
+                        string boat_ctr = dr["boat_ctr"].ToString();
+                        string division_ctr = dr["division_ctr"].ToString();
+                        string gender_ctr = dr["gender_ctr"].ToString();
                         string prognostic = dr["prognostic"].ToString();
                         string prognosticoverride = dr["prognosticoverride"].ToString();
 
 
 
-                        html += "<tr id=\"" + crew_ctr + "\">";
+                        html += "<tr crew=\"" + crew_ctr + "\" discipline=\"" + discipline_ctr + "\" boat=\"" + boat_ctr + "\" division=\"" + division_ctr + "\" gender=\"" + gender_ctr + "\" club=\"" + club_ctr + "\">";
                         html += "<td>" + club + "</td>";
                         html += "<td>" + title + "</td>";
                         html += "<td>" + boat + "</td>";

@@ -28,16 +28,34 @@ namespace UBC.People
         public string updatefield(string table, string field, string id, string value, string keyfield)
         {
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-
-            value = value.Replace("'", "''");
-            string sql1 = "update [" + table + "] set [" + field + "] = '" + value + "' where [" + keyfield + "] = '" + id + "'";
-            
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand(sql1, con);
+            SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandType = CommandType.Text;
+
+            string command = "";
+            switch (table)
+            {
+                case "ergregister":
+                    command = "update_table_field";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@table", SqlDbType.VarChar).Value = table;
+                    cmd.Parameters.Add("@field", SqlDbType.VarChar).Value = field;
+                    cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = id.Substring(4);
+                    cmd.Parameters.Add("@value", SqlDbType.VarChar).Value = value;
+                    cmd.Parameters.Add("@keyfield", SqlDbType.VarChar).Value = keyfield;
+                    break;
+
+                default:
+
+                    value = value.Replace("'", "''");
+                    command = "update [" + table + "] set [" + field + "] = '" + value + "' where [" + keyfield + "] = '" + id + "'";
+                    cmd.CommandType = CommandType.Text;
+                    break;
+
+
+            }
+            cmd.CommandText = command;
             cmd.Connection = con;
-
             con.Open();
             //SqlDataReader dr = cmd.ExecuteReader();
             cmd.ExecuteNonQuery();
@@ -45,11 +63,9 @@ namespace UBC.People
             cmd.Dispose();
             con.Close();
             con.Dispose();
-           
+
             return ("Ok");
         }
-
-
 
 
         [WebMethod]

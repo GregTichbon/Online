@@ -82,7 +82,7 @@
     <script src="<%: ResolveUrl("~/Scripts/moment/moment.js")%>"></script>
     <script src="<%: ResolveUrl("~/Scripts/jquery.ui.autocomplete.scroll.min.js")%>"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4EiyE4AE79M4SpyzGYG7KAB6trfGUdsI"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCpsWhkuuHlAe6EKhSi5zSlmmIVMN9M8c"></script>
 
     <script type="text/javascript">
         //&callback=initMap
@@ -362,7 +362,7 @@
 
             $("#dialogperson").dialog({
                 autoOpen: false,
-                width: 400,
+                width: 800,
                 height: 350
             });
             $("#dialogadd").dialog({
@@ -737,14 +737,17 @@
         }
 
         function geocodeAddress(geocoder, resultsMap, address, title, assignedto) {
+          
             myaddress = address + ',Whanganui'
             //alert(myaddress + "-" + assignedto);
-            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + myaddress + '&sensor=false', null, function (data) {
+            $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCCpsWhkuuHlAe6EKhSi5zSlmmIVMN9M8c&address=' + myaddress + '&sensor=false', null, function (data) {
+    console.log(data);
                 var p = data.results[0].geometry.location
                 var latlng = new google.maps.LatLng(p.lat, p.lng);
                 addMarker(latlng, title + ' - ' + address, assignedto);
                 //alert(latlng);
             });
+           
         }
 
         function addMarker(location, title, icon) {

@@ -54,136 +54,142 @@
         var mywidth;
         var mode;
         var tr;
+        var discipline;
 
         $(document).ready(function () {
             mywidth = $(window).width() * .95;
             if (mywidth > 800) {
                 //mywidth = 800;
             }
-            $('#div_prognostic').cascadingDropdown({
-                selectBoxes: [
-                    {
-                        selector: '#dd_discipline',
-                        source: function (request, response) {
-                            $.getJSON('data.asmx/discipline', function (data) {
-                                response($.map(data, function (item, index) {
-                                    return {
-                                        label: item.label,
-                                        value: item.value
-                                    }
-                                }));
-                            })
-                        },
-                        onChange: function (event, value, requiredValues, requirementsMet) {
-                            $('#html').html('');
-                        }
-                    },
-                    {
-                        selector: '#dd_boat',
-                        requires: ['#dd_discipline'],
-                        requireAll: true,
-                        source: function (request, response) {
-                            $.getJSON('data.asmx/boat', request, function (data) {
-                                //var selectOnlyOption = data.length <= 1;
-                                response($.map(data, function (item, index) {
-                                    return {
-                                        label: item.label,
-                                        value: item.value//,
-                                        //selected: index == 0 //selectOnlyOption
-                                    };
-                                }));
-                            });
-                        },
-                        onChange: function (event, value, requiredValues, requirementsMet) {
-                            $('#html').html('');
-                        }
-                    },
-                    {
-                        selector: '#dd_division',
-                        requires: ['#dd_discipline', '#dd_boat'],
-                        requireAll: true,
-                        source: function (request, response) {
-                            $.getJSON('data.asmx/division', request, function (data) {
-                                //var selectOnlyOption = data.length <= 1;
-                                response($.map(data, function (item, index) {
-                                    return {
-                                        label: item.label,
-                                        value: item.value//,
-                                        //selected: index == 0 //selectOnlyOption
-                                    };
-                                }));
-                            });
-                        },
-                        onChange: function (event, value, requiredValues, requirementsMet) {
-                            $('#html').html('');
-                        }
-                    },
-                    {
-                        selector: '#dd_gender',
-                        requires: ['#dd_discipline', '#dd_boat', '#dd_division'],
-                        requireAll: true,
-                        source: function (request, response) {
-                            $.getJSON('data.asmx/gender', request, function (data) {
-                                //var selectOnlyOption = data.length <= 1;
-                                response($.map(data, function (item, index) {
-                                    return {
-                                        label: item.label,
-                                        value: item.value//,
-                                        //selected: index == 0 //selectOnlyOption
-                                    };
-                                }));
-                            });
-                        },
-
-                        onChange: function (event, value, requiredValues, requirementsMet) {
-                            $('#html').html('');
-                            if (!requirementsMet) {
-                                //$("#btn_submit").prop('disabled', true);
-                                //alert('Requirements not met');
-                                return;
-                            }
-                            //alert('Requirements met');
-                            //standardised.loading(true);
-                            //$("#btn_submit").prop('disabled', false);
-
-                            $.ajax({
-                                url: "data.aspx/mode=get_entry?id=" + xx + "&discipline=" + $('#dd_discipline').val() + "&boat=" + $('#dd_boat').val() + "&division=" + $('#dd_division').val() + "&gender=" + $('#dd_gender').val(), success: function (result) {
-                                    $('#html').html(myhtml);
-                                }
-                            });
-                       
-                        
-                        }
-                    }
-                ]
-            });
 
             $("tr").click(function () {
                 mode = $(this).data('mode');
                 if (mode == "add") {
                     $("#dialog_edit").find(':input').val('');
-                    $('#div_prognostic').show();
                 } else {
                     tr = $(this).closest('tr');
-                    $.ajax({
-                        url: "data.aspx/mode=get_entry?id=" + $(this).attr("id"), success: function (result) {
-                            $('#html').html(myhtml);
-                        }
-                    });
-                    $('#tb_email_emailaddress').val($(tr).find('td').eq(1).text());
-                    $('#tb_email_note').val($(tr).find('td').eq(2).text());
+
+                    crew = $(this).attr('crew');
+                    discipline = $(this).attr('discipline');
+                    boat = $(this).attr('boat');
+                    division = $(this).attr('division');
+                    gender = $(this).attr('gender');
+                    club = $(this).attr('club');
                 }
+
+                $('#div_prognostic').cascadingDropdown({
+                    selectBoxes: [
+                        {
+                            selector: '#dd_discipline',
+                            source: function (request, response) {
+                                $.getJSON('data.asmx/discipline', function (data) {
+                                    response($.map(data, function (item, index) {
+                                        return {
+                                            label: item.label,
+                                            value: item.value,
+                                            selected: item.value == discipline
+                                        }
+                                    }));
+                                })
+                            },
+                            onChange: function (event, value, requiredValues, requirementsMet) {
+                                $('#html').html('');
+                            }
+                        },
+                        {
+                            selector: '#dd_boat',
+                            requires: ['#dd_discipline'],
+                            requireAll: true,
+                            source: function (request, response) {
+                                $.getJSON('data.asmx/boat', request, function (data) {
+                                    //var selectOnlyOption = data.length <= 1;
+                                    response($.map(data, function (item, index) {
+                                        return {
+                                            label: item.label,
+                                            value: item.value,
+                                            selected: item.value == boat
+                                        };
+                                    }));
+                                });
+                            },
+                            onChange: function (event, value, requiredValues, requirementsMet) {
+                                $('#html').html('');
+                            }
+                        },
+                        {
+                            selector: '#dd_division',
+                            requires: ['#dd_discipline', '#dd_boat'],
+                            requireAll: true,
+                            source: function (request, response) {
+                                $.getJSON('data.asmx/division', request, function (data) {
+                                    //var selectOnlyOption = data.length <= 1;
+                                    response($.map(data, function (item, index) {
+                                        return {
+                                            label: item.label,
+                                            value: item.value,
+                                            selected: item.value == division
+                                        };
+                                    }));
+                                });
+                            },
+                            onChange: function (event, value, requiredValues, requirementsMet) {
+                                $('#html').html('');
+                            }
+                        },
+                        {
+                            selector: '#dd_gender',
+                            requires: ['#dd_discipline', '#dd_boat', '#dd_division'],
+                            requireAll: true,
+                            source: function (request, response) {
+                                $.getJSON('data.asmx/gender', request, function (data) {
+                                    //var selectOnlyOption = data.length <= 1;
+                                    response($.map(data, function (item, index) {
+                                        return {
+                                            label: item.label,
+                                            value: item.value,
+                                            selected: item.value == gender
+                                        };
+                                    }));
+                                });
+                            },
+
+                            onChange: function (event, value, requiredValues, requirementsMet) {
+                                $('#html').html('');
+                                if (!requirementsMet) {
+                                    //$("#btn_submit").prop('disabled', true);
+                                    //alert('Requirements not met');
+                                    return;
+                                }
+                                //alert('Requirements met');
+                                //standardised.loading(true);
+                                //$("#btn_submit").prop('disabled', false);
+                                $.ajax({
+                                    dataType: 'html', // what type of data do we expect back from the server
+                                    url: "data.aspx?mode=get_crewmembers&crew=" + crew + "&discipline=" + $('#dd_discipline').val() + "&boat=" + $('#dd_boat').val() + "&division=" + $('#dd_division').val() + "&gender=" + $('#dd_gender').val(), success: function (result) {
+                                        $("#html").html(result);
+                                    }
+                                });
+                            }
+                        }
+                    ]
+                });
+
                 $("#dialog_edit").dialog({
                     resizable: true,
                     //height: 700,
                     width: mywidth - 100,
                     modal: true,
                     position: { my: "top", at: "centre" },
-                    appendTo: "#form1"
+                    appendTo: "#form1",
+                    close: function (event, ui) {
+                        $('#div_prognostic').cascadingDropdown('destroy');
+                    }
+                    
                 });
 
                 var myButtons = {
                     "Cancel": function () {
+                        //$('#div_prognostic').cascadingDropdown('destroy');
                         $(this).dialog("close");
                     },
                     "Save": function () {
@@ -196,15 +202,16 @@
                         area = $('#area').val();
                         note = $('#note').val();
                         amount = $('#amount').val();
-                       
+
                         //$(tr).find('td').eq(0).text('xxxxx');
                         //$(tr).find('td').eq(1).text('xxxxxx');
                         //$(tr).find('td').eq(2).text('xxxxxx');
                         //$(tr).find('td').eq(3).text('xxxxxx');
                         $(tr).find('td').eq(4).text('10000');
                         //$(tr).find('td').eq(2).text(parseFloat(amount).toFixed(2));
+                        //$('#div_prognostic').cascadingDropdown('destroy');
 
- 
+
                         $(this).dialog("close");
                         alert('to do: update database on Update');
                         /*
@@ -234,7 +241,7 @@
                     myButtons["Delete"] = function () {
                         if (window.confirm("Are you sure you want to delete this transaction?")) {
                             $(tr).remove();
-                            
+
                             $(this).dialog("close");
                             alert('to do: update database on Delete');
                             /*
@@ -305,14 +312,15 @@
             });
 
 
+
         }); //document.ready
     </script>
 
 </head>
 <body>
     <div class="container" style="background-color: #FCF7EA">
-        <form id="form1" runat="server">
-            <asp:DropDownList ID="dd_club" runat="server"></asp:DropDownList>
+        <form id="form1" runat="server" class="form-horizontal" role="form">
+            <!--<asp:DropDownList ID="dd_club" runat="server"></asp:DropDownList>-->
             <table id="tab_entries">
                 <thead>
                     <tr>
@@ -326,38 +334,40 @@
                 </thead>
                 <tbody>
                     <%= html %>
+                    <tr>
+                        <td colspan="6" data-mode="Add">Add</td>
+                    </tr>
                 </tbody>
             </table>
 
-            <div id="dialog_edit" title="Edit" style="display: none" class="form-horizontal">
-                <div id="div_prognostic" style="display:none">
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_discipline">Discipline</label>
+            <div id="dialog_edit" title="Edit" style="display: none">
+                <div id="div_prognostic">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-4 text-right" for="dd_discipline">Discipline</label>
                         <div class="col-sm-8">
                             <select id="dd_discipline" name="discipline" class="form-control">
                                 <option></option>
                             </select>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_boat">Boat</label>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-4 text-right" for="dd_boat">Boat</label>
                         <div class="col-sm-8">
                             <select id="dd_boat" name="boat" class="form-control">
                                 <option></option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_division">Division</label>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-4 text-right" for="dd_division">Division</label>
                         <div class="col-sm-8">
                             <select id="dd_division" name="division" class="form-control">
                                 <option></option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="dd_gender">Gender</label>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-4 text-right" for="dd_gender">Gender</label>
                         <div class="col-sm-8">
                             <select id="dd_gender" name="gender" class="form-control">
                                 <option></option>
@@ -365,11 +375,11 @@
                         </div>
                     </div>
                 </div>
-                 <div id="html"></div>
+                <div id="html"></div>
             </div>
-            
+
         </form>
-        <form id="form2"></form>
+
     </div>
 </body>
 </html>

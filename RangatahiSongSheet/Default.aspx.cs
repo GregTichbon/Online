@@ -11,7 +11,7 @@ namespace RangatahiSongSheet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("Dependencies/RSDocument.pdf");
+            Response.Redirect("Dependencies/RangatahiSongsheet_2020.pdf");
         }
     }
 }

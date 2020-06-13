@@ -20,6 +20,59 @@ namespace DataInnovations.Raffles
     [System.Web.Script.Services.ScriptService]   //GREG  -  THIS IS REQUIRED FOR POSTS
     public class Posts : System.Web.Services.WebService
     {
+        /*{ "name": "date", "value": $('#fld_date').val()},
+                    { "name": "identifier", "value": $('#fld_identifier').val() },
+                    { "name": "ticket", "value": $('#fld_ticket').val() },
+                    { "name": "note", "value": $('#fld_note').val() },
+                    { "name": "voucher", "value": $('#fld_voucher').val() },
+                    { "name": "draw", "value": $('#fld_draw').val() }*/
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string update_ticket_winner2(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string rafflegroup_ID = formVars.Form("rafflegroup_ID");
+            string date = formVars.Form("date");
+            string identifier = formVars.Form("identifier");
+            string ticket = formVars.Form("ticket");
+            string note = formVars.Form("note");
+            string voucher = formVars.Form("voucher");
+            string draw = formVars.Form("draw");
+
+            string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+
+
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd = new SqlCommand("update_ticket_winner2", con);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@RaffleGroup_ID", SqlDbType.VarChar).Value = rafflegroup_ID;
+            cmd.Parameters.Add("@date", SqlDbType.VarChar).Value = date;
+            cmd.Parameters.Add("@identifier", SqlDbType.VarChar).Value = identifier;
+            cmd.Parameters.Add("@ticket", SqlDbType.VarChar).Value = ticket;
+            cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = note;
+            cmd.Parameters.Add("@voucher", SqlDbType.VarChar).Value = voucher;
+            cmd.Parameters.Add("@draw", SqlDbType.VarChar).Value = draw;
+
+            cmd.Connection = con;
+
+            con.Open();
+
+            string response = cmd.ExecuteScalar().ToString();
+
+            con.Close();
+            con.Dispose();
+
+            standardResponse resultclass = new standardResponse();
+            resultclass.id = "";
+            resultclass.message = response;
+
+            JavaScriptSerializer JS = new JavaScriptSerializer();
+            string passresult = JS.Serialize(resultclass);
+            return (passresult);
+
+        }
+
+
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string update_ticket_winner(NameValue[] formVars)    //you can't pass any querystring params
@@ -30,6 +83,7 @@ namespace DataInnovations.Raffles
             string drawndate = formVars.Form("drawndate");
             string status = formVars.Form("status");
             string notes = formVars.Form("notes");
+            string voucher = formVars.Form("voucher");
 
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
@@ -44,6 +98,7 @@ namespace DataInnovations.Raffles
             cmd.Parameters.Add("@drawndate", SqlDbType.VarChar).Value = drawndate;
             cmd.Parameters.Add("@status", SqlDbType.VarChar).Value = status;
             cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = notes;
+            cmd.Parameters.Add("@voucher", SqlDbType.VarChar).Value = voucher;
             //cmd.Parameters.Add("@response", SqlDbType.VarChar).Value = response;
 
             cmd.Connection = con;
@@ -179,7 +234,7 @@ namespace DataInnovations.Raffles
                     }
                     */
 
-                    string emailhtml = "Thanks for taking ticket " + ticket + " in the " + rafflename;
+        string emailhtml = "Thanks for taking ticket " + ticket + " in the " + rafflename;
                     emailhtml += "<table>";
                     emailhtml += "<tr><td>Name </td><td>" + name + "</td></tr>";
                     emailhtml += "<tr><td>Email Address </td><td>" + emailaddress + "</td></tr>";

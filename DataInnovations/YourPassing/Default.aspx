@@ -6,6 +6,7 @@
     <a href="agent.aspx">I have been authorised by the whanau to administer this funeral / unveiling</a>
     <br />  <br />
     <a href="mourner.aspx">I am mourning a deceased person and would like to leave my condolences and leave a koha</a>
-      
+        <br />  <br />  <br />  <br />  <br />  <br />
 
+      <a href="administration">Administration (not generally available)</a>
 </asp:Content>

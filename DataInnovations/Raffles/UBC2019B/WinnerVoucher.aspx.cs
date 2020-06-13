@@ -74,7 +74,7 @@ namespace DataInnovations.Raffles.UBC2019B
                         QRCode qrCode = new QRCode(qrCodeData);
                         Bitmap qrCodeImage = qrCode.GetGraphic(20);
 
-                        Bitmap resized = new Bitmap(qrCodeImage, new Size(Convert.ToInt16(qrCodeImage.Width * .85), Convert.ToInt16(qrCodeImage.Height * .85)));
+                        Bitmap resized = new Bitmap(qrCodeImage, new Size(Convert.ToInt16(qrCodeImage.Width * .7), Convert.ToInt16(qrCodeImage.Height * .7)));
 
                         //using (System.Drawing.Image image = System.Drawing.Image.FromFile(sourceImage))
                         //using (Graphics imageGraphics = Graphics.FromImage(image))
@@ -83,7 +83,7 @@ namespace DataInnovations.Raffles.UBC2019B
 
                         using (TextureBrush watermarkBrush = new TextureBrush(resized))
                         {
-                            int x = 1400; // (image.Width / 2 - resized.Width / 2);
+                            int x = 1500; // (image.Width / 2 - resized.Width / 2);
                             int y = 1350; // (image.Height / 2 - resized.Height / 2) + 200;
                             watermarkBrush.TranslateTransform(x, y);
                             imageGraphics.FillRectangle(watermarkBrush, new Rectangle(new Point(x, y), new Size(resized.Width + 1, resized.Height)));
@@ -112,13 +112,13 @@ namespace DataInnovations.Raffles.UBC2019B
                         b1.Alignment = BarcodeLib.AlignmentPositions.CENTER;
                         b1.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
                         //b1.ImageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
-                        Font font = new System.Drawing.Font("verdana", 20f);
+                        Font font = new System.Drawing.Font("verdana", 16f);
                         b1.LabelFont = font;
                         b1.Height = 100;
-                        b1.Width = 400;
+                        b1.Width = 220;
 
                         System.Drawing.Image BarCodeimage = b1.Encode(BarcodeLib.TYPE.CODE39Extended, voucher);
-                        imageGraphics.DrawImage(BarCodeimage, 1250, 2300);
+                        imageGraphics.DrawImage(BarCodeimage, 1550, 2160);
 
 
                         image.Save(targetImage);

@@ -11,6 +11,7 @@
         <a href="default.aspx">Purchase Ticket</a><br /><br />
         <a href="communicatewinners.aspx">Communicate with winners</a><br /><br />
         <a href="WinnerVoucher.aspx">Create Winners Vouchers</a><br /><br />
+        <a href="Voucher.aspx">Maintain Winner Statuses</a><br /><br />
     </form>
 </body>
 </html>

@@ -1,103 +1,84 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Upload.aspx.cs" Inherits="DataInnovations.Accounts.Upload" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Upload.aspx.cs" Inherits="UBC.People.Upload" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- Style Sheets -->
+    <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Accounts Upload</title>
-    <style>
-        table {
-            width: 100%;
-            border: 1px solid #FFFFFF;
-            border-collapse: collapse;
-        }
+    <!-- Javascript -->
+    <script src="<%: ResolveUrl("~/Dependencies/jquery-2.2.0.min.js")%>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-            table td, table th {
-                border: 1px solid #FFFFFF;
-                padding: 5px;
-                text-align: left;
-            }
+    <script type="text/javascript">
+        // Change JQueryUI plugin names to fix name collision with Bootstrap.
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
 
-            table tbody td {
-                font-size: 13px;
-            }
+    <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
+    <script src="<%: ResolveUrl("~/Dependencies/jquery.validate.min.js")%>"></script>
 
-            table tr:nth-child(even) {
-                background: #D0E4F5;
-            }
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-            table thead {
-                background: #0B6FA4;
-                border-bottom: 5px solid #FFFFFF;
-            }
-
-                table thead th {
-                    font-size: 17px;
-                    font-weight: bold;
-                    color: #FFFFFF;
-                    text-align: left;
-                    border-left: 2px solid #FFFFFF;
+            $(document).uitooltip({
+                position: {
+                    my: "right center",
+                    at: "left center"
+                },
+                content: function () {
+                    return $(this).prop('title');
                 }
+            });
 
-                    table thead th:first-child {
-                        border-left: none;
-                    }
 
+            $("#form1").validate();
+
+
+
+
+        });
+
+
+
+    </script>
+    <style type="text/css">
+     
+               
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-   <div class="container" style="background-color: #FCF7EA">
-
-        <h1>Upload
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container" style="background-color: #FCF7EA">
+        <div class="toprighticon">
+            <input type="button" id="menu" class="btn btn-info" value="MENU" />
+        </div>
+        <h1>Union Boat Club - Upload
         </h1>
-       <table>
-           <thead>
-               <tr>
-                   <th>Bank Account</th>
-                   <th>First Date</th>
-                   <th>Last Date</th>
-                   <th style="text-align: right">Transactions</th>
-                   <th style="text-align: right">Credits</th>
-                   <th style="text-align: right">Debits</th>
-                   <th style="text-align: right">Net</th>
-               </tr>
-           </thead>
-           <tbody>
-               <%= html %>
-           </tbody>
-       </table>
-       <div class="form-group">
-           <div class="col-sm-4">
-                Please upload the bank file
-            </div>
-            <div class="col-sm-8">
-                <asp:FileUpload ID="fu_bankfile" runat="server" AllowMultiple="True" />
+        <div class="form-group">
+            <label class="control-label col-sm-5" for="uploadto">Upload to</label>
+            <div class="col-sm-7">
+                <select id="uploadto" name="uploadto" class="form-control" required>
+                    <option></option>
+                    <option value="documents">People/Documents</option>
+                </select>
             </div>
         </div>
-
         <div class="form-group">
-            <div class="col-sm-4">
-                What format is it
-            </div>
-            <div class="col-sm-8">
-                <asp:DropDownList ID="dd_format" runat="server">
-                    <asp:ListItem Selected="True">ANZ - TSV</asp:ListItem>
-                </asp:DropDownList>
-
+            <label class="control-label col-sm-5" for="files">File(s)</label>
+            <div class="col-sm-7">
+                <asp:FileUpload ID="files" name="files" runat="server" AllowMultiple="true" />
             </div>
         </div>
-
-
         <div class="form-group">
-            <div class="col-sm-4">
+            <div class="col-sm-5">
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-7">
                 <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
             </div>
         </div>
 
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+</asp:Content>

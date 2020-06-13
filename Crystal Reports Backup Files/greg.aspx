@@ -25,9 +25,9 @@
         <br />
         <a href="raffles/spinner.aspx">Raffle Spinner</a>
         <br />
-        <a href="raffles/UBC2019Avoucher.aspx">Raffle Voucher</a>
+        <a href="raffles/UBC2019B/control.aspx">UBC 2019B Raffle Control</a>
         <br />
-        
+          
         <br />
         <a href="../raffles/ubc2019a">UBC2019A Raffle menu</a>
         <br />
@@ -39,7 +39,7 @@
         <br />
         <a href="sms/log.aspx">SMS Log</a>
         <br />
-        <a href="sms/data.asmx/SMSPhoneStatus">SMS Phone Status</a>
+        <a href="sms/data.asmx/SMSPhoneStatus?options=">SMS Phone Status</a>
         <br />
         <br />
         <a href="http://office.datainn.co.nz/vehicles">Vehicle Reminders</a>
@@ -54,7 +54,8 @@
         <a href="accounts">Personal Accounts</a>
         <br />
         <a href="http://ubc.org.nz/people/signupList.aspx">Schools Learn to Row 2019</a>
-        
+        <br />
+        <a href="https://teorahou-my.sharepoint.com/personal/gtichbon_teorahou_org_nz/Lists/Knowledge/AllItems.aspx">My Knowledgebase</a>
 
     </form>
 </body>

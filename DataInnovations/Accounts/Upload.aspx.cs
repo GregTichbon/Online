@@ -31,7 +31,7 @@ namespace DataInnovations.Accounts
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "Accounts_Transaction_Summary";
-
+                    cmd.CommandTimeout = 600;
 
 
                     SqlDataReader dr = cmd.ExecuteReader();

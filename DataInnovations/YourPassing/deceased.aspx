@@ -1,13 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/YourPassing/Main.Master" AutoEventWireup="true" CodeBehind="deceased.aspx.cs" Inherits="DataInnovations.YourPassing.deceased" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="_Includes/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
         $(document).ready(function () {
 
             tinymce.init({selector: "textarea"});
   
             $('#btn_support').click(function () {
+            //$('body').on('click', '#btn_support', function() {
                 $('#dialog_support').dialog({
                     modal: true,
                     width: $(window).width() * .8,

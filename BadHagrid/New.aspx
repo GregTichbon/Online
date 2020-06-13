@@ -80,6 +80,10 @@
             margin-bottom: 120px;
         }
 
+        .showcountdown {
+            display:none;
+        }
+
         ul.countdown {
             list-style: none;
             margin: 10px 0;
@@ -322,17 +326,19 @@
             }
 
 
-            $('.countdown').downCount({
-                date: '02/06/2020 12:00:00',
+            $('.countdownX').downCount({
+                date: '03/06/2020 12:00:00',
                 offset: +13
             }, function () {
-                $('#dialog_result').html("It's happening");
-                $('#dialog_result').dialog({
-                    modal: true,
-                    width: 400,
-                    title: "Release",
-                    closeText: false
-                });
+                if (1 == 2) {
+                    $('#dialog_result').html("The 5th single was released at 12:00noon on 6 March 2020");
+                    $('#dialog_result').dialog({
+                        modal: true,
+                        width: 400,
+                        title: "Release",
+                        closeText: false
+                    });
+                }
             })
 
 
@@ -408,7 +414,7 @@
 
 
         });  //document.ready
-    </script>
+   </script>
 
 </head>
 <body>
@@ -512,7 +518,7 @@
 
                 </div>
                 <div class="col-sm-4">
-                    <div xstyle="float: right">
+                    <div xstyle="float: right" class="showcountdown">
                         <ul class="countdown">
                             <li>
                                 <span class="days">00</span>

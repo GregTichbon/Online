@@ -58,7 +58,7 @@
                 $('#processing').show();
 
                 $.ajax({
-                    url: "data.asmx/updaterafflestatus?id=" + $('#hf_id').val() + "&status=" + $(this).val(), success: function (result) {
+                    url: "../data.asmx/updaterafflestatus?id=" + $('#hf_id').val() + "&status=" + $(this).val(), success: function (result) {
                         //alert('Success');
                     }, error: function (XMLHttpRequest, textStatus, error) {
                         alert("AJAX error: " + textStatus + "; " + error);
@@ -76,7 +76,7 @@
                 });
 
                 $('tbody tr').each(function () {
-                    thisstatus = $(this).find('td').eq(4).text();
+                    thisstatus = $(this).find('td').eq(5).text();
                     if (selected.indexOf(thisstatus) != -1) {
                         $(this).show();
                     }
@@ -101,7 +101,7 @@
         </div>
 
         <div id="processing" style="display: none">
-            <img src="../Dependencies/Images/processing2.gif" class="centered" />
+            <img src="../../Dependencies/Images/processing2.gif" class="centered" />
         </div>
 
 

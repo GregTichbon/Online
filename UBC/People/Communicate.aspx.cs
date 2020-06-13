@@ -132,6 +132,7 @@ namespace UBC.People
                         if (email != "")
                         {
                             string delim = "";
+                            int c1 = 0;
                             //string[] emailsplit = email.Split('|');
                             foreach (string emailsplit in email.Split('|'))
                             {
@@ -141,7 +142,8 @@ namespace UBC.People
                                 {
                                     note = " - " + note;
                                 }
-                                sendemail += delim + "<input id=\"cb_email_" + id + "\" name =\"cb_email_" + id + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note;
+                                c1 ++;
+                                sendemail += delim + "<div><input id=\"cb_email_" + id + "_" + c1 +"\" name =\"cb_email_" + id + "_" + c1 + "\" type=\"checkbox\"  value=\"" + address + "\" /> <a href=\"mailto:" + address + "\">" + address + "</a>" + note + "</div>";
                                 //sendemaillink += "<a href=\"mailto:" + address + "\">" + address + note + "</a>" + delim;
                                 delim = "<br />";
                             }
@@ -150,6 +152,7 @@ namespace UBC.People
                         if (mobile != "")
                         {
                             string delim = "";
+                            int c1 = 0;
                             //string[] mobilesplit = mobile.Split('|');
                             foreach (string mobilesplit in mobile.Split('|'))
                             {
@@ -159,8 +162,8 @@ namespace UBC.People
                                 {
                                     note = " - " + note;
                                 }
-
-                                sendtext += delim + "<div><input id=\"cb_text_" + id + "\" name=\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /> <a href=\"tel:" + number + "\">" + number + "</a>" + note + "</div>";
+                                c1++;
+                                sendtext += delim + "<div><input id=\"cb_text_" + id + "_" + c1 + "\" name=\"cb_text_" + id + "_" + c1 + "\" type=\"checkbox\" value=\"" + number + "\" /> <a href=\"tel:" + number + "\">" + number + "</a>" + note + "</div>";
 
                                 //sendtext = delim + "<input name =\"cb_text_" + id + "\" type=\"checkbox\" value=\"" + number + "\" /><a href=\"tel:" + number + "\">" + number + "</a>" + note;
                                 //mobile = "<a href=\"tel:" + mobile + "\">" + mobile + "</>";
@@ -229,6 +232,7 @@ namespace UBC.People
                                 string rphones = relation.Split('^')[6];
                                 if (rphones != "")
                                 {
+                                    int c1 = 0;
                                     foreach (string rphone in rphones.Split('|'))
                                     {
                                         string rphonenumber = rphone.Split('~')[0];
@@ -237,12 +241,14 @@ namespace UBC.People
                                         {
                                             rphonenote = " - " + rphonenote;
                                         }
-                                        rline += "<input id=\"cb_rtext_" + rid + "\" name=\"cb_rtext_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
+                                        c1++;
+                                        rline += "<input id=\"cb_rtext_" + rid + "_" + c1 + "\" name=\"cb_rtext_" + rid + "_" + c1 + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + rphonenumber + "\" /> <a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
                                     }
                                 }
                                 string remails = relation.Split('^')[7];
                                 if (remails != "")
                                 {
+                                    int c1 = 0;
                                     foreach (string remail in remails.Split('|'))
                                     {
                                         string remailaddress = remail.Split('~')[0];
@@ -251,7 +257,8 @@ namespace UBC.People
                                         {
                                             remailnote = " - " + remailnote;
                                         }
-                                        rline += "<input id=\"cb_remail_" + rid + "\" name =\"cb_remail_" + rid + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
+                                        c1++;
+                                        rline += "<input id=\"cb_remail_" + rid + "_" + c1 + "\" name =\"cb_remail_" + rid + "_" + c1 + "\" type=\"checkbox\"  value=\"" + id + "|" + firstname + "|" + remailaddress + "\" /> <a href=\"mailto:" + remailaddress + "\">" + remailaddress + "</a>" + remailnote + "<br />";
                                     }
                                 }
                             }

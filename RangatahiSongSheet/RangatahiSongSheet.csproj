@@ -148,6 +148,8 @@
     <Content Include="Dependencies\RSDiagram.pdf" />
     <Content Include="Dependencies\RSDocument.pdf" />
     <Content Include="Dependencies\RSImage.pdf" />
+    <Content Include="Dependencies\Rangatahisongsheetkaupapa.pdf" />
+    <Content Include="Dependencies\RangatahiSongsheet_2020.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

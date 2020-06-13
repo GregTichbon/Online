@@ -22,7 +22,7 @@ namespace DataInnovations.Raffles
                 case "Get_Ticket_Wins":
                     string raffleticket_id = Request.QueryString["raffleticket_id"];
 
-                    html = "<table class=\"mytable\" id=\"tab_Wins\"><thead><tr><th>Draw</th><th>Date</th><th>Status</th><th>Notes</th><th><span class=\"edit\">Add</span></th></tr></thead><tbody>";
+                    html = "<table class=\"mytable\" id=\"tab_Wins\"><thead><tr><th>Draw</th><th>Date</th><th>Status</th><th>Notes</th><th>Voucher</th><th><span class=\"edit\">Add</span></th></tr></thead><tbody>";
                     //get_event_person event_id mode='Recorded'
                     strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
@@ -51,8 +51,9 @@ namespace DataInnovations.Raffles
                                 string Notes = dr["Notes"].ToString();
                                 string Response = dr["Response"].ToString();
                                 string itiNinjaID = dr["itiNinjaID"].ToString();
+                                string Voucher = dr["voucher"].ToString();
 
-                                html += "<tr id=\"tr_" + id + "\"><td>" + Draw + "</td><td>" + DrawnDate + "</td><td>" + Status + "</td><td>" + Notes + "</td><td><span class=\"edit\">Edit</span></td></tr>";
+                                html += "<tr id=\"tr_" + id + "\"><td>" + Draw + "</td><td>" + DrawnDate + "</td><td>" + Status + "</td><td>" + Notes + "</td><td>" + Voucher + "</td><td><span class=\"edit\">Edit</span></td></tr>";
                             }
                         }
                         dr.Close();
