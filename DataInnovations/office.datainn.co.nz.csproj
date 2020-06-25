@@ -317,6 +317,7 @@
     <Content Include="Raffles\UBC2019B\default.aspx" />
     <Content Include="Raffles\UBC2019B\Login.aspx" />
     <Content Include="Raffles\UBC2019B\Voucher.aspx" />
+    <Content Include="Raffles\UBC2019B\Winners.aspx" />
     <Content Include="Raffles\UBC2019B\WinnerVoucher.aspx" />
     <Content Include="Raffles\WinnerEntry.aspx" />
     <Content Include="Row\%24ReadMe.txt" />
@@ -1291,6 +1292,13 @@
     </Compile>
     <Compile Include="Raffles\UBC2019B\Voucher.aspx.designer.cs">
       <DependentUpon>Voucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\UBC2019B\Winners.aspx.cs">
+      <DependentUpon>Winners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019B\Winners.aspx.designer.cs">
+      <DependentUpon>Winners.aspx</DependentUpon>
     </Compile>
     <Compile Include="Raffles\UBC2019B\WinnerVoucher.aspx.cs">
       <DependentUpon>WinnerVoucher.aspx</DependentUpon>

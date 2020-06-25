@@ -26,6 +26,8 @@ namespace DataInnovations.Raffles
             string purchaser = "";
             string mobile = "";
             string greeting = "";
+            string emailaddress = "";
+            string notes = "";
 
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
@@ -59,6 +61,8 @@ namespace DataInnovations.Raffles
                     purchaser = dr["purchaser"].ToString();
                     mobile = dr["mobile"].ToString();
                     greeting = dr["greeting"].ToString();
+                    emailaddress = dr["emailaddress"].ToString();
+                    notes = dr["notes"].ToString();
 
                     html += "<tr>";
                     html += "<td>";
@@ -71,6 +75,8 @@ namespace DataInnovations.Raffles
                     tabledata += ", purchaser:\"" + purchaser + "\"";
                     tabledata += ", mobile:\"" + mobile + "\"";
                     tabledata += ", greeting:\"" + greeting + "\"";
+                    tabledata += ", emailaddress:\"" + emailaddress + "\"";
+                    tabledata += ", notes:\"" + notes + "\"";
                     //tabledata += ", ticketnumber:\"" + ticketnumber + "\"";
 
                     tabledata += "}";

@@ -104,22 +104,24 @@ namespace DataInnovations.Raffles.UBC2019B
                             int y = 50;
                             imageGraphics.DrawString("Draw " + draw + " - " + drawndate, Font, Brushes.Yellow, x, y);
                         }
-                        
-                        BarcodeLib.Barcode b1 = new BarcodeLib.Barcode();
-                        b1.BackColor = System.Drawing.Color.White;
-                        b1.ForeColor = System.Drawing.Color.Black;
-                        b1.IncludeLabel = true;
-                        b1.Alignment = BarcodeLib.AlignmentPositions.CENTER;
-                        b1.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
-                        //b1.ImageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
-                        Font font = new System.Drawing.Font("verdana", 16f);
-                        b1.LabelFont = font;
-                        b1.Height = 100;
-                        b1.Width = 220;
 
-                        System.Drawing.Image BarCodeimage = b1.Encode(BarcodeLib.TYPE.CODE39Extended, voucher);
-                        imageGraphics.DrawImage(BarCodeimage, 1550, 2160);
+                        if (voucher != "")
+                        {
+                            BarcodeLib.Barcode b1 = new BarcodeLib.Barcode();
+                            b1.BackColor = System.Drawing.Color.White;
+                            b1.ForeColor = System.Drawing.Color.Black;
+                            b1.IncludeLabel = true;
+                            b1.Alignment = BarcodeLib.AlignmentPositions.CENTER;
+                            b1.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
+                            //b1.ImageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
+                            Font font = new System.Drawing.Font("verdana", 16f);
+                            b1.LabelFont = font;
+                            b1.Height = 100;
+                            b1.Width = 220;
 
+                            System.Drawing.Image BarCodeimage = b1.Encode(BarcodeLib.TYPE.CODE39Extended, voucher);
+                            imageGraphics.DrawImage(BarCodeimage, 1550, 2160);
+                        }
 
                         image.Save(targetImage);
 

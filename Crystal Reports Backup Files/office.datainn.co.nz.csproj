@@ -49,10 +49,10 @@
       <HintPath>..\packages\BarcodeLib.2.2.3\lib\netstandard2.0\BarcodeStandard.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
@@ -306,6 +306,7 @@
     <Content Include="Dependencies\StickyTableCells\README.md" />
     <Content Include="Dependencies\colorbox\images\Thumbs.db" />
     <Content Include="Quiz\default.aspx" />
+    <Content Include="Raffles\ControlAll.aspx" />
     <Content Include="Raffles\Images\Blank.jpg" />
     <Content Include="Raffles\Images\ChefsChoiceWinningTicket2019B.jpg" />
     <Content Include="Raffles\Maint.aspx" />
@@ -316,7 +317,9 @@
     <Content Include="Raffles\UBC2019B\default.aspx" />
     <Content Include="Raffles\UBC2019B\Login.aspx" />
     <Content Include="Raffles\UBC2019B\Voucher.aspx" />
+    <Content Include="Raffles\UBC2019B\Winners.aspx" />
     <Content Include="Raffles\UBC2019B\WinnerVoucher.aspx" />
+    <Content Include="Raffles\WinnerEntry.aspx" />
     <Content Include="Row\%24ReadMe.txt" />
     <Content Include="Row\CalculatePrognostic.aspx" />
     <Content Include="Row\Entry4.aspx" />
@@ -342,10 +345,13 @@
     <Content Include="YourPassing\Administration\Agents.aspx" />
     <Content Include="YourPassing\Administration\default.aspx" />
     <Content Include="YourPassing\Administration\Directors.aspx" />
+    <Content Include="YourPassing\Administration\Messages.aspx" />
+    <Content Include="YourPassing\Administration\Transactions.aspx" />
     <Content Include="YourPassing\deceased.aspx" />
     <Content Include="YourPassing\DeceasedDetails.aspx" />
     <Content Include="YourPassing\Mourner.aspx" />
     <Content Include="YourPassing\Payment.aspx" />
+    <Content Include="YourPassing\PaymentProcess.aspx" />
     <Content Include="YourPassing\Posts.asmx" />
     <Content Include="YourPassing\PXPay2\Default.aspx" />
     <Content Include="YourPassing\_Includes\jquery-ui-themes-1.12.1\AUTHORS.txt" />
@@ -1083,6 +1089,13 @@
     <Compile Include="Raffles\Control.aspx.designer.cs">
       <DependentUpon>Control.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\ControlAll.aspx.cs">
+      <DependentUpon>ControlAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\ControlAll.aspx.designer.cs">
+      <DependentUpon>ControlAll.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\Data.asmx.cs">
       <DependentUpon>Data.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1280,12 +1293,26 @@
     <Compile Include="Raffles\UBC2019B\Voucher.aspx.designer.cs">
       <DependentUpon>Voucher.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Raffles\UBC2019B\Winners.aspx.cs">
+      <DependentUpon>Winners.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\UBC2019B\Winners.aspx.designer.cs">
+      <DependentUpon>Winners.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Raffles\UBC2019B\WinnerVoucher.aspx.cs">
       <DependentUpon>WinnerVoucher.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Raffles\UBC2019B\WinnerVoucher.aspx.designer.cs">
       <DependentUpon>WinnerVoucher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Raffles\WinnerEntry.aspx.cs">
+      <DependentUpon>WinnerEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Raffles\WinnerEntry.aspx.designer.cs">
+      <DependentUpon>WinnerEntry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Row\CalculatePrognostic.aspx.cs">
       <DependentUpon>CalculatePrognostic.aspx</DependentUpon>
@@ -1705,6 +1732,20 @@
     <Compile Include="YourPassing\Administration\Directors.aspx.designer.cs">
       <DependentUpon>Directors.aspx</DependentUpon>
     </Compile>
+    <Compile Include="YourPassing\Administration\Messages.aspx.cs">
+      <DependentUpon>Messages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\Administration\Messages.aspx.designer.cs">
+      <DependentUpon>Messages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\Administration\Transactions.aspx.cs">
+      <DependentUpon>Transactions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\Administration\Transactions.aspx.designer.cs">
+      <DependentUpon>Transactions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="YourPassing\agent.aspx.cs">
       <DependentUpon>agent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1767,6 +1808,13 @@
     </Compile>
     <Compile Include="YourPassing\Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="YourPassing\PaymentProcess.aspx.cs">
+      <DependentUpon>PaymentProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="YourPassing\PaymentProcess.aspx.designer.cs">
+      <DependentUpon>PaymentProcess.aspx</DependentUpon>
     </Compile>
     <Compile Include="YourPassing\Posts.asmx.cs">
       <DependentUpon>Posts.asmx</DependentUpon>

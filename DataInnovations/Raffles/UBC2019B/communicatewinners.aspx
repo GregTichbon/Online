@@ -75,7 +75,7 @@
         <br />
 &nbsp;<asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
 Your ticket, ||identifier||/||ticketnumber||, is a winner in the Union Boat Club's Chef's Choice Maadi rowing raffle.
-Please contact Greg (0272495088) to collect your voucher.
+You can collect your voucher from: Health 2000, 58 Victoria Ave.
 Thanks for your support
     
  

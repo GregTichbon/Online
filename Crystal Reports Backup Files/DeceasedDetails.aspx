@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="_Includes/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
         $(document).ready(function () {
             tinymce.init({ selector: "textarea" });

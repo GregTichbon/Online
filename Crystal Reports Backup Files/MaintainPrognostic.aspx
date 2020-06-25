@@ -56,7 +56,7 @@
                     });
                 },
                 columns: [
-                    { title: "ID", field: "code_ctr", visible: false },
+                    { title: "ID", field: "Prognostic_CTR", visible: false },
                     { title: "Discipline", field: "Discipline", sorter: "alphanum", headerFilter: "input" },
                     { title: "Code", field: "code", sorter: "alphanum", headerFilter: "input", editor: "input" },
                     { title: "Description", field: "Description", sorter: "alphanum", headerFilter: "input", editor: "input" },

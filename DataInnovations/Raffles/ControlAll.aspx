@@ -149,11 +149,13 @@
 
                 columns: [
                     { title: "ID", field: "raffleticket_id", visible: false },
-                    { title: "Identifier", field: "identifier" },
-                    { title: "Ticket", field: "ticketnumber" },
-                    { title: "Purchaser", field: "purchaser", editor: "input" },
-                    { title: "Mobile", field: "mobile", editor: "input" },
-                    { title: "Greeting", field: "greeting", editor: "input" },
+                    { title: "Identifier", field: "identifier", headerFilter: true },
+                    { title: "Ticket", field: "ticketnumber", headerFilter: "input" },
+                    { title: "Purchaser", field: "purchaser", editor: "input", headerFilter: "input" },
+                    { title: "Mobile", field: "mobile", editor: "input", headerFilter: "input" },
+                    { title: "Email", field: "emailaddress", editor: "input", headerFilter: "input" },
+                    { title: "Note", field: "notes", editor: "input", headerFilter: "input" },
+                    { title: "Greeting", field: "greeting", editor: "input", headerFilter: "input" },
                     {
                         title: "Wins", formatter: actWins, cellClick: function (e, cell) {
                             id = cell.getRow().getData().id;
@@ -312,6 +314,7 @@
                             <select id="status" name="status">
                                 <option></option>
                                 <option>Winner</option>
+                                <option>Printed</option>
                                 <option>Notified</option>
 								<option>Received</option>
                                 <option>Ordered</option>

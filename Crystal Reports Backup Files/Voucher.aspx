@@ -76,7 +76,7 @@
                 });
 
                 $('tbody tr').each(function () {
-                    thisstatus = $(this).find('td').eq(4).text();
+                    thisstatus = $(this).find('td').eq(5).text();
                     if (selected.indexOf(thisstatus) != -1) {
                         $(this).show();
                     }

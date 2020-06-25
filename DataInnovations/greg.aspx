@@ -21,6 +21,8 @@
         <br />
         <a href="raffles/raffles.aspx">Raffles</a>
         <br />
+                <a href="raffles/controlall.aspx">Control All</a>
+        <br />
         <a href="raffles/communicatewinners.aspx">Communicate with winners</a>
         <br />
         <a href="raffles/spinner.aspx">Raffle Spinner</a>

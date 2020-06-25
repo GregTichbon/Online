@@ -647,17 +647,36 @@ namespace UBC.People
 
             string emailSubject = "Union Boat Club Rower Registration";
             string screenTemplate = "RegisterScreen.xslt";
-            //string host = "datainn.co.nz";
+
+            /*
+            string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+            string emailfrom = "info@unionboatclub.co.nz";
+            string password = "R0wtheboat";
+            int port = 587; // 465; // 25;
+            Boolean enableSsl = true;
+
+            string[] attachments = new string[0];
+            Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+
+
+            */
+
+
             string host = "70.35.207.87";
             string emailfrom = "UnionBoatClub@datainn.co.nz";
+            string password = "39%3Zxon";
+
             string emailBCC = emailfrom + ";greg@datainn.co.nz;gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";
             string emailfromname = "Union Boat Club";
-            string password = "39%3Zxon";
+
             //string emailRecipient = Request.Form["emailaddress"];
 
             string emailtext = functions.HTMLtoText(emaildocument);
 
-             //functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
+            //functions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "", attachments, emailoptions);
+
+
+            //functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
             functions.sendemailV3(host, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "");
 
             XslCompiledTransform ScreenXslTrans = new XslCompiledTransform();
@@ -673,3 +692,4 @@ namespace UBC.People
         }
     }
 }
+ 

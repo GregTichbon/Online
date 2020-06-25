@@ -312,6 +312,7 @@
                             <select id="status" name="status">
                                 <option></option>
                                 <option>Winner</option>
+                                <option>Printed</option>
                                 <option>Notified</option>
 								<option>Received</option>
                                 <option>Ordered</option>

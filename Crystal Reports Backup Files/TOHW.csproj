@@ -1,0 +1,1419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19139119-4F16-4065-8BCC-F6B712D75DF2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TOHW</RootNamespace>
+    <AssemblyName>TOHW</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Generic">
+      <HintPath>..\Generic\bin\Generic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="2Talk\default.asp" />
+    <Content Include="2Talk\default.aspx" />
+    <Content Include="AFace1\face-api.min.js" />
+    <Content Include="AFace1\index.html" />
+    <Content Include="AFace1\script.js" />
+    <Content Include="AFace\Default.html" />
+    <Content Include="AFace\face-api.min.js" />
+    <Content Include="Auction\Admin\Default.aspx" />
+    <Content Include="Auction\%24OLD\item.aspx" />
+    <Content Include="Auction\%24OLD\donor.aspx" />
+    <Content Include="Auction\%24OLD\DonorList.aspx" />
+    <Content Include="Auction\%24OLD\ItemList.aspx" />
+    <Content Include="Auction\Admin\donor.aspx" />
+    <Content Include="Auction\Admin\donorlist.aspx" />
+    <Content Include="Auction\Images\Donors\10\Edmonds Painting 2016 logo - with service list.jpg" />
+    <Content Include="Auction\Images\Donors\10\Original\Edmonds Painting 2016 logo - with service list.jpg" />
+    <Content Include="Auction\Images\Donors\11\Dulux paint logo.png" />
+    <Content Include="Auction\Images\Donors\11\Original\Dulux paint logo.png" />
+    <Content Include="Auction\Images\Donors\12\Big Orange Ceramic Logo.jpg" />
+    <Content Include="Auction\Images\Donors\12\Original\Big Orange Ceramic Logo.jpg" />
+    <Content Include="Auction\Images\Donors\13\Rutland Arms Email Banners.jpg" />
+    <Content Include="Auction\Images\Donors\14\The Red Lion.jpg" />
+    <Content Include="Auction\Images\Donors\15\carolines-boatshed-black-large.png" />
+    <Content Include="Auction\Images\Donors\15\Original\carolines-boatshed-black-large.png" />
+    <Content Include="Auction\Images\Donors\16\16.jpg" />
+    <Content Include="Auction\Images\Donors\16\Original\16.jpg" />
+    <Content Include="Auction\Images\Donors\17\17.jpg" />
+    <Content Include="Auction\Images\Donors\17\Original\17.jpg" />
+    <Content Include="Auction\Images\Donors\18\Original\TV Business card.jpg" />
+    <Content Include="Auction\Images\Donors\18\TV Business card.jpg" />
+    <Content Include="Auction\Images\Donors\19\Original\Weta Workshop.jpg" />
+    <Content Include="Auction\Images\Donors\19\Weta Workshop.jpg" />
+    <Content Include="Auction\Images\Donors\1\1.jpg" />
+    <Content Include="Auction\Images\Donors\1\Original\1.jpg" />
+    <Content Include="Auction\Images\Donors\20\Bolton Hotel.jpg" />
+    <Content Include="Auction\Images\Donors\20\Original\Bolton Hotel.jpg" />
+    <Content Include="Auction\Images\Donors\21\Mercedes Logo.png" />
+    <Content Include="Auction\Images\Donors\23\HURRICANES LOGO.jpg" />
+    <Content Include="Auction\Images\Donors\23\Original\HURRICANES LOGO.jpg" />
+    <Content Include="Auction\Images\Donors\24\Logan Brown Logo.jpg" />
+    <Content Include="Auction\Images\Donors\24\Original\Logan Brown Logo.jpg" />
+    <Content Include="Auction\Images\Donors\27\Earl Bamber Image.jpg" />
+    <Content Include="Auction\Images\Donors\27\original\Earl Bamber Image.png" />
+    <Content Include="Auction\Images\Donors\28\Michael Hill Logo.png" />
+    <Content Include="Auction\Images\Donors\29\Eyes on Victoria .jpg" />
+    <Content Include="Auction\Images\Donors\29\original\Eyes on Victoria .jpg" />
+    <Content Include="Auction\Images\Donors\2\Coutts Newmarket.jpg" />
+    <Content Include="Auction\Images\Donors\2\Original\Coutts Newmarket.jpg" />
+    <Content Include="Auction\Images\Donors\30\original\Victoria Dental .jpg" />
+    <Content Include="Auction\Images\Donors\30\Victoria Dental .jpg" />
+    <Content Include="Auction\Images\Donors\31\Mitre 10 MEGA Wanganui.jpg" />
+    <Content Include="Auction\Images\Donors\31\original\Mitre 10 MEGA Wanganui.jpg" />
+    <Content Include="Auction\Images\Donors\32\32.jpg" />
+    <Content Include="Auction\Images\Donors\32\Original\32.jpg" />
+    <Content Include="Auction\Images\Donors\34\34.jpg" />
+    <Content Include="Auction\Images\Donors\34\Original\34.jpg" />
+    <Content Include="Auction\Images\Donors\35\Crossroads Wine.jpg" />
+    <Content Include="Auction\Images\Donors\35\original\Crossroads Wine.jpg" />
+    <Content Include="Auction\Images\Donors\36\Original\Springvale Garden Centre Logo.jpg" />
+    <Content Include="Auction\Images\Donors\36\Springvale Garden Centre Logo.jpg" />
+    <Content Include="Auction\Images\Donors\37\original\The Edge Logo.jpg" />
+    <Content Include="Auction\Images\Donors\37\The Edge Logo.jpg" />
+    <Content Include="Auction\Images\Donors\38\38.jpg" />
+    <Content Include="Auction\Images\Donors\38\original\38.jpg" />
+    <Content Include="Auction\Images\Donors\3\Original\The Sugar Club logo - black.jpg" />
+    <Content Include="Auction\Images\Donors\3\The Sugar Club logo - black.jpg" />
+    <Content Include="Auction\Images\Donors\42\Museum Hotel Portrait Black.jpg" />
+    <Content Include="Auction\Images\Donors\42\original\Museum Hotel Portrait Black.jpg" />
+    <Content Include="Auction\Images\Donors\45\Air Chathams Black.jpg" />
+    <Content Include="Auction\Images\Donors\45\original\Air Chathams Black.jpg" />
+    <Content Include="Auction\Images\Donors\46\original\Take It Easy Tours.jpg" />
+    <Content Include="Auction\Images\Donors\46\Take It Easy Tours.jpg" />
+    <Content Include="Auction\Images\Donors\47\Japanese Kitchen.jpg" />
+    <Content Include="Auction\Images\Donors\47\Original\Japanese Kitchen.jpg" />
+    <Content Include="Auction\Images\Donors\48\MINT Logo Specs.jpg" />
+    <Content Include="Auction\Images\Donors\48\original\MINT Logo Specs.jpg" />
+    <Content Include="Auction\Images\Donors\49\NZR_logo_WHT.jpg" />
+    <Content Include="Auction\Images\Donors\49\original\NZR_logo_WHT.jpg" />
+    <Content Include="Auction\Images\Donors\4\Original\Sky City Hotel.jpg" />
+    <Content Include="Auction\Images\Donors\4\Sky City Hotel.jpg" />
+    <Content Include="Auction\Images\Donors\50\original\Parapara Deer Hunt.jpg" />
+    <Content Include="Auction\Images\Donors\50\Parapara Deer Hunt.jpg" />
+    <Content Include="Auction\Images\Donors\51\original\WOW-Awards-Show-Logo.jpg" />
+    <Content Include="Auction\Images\Donors\51\WOW-Awards-Show-Logo.jpg" />
+    <Content Include="Auction\Images\Donors\52\Morrie Gibbons Signs.jpg" />
+    <Content Include="Auction\Images\Donors\52\original\Morrie Gibbons Signs.jpg" />
+    <Content Include="Auction\Images\Donors\53\Chester Borrows.jpg" />
+    <Content Include="Auction\Images\Donors\53\original\Chester Borrows.jpg" />
+    <Content Include="Auction\Images\Donors\54\original\Wanganui Rugby.png" />
+    <Content Include="Auction\Images\Donors\54\Wanganui Rugby.png" />
+    <Content Include="Auction\Images\Donors\55\Cooks Gardens.jpg" />
+    <Content Include="Auction\Images\Donors\55\original\Cooks Gardens.jpg" />
+    <Content Include="Auction\Images\Donors\56\original\Rachel Brandon logo.png" />
+    <Content Include="Auction\Images\Donors\56\Rachel Brandon logo.png" />
+    <Content Include="Auction\Images\Donors\57\Wanganuim Events Trust Logo FINAL_cmyk.png" />
+    <Content Include="Auction\Images\Donors\58\Element Logo.png" />
+    <Content Include="Auction\Images\Donors\59\hammond pantone no shadow 600Low Res.jpg" />
+    <Content Include="Auction\Images\Donors\59\Original\hammond pantone no shadow 600Low Res.jpg" />
+    <Content Include="Auction\Images\Donors\5\David Jones logo Red Blue.jpg" />
+    <Content Include="Auction\Images\Donors\5\Original\David Jones logo Red Blue.jpg" />
+    <Content Include="Auction\Images\Donors\60\original\Quilt.jpg" />
+    <Content Include="Auction\Images\Donors\60\Quilt.jpg" />
+    <Content Include="Auction\Images\Donors\6\Original\Suzuki logo 2.jpg" />
+    <Content Include="Auction\Images\Donors\6\Suzuki logo 2.jpg" />
+    <Content Include="Auction\Images\Donors\7\7.jpg" />
+    <Content Include="Auction\Images\Donors\7\Original\7.jpg" />
+    <Content Include="Auction\Images\Donors\8\8.jpg" />
+    <Content Include="Auction\Images\Donors\8\Original\8.jpg" />
+    <Content Include="Auction\Images\Donors\9\DML Construction Logo %28Large%29_001.png" />
+    <Content Include="Auction\Images\Donors\9\Original\DML Construction Logo %28Large%29_001.png" />
+    <Content Include="Auction\Images\Donors\RAW\ATEED Logo.png" />
+    <Content Include="Auction\Images\Donors\RAW\ATTEED LOGO LARGE.png" />
+    <Content Include="Auction\Images\Donors\RAW\Mellonsfolly Ranch Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Mercedes Logo.jpg" />
+    <Content Include="Auction\Images\Donors\RAW\original\ATEED Logo.png" />
+    <Content Include="Auction\Images\Donors\RAW\original\ATTEED LOGO LARGE.png" />
+    <Content Include="Auction\Images\Donors\RAW\original\Mellonsfolly Ranch Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Mercedes Logo.jpg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Partridge Jewellers Med Ldscape Blue jpg.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Partridge Jewellers Med Portrait Blue copy.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Rivercity Trees Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Springvale Garden Centre Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Stellar 1.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Stellar 2.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\The Edge Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Top Draw_Logo details.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\Top Draw_Logo only.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\original\yellowhouselogo.png" />
+    <Content Include="Auction\Images\Donors\RAW\Partridge Jewellers Med Ldscape Blue jpg.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Partridge Jewellers Med Portrait Blue copy.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Rivercity Trees Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Springvale Garden Centre Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Stellar 1.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Stellar 2.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\The Edge Logo.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Top Draw_Logo details.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\Top Draw_Logo only.jpeg" />
+    <Content Include="Auction\Images\Donors\RAW\yellowhouselogo.png" />
+    <Content Include="Auction\Images\Items\10\Earl Bamber Image.jpg" />
+    <Content Include="Auction\Images\Items\10\original\Earl Bamber Image.png" />
+    <Content Include="Auction\Images\Items\11\original\Weta Vouchers.jpg" />
+    <Content Include="Auction\Images\Items\11\Weta Vouchers.jpg" />
+    <Content Include="Auction\Images\Items\12\Men%27s Gold Watch.jpg" />
+    <Content Include="Auction\Images\Items\12\original\Men%27s Gold Watch.jpg" />
+    <Content Include="Auction\Images\Items\13\Eyes on Victoria RAYBAN IMAGE.jpg" />
+    <Content Include="Auction\Images\Items\13\original\Eyes on Victoria RAYBAN IMAGE.jpg" />
+    <Content Include="Auction\Images\Items\14\IMG_2594.jpg" />
+    <Content Include="Auction\Images\Items\14\original\IMG_2594.jpg" />
+    <Content Include="Auction\Images\Items\14\original\Victoria Dental .jpg" />
+    <Content Include="Auction\Images\Items\14\Victoria Dental .jpg" />
+    <Content Include="Auction\Images\Items\15\original\Outdoor Furniture Cool Stool.jpg" />
+    <Content Include="Auction\Images\Items\15\original\Outdoor Furniture Jersey Setting.jpg" />
+    <Content Include="Auction\Images\Items\15\Outdoor Furniture Cool Stool.jpg" />
+    <Content Include="Auction\Images\Items\15\Outdoor Furniture Jersey Setting.jpg" />
+    <Content Include="Auction\Images\Items\16\original\Rivercity Trees.jpg" />
+    <Content Include="Auction\Images\Items\16\Rivercity Trees.jpg" />
+    <Content Include="Auction\Images\Items\17\original\Top Drawer Package.jpg" />
+    <Content Include="Auction\Images\Items\17\Top Drawer Package.jpg" />
+    <Content Include="Auction\Images\Items\18\original\The Edge Package.jpg" />
+    <Content Include="Auction\Images\Items\18\The Edge Package.jpg" />
+    <Content Include="Auction\Images\Items\19\Crossroads Wine.jpg" />
+    <Content Include="Auction\Images\Items\19\original\Crossroads Wine.jpg" />
+    <Content Include="Auction\Images\Items\1\Mellonsfolly 3.jpg" />
+    <Content Include="Auction\Images\Items\1\Mellonsfolly Old West Town.jpg" />
+    <Content Include="Auction\Images\Items\1\original\Mellonsfolly 3.jpg" />
+    <Content Include="Auction\Images\Items\1\original\Mellonsfolly Old West Town.jpg" />
+    <Content Include="Auction\Images\Items\20\original\Springvale Landscape Package.jpg" />
+    <Content Include="Auction\Images\Items\20\Springvale Landscape Package.jpg" />
+    <Content Include="Auction\Images\Items\21\original\Rachel Brandon Voucher.jpg" />
+    <Content Include="Auction\Images\Items\21\Rachel Brandon Voucher.jpg" />
+    <Content Include="Auction\Images\Items\22\Morrie Gibbons Signs promotion.jpg" />
+    <Content Include="Auction\Images\Items\22\original\Morrie Gibbons Signs promotion.jpg" />
+    <Content Include="Auction\Images\Items\2\original\Partridge Jeweller Pendant Photo 2.jpg" />
+    <Content Include="Auction\Images\Items\2\original\Partridge Jeweller Pendant.jpg" />
+    <Content Include="Auction\Images\Items\2\Partridge Jeweller Pendant Photo 2.jpg" />
+    <Content Include="Auction\Images\Items\2\Partridge Jeweller Pendant.jpg" />
+    <Content Include="Auction\Images\Items\30\Cook%27s Gardens.jpg" />
+    <Content Include="Auction\Images\Items\30\original\Cook%27s Gardens.jpg" />
+    <Content Include="Auction\Images\Items\39\Kim Kardashian Ring.jpg" />
+    <Content Include="Auction\Images\Items\39\original\Kim Kardashian Ring.jpg" />
+    <Content Include="Auction\Images\Items\3\original\Villa 1.jpg" />
+    <Content Include="Auction\Images\Items\3\Villa 1.jpg" />
+    <Content Include="Auction\Images\Items\43\All Black%27s Jersey.jpg" />
+    <Content Include="Auction\Images\Items\43\original\All Black%27s Jersey.jpg" />
+    <Content Include="Auction\Images\Items\44\Auckland Experience Package Mercedes.jpg" />
+    <Content Include="Auction\Images\Items\44\Auckland Experience Package Sky City Hotel.jpg" />
+    <Content Include="Auction\Images\Items\44\Auckland Experience Package The Sugar Club.jpg" />
+    <Content Include="Auction\Images\Items\44\original\Auckland Experience Package Mercedes.png" />
+    <Content Include="Auction\Images\Items\44\original\Auckland Experience Package Sky City Hotel.jpg" />
+    <Content Include="Auction\Images\Items\44\original\Auckland Experience Package The Sugar Club.jpg" />
+    <Content Include="Auction\Images\Items\45\original\Swift Red Front retouched.jpg" />
+    <Content Include="Auction\Images\Items\45\Swift Red Front retouched.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package and Auckland Experience Package Air Chathams.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package EcoZip.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package Fullers Ferry.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package Mudbrick 2.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package Mudbrick Restaurant.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package The Oyster Inn 2.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package The Oyster Inn 3..jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package The Oyster Inn 4.jpg" />
+    <Content Include="Auction\Images\Items\46\original\Waiheke Package The Oyster Inn.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package and Auckland Experience Package Air Chathams.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package EcoZip.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package Fullers Ferry.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package Mudbrick 2.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package Mudbrick Restaurant.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package The Oyster Inn 2.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package The Oyster Inn 3..jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package The Oyster Inn 4.jpg" />
+    <Content Include="Auction\Images\Items\46\Waiheke Package The Oyster Inn.jpg" />
+    <Content Include="Auction\Images\Items\49\Bellamy%27s voucher.jpg" />
+    <Content Include="Auction\Images\Items\49\original\Bellamy%27s voucher.jpg" />
+    <Content Include="Auction\Images\Items\49\original\Wow Tickets.jpg" />
+    <Content Include="Auction\Images\Items\49\Wow Tickets.jpg" />
+    <Content Include="Auction\Images\Items\4\Big Orange Ceramic Logo.jpg" />
+    <Content Include="Auction\Images\Items\4\carolines-boatshed-black-large.png" />
+    <Content Include="Auction\Images\Items\4\Element Logo.png" />
+    <Content Include="Auction\Images\Items\4\Japanese Kitchen.png" />
+    <Content Include="Auction\Images\Items\4\MINT Logo Specs.jpg" />
+    <Content Include="Auction\Images\Items\4\original\carolines-boatshed-black-large.png" />
+    <Content Include="Auction\Images\Items\4\original\Japanese Kitchen.png" />
+    <Content Include="Auction\Images\Items\4\original\Stellar 1.jpg" />
+    <Content Include="Auction\Images\Items\4\original\TV Business card.jpg" />
+    <Content Include="Auction\Images\Items\4\original\yellowhouselogo.png" />
+    <Content Include="Auction\Images\Items\4\Rutland Arms Email Banners.jpg" />
+    <Content Include="Auction\Images\Items\4\Stellar 1.jpg" />
+    <Content Include="Auction\Images\Items\4\The Red Lion.jpg" />
+    <Content Include="Auction\Images\Items\4\TV Business card.jpg" />
+    <Content Include="Auction\Images\Items\4\yellowhouselogo.png" />
+    <Content Include="Auction\Images\Items\54\original\Quilt.jpg" />
+    <Content Include="Auction\Images\Items\54\Quilt.jpg" />
+    <Content Include="Auction\Images\Items\5\original\Wellington_NZ-cablecar-topview.jpg" />
+    <Content Include="Auction\Images\Items\5\Wellington_NZ-cablecar-topview.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Package 2017 Lounge.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Package Logan Brown Photo.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Package Logan Brown Restaurant 2.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Package Museum Hotel 2.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Package Museum Hotel 3.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Package Museum Hotel.jpg" />
+    <Content Include="Auction\Images\Items\7\Hurricanes Photo.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Package 2017 Lounge.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Package Logan Brown Photo.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Package Logan Brown Restaurant 2.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Package Museum Hotel 2.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Package Museum Hotel 3.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Package Museum Hotel.jpg" />
+    <Content Include="Auction\Images\Items\7\original\Hurricanes Photo.jpg" />
+    <Content Include="Auction\Images\Items\8\Heartland Rugby season passes.jpg" />
+    <Content Include="Auction\Images\Items\8\original\Heartland Rugby season passes.jpg" />
+    <Content Include="Auction\Images\Items\8\original\Wanganui Rugby Jersey.jpg" />
+    <Content Include="Auction\Images\Items\8\Wanganui Rugby Jersey.jpg" />
+    <Content Include="Auction\Images\Items\9\original\Parapara Deer Hunt.jpg" />
+    <Content Include="Auction\Images\Items\9\Parapara Deer Hunt.jpg" />
+    <Content Include="Auction\Page.aspx" />
+    <Content Include="bin\Generic.dll" />
+    <Content Include="bin\HtmlAgilityPack.dll" />
+    <Content Include="BpopUp1.aspx" />
+    <Content Include="Bpopup2.aspx" />
+    <Content Include="Bpop\assets\jquery.bpopup-0.11.0.min.js" />
+    <Content Include="Bpop\assets\test.html" />
+    <Content Include="Bpop\Test1.aspx" />
+    <Content Include="Bpop\Test2.aspx" />
+    <Content Include="CheckinOut\app.js" />
+    <Content Include="Face-Recognition\face-api.min.js" />
+    <Content Include="Face-Recognition\index.html" />
+    <Content Include="Face-Recognition\labeled_images\Black Widow\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Black Widow\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain America\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain America\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain Marvel\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Captain Marvel\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Hawkeye\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Hawkeye\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Jim Rhodes\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Jim Rhodes\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Thor\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Thor\2.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Tony Stark\1.jpg" />
+    <Content Include="Face-Recognition\labeled_images\Tony Stark\2.jpg" />
+    <Content Include="Face-Recognition\script.js" />
+    <Content Include="Face-Recognition\test_images\1.png" />
+    <Content Include="Face-Recognition\test_images\2.jpg" />
+    <Content Include="Face-Recognition\test_images\3.jpg" />
+    <Content Include="CheckinOut\instascan.min.js" />
+    <Content Include="CheckinOut\jsqrcode\alignpat.js" />
+    <Content Include="CheckinOut\jsqrcode\bitmat.js" />
+    <Content Include="CheckinOut\jsqrcode\bmparser.js" />
+    <Content Include="CheckinOut\jsqrcode\datablock.js" />
+    <Content Include="CheckinOut\jsqrcode\databr.js" />
+    <Content Include="CheckinOut\jsqrcode\datamask.js" />
+    <Content Include="CheckinOut\jsqrcode\decoder.js" />
+    <Content Include="CheckinOut\jsqrcode\detector.js" />
+    <Content Include="CheckinOut\jsqrcode\errorlevel.js" />
+    <Content Include="CheckinOut\jsqrcode\findpat.js" />
+    <Content Include="CheckinOut\jsqrcode\formatinf.js" />
+    <Content Include="CheckinOut\jsqrcode\gf256.js" />
+    <Content Include="CheckinOut\jsqrcode\gf256poly.js" />
+    <Content Include="CheckinOut\jsqrcode\grid.js" />
+    <Content Include="CheckinOut\jsqrcode\qrcode.js" />
+    <Content Include="CheckinOut\jsqrcode\rsdecoder.js" />
+    <Content Include="CheckinOut\jsqrcode\test.html" />
+    <Content Include="CheckinOut\jsqrcode\version.js" />
+    <Content Include="CheckinOut\Posts.asmx" />
+    <Content Include="CheckinOut\style.css" />
+    <Content Include="CheckinOut\New.html" />
+    <Content Include="CheckinOut\Test1.aspx" />
+    <Content Include="CheckinOut\Test1.html" />
+    <Content Include="CheckinOut\default.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Database\data.asmx" />
+    <Content Include="Database\Main.aspx" />
+    <Content Include="Database\Main2.aspx" />
+    <Content Include="Database\Reports\Attendance.aspx" />
+    <Content Include="Database\Search.aspx" />
+    <Content Include="Database\simple.aspx" />
+    <Content Include="Database\TodaysBirthdays.aspx" />
+    <Content Include="default.aspx" />
+    <Content Include="Dependencies\CascadingDropDown\jquery.cascadingdropdown.min.js" />
+    <Content Include="Dependencies\colorbox\colorbox.css" />
+    <Content Include="Dependencies\colorbox\images\border.png" />
+    <Content Include="Dependencies\colorbox\images\controls.png" />
+    <Content Include="Dependencies\colorbox\images\loading.gif" />
+    <Content Include="Dependencies\colorbox\images\loading_background.png" />
+    <Content Include="Dependencies\colorbox\images\overlay.png" />
+    <Content Include="Dependencies\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\css\ScrollTabla.css" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo3.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Ejemplo4.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example1.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example2.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example3.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example4.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example5.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\Example6.html" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logoN.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\img\logonit.png" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\js\jquery.CongelarFilaColumna.js" />
+    <Content Include="Dependencies\Images\processing1.gif" />
+    <Content Include="Dependencies\StickyTableCells\Examples\example-rtl.html" />
+    <Content Include="Dependencies\StickyTableCells\Examples\index.html" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.js" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.css" />
+    <Content Include="Dependencies\StickyTableCells\jquery.stickytable.min.js" />
+    <Content Include="Dependencies\TableHeadFixer\examples\cutomStyleHeight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixFooterAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeadAndRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixHeader.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiFooter.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiHead.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiLeft.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixMultiTable.html" />
+    <Content Include="Dependencies\TableHeadFixer\examples\fixRight.html" />
+    <Content Include="Dependencies\TableHeadFixer\gulpfile.js" />
+    <Content Include="Dependencies\TableHeadFixer\index.html" />
+    <Content Include="Dependencies\TableHeadFixer\tableHeadFixer.js" />
+    <Content Include="Evaluation\default.aspx" />
+    <Content Include="functions\Data.asmx" />
+    <Content Include="images\aimeeMatthews.jpg" />
+    <Content Include="images\Charlie-BoyWilliams.jpg" />
+    <Content Include="images\DolzHadfield.jpg" />
+    <Content Include="images\GregTichbon.jpg" />
+    <Content Include="images\JordinHaami-Rerekura.jpg" />
+    <Content Include="images\JudyKumeroa.jpg" />
+    <Content Include="images\KathParnell.jpg" />
+    <Content Include="images\KeeganEaston.jpg" />
+    <Content Include="images\LeoneandMellisa.jpg" />
+    <Content Include="images\MahangaWilliams.jpg" />
+    <Content Include="Index.aspx" />
+    <Content Include="Information.aspx" />
+    <Content Include="MySite\default.html" />
+    <Content Include="MySite\fblogin.png" />
+    <Content Include="MySite\login.aspx" />
+    <Content Include="MySite\Login.html" />
+    <Content Include="PhotoHunt11Jun18\Answer.aspx" />
+    <Content Include="PhotoHunt11Jun18\Answers.aspx" />
+    <Content Include="PhotoHunt11Jun18\AnswersPhotos.aspx" />
+    <Content Include="PhotoHunt11Jun18\data.asmx" />
+    <Content Include="PhotoHunt11Jun18\Default.aspx" />
+    <Content Include="PhotoHunt11Jun18\ShowAll.aspx" />
+    <Content Include="PhotoHunt11Jun18\TestImage1.aspx" />
+    <Content Include="PhotoHunt11Jun18\UBC.jpg" />
+    <Content Include="PhotoHunt11Jun18\VW1.aspx" />
+    <Content Include="Pickups\accident.bmp" />
+    <Content Include="Pickups\Admin.aspx" />
+    <Content Include="Pickups\data.asmx" />
+    <Content Include="Pickups\GoogleMaps1.aspx" />
+    <Content Include="Pickups\GoogleMaps2.aspx" />
+    <Content Include="Pickups\Icons\Charlie Boy.png" />
+    <Content Include="Pickups\Icons\Greg.png" />
+    <Content Include="Pickups\Icons\Jay.png" />
+    <Content Include="Pickups\Icons\Jordi.png" />
+    <Content Include="Pickups\Icons\Judy.png" />
+    <Content Include="Pickups\Icons\Keegan.png" />
+    <Content Include="Pickups\Icons\Keith.png" />
+    <Content Include="Pickups\Icons\Koralee.png" />
+    <Content Include="Pickups\Icons\TOH.png" />
+    <Content Include="Pickups\Icons\Unknown.png" />
+    <Content Include="Pickups\Icons\Whakapakari.png" />
+    <Content Include="Pickups\ImageHandlerTest.aspx" />
+    <Content Include="Pickups\InArray1.aspx" />
+    <Content Include="Pickups\login.aspx" />
+    <Content Include="Pickups\tabletoExcel.aspx" />
+    <Content Include="QS1.html" />
+    <Content Include="QS2.aspx" />
+    <Content Include="QS3.aspx" />
+    <Content Include="Rewards\default.aspx" />
+    <Content Include="Permissions.sql" />
+    <Content Include="Pickups\default.aspx" />
+    <Content Include="Scripts\addclear.min.js" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\BPopup.js" />
+    <Content Include="Scripts\colorbox\colorbox.css" />
+    <Content Include="Scripts\colorbox\images\border.png" />
+    <Content Include="Scripts\colorbox\images\controls.png" />
+    <Content Include="Scripts\colorbox\images\loading.gif" />
+    <Content Include="Scripts\colorbox\images\loading_background.png" />
+    <Content Include="Scripts\colorbox\images\overlay.png" />
+    <Content Include="Scripts\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Scripts\datepicker\calendar-blue.gif" />
+    <Content Include="Scripts\datepicker\calendar-green.gif" />
+    <Content Include="Scripts\datepicker\calendar.gif" />
+    <Content Include="Scripts\datepicker\datepickBasic.html" />
+    <Content Include="Scripts\datepicker\flora.datepick.css" />
+    <Content Include="Scripts\datepicker\humanity.datepick.css" />
+    <Content Include="Scripts\datepicker\jquery.datepick-af.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-am.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ar-DZ.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ar-EG.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ar.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-az.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-bg.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-bs.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ca.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-cs.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-da.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-de-CH.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-de.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-el.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-en-AU.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-en-GB.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-en-NZ.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-eo.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-es-AR.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-es-PE.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-es.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-et.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-eu.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fa.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fi.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fo.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fr-CH.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-fr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-gl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-gu.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-he.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hi-IN.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hi.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hu.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-hy.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-id.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-is.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-it.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ja.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ka.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-km.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ko.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-lt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-lv.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-me-ME.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-me.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-mk.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ml.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ms.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-mt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-nl-BE.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-nl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-no.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-pl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-pt-BR.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-pt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-rm.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ro.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ru.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sk.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sl.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sq.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sr-SR.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-sv.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ta.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-th.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-tr.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-tt.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-uk.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-ur.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-vi.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-zh-CN.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-zh-HK.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick-zh-TW.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.css" />
+    <Content Include="Scripts\datepicker\jquery.datepick.ext.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.ext.min.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.lang.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.lang.min.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.min.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.validation.js" />
+    <Content Include="Scripts\datepicker\jquery.datepick.validation.min.js" />
+    <Content Include="Scripts\datepicker\jquery.plugin.js" />
+    <Content Include="Scripts\datepicker\jquery.plugin.min.js" />
+    <Content Include="Scripts\datepicker\redmond.datepick.css" />
+    <Content Include="Scripts\datepicker\smoothness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-black-tie.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-blitzer.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-cupertino.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-dark-hive.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-dot-luv.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-eggplant.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-excite-bike.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-flick.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-hot-sneaks.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-humanity.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-le-frog.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-mint-choc.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-overcast.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-pepper-grinder.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-redmond.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-smoothness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-south-street.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-start.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-sunny.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-swanky-purse.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-trontastic.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-ui-darkness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-ui-lightness.datepick.css" />
+    <Content Include="Scripts\datepicker\ui-vader.datepick.css" />
+    <Content Include="Scripts\datepicker\ui.datepick.css" />
+    <Content Include="Scripts\fullcalendar\CHANGELOG.txt" />
+    <Content Include="Scripts\fullcalendar\CONTRIBUTING.txt" />
+    <Content Include="Scripts\fullcalendar\datePicker\css\datepicker.css" />
+    <Content Include="Scripts\fullcalendar\datePicker\css\datepicker.min.css" />
+    <Content Include="Scripts\fullcalendar\datePicker\css\demo.css" />
+    <Content Include="Scripts\fullcalendar\datePicker\index.html" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\datepicker.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\datepicker.min.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\ar.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\cs.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\da.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\de.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\en-US.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\en.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\eo.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\es-MX.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\es.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\et.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\fi.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\fr.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\he.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\hu.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\id.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\it.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\kr.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\lt.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\lv.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\nl.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\no.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\pl.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\pt-br.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\pt.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\ru.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\se.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\si.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\sk.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\th.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\tr.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\js\lang\zh.js" />
+    <Content Include="Scripts\fullcalendar\datePicker\language\index.html" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-cursor.jpg" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-disabled.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-focused.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-gradient.gif" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-normal.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-selected.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-sprite.png" />
+    <Content Include="Scripts\fullcalendar\datePicker\media\datepicker-today.gif" />
+    <Content Include="Scripts\fullcalendar\datePicker\README.txt" />
+    <Content Include="Scripts\fullcalendar\demos\agenda-views.html" />
+    <Content Include="Scripts\fullcalendar\demos\background-events.html" />
+    <Content Include="Scripts\fullcalendar\demos\basic-views.html" />
+    <Content Include="Scripts\fullcalendar\demos\default.html" />
+    <Content Include="Scripts\fullcalendar\demos\external-dragging.html" />
+    <Content Include="Scripts\fullcalendar\demos\gcal.html" />
+    <Content Include="Scripts\fullcalendar\demos\json.html" />
+    <Content Include="Scripts\fullcalendar\demos\jsonGreg.html" />
+    <Content Include="Scripts\fullcalendar\demos\languages.html" />
+    <Content Include="Scripts\fullcalendar\demos\selectable.html" />
+    <Content Include="Scripts\fullcalendar\demos\theme.html" />
+    <Content Include="Scripts\fullcalendar\demos\timezones.html" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Scripts\fullcalendar\gcal.js" />
+    <Content Include="Scripts\fullcalendar\lang-all.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-tn.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar.js" />
+    <Content Include="Scripts\fullcalendar\lang\bg.js" />
+    <Content Include="Scripts\fullcalendar\lang\ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\cs.js" />
+    <Content Include="Scripts\fullcalendar\lang\da.js" />
+    <Content Include="Scripts\fullcalendar\lang\de-at.js" />
+    <Content Include="Scripts\fullcalendar\lang\de.js" />
+    <Content Include="Scripts\fullcalendar\lang\el.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-au.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-gb.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-ie.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-nz.js" />
+    <Content Include="Scripts\fullcalendar\lang\es.js" />
+    <Content Include="Scripts\fullcalendar\lang\fa.js" />
+    <Content Include="Scripts\fullcalendar\lang\fi.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr-ch.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr.js" />
+    <Content Include="Scripts\fullcalendar\lang\he.js" />
+    <Content Include="Scripts\fullcalendar\lang\hi.js" />
+    <Content Include="Scripts\fullcalendar\lang\hr.js" />
+    <Content Include="Scripts\fullcalendar\lang\hu.js" />
+    <Content Include="Scripts\fullcalendar\lang\id.js" />
+    <Content Include="Scripts\fullcalendar\lang\is.js" />
+    <Content Include="Scripts\fullcalendar\lang\it.js" />
+    <Content Include="Scripts\fullcalendar\lang\ja.js" />
+    <Content Include="Scripts\fullcalendar\lang\ko.js" />
+    <Content Include="Scripts\fullcalendar\lang\lt.js" />
+    <Content Include="Scripts\fullcalendar\lang\lv.js" />
+    <Content Include="Scripts\fullcalendar\lang\nb.js" />
+    <Content Include="Scripts\fullcalendar\lang\nl.js" />
+    <Content Include="Scripts\fullcalendar\lang\pl.js" />
+    <Content Include="Scripts\fullcalendar\lang\pt-br.js" />
+    <Content Include="Scripts\fullcalendar\lang\pt.js" />
+    <Content Include="Scripts\fullcalendar\lang\ro.js" />
+    <Content Include="Scripts\fullcalendar\lang\ru.js" />
+    <Content Include="Scripts\fullcalendar\lang\sk.js" />
+    <Content Include="Scripts\fullcalendar\lang\sl.js" />
+    <Content Include="Scripts\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Scripts\fullcalendar\lang\sr.js" />
+    <Content Include="Scripts\fullcalendar\lang\sv.js" />
+    <Content Include="Scripts\fullcalendar\lang\th.js" />
+    <Content Include="Scripts\fullcalendar\lang\uk.js" />
+    <Content Include="Scripts\fullcalendar\lang\vi.js" />
+    <Content Include="Scripts\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Scripts\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Scripts\fullcalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\moment.min.js" />
+    <Content Include="Scripts\fullcalendar\LICENSE.txt" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Scripts\jquery.ui.autocomplete.scroll.min.js" />
+    <Content Include="Scripts\Moment\moment.js" />
+    <Content Include="Scripts\PopupOverlay\index.html" />
+    <Content Include="Scripts\PopupOverlay\index.js" />
+    <Content Include="Scripts\PopupOverlay\jquery.popupoverlay.js" />
+    <Content Include="Scripts\Resize-Center\index.html" />
+    <Content Include="Scripts\Resize-Center\jquery.image-cover.js" />
+    <Content Include="Scripts\Resize-Center\jquery.image-cover.min.js" />
+    <Content Include="Scripts\table2Excel\demo\index.html" />
+    <Content Include="Scripts\table2Excel\dist\jquery.table2excel.js" />
+    <Content Include="Scripts\table2Excel\dist\jquery.table2excel.min.js" />
+    <Content Include="Scripts\table2Excel\Gruntfile.js" />
+    <Content Include="Scripts\table2Excel\src\jquery.table2excel.js" />
+    <Content Include="test1.aspx" />
+    <Content Include="TestandPlay\Format.html" />
+    <Content Include="TESTQS.html" />
+    <Content Include="TOHTSHIRT\default.aspx" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\ie8.css" />
+    <Content Include="assets\css\ie9.css" />
+    <Content Include="assets\css\images\intro.svg" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\js\ie\html5shiv.js" />
+    <Content Include="assets\js\ie\respond.min.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\jquery.scrollex.min.js" />
+    <Content Include="assets\js\jquery.scrolly.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\skel.min.js" />
+    <Content Include="assets\js\util.js" />
+    <Content Include="images\pic02.jpg" />
+    <Content Include="images\pic03.jpg" />
+    <Content Include="images\pic04.jpg" />
+    <Content Include="images\pic05.jpg" />
+    <Content Include="images\pic06.jpg" />
+    <Content Include="index.html" />
+    <Content Include="_TEST\Popup1.aspx" />
+    <Content Include="Bpop\assets\style.min.css" />
+    <Content Include="Bpop\assets\jquery.easing.1.3.js" />
+    <Content Include="Bpop\assets\scripting.min.js" />
+    <Content Include="Auction\Images\Donors\13\Original\Rutland Arms Email Banners.pdf" />
+    <Content Include="Auction\Images\Donors\13\Rutland Arms Email Banners.pdf" />
+    <Content Include="Auction\Images\Donors\14\Original\The Red Lion.pdf" />
+    <Content Include="Auction\Images\Donors\21\Original\Mercedes Logo.pdf" />
+    <Content Include="Auction\Images\Donors\28\original\Michael Hill Logo.pdf" />
+    <Content Include="Auction\Images\Donors\47\Original\Japanese Kitchen.pdf" />
+    <Content Include="Auction\Images\Donors\57\Original\Wanganuim Events Trust Logo FINAL_cmyk.pdf" />
+    <Content Include="Auction\Images\Donors\58\Original\Element Logo.pdf" />
+    <Content Include="Auction\Images\Donors\5\Original\David Jones logo Red Blue.pdf" />
+    <Content Include="Auction\Images\Donors\RAW\Mercedes Logo.pdf" />
+    <Content Include="Auction\Images\Donors\RAW\original\Mercedes Logo.pdf" />
+    <Content Include="Auction\Images\Donors\RAW\original\The Edge Logo Final %28Colour%29.pdf" />
+    <Content Include="Auction\Images\Donors\RAW\The Edge Logo Final %28Colour%29.pdf" />
+    <Content Include="Auction\Images\Items\4\original\Big Orange Ceramic Logo.pdf" />
+    <Content Include="Auction\Images\Items\4\original\Element Logo.pdf" />
+    <Content Include="Auction\Images\Items\4\original\MINT Logo Specs.pdf" />
+    <Content Include="Auction\Images\Items\4\original\Rutland Arms Email Banners.pdf" />
+    <Content Include="Auction\Images\Items\4\original\The Red Lion.pdf" />
+    <Content Include="TOHWAuction.Master" />
+    <Content Include="MySite\MySite.Master" />
+    <Content Include="Dependencies\colorbox\images\Thumbs.db" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\LICENSE" />
+    <Content Include="Dependencies\Freeze_Table_Columns_Rows\README.md" />
+    <Content Include="Dependencies\StickyTableCells\LICENCE.MIT" />
+    <Content Include="Dependencies\StickyTableCells\README.md" />
+    <Content Include="Dependencies\TableHeadFixer\.gitignore" />
+    <Content Include="Dependencies\TableHeadFixer\package.json" />
+    <Content Include="Dependencies\TableHeadFixer\README.md" />
+    <Content Include="Pickups\GetImage.ashx" />
+    <Content Include="Face-Recognition\models\face_landmark_68_model-shard1" />
+    <Content Include="Face-Recognition\models\face_landmark_68_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\face_recognition_model-shard1" />
+    <Content Include="Face-Recognition\models\face_recognition_model-shard2" />
+    <Content Include="Face-Recognition\models\face_recognition_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\mtcnn_model-shard1" />
+    <Content Include="Face-Recognition\models\mtcnn_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\ssd_mobilenetv1_model-shard1" />
+    <Content Include="Face-Recognition\models\ssd_mobilenetv1_model-shard2" />
+    <Content Include="Face-Recognition\models\ssd_mobilenetv1_model-weights_manifest.json" />
+    <Content Include="Face-Recognition\models\tiny_face_detector_model-shard1" />
+    <Content Include="Face-Recognition\models\tiny_face_detector_model-weights_manifest.json" />
+    <Content Include="AFace\Models\age_gender_model-shard1" />
+    <Content Include="AFace\Models\age_gender_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_expression_model-shard1" />
+    <Content Include="AFace\Models\face_expression_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_landmark_68_model-shard1" />
+    <Content Include="AFace\Models\face_landmark_68_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_landmark_68_tiny_model-shard1" />
+    <Content Include="AFace\Models\face_landmark_68_tiny_model-weights_manifest.json" />
+    <Content Include="AFace\Models\face_recognition_model-shard1" />
+    <Content Include="AFace\Models\face_recognition_model-shard2" />
+    <Content Include="AFace\Models\face_recognition_model-weights_manifest.json" />
+    <Content Include="AFace\Models\mtcnn_model-shard1" />
+    <Content Include="AFace\Models\mtcnn_model-weights_manifest.json" />
+    <Content Include="AFace\Models\ssd_mobilenetv1_model-shard1" />
+    <Content Include="AFace\Models\ssd_mobilenetv1_model-shard2" />
+    <Content Include="AFace\Models\ssd_mobilenetv1_model-weights_manifest.json" />
+    <Content Include="AFace\Models\tiny_face_detector_model-shard1" />
+    <Content Include="AFace\Models\tiny_face_detector_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_expression_model-shard1" />
+    <Content Include="AFace1\models\face_expression_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_landmark_68_model-shard1" />
+    <Content Include="AFace1\models\face_landmark_68_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_landmark_68_tiny_model-shard1" />
+    <Content Include="AFace1\models\face_landmark_68_tiny_model-weights_manifest.json" />
+    <Content Include="AFace1\models\face_recognition_model-shard1" />
+    <Content Include="AFace1\models\face_recognition_model-shard2" />
+    <Content Include="AFace1\models\face_recognition_model-weights_manifest.json" />
+    <Content Include="AFace1\models\tiny_face_detector_model-shard1" />
+    <Content Include="AFace1\models\tiny_face_detector_model-weights_manifest.json" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Scripts\Grid\css\dialog.css" />
+    <Content Include="Scripts\Grid\css\dialog.min.css" />
+    <Content Include="Scripts\Grid\css\grid.css" />
+    <Content Include="Scripts\Grid\css\grid.min.css" />
+    <Content Include="Scripts\Grid\js\dialog.js" />
+    <Content Include="Scripts\Grid\js\dialog.min.js" />
+    <Content Include="Scripts\Grid\js\draggable.js" />
+    <Content Include="Scripts\Grid\js\draggable.min.js" />
+    <Content Include="Scripts\Grid\js\grid.js" />
+    <Content Include="Scripts\Grid\js\grid.min.js" />
+    <Content Include="Scripts\init.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\pwstrength-bootstrap.min.js" />
+    <Content Include="Scripts\snippets.js" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-light.css" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-noir.css" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-punk.css" />
+    <Content Include="Scripts\ToolTipster\css\themes\tooltipster-shadow.css" />
+    <Content Include="Scripts\ToolTipster\css\tooltipster.css" />
+    <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.js" />
+    <Content Include="Scripts\ToolTipster\js\jquery.tooltipster.min.js" />
+    <Content Include="Scripts\generic.js" />
+    <Content Include="Web.config" />
+    <Content Include="elements.html" />
+    <Content Include="generic.html" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\sass\base\_page.scss" />
+    <Content Include="assets\sass\base\_typography.scss" />
+    <Content Include="assets\sass\components\_box.scss" />
+    <Content Include="assets\sass\components\_button.scss" />
+    <Content Include="assets\sass\components\_features.scss" />
+    <Content Include="assets\sass\components\_form.scss" />
+    <Content Include="assets\sass\components\_icon.scss" />
+    <Content Include="assets\sass\components\_image.scss" />
+    <Content Include="assets\sass\components\_list.scss" />
+    <Content Include="assets\sass\components\_section.scss" />
+    <Content Include="assets\sass\components\_split.scss" />
+    <Content Include="assets\sass\components\_spotlights.scss" />
+    <Content Include="assets\sass\components\_table.scss" />
+    <Content Include="assets\sass\components\_wrapper.scss" />
+    <Content Include="assets\sass\ie8.scss" />
+    <Content Include="assets\sass\ie9.scss" />
+    <Content Include="assets\sass\layout\_footer.scss" />
+    <Content Include="assets\sass\layout\_header.scss" />
+    <Content Include="assets\sass\layout\_intro.scss" />
+    <Content Include="assets\sass\layout\_sidebar.scss" />
+    <Content Include="assets\sass\layout\_wrapper.scss" />
+    <Content Include="assets\sass\libs\_functions.scss" />
+    <Content Include="assets\sass\libs\_mixins.scss" />
+    <Content Include="assets\sass\libs\_skel.scss" />
+    <Content Include="assets\sass\libs\_vars.scss" />
+    <Content Include="assets\sass\main.scss" />
+    <Content Include="images\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="2Talk\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="2Talk\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckinOut\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CheckinOut\Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckinOut\Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Database\Reports\Attendance.aspx.cs">
+      <DependentUpon>Attendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\Reports\Attendance.aspx.designer.cs">
+      <DependentUpon>Attendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Reports\Attendance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Attendance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Database\simple.aspx.cs">
+      <DependentUpon>simple.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\simple.aspx.designer.cs">
+      <DependentUpon>simple.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\TodaysBirthdays.aspx.cs">
+      <DependentUpon>TodaysBirthdays.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\TodaysBirthdays.aspx.designer.cs">
+      <DependentUpon>TodaysBirthdays.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Information.aspx.cs">
+      <DependentUpon>Information.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Information.aspx.designer.cs">
+      <DependentUpon>Information.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MySite\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MySite\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MySite\MySite.Master.cs">
+      <DependentUpon>MySite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MySite\MySite.Master.designer.cs">
+      <DependentUpon>MySite.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answer.aspx.cs">
+      <DependentUpon>Answer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answer.aspx.designer.cs">
+      <DependentUpon>Answer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answers.aspx.cs">
+      <DependentUpon>Answers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Answers.aspx.designer.cs">
+      <DependentUpon>Answers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\AnswersPhotos.aspx.cs">
+      <DependentUpon>AnswersPhotos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\AnswersPhotos.aspx.designer.cs">
+      <DependentUpon>AnswersPhotos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\ShowAll.aspx.cs">
+      <DependentUpon>ShowAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\ShowAll.aspx.designer.cs">
+      <DependentUpon>ShowAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\TestImage1.aspx.cs">
+      <DependentUpon>TestImage1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\TestImage1.aspx.designer.cs">
+      <DependentUpon>TestImage1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\VW1.aspx.cs">
+      <DependentUpon>VW1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\VW1.aspx.designer.cs">
+      <DependentUpon>VW1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\GetImage.ashx.cs">
+      <DependentUpon>GetImage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\GoogleMaps2.aspx.cs">
+      <DependentUpon>GoogleMaps2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\GoogleMaps2.aspx.designer.cs">
+      <DependentUpon>GoogleMaps2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\ImageHandlerTest.aspx.cs">
+      <DependentUpon>ImageHandlerTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\ImageHandlerTest.aspx.designer.cs">
+      <DependentUpon>ImageHandlerTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\tabletoExcel.aspx.cs">
+      <DependentUpon>tabletoExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\tabletoExcel.aspx.designer.cs">
+      <DependentUpon>tabletoExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TOHTSHIRT\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TOHTSHIRT\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TOHWAuction.Master.cs">
+      <DependentUpon>TOHWAuction.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TOHWAuction.Master.designer.cs">
+      <DependentUpon>TOHWAuction.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\item.aspx.cs">
+      <DependentUpon>item.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\item.aspx.designer.cs">
+      <DependentUpon>item.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\donor.aspx.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\donor.aspx.designer.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\DonorList.aspx.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\DonorList.aspx.designer.cs">
+      <DependentUpon>DonorList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\%24OLD\ItemList.aspx.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\%24OLD\ItemList.aspx.designer.cs">
+      <DependentUpon>ItemList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Admin\donor.aspx.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\donor.aspx.designer.cs">
+      <DependentUpon>donor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Admin\donorlist.aspx.cs">
+      <DependentUpon>donorlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Admin\donorlist.aspx.designer.cs">
+      <DependentUpon>donorlist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auction\Page.aspx.cs">
+      <DependentUpon>Page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auction\Page.aspx.designer.cs">
+      <DependentUpon>Page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BpopUp1.aspx.cs">
+      <DependentUpon>BpopUp1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BpopUp1.aspx.designer.cs">
+      <DependentUpon>BpopUp1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bpopup2.aspx.cs">
+      <DependentUpon>Bpopup2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bpopup2.aspx.designer.cs">
+      <DependentUpon>Bpopup2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bpop\Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bpop\Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bpop\Test2.aspx.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bpop\Test2.aspx.designer.cs">
+      <DependentUpon>Test2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Main2.aspx.cs">
+      <DependentUpon>Main2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\Main2.aspx.designer.cs">
+      <DependentUpon>Main2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="functions\Data.asmx.cs">
+      <DependentUpon>Data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="functions\functions.cs" />
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DPS Result.cs" />
+    <Compile Include="Pickups\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\data.asmx.cs">
+      <DependentUpon>data.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pickups\GoogleMaps1.aspx.cs">
+      <DependentUpon>GoogleMaps1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\GoogleMaps1.aspx.designer.cs">
+      <DependentUpon>GoogleMaps1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\InArray1.aspx.cs">
+      <DependentUpon>InArray1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\InArray1.aspx.designer.cs">
+      <DependentUpon>InArray1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QS2.aspx.cs">
+      <DependentUpon>QS2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QS2.aspx.designer.cs">
+      <DependentUpon>QS2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QS3.aspx.cs">
+      <DependentUpon>QS3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QS3.aspx.designer.cs">
+      <DependentUpon>QS3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Rewards\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Rewards\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pickups\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pickups\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test1.aspx.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test1.aspx.designer.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TOHW.Master.cs">
+      <DependentUpon>TOHW.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TOHW.Master.designer.cs">
+      <DependentUpon>TOHW.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_TEST\Popup1.aspx.cs">
+      <DependentUpon>Popup1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_TEST\Popup1.aspx.designer.cs">
+      <DependentUpon>Popup1.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\tohw.pubxml" />
+    <Content Include="TOHW.Master" />
+    <Content Include="Scripts\colorbox\images\Thumbs.db" />
+    <Content Include="Scripts\fullcalendar\demos\json\events.json" />
+    <Content Include="Scripts\fullcalendar\demos\php\calendar.json" />
+    <Content Include="Scripts\fullcalendar\demos\php\get-events.php" />
+    <Content Include="Scripts\fullcalendar\demos\php\get-timezones.php" />
+    <Content Include="Scripts\fullcalendar\demos\php\utils.php" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
+    <Content Include="Scripts\table2Excel\.editorconfig" />
+    <Content Include="Scripts\table2Excel\.gitignore" />
+    <Content Include="Scripts\table2Excel\.jshintrc" />
+    <Content Include="Scripts\table2Excel\.travis.yml" />
+    <Content Include="Scripts\table2Excel\bower.json" />
+    <Content Include="Scripts\table2Excel\CHANGELOG.md" />
+    <Content Include="Scripts\table2Excel\CONTRIBUTING.md" />
+    <Content Include="Scripts\table2Excel\demo\download.xls" />
+    <Content Include="Scripts\table2Excel\package.json" />
+    <Content Include="Scripts\table2Excel\README.md" />
+    <Content Include="Scripts\table2Excel\table2excel.jquery.json" />
+    <Content Include="Scripts\Resize-Center\LICENSE" />
+    <Content Include="Scripts\Resize-Center\README.md" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Auction\Images\Donors\22\original\" />
+    <Folder Include="Auction\Images\Donors\25\original\" />
+    <Folder Include="Auction\Images\Donors\39\original\" />
+    <Folder Include="Auction\Images\Donors\40\original\" />
+    <Folder Include="Auction\Images\Donors\41\original\" />
+    <Folder Include="Auction\Images\Donors\43\original\" />
+    <Folder Include="Auction\Images\Donors\44\original\" />
+    <Folder Include="Auction\Images\Donors\61\Original\" />
+    <Folder Include="Auction\Images\Donors\Thumbnail\" />
+    <Folder Include="Auction\Images\Donors\Uploaded\" />
+    <Folder Include="Auction\Images\Items\40\original\" />
+    <Folder Include="Auction\Images\Items\41\original\" />
+    <Folder Include="Auction\Images\Items\42\original\" />
+    <Folder Include="Auction\Images\Items\47\original\" />
+    <Folder Include="Auction\Images\Items\48\original\" />
+    <Folder Include="Auction\Images\Items\50\original\" />
+    <Folder Include="Auction\Images\Items\51\original\" />
+    <Folder Include="Auction\Images\Items\52\original\" />
+    <Folder Include="Auction\Images\Items\53\original\" />
+    <Folder Include="Auction\Images\Items\55\original\" />
+    <Folder Include="Auction\Images\Items\6\" />
+    <Folder Include="PhotoHunt11Jun18\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Database\Reports\Attendance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Attendance.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63763</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63763/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
