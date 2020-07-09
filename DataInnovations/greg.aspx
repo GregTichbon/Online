@@ -36,7 +36,9 @@
         <br />
         <a href="meetingscheduler/notify.aspx">Meeting Scheduler - Notify</a>
         <br />
+         <a href="meetingscheduler/group.aspx">Meeting Scheduler - Group Members</a>
         <br />
+       <br />
         <a href="sms/administration/group.aspx">SMS Groups and Send</a>
         <br />
         <a href="sms/log.aspx">SMS Log</a>

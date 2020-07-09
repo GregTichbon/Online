@@ -38,13 +38,17 @@ namespace DataInnovations.Raffles.UBC2019B
             cmd1.CommandType = CommandType.Text;
             cmd1.Connection = con;
 
+            int c1 = 0;
             try
             {
                 SqlDataReader dr = cmd1.ExecuteReader();
+
+
                 if (dr.HasRows)
                 {
                     while (dr.Read())
                     {
+                        c1++;
                         string name = dr["purchaser"].ToString();
                         //mobile = dr["mobile"].ToString();
                         //email = dr["emailaddress"].ToString();
@@ -135,6 +139,7 @@ namespace DataInnovations.Raffles.UBC2019B
             {
                 throw ex;
             }
+            Response.Write(c1.ToString() + " winners certificates created");
 
         }
     }

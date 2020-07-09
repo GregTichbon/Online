@@ -150,7 +150,7 @@
                 columns: [
                     { title: "ID", field: "raffleticket_id", visible: false },
                     { title: "Identifier", field: "identifier", headerFilter: true },
-                    { title: "Ticket", field: "ticketnumber", headerFilter: "input" },
+                    { title: "Ticket", field: "ticketnumber", headerFilter: "input", headerFilterFunc:"=" },
                     { title: "Purchaser", field: "purchaser", editor: "input", headerFilter: "input" },
                     { title: "Mobile", field: "mobile", editor: "input", headerFilter: "input" },
                     { title: "Email", field: "emailaddress", editor: "input", headerFilter: "input" },

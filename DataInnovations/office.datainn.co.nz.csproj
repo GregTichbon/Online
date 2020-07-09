@@ -294,6 +294,7 @@
     <Content Include="MeetingScheduler\data.asmx" />
     <Content Include="MeetingScheduler\Default.aspx" />
     <Content Include="MeetingScheduler\email.aspx" />
+    <Content Include="MeetingScheduler\Group.aspx" />
     <Content Include="MeetingScheduler\Notify.aspx" />
     <Content Include="MeetingScheduler\Scheduler.aspx" />
     <Content Include="MeetingScheduler\Setup_Meeting_Blocks.aspx" />
@@ -1039,6 +1040,13 @@
     </Compile>
     <Compile Include="MeetingScheduler\email.aspx.designer.cs">
       <DependentUpon>email.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MeetingScheduler\Group.aspx.cs">
+      <DependentUpon>Group.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeetingScheduler\Group.aspx.designer.cs">
+      <DependentUpon>Group.aspx</DependentUpon>
     </Compile>
     <Compile Include="MeetingScheduler\Notify.aspx.cs">
       <DependentUpon>Notify.aspx</DependentUpon>

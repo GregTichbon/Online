@@ -40,9 +40,9 @@ namespace DataInnovations.Raffles.UBC2019B
                     }
 
                     html += "<table><thead>";
-                    html += "<tr><th colspan=\"6\">" + filter + "</th></tr>";
+                    html += "<tr><th colspan=\"7\">" + filter + "</th></tr>";
 
-                    html += "<tr><th>Ticket Reference</th><th>Name</th><th>Email</th><th>Phone</th><th>Voucher</th><th>Status</th></tr></thead><tbody>";
+                    html += "<tr><th>Ticket Reference</th><th>Name</th><th>Email</th><th>Phone</th><th>Note</th><th>Voucher</th><th>Status</th></tr></thead><tbody>";
 
                     cmd = new SqlCommand("Get_Raffle_Winners", con);
                     cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = "UBC2019B";
@@ -78,7 +78,7 @@ namespace DataInnovations.Raffles.UBC2019B
                                 email = "<a href=\"mailto:" + email + "\">" + email + "</a>";
                             }
 
-                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a><br />" + drawndate + "</td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + voucher + "</td><td>" + status + "</td></tr>";
+                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a><br />" + drawndate + "</td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + notes + "</td><td>" + voucher + "</td><td>" + status + "</td></tr>";
                         }
 
                         html += "</tbody></table>";
