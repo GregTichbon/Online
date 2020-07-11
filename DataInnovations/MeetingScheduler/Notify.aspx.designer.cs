@@ -22,13 +22,13 @@ namespace DataInnovations.MeetingScheduler {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// tb_meeting control.
+        /// fld_meeting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_meeting;
+        protected global::System.Web.UI.WebControls.DropDownList fld_meeting;
         
         /// <summary>
         /// tb_subject control.

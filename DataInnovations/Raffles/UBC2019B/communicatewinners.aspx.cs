@@ -18,16 +18,23 @@ namespace DataInnovations.Raffles.UBC2019B
         public string html = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            string[] status_values = new string[8] { "Winner", "Printed", "Notified", "Received Voucher", "Ordered", "Collected", "Invoiced", "Paid" };
+            string filter = "Show ==> ";
+            foreach (string status in status_values)
+            {
+                filter += "&nbsp;&nbsp;&nbsp;&nbsp;<input class=\"statusfilter\" checked type=\"checkbox\" value=\"" + status + "\" /> " + status;
+            }
+
+
             string strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             Generic.Functions gFunctions = new Generic.Functions();
 
             int c1 = 0;
-
-
-            html += "<tr><td colspan=\"11\"><input id=\"cb_toggleall\" type=\"checkbox\" /></td></tr>";
-            html += "<tr><td>Draw</td><td>Ticket</td><td>Purchaser</td><td>Greeting</td><td>Mobile</td><td>Email Address</td><td>Voucher</td><td>Iti.Ninja</td><td>Winner Status</td><td>Winner Response</td><td>Winner Note</td></tr>";
-
+            html = "<thead>";
+            html += "<tr><th><input id=\"cb_toggleall\" type=\"checkbox\" /></th><th><input type=\"text\" id=\"date\" placeholder=\"Date\" /><td colspan=\"9\">" + filter + "</th></tr>";
+            html += "<tr><th>Draw</th><th>Ticket</th><th>Purchaser</th><th>Greeting</th><th>Mobile</th><th>Email Address</th><th>Voucher</th><th>Iti.Ninja</th><th>Winner Status</th><th>Winner Response</th><th>Winner Note</th></tr>";
+            html += "</thead><tbody>";
             string sql = @"select W.rafflewinner_id, R.identifier, T.RaffleTicket_ID, T.purchaser, t.greeting, t.mobile, t.TicketNumber, t.EmailAddress, t.Greeting, W.guid, W.status, W.Draw, W.Notes, W.Response, W.itininjaid, W.drawndate
                 from RaffleWinner W
                 inner join raffleticket T on T.RaffleTicket_ID = W.RaffleTicket_ID
@@ -161,6 +168,7 @@ namespace DataInnovations.Raffles.UBC2019B
             con.Close();
             con.Dispose();
 
+            html += "</tbody>";
             if (IsPostBack)
             {
                 Response.Write(c1.ToString() + " messages sent");

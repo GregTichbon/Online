@@ -74,9 +74,10 @@
                 $(':checkbox:checked').each(function() {
                     selected.push($(this).val());
                 });
+                //console.log(selected);
 
                 $('tbody tr').each(function () {
-                    thisstatus = $(this).find('td').eq(5).text();
+                    thisstatus = $(this).find('td').eq(6).text();
                     if (selected.indexOf(thisstatus) != -1) {
                         $(this).show();
                     }

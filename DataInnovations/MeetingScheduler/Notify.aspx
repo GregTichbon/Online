@@ -9,7 +9,9 @@
 <body>
     <form id="form1" runat="server">
         Meeting CTR:
-        <asp:TextBox ID="tb_meeting" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="fld_meeting" runat="server">
+            <asp:ListItem>Please Select</asp:ListItem>
+        </asp:DropDownList>
         <br />
         <br />
         Use ||link|| to include the link, it will be displayed as &quot;here&quot; in the body of the email.<br />

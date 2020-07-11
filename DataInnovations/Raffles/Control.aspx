@@ -314,7 +314,7 @@
                                 <option>Winner</option>
                                 <option>Printed</option>
                                 <option>Notified</option>
-								<option>Received</option>
+                                <option>Received Voucher</option>
                                 <option>Ordered</option>
                                 <option>Collected</option>
                                 <option>Invoiced</option>

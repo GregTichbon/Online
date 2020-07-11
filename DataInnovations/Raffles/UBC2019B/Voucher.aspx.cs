@@ -16,7 +16,7 @@ namespace DataInnovations.Raffles.UBC2019B
         protected void Page_Load(object sender, EventArgs e)
         {
             string guid = Request.QueryString["id"] ?? "";
-            string[] status_values = new string[9] { "Winner", "Printed", "Notified", "Received Notification", "Received Voucher", "Ordered", "Collected", "Invoiced", "Paid" };
+            string[] status_values = new string[8] { "Winner", "Printed", "Notified", "Received Voucher", "Ordered", "Collected", "Invoiced", "Paid" };
 
             if (Request.Cookies["chefschoiceaccess"] == null)
             {

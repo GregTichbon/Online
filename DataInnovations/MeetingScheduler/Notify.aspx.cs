@@ -15,23 +15,49 @@ namespace DataInnovations.MeetingScheduler
 {
     public partial class Notify : System.Web.UI.Page
     {
+        string strConnString = "Data Source=toh-app;Initial Catalog=MeetingScheduler;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd1 = new SqlCommand("Get_Meetings", con);
+            //cmd1.Parameters.Add("@meeting_ctr", SqlDbType.VarChar).Value = fld_meeting.SelectedValue;
 
+            cmd1.CommandType = CommandType.StoredProcedure;
+            cmd1.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd1.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    fld_meeting.Items.Add(new ListItem(dr["fullName"].ToString(), dr["meeting_ctr"].ToString()));
+                }
+
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
         }
-
         protected void btn_submit_Click(object sender, EventArgs e)
         {
             //1st submit show data with send text and send email check boxes
             //second submit do the actual sending
             Functions funcs = new Functions();
 
-            string strConnString = "Data Source=toh-app;Initial Catalog=MeetingScheduler;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             string allemail = "";
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd1 = new SqlCommand("Get_Meeting_Entity", con);
-            cmd1.Parameters.Add("@meeting_ctr", SqlDbType.VarChar).Value = tb_meeting.Text;
+            cmd1.Parameters.Add("@meeting_ctr", SqlDbType.VarChar).Value = fld_meeting.SelectedValue;
 
             cmd1.CommandType = CommandType.StoredProcedure;
             cmd1.Connection = con;

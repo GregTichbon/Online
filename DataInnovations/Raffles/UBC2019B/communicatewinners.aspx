@@ -43,6 +43,59 @@
                     });
                 }
             });
+            $('.statusfilter').change(function () {
+                //console.log(selected);
+                /*
+                $('tbody tr').each(function () {
+
+                    thisstatus = $(this).find('td').eq(8).text();
+                    if (selected.indexOf(thisstatus) != -1) {
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+
+                });
+                */
+                filter();
+            });
+            $('#date').change(function () {
+                /*
+                var date = $(this).val();
+                $('tbody tr').each(function () {
+                    if ($(this).find('td').eq(0).text().endsWith(date)) {
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                });
+                */
+                filter();
+            });
+
+
+            function filter() {
+                var date = $('#date').val();
+                var selected = [];
+                $('.statusfilter:checked').each(function () {
+                    selected.push($(this).val());
+                });
+                $('tbody tr').each(function () {
+                    thisstatus = $(this).find('td').eq(8).text();
+                    if (
+                        (date == "" || $(this).find('td').eq(0).text().endsWith(date))
+                        && (selected.indexOf(thisstatus) != -1)
+                    ) {
+                        $(this).show();
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                    
+                });
+            }
 
             /*
             $('.itininja').click(function () {
@@ -69,24 +122,24 @@
         ||greeting|| 
                              <br />
         ||ticketnumber||<br />
-                             ||guid||<br />
+        ||guid||<br />
         ||identifier||<br />
         ||voucher||<br />
         <br />
-&nbsp;<asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
-Your ticket, ||identifier||/||ticketnumber||, is a winner in the Union Boat Club's Chef's Choice Maadi rowing raffle.
-You can collect your voucher from: Health 2000, 58 Victoria Ave.
-Thanks for your support
+        &nbsp;<asp:TextBox ID="tb_message" runat="server" Height="134px" TextMode="MultiLine" Width="874px" OnTextChanged="tb_message_TextChanged">Hi ||greeting||
+Your ticket, ||identifier||/||ticketnumber||, is a winner in the Union Boat Club's Chef's Choice rowing raffle.
+You can collect your voucher from: Health 2000, 58 Victoria Ave. Who, though are not involved in the raffle, have kindly offered to be the pickup point.
+Thanks for your support, please contact Greg (0272495088) if you have any queries.
     
  
-      </asp:TextBox>
+        </asp:TextBox>
         <!--   Hi ||greeting||
 Your ticket, ||identifier||/||ticketnumber||, is a winner in the Maadi rowing raffle.
 Please go to: ||voucher|| to view/download your Chef's Choice Voucher.
 Thanks for your support.
 Please contact Greg (0272495088) if you need assistance.
             -->
-        <table style="width:100%">
+        <table style="width: 100%">
             <%=html %>
         </table>
         <asp:Button ID="btn_submit" runat="server" Text="Send" OnClick="btn_submit_Click" />

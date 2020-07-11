@@ -154,7 +154,7 @@
                             "Winner": "Winner",
                             "Printed": "Printed",
                             "Notified": "Notified",
-                            "Received": "Received",
+                            "Received Voucher": "Received Voucher",
                             "Ordered": "Ordered",
                             "Collected": "Collected",
                             "Invoiced": "Invoiced",
