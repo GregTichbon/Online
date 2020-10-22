@@ -114,7 +114,8 @@
                     <li><a href="#three">Who supports us</a> </li>
                     <li><a href="#four">Interns</a> </li>
                     <li><a href="#five">Get in touch</a> </li>
-                </ul>
+                     <li><a href="#six">Screen Printing</a> </li>
+               </ul>
             </nav>
         </div>
     </section>
@@ -155,7 +156,6 @@
                         <p>Office Manager / Drivers Licence Co-ordinator</p>
                         <ul class="actions">
                             <li><a href="javascript:void(0);" class="button" data-bpopup='{"contentContainer":".content","loadUrl":"test1.html"}'>Learn more</a> </li>
-                            <li><a href="#" class="button">Learn more</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -181,27 +181,14 @@
                 <div class="content">
                     <div class="inner">
                         <h2>Keegan Easton</h2>
-                        <p>Youth Worker / Te Pihi Ora Hou Tane Co-ordinator</p>
+                        <p>Tihokahoka Co-ordinator</p>
                         <ul class="actions">
                             <li><a href="#" class="button">Learn more</a> </li>
                         </ul>
                     </div>
                 </div>
             </section>
-            <section>
-                <a href="#" class="image">
-                    <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
-                </a>
-                <div class="content">
-                    <div class="inner">
-                        <h2>Charlie-Boy Williams</h2>
-                        <p>Youth Worker / Senior Club Co-ordinator</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">Learn more</a> </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+
             <section>
                 <a href="#" class="image">
                     <img src="images/KathParnell.jpg" alt="" data-position="25% 25%" />
@@ -231,16 +218,62 @@
                 </div>
             </section>
             <section>
-                <a href="#" class="image">&nbsp;</a><div class="content">
+                <a href="#" class="image">
+                    <img src="images/ChrisKirby.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
                     <div class="inner">
-                        <h2>Ataria </h2>
-                        <p>Stone Soup Worker</p>
+                        <h2>Chris Kirby</h2>
+                        <p>Youth Worker / Senior Club Co-ordinator</p>
                         <ul class="actions">
                             <li><a href="#" class="button">Learn more</a> </li>
                         </ul>
                     </div>
                 </div>
             </section>
+            <section>
+                <a href="#" class="image">
+                    <img src="images/MaryTafilipepe.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Mary Tafilipepe</h2>
+                        <p>Tihokahoka Co-ordinator</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+                        <section>
+                <a href="#" class="image">
+                    <img src="images/DanChadfield.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Dan Chadfield</h2>
+                        <p>Te Pihi Ora Hou Boys Co-ordinator</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+                        <section>
+                <a href="#" class="image">
+                    <img src="images/BaillieChadfield.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Baillie Chadfield</h2>
+                        <p></p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
             <section>
                 <a href="#" class="image">
                     <img src="images/GregTichbon.jpg" alt="" data-position="25% 25%" />
@@ -256,7 +289,32 @@
                     </div>
                 </div>
             </section>
-            <!--
+             <!--
+                 <section>
+                <a href="#" class="image">&nbsp;</a><div class="content">
+                    <div class="inner">
+                        <h2>Ataria </h2>
+                        <p>Stone Soup Worker</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <a href="#" class="image">
+                    <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
+                </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Charlie-Boy Williams</h2>
+                        <p>Youth Worker / Senior Club Co-ordinator</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
             <section>
                 <a href="#" class="image">
                     <img src="images/LeoneandMellisa.jpg" alt="" data-position="25% 25%" />
@@ -279,7 +337,7 @@
         <section id="two" class="wrapper style3 fade-up">
             <div class="inner">
                 <h2>What we do</h2>
-                <p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+                <p>What we do .....</p>
                 <div class="features">
                     <section>
                         <span class="icon major fa-code"></span>
@@ -310,6 +368,11 @@
                         <h3>Te Pihi Ora Hou Tane</h3>
                         <p></p>
                     </section>
+                                        <section>
+                        <span class="icon major fa-cog"></span>
+                        <h3>Te Pihi Ora Hou Tane</h3>
+                        <p></p>
+                    </section>
                     <section>
                         <span class="icon major fa-desktop"></span>
                         <h3>Holiday Programs</h3>
@@ -329,6 +392,11 @@
                     <section>
                         <span class="icon major fa-diamond"></span>
                         <h3>Driver Licence</h3>
+                        <p></p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-diamond"></span>
+                        <h3>Tihokahoka</h3>
                         <p></p>
                     </section>
                     <section>
@@ -367,7 +435,7 @@
                         <span class="icon major fa-code"></span>
                         <h3>Our Board</h3>
                         <p>Te Ora Hou Whanganui is incredibly fortunate to have a wise board who give of their time and experience freely to support our direction and governance. </p>
-                        <p>Our board is made up of: Des Warahi (Chairman), Tracey Hawker, (Treasurer), Eugene Katene, Roz Armstrong, and Judy Kumeroa (Kaihautu)</p>
+                        <p>Our board is made up of: Roz Armstrong (Chairman), Jay Rerekura, Maia Williams, and Judy Kumeroa (Kaihautu)</p>
                     </section>
                     <section>
                         <span class="icon major fa-code"></span>
@@ -480,6 +548,21 @@
                                     <td>Netherlands</td>
                                     <td>2017</td>
                                 </tr>
+                                <tr>
+                                    <td>Zuzanna Kruber</td>
+                                    <td>Netherlands</td>
+                                    <td>2020</td>
+                                </tr>
+                                <tr>
+                                    <td>Elke Bellemakers</td>
+                                    <td>Netherlands</td>
+                                    <td>2020</td>
+                                </tr>
+                                <tr>
+                                    <td>Lotte van Dongen</td>
+                                    <td>Netherlands</td>
+                                    <td>2020</td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -543,12 +626,32 @@
                 </div>
             </div>
         </section>
+
+        <!-- SIX -->
+        <section id="six" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h2>Screen Printing</h2>
+                <p>We have a screen printer that we use to do jobs to support out work financially.</p>
+                <p>We print mainly on t-shirts, sweatshirts, and hoodies but can look at other garments and items as well.&nbsp; </p>
+                <p>if you are thinking about getting us to do some work, there are a few things to consider.</p>
+                <ul>
+                    <li>We like to source the garments, please check out <a href="https://www.premiumcatalogue.co.nz" target="_blank">https://www.premiumcatalogue.co.nz</a> and <a href="https://www.ascolour.co.nz" target="_blank">https://www.ascolour.co.nz</a>&nbsp; We can often get these at a cheaper rate than advertised and can usually pass some of these savings on to you.&nbsp; It also means that we can quickly get more if you need more and can easily replace any that might not be printed to our standard.</li>
+                    <li>Simple graphics of 1 or 2 colours usially work best.</li>
+                    <li>We have to create the screen whether we print 2 or 202 garments, so it&#39;s usually best to look at 20 or more garments to make the printing cost effective.&nbsp; We generally won&#39;t do less than 10.</li>
+                    <li>Know your placement and sizes.&nbsp; Your design needs to fit on the smallest and largest garment so pleae take this into consideration.</li>
+                    <li>If you can supply the graphics in a &quot;Vector&quot; format it means we will get the best quality and are able to resize the design without any loss in quality.</li>
+                </ul>
+                <!--<p>
+                    <a href="#six" class="button scrolly">Learn more</a>
+                </p>-->
+            </div>
+        </section>
     </div>
     <!-- Footer -->
     <footer id="footer" class="wrapper style1-alt">
         <div class="inner">
             <ul class="menu">
-                <li>&copy; Te Ora Hou Whanganui. All rights reserved.</li>
+                <li>&copy; Te Ora Hou Whanganui. All rights reserved.anui. All rights reserved.</li>
                 <li>Design: Data Innovations</li>
             </ul>
         </div>

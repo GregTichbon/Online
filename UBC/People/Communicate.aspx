@@ -383,7 +383,9 @@
             <input type="button" class="btn_submit btn btn-info" value="Send" />
             <input type="button" class="btn btn-info" id="menu" value="MENU" />
         </div>
+
         <% = response %>
+        <% = SMSStatus %>
         Event ID:
         <input type="text" id="tb_event_id" name="tb_event_id" value="<%=event_id %>" />
         <input type="button" id="btn_event" class="btn btn-info" value="Select Event" /><%=html_event %>

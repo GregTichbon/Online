@@ -114,6 +114,7 @@
                     <li><a href="#three">Who supports us</a> </li>
                     <li><a href="#four">Interns</a> </li>
                     <li><a href="#five">Get in touch</a> </li>
+                    <li><a href="#six">Screen Printing</a> </li>
                 </ul>
             </nav>
         </div>
@@ -181,13 +182,70 @@
                 <div class="content">
                     <div class="inner">
                         <h2>Keegan Easton</h2>
-                        <p>Youth Worker / Te Pihi Ora Hou Tane Co-ordinator</p>
+                        <p>Tihokahoka Co-ordinator</p>
                         <ul class="actions">
                             <li><a href="#" class="button">Learn more</a> </li>
                         </ul>
                     </div>
                 </div>
             </section>
+            <section>
+                <a href="#" class="image">
+                    <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Chris Kirby</h2>
+                        <p>Youth Worker / Senior Club Co-ordinator</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <a href="#" class="image">
+                    <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Mary Tafilippepe</h2>
+                        <p>Tihokahoka Co-ordinator</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+                        <section>
+                <a href="#" class="image">
+                    <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Dan Chadfield</h2>
+                        <p>Te Pihi Ora Hou Boys Co-ordinator</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+                        <section>
+                <a href="#" class="image">
+                    <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
+                    > </a>
+                <div class="content">
+                    <div class="inner">
+                        <h2>Baillie Chadfield</h2>
+                        <p></p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn more</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!--
             <section>
                 <a href="#" class="image">
                     <img src="images/Charlie-BoyWilliams.jpg" alt="" data-position="25% 25%" />
@@ -202,6 +260,7 @@
                     </div>
                 </div>
             </section>
+            -->
             <section>
                 <a href="#" class="image">
                     <img src="images/KathParnell.jpg" alt="" data-position="25% 25%" />
@@ -230,6 +289,7 @@
                     </div>
                 </div>
             </section>
+            <!--
             <section>
                 <a href="#" class="image">
                     <img src="images/pic03.jpg" alt="" data-position="25% 25%" />
@@ -244,6 +304,7 @@
                     </div>
                 </div>
             </section>
+            -->
             <section>
                 <a href="#" class="image">
                     <img src="images/GregTichbon.jpg" alt="" data-position="25% 25%" />
@@ -259,6 +320,7 @@
                     </div>
                 </div>
             </section>
+            <!--
             <section>
                 <a href="#" class="image">
                     <img src="images/LeoneandMellisa.jpg" alt="" data-position="25% 25%" />
@@ -274,12 +336,13 @@
                     </div>
                 </div>
             </section>
+            -->
         </section>
         <!-- Two -->
         <section id="two" class="wrapper style3 fade-up">
             <div class="inner">
                 <h2>What we do</h2>
-                <p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+                <p>Te Ora Hou Whanganui ....</p>
                 <div class="features">
                     <section>
                         <span class="icon major fa-code"></span>
@@ -460,6 +523,21 @@
                                     <td>Melissa van Soest</td>
                                     <td>Netherlands</td>
                                     <td>2017</td>
+                                </tr>
+                                <tr>
+                                    <td>Zuzanna Kruber</td>
+                                    <td>Netherlands</td>
+                                    <td>2020</td>
+                                </tr>
+                                <tr>
+                                    <td>Elke Bellemakers</td>
+                                    <td>Netherlands</td>
+                                    <td>2020</td>
+                                </tr>
+                                <tr>
+                                    <td>Lotte van Dongen</td>
+                                    <td>Netherlands</td>
+                                    <td>2020</td>
                                 </tr>
                             </tbody>
                         </table>

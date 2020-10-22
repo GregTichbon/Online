@@ -1047,12 +1047,13 @@
 
             <input id="hf_guid" name="hf_guid" type="hidden" value="<%:hf_guid%>" />
 
-             <div class="toprighticon">
-            <input type="button" id="search" class="btn btn-info" value="Search" />
-
-            <input type="button" id="menu" class="btn btn-info" value="MENU" />
-                 </div>
-
+            <div class="toprighticon">
+                <input type="button" id="search" class="btn btn-info" value="Search" />
+                <input type="button" id="menu" class="btn btn-info" value="MENU" />
+            </div>
+            <div class="bottomrighticon">
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="submit btn btn-info" Text="Submit" />
+            </div>
             <h1>Union Boat Club - Person Maintenance
             </h1>
 
@@ -1426,15 +1427,63 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="div_guid">GUID</label>
                         <div class="col-sm-8">
-                            <div id="div_guid"><%=hf_guid%></div>
+                            <div id="div_guid"><%=hf_guid%><br /><a href="http://ubc.org.nz/go/register?id=<%=hf_guid%>">Registration link</a></div>
                         </div>
                      
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
+                <div id="div_onloan" class="tab-pane fade in">
+                    <h3>On loan</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:100px">What</th>
+                                <th>Details</th>
+                                <th style="width:100px">On loan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Key</td>
+                                <td>
+                                    <textarea id="tb_key" name="tb_key" class="form-control"><%: tb_key %></textarea><br /><a href="KeyRegister.aspx" target="_blank">Key Register</a>
+                                </td>
+                                <td>
+                                    <select id="dd_keyactive" name="dd_keyactive" class="form-control">
+                                        <%= Generic.Functions.populateselect(yesno, dd_keyactive,"") %>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>
+                                    <textarea id="tb_uniform" name="tb_uniform" class="form-control"><%: tb_uniform %></textarea><br /><a href="UniformRegister.aspx" target="_blank">Uniform Register</a>
+                                </td>
+                                <td>
+                                    <select id="dd_uniformactive" name="dd_uniformactive" class="form-control">
+                                        <%= Generic.Functions.populateselect(yesno, dd_uniformactive,"") %>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>General</td>
+                                <td>
+                                    <textarea id="tb_onloanfromclub" name="tb_onloanfromclub" class="form-control"><%: tb_onloanfromclub %></textarea>
+                                </td>
+                                <td>
+                                    <select id="dd_onloanfromclubactive" name="dd_onloanfromclubactive" class="form-control">
+                                        <%= Generic.Functions.populateselect(yesno, dd_onloanfromclubactive,"") %>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!------------------------------------------------------------------------------------------------------>
                 <div id="div_general" class="tab-pane fade in">
                     <h3>General</h3>
-                   
+
                     <div class="form-group">
                         <label for="tb_birthdate" class="control-label col-sm-4">
                             Date of birth
@@ -1552,19 +1601,8 @@
                             </select>
                         </div>
                     </div>
-                         
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_schoolyear">Key number</label>
-                        <div class="col-sm-8">
-                            <input id="tb_keynumber" name="tb_keynumber" type="text" class="form-control" value="<%:tb_keynumber%>" maxlength="10" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_notes">On loan from club</label>
-                        <div class="col-sm-8">
-                            <textarea id="tb_onloanfromclub" name="tb_onloanfromclub" class="form-control"><%: tb_onloanfromclub %></textarea>
-                        </div>
-                    </div>
+
+                    
 
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_notes">Notes</label>
@@ -1744,13 +1782,7 @@
 
             </div>
             <!-- tabs -->
-            <div class="form-group">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-8">
-                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="submit btn btn-info" Text="Submit" />
-                </div>
-            </div>
+     
         </form>
         <form id="form2"></form>
         <form id="form3"></form>

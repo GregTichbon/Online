@@ -21,7 +21,7 @@ namespace UBC.People
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
-            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "111"))
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11100001"))
             {
                 Response.Redirect("~/default.aspx");
             }
@@ -40,7 +40,7 @@ namespace UBC.People
                 if (dr.HasRows)
                 {
 
-                    html = "<tr><th>Checkbox</th><th>Name</th><th>Category</th><th>Edit</th><th>Image</th></tr>";
+                    html = "<tr><th style=\"display:none\">Checkbox</th><th>Name</th><th>Category</th><th>Edit</th><th>Image</th></tr>";
 
                     while (dr.Read())
                     {
@@ -82,7 +82,7 @@ namespace UBC.People
 
 
                         html += "<tr>";
-                        html += "<td>Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + categories.Replace("|","<br />") + "</td><td>" + link + "</td><td>" + image + "</td>";
+                        html += "<td style=\"display:none\">Checkbox " + person_id + "</td><td>" + firstname + " " + lastname + "</td><td>" + categories.Replace("|","<br />") + "</td><td>" + link + "</td><td>" + image + "</td>";
                         html += "</tr>";
                     }
                 }

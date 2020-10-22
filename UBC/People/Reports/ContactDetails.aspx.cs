@@ -22,7 +22,7 @@ namespace UBC.People.Reports
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
-            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11110001"))
             {
                 Response.Redirect("~/default.aspx");
             }
@@ -115,7 +115,7 @@ namespace UBC.People.Reports
                             }
                             rline += "<b>" + rname + "</b> " + rrelationship + rnote + "<br />";
 
-                            string rphones = relation.Split('^')[5];
+                            string rphones = relation.Split('^')[6];
                             if (rphones != "")
                             {
                                 foreach (string rphone in rphones.Split('|'))
@@ -129,7 +129,7 @@ namespace UBC.People.Reports
                                     rline += "<a href=\"tel:" + rphonenumber + "\">" + rphonenumber + "</a>" + rphonenote + "<br />";
                                 }
                             }
-                            string remails = relation.Split('^')[6];
+                            string remails = relation.Split('^')[7];
                             if (remails != "")
                             {
                                 foreach (string remail in remails.Split('|'))

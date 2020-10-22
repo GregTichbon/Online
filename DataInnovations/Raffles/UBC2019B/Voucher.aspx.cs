@@ -16,7 +16,8 @@ namespace DataInnovations.Raffles.UBC2019B
         protected void Page_Load(object sender, EventArgs e)
         {
             string guid = Request.QueryString["id"] ?? "";
-            string[] status_values = new string[8] { "Winner", "Printed", "Notified", "Received Voucher", "Ordered", "Collected", "Invoiced", "Paid" };
+            //string[] status_values = new string[8] { "Winner", "Printed", "Notified", "Received Voucher", "Ordered", "Collected", "Invoiced", "Paid" };
+            string[] status_values = new string[6] { "Winner", "Printed", "Notified", "Received Voucher", "Ordered", "Collected" };
 
             if (Request.Cookies["chefschoiceaccess"] == null)
             {
@@ -42,7 +43,7 @@ namespace DataInnovations.Raffles.UBC2019B
                     html += "<table><thead>";
                     html += "<tr><th colspan=\"7\">" + filter + "</th></tr>";
 
-                    html += "<tr><th>Ticket Reference</th><th>Name</th><th>Email</th><th>Phone</th><th>Note</th><th>Voucher</th><th>Status</th></tr></thead><tbody>";
+                    html += "<tr><th>Ticket Reference</th><th>Name</th><th>Email</th><th>Phone</th><th>Note</th><th>Voucher</th><th>Status <span id=\"count\"></span></th></tr></thead><tbody>";
 
                     cmd = new SqlCommand("Get_Raffle_Winners", con);
                     cmd.Parameters.Add("@code", SqlDbType.VarChar).Value = "UBC2019B";
@@ -55,6 +56,7 @@ namespace DataInnovations.Raffles.UBC2019B
 
                         while (dr.Read())
                         {
+                            string id = dr["raffleWinner_ID"].ToString();
                             string name = dr["purchaser"].ToString();
                             string mobile = dr["mobile"].ToString();
                             string email = dr["emailaddress"].ToString();
@@ -78,7 +80,7 @@ namespace DataInnovations.Raffles.UBC2019B
                                 email = "<a href=\"mailto:" + email + "\">" + email + "</a>";
                             }
 
-                            html += "<tr><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a><br />" + drawndate + "</td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + notes + "</td><td>" + voucher + "</td><td>" + status + "</td></tr>";
+                            html += "<tr data-id=\"" + id + "\"><td><a href=\"?id=" + guid + "\" target=\"ticket\">" + identifier + "/" + draw + " Ticket " + ticketnumber + "</a><br />" + drawndate + "</td><td>" + name + "</td><td>" + email + "</td><td>" + mobile + "</td><td>" + notes + "</td><td>" + voucher + "</td><td class=\"status\">" + status + "</td></tr>";
                         }
 
                         html += "</tbody></table>";

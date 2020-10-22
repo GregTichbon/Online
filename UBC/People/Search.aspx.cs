@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,10 @@ namespace UBC.People
             if (Session["UBC_person_id"] == null)
             {
                 Response.Redirect("~/people/security/login.aspx");
+            }
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11010001"))
+            {
+                Response.Redirect("~/default.aspx");
             }
         }
     }

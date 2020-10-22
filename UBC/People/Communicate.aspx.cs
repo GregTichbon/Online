@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -15,6 +16,7 @@ namespace UBC.People
     public partial class Communicate : System.Web.UI.Page
     {
         public string html;
+        public string SMSStatus = "";
         public string html_facebook;
         public string html_event;
         public string event_id = "";
@@ -45,6 +47,20 @@ namespace UBC.People
             if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
             {
                 Response.Redirect("~/default.aspx");
+            }
+
+
+            var url = "http://office.datainn.co.nz/sms/data.asmx/SMSPhoneStatus?options=|SendEmail|";
+            var webrequest = (HttpWebRequest)System.Net.WebRequest.Create(url);
+
+            using (var response = webrequest.GetResponse())
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                string result = reader.ReadToEnd();
+                if(result == "Error")
+                {
+                    SMSStatus = "<h1>Warning! Texting may not be available</h1>";
+                }
             }
 
 

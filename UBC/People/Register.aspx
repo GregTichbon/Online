@@ -39,8 +39,8 @@
                 }
             });
 
-            $('#qm_membershiptype').prop('title', '<table><tr><td>Full</td><td>$400.00*</td></tr><tr><td>Club Recreation</td><td>$300.00</td></tr><tr><td>Novice</td><td>$300.00*</td></tr><tr><td>Coxswain</td><td>$0.00*</td></tr><tr><td>* Rowing NZ Competition License Fee</td><td>$96.00</td></tr></table>');
-
+            $('#qm_membershiptype').prop('title', '<table><tr><td>Full (Competitive)</td><td>$400.00*</td></tr><tr><td>Club - Recreation</td><td>$300.00</td></tr><tr><td>First Year Rower</td><td>$300.00*</td></tr><tr><td>Coxswain</td><td>$0.00*</td></tr><tr><td>Non-Resident Rower</td><td>$0.00*</td></tr><tr><td>Gym Only</td><td>$100.00</td></tr><tr><td>Casual</td><td>$50.00^</td></tr><tr><td>* Rowing NZ Competition License Fee</td><td>TBA</td></tr><tr><td colspan=\"2\">^ $10.00 per row and $5.00 per gym session</tr></table>');
+            //Full (Competitive)", "Club - Recreation", "First Year Rower", "Coxswain", "Non-Resident Rower", "Gym Only", "Casual" };
             if ($('#school').val() != "") {
                 $("#div_schoolyear").show();
             }
@@ -274,6 +274,10 @@
 
             });
 
+            $('.submit').click(function () {
+                $('.processing').show();
+            });
+
             //$('[required]').css('border', '1px solid red');
             //$('[required]').addClass('required');
         });
@@ -303,14 +307,21 @@
     </script>
     <style type="text/css">
         .validate {
-            display:none;
+            display: none;
+        }
+
+        .processing {
+            margin: auto;
+            width: 50%;
+            display: none;
         }
                
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input id="guid" name="guid" type="hidden" value="<%:guid%>" />
-
+    
+    <img src="../Dependencies/Images/processing2.gif" class="processing" />
     <div class="container" style="background-color: #B1C9E6">
         <p></p>
         <table style="width: 100%">
@@ -319,7 +330,7 @@
                     <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
                 <td style="text-align: center">
                     <h1>Registration / Renewal</h1>
-                    <h2>1 Sep 2019 - 30 Aug 2020</h2>
+                    <h2>1 Sep 2020 - 30 Aug 2021</h2>
                 </td>
             </tr>
         </table>
@@ -339,9 +350,11 @@
         </div>
         <div class="panel panel-danger">
             <div class="panel-heading">Rower</div>
-            <div class="panel-body">
+                           
 
+            <div class="panel-body">
                 <!------------------------------------------------------>
+                 <div class="col-sm-12"><img id="img_photo" alt="" src="Images/<%: person_id %>.jpg" style="float:left;width:200px" /></div>
                 <div class="form-group">
                     <label class="control-label col-sm-5" for="firstname">First name</label>
                     <div class="col-sm-7">
@@ -604,7 +617,6 @@
                             <option></option>
                             <%= Generic.Functions.populateselect(membershipvalues, membershiptype,"None") %>
                             <!--<option value="Non-Rower/Supporter">Non-Rower/Supporter</option>-->
-                            <option value="Gym Membership Only">Gym Membership Only</option>
                         </select>
                     </div>
                 </div>
@@ -683,7 +695,7 @@
             <div class="col-sm-5">
             </div>
             <div class="col-sm-7">
-                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="submit btn btn-info" Text="Submit" />
             </div>
         </div>
     </div>

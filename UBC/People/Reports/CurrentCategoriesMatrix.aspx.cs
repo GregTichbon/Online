@@ -22,6 +22,11 @@ namespace UBC.People.Reports
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
+            if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11110001"))
+            {
+                Response.Redirect("~/default.aspx");
+            }
+
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
            

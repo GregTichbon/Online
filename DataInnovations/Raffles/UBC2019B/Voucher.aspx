@@ -14,7 +14,7 @@
         }
 
         .pc {
-            text-align:center;
+            text-align: center;
         }
 
         html, body {
@@ -39,7 +39,7 @@
 
         .centered {
             position: absolute;
-            width:100px;
+            width: 100px;
             top: 40%;
             left: 45%;
         }
@@ -54,6 +54,46 @@
 
 
         $(document).ready(function () {
+
+
+
+            var statusstring = "Winner,Printed,Notified,Received Voucher,Ordered,Collected";
+            var statusoptions = statusstring.split(',');
+
+            $('tbody tr').each(function () {
+                id = $(this).data('id');
+                var s = $('<select class="form-control sel_statusfull" name="" winnerid="' + id + '" />');
+                value = $(this).find('td').eq(6).text();
+                statusoptions.forEach(function (item, index) {
+                    if (value == item) {
+                        selectedvalue = true;
+                    } else {
+                        selectedvalue = false;
+                    }
+                    $("<option />", { value: item, text: item, selected: selectedvalue }).appendTo(s);
+                });
+                $(this).find('td').eq(6).html(s);
+            });
+
+            filter();
+
+            $('.sel_statusfull').change(function () {
+                id = $(this).attr("winnerid");
+                value = $(this).val();
+                //alert(id + ', ' + value);
+
+                $.ajax({
+                    url: "../data.asmx/updaterafflestatus?id=" + id + "&status=" + value, success: function (result) {
+                        //alert('Success');
+                    }, error: function (XMLHttpRequest, textStatus, error) {
+                        alert("AJAX error: " + textStatus + "; " + error);
+                    }
+                });
+                filter();
+
+            });
+
+
             $('#sel_status').change(function () {
                 $('#processing').show();
 
@@ -70,24 +110,36 @@
                     }, 1000);
             });
             $(':checkbox').change(function () {
-                var selected = [];
-                $(':checkbox:checked').each(function() {
-                    selected.push($(this).val());
-                });
+                
                 //console.log(selected);
+                filter();
 
-                $('tbody tr').each(function () {
-                    thisstatus = $(this).find('td').eq(6).text();
-                    if (selected.indexOf(thisstatus) != -1) {
-                        $(this).show();
-                    }
-                    else {
-                        $(this).hide();
-                    }
-                });
 
             });
         });
+
+        function filter() {
+            var selected = [];
+            $(':checkbox:checked').each(function () {
+                selected.push($(this).val());
+            });
+            var c1 = 0;
+            var c2 = 0;
+            $('tbody tr').each(function () {
+                c1++;
+                //thisstatus = $(this).find('td').eq(6).text();
+                thisstatus = $(this).find('.sel_statusfull').val();
+                if (selected.indexOf(thisstatus) != -1) {
+                    c2++;
+                    $(this).show();
+                }
+                else {
+                    $(this).hide();
+                }
+            });
+            $('#count').text(c2 + '/' + c1);
+        }
+
     </script>
 
 
@@ -107,6 +159,6 @@
 
 
     </form>
-    
+
 </body>
 </html>

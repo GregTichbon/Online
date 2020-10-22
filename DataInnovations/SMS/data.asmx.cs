@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,6 +9,24 @@ using System.Net;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+*/
+
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
+using System.Web.Services;
+
+
 
 namespace DataInnovations.SMS
 {
@@ -232,11 +251,12 @@ namespace DataInnovations.SMS
                 con.Dispose();
             }
         }
-        [WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string SMSPhoneStatus(string options)
-        {
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void SMSPhoneStatus(string options)
+        {
+            //dynamic result = new JObject();
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             String strConnString = "Data Source=192.168.10.6;Initial Catalog=SMS;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
@@ -265,6 +285,7 @@ namespace DataInnovations.SMS
             }
 
             string html = "";
+
             Boolean success = false;
             int failed = 0;
             WebRequest wr = WebRequest.Create("http://" + parameters["IPAddress"] + parameters["Port"] + "/v1/device/status");
@@ -280,6 +301,7 @@ namespace DataInnovations.SMS
                     using (StreamReader sr = new StreamReader(data))
                     {
                         html += sr.ReadToEnd();
+                        //result.data = sr.ReadToEnd();
                     }
                     success = true;
                     data.Dispose();
@@ -299,12 +321,13 @@ namespace DataInnovations.SMS
                         //gFunctions.sendemailV4(host, "greg@datainn.co.nz", "SMS Monitor", password, "No response from SMS Mobile", "", db_otheremailaddress, emailBCC, replyto, attachments, emailoptions);
                     }
                     html += "Error";
-                    //send email
+                    //result.data = "Error";
                 }
             }
+            //Context.Response.Write(result);
+            Context.Response.Write(html);
+            //return (html);
 
-            return (html);
-        
 
         }
 

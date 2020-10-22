@@ -240,6 +240,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Imagery.aspx" />
     <Content Include="Imagery1.aspx" />
+    <Content Include="link.aspx" />
     <Content Include="Masonry1.aspx" />
     <Content Include="Masonry2.aspx" />
     <Content Include="New.aspx" />
@@ -489,6 +490,13 @@
     </Compile>
     <Compile Include="Imagery1.aspx.designer.cs">
       <DependentUpon>Imagery1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="link.aspx.cs">
+      <DependentUpon>link.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="link.aspx.designer.cs">
+      <DependentUpon>link.aspx</DependentUpon>
     </Compile>
     <Compile Include="Masonry1.aspx.cs">
       <DependentUpon>Masonry1.aspx</DependentUpon>

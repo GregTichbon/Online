@@ -39,8 +39,12 @@ namespace UBC.People
         public string tb_colour;
         public string dd_swimmer;
         public string tb_rowit_id;
-        public string tb_keynumber;
+        public string tb_key;
+        public string dd_keyactive;
         public string tb_onloanfromclub;
+        public string dd_onloanfromclubactive;
+        public string tb_uniform;
+        public string dd_uniformactive;
         public string dd_relationshiponly;
         public string tb_invoicerecipient;
         public string dd_invoiceaddresstype;
@@ -70,7 +74,7 @@ namespace UBC.People
         public string[] transactions_system = new string[2] { "UBC", "Friends" };
         public string[] transactions_code = new string[9] { "Regatta", "Boat Transport", "Accomodation", "Clothing", "Fees", "Race Fees", "Fundraising", "Grant Allocation", "Subsidy" };
         public string[] invoiceaddresstypes = new string[3] { "Email", "Mail", "Hand Deliver" }; //[4] { "Email", "Text", "Mail", "Hand Deliver" };
-        public string[] seasons = new string[3] { "2017/18", "2018/19", "2019/20" };
+        public string[] seasons = new string[4] { "2017/18", "2018/19", "2019/20", "2020/21" };
         public string category_category;
         public string relationships_relationshiptypes;
 
@@ -172,8 +176,12 @@ namespace UBC.People
                             dd_lastseasonregistered = dr["lastseasonregistered"].ToString();
                             dd_swimmer = dr["swimmer"].ToString();
                             tb_rowit_id = dr["rowit_id"].ToString();
-                            tb_keynumber = dr["keynumber"].ToString();
+                            tb_key = dr["key"].ToString();
+                            dd_keyactive = dr["keyactive"].ToString();
                             tb_onloanfromclub = dr["onloanfromclub"].ToString();
+                            dd_onloanfromclubactive = dr["onloanfromclubactive"].ToString();
+                            tb_uniform = dr["uniform"].ToString();
+                            dd_uniformactive = dr["uniformactive"].ToString();
                             dd_relationshiponly = dr["relationshiponly"].ToString();
                             tb_invoicerecipient = dr["InvoiceRecipient"].ToString();
                             dd_invoiceaddresstype = dr["InvoiceAddressType"].ToString();
@@ -251,6 +259,7 @@ namespace UBC.People
                         }
                     }
                     html_tabs += "<li><a data-target=\"#div_note\">Notes</a></li>";
+                    html_tabs += "<li><a data-target=\"#div_onloan\">On Loan</a></li>";
 
 
 
@@ -929,8 +938,12 @@ namespace UBC.People
             dd_lastseasonregistered = Request.Form["dd_lastseasonregistered"].Trim();
 
             tb_rowit_id = Request.Form["tb_rowit_id"].Trim();
-            tb_keynumber = Request.Form["tb_keynumber"].Trim();
+            tb_key = Request.Form["tb_key"].Trim();
+            dd_keyactive = Request.Form["dd_keyactive"].Trim();
             tb_onloanfromclub = Request.Form["tb_onloanfromclub"].Trim();
+            dd_onloanfromclubactive = Request.Form["dd_onloanfromclubactive"].Trim();
+            tb_uniform = Request.Form["tb_uniform"].Trim();
+            dd_uniformactive = Request.Form["dd_uniformactive"].Trim();
             dd_swimmer = Request.Form["dd_swimmer"].Trim();
             dd_relationshiponly = Request.Form["dd_relationshiponly"].Trim();
             tb_invoicerecipient = Request.Form["tb_invoicerecipient"].Trim();
@@ -981,8 +994,12 @@ namespace UBC.People
             cmd.Parameters.Add("@familymember", SqlDbType.VarChar).Value = dd_familymember;
             cmd.Parameters.Add("@lastseasonregistered", SqlDbType.VarChar).Value = dd_lastseasonregistered;
             cmd.Parameters.Add("@rowit_id", SqlDbType.VarChar).Value = tb_rowit_id;
-            cmd.Parameters.Add("@keynumber", SqlDbType.VarChar).Value = tb_keynumber;
+            cmd.Parameters.Add("@key", SqlDbType.VarChar).Value = tb_key;
+            cmd.Parameters.Add("@keyactive", SqlDbType.VarChar).Value = dd_keyactive;
             cmd.Parameters.Add("@onloanfromclub", SqlDbType.VarChar).Value = tb_onloanfromclub;
+            cmd.Parameters.Add("@onloanfromclubactive", SqlDbType.VarChar).Value = dd_onloanfromclubactive;
+            cmd.Parameters.Add("@uniform", SqlDbType.VarChar).Value = tb_uniform;
+            cmd.Parameters.Add("@uniformactive", SqlDbType.VarChar).Value = dd_uniformactive;
             cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
             cmd.Parameters.Add("@relationshiponly", SqlDbType.VarChar).Value = dd_relationshiponly;
             cmd.Parameters.Add("@InvoiceRecipient", SqlDbType.VarChar).Value = tb_invoicerecipient;

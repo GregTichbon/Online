@@ -10,8 +10,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 namespace UBC.People
+
 {
-    public partial class KeyRegister : System.Web.UI.Page
+    public partial class UniformRegister : System.Web.UI.Page
     {
         public string html = "";
         protected void Page_Load(object sender, EventArgs e)
@@ -26,13 +27,13 @@ namespace UBC.People
                 Response.Redirect("~/default.aspx");
             }
 
-             
-                string[] optionvalues = new string[2] {"Yes", "No" };
+
+            string[] optionvalues = new string[2] { "Yes", "No" };
 
             string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
 
             SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd1 = new SqlCommand("get_keyregister", con);
+            SqlCommand cmd1 = new SqlCommand("get_uniformregister", con);
 
             cmd1.CommandType = CommandType.StoredProcedure;
             cmd1.Connection = con;
@@ -48,17 +49,18 @@ namespace UBC.People
                         string person_id = dr["person_id"].ToString();
                         string guid = dr["guid"].ToString();
                         string name = dr["name"].ToString();
-                        string key = dr["key"].ToString();
-                        string keyactive = dr["keyactive"].ToString();
+                        string uniform = dr["uniform"].ToString();
+                        string uniformactive = dr["uniformactive"].ToString();
 
                         string options = "<option>--Please Select--</option>";
                         string selected = "";
-                        foreach(string optionvalue in optionvalues)
+                        foreach (string optionvalue in optionvalues)
                         {
-                            if(optionvalue == keyactive)
+                            if (optionvalue == uniformactive)
                             {
                                 selected = " selected=\"selected\"";
-                            } else
+                            }
+                            else
                             {
                                 selected = "";
                             }
@@ -66,7 +68,7 @@ namespace UBC.People
                         }
 
                         html += "<tr>";
-                        html += "<td><a href=\"maint.aspx?id=" + guid + "\" target=\"_blank\">" + name + "</a></td><td><textarea class=\"form-control\" id=\"key_" + guid + "\">" + key + "</textarea></td><td><select class=\"form-control\" id=\"keyactive_" + guid + "\">" + options + "</select></td>";
+                        html += "<td><a href=\"maint.aspx?id=" + guid + "\" target=\"_blank\">" + name + "</a></td><td><textarea class=\"form-control\" id=\"uniform_" + guid + "\">" + uniform + "</textarea></td><td><select class=\"form-control\" id=\"uniformactive_" + guid + "\">" + options + "</select></td>";
                         html += "</tr>";
                     }
                 }

@@ -60,6 +60,33 @@ namespace Generic
             return "Test";
         }
 
+        public string functionaccess(string functionName)
+        {
+            string accessString = "";
+            String strConnString = "Data Source=toh-app;Initial Catalog=DataInnovations;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+            SqlConnection con = new SqlConnection(strConnString);
+
+            SqlCommand cmd = new SqlCommand("get_function_access", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@name", SqlDbType.VarChar).Value = functionName;
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                accessString = cmd.ExecuteScalar().ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return accessString;
+        }
+
         public static Boolean accessstringtest(string personaccess, string requiredaccess)
         {
             int personaccesslength = personaccess.Length;
@@ -73,7 +100,6 @@ namespace Generic
                 string pad = new String('0', personaccesslength - requiredaccesslength);
                 requiredaccess = requiredaccess + pad;
             }
-
 
             int result = Convert.ToInt32(personaccess, 2) & Convert.ToInt32(requiredaccess, 2);
 

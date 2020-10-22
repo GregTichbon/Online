@@ -435,7 +435,10 @@
     <Content Include="Evaluation\default.aspx" />
     <Content Include="functions\Data.asmx" />
     <Content Include="images\aimeeMatthews.jpg" />
+    <Content Include="images\BaillieChadfield.jpg" />
     <Content Include="images\Charlie-BoyWilliams.jpg" />
+    <Content Include="images\ChrisKirby.jpg" />
+    <Content Include="images\DanChadfield.jpg" />
     <Content Include="images\DolzHadfield.jpg" />
     <Content Include="images\GregTichbon.jpg" />
     <Content Include="images\JordinHaami-Rerekura.jpg" />
@@ -444,6 +447,7 @@
     <Content Include="images\KeeganEaston.jpg" />
     <Content Include="images\LeoneandMellisa.jpg" />
     <Content Include="images\MahangaWilliams.jpg" />
+    <Content Include="images\MaryTafilipepe.jpg" />
     <Content Include="Index.aspx" />
     <Content Include="Information.aspx" />
     <Content Include="MySite\default.html" />

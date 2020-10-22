@@ -63,7 +63,7 @@ namespace UBC.People
         public int parentctr = 0;
         public int parentphonectr = 0;
 
-        public string season = "2019/20";
+        public string season = "2020/21";
 
         public string[] schoolvalues = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gendervalues = new string[2] { "Female", "Male" };
@@ -74,7 +74,7 @@ namespace UBC.People
         //public string[] phonetypevalues = new string[] { };
         public string[] relationshipvalues = new string[4] { "Mother", "Father", "Caregiver", "Other" };
         public string[] invoicetypevalues = new string[3] { "Email", "Mail", "Hand deliver" }; //[4] { "Email", "Text", "Mail", "Hand deliver" };
-        public string[] membershipvalues = new string[7] { "Full (Competitive) Membership", "Club Recreation Membership", "Novice Membership", "Coxswain Membership", "Life Membership", "Honorary Membership", "Gym Membership Only" };
+        public string[] membershipvalues = new string[7] { "Full (Competitive)", "Club - Recreation", "First Year Rower", "Coxswain", "Non-Resident Rower", "Gym Only", "Casual" };
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -129,6 +129,7 @@ namespace UBC.People
                     if (dr.HasRows)
                     {
                         dr.Read();
+                        person_id = dr["person_id"].ToString();
                         xml = dr["xml"].ToString();
                         XMLdoc.LoadXml(xml);
 
@@ -178,7 +179,7 @@ namespace UBC.People
                             string invoicetype = dr["invoiceaddresstype"].ToString();
                             string invoiceaddress = dr["invoiceaddress"].ToString();
                             //string invoicenote = dr["financialnote"].ToString();
-                            string membershiptype = dr["feecategory"].ToString();
+                            string membershiptype = ""; // dr["feecategory"].ToString();
                             string familydiscount = dr["familymember"].ToString();
                             if (familydiscount != "")
                             {
@@ -297,6 +298,8 @@ namespace UBC.People
                     con.Dispose();
 
 
+
+
                     firstname = XMLdoc.DocumentElement.SelectSingleNode("/root/firstname").InnerText;
                     lastname = XMLdoc.DocumentElement.SelectSingleNode("/root/lastname").InnerText;
                     birthdate = XMLdoc.DocumentElement.SelectSingleNode("/root/birthdate").InnerText;
@@ -312,7 +315,7 @@ namespace UBC.People
                     invoicetype = XMLdoc.DocumentElement.SelectSingleNode("/root/invoicetype").InnerText;
                     invoiceaddress = XMLdoc.DocumentElement.SelectSingleNode("/root/invoiceaddress").InnerText;
                     invoicenote = XMLdoc.DocumentElement.SelectSingleNode("/root/invoicenote").InnerText;
-                    membershiptype = XMLdoc.DocumentElement.SelectSingleNode("/root/membershiptype").InnerText;
+                    membershiptype = ""; // XMLdoc.DocumentElement.SelectSingleNode("/root/membershiptype").InnerText;
                     familydiscount = XMLdoc.DocumentElement.SelectSingleNode("/root/familydiscount").InnerText;
                     previousclub = XMLdoc.DocumentElement.SelectSingleNode("/root/previousclub").InnerText;
                     boatinstorage = XMLdoc.DocumentElement.SelectSingleNode("/root/boatinstorage").InnerText;

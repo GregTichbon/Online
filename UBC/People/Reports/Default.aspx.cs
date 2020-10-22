@@ -33,7 +33,7 @@ namespace UBC.People.Reports
 
             }
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11110001"))
             {
                 html += "<br /><a id=\"link2\" href=\"currentmembers.aspx\">Registered members for the current year</a>";
                 script += "$('#link2').prop('title', 'All members who have a a registration date for the current year as defined in Parameter 1 - Current Season');";
@@ -45,7 +45,7 @@ namespace UBC.People.Reports
                 script += "$('#link3').prop('title', 'Those that have a school loaded and and \"Active\" Category');";
 
             }
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111101"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11111011"))
             {
                 html += "<br /><a href=\"smslog.aspx\">SMS Log</a>";
             }

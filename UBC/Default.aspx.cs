@@ -18,7 +18,9 @@ namespace UBC
             {
                 Response.Redirect("~/people/security/login.aspx");
             }
+
             html = "";
+            //Response.Write(Session["UBC_AccessString"].ToString());
 
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
             {
@@ -49,18 +51,19 @@ namespace UBC
                 html += "<br /><a href=\"bookingcalendar.aspx\">Booking Calendar</a>";
             }
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1101"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11010001"))
             {
                 html += "<br /><a href=\"people/Search.aspx\">People Search</a>";
                 html += "<br /><a href=\"people/List.aspx\">People List</a>";
             }
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11110001"))
             {
                 html += "<br /><a href=\"people/reports/CheckList.aspx\">Check List</a>";
 
                 html += "<br /><a href=\"people/findphone.aspx\">Find a phone number</a>";
                 html += "<br /><a href=\"people/keyregister.aspx\">Key Register</a>";
+                html += "<br /><a href=\"people/uniformregister.aspx\">Uniform Register</a>";
 
             }
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1011"))
@@ -75,13 +78,11 @@ namespace UBC
 
             html += "<br /><a href=\"people/resources.aspx\">Rowing Resources</a>";
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1111101"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11111011"))
             {
                 html += "<br /><a href=\"people/reports/AttendanceMatrix.aspx\">Attendance Matrix</a>";
                 html += "<br /><a href=\"people/reports/CurrentCategoriesMatrix.aspx\">Current Categories Matrix</a>";
             }
-
-
 
             html += "<br /><a href=\"people/reports/EventSchedule.aspx\">Event Schedule</a>";
             html += "<br /><a href=\"people/reports/ShowAttendees.aspx\">Show Attendees</a>";
