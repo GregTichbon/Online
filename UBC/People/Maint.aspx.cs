@@ -65,9 +65,14 @@ namespace UBC.People
         */
         public string tb_notes;
 
+        public Dictionary<string, string> options = new Dictionary<string, string>();
+        public Dictionary<string, string> nooptions = new Dictionary<string, string>();
+        
         public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
         public string[] gender = new string[2] { "Female", "Male" };
-        public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };  //Have added a new table - not yet using
+        //public string[] feecategory = new string[6] { "Full", "Recreational", "Cox", "Novice", "Special", "N/A" };  //Have added a new table - not yet using
+        //public Dictionary<string, string> feecategory = new Dictionary<string, string>();
+        public string[,] feecategory;
         public string[] rowingrole = new string[4] { "Rower", "Novice Rower", "Cox", "N/A" };  
         public string[] yesno = new string[2] { "Yes", "No" };
         public string[] familymember = new string[5] { "1", "2", "3", "4", "5" };
@@ -121,16 +126,6 @@ namespace UBC.People
 
                 Generic.Functions gFunctions = new Generic.Functions();
 
-                Dictionary<string, string> category_options = new Dictionary<string, string>();
-                category_options["usevalues"] = "";
-                category_options["selecttype"] = "Value";
-                //category_options["storedprocedure"] = "get_categories";
-                //category_options["storedprocedurename"] = "get_categories";
-                //category_options["parameters"] = parameters["Auction_CTR"];
-                //category_category = gFunctions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
-                category_category = Functions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
-
-
                 Dictionary<string, string> relationships_options = new Dictionary<string, string>();
                 relationships_options["usevalues"] = "";
                 relationships_options["selecttype"] = "Value";
@@ -139,6 +134,8 @@ namespace UBC.People
 
                 if (hf_guid != "new")
                 {
+                    feecategory = Functions.buildselectarray(strConnString, "get_feecategories");
+
                     SqlConnection con = new SqlConnection(strConnString);
                     con.Open();
                     SqlCommand cmd = new SqlCommand();

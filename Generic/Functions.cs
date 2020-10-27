@@ -898,6 +898,196 @@ namespace Generic
             return html;
         }
 
+        public static string buildselection(string[] optionlist, string selectedoption, Dictionary<string, string> options)
+        {
+            Dictionary<string, string> DICToptionlist = new Dictionary<string, string>();
+            foreach (string option in optionlist)
+            {
+                DICToptionlist.Add(option, option);
+            }
+            string[] ARRAYselectedoption = new string[] { selectedoption };
+
+            return buildselection(DICToptionlist, ARRAYselectedoption, options);
+        }
+
+        public static string buildselection(string[,] optionlist, string selectedoption, Dictionary<string, string> options)
+        {
+            Dictionary<string, string> DICToptionlist = new Dictionary<string, string>();
+            for (int f1 = 0; f1 < optionlist.GetLength(0); f1++)
+            {
+                DICToptionlist.Add(optionlist[f1, 0], optionlist[f1, 1]);
+            }
+            string[] ARRAYselectedoption = new string[] { selectedoption };
+
+            return buildselection(DICToptionlist, ARRAYselectedoption, options);
+        }
+
+        public static string buildselection(Dictionary<string, string> optionlist, string[] selectedoption, Dictionary<string, string> options)
+        {
+            string html = "";
+
+            /* Can just put the option on the page
+            if (options["firstoption"] != "None")  //eg: Please Select
+            {
+                html = html + ("<option>" + options["firstoption"] + "</option>");
+            }
+            */
+
+            string Label;
+            string Value = "";
+            string ValueText;
+            string selectText = "";
+
+            foreach (KeyValuePair<string, string> selectionpair in optionlist)
+            {
+                ValueText = "";
+                Label = selectionpair.Key;
+                if (options.ContainsKey("valuefield"))
+                {
+                    if (options["valuefield"] == "label")
+                    {
+                        Value = Label;
+                    }
+                    else if (options["valuefield"] == "value")
+                    {
+                        Value = selectionpair.Value;
+                    }
+                }
+                string selected = "";
+
+                if (options.ContainsKey("comparelabel"))
+                {
+                    selectText = Label;
+                }
+                else //compare value
+                {
+                    selectText = Value;
+                }
+
+                if (selectedoption.Contains(selectText))
+                {
+                    selected = " selected";
+                }
+                else
+                {
+                    selected = "";
+                }
+                if (!options.ContainsKey("type"))
+                {
+                    options.Add("type", "select");
+                }
+
+                if (options["type"] == "uiselectable")
+                {
+                    string id = "checkbox_" + Value;
+                    string name = options["name"];
+                    ValueText = "<label for=\"" + id + "\">" + Label + "</label>";
+                    ValueText += "<input class=\"uicheckbox\" type=\"checkbox\" name=\"" + name + "\" id=\"" + id + "\">";
+                }
+                else if (options["type"] == "select")
+                {
+                    if (Value != "")
+                    {
+                        ValueText = " value=\"" + Value + "\"";
+                    }
+                    ValueText = "<option" + ValueText + selected + ">" + Label + "</option>";
+                }
+                else if (options["type"] == "checkbox")
+                {
+
+                }
+                else if (options["type"] == "radio")
+                {
+
+                }
+
+
+
+                html += ValueText;
+
+
+            }
+            return html;
+        }
+
+        public static Dictionary<string, string> buildselectionlist(string strConnString, string cmdtext, Dictionary<string, string> options)
+        {
+            Dictionary<string, string> selectionlist = new Dictionary<string, string>();
+
+            SqlConnection con = new SqlConnection(strConnString);
+            SqlCommand cmd;
+
+            if (options.ContainsKey("storedprocedure"))
+            {
+                if (options.ContainsKey("storedprocedurename"))
+                {
+                    cmd = new SqlCommand(cmdtext, con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                }
+                else
+                {
+                    cmd = new SqlCommand("buildselectionlist", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sqltext", SqlDbType.VarChar).Value = cmdtext;
+                }
+                if (options.ContainsKey("parameters"))
+                {
+                    cmd.Parameters.Add("@parameters", SqlDbType.VarChar).Value = options["parameters"];
+                }
+            }
+            else
+            {
+                cmd = new SqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = cmdtext;
+            }
+
+            string optionlabel = "label";
+            if (options.ContainsKey("label"))
+            {
+                optionlabel = options["label"];
+            }
+
+            cmd.Connection = con;
+            try
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    string Label;
+                    string Value = "";
+                    while (dr.Read())
+                    {
+                        Label = dr[optionlabel].ToString();
+                        if (options.ContainsKey("usevalues"))
+                        {
+                            string optionvalue = "value";
+                            if (options["usevalues"] != "")
+                            {
+                                optionvalue = options["usevalues"];
+                            }
+                            Value = dr[optionvalue].ToString();
+                        }
+                        selectionlist.Add(Label, Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+
+            return selectionlist;
+        }
+
         public static string buildandpopulateselect(string strConnString, string cmdtext, string selectedoption, Dictionary<string, string> options, string firstoption = "None")
         {
             string selected;
@@ -1001,11 +1191,11 @@ namespace Generic
             return html;
         }
 
-        public string[,] buildselectarray(string strConnString, string cmdtext)
+        public static string[,] buildselectarray(string strConnString, string cmdtext)
         {
             string[,] SelectArray = null;
 
-            var myList = new List<SelectList>();
+            var myList = new List<selectList>();
 
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand();
@@ -1023,7 +1213,7 @@ namespace Generic
                     while (dr.Read())
                     {
 
-                        myList.Add(new SelectList()
+                        myList.Add(new selectList()
                         {
                             Label = dr["label"].ToString(),
                             Value = dr["value"].ToString()
@@ -1045,8 +1235,8 @@ namespace Generic
             SelectArray = new string[myList.Count, 2];
             for (int i = 0; i < myList.Count; i++)
             {
-                SelectArray[i, 0] = ((SelectList)myList[i]).Label;
-                SelectArray[i, 1] = ((SelectList)myList[i]).Value;
+                SelectArray[i, 0] = ((selectList)myList[i]).Label;
+                SelectArray[i, 1] = ((selectList)myList[i]).Value;
             }
 
             return SelectArray;
@@ -1355,7 +1545,7 @@ namespace Generic
     */
 
 }
-public class SelectList
+public class selectList
 {
     public string Label { get; set; }
     public string Value { get; set; }

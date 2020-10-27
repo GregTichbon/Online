@@ -1516,7 +1516,9 @@
                         <label class="control-label col-sm-4" for="dd_feecategory">Fee category</label>
                         <div class="col-sm-3">
                             <select id="dd_feecategory" name="dd_feecategory" class="form-control">
-                                <%= Generic.Functions.populateselect(feecategory, dd_feecategory,"") %>
+                           <%     
+                                Response.Write(Generic.Functions.buildselection(feecategory, dd_feecategory,nooptions));
+                                //Generic.Functions.populateselect(feecategory, dd_feecategory,"") %>
                             </select>
                         </div>
                         <label class="control-label col-sm-2" for="dd_rowingrole">Rowing Role</label>
