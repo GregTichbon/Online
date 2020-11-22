@@ -62,7 +62,7 @@ namespace UBC.People.Signup
                             string guid = dr["guid"].ToString();
 
 
-                            string person = "<a id=\"name_" + id + "\" href=\"http://private.unionboatclub.co.nz/people/signup?id=" + guid + "\" target=\"link\">" + name + "</a>";
+                            string person = "<a id=\"name_" + id + "\" href=\"http://ubc.org.nz/people/signup?id=" + guid + "\" target=\"link\">" + name + "</a>";
 
                             string sendemail = "";
                             if (email != "")

@@ -35,7 +35,14 @@ namespace UBC
             string emailHtml = "<html><body>Test</body></html>";
 
             Functions functions = new Functions();
-            functions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emailHtml, emailRecipient, emailBCC,"",attachments,emailoptions);
+            //try
+            {
+                functions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emailHtml, emailRecipient, emailBCC, "", attachments, emailoptions);
+            }
+            //catch (Exception ex)
+            {
+            //    Response.Write(ex.InnerException);
+            }
         }
     }
 }

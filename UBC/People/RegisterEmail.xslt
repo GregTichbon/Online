@@ -7,7 +7,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <table width="100%" border="1" cellpadding="10" cellspacing="0" align="center">
       <tr>
         <td>
-          <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head-350.png" />
+          <img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head-350.png" />
         </td>
         <td>
           <h2> Union Boat Club Rower Registration</h2>

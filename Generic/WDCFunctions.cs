@@ -28,6 +28,8 @@ namespace Online.WDCFunctions
 {
     public class WDCFunctions
     {
+
+
         public bool IsReCaptchValid(string g_recaptcha_response)
         {
             var result = false;

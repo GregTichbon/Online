@@ -32,6 +32,7 @@
             relative_urls: false,
             remove_script_host : false
         });
+
         $(document).ready(function () {
             $('.fb_clipboard').click(function () {
                 link = $(this).data('link');
@@ -44,6 +45,9 @@
                 window.open(link, 'facebook');
                 //alert("Copied to clipboard");
             });
+
+            $('#dd_categories_filter').val('21');
+             processrows();
 
             $(".numeric").keydown(function (event) {
                 if (event.shiftKey == true) {
@@ -398,7 +402,7 @@
                     ||username||<br />
                     ||tempphrase||<br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+                    ||folder|| as in http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf<br />
                     ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />
@@ -429,7 +433,7 @@
                     ||username||<br />
                     ||tempphrase||<br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in http://private.unionboatclub.co.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+                    ||folder|| as in http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf<br />
                     ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />

@@ -282,7 +282,7 @@ namespace UBC.People.Signup
                 string emailfrom = "ltr@datainn.co.nz";
                 string emailfromname = "Union Boat Club";
                 string password = "m33t1ng";
-                string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
+                string emailRecipient = "greg@datainn.co.nz; gtichbon@teorahou.org.nz; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";  //info@unionboatclub.co.nz
 
 
                 string path = Server.MapPath(".");

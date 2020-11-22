@@ -134,6 +134,18 @@
                 }
             })
 
+            $('#endallcategories').click(function () {
+                alert('Needs to ask date');
+                $('#categorytable > tbody > tr').each(function () {
+                    if ($(this).find('td:eq(3)').text() == "") {
+                        $(this).find('td:eq(3)').text('31 Aug 20');
+                        $(this).find('td:eq(0)').addClass('changed');
+                        $(this).attr('maint', 'changed');
+                    }
+                });
+                
+            })
+
             $('.submit').click(function () {
                 delim = String.fromCharCode(254);
 
@@ -1627,6 +1639,7 @@
                     <table id="categorytable" class="table">
                         <%= html_category %>
                     </table>
+                    <a id="endallcategories">End all categories</a>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_finance" class="tab-pane fade in">

@@ -226,7 +226,7 @@ namespace UBC.People
                 emailhtml = emailhtml.Replace("||attendance||", attendance);
                 //emailhtml = emailhtml.Replace("||role||", role);
                 emailhtml = emailhtml.Replace("||folder||", "Folder" + id);
-                emailhtml = emailhtml.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
+                emailhtml = emailhtml.Replace("||redirect||", "http://ubc.org.nz/Folder" + id + "/redirect.aspx?url=");
                 //emailhtml = emailhtml.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                 emailhtml = emailhtml.Replace("||rfirstname||", rfirstname);
@@ -271,7 +271,7 @@ namespace UBC.People
                 text = text.Replace("||attendance||", attendance);
                 //text = text.Replace("||role||", role);
                 text = text.Replace("||folder||", "Folder" + id);
-                text = text.Replace("||redirect||", "http://private.unionboatclub.co.nz/Folder" + id + "/redirect.aspx?url=");
+                text = text.Replace("||redirect||", "http://ubc.org.nz/Folder" + id + "/redirect.aspx?url=");
                 //text = text.Replace("||personevent||", "p=" + person_guid + "&e=" + event_guid);
 
                 text = text.Replace("||rfirstname||", rfirstname);

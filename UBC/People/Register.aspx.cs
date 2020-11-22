@@ -420,279 +420,288 @@ namespace UBC.People
                     guid = Guid.NewGuid().ToString();
                 }
             }
-            
+
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
-
-            Functions functions = new Functions();
-
-            string EmailRecipients = Request.Form["emailaddress"];
-
-            string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
-            SqlConnection con = new SqlConnection(strConnString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            XElement rootXml = new XElement("root");
-            DataTable repeatertable = new DataTable("Repeater");
-
-            repeatertable.Columns.Add("Parent", typeof(string));
-            repeatertable.Columns.Add("ParentIndex", typeof(int));
-            repeatertable.Columns.Add("Name", typeof(string));
-            repeatertable.Columns.Add("Index", typeof(int));
-            repeatertable.Columns.Add("Field", typeof(string));
-            repeatertable.Columns.Add("Value", typeof(string));
-
-            string keypartparent = "";
-            string keypartparentindex = "";
-            string keypartname = "";
-            string keypartindex = "";
-            string keypartfield = "";
-
-            foreach (string key in Request.Form)
+            //if (1 == 2)
             {
-                //if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
-                if (!key.StartsWith("__") && !key.StartsWith("ctl") && !key.StartsWith("clientsideonly_") && !key.StartsWith("btn_"))
-                {
-                    if (key.StartsWith("repeat_"))
-                    {
-                        string[] keyparts = key.Split('_');
-                        int keypartscnt = keyparts.Count();
+                Functions functions = new Functions();
 
-                        switch (keypartscnt)
+                string EmailRecipients = Request.Form["emailaddress"];
+
+                string strConnString = "Data Source=toh-app;Initial Catalog=UBC;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
+                SqlConnection con = new SqlConnection(strConnString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                XElement rootXml = new XElement("root");
+                DataTable repeatertable = new DataTable("Repeater");
+
+                repeatertable.Columns.Add("Parent", typeof(string));
+                repeatertable.Columns.Add("ParentIndex", typeof(int));
+                repeatertable.Columns.Add("Name", typeof(string));
+                repeatertable.Columns.Add("Index", typeof(int));
+                repeatertable.Columns.Add("Field", typeof(string));
+                repeatertable.Columns.Add("Value", typeof(string));
+
+                string keypartparent = "";
+                string keypartparentindex = "";
+                string keypartname = "";
+                string keypartindex = "";
+                string keypartfield = "";
+
+                foreach (string key in Request.Form)
+                {
+                    //if (key.Substring(0, 2) != "__" && key.Substring(0, 3) != "ctl" && !key.StartsWith("clientsideonly_"))
+                    if (!key.StartsWith("__") && !key.StartsWith("ctl") && !key.StartsWith("clientsideonly_") && !key.StartsWith("btn_"))
+                    {
+                        if (key.StartsWith("repeat_"))
                         {
-                            case 4:
-                                keypartparent = "";
-                                keypartparentindex = "0";
-                                keypartname = keyparts[1];
-                                keypartfield = keyparts[2];
-                                keypartindex = keyparts[3];
-                                break;
-                            case 6:
-                                keypartparent = keyparts[1];
-                                keypartname = keyparts[2];
-                                keypartfield = keyparts[3];
-                                keypartparentindex = keyparts[4];
-                                keypartindex = keyparts[5];
-                                break;
-                            default:
-                                break;
+                            string[] keyparts = key.Split('_');
+                            int keypartscnt = keyparts.Count();
 
-                        }
-
-                        repeatertable.Rows.Add(keypartparent, keypartparentindex, keypartname, keypartindex, keypartfield, Request.Form[key]);
-                    }
-                    else
-                    {
-                        rootXml.Add(new XElement(key, Request.Form[key]));
-                    }
-                }
-            }
-            rootXml.Add(new XElement("submitted", DateTime.Now.ToString("dd MMM yyyy HH:mm:ss")));
-
-            /*
-            string x = "";
-            foreach (DataColumn xcol in repeatertable.Columns)
-            {
-                x += xcol.ColumnName + "|";
-            }
-            foreach (DataRow xrow in repeatertable.Rows)
-            {
-                x = "";
-                foreach(DataColumn xcol in repeatertable.Columns)
-                {
-                    x += xrow[xcol.ColumnName] + "|";
-                }
-                System.Diagnostics.Debug.WriteLine(x);
-            }
-            */
-            string sel = "";
-
-            sel = "[Name] = 'Phone' and [ParentIndex] = 0";
-            DataView dv = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
-            DataTable dt = dv.ToTable(true, "Index");
-            if (dt.Rows.Count > 0)
-            {
-                XElement repeaterXml = new XElement("PhoneRepeater");
-
-                foreach (DataRow indexrow in dt.Rows)
-                {
-                    XElement subXml = new XElement("Phone");
-                    //subXml.Add(new XElement("Index", indexrow["Index"].ToString()));
-
-                    sel = "[Name] = 'Phone' and [ParentIndex] = 0 and [index] = " + indexrow["Index"];
-                    DataView dv4 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
-                    DataTable dvfields = dv4.ToTable();
-
-                    foreach (DataRow fieldrow in dvfields.Rows)
-                    {
-                        string field = fieldrow["Field"].ToString();
-                        string value = fieldrow["Value"].ToString();
-                        subXml.Add(new XElement(field, value));
- 
-                    }
-                    repeaterXml.Add(subXml);
-                }
-                rootXml.Add(repeaterXml);
-            }
-
-            sel = "[Name] = 'Parent'";
-            dv = new DataView(repeatertable, sel, "[Index]", DataViewRowState.CurrentRows);
-            dt = dv.ToTable(true, "Index");
-            if (dt.Rows.Count > 0)
-            {
-                XElement repeaterXml = new XElement("ParentRepeater");
-
-                foreach (DataRow indexrow in dt.Rows)
-                {
-                    XElement subXml = new XElement("Parent");
-                    //subXml.Add(new XElement("Index", indexrow["Index"].ToString()));
-
-                    sel = "[Name] = 'Parent' and [Index] = " + indexrow["Index"];
-                    DataView dv4 = new DataView(repeatertable, sel, "[Index]", DataViewRowState.CurrentRows);
-                    DataTable dvfields = dv4.ToTable();
-
-                    foreach (DataRow fieldrow in dvfields.Rows)
-                    {
-                        string field = fieldrow["Field"].ToString();
-                        string value = fieldrow["Value"].ToString();
-                        subXml.Add(new XElement(field, value));
-                        if (field == "email")
-                        {
-                            EmailRecipients += ";" + fieldrow["Value"].ToString();
-                        }
-                    }
-                    sel = "[Parent] = 'Parent' and [ParentIndex] = " + indexrow["Index"] + " and [Name] = 'Phone'";
-                    DataView dv1 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
-                    DataTable dt1 = dv1.ToTable(true, "Index");
-                    if (dt1.Rows.Count > 0)
-                    {
-
-                        XElement repeaterXml2 = new XElement("PhoneRepeater");
-
-                        foreach (DataRow indexrow2 in dt1.Rows)
-                        {
-                            XElement subXml2 = new XElement("Phone");
-                            //subXml2.Add(new XElement("Index", indexrow2["Index"].ToString()));
-
-                            sel = "[Parent] = 'Parent' and [ParentIndex] = " + indexrow["Index"] + " and [Name] = 'Phone' and [index] = " + indexrow2["Index"];
-                            DataView dv5 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
-                            DataTable dvfields2 = dv5.ToTable();
-                            foreach (DataRow fieldrow in dvfields2.Rows)
+                            switch (keypartscnt)
                             {
-                                string field = fieldrow["Field"].ToString();
-                                string value = fieldrow["Value"].ToString();
-                                subXml2.Add(new XElement(field, value));
+                                case 4:
+                                    keypartparent = "";
+                                    keypartparentindex = "0";
+                                    keypartname = keyparts[1];
+                                    keypartfield = keyparts[2];
+                                    keypartindex = keyparts[3];
+                                    break;
+                                case 6:
+                                    keypartparent = keyparts[1];
+                                    keypartname = keyparts[2];
+                                    keypartfield = keyparts[3];
+                                    keypartparentindex = keyparts[4];
+                                    keypartindex = keyparts[5];
+                                    break;
+                                default:
+                                    break;
+
                             }
-                            subXml.Add(subXml2);
+
+                            repeatertable.Rows.Add(keypartparent, keypartparentindex, keypartname, keypartindex, keypartfield, Request.Form[key]);
+                        }
+                        else
+                        {
+                            rootXml.Add(new XElement(key, Request.Form[key]));
+                        }
+                    }
+                }
+                rootXml.Add(new XElement("submitted", DateTime.Now.ToString("dd MMM yyyy HH:mm:ss")));
+
+                /*
+                string x = "";
+                foreach (DataColumn xcol in repeatertable.Columns)
+                {
+                    x += xcol.ColumnName + "|";
+                }
+                foreach (DataRow xrow in repeatertable.Rows)
+                {
+                    x = "";
+                    foreach(DataColumn xcol in repeatertable.Columns)
+                    {
+                        x += xrow[xcol.ColumnName] + "|";
+                    }
+                    System.Diagnostics.Debug.WriteLine(x);
+                }
+                */
+                string sel = "";
+
+                sel = "[Name] = 'Phone' and [ParentIndex] = 0";
+                DataView dv = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                DataTable dt = dv.ToTable(true, "Index");
+                if (dt.Rows.Count > 0)
+                {
+                    XElement repeaterXml = new XElement("PhoneRepeater");
+
+                    foreach (DataRow indexrow in dt.Rows)
+                    {
+                        XElement subXml = new XElement("Phone");
+                        //subXml.Add(new XElement("Index", indexrow["Index"].ToString()));
+
+                        sel = "[Name] = 'Phone' and [ParentIndex] = 0 and [index] = " + indexrow["Index"];
+                        DataView dv4 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                        DataTable dvfields = dv4.ToTable();
+
+                        foreach (DataRow fieldrow in dvfields.Rows)
+                        {
+                            string field = fieldrow["Field"].ToString();
+                            string value = fieldrow["Value"].ToString();
+                            subXml.Add(new XElement(field, value));
+
                         }
                         repeaterXml.Add(subXml);
                     }
+                    rootXml.Add(repeaterXml);
                 }
-                rootXml.Add(repeaterXml);
-            }
 
-            string emailbodyTemplate = "RegisterEmail.xslt";
+                sel = "[Name] = 'Parent'";
+                dv = new DataView(repeatertable, sel, "[Index]", DataViewRowState.CurrentRows);
+                dt = dv.ToTable(true, "Index");
+                if (dt.Rows.Count > 0)
+                {
+                    XElement repeaterXml = new XElement("ParentRepeater");
 
-            string path = Server.MapPath(".");
-            XmlDocument reader = new XmlDocument();
-            reader.LoadXml(rootXml.ToString());
+                    foreach (DataRow indexrow in dt.Rows)
+                    {
+                        XElement subXml = new XElement("Parent");
+                        //subXml.Add(new XElement("Index", indexrow["Index"].ToString()));
 
-            XslCompiledTransform EmailXslTrans = new XslCompiledTransform();
-            EmailXslTrans.Load(path + "\\" + emailbodyTemplate);
+                        sel = "[Name] = 'Parent' and [Index] = " + indexrow["Index"];
+                        DataView dv4 = new DataView(repeatertable, sel, "[Index]", DataViewRowState.CurrentRows);
+                        DataTable dvfields = dv4.ToTable();
 
-            StringBuilder EmailOutput = new StringBuilder();
-            TextWriter EmailWriter = new StringWriter(EmailOutput);
+                        foreach (DataRow fieldrow in dvfields.Rows)
+                        {
+                            string field = fieldrow["Field"].ToString();
+                            string value = fieldrow["Value"].ToString();
+                            subXml.Add(new XElement(field, value));
+                            if (field == "email")
+                            {
+                                EmailRecipients += ";" + fieldrow["Value"].ToString();
+                            }
+                        }
+                        sel = "[Parent] = 'Parent' and [ParentIndex] = " + indexrow["Index"] + " and [Name] = 'Phone'";
+                        DataView dv1 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                        DataTable dt1 = dv1.ToTable(true, "Index");
+                        if (dt1.Rows.Count > 0)
+                        {
 
-            EmailXslTrans.Transform(reader, null, EmailWriter);
-            string emailbodydocument = EmailOutput.ToString();
+                            XElement repeaterXml2 = new XElement("PhoneRepeater");
 
-            string emailtemplate = Server.MapPath("..") + "\\EmailTemplate\\standard.html";
-            string emaildocument = "";
+                            foreach (DataRow indexrow2 in dt1.Rows)
+                            {
+                                XElement subXml2 = new XElement("Phone");
+                                //subXml2.Add(new XElement("Index", indexrow2["Index"].ToString()));
 
-            try
-            {
+                                sel = "[Parent] = 'Parent' and [ParentIndex] = " + indexrow["Index"] + " and [Name] = 'Phone' and [index] = " + indexrow2["Index"];
+                                DataView dv5 = new DataView(repeatertable, sel, "", DataViewRowState.CurrentRows);
+                                DataTable dvfields2 = dv5.ToTable();
+                                foreach (DataRow fieldrow in dvfields2.Rows)
+                                {
+                                    string field = fieldrow["Field"].ToString();
+                                    string value = fieldrow["Value"].ToString();
+                                    subXml2.Add(new XElement(field, value));
+                                }
+                                subXml.Add(subXml2);
+                            }
+                            repeaterXml.Add(subXml);
+                        }
+                    }
+                    rootXml.Add(repeaterXml);
+                }
+
+                string emailbodyTemplate = "RegisterEmail.xslt";
+
+                string path = Server.MapPath(".");
+                XmlDocument reader = new XmlDocument();
+                reader.LoadXml(rootXml.ToString());
+
+                XslCompiledTransform EmailXslTrans = new XslCompiledTransform();
+                EmailXslTrans.Load(path + "\\" + emailbodyTemplate);
+
+                StringBuilder EmailOutput = new StringBuilder();
+                TextWriter EmailWriter = new StringWriter(EmailOutput);
+
+                EmailXslTrans.Transform(reader, null, EmailWriter);
+                string emailbodydocument = EmailOutput.ToString();
+
+                string emailtemplate = Server.MapPath("..") + "\\EmailTemplate\\standard.html";
+                string emaildocument = "";
+
+                //try
+                //{
                 using (StreamReader sr = new StreamReader(emailtemplate))
                 {
                     emaildocument = sr.ReadToEnd();
                 }
-            }
-            catch (Exception ex)
-            {
-                functions.Log("", Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                //}
+                //catch (Exception ex)
+                //{
+                //    functions.Log("", Request.RawUrl, ex.Message, "greg@datainn.co.nz");
+                //}
 
-            }
+                emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
 
-            emaildocument = emaildocument.Replace("||Content||", emailbodydocument);
+                cmd.CommandText = "Update_Registration";
+                cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = Request.Form["guid"].ToString(); ;
+                cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
+                cmd.Parameters.Add("@document", SqlDbType.VarChar).Value = emaildocument;
 
-            cmd.CommandText = "Update_Registration";
-            cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = Request.Form["guid"].ToString(); ;
-            cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = new SqlXml(rootXml.CreateReader());
-            cmd.Parameters.Add("@document", SqlDbType.VarChar).Value = emaildocument;
-
-            cmd.Connection = con;
-            try
-            {
+                cmd.Connection = con;
+                //try
+                //{
                 con.Open();
                 string result = cmd.ExecuteScalar().ToString();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw ex;
+                //}
+                //finally
+                //{
                 con.Close();
                 con.Dispose();
+                //}
+
+                string emailSubject = "Union Boat Club Rower Registration";
+                string screenTemplate = "RegisterScreen.xslt";
+
+                /*
+                string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+                string emailfrom = "info@unionboatclub.co.nz";
+                string password = "R0wtheboat";
+                int port = 587; // 465; // 25;
+                Boolean enableSsl = true;
+
+                string[] attachments = new string[0];
+                Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+
+
+                */
+
+
+                //string host = "70.35.207.87";
+                //string emailfrom = "UnionBoatClub@datainn.co.nz";
+                //string password = "39%3Zxon";
+
+                string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+                string emailfrom = "info@unionboatclub.co.nz";
+                string password = "R0wtheboat";
+                int port = 587; // 465; // 25;
+                Boolean enableSsl = true;
+
+
+                string emailBCC = emailfrom + ";greg@datainn.co.nz;gtichbon@teorahou.org.nz; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";
+                string emailfromname = "Union Boat Club";
+
+                //string emailRecipient = Request.Form["emailaddress"];
+
+                //string emailtext = functions.HTMLtoText(emaildocument);
+
+                string[] attachments = new string[0];
+                Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+                functions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "", attachments, emailoptions);
+
+
+                //functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
+
+                //functions.sendemailV3(host, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "");
+
+                XslCompiledTransform ScreenXslTrans = new XslCompiledTransform();
+                ScreenXslTrans.Load(path + "\\" + screenTemplate);
+
+                StringBuilder ScreenOutput = new StringBuilder();
+                TextWriter ScreenWriter = new StringWriter(ScreenOutput);
+
+                ScreenXslTrans.Transform(reader, null, ScreenWriter);
+                Session["UBC_body"] = ScreenOutput.ToString();
+                Response.Redirect("../completed/default.aspx");
             }
-
-            string emailSubject = "Union Boat Club Rower Registration";
-            string screenTemplate = "RegisterScreen.xslt";
-
-            /*
-            string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
-            string emailfrom = "info@unionboatclub.co.nz";
-            string password = "R0wtheboat";
-            int port = 587; // 465; // 25;
-            Boolean enableSsl = true;
-
-            string[] attachments = new string[0];
-            Dictionary<string, string> emailoptions = new Dictionary<string, string>();
-
-
-            */
-
-
-            string host = "70.35.207.87";
-            string emailfrom = "UnionBoatClub@datainn.co.nz";
-            string password = "39%3Zxon";
-
-            string emailBCC = emailfrom + ";greg@datainn.co.nz;gtichbon@teorahou.org.nz; normcarter@hotmail.com; info@unionboatclub.co.nz; thenielsens@xtra.co.nz";
-            string emailfromname = "Union Boat Club";
-
-            //string emailRecipient = Request.Form["emailaddress"];
-
-            string emailtext = functions.HTMLtoText(emaildocument);
-
-            //functions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "", attachments, emailoptions);
-
-
-            //functions.sendemailV2(host, emailfrom, emailfromname, password, emailSubject, emailtext, emaildocument, emailRecipient, emailBCC, "");
-            functions.sendemailV3(host, emailfrom, emailfromname, password, emailSubject, emaildocument, EmailRecipients, emailBCC, "");
-
-            XslCompiledTransform ScreenXslTrans = new XslCompiledTransform();
-            ScreenXslTrans.Load(path + "\\" + screenTemplate);
-
-            StringBuilder ScreenOutput = new StringBuilder();
-            TextWriter ScreenWriter = new StringWriter(ScreenOutput);
-
-            ScreenXslTrans.Transform(reader, null, ScreenWriter);
-            Session["UBC_body"] = ScreenOutput.ToString();
-            Response.Redirect("../completed/default.aspx");
-
         }
     }
 }
- 

@@ -286,6 +286,14 @@
     <Content Include="Entity\ResetPassword.aspx" />
     <Content Include="Entity\Test.aspx" />
     <Content Include="FB\default.aspx" />
+    <Content Include="Finance\Allocate.aspx" />
+    <Content Include="Finance\BankImport.aspx" />
+    <Content Include="Finance\BankTransaction.aspx" />
+    <Content Include="Finance\BankTransactions.aspx" />
+    <Content Include="Finance\data.aspx" />
+    <Content Include="Finance\Default.aspx" />
+    <Content Include="Finance\Posts.asmx" />
+    <Content Include="Finance\transactionitems.aspx" />
     <Content Include="greg.aspx" />
     <Content Include="Greg\default.aspx" />
     <Content Include="Greg\SMS.aspx" />
@@ -1008,6 +1016,59 @@
     </Compile>
     <Compile Include="FB\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\Allocate.aspx.cs">
+      <DependentUpon>Allocate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\Allocate.aspx.designer.cs">
+      <DependentUpon>Allocate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\BankImport.aspx.cs">
+      <DependentUpon>BankImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\BankImport.aspx.designer.cs">
+      <DependentUpon>BankImport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\BankTransaction.aspx.cs">
+      <DependentUpon>BankTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\BankTransaction.aspx.designer.cs">
+      <DependentUpon>BankTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\BankTransactions.aspx.cs">
+      <DependentUpon>BankTransactions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\BankTransactions.aspx.designer.cs">
+      <DependentUpon>BankTransactions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\data.aspx.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\data.aspx.designer.cs">
+      <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Finance\transactionitems.aspx.cs">
+      <DependentUpon>transactionitems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\transactionitems.aspx.designer.cs">
+      <DependentUpon>transactionitems.aspx</DependentUpon>
     </Compile>
     <Compile Include="Greg\SMS.aspx.cs">
       <DependentUpon>SMS.aspx</DependentUpon>

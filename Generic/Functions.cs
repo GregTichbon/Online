@@ -49,6 +49,15 @@ namespace Generic
             return pageText;
         }
 
+        public string formatdate(string date, string format)
+        {
+            if (date != "")
+            {
+                date = Convert.ToDateTime(date).ToString(format);
+            }
+            return date;
+        }
+
         public string formatphonenumber(string phonenumber)
         {
             phonenumber = Regex.Replace(phonenumber, "[^0-9]", "");

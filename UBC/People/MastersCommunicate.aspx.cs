@@ -61,7 +61,7 @@ namespace UBC.People
                             string person_guid = dr["person_guid"].ToString();
 
 
-                            string person = "<a id=\"name_" + id + "\" href=\"http://private.unionboatclub.co.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
+                            string person = "<a id=\"name_" + id + "\" href=\"http://ubc.org.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
                             string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
 
                             string sendemail = "";

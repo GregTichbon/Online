@@ -11,7 +11,7 @@ namespace UBC.Go.Register
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string url = "http://private.unionboatclub.co.nz/people/register.aspx";
+            //string url = "http://ubc.org.nz/people/register.aspx";
             string url = "../../people/register.aspx";
 
             string id = Request.QueryString["id"] ?? "";

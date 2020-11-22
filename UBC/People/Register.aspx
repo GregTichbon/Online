@@ -274,9 +274,16 @@
 
             });
 
+            /*
             $('.submit').click(function () {
+                alert(1);
                 $('.processing').show();
             });
+            */
+            $("form").submit(function (event) {
+                $('.processing').show();
+            });
+
 
             //$('[required]').css('border', '1px solid red');
             //$('[required]').addClass('required');
@@ -310,24 +317,28 @@
             display: none;
         }
 
-        .processing {
-            margin: auto;
-            width: 50%;
-            display: none;
-        }
+.processing {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('/dependencies/images/processing2.gif') 50% 50% no-repeat ;
+}
                
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input id="guid" name="guid" type="hidden" value="<%:guid%>" />
     
-    <img src="../Dependencies/Images/processing2.gif" class="processing" />
+    <div style="display: none" class="processing"></div>
     <div class="container" style="background-color: #B1C9E6">
         <p></p>
         <table style="width: 100%">
             <tr>
                 <td style="width: 350px">
-                    <img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
+                    <img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
                 <td style="text-align: center">
                     <h1>Registration / Renewal</h1>
                     <h2>1 Sep 2020 - 30 Aug 2021</h2>

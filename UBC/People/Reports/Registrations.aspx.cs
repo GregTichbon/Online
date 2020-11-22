@@ -45,6 +45,8 @@ namespace UBC.People.Reports
             {
 
                 string registration_id = dr["registration_id"].ToString();
+                string person_id = dr["person_id"].ToString();
+                
                 string name = dr["name"].ToString();
                 if(name == "")
                 {
@@ -65,23 +67,34 @@ namespace UBC.People.Reports
                 if(!guids.Contains(guid))
                 {
                     guids.Add(guid);
-                    update = " <a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">Update</a>";
+                    update = " <a class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">Update</a>";
+                }
+                string maint;
+                string link = "";
+
+                if (person_id != "")
+                {
+                    maint = "<a href=\"../maint.aspx?id=" + guid + "\" target=\"_blank\">" + name + "</a>";
+                } else
+                {
+                    maint = name;
+                    link = " <a class=\"link\" id=\"link_" + guid + "\">Link</a>";
                 }
 
-               // if(registration_id )
+                // if(registration_id )
                 //if (edit == "")
                 //{
                 //    edit = "<a href=\"javascript:void(0)\" class=\"registrationedit\" id=\"registeredit_" + registration_id + "\">";
                 //}
                 html_registration += "<tr>";
-                html_registration += "<td><a href=\"../maint.aspx?id=" + guid + "\" target=\"_blank\">" + name + "</a></td>";
+                html_registration += "<td>" + maint + "</td>";
                 html_registration += "<td>" + season + "</td>";
                 html_registration += "<td>" + CreatedDate + "</td>";
                 html_registration += "<td>" + Status + "</td>";
                 html_registration += "<td>" + StatusUpdatedDateTime + "</td>";
                 html_registration += "<td>" + StatusUpdatedperson + "</td>";
                 html_registration += "<td>" + StatusNote + "</td>";
-                html_registration += "<td class=\"noexport\"><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"registerview_" + registration_id + "_" + season + "\"> View" + update + "</td>";
+                html_registration += "<td class=\"noexport\"><a href=\"javascript:void(0)\" class=\"registrationview\" id=\"registerview_" + registration_id + "_" + season + "\"> View" + update + link + "</td>";
                 html_registration += "</tr>";
 
 

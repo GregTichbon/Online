@@ -15,7 +15,7 @@ namespace UBC.People
         public string returnto;
 
         public string hf_guid;
-        public string hf_person_id;
+        public string hf_person_id = "";
         public string tb_firstname;
         public string tb_lastname;
         public string tb_knownas;
@@ -126,15 +126,20 @@ namespace UBC.People
 
                 Generic.Functions gFunctions = new Generic.Functions();
 
+                Dictionary<string, string> category_options = new Dictionary<string, string>();
+                category_options["usevalues"] = "";
+                category_options["selecttype"] = "Value";
+                category_category = Functions.buildandpopulateselect(strConnString, "exec get_categories", "", category_options, "None");
+
                 Dictionary<string, string> relationships_options = new Dictionary<string, string>();
                 relationships_options["usevalues"] = "";
                 relationships_options["selecttype"] = "Value";
                 relationships_relationshiptypes = Functions.buildandpopulateselect(strConnString, "exec get_relationshiptypes", "", relationships_options, "None");
 
+                feecategory = Functions.buildselectarray(strConnString, "get_feecategories");
 
                 if (hf_guid != "new")
                 {
-                    feecategory = Functions.buildselectarray(strConnString, "get_feecategories");
 
                     SqlConnection con = new SqlConnection(strConnString);
                     con.Open();
@@ -882,15 +887,18 @@ namespace UBC.People
                     con.Close();
                     con.Dispose();
 
-                    Functions genericfunctions = new Functions();
-                    Dictionary<string, string> functionoptions = new Dictionary<string, string>();
-                    functionoptions.Clear();
-                    functionoptions.Add("storedprocedure", "");
-                    functionoptions.Add("storedprocedurename", "");
-                    functionoptions.Add("parameters", hf_person_id);
-                    functionoptions.Add("usevalues", "");
-                    //person_financial_events = genericfunctions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
-                    person_financial_events = Functions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
+                    if (hf_person_id != "")
+                    {
+                        Functions genericfunctions = new Functions();
+                        Dictionary<string, string> functionoptions = new Dictionary<string, string>();
+                        functionoptions.Clear();
+                        functionoptions.Add("storedprocedure", "");
+                        functionoptions.Add("storedprocedurename", "");
+                        functionoptions.Add("parameters", hf_person_id);
+                        functionoptions.Add("usevalues", "");
+                        //person_financial_events = genericfunctions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
+                        person_financial_events = Functions.buildandpopulateselect(strConnString, "get_person_financial_events", "", functionoptions, "None");
+                    }
                 }
 
 

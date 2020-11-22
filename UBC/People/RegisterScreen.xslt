@@ -5,7 +5,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:template match="/">
     <table class="submissionhead">
       <tr>
-        <td align="left"><img src="http://private.unionboatclub.co.nz/dependencies/images/Logo-Page-Head.png" width="350px" />
+        <td align="left"><img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head.png" width="350px" />
         </td>
         <td>
           <h2>Union Boat Club Rower Registration</h2>

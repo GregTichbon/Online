@@ -32,6 +32,28 @@
                 }
             });
 
+            $('.link').click(function () {
+                id = $(this).attr('id');
+                idparts = id.split("_");
+                $("#dialog-link").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        },
+                        "Save": function () {
+                            alert('to do');
+                            $(this).dialog("close");
+                        }
+                    },
+                    appendTo: "#form1"
+                });
+
+            });
+
             mywidth = $(window).width() * .95;
             if (mywidth > 800) {
                 mywidth = 800;
@@ -161,9 +183,13 @@
         <div id="div_download" title="Download" style="display: none;">
             <div id="div_downloadtext"></div>
         </div>
+        <div id="dialog-link" title="Edit" style="display: none" class="form-horizontal">
+            <h2>Linking still to be done, this will either 1) select an exisiting person and change the guid of this record or 2) allow the creation of a person and assign this guid</h2>
+        </div>
+
         <div id="dialog-edit" title="Edit" style="display: none" class="form-horizontal">
             <h2>Updating still to be done, default to todays date, make person use currently logged on user.</h2>
-           
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="dd_status">Status</label>
                 <div class="col-sm-8">
@@ -172,7 +198,7 @@
                     </select>
                 </div>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="tb_statusdate" class="control-label col-sm-4">
                     Date
                 </label>

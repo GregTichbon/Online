@@ -11,7 +11,7 @@ namespace UBC.Go.Doc1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("http://private.unionboatclub.co.nz/people/documents/Parent Information 2018.pdf");
+            Response.Redirect("http://ubc.org.nz/people/documents/Parent Information 2018.pdf");
 
         }
     }
