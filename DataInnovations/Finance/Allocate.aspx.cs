@@ -47,23 +47,23 @@ namespace DataInnovations.Finance
 
             while (dr.Read())
             {
-                string transaction_CTR = dr[0].ToString();
-                string DebitCredit = dr[1].ToString();
-                string type = dr[2].ToString();
-                string Reference = dr[3].ToString();
-                string Date = genericfunctions.formatdate(dr[4].ToString(), "dd-MMM-yyyy");
-                string Name = dr[5].ToString();
-                string Entity = dr[6].ToString();
+                string transaction_CTR = dr["ID"].ToString();
+                string DebitCredit = dr["DebitCredit"].ToString();
+                string type = dr["type"].ToString();
+                string Reference = dr["Reference"].ToString();
+                string Date = genericfunctions.formatdate(dr["Date"].ToString(), "dd-MMM-yyyy");
+                string Name = dr["Name"].ToString();
+                string Entity = dr["Entity"].ToString();
                 
-                string StatementDate = genericfunctions.formatdate(dr[7].ToString(),"dd-MMM-yyyy");
-                string StatementPage = dr[8].ToString();
-                string StatementLine = dr[9].ToString();
-                string amount = dr[10].ToString();
-                string EntityName = dr[11].ToString();
-                string TotalAllocated = dr[12].ToString();
+                string StatementDate = genericfunctions.formatdate(dr["StatementDate"].ToString(),"dd-MMM-yyyy");
+                string StatementPage = dr["StatementPage"].ToString();
+                string StatementLine = dr["StatementLine"].ToString();
+                string amount = dr["Amount"].ToString();
+                string EntityName = dr["entityName"].ToString();
+                string TotalAllocated = dr["TotalAllocated"].ToString();
 
                 string allocated = " unallocated";
-                if (Convert.ToDecimal(dr[10].ToString()) == Convert.ToDecimal(dr[12].ToString()))
+                if (Convert.ToDecimal(amount) == Convert.ToDecimal(TotalAllocated))
                 {
                     allocated = " allocated";
                 }

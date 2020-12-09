@@ -1063,6 +1063,12 @@
       <DependentUpon>Posts.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Finance\Reports\Crystal\Bank.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Finance\transactionitems.aspx.cs">
       <DependentUpon>transactionitems.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1910,6 +1916,10 @@
     <EmbeddedResource Include="Accounts\Statements.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Statements.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\Reports\Crystal\Bank.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Bank.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

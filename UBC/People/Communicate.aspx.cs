@@ -50,14 +50,14 @@ namespace UBC.People
             }
 
 
-            var url = "http://office.datainn.co.nz/sms/data.asmx/SMSPhoneStatus?options=|SendEmail|";
+            var url = "http://office.datainn.co.nz/sms/data.asmx/SMSPhoneStatus?options="; //|SendEmail|";
             var webrequest = (HttpWebRequest)System.Net.WebRequest.Create(url);
 
             using (var response = webrequest.GetResponse())
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 string result = reader.ReadToEnd();
-                if(result == "Error")
+                if(result.StartsWith("Error"))
                 {
                     SMSStatus = "<h1>Warning! Texting may not be available</h1>";
                 }

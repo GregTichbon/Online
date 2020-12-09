@@ -34,7 +34,7 @@
     <!--additional-methods.min.js-->
 
     <style>
-         .imagecontainer {
+        .imagecontainer {
             max-width: 800px;
             max-height: 800px;
             margin: 20px auto;
@@ -60,7 +60,6 @@
         .notcurrentcategory {
             background-color: grey;
         }
-
     </style>
 
     <script type="text/javascript">
@@ -143,15 +142,15 @@
                         $(this).attr('maint', 'changed');
                     }
                 });
-                
+
             })
 
             $('.submit').click(function () {
                 delim = String.fromCharCode(254);
 
 
-               /*----------------------------------------------TRANSACTIONS-----------------------------------------*/
-               $('#transactionstable > tbody > tr[maint="changed"]').each(function () {
+                /*----------------------------------------------TRANSACTIONS-----------------------------------------*/
+                $('#transactionstable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_date = $(this).find('td:eq(1)').text();
                     tr_system = $(this).find('td:eq(2)').text();
@@ -176,7 +175,7 @@
                     tr_startdate = $(this).find('td:eq(2)').text();
                     tr_enddate = $(this).find('td:eq(3)').text();
                     tr_note = $(this).find('td:eq(4)').text();
-                   
+
                     value = tr_category + delim + tr_startdate + delim + tr_enddate + delim + tr_note;
                     $('<input>').attr({
                         type: 'hidden',
@@ -195,7 +194,6 @@
                         }).appendTo('#form1');
                     }
                 });
-
                 /*----------------------------------------------PHONE-----------------------------------------*/
                 $('#phonetable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
@@ -219,10 +217,10 @@
                             type: 'hidden',
                             name: tr_id,
                             value: ""
-                        }).appendTo('#form1'); 
+                        }).appendTo('#form1');
                     }
                 });
-                 /*----------------------------------------------NOTE-----------------------------------------*/
+                /*----------------------------------------------NOTE-----------------------------------------*/
                 $('#notetable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_datetime = $(this).find('td:eq(1)').text();
@@ -245,12 +243,39 @@
                             type: 'hidden',
                             name: tr_id,
                             value: ""
-                        }).appendTo('#form1'); 
+                        }).appendTo('#form1');
                     }
                 });
+                /*----------------------------------------------COURSE-----------------------------------------*/
+                $('#coursetable > tbody > tr[maint="changed"]').each(function () {
+                    tr_id = $(this).attr('id');
+                    tr_course = $(this).find('td:eq(1)').text();
+                    tr_startdate = $(this).find('td:eq(2)').text();
+                    tr_enddate = $(this).find('td:eq(3)').text();
+                    tr_note = $(this).find('td:eq(4)').text();
+                    tr_followupdate = $(this).find('td:eq(5)').text();
+                    tr_followupactioneddate = $(this).find('td:eq(6)').text();
 
-               /*----------------------------------------------EMAIL-----------------------------------------*/
-               $('#emailtable > tbody > tr[maint="changed"]').each(function () {
+                    value = tr_course + delim + tr_startdate + delim + tr_enddate + delim + tr_note + delim + tr_followupdate + delim + tr_followupactioneddate;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: tr_id,
+                        value: value
+                    }).appendTo('#form1');
+                });
+                $('#coursetable > tbody > tr[maint="deleted"]').each(function () {
+                    //don't do if new
+                    tr_id = $(this).attr('id') + '_delete';
+                    if (tr_id.substring(0, 3) != 'new') {
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: tr_id,
+                            value: ""
+                        }).appendTo('#form1');
+                    }
+                });
+                /*----------------------------------------------EMAIL-----------------------------------------*/
+                $('#emailtable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_emailaddress = $(this).find('td:eq(1)').text();
                     tr_note = $(this).find('td:eq(2)').text();
@@ -274,14 +299,13 @@
                     }
 
                 });
-
                 /*----------------------------------------------RELATIONSHIP-----------------------------------------*/
                 $('#relationshiptable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
                     tr_relationshiptype_id = $(this).find('td:eq(1)').attr('relationshiptype_id');
                     tr_person_id = $(this).find('td:eq(2)').attr('relationshipperson_id');
                     tr_note = $(this).find('td:eq(3)').text();
-                   
+
                     value = tr_relationshiptype_id + delim + tr_person_id + delim + tr_note;
                     $('<input>').attr({
                         type: 'hidden',
@@ -301,7 +325,7 @@
                     }
                 });
             });  //.submit end
-            
+
 
 
 
@@ -322,11 +346,11 @@
                 }
             });
 
-             $('.registrationedit').click(function () {
+            $('.registrationedit').click(function () {
                 id = $(this).attr('id');
                 idparts = id.split("_");
                 alert('To do: Update Status information: ie: Have updated the main record from this registration - Person can be logged in user');
-            });           
+            });
 
             $('.standarddate').datetimepicker({
                 format: 'D MMM YYYY',
@@ -411,12 +435,12 @@
                     resizable: false,
                     height: 600,
                     width: mywidth,
-                    modal: true 
+                    modal: true
                     /*
                     ,open: function (type, data) {
                         $(this).appendTo($('form')); // reinsert the dialog to the form       
                     }*/
-                    ,appendTo: "#form2"  
+                    , appendTo: "#form2"
                 });
 
                 var myButtons = {
@@ -469,7 +493,7 @@
                 $("#dialog-transactions").dialog('option', 'buttons', myButtons);
             })
 
-             /* ========================================= CATEGORY ===========================================*/
+            /* ========================================= CATEGORY ===========================================*/
 
             $(document).on('click', '.categoryedit', function () {
                 mode = $(this).data('mode');
@@ -693,6 +717,79 @@
                 $("#dialog-notes").dialog('option', 'buttons', myButtons);
             })
 
+            /* ========================================= COURSE ===========================================*/
+            $(document).on('click', '.courseedit', function () {
+                //$('.coursesedit').click(function () {
+                mode = $(this).data('mode');
+                if (mode == "add") {
+                    $("#dialog-courses").find(':input').val('');
+                } else {
+                    tr = $(this).closest('tr');
+                    $('#dd_courses_course').val($(tr).find('td').eq(1).text());
+                    $('#tb_courses_startdate').val($(tr).find('td').eq(2).text());
+                    $('#tb_courses_enddate').val($(tr).find('td').eq(3).text());
+                    $('#tb_courses_note').val($(tr).find('td').eq(4).text());
+                    $('#tb_courses_followupdate').val($(tr).find('td').eq(5).text());
+                    $('#tb_courses_followactioneddate').val($(tr).find('td').eq(6).text());
+                }
+
+                mywidth = $(window).width() * .95;
+                if (mywidth > 800) {
+                    mywidth = 800;
+                }
+
+                $("#dialog-courses").dialog({
+                    resizable: false,
+                    height: 600,
+                    width: mywidth,
+                    modal: true
+                    , appendTo: "#form3"
+                });
+
+                var myButtons = {
+                    "Cancel": function () {
+                        $(this).dialog("close");
+                    },
+                    "Save": function () {
+                        if ($("#form3").valid()) {
+                            if (mode == "add") {
+                                tr = $('#div_course > table > tbody tr:first').clone();
+                                $(tr).removeAttr('style');
+                                $('#div_course > table > tbody').append(tr);
+                                $(tr).attr('id', 'course_new_' + get_newctr());
+                                $(tr).find('td:first').attr("class", "inserted");
+                            } else {
+                                $(tr).find('td:first').attr("class", "changed");
+
+                            }
+                            $(tr).attr('maint', 'changed');
+
+                            $(tr).find('td').eq(1).text($('#dd_courses_course').val());
+                            $(tr).find('td').eq(2).text($('#tb_courses_startdate').val());
+                            $(tr).find('td').eq(3).text($('#tb_courses_enddate').val());
+                            $(tr).find('td').eq(4).text($('#tb_courses_note').val());
+                            $(tr).find('td').eq(5).text($('#tb_courses_followupdate').val());
+                            $(tr).find('td').eq(6).text($('#tb_courses_followactioneddate').val());
+                            //alert("Database will be updated when record submited");
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+
+                if (mode != 'add') {
+                    myButtons["Delete"] = function () {
+                        if (window.confirm("Are you sure you want to delete this course?")) {
+                            $(tr).find('td:first').attr("class", "deleted");
+                            $(tr).attr('maint', 'deleted');
+                            //$(tr).remove
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+                $("#dialog-courses").dialog('option', 'buttons', myButtons);
+            })
+
+
             /* ========================================= RELATIONSHIPS ===========================================*/
             $(document).on('click', '.relationshipsedit', function () {
                 //$('.relationshipsedit').click(function () {
@@ -772,9 +869,9 @@
                 }
             })
 
-    
 
-/* ========================================= EMAIL ===========================================*/
+
+            /* ========================================= EMAIL ===========================================*/
             $(document).on('click', '.emailedit', function () {
                 //$('.emailedit').click(function () {
                 mode = $(this).data('mode');
@@ -804,26 +901,26 @@
                     },
                     "Save": function () {
                         //if ($("#dialog-email").valid()) {
-                            if (mode == "add") {
-                                tr = $('#div_email > table > tbody tr:first').clone();
-                                $(tr).removeAttr('style');
-                                //$('#div_email > table > tbody > tr:last').before(tr);
-                                $('#div_email > table > tbody').append(tr);
-                                $(tr).attr('id', 'email_new_' + get_newctr());
-                                $(tr).find('td:first').attr("class", "inserted");
-                            } else {
-                                $(tr).find('td:first').attr("class", "changed");
+                        if (mode == "add") {
+                            tr = $('#div_email > table > tbody tr:first').clone();
+                            $(tr).removeAttr('style');
+                            //$('#div_email > table > tbody > tr:last').before(tr);
+                            $('#div_email > table > tbody').append(tr);
+                            $(tr).attr('id', 'email_new_' + get_newctr());
+                            $(tr).find('td:first').attr("class", "inserted");
+                        } else {
+                            $(tr).find('td:first').attr("class", "changed");
 
-                            }
-                            $(tr).attr('maint', 'changed');
-                            $(tr).find('td').eq(1).text($('#tb_email_emailaddress').val());
-                            $(tr).find('td').eq(2).text($('#tb_email_note').val());
-                            $(tr).find('td').eq(3).html('<a class="send_email_system">Send</a>');
-                            //$(tr).find('td').eq(4).html('<a class="send_email_local" href="mailto:' + $('#tb_email_emailaddress').val() + '?subject=Union Boat Club&amp;body=Hi ' + 'Greg' + '">Send</a>');
-                            $(tr).find('td').eq(4).html('<a class="send_email_local">Send</a>');
+                        }
+                        $(tr).attr('maint', 'changed');
+                        $(tr).find('td').eq(1).text($('#tb_email_emailaddress').val());
+                        $(tr).find('td').eq(2).text($('#tb_email_note').val());
+                        $(tr).find('td').eq(3).html('<a class="send_email_system">Send</a>');
+                        //$(tr).find('td').eq(4).html('<a class="send_email_local" href="mailto:' + $('#tb_email_emailaddress').val() + '?subject=Union Boat Club&amp;body=Hi ' + 'Greg' + '">Send</a>');
+                        $(tr).find('td').eq(4).html('<a class="send_email_local">Send</a>');
 
-                            //alert("Database will be updated when record submited");
-                            $(this).dialog("close");
+                        //alert("Database will be updated when record submited");
+                        $(this).dialog("close");
                         //}
                     }
                 }
@@ -1008,7 +1105,7 @@
             $('[required]').addClass('required');
         });
 
-        function calculateage(e) {   
+        function calculateage(e) {
             if (moment().diff(e, 'seconds') < 0) {
                 e.date = moment(e).subtract(100, 'years');
                 $("#tb_birthdate").val(moment(e).format('D MMM YYYY'));
@@ -1046,7 +1143,7 @@
             $('#div_transactions > table > tbody > tr:last').find('td').eq(0).html('<b>' + parseFloat(transactionstotal).toFixed(2) + Cr + '</b>');
         }
 
-    
+
 
 
     </script>
@@ -1306,7 +1403,7 @@
                         <span id="span_notes_madeby" class="form-control"></span>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_notes_note">Note</label>
                     <div class="col-sm-8">
@@ -1320,7 +1417,7 @@
                     </label>
                     <div class="col-sm-8">
                         <div class="input-group standarddate">
-                            <input id="tb_notes_followup" name="tb_notes_followup" placeholder="eg: 23 Jun 1985" type="text" class="form-control"  />
+                            <input id="tb_notes_followup" name="tb_notes_followup" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -1336,6 +1433,84 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <!-- ================================= COURSE ===================================  -->
+            <div id="dialog-courses" title="Maintain courses" style="display: none" class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="dd_courses_course">Course (change to DD)</label>
+                    <div class="col-sm-8">
+                        <select id="dd_courses_course" name="dd_courses_course" class="form-control">
+                            <%= Generic.Functions.populateselect(yesno, "","") %>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="tb_courses_startdate" class="control-label col-sm-4">
+                        Start Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_courses_startdate" name="tb_courses_startdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" required="required" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tb_courses_enddate" class="control-label col-sm-4">
+                        End Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_courses_enddate" name="tb_courses_enddate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" required="required" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_courses_note">Note</label>
+                    <div class="col-sm-8">
+                        <textarea id="tb_courses_note" name="tb_courses_note" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tb_courses_followupdate" class="control-label col-sm-4">
+                        Followup Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_courses_followupdate" name="tb_courses_followupdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tb_courses_followactioneddate" class="control-label col-sm-4">
+                        Followup Actioned Date
+                    </label>
+                    <div class="col-sm-8">
+                        <div class="input-group standarddate">
+                            <input id="tb_courses_followactioneddate" name="tb_courses_followactioneddate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
             <!-- ================================= EMAIL ===================================  -->
             <div id="dialog-email" title="Maintain email" style="display: none" class="form-horizontal">
@@ -1356,22 +1531,21 @@
             </div>
             <!-- ================================= RELATIONSHIPS ===================================  -->
             <div id="dialog-relationships" title="Maintain relationship" style="display: none" class="form-horizontal">
-                
+
                 <div class="form-group">
                     <div class="col-sm-4">
-                        </div>
+                    </div>
                     <div id="div_relationships_person" class="col-sm-8">
-                        
                     </div>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label for="dd_relationships_relationship" class="control-label col-sm-4">
                         Is the
                     </label>
                     <div class="col-sm-8">
-                         <select id="dd_relationships_relationship" name="dd_relationships_relationship" class="form-control">
+                        <select id="dd_relationships_relationship" name="dd_relationships_relationship" class="form-control">
                             <%=  relationships_relationshiptypes  %>
                         </select>
                     </div>
@@ -1439,9 +1613,10 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="div_guid">GUID</label>
                         <div class="col-sm-8">
-                            <div id="div_guid"><%=hf_guid%><br /><a href="http://ubc.org.nz/go/register?id=<%=hf_guid%>">Registration link</a></div>
+                            <div id="div_guid"><%=hf_guid%><br />
+                                <a href="http://ubc.org.nz/go/register?id=<%=hf_guid%>">Registration link</a></div>
                         </div>
-                     
+
                     </div>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
@@ -1450,16 +1625,17 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="width:100px">What</th>
+                                <th style="width: 100px">What</th>
                                 <th>Details</th>
-                                <th style="width:100px">On loan</th>
+                                <th style="width: 100px">On loan</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Key</td>
                                 <td>
-                                    <textarea id="tb_key" name="tb_key" class="form-control"><%: tb_key %></textarea><br /><a href="KeyRegister.aspx" target="_blank">Key Register</a>
+                                    <textarea id="tb_key" name="tb_key" class="form-control"><%: tb_key %></textarea><br />
+                                    <a href="KeyRegister.aspx" target="_blank">Key Register</a>
                                 </td>
                                 <td>
                                     <select id="dd_keyactive" name="dd_keyactive" class="form-control">
@@ -1470,7 +1646,8 @@
                             <tr>
                                 <td>Uniform</td>
                                 <td>
-                                    <textarea id="tb_uniform" name="tb_uniform" class="form-control"><%: tb_uniform %></textarea><br /><a href="UniformRegister.aspx" target="_blank">Uniform Register</a>
+                                    <textarea id="tb_uniform" name="tb_uniform" class="form-control"><%: tb_uniform %></textarea><br />
+                                    <a href="UniformRegister.aspx" target="_blank">Uniform Register</a>
                                 </td>
                                 <td>
                                     <select id="dd_uniformactive" name="dd_uniformactive" class="form-control">
@@ -1528,9 +1705,9 @@
                         <label class="control-label col-sm-4" for="dd_feecategory">Fee category</label>
                         <div class="col-sm-3">
                             <select id="dd_feecategory" name="dd_feecategory" class="form-control">
-                           <%     
-                                Response.Write(Generic.Functions.buildselection(feecategory, dd_feecategory,nooptions));
-                                //Generic.Functions.populateselect(feecategory, dd_feecategory,"") %>
+                                <%     
+                                    Response.Write(Generic.Functions.buildselection(feecategory, dd_feecategory, nooptions));
+                                    //Generic.Functions.populateselect(feecategory, dd_feecategory,"") %>
                             </select>
                         </div>
                         <label class="control-label col-sm-2" for="dd_rowingrole">Rowing Role</label>
@@ -1542,23 +1719,26 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_familymember">
-                            <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="If there are more than 1 family member registered with UBC record a number otherwise leave blank" /> Family member</label>
+                            <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="If there are more than 1 family member registered with UBC record a number otherwise leave blank" />
+                            Family member</label>
                         <div class="col-sm-8">
                             <select id="dd_familymember" name="dd_familymember" class="form-control">
                                 <%= Generic.Functions.populateselect(familymember, dd_familymember,"") %>
                             </select>
                         </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label class="control-label col-sm-4" for="dd_lastseasonregistered">Last Season Registered</label>
                         <div class="col-sm-8">
                             <select id="dd_lastseasonregistered" name="dd_lastseasonregistered" class="form-control">
                                 <%= Generic.Functions.populateselect(seasons, dd_lastseasonregistered,"") %>
                             </select>
                         </div>
-                     </div>
+                    </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="tb_boatstorage"><img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Record a description of the boat or leave blank" /> Boat Storage</label>
+                        <label class="control-label col-sm-4" for="tb_boatstorage">
+                            <img src="../Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="Record a description of the boat or leave blank" />
+                            Boat Storage</label>
                         <div class="col-sm-4">
                             <input id="tb_boatstorage" name="tb_boatstorage" type="text" class="form-control" value="<%:tb_boatstorage%>" maxlength="100" />
                         </div>
@@ -1600,15 +1780,15 @@
                             <input id="tb_rowit_id" name="tb_rowit_id" type="text" class="form-control numeric" value="<%:tb_rowit_id%>" maxlength="10" />
                         </div>
                     </div>
-                     
+
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_rowingnzid">Rowing NZ ID</label>
                         <div class="col-sm-3">
                             <input id="tb_rowingnzid" name="tb_rowingnzid" type="text" class="form-control numeric" value="<%:tb_rowingnzid%>" maxlength="10" />
                         </div>
-                         
-                            <label class="control-label col-sm-1" for="tb_rowingnzid">Season</label>
-                       
+
+                        <label class="control-label col-sm-1" for="tb_rowingnzid">Season</label>
+
                         <div class="col-sm-4">
                             <select id="dd_rowingnzseason" name="dd_rowingnzseason" class="form-control">
                                 <%= Generic.Functions.populateselect(seasons, dd_rowingnzseason,"") %>
@@ -1616,7 +1796,7 @@
                         </div>
                     </div>
 
-                    
+
 
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="tb_notes">Notes</label>
@@ -1625,7 +1805,7 @@
                         </div>
                     </div>
                 </div>
-                    
+
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_attendance" class="tab-pane fade in">
                     <h3>Attendance</h3>
@@ -1689,8 +1869,8 @@
                 <!------------------------------------------------------------------------------------------------------>
                 <div id="div_phone" class="tab-pane fade in">
                     <h3>Phone</h3>
-                  <table id="phonetable" class="table">
-                      <%= html_phone %>
+                    <table id="phonetable" class="table">
+                        <%= html_phone %>
                     </table>
                 </div>
                 <!------------------------------------------------------------------------------------------------------>
@@ -1770,6 +1950,16 @@
                 <p></p>
                 <p></p>
                 <!------------------------------------------------------------------------------------------------------>
+                <div id="div_course" class="tab-pane fade in">
+                    <h3>Courses</h3>
+                    <table id="coursetable" class="table" style="width: 100%">
+                        <%= html_course %>
+                    </table>
+                </div>
+
+                <p></p>
+                <p></p>
+                <!------------------------------------------------------------------------------------------------------>
                 <div id="div_tracker" class="tab-pane fade in">
                     <h3>Tracker</h3>
                     <table class="table" style="width: 100%">
@@ -1797,7 +1987,7 @@
 
             </div>
             <!-- tabs -->
-     
+
         </form>
         <form id="form2"></form>
         <form id="form3"></form>

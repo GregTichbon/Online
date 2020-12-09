@@ -64,7 +64,12 @@
                     birthdate: {
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
                     }
-                }/*,
+                },
+                submitHandler: function (form) {
+                    $(".processing").show();
+                    form.submit();
+                }
+             /*,
                 errorPlacement: function (error, element) {
                     var placement = $(element).data('errorplacement');
                     if (placement) {
@@ -279,11 +284,11 @@
                 alert(1);
                 $('.processing').show();
             });
-            */
+            
             $("form").submit(function (event) {
                 $('.processing').show();
             });
-
+            */
 
             //$('[required]').css('border', '1px solid red');
             //$('[required]').addClass('required');

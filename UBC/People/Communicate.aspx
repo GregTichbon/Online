@@ -20,7 +20,10 @@
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+    <!--<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>-->
+    <script src="https://cdn.tiny.cloud/1/72kumvg7ceuy157moyvp1m3056ca3ubthxyi6szh4jvuzapk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
     <script>
         var newobj;
 
@@ -45,6 +48,29 @@
                 window.open(link, 'facebook');
                 //alert("Copied to clipboard");
             });
+
+            $('#test').click(function () {
+
+                mobile = prompt("Please enter the mobile number");
+                if (mobile != "") {
+
+                    var arForm = [{ "name": "mobile", "value": mobile }];
+                    var mydata = JSON.stringify({ formVars: arForm });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "posts.asmx/test_text",
+                        data: mydata,
+                        contentType: "application/json",
+                        datatype: "json",
+                        async: false,
+                        success: function (responseFromServer) {
+                            alert(responseFromServer.d.status);
+                        }
+                    });
+                }
+
+            })
 
             $('#dd_categories_filter').val('21');
              processrows();
@@ -125,7 +151,7 @@
                         position: { my: "center", at: "100", of: window }
                     });
                     newobj = $("#tbl_people > tbody > tr > td > div > input:checked").toArray()
-                    console.log(newobj);
+                    //console.log(newobj);
                     send(0, $(newobj).length);
                 }
 
@@ -384,6 +410,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="background-color: #FCF7EA; width: 100%">
         <div class="toprighticon">
+            <input type="button" class="btn btn-info" id="test" value="Test SMS" />
             <input type="button" class="btn_submit btn btn-info" value="Send" />
             <input type="button" class="btn btn-info" id="menu" value="MENU" />
         </div>

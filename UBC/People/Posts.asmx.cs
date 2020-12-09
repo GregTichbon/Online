@@ -10,6 +10,7 @@ using System.Xml;
 using OfficeOpenXml;
 using System.IO;
 using Generic;
+using System.Net;
 
 namespace UBC.People
 {
@@ -66,7 +67,6 @@ namespace UBC.People
 
             return ("Ok");
         }
-
 
         [WebMethod]
         public string create_recurring_events(string event_id, string period, string frequency, string upto)
@@ -129,6 +129,22 @@ namespace UBC.People
             Generic.Functions gFunctions = new Generic.Functions();
             string response = gFunctions.SendRemoteMessage(PhoneNumber, Message, "UBC Communications");
             return response;
+        }
+
+        [WebMethod]
+        public standardResponseID test_text(NameValue[] formVars)    //you can't pass any querystring params
+        {
+            string response = "";
+            Generic.Functions gFunctions = new Generic.Functions();
+            response = gFunctions.SendRemoteMessage(formVars.Form("mobile"), "Test text", "UBC Communications");
+
+            standardResponseID resultclass = new standardResponseID();
+            resultclass.status = response;
+            resultclass.message = "";
+            resultclass.id = "0";
+
+            return (resultclass);
+
         }
 
         [WebMethod]

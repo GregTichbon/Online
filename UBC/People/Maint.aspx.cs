@@ -95,6 +95,7 @@ namespace UBC.People
         public string html_attendance = "";
         public string html_phone = "";
         public string html_note = "";
+        public string html_course = "";
         public string html_category = "";
         public string html_results = "";
         public string html_arrangements = "";
@@ -262,6 +263,7 @@ namespace UBC.People
                     }
                     html_tabs += "<li><a data-target=\"#div_note\">Notes</a></li>";
                     html_tabs += "<li><a data-target=\"#div_onloan\">On Loan</a></li>";
+                    html_tabs += "<li><a data-target=\"#div_course\">Courses</a></li>";
 
 
 
@@ -635,6 +637,70 @@ namespace UBC.People
                         throw ex;
                     }
                     //}
+                    //-------------------------------------------------------------------------------------
+                    //COURSES
+                    //if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                    //{
+                    html_course = "<thead>";
+
+                    html_course += "<tr><th style=\"width:50px;text-align:center\"></th><th>Course</th><th>Start Date</th><th>End Date</th><th>Note</th><th>Followup</th><th>Followup Actioned</th><th style=\"width:100px\">Action / <a class=\"courseedit\" data-mode=\"add\" href=\"javascript: void(0)\">Add</a></th></tr>";
+                    html_course += "</thead>";
+                    html_course += "<tbody>";
+
+                    //hidden row, used for creating new rows client side
+                    html_course += "<tr style=\"display:none\">";
+                    html_course += "<td style=\"text-align:center\"></td>";
+                    html_course += "<td></td>";
+                    html_course += "<td></td>";
+                    html_course += "<td></td>";
+                    html_course += "<td></td>";
+                    html_course += "<td></td>";
+                    html_course += "<td></td>";
+                    html_course += "<td><a href=\"javascript:void(0)\" class=\"courseedit\" data-mode=\"edit\">Edit</td>";
+                    html_course += "</tr>";
+                    cmd.CommandText = "get_person_courses";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
+
+                    
+                    try
+                    {
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            string person_course_id = dr["Person_course_ID"].ToString();
+                            string CourseID = dr["Course_ID"].ToString();
+                            string Course = dr["Course"].ToString();
+                            string StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("dd MMM yyyy");
+                            string EndDate = Convert.ToDateTime(dr["EndDate"]).ToString("dd MMM yyyy");
+                            string note = dr["note"].ToString();
+                            string followupDate = dr["followupDate"].ToString();
+                            string followupActionedDate = dr["followupActionedDate"].ToString();
+                            
+                            html_course += "<tr id=\"course_" + person_course_id + "\">";
+                            html_course += "<td style=\"text-align:center\"></td>";
+                            html_course += "<td>" + Course + "</td>";
+                            html_course += "<td>" + StartDate + "</td>";
+                            html_course += "<td>" + EndDate + "</td>";
+                            html_course += "<td>" + note + "</td>";
+                            html_course += "<td>" + followupDate + "</td>";
+                            html_course += "<td>" + followupActionedDate + "</td>";
+                            html_course += "<td><a href=\"javascript:void(0)\" class=\"courseedit\" data-mode=\"edit\">Edit</td>";
+                            html_course += "</tr>";
+
+                        }
+                        dr.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                  
+                    //}
+
+
+
+
                     //------------------------------------PHONE-------------------------------------------------
                     html_phone = "<thead>";
 
@@ -1227,6 +1293,41 @@ namespace UBC.People
                     con.Close();
                 }
 
+                if (key.StartsWith("course_"))
+                {
+                    string person_course_id = key.Substring(7);
+                    if (person_course_id.EndsWith("_delete"))
+                    {
+                        cmd.CommandText = "Delete_Person_course";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@person_course_id", SqlDbType.VarChar).Value = person_course_id.Substring(0, person_course_id.Length - 7);
+                    }
+                    else
+                    {
+                        if (person_course_id.StartsWith("new"))
+                        {
+                            person_course_id = "new";
+                        }
+
+                        string[] valuesSplit = Request.Form[key].Split('\x00FE');
+                        cmd.CommandText = "Update_Person_course";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@person_course_id", SqlDbType.VarChar).Value = person_course_id;
+                        cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
+                        cmd.Parameters.Add("@course", SqlDbType.VarChar).Value = valuesSplit[0];
+                        cmd.Parameters.Add("@startdate", SqlDbType.VarChar).Value = valuesSplit[1];
+                        cmd.Parameters.Add("@enddate", SqlDbType.VarChar).Value = valuesSplit[2];
+                        cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[3];
+                        cmd.Parameters.Add("@followupdate", SqlDbType.VarChar).Value = valuesSplit[4];
+                        cmd.Parameters.Add("@followupactioneddate", SqlDbType.VarChar).Value = valuesSplit[5];
+
+                    }
+                    /*
+                    con.Open();
+                    result = cmd.ExecuteScalar().ToString();
+                    con.Close();
+                    */
+                }
 
             }
             //finally

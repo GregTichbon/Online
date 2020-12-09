@@ -47,7 +47,7 @@ namespace DataInnovations.Finance
 
                     if (dr.HasRows)
                     {
-                        html = "<table class=\"table\"><thead><tr><th>Date</th><th>Type</th><th>Details</th><th>Particulars</th><th>Code</th><th>Reference</th><th style=\"text-align: right\">Amount</th><th style=\"text-align: right\">Allocated</th><th>Count</th></tr></thead><tbody>";
+                        html = "<table class=\"table\"><thead><tr><th>Date</th><th>Type</th><th>Details</th><th>Particulars</th><th>Code</th><th>Reference</th><th style=\"text-align: right\">Amount</th><th style=\"text-align: right\">Allocated</th><th>Transactions</th></tr></thead><tbody>";
 
                         dr.Read();
                         Type = dr[1].ToString();
@@ -71,7 +71,7 @@ namespace DataInnovations.Finance
                         html += "<td>" + Reference + "</td>";
                         html += "<td style=\"text-align:right\">" + Convert.ToDecimal(Amount).ToString("0.00") + "</td>";
                         html += "<td style=\"text-align:right\">" + Convert.ToDecimal(TotalAllocated).ToString("0.00") + "</td>";
-                        html += "<td>" + transactions + "/" + items + "</td>";
+                        html += "<td>" + transactions + "</td>";
                         html += "</tr>";
 
                         html += "</tbody></table>";
@@ -79,7 +79,7 @@ namespace DataInnovations.Finance
                     dr.Close();
                 }
 
-                html += "<table class=\"table\"><thead><tr><th>Reference</th><th>Type</th><th>Name</th><th style=\"text-align: right\">Amount</th><th style=\"text-align: right\">Allocated</th><th>Count</th><th>Add</th></tr></thead><tbody>";
+                html += "<table class=\"table\"><thead><tr><th>Reference</th><th>Type</th><th>Name</th><th style=\"text-align: right\">Amount</th><th style=\"text-align: right\">Allocated</th><th>Items</th><th>Add</th></tr></thead><tbody>";
 
 
                 using (SqlCommand cmd = new SqlCommand("Get_Finance_Transactions", con))

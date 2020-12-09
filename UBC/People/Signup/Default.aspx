@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UBC.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="UBC.People.Signup.Default" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Style Sheets -->
     <link href="<%: ResolveUrl("~/Dependencies/bootstrap.min.css")%>" rel="stylesheet" />
@@ -118,7 +119,7 @@
 
 
             $("#form1").validate({
-                /*rules: {
+                rules: {
                     tb_birthdate: {
                         pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
                     }
@@ -127,10 +128,10 @@
                     tb_birthdate: {
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
                     }
-                }*/
+                }
             });
 
-            /*
+
             $('#div_birthdate').datetimepicker({
                 format: 'D MMM YYYY',
                 extraFormats: ['D MMM YY', 'D MMM YYYY', 'DD/MM/YY', 'DD/MM/YYYY', 'DD.MM.YY', 'DD.MM.YYYY', 'DD MM YY', 'DD MM YYYY'],
@@ -149,7 +150,7 @@
 
             var e = moment($("#div_birthdate").find("input").val());
             calculateage(e);
-            */
+
             $(".numeric").keydown(function (event) {
                 if (event.shiftKey == true) {
                     event.preventDefault();
@@ -169,18 +170,18 @@
 
             });
 
-            /*
+             
             $('#dd_school').change(function () {
                 school = $(this).val();
                 //alert('*' + school + '*');
-                if (school != "") {
+                if (school != "None" && school != "") {
                     $("#div_schoolyear").show();
                 } else {
                     $("#div_schoolyear").hide();
                     $("#dd_schoolyear").prop('selectedIndex', 0);
                 }
             });
-            */
+           
 
             /*
             $('#tb_birthdate').change(function () {
@@ -193,7 +194,7 @@
             //$('[required]').addClass('required');
         });
 
-        /*
+
         function calculateage(e) {
             if (moment(e).isValid()) {
                 if (moment().diff(e, 'seconds') < 0) {
@@ -205,23 +206,20 @@
                 var jan1 = moment([thisyear, 0, 1]);
                 $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
 
-                //if (years < 18) {
-                //    $('#div_parent').show();
-                //} else {
-                //    $('#div_parent').hide();
-                //    $('#tb_parentcaregiver1').val('');
-                //    $('#tb_parentcaregiver1mobilephone').val('');
-                //    $('#tb_parentcaregiver1emailaddress').val('');
-                //    $('#tb_parentcaregiver2').val('');
-                //    $('#tb_parentcaregiver2mobilephone').val('');
-                //    $('#tb_parentcaregiver2emailaddress').val('');
-
-                //}
-
-
+                if (years < 18) {
+                    $('#div_parent').show();
+                } else {
+                    $('#div_parent').hide();
+                    $('#tb_parentcaregiver1').val('');
+                    $('#tb_parentcaregiver1mobilephone').val('');
+                    $('#tb_parentcaregiver1emailaddress').val('');
+                    $('#tb_parentcaregiver2').val('');
+                    $('#tb_parentcaregiver2mobilephone').val('');
+                    $('#tb_parentcaregiver2emailaddress').val('');
+                }
             }
         }
-        */
+
 
     </script>
     <style type="text/css">
@@ -229,7 +227,8 @@
             text-align: center;
             font-size: xx-large;
         }
-            .imagecontainer {
+
+        .imagecontainer {
             max-width: 800px;
             max-height: 800px;
             margin: 20px auto;
@@ -263,8 +262,7 @@
                 <td style="width: 350px">
                     <img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
                 <td style="text-align: center">
-                    <h1>Schools Learn to Row<br />
-                        Friday 23 - Sunday 25 August 2019
+                    <h1>I'm interested in rowing!
                     </h1>
                 </td>
             </tr>
@@ -272,12 +270,11 @@
         <p></p>
         <hr />
         <p></p>
-        <p class="style1">Read the <a href="SchoolLearntoRowAug2019.pdf" target="_blank">brochure</a></p>
+ 
 
         <div class="panel panel-danger">
             <div class="panel-heading">Student</div>
             <div class="panel-body">
-
                 <!------------------------------------------------------>
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_firstname">First name</label>
@@ -285,15 +282,12 @@
                         <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_lastname">Last name</label>
                     <div class="col-sm-8">
                         <input id="tb_lastname" name="tb_lastname" type="text" class="form-control" value="<%:tb_lastname%>" maxlength="30" required />
                     </div>
                 </div>
-
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_gender">Gender</label>
                     <div class="col-sm-8">
@@ -303,8 +297,6 @@
                         </select>
                     </div>
                 </div>
-
-                <!--
                 <div class="form-group">
                     <label for="tb_birthdate" class="control-label col-sm-4">
                         Date of birth
@@ -312,17 +304,13 @@
                     <div class="col-sm-8">
                         <div class="input-group date" id="div_birthdate">
                             <input id="tb_birthdate" name="tb_birthdate" placeholder="eg: 23 Jun 1985" type="text" class="form-control" value="<%: tb_birthdate %>" required />
-
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
-
                             <span id="span_age" class="input-group-addon"></span>
                         </div>
                     </div>
                 </div>
-                -->
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_school">School</label>
                     <div class="col-sm-8">
@@ -339,39 +327,30 @@
                         </select>
                     </div>
                 </div>
-
-
-
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_emailaddress">Email address</label>
                     <div class="col-sm-8">
                         <input id="tb_emailaddress" name="tb_emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_emailaddress%>" />
                     </div>
                 </div>
-                <!--
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_homephone">Home phone</label>
                     <div class="col-sm-8">
                         <input id="tb_homephone" name="tb_homephone" type="text" class="form-control numeric" value="<%:tb_homephone%>" maxlength="20" />
                     </div>
                 </div>
-                -->
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_mobilephone">Mobile phone</label>
                     <div class="col-sm-8">
                         <input id="tb_mobilephone" name="tb_mobilephone" type="text" class="form-control numeric" value="<%:tb_mobilephone%>" maxlength="20" required />
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_notes">Anything else you want to let us know?</label>
                     <div class="col-sm-8">
                         <textarea id="tb_notes" name="tb_notes" class="form-control"><%:tb_notes%></textarea>
                     </div>
                 </div>
-                <!--
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="dd_school">Swimming ability</label>
                     <div class="col-sm-8">
@@ -380,13 +359,9 @@
                         </select>
                     </div>
                 </div>
-                -->
                 <!------------------------------------------------------>
-
             </div>
         </div>
-
-
         <div class="panel panel-danger" id="div_parent">
             <div class="panel-heading">Parent/Caregivers</div>
             <div class="panel-body">
@@ -409,7 +384,6 @@
                         <input id="tb_parentcaregiver1mobilephone" name="tb_parentcaregiver1mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver1mobilephone%>" required maxlength="20" />
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_parentcaregiver1emailaddress">Email address</label>
                     <div class="col-sm-8">
@@ -417,15 +391,12 @@
                     </div>
                 </div>
                 -->
-                <!--
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_parentcaregiver">Name (2)</label>
                     <div class="col-sm-8">
                         <input id="tb_parentcaregiver2" name="tb_parentcaregiver2" type="text" class="form-control" value="<%:tb_parentcaregiver2%>" maxlength="100" />
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_parentcaregiver2mobilephone">Mobile phone (2)</label>
                     <div class="col-sm-8">
@@ -439,37 +410,26 @@
                     </div>
                 </div>
             </div>
-     -->
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4">
             </div>
-
-
-
-
-            <div class="form-group">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-8">
-                    <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
-                </div>
-            </div>
-
-            <img id="img_photo" alt="" src="../Images/Signup/<%: hf_signup_ctr %>.jpg" style="width: 200px" /><br />
-            <a id="getphoto">Upload Photo</a>
-
-
-            <div id="dialog-getphoto" title="Upload Photo" style="display: none">
-                <div class="imagecontainer">
-                    <input type="file" id="fileInput" accept="image/*" />
-                    <canvas id="canvas" style="display: none">Your browser does not support the HTML5 canvas element.
-                    </canvas>
-                    <br />
-                    <input type="button" id="btn_Crop" class="btn btn-info" value="Crop" style="display: none" />
-                    <div id="preview"></div>
-                    <div id="result"></div>
-                </div>
-
+            <div class="col-sm-8">
+                <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
             </div>
         </div>
-
+        <img id="img_photo" alt="" src="../Images/Signup/<%: hf_signup_ctr %>.jpg" style="width: 200px" /><br />
+        <a id="getphoto">Upload Photo</a>
+        <div id="dialog-getphoto" title="Upload Photo" style="display: none">
+            <div class="imagecontainer">
+                <input type="file" id="fileInput" accept="image/*" />
+                <canvas id="canvas" style="display: none">Your browser does not support the HTML5 canvas element.
+                </canvas>
+                <br />
+                <input type="button" id="btn_Crop" class="btn btn-info" value="Crop" style="display: none" />
+                <div id="preview"></div>
+                <div id="result"></div>
+            </div>
+        </div>
     </div>
 </asp:Content>

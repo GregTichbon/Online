@@ -48,7 +48,7 @@ namespace UBC.People.Signup
         //public string dd_correspondence;
 
 
-        public string[] school = new string[3] { "City College", "Cullinane", "Girls College" };
+        public string[] school = new string[5] { "None", "City College", "Cullinane", "Girls College", "Other" };
         public string[] gender = new string[2] { "Female", "Male" };
         public string[] yesno = new string[2] { "Yes", "No" };
         public string[] schoolyear = new string[5] { "9", "10", "11", "12", "13" };

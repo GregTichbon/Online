@@ -631,6 +631,7 @@
     <Content Include="People\Reports\FriendsStatementsPreview.aspx" />
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
+    <Content Include="People\Reports\PersonAccess.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
     <Content Include="People\Reports\Registrations.aspx" />
     <Content Include="People\Reports\Relationship Audit.aspx" />
@@ -1405,6 +1406,13 @@
     </Compile>
     <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
       <DependentUpon>LoginRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\PersonAccess.aspx.cs">
+      <DependentUpon>PersonAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\PersonAccess.aspx.designer.cs">
+      <DependentUpon>PersonAccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\RaceFees.cs">
       <AutoGen>True</AutoGen>

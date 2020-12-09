@@ -32,7 +32,8 @@
         }
     </style>
 
-       <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+    <!--<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>-->
+    <script src="https://cdn.tiny.cloud/1/72kumvg7ceuy157moyvp1m3056ca3ubthxyi6szh4jvuzapk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: '.tinymce',

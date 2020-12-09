@@ -43,7 +43,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Date/CR</th>
+                        <th>Date</th>
                         <th>Type</th>
                         <th>Details</th>
                         <th>Particulars</th>
@@ -51,7 +51,7 @@
                         <th>Reference</th>
                         <th style="text-align: right">Amount</th>
                         <th style="text-align: right">Allocated</th>
-                        <th>Count</th>
+                        <th>Transactions<br />Items</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -20,7 +20,8 @@
 
     <script src="<%: ResolveUrl("~/Dependencies/bootstrap.min.js")%>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+    <!--<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>-->
+    <script src="https://cdn.tiny.cloud/1/72kumvg7ceuy157moyvp1m3056ca3ubthxyi6szh4jvuzapk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <style>
         .scrollable {

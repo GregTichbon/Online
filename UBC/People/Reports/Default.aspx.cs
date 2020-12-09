@@ -28,8 +28,9 @@ namespace UBC.People.Reports
                 html += "<br /><a id=\"link1\" href=\"loginregister.aspx\">Login register</a>";
                 script += "$('#link1').prop('title', 'A register of all login attempts whether successful or failure');";
                 html += "<br /><a href=\"tracker.aspx\">Tracker</a>";
-                html += "<br /><a href=\"FriendsStatementsPreview.aspx\">Friends Statemens Preiew</a>";
+                html += "<br /><a href=\"FriendsStatementsPreview.aspx\">Friends Statements Preiew</a>";
                 html += "<br /><a href=\"RelationshipAudit.aspx\">Relationship Audit</a>";
+                html += "<br /><a href=\"PersonAccess.aspx\">Person Access</a>";
 
             }
 

@@ -16,6 +16,7 @@ namespace DataInnovations.Finance
 
 
         public string html = "";
+        public string reference = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
