@@ -82,6 +82,7 @@ namespace UBC.People
         public string[] seasons = new string[4] { "2017/18", "2018/19", "2019/20", "2020/21" };
         public string category_category;
         public string relationships_relationshiptypes;
+        public string courses_courses;
 
         public string person_financial_events;
 
@@ -136,6 +137,11 @@ namespace UBC.People
                 relationships_options["usevalues"] = "";
                 relationships_options["selecttype"] = "Value";
                 relationships_relationshiptypes = Functions.buildandpopulateselect(strConnString, "exec get_relationshiptypes", "", relationships_options, "None");
+
+                Dictionary<string, string> courses_options = new Dictionary<string, string>();
+                courses_options["usevalues"] = "";
+                courses_options["selecttype"] = "Value";
+                courses_courses = Functions.buildandpopulateselect(strConnString, "exec get_courses", "", courses_options, "None");
 
                 feecategory = Functions.buildselectarray(strConnString, "get_feecategories");
 
@@ -674,12 +680,12 @@ namespace UBC.People
                             string StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("dd MMM yyyy");
                             string EndDate = Convert.ToDateTime(dr["EndDate"]).ToString("dd MMM yyyy");
                             string note = dr["note"].ToString();
-                            string followupDate = dr["followupDate"].ToString();
-                            string followupActionedDate = dr["followupActionedDate"].ToString();
+                            string followupDate = gFunctions.formatdate(dr["followupDate"].ToString(),"dd MMM yyyy");
+                            string followupActionedDate = gFunctions.formatdate(dr["followupActionedDate"].ToString(), "dd MMM yyyy");
                             
                             html_course += "<tr id=\"course_" + person_course_id + "\">";
                             html_course += "<td style=\"text-align:center\"></td>";
-                            html_course += "<td>" + Course + "</td>";
+                            html_course += "<td course_id=\"" + CourseID + "\">" + Course + "</td>";
                             html_course += "<td>" + StartDate + "</td>";
                             html_course += "<td>" + EndDate + "</td>";
                             html_course += "<td>" + note + "</td>";
@@ -1314,7 +1320,7 @@ namespace UBC.People
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add("@person_course_id", SqlDbType.VarChar).Value = person_course_id;
                         cmd.Parameters.Add("@person_guid", SqlDbType.VarChar).Value = hf_guid;
-                        cmd.Parameters.Add("@course", SqlDbType.VarChar).Value = valuesSplit[0];
+                        cmd.Parameters.Add("@course_id", SqlDbType.VarChar).Value = valuesSplit[0];
                         cmd.Parameters.Add("@startdate", SqlDbType.VarChar).Value = valuesSplit[1];
                         cmd.Parameters.Add("@enddate", SqlDbType.VarChar).Value = valuesSplit[2];
                         cmd.Parameters.Add("@note", SqlDbType.VarChar).Value = valuesSplit[3];
@@ -1322,11 +1328,11 @@ namespace UBC.People
                         cmd.Parameters.Add("@followupactioneddate", SqlDbType.VarChar).Value = valuesSplit[5];
 
                     }
-                    /*
+                    
                     con.Open();
                     result = cmd.ExecuteScalar().ToString();
                     con.Close();
-                    */
+                    
                 }
 
             }

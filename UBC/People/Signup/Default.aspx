@@ -25,6 +25,8 @@
 
 
     <script type="text/javascript">
+        var age = -1;
+
         $(document).ready(function () {
             $(document).uitooltip({
                 position: {
@@ -113,20 +115,59 @@
                 }
             });
 
-            if ($('#dd_school').val() != "") {
+            if ($('#dd_school').val() != "" && $('#dd_school').val() != "None") {
                 $("#div_schoolyear").show();
-            }
-
+            } 
 
             $("#form1").validate({
+                groups: {
+                    contact_details: "tb_mobilephone tb_homephone tb_emailaddress",
+                    parent1_contactdetails: "tb_parentcaregiver1mobilephone tb_parentcaregiver1homephone tb_parentcaregiver1emailaddress"
+                },
                 rules: {
                     tb_birthdate: {
                         pattern: /(([0-9])|([0-2][0-9])|([3][0-1])) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}/
+                    },
+                    tb_mobilephone: {
+                        require_from_group: [1, ".contact-group"]
+                    },
+                    tb_homephone: {
+                        require_from_group: [1, ".contact-group"]
+                    },
+                    tb_emailaddress: {
+                        require_from_group: [1, ".contact-group"]
+                    },
+                    tb_parentcaregiver1mobilephone: {
+                        require_from_group: [1, ".parent1_contact-group"]
+                    },
+                    tb_parentcaregiver1homephone: {
+                        require_from_group: [1, ".parent1_contact-group"]
+                    },
+                    tb_parentcaregiver1emailaddress: {
+                        require_from_group: [1, ".parent1_contact-group"]
                     }
                 },
                 messages: {
                     tb_birthdate: {
                         pattern: "Must be in the format of day month year, eg: 23 Jun 1985"
+                    },
+                    tb_mobilephone: {
+                        require_from_group: 'Please provide at least 1 phone number or an email address'
+                    },
+                    tb_homephone: {
+                        require_from_group: 'Please provide at least 1 phone number or an email address'
+                    },
+                    tb_emailaddress: {
+                        require_from_group: 'Please provide at least 1 phone number or an email address'
+                    },
+                    tb_parentcaregiver1mobilephone: {
+                        require_from_group: 'Please provide at least 1 phone number or an email address'
+                    },
+                    tb_parentcaregiver1homephone: {
+                        require_from_group: 'Please provide at least 1 phone number or an email address'
+                    },
+                    tb_parentcaregiver1emailaddress: {
+                        require_from_group: 'Please provide at least 1 phone number or an email address'
                     }
                 }
             });
@@ -170,7 +211,7 @@
 
             });
 
-             
+
             $('#dd_school').change(function () {
                 school = $(this).val();
                 //alert('*' + school + '*');
@@ -180,8 +221,9 @@
                     $("#div_schoolyear").hide();
                     $("#dd_schoolyear").prop('selectedIndex', 0);
                 }
+                showparents();
             });
-           
+
 
             /*
             $('#tb_birthdate').change(function () {
@@ -196,30 +238,42 @@
 
 
         function calculateage(e) {
+            age = -1;
             if (moment(e).isValid()) {
                 if (moment().diff(e, 'seconds') < 0) {
                     e.date = moment(e).subtract(100, 'years');
                     $("#tb_birthdate").val(moment(e).format('D MMM YYYY'));
                 }
                 var years = moment().diff(e, 'years');
+                age = years;
                 thisyear = moment().year();
                 var jan1 = moment([thisyear, 0, 1]);
                 $("#span_age").text('Age: ' + years + ' years, ' + jan1.diff(e, 'years') + ' years at 1 Jan ' + thisyear);
-
-                if (years < 18) {
-                    $('#div_parent').show();
-                } else {
-                    $('#div_parent').hide();
-                    $('#tb_parentcaregiver1').val('');
-                    $('#tb_parentcaregiver1mobilephone').val('');
-                    $('#tb_parentcaregiver1emailaddress').val('');
-                    $('#tb_parentcaregiver2').val('');
-                    $('#tb_parentcaregiver2mobilephone').val('');
-                    $('#tb_parentcaregiver2emailaddress').val('');
-                }
             }
+            showparents();
         }
 
+        function showparents() {
+            //if ((age >= 0 && age < 18) || ($('#dd_school').val() != "None" && $('#dd_school').val() != "")) {
+            if ((age >= 0 && age < 18)) {
+                $('#div_parent').show();
+            } else {
+                $('#div_parent').hide();
+                /*
+                $('#tb_parentcaregiver1').val('');
+                $('#tb_parentcaregiver1relationship').val('');
+                $('#tb_parentcaregiver1mobilephone').val('');
+                $('#tb_parentcaregiver1homephone').val('');
+                $('#tb_parentcaregiver1emailaddress').val('');
+                $('#tb_parentcaregiver2').val('');
+                $('#tb_parentcaregiver2relationship').val('');
+                $('#tb_parentcaregiver2mobilephone').val('');
+                $('#tb_parentcaregiver2homephone').val('');
+                $('#tb_parentcaregiver2emailaddress').val('');
+                $('#tb_parentcaregivercomments').val('');
+                */
+            }
+        }
 
     </script>
     <style type="text/css">
@@ -263,23 +317,42 @@
                     <img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
                 <td style="text-align: center">
                     <h1>I'm interested in rowing!
-                    </h1>
+                    </h1>We require parent/caregiver information for rowers aged under 18.<br />You will be prompted for this.
                 </td>
             </tr>
         </table>
         <p></p>
         <hr />
         <p></p>
- 
+
 
         <div class="panel panel-danger">
-            <div class="panel-heading">Student</div>
+            <div class="panel-heading">Rower</div>
             <div class="panel-body">
                 <!------------------------------------------------------>
+                <img id="img_photo" alt="" src="../Images/Signup/<%: hf_signup_ctr %>.jpg" style="width: 200px" /><br />
+        <a id="getphoto"<%=uploadphoto %>>Upload Photo</a>
+        <div id="dialog-getphoto" title="Upload Photo" style="display: none">
+            <div class="imagecontainer">
+                <input type="file" id="fileInput" accept="image/*" />
+                <canvas id="canvas" style="display: none">Your browser does not support the HTML5 canvas element.
+                </canvas>
+                <br />
+                <input type="button" id="btn_Crop" class="btn btn-info" value="Crop" style="display: none" />
+                <div id="preview"></div>
+                <div id="result"></div>
+            </div>
+        </div>
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_firstname">First name</label>
                     <div class="col-sm-8">
                         <input id="tb_firstname" name="tb_firstname" type="text" class="form-control" value="<%:tb_firstname%>" maxlength="20" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="tb_firstname">Known as</label>
+                    <div class="col-sm-8">
+                        <input id="tb_knownas" name="tb_knownas" type="text" class="form-control" value="<%:tb_knownas%>" maxlength="50" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -319,7 +392,7 @@
                         </select>
                     </div>
                 </div>
-                <div id="div_schoolyear" class="form-group">
+                <div id="div_schoolyear" class="form-group" style="display:none">
                     <label class="control-label col-sm-4" for="dd_schoolyear">School year</label>
                     <div class="col-sm-8">
                         <select id="dd_schoolyear" name="dd_schoolyear" class="form-control" required>
@@ -328,23 +401,26 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_emailaddress">Email address</label>
+                    <label class="control-label col-sm-4" for="tb_mobilephone">
+                        Mobile phone </label>
                     <div class="col-sm-8">
-                        <input id="tb_emailaddress" name="tb_emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_emailaddress%>" />
+                        <input id="tb_mobilephone" name="tb_mobilephone" type="text" class="form-control numeric contact-group" value="<%:tb_mobilephone%>" maxlength="20" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_homephone">Home phone</label>
                     <div class="col-sm-8">
-                        <input id="tb_homephone" name="tb_homephone" type="text" class="form-control numeric" value="<%:tb_homephone%>" maxlength="20" />
+                        <input id="tb_homephone" name="tb_homephone" type="text" class="form-control numeric contact-group" value="<%:tb_homephone%>" maxlength="20" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_mobilephone">Mobile phone</label>
+                    <label class="control-label col-sm-4" for="tb_emailaddress">Email address</label>
                     <div class="col-sm-8">
-                        <input id="tb_mobilephone" name="tb_mobilephone" type="text" class="form-control numeric" value="<%:tb_mobilephone%>" maxlength="20" required />
+                        <input id="tb_emailaddress" name="tb_emailaddress" type="email" class="form-control contact-group" maxlength="100" value="<%:tb_emailaddress%>" />
                     </div>
                 </div>
+                
+                
                 <div class="form-group">
                     <label class="control-label col-sm-4" for="tb_notes">Anything else you want to let us know?</label>
                     <div class="col-sm-8">
@@ -362,53 +438,99 @@
                 <!------------------------------------------------------>
             </div>
         </div>
-        <div class="panel panel-danger" id="div_parent">
-            <div class="panel-heading">Parent/Caregivers</div>
+        <div class="panel panel-danger" id="div_parent" style="display:none">
+            <div class="panel-heading">Parents/Caregivers</div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver1">Name(s)</label>
-                    <div class="col-sm-8">
-                        <input id="tb_parentcaregiver1" name="tb_parentcaregiver1" type="text" class="form-control" value="<%:tb_parentcaregiver1%>" maxlength="100" required />
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Parent/Caregiver 1</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver1">Name</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver1" name="tb_parentcaregiver1" type="text" class="form-control" value="<%:tb_parentcaregiver1%>" maxlength="100" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver1relationship">Relationship
+                                <img src="/Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="eg: Mother / Father / Caregiver / Aunty / Uncle / Grandmother / Grandfather ...." />
+                            </label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver1relationship" name="tb_parentcaregiver1relationship" type="text" class="form-control" value="<%:tb_parentcaregiver1relationship%>" maxlength="100" required />
+                            </div>
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver1phone">Contact phone number(s)</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver1phone" name="tb_parentcaregiver1phone" type="text" class="form-control" value="<%:tb_parentcaregiver1phone%>" required maxlength="20" />
+                            </div>
+                        </div>
+                        -->
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver1mobilephone">Mobile phone</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver1mobilephone" name="tb_parentcaregiver1mobilephone" type="text" class="form-control numeric parent1_contact-group" value="<%:tb_parentcaregiver1mobilephone%>" maxlength="20" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver1homephone">Home phone</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver1homephone" name="tb_parentcaregiver1homephone" type="text" class="form-control numeric parent1_contact-group" value="<%:tb_parentcaregiver1homephone%>" maxlength="20" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver1emailaddress">Email address</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver1emailaddress" name="tb_parentcaregiver1emailaddress" type="email" class="form-control parent1_contact-group" maxlength="100" value="<%:tb_parentcaregiver1emailaddress%>" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Parent/Caregiver 2</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver">Name</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver2" name="tb_parentcaregiver2" type="text" class="form-control" value="<%:tb_parentcaregiver2%>" maxlength="100" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver2relationship">Relationship
+                                 <img src="/Dependencies/images/questionsmall.png" data-toggle="tooltip" data-html="true" title="eg: Mother / Father / Caregiver / Aunty / Uncle / Grandmother / Grandfather ...." />
+                            </label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver2relationship" name="tb_parentcaregiver2relationship" type="text" class="form-control" value="<%:tb_parentcaregiver2relationship%>" maxlength="100" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver2mobilephone">Mobile phone</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver2mobilephone" name="tb_parentcaregiver2mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2mobilephone%>" maxlength="20" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver2homephone">Home phone</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver2homephone" name="tb_parentcaregiver2homephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2homephone%>" maxlength="20" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="tb_parentcaregiver2emailaddress">Email address</label>
+                            <div class="col-sm-8">
+                                <input id="tb_parentcaregiver2emailaddress" name="tb_parentcaregiver2emailaddress" type="email" class="form-control" maxlength="100" value="<%:tb_parentcaregiver2emailaddress%>" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver1phone">Contact phone number(s)</label>
+                    <label class="control-label col-sm-4" for="tb_parentcaregivercomments">Comments</label>
                     <div class="col-sm-8">
-                        <input id="tb_parentcaregiver1phone" name="tb_parentcaregiver1phone" type="text" class="form-control" value="<%:tb_parentcaregiver1phone%>" required maxlength="20" />
+                        <textarea id="tb_parentcaregivercomments" name="tb_parentcaregivercomments" class="form-control" maxlength="100"><%:tb_parentcaregivercomments%></textarea> 
                     </div>
                 </div>
-                <!--
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver1mobilephone">Mobile phone</label>
-                    <div class="col-sm-8">
-                        <input id="tb_parentcaregiver1mobilephone" name="tb_parentcaregiver1mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver1mobilephone%>" required maxlength="20" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver1emailaddress">Email address</label>
-                    <div class="col-sm-8">
-                        <input id="tb_parentcaregiver1emailaddress" name="tb_parentcaregiver1emailaddress" type="email" class="form-control" maxlength="100" required value="<%:tb_parentcaregiver1emailaddress%>" />
-                    </div>
-                </div>
-                -->
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver">Name (2)</label>
-                    <div class="col-sm-8">
-                        <input id="tb_parentcaregiver2" name="tb_parentcaregiver2" type="text" class="form-control" value="<%:tb_parentcaregiver2%>" maxlength="100" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver2mobilephone">Mobile phone (2)</label>
-                    <div class="col-sm-8">
-                        <input id="tb_parentcaregiver2mobilephone" name="tb_parentcaregiver2mobilephone" type="text" class="form-control numeric" value="<%:tb_parentcaregiver2mobilephone%>" maxlength="20" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="tb_parentcaregiver2emailaddress">Email address (2)</label>
-                    <div class="col-sm-8">
-                        <input id="tb_parentcaregiver2emailaddress" name="tb_parentcaregiver2emailaddress" type="email" class="form-control" maxlength="100" value="<%:tb_parentcaregiver2emailaddress%>" />
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="form-group">
@@ -418,18 +540,6 @@
                 <asp:Button ID="btn_submit" runat="server" OnClick="btn_submit_Click" class="btn btn-info" Text="Submit" />
             </div>
         </div>
-        <img id="img_photo" alt="" src="../Images/Signup/<%: hf_signup_ctr %>.jpg" style="width: 200px" /><br />
-        <a id="getphoto">Upload Photo</a>
-        <div id="dialog-getphoto" title="Upload Photo" style="display: none">
-            <div class="imagecontainer">
-                <input type="file" id="fileInput" accept="image/*" />
-                <canvas id="canvas" style="display: none">Your browser does not support the HTML5 canvas element.
-                </canvas>
-                <br />
-                <input type="button" id="btn_Crop" class="btn btn-info" value="Crop" style="display: none" />
-                <div id="preview"></div>
-                <div id="result"></div>
-            </div>
-        </div>
+        
     </div>
 </asp:Content>

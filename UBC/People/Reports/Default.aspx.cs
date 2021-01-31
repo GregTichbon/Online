@@ -44,7 +44,8 @@ namespace UBC.People.Reports
                 html += "<br /><a href=\"ContactDetails.aspx\">Contact Details</a>";
                 html += "<br /><a id=\"link3\" href=\"SchoolRowers.aspx\">School Rowers</a>";
                 script += "$('#link3').prop('title', 'Those that have a school loaded and and \"Active\" Category');";
-
+                html += "<br /><a href=\"courses.aspx\">Courses</a>";
+                html += "<br /><a href=\"onloan.aspx\">On Loan</a>";
             }
             if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11111011"))
             {

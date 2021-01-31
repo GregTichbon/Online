@@ -31,6 +31,24 @@ namespace DataInnovations.MeetingScheduler {
         protected global::System.Web.UI.WebControls.DropDownList fld_meeting;
         
         /// <summary>
+        /// lit_details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lit_details;
+        
+        /// <summary>
+        /// fld_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList fld_email;
+        
+        /// <summary>
         /// tb_subject control.
         /// </summary>
         /// <remarks>

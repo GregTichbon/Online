@@ -430,6 +430,7 @@ namespace Generic
                     mail.Attachments.Add(new Attachment(attachment));
                 }
                 client.EnableSsl = enableSsl;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 client.Send(mail);
             }
             catch (Exception e)

@@ -71,8 +71,8 @@
     <Reference Include="Generic">
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.30.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.30\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Ical.Net, Version=4.1.8.0, Culture=neutral, PublicKeyToken=65c0446cd019ea53, processorArchitecture=MSIL">
       <HintPath>..\packages\Ical.Net.4.1.11\lib\net46\Ical.Net.dll</HintPath>
@@ -622,6 +622,7 @@
     <Content Include="People\RegistrationDisplay.aspx" />
     <Content Include="People\Reports\ComingEventsList.aspx" />
     <Content Include="People\Reports\ContactDetails.aspx" />
+    <Content Include="People\Reports\Courses.aspx" />
     <Content Include="People\Reports\CurrentCategoriesMatrix.aspx" />
     <Content Include="People\Reports\CurrentMembers.aspx" />
     <Content Include="People\Reports\Default.aspx" />
@@ -631,6 +632,7 @@
     <Content Include="People\Reports\FriendsStatementsPreview.aspx" />
     <Content Include="People\Reports\FullReport.aspx" />
     <Content Include="People\Reports\LoginRegister.aspx" />
+    <Content Include="People\Reports\OnLoan.aspx" />
     <Content Include="People\Reports\PersonAccess.aspx" />
     <Content Include="People\Reports\RegattaList.aspx" />
     <Content Include="People\Reports\Registrations.aspx" />
@@ -679,6 +681,7 @@
     <Content Include="People\TestAndPlay\posts.asmx" />
     <Content Include="People\Transaction.aspx" />
     <Content Include="People\transactions.aspx" />
+    <Content Include="People\_TestEmail.aspx" />
     <Content Include="redirect.aspx" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -694,6 +697,7 @@
     <Content Include="People\Documents\2020WinterSeriesRace1.pdf" />
     <Content Include="_Notes.docx" />
     <Content Include="People\Documents\WeightTraining2020.pdf" />
+    <Content Include="People\Documents\ChristmasCelebration2020.pdf" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -1296,6 +1300,13 @@
     <Compile Include="People\Reports\ContactDetails.aspx.designer.cs">
       <DependentUpon>ContactDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="People\Reports\Courses.aspx.cs">
+      <DependentUpon>Courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\Courses.aspx.designer.cs">
+      <DependentUpon>Courses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="People\Reports\Crystal\AllEmail.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1406,6 +1417,13 @@
     </Compile>
     <Compile Include="People\Reports\LoginRegister.aspx.designer.cs">
       <DependentUpon>LoginRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\Reports\OnLoan.aspx.cs">
+      <DependentUpon>OnLoan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\Reports\OnLoan.aspx.designer.cs">
+      <DependentUpon>OnLoan.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\Reports\PersonAccess.aspx.cs">
       <DependentUpon>PersonAccess.aspx</DependentUpon>
@@ -1738,6 +1756,13 @@
     </Compile>
     <Compile Include="People\uploadphoto.aspx.designer.cs">
       <DependentUpon>uploadphoto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="People\_TestEmail.aspx.cs">
+      <DependentUpon>_TestEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="People\_TestEmail.aspx.designer.cs">
+      <DependentUpon>_TestEmail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="redirect.aspx.cs">

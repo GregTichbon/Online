@@ -46,6 +46,7 @@ namespace DataInnovations.MeetingScheduler
                 con.Close();
                 con.Dispose();
             }
+            btn_submit.Style.Add("display", "none");
         }
         protected void btn_submit_Click(object sender, EventArgs e)
         {
@@ -69,20 +70,35 @@ namespace DataInnovations.MeetingScheduler
                 {
                     if (btn_submit.Text != "Send")
                     {
-                        Lit_html.Text = "<tr><td>Send Email</td><td>Send Text</td><td>Social</td><td>Name</td><td>URL</td><td>Email Address</td><td>Mobile</td></tr>";
+                        Lit_html.Text = "<tr><td>Send Email</td><td>Send Text</td><td>Social</td><td>Name</td><td>Greeting</td><td>URL</td><td>Email Address</td><td>Mobile</td></tr>";
                         allemail = "";
+                        btn_submit.Style.Remove("display");
                     }
                     while (dr.Read())
                     {
+                        string title = dr["title"].ToString();
+                        string description = dr["description"].ToString();
+
+                        lit_details.Text = "<b>Title</b>: " + title + "<br />";
+                        lit_details.Text += "<b>Description</b>: " + description + "<br />";
+
                         string id = dr["entity_ctr"].ToString();
                         string greeting = dr["greeting"].ToString();
                         string mobile = dr["mobile"].ToString();
                         string meetingguid = dr["meeting_guid"].ToString();
                         string entityguid = dr["entity_guid"].ToString();
-                        string link = "http://office.datainn.co.nz/MeetingScheduler/Scheduler.aspx?meeting=" + meetingguid + "&entity=" + entityguid;
+                        string type = dr["type"].ToString();
+                        string MeetingEntity_GUID = dr["MeetingEntity_GUID"].ToString();
+                        string link = "";
+                        if(type == "Options")
+                        {
+                            link = "http://office.datainn.co.nz/MeetingScheduler/select.aspx?id=" + MeetingEntity_GUID;
+                        } else
+                        {
+                            link = "http://office.datainn.co.nz/MeetingScheduler/Scheduler.aspx?meeting=" + meetingguid + "&entity=" + entityguid;
+                        }
+
                         string emailaddress = dr["emailaddress"].ToString();
-                        string title = dr["title"].ToString();
-                        string description = dr["description"].ToString();
                         string name = dr["name"].ToString();
 
                         string sendemail = "";
@@ -111,38 +127,48 @@ namespace DataInnovations.MeetingScheduler
                                 emailhtml = emailhtml.Replace("||description||", description);
                                 emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
+                                Generic.Functions gFunctions = new Generic.Functions();
+                                string[] attachments = new string[0];
+                                Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+                                //emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
 
-                                System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
 
-                                //message.To.Add(emailaddress);
-                                string[] emailaddresses = emailaddress.Split(';');
-                                foreach (string eachemailaddress in emailaddresses)
+                                string host = "";
+                                string emailfrom = "";
+                                string password = "";
+                                int port = 0;
+                                Boolean enableSsl = false;
+
+                                switch (fld_email.Text)
                                 {
-                                    message.To.Add(eachemailaddress);
+                                    case "meetingscheduler@datainn.co.nz":
+                                        host = "datainn.co.nz";
+                                        // host = "70.35.207.87";
+                                        emailfrom = "UnionBoatClub@datainn.co.nz";
+                                        password = "39%3Zxon";
+                                        port = 25;
+                                        enableSsl = false;
+                                        break;
+                                    case "info@unionboatclub.co.nz":
+                                        host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+                                        emailfrom = "info@unionboatclub.co.nz";
+                                        password = "R0wtheboat";
+                                        port = 587; // 465; // 25;
+                                        enableSsl = true;
+                                        break;
+                                    default:
+                                        break;
                                 }
 
-                                message.ReplyToList.Add(new System.Net.Mail.MailAddress("greg@stonesoup.org.nz", "Greg Tichbon"));
-                                message.From = new System.Net.Mail.MailAddress("meetingscheduler@datainn.co.nz", "Meeting Scheduler");
+
+                                string emailfromname = "Union Boat Club";
+                                string emailBCC = emailfrom;
 
                                 string emailsubject = tb_subject.Text;
                                 emailsubject = emailsubject.Replace("||greeting||", greeting);
                                 emailsubject = emailsubject.Replace("||title||", title);
 
-
-
-                                message.Subject = emailsubject;
-                                message.IsBodyHtml = false;
-                                message.Body = emailtext;
-                                System.Net.Mime.ContentType mimeType = new System.Net.Mime.ContentType("text/html");
-                                AlternateView alternate = AlternateView.CreateAlternateViewFromString(emailhtml, mimeType);
-
-                                message.AlternateViews.Add(alternate);
-
-
-                                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("datainn.co.nz", 25);
-                                client.UseDefaultCredentials = false;
-                                client.Credentials = new System.Net.NetworkCredential("meetingscheduler@datainn.co.nz", "m33t1ng");
-                                client.Send(message);
+                                gFunctions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailsubject, emailhtml, emailaddress, emailBCC, "", attachments, emailoptions);
 
 
 
@@ -183,7 +209,7 @@ namespace DataInnovations.MeetingScheduler
                             string social = "<input id=\"cb_social_" + id + "\" name =\"cb_social_" + id + "\" type=\"checkbox\" />";
 
                             Lit_html.Text += "<tr>";
-                            Lit_html.Text += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + social + "</td><td>" + name + "</td><td><a href=\"" + link + "\" target_\"_Blank\">" + link + "</a></td><td><a href=\"mailto:" + emailaddress + "\"</a>" + emailaddress + "</td><td>" + dr["mobile"];
+                            Lit_html.Text += "<td>" + sendemail + "</td><td>" + sendtext + "</td><td>" + social + "</td><td>" + name + "</td><td>" + greeting + "</td><td><a href=\"" + link + "\" target_\"_Blank\">" + link + "</a></td><td><a href=\"mailto:" + emailaddress + "\"</a>" + emailaddress + "</td><td>" + dr["mobile"];
                             Lit_html.Text += "</tr>";
                         }
                     }

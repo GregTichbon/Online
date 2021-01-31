@@ -19,22 +19,23 @@ namespace UBC.People.Signup
     {
         public string hf_guid = "";
         public string hf_signup_ctr;
+        public string signupprogram_ctr = "3";
         public string tb_firstname;
         public string tb_lastname;
-        //public string tb_knownas;
+        public string tb_knownas;
         public string tb_birthdate;
-        public string dd_gender;
+        public string dd_gender = "";
         //public string tb_medical;
         //public string tb_dietry;
         public string tb_emailaddress;
         public string tb_homephone;
         public string tb_mobilephone;
-        public string dd_school;
-        public string dd_schoolyear;
+        public string dd_school = "";
+        public string dd_schoolyear = "";
         //public string tb_facebook;
         //public string tb_residentialaddress;
         //public string tb_postaladdress;
-        public string dd_swimmer;
+        public string dd_swimmer = "";
         public string tb_parentcaregiver1;
         public string tb_parentcaregiver1mobilephone;
         public string tb_parentcaregiver1emailaddress;
@@ -43,6 +44,13 @@ namespace UBC.People.Signup
         public string tb_parentcaregiver2mobilephone;
         public string tb_parentcaregiver2emailaddress;
         public string tb_notes;
+        public string tb_parentcaregiver1relationship;
+        public string tb_parentcaregiver2relationship;
+        public string tb_parentcaregiver1homephone;
+        public string tb_parentcaregiver2homephone;
+        public string tb_parentcaregivercomments;
+
+        public string uploadphoto = " style=\"display:none\"";
 
         //public string dd_agreement;
         //public string dd_correspondence;
@@ -77,10 +85,15 @@ namespace UBC.People.Signup
                         dr.Read();
                         hf_signup_ctr = dr["signup_ctr"].ToString();
                         hf_guid = dr["guid"].ToString();
+
+                        uploadphoto = "";
+
+                        signupprogram_ctr = dr["signupprogram_ctr"].ToString();
+
                         tb_firstname = dr["firstname"].ToString();
                         tb_lastname = dr["lastname"].ToString();
-                        //tb_knownas = dr["knownas"].ToString();
-                        //tb_birthdate = dr["birthdate"].ToString();
+                        tb_knownas = dr["knownas"].ToString();
+                        tb_birthdate = dr["birthdate"].ToString();
                         dd_gender = dr["gender"].ToString();
                         //tb_medical = dr["medical"].ToString();
                         //tb_dietry = dr["dietry"].ToString();
@@ -90,22 +103,27 @@ namespace UBC.People.Signup
                         //tb_residentialaddress = dr["residentialaddress"].ToString();
                         //tb_postaladdress = dr["postaladdress"].ToString();
                         tb_emailaddress = dr["emailaddress"].ToString();
-                        //tb_homephone = dr["homephone"].ToString();
+                        tb_homephone = dr["homephone"].ToString();
                         tb_mobilephone = dr["mobilephone"].ToString();
-                        //dd_swimmer = dr["swimmer"].ToString();
-                        tb_parentcaregiver1 = dr["parentcaregiver1"].ToString();
-                        //tb_parentcaregiver1mobilephone = dr["parentcaregiver1_mobilephone"].ToString();
-                        tb_parentcaregiver1phone = dr["parentcaregiver1_phone"].ToString();
-                        //tb_parentcaregiver1emailaddress = dr["parentcaregiver1_emailaddress"].ToString();
-                        //tb_parentcaregiver2 = dr["parentcaregiver2"].ToString();
-                        //tb_parentcaregiver2mobilephone = dr["parentcaregiver2_mobilephone"].ToString();
-                        //tb_parentcaregiver2emailaddress = dr["parentcaregiver2_emailaddress"].ToString();
+                        dd_swimmer = dr["swimmer"].ToString();
                         tb_notes = dr["notes"].ToString();
 
-                        //if (tb_birthdate != "")
-                        //{
-                        //    tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
-                        //}
+                        tb_parentcaregiver1 = dr["parentcaregiver1"].ToString();
+                        tb_parentcaregiver1relationship = dr["parentcaregiver1_relationship"].ToString();
+                        tb_parentcaregiver1mobilephone = dr["parentcaregiver1_mobile"].ToString();
+                        tb_parentcaregiver1homephone = dr["parentcaregiver1_home"].ToString();
+                        tb_parentcaregiver1emailaddress = dr["parentcaregiver1_email"].ToString();
+                        tb_parentcaregiver2 = dr["parentcaregiver2"].ToString();
+                        tb_parentcaregiver2relationship = dr["parentcaregiver2_relationship"].ToString();
+                        tb_parentcaregiver2mobilephone = dr["parentcaregiver2_mobile"].ToString();
+                        tb_parentcaregiver2homephone = dr["parentcaregiver2_home"].ToString();
+                        tb_parentcaregiver2emailaddress = dr["parentcaregiver2_email"].ToString();
+
+                        tb_parentcaregivercomments = dr["parentcaregiver_comments"].ToString();
+                        if (tb_birthdate != "")
+                        {
+                            tb_birthdate = Convert.ToDateTime(tb_birthdate).ToString("dd MMM yyyy");
+                        }
                     }
 
                     dr.Close();
@@ -124,7 +142,7 @@ namespace UBC.People.Signup
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
-            Boolean sendEmail = false;
+            Boolean sendEmail = true;
             Boolean sendText = false;
 
             Functions gfunctions = new Functions();
@@ -141,10 +159,11 @@ namespace UBC.People.Signup
 
             #region fields
             //hf_guid = Request.Form["hf_guid"].Trim();
+
             tb_firstname = Request.Form["tb_firstname"].Trim();
             tb_lastname = Request.Form["tb_lastname"].Trim();
-            //tb_knownas = Request.Form["tb_knownas"].Trim();
-            //tb_birthdate = Request.Form["tb_birthdate"].Trim();
+            tb_knownas = Request.Form["tb_knownas"].Trim();
+            tb_birthdate = Request.Form["tb_birthdate"].Trim();
             dd_gender = Request.Form["dd_gender"].Trim();
             dd_school = Request.Form["dd_school"].Trim();
             dd_schoolyear = Request.Form["dd_schoolyear"].Trim();
@@ -156,30 +175,38 @@ namespace UBC.People.Signup
             tb_emailaddress = Request.Form["tb_emailaddress"].Trim();
             //tb_homephone = Request.Form["tb_homephone"].Trim();
             tb_mobilephone = Request.Form["tb_mobilephone"].Trim();
-            //dd_swimmer = Request.Form["dd_swimmer"].Trim();
+            tb_homephone = Request.Form["tb_homephone"].Trim();
+            dd_swimmer = Request.Form["dd_swimmer"].Trim();
+            tb_notes = Request.Form["tb_notes"].Trim();
 
             tb_parentcaregiver1 = Request.Form["tb_parentcaregiver1"].Trim();
-            tb_parentcaregiver1phone = Request.Form["tb_parentcaregiver1phone"].Trim();
-            //tb_parentcaregiver1mobilephone = Request.Form["tb_parentcaregiver1mobilephone"].Trim();
-            //tb_parentcaregiver1emailaddress = Request.Form["tb_parentcaregiver1emailaddress"].Trim();
-            //tb_parentcaregiver2 = Request.Form["tb_parentcaregiver2"].Trim();
-            //tb_parentcaregiver2mobilephone = Request.Form["tb_parentcaregiver2mobilephone"].Trim();
-            //tb_parentcaregiver2emailaddress = Request.Form["tb_parentcaregiver2emailaddress"].Trim();
+            tb_parentcaregiver1relationship = Request.Form["tb_parentcaregiver1relationship"].Trim();
+            //tb_parentcaregiver1phone = Request.Form["tb_parentcaregiver1phone"].Trim();
+            tb_parentcaregiver1mobilephone = Request.Form["tb_parentcaregiver1mobilephone"].Trim();
+            tb_parentcaregiver1homephone = Request.Form["tb_parentcaregiver1homephone"].Trim();
+            tb_parentcaregiver1emailaddress = Request.Form["tb_parentcaregiver1emailaddress"].Trim();
 
+            tb_parentcaregiver2 = Request.Form["tb_parentcaregiver2"].Trim();
+            tb_parentcaregiver2relationship = Request.Form["tb_parentcaregiver2relationship"].Trim();
+            tb_parentcaregiver2mobilephone = Request.Form["tb_parentcaregiver2mobilephone"].Trim();
+            tb_parentcaregiver2homephone = Request.Form["tb_parentcaregiver2homephone"].Trim();
+            tb_parentcaregiver2emailaddress = Request.Form["tb_parentcaregiver2emailaddress"].Trim();
+
+            tb_parentcaregivercomments = Request.Form["tb_parentcaregivercomments"].Trim();
             //dd_agreement = Request.Form["dd_agreement"].Trim();
             //dd_correspondence = Request.Form["dd_correspondence"].Trim();
-            tb_notes = Request.Form["tb_notes"].Trim();
+
             #endregion
 
             #region setup specific data
             cmd.CommandText = "Update_signup";
-            cmd.Parameters.Add("@signupprogram_ctr", SqlDbType.Int).Value = 2;
+            cmd.Parameters.Add("@signupprogram_ctr", SqlDbType.VarChar).Value = signupprogram_ctr;
 
             cmd.Parameters.Add("@signup_ctr", SqlDbType.VarChar).Value = hf_signup_ctr;
             cmd.Parameters.Add("@guid", SqlDbType.VarChar).Value = hf_guid;
             cmd.Parameters.Add("@firstname", SqlDbType.VarChar).Value = tb_firstname;
             cmd.Parameters.Add("@lastname", SqlDbType.VarChar).Value = tb_lastname;
-            //cmd.Parameters.Add("@knownas", SqlDbType.VarChar).Value = tb_knownas;
+            cmd.Parameters.Add("@knownas", SqlDbType.VarChar).Value = tb_knownas;
             cmd.Parameters.Add("@birthdate", SqlDbType.VarChar).Value = tb_birthdate;
             cmd.Parameters.Add("@school", SqlDbType.VarChar).Value = dd_school;
             cmd.Parameters.Add("@schoolyear", SqlDbType.VarChar).Value = dd_schoolyear;
@@ -191,20 +218,28 @@ namespace UBC.People.Signup
             //cmd.Parameters.Add("@facebook", SqlDbType.VarChar).Value = tb_facebook;
             cmd.Parameters.Add("@emailaddress", SqlDbType.VarChar).Value = tb_emailaddress;
             cmd.Parameters.Add("@mobilephone", SqlDbType.VarChar).Value = tb_mobilephone;
-            //cmd.Parameters.Add("@homephone", SqlDbType.VarChar).Value = tb_homephone;
-            //cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
+            cmd.Parameters.Add("@homephone", SqlDbType.VarChar).Value = tb_homephone;
+            cmd.Parameters.Add("@swimmer", SqlDbType.VarChar).Value = dd_swimmer;
+            cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = tb_notes;
 
             cmd.Parameters.Add("parentcaregiver1", SqlDbType.VarChar).Value = tb_parentcaregiver1;
-            cmd.Parameters.Add("parentcaregiver1_phone", SqlDbType.VarChar).Value = tb_parentcaregiver1phone;
-            //cmd.Parameters.Add("parentcaregiver1_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver1mobilephone;
-            //cmd.Parameters.Add("parentcaregiver1_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver1emailaddress;
-            //cmd.Parameters.Add("parentcaregiver2", SqlDbType.VarChar).Value = tb_parentcaregiver2;
-            //cmd.Parameters.Add("parentcaregiver2_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver2mobilephone;
-            //cmd.Parameters.Add("parentcaregiver2_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver2emailaddress;
+            cmd.Parameters.Add("parentcaregiver1relationship", SqlDbType.VarChar).Value = tb_parentcaregiver1relationship;
+            //cmd.Parameters.Add("parentcaregiver1_phone", SqlDbType.VarChar).Value = tb_parentcaregiver1phone;
+            cmd.Parameters.Add("parentcaregiver1_homephone", SqlDbType.VarChar).Value = tb_parentcaregiver1homephone;
+            cmd.Parameters.Add("parentcaregiver1_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver1mobilephone;
+            cmd.Parameters.Add("parentcaregiver1_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver1emailaddress;
+
+            cmd.Parameters.Add("parentcaregiver2", SqlDbType.VarChar).Value = tb_parentcaregiver2;
+            cmd.Parameters.Add("parentcaregiver2relationship", SqlDbType.VarChar).Value = tb_parentcaregiver2relationship;
+            cmd.Parameters.Add("parentcaregiver2_mobilephone", SqlDbType.VarChar).Value = tb_parentcaregiver2mobilephone;
+            cmd.Parameters.Add("parentcaregiver2_homephone", SqlDbType.VarChar).Value = tb_parentcaregiver2homephone;
+            cmd.Parameters.Add("parentcaregiver2_emailaddress", SqlDbType.VarChar).Value = tb_parentcaregiver2emailaddress;
+
+            cmd.Parameters.Add("parentcaregivercomments", SqlDbType.VarChar).Value = tb_parentcaregivercomments;
 
             //cmd.Parameters.Add("@agreement", SqlDbType.VarChar).Value = dd_agreement;
             //cmd.Parameters.Add("@correspondence", SqlDbType.VarChar).Value = dd_correspondence;
-            cmd.Parameters.Add("@notes", SqlDbType.VarChar).Value = tb_notes;
+
 
 
 
@@ -361,29 +396,37 @@ namespace UBC.People.Signup
 
             if (sendText)
             {
-                string messageresponse = gfunctions.SendRemoteMessage("0272495088", "Learn to Row registration: " + tb_firstname + " " + tb_lastname + " " + dd_school, "School Learn to Row registration");
+                string messageresponse = gfunctions.SendRemoteMessage("0272495088", "'Interested in Rowing' registration: " + tb_firstname + " " + tb_lastname + " " + dd_school, "'Interested in Rowing' registration");
                 if (tb_mobilephone != "")
                 {
                     //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
                     string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
                     //message = HttpUtility.UrlEncode(message);
-                    messageresponse = gfunctions.SendRemoteMessage(tb_mobilephone, message, "School Learn to Row registration");
+                    messageresponse = gfunctions.SendRemoteMessage(tb_mobilephone, message, "Interested in ");
                 }
             }
             if (sendEmail)
             {
-                if (tb_emailaddress != "")
+                if (tb_emailaddress != "" || tb_parentcaregiver1emailaddress != "" || tb_parentcaregiver2emailaddress != "")
                 {
+                    string emailRecipients = tb_emailaddress + "; " + tb_parentcaregiver1emailaddress + "; " + tb_parentcaregiver2emailaddress;
+                    string host = "cp-wc03.per01.ds.network"; //"mail.unionboatclub.co.nz";
+                    string emailfrom = "info@unionboatclub.co.nz";
+                    string password = "R0wtheboat";
+                    int port = 587; // 465; // 25;
+                    Boolean enableSsl = true;
                     string emailBCC = "greg@datainn.co.nz";
-                    string host = "70.35.207.87";
-                    string emailfrom = "UnionBoatClub@datainn.co.nz";
                     string emailfromname = "Union Boat Club";
-                    string password = "39%3Zxon";
+                    string emailSubject = "Union Boat Club Rower Registration";
 
-                    string emailhtml = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.</p><p>Information can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
+                    string[] attachments = new string[0];
+                    Dictionary<string, string> emailoptions = new Dictionary<string, string>();
+                    string emaildocument = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering your interest in rowing.</p>"; 
+                    //<p>Information can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
+                    emaildocument = "<html><head></head><body>" + emaildocument + "</body></html>";
 
-                    emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
-                    gfunctions.sendemailV3(host, emailfrom, emailfromname, password, "School Learn to Row registration", emailhtml, tb_emailaddress, emailBCC, "");
+                    gfunctions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emaildocument, emailRecipients, emailBCC, "", attachments, emailoptions);
+
                 }
             }
 

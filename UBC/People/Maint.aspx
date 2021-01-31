@@ -249,7 +249,7 @@
                 /*----------------------------------------------COURSE-----------------------------------------*/
                 $('#coursetable > tbody > tr[maint="changed"]').each(function () {
                     tr_id = $(this).attr('id');
-                    tr_course = $(this).find('td:eq(1)').text();
+                    tr_course = $(this).find('td:eq(1)').attr('course_id');
                     tr_startdate = $(this).find('td:eq(2)').text();
                     tr_enddate = $(this).find('td:eq(3)').text();
                     tr_note = $(this).find('td:eq(4)').text();
@@ -725,7 +725,7 @@
                     $("#dialog-courses").find(':input').val('');
                 } else {
                     tr = $(this).closest('tr');
-                    $('#dd_courses_course').val($(tr).find('td').eq(1).text());
+                    $('#dd_courses_course').val($(tr).find('td').eq(1).attr('course_id'));
                     $('#tb_courses_startdate').val($(tr).find('td').eq(2).text());
                     $('#tb_courses_enddate').val($(tr).find('td').eq(3).text());
                     $('#tb_courses_note').val($(tr).find('td').eq(4).text());
@@ -764,7 +764,8 @@
                             }
                             $(tr).attr('maint', 'changed');
 
-                            $(tr).find('td').eq(1).text($('#dd_courses_course').val());
+                            $(tr).find('td').eq(1).text($('#dd_courses_course option:selected').text());
+                            $(tr).find('td').eq(1).attr('course_id', $('#dd_courses_course').val());
                             $(tr).find('td').eq(2).text($('#tb_courses_startdate').val());
                             $(tr).find('td').eq(3).text($('#tb_courses_enddate').val());
                             $(tr).find('td').eq(4).text($('#tb_courses_note').val());
@@ -1438,10 +1439,10 @@
             <div id="dialog-courses" title="Maintain courses" style="display: none" class="form-horizontal">
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="dd_courses_course">Course (change to DD)</label>
+                    <label class="control-label col-sm-4" for="dd_courses_course">Course</label>
                     <div class="col-sm-8">
                         <select id="dd_courses_course" name="dd_courses_course" class="form-control">
-                            <%= Generic.Functions.populateselect(yesno, "","") %>
+                            <%= courses_courses %>
                         </select>
                     </div>
                 </div>
