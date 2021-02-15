@@ -10,13 +10,100 @@
         img {
             width: 100%;
         }
+
+        .photo {
+            display: inline;
+        }
+
+        .answered {
+            display: none;
+        }
+
+        .versions {
+            /*border: 5px solid red;*/
+            display: none;
+        }
+
+        .toggleversions {
+            font-size: large;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .top-left {
+            background-color: red;
+            font-size: large;
+            position: absolute;
+            top: 8px;
+            left: 16px;
+        }
+
+        .button {
+            box-shadow: 3px 4px 0px 0px #8a2a21;
+            background: linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+            background-color: #c62d1f;
+            border-radius: 18px;
+            border: 1px solid #d02718;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 17px;
+            padding: 7px 25px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #810e05;
+            margin: 10px 10px 10px 10px;
+        }
+
+            .button:hover {
+                background: linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+                background-color: #f24437;
+            }
+
+            .button:active {
+                position: relative;
+                top: 1px;
+            }
+
+
     </style>
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="<%: ResolveUrl("~/Dependencies/colorbox/jquery.colorbox-min.js")%>"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.show').click(function () {
+
+            $('.togglephoto').click(function () {
+                div = $(this).parent().nextAll().filter("div").first();
+                if ($(this).val().substring(0, 1) == "H") {
+                    $(div).hide();
+                    $(this).val('Show');
+                } else {
+                    $(div).show();
+                    $(this).val('Hide');
+                }
+            })
+
+            $('.toggleversions').click(function () {
+                //div = $(this).parent().nextAll().filter("div").first();
+                if ($(this).val().substring(0, 1) == "H") {
+                    $(this).next('div').hide();
+                    $(this).val('Show Previous Versions');
+                } else {
+                    $(this).next('div').show();
+                    $(this).val('Hide Previous Versions');
+                }
+              
+            })
+
+            $('.shownextversion').click(function () {
+                alert("Greg is testing");
+                
                 direction = $(this).attr('id').substring(0, 1);
                 //alert(direction);
                 if (direction == 'B') {
@@ -24,21 +111,24 @@
                 } else {
                     ans = confirm("Are you sure that you want to show the next version of this photo?")
                 }
-                if(ans) {
+                if (ans) {
                     photo = $(this).attr('id').substring(2);
                     $.ajax({
                         url: "data.asmx/get_next_version?groupcode=<%=groupcode%>&photo=" + photo + "&direction=" + direction, success: function (result) {
+                            location.reload();
+                            /*
                             myresult = $.parseJSON(result);
                             src = myresult.src;
                             version = myresult.version;
                             $('#I_' + photo).attr("src", src);
                             $('#I_' + photo).attr("title", src);
-                            window.location.hash = 'I_' + photo;
+                            window.location.hash = 'I_' + photo;  
                             if (version == 4) {
                                 $('#P_' + photo).remove();
                             } else {
                                 $('#V_' + photo).text(version);
                             }
+                            */
                         }
                     });
                 }
@@ -64,7 +154,7 @@
 
         }); //document ready
 
-  
+
     </script>
 </head>
 <body>
@@ -100,5 +190,9 @@
         &nbsp;<br />
         <asp:Literal ID="Lit_Images" runat="server"></asp:Literal>
     </form>
+
+
+
+
 </body>
 </html>

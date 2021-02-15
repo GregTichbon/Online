@@ -184,7 +184,7 @@
             <div id="div_downloadtext"></div>
         </div>
         <div id="dialog-link" title="Edit" style="display: none" class="form-horizontal">
-            <h2>Linking still to be done, this will either 1) select an exisiting person and change the guid of this record or 2) allow the creation of a person and assign this guid</h2>
+            <h2>Linking still to be done, this will either 1) select an exisiting person and change the guid of "Person" record or 2) allow the creation of a "Person" record and assign the "Registration" guid</h2>
         </div>
 
         <div id="dialog-edit" title="Edit" style="display: none" class="form-horizontal">

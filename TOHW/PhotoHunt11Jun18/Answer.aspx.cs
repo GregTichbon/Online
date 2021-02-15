@@ -13,19 +13,19 @@ namespace TOHW.PhotoHunt11Jun18
     public partial class Answer : System.Web.UI.Page
     {
         public string groupcode;
-        public string photo;
+        public string photo_ctr;
         public string showupload;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             groupcode = Request.QueryString["group"];
-            photo = Request.QueryString["photo"];
+            photo_ctr = Request.QueryString["photo"];
         }
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
 
-            string path = Server.MapPath("\\PhotoHunt11Jun18\\images\\answers\\" + groupcode + "\\" + photo );
+            string path = Server.MapPath("\\PhotoHunt11Jun18\\images\\answers\\" + groupcode + "\\" + photo_ctr );
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -57,7 +57,7 @@ namespace TOHW.PhotoHunt11Jun18
 
             SqlCommand cmd = new SqlCommand("PH_Update_Group_Photos", con);
             cmd.Parameters.Add("@GroupCode", SqlDbType.VarChar).Value = groupcode; //1111; //
-            cmd.Parameters.Add("@Photo_CNT", SqlDbType.VarChar).Value = photo; 
+            cmd.Parameters.Add("@Photo_CTR", SqlDbType.VarChar).Value = photo_ctr; 
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Connection = con;
@@ -80,7 +80,7 @@ namespace TOHW.PhotoHunt11Jun18
                 con.Close();
                 con.Dispose();
             }
-            Lit_Response.Text = "<span id=\"span_message\">Your image has been recorded.  You may click \"Close\" or \"Upload\" another image.</span><br /><input id=\"btn_close\" type=\"button\" value=\"Close\" /> <input id=\"btn_upload\" type=\"button\" value=\"Upload\" />";
+            Lit_Response.Text = "Successfully saved."; // < span id=\"span_message\">Your image has been recorded.  You may click \"Close\" or \"Upload\" another image.</span><br /><input id=\"btn_close\" type=\"button\" value=\"Close\" /> <input id=\"btn_upload\" type=\"button\" value=\"Upload\" />";
             showupload = " style=\"display: none\"";
             //Response.Write(path + "<br />");
             //Response.Write("Close this page and refresh the calling page");

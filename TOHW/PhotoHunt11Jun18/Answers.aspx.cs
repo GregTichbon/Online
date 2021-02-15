@@ -14,12 +14,13 @@ namespace TOHW.PhotoHunt11Jun18
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string id = Request.QueryString["id"];
+
             string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
             SqlCommand cmd = new SqlCommand("PH_Show_Answers", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@groupcode", SqlDbType.BigInt).Value = groupcode;
-            //cmd.Parameters.Add("@photo", SqlDbType.BigInt).Value = photo;
+            cmd.Parameters.Add("@game_ctr", SqlDbType.VarChar).Value = id;
 
             cmd.Connection = con;
             try

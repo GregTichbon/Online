@@ -93,7 +93,7 @@ namespace UBC
             }
             html += "<br /><a href=\"people/reports/default.aspx\">REPORTS</a>";
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11"))
             {
                 html += "<br /><a href=\"people/signup/menu.aspx\">SIGNUP</a>";
             }

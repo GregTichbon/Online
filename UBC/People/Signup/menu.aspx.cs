@@ -20,7 +20,7 @@ namespace UBC.People.Signup
             }
             html = "";
 
-            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1")) //Highest Level
+            if (Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11")) //Highest Level
             {
                 html += "<br /><a href=\"communicate.aspx\">Communicate</a>";
                 html += "<br /><a href=\"list.aspx\">List</a>";

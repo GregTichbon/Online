@@ -48,6 +48,7 @@
       <HintPath>..\Generic\bin\Generic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -329,6 +330,7 @@
     <Content Include="Bpop\Test1.aspx" />
     <Content Include="Bpop\Test2.aspx" />
     <Content Include="CheckinOut\app.js" />
+    <Content Include="Dependencies\WebCam\webcam.js" />
     <Content Include="Face-Recognition\face-api.min.js" />
     <Content Include="Face-Recognition\index.html" />
     <Content Include="Face-Recognition\labeled_images\Black Widow\1.jpg" />
@@ -459,10 +461,15 @@
     <Content Include="PhotoHunt11Jun18\AnswersPhotos.aspx" />
     <Content Include="PhotoHunt11Jun18\data.asmx" />
     <Content Include="PhotoHunt11Jun18\Default.aspx" />
+    <Content Include="PhotoHunt11Jun18\Images\qm.png" />
+    <Content Include="PhotoHunt11Jun18\PhotoVersions.aspx" />
+    <Content Include="PhotoHunt11Jun18\Posts.asmx" />
     <Content Include="PhotoHunt11Jun18\ShowAll.aspx" />
     <Content Include="PhotoHunt11Jun18\TestImage1.aspx" />
     <Content Include="PhotoHunt11Jun18\UBC.jpg" />
+    <Content Include="PhotoHunt11Jun18\UploadPhotos.aspx" />
     <Content Include="PhotoHunt11Jun18\VW1.aspx" />
+    <Content Include="PhotoHunt11Jun18\WebCamTest.aspx" />
     <Content Include="Pickups\accident.bmp" />
     <Content Include="Pickups\Admin.aspx" />
     <Content Include="Pickups\data.asmx" />
@@ -1044,6 +1051,17 @@
     <Compile Include="PhotoHunt11Jun18\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PhotoHunt11Jun18\PhotoVersions.aspx.cs">
+      <DependentUpon>PhotoVersions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\PhotoVersions.aspx.designer.cs">
+      <DependentUpon>PhotoVersions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\Posts.asmx.cs">
+      <DependentUpon>Posts.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PhotoHunt11Jun18\ShowAll.aspx.cs">
       <DependentUpon>ShowAll.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1058,12 +1076,26 @@
     <Compile Include="PhotoHunt11Jun18\TestImage1.aspx.designer.cs">
       <DependentUpon>TestImage1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PhotoHunt11Jun18\UploadPhotos.aspx.cs">
+      <DependentUpon>UploadPhotos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\UploadPhotos.aspx.designer.cs">
+      <DependentUpon>UploadPhotos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PhotoHunt11Jun18\VW1.aspx.cs">
       <DependentUpon>VW1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PhotoHunt11Jun18\VW1.aspx.designer.cs">
       <DependentUpon>VW1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\WebCamTest.aspx.cs">
+      <DependentUpon>WebCamTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoHunt11Jun18\WebCamTest.aspx.designer.cs">
+      <DependentUpon>WebCamTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pickups\GetImage.ashx.cs">
       <DependentUpon>GetImage.ashx</DependentUpon>
@@ -1377,7 +1409,8 @@
     <Folder Include="Auction\Images\Items\53\original\" />
     <Folder Include="Auction\Images\Items\55\original\" />
     <Folder Include="Auction\Images\Items\6\" />
-    <Folder Include="PhotoHunt11Jun18\Images\" />
+    <Folder Include="PhotoHunt11Jun18\Images\Originals\" />
+    <Folder Include="PhotoHunt\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Database\Reports\Attendance.rpt">

@@ -60,7 +60,25 @@
         <a href="http://ubc.org.nz/people/signupList.aspx">Schools Learn to Row 2019</a>
         <br />
         <a href="https://teorahou-my.sharepoint.com/personal/gtichbon_teorahou_org_nz/Lists/Knowledge/AllItems.aspx">My Knowledgebase</a>
-
+        <hr />
+        <h3>Sites</h3>
+        <p><a href="http://badhagrid.com" target="DISite">badhagrid.com (https)</a></p>
+        <p><a href="http://campbellautorepairs.com" target="DISite">campbellautorepairs.com (https)</a></p>
+        <p><a href="http://forourkids.org.nz" target="DISite">forourkids.org.nz</a></p>
+        <p><a href="http://makaranui.nz" target="DISite">makaranui.nz</a></p>
+        <p><a href="http://rangatahisongsheet.nz" target="DISite">rangatahisongsheet.nz</a></p>
+        <p><a href="http://teorahou.online" target="DISite">teorahou.online (https)</a></p>
+        <p><a href="http://ubc.org.nz" target="DISite">ubc.org.nz (https)</a></p>
+        <p><a href="http://whanganui.teorahou.org.nz" target="DISite">whanganui.teorahou.org.nz (https)</a></p>
+        <hr />
+        <p><a href="http://changemaker.co.nz" target="DISite">changemaker.co.nz</a></p>
+        <p><a href="http://datainn.co.nz" target="DISite">datainn.co.nz</a></p>
+        <p><a href="http://incedo.org.nz" target="DISite">incedo.org.nz</a></p>
+        <p><a href="http://iti.ninja" target="DISite">iti.ninja</a></p>
+        <p><a href="http://online-payments.net" target="DISite">online-payments.net</a></p>
+        <p><a href="http://stonesoup.org.nz" target="DISite">stonesoup.org.nz</a></p>
+        <p><a href="http://wanganuisportscentre.org.nz" target="DISite">wanganuisportscentre.org.nz</a></p>
+        <p><a href="http://wrw.org.nz" target="DISite">wrw.org.nz</a></p>
     </form>
 </body>
 

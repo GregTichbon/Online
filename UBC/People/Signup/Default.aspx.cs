@@ -142,7 +142,7 @@ namespace UBC.People.Signup
 
         protected void btn_submit_Click(object sender, EventArgs e)
         {
-            Boolean sendEmail = true;
+            Boolean sendEmail = false;
             Boolean sendText = false;
 
             Functions gfunctions = new Functions();

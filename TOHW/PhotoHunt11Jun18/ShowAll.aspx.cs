@@ -13,6 +13,8 @@ namespace TOHW.PhotoHunt11Jun18
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string id = Request.QueryString["id"];
+
             int c1 = 0;
             string strConnString = "Data Source=toh-app;Initial Catalog=TeOraHou;Integrated Security=False;user id=OnlineServices;password=Whanganui497";
             SqlConnection con = new SqlConnection(strConnString);
@@ -20,6 +22,8 @@ namespace TOHW.PhotoHunt11Jun18
             SqlCommand cmd = new SqlCommand("PH_Get_All_Photos", con);
 
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@game_ctr", SqlDbType.VarChar).Value = id;
+
             cmd.Connection = con;
             try
             {
@@ -37,7 +41,7 @@ namespace TOHW.PhotoHunt11Jun18
                         c1 = 1;
                         Lit_Images.Text += "<br />Photo: " + dr["Counter"] + "<br />"; ;
                     }
-                    Lit_Images.Text += "<img id=\"I_" + dr["photo_cnt"] + "\" src=\"Images\\" + dr["GUID"] + ".jpg\" title=\"Images\\" + dr["GUID"] + ".jpg\">";
+                    Lit_Images.Text += "<img id=\"I_" + dr["photo_ctr"] + "\" src=\"Images\\" + dr["GUID"] + ".jpg\" title=\"Images\\" + dr["GUID"] + ".jpg\">";
                     //Lit_Images.Text += "<br />" + dr["GUID"];
                 }
 

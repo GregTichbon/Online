@@ -27,7 +27,7 @@ namespace UBC.People.Signup
                 {
                     Response.Redirect("../security/login.aspx");
                 }
-                if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "1"))
+                if (!Functions.accessstringtest(Session["UBC_AccessString"].ToString(), "11"))
                 {
                     Response.Redirect("~/default.aspx");
                 }
