@@ -24,8 +24,9 @@ namespace TOHW.Pickups
         //public string[] status_values = new string[7] { "Coming", "Not Coming", "No Response", "Call in", "Picked up", "Picked up from another address", "Called in - not coming" };
         //public string[] assignedto_values = new string[8] { "Jay", "Keith", "Jordi", "Greg", "Nate", "Watties", "Isa", "Judy"};
 
-        public string status_values = "Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Called in - no response,Will make their own way,Made own way";
-        public string assignedto_values = "Jay,Keith,Jordi,Greg,Chris,Zeana,Jessie,Chelsea,Nate,Watties,Judy,Charlie Boy,Keegan,Rebecca,Mahanga,Koralee,Aimee,Whakapakari,Driver 1,Driver 2,Driver 3";
+        //If changing status_values check how they are used in the aspx as well
+        public string status_values = "Coming,Not Coming,No Response,Call in,Picked up,Picked up from another address,Called in - not coming,Called in - not home,Called in - no response,Will make their own way,Made own way,Don't call in,Missed";
+        public string assignedto_values = "Jay,Keith,Jordi,Greg,Chris,Zeana,Miriama,Jessie,Chelsea,Nate,Watties,Judy,Charlie Boy,Keegan,Rebecca,Mahanga,Koralee,Aimee,Whakapakari,Driver 1,Driver 2,Driver 3";
         public string missingicons = "";
 
         public string formattedDate;

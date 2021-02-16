@@ -476,6 +476,8 @@
     <Content Include="Pickups\GoogleMaps1.aspx" />
     <Content Include="Pickups\GoogleMaps2.aspx" />
     <Content Include="Pickups\Icons\Charlie Boy.png" />
+    <Content Include="Pickups\Icons\Chelsea.png" />
+    <Content Include="Pickups\Icons\Chris.png" />
     <Content Include="Pickups\Icons\Greg.png" />
     <Content Include="Pickups\Icons\Jay.png" />
     <Content Include="Pickups\Icons\Jordi.png" />
@@ -483,6 +485,8 @@
     <Content Include="Pickups\Icons\Keegan.png" />
     <Content Include="Pickups\Icons\Keith.png" />
     <Content Include="Pickups\Icons\Koralee.png" />
+    <Content Include="Pickups\Icons\Miriama.png" />
+    <Content Include="Pickups\Icons\Rebecca.png" />
     <Content Include="Pickups\Icons\TOH.png" />
     <Content Include="Pickups\Icons\Unknown.png" />
     <Content Include="Pickups\Icons\Whakapakari.png" />
@@ -885,6 +889,7 @@
     <Content Include="AFace1\models\face_recognition_model-weights_manifest.json" />
     <Content Include="AFace1\models\tiny_face_detector_model-shard1" />
     <Content Include="AFace1\models\tiny_face_detector_model-weights_manifest.json" />
+    <Content Include="Pickups\Icons\Icons.cdr" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\Grid\css\dialog.css" />
     <Content Include="Scripts\Grid\css\dialog.min.css" />

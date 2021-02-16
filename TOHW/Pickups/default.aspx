@@ -569,7 +569,7 @@
                 } else if ($('#dd_status').val() == "Unknown") {
                     todo = "||No Response|Call in|";
                 } else if ($('#dd_status').val() == "Noted") {
-                    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Called in - no response|Will make their own way|Made own way|";
+                    todo = "|Coming|Not Coming|No Response|Call in|Picked up|Picked up from another address|Called in - not coming|Called in - not home|Called in - no response|Will make their own way|Made own way|Missed|Don't call in";
                 } else if ($('#dd_status').val() == "Pickups") {
                     todo = "|Coming|Call in|";
                 } else {
