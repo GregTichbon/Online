@@ -8,11 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <a href="http://private.incedo.org.nz">Incedo</a>
-        <br />
-        <a href="http://private.incedo.org.nz/prayer/send_dailytext.asp" onclick="return confirm('Are you sure you want to do this?');">Send Incedo Daily Prayer texts</a>
-        <br />
-        <br />
+        
         <a href="SMS/Send/Form.aspx">Send text from form</a>
                 <br />
         <br />
@@ -62,7 +58,7 @@
         <a href="https://teorahou-my.sharepoint.com/personal/gtichbon_teorahou_org_nz/Lists/Knowledge/AllItems.aspx">My Knowledgebase</a>
         <hr />
         <h3>Sites</h3>
-        <p><a href="http://badhagrid.com" target="DISite">badhagrid.com (https)</a></p>
+        <p><a href="http://badhagrid.com" target="DISite">badhagrid.com</a></p>
         <p><a href="http://campbellautorepairs.com" target="DISite">campbellautorepairs.com (https)</a></p>
         <p><a href="http://forourkids.org.nz" target="DISite">forourkids.org.nz</a></p>
         <p><a href="http://makaranui.nz" target="DISite">makaranui.nz</a></p>

@@ -1615,7 +1615,7 @@
                         <label class="control-label col-sm-4" for="div_guid">GUID</label>
                         <div class="col-sm-8">
                             <div id="div_guid"><%=hf_guid%><br />
-                                <a href="http://ubc.org.nz/go/register?id=<%=hf_guid%>">Registration link</a></div>
+                                <a href="https://ubc.org.nz/go/register?id=<%=hf_guid%>">Registration link</a></div>
                         </div>
 
                     </div>

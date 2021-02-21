@@ -23,7 +23,7 @@
         <table style="width:100%">
             <tr>
                 <td style="width:350px">
-                    <img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
+                    <img src="https://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width:100%" /></td>
                 <td style="text-align:center">
                     <h1>Schools Learn to Row<br />Friday 23 - Sunday 25 August 2019
                     </h1>
@@ -40,7 +40,7 @@
                 <br />
                 Thanks for your registration, we look forward to seeing you.<br />
                 <br />
-                Get more information from the <a href="http://ubc.org.nz/people/SchoolLearntoRowAug2019.pdf" target="_blank">brochure</a>
+                Get more information from the <a href="https://ubc.org.nz/people/SchoolLearntoRowAug2019.pdf" target="_blank">brochure</a>
                 <br />
                 <br />
                 You can contact us on 0800 002 541 if you have any questions<br />

@@ -92,7 +92,7 @@
                     ||tempphrase||
          <br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in <a href="http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf">http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
+                    ||folder|| as in <a href="https://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf">https://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />
                     Email messages will not be sent where there is no email subject<br />
@@ -126,7 +126,7 @@
                     ||tempphrase||
          <br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in <a href="http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf">http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
+                    ||folder|| as in <a href="https://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf">https://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf</a><br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />
                     Email messages will not be sent where there is no email subject<br />

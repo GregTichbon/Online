@@ -15,7 +15,7 @@ namespace UBC
         public string url;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //http://ubc.org.nz/main.aspx?404;http://ubc.org.nz:80/people/reports/loginregister1.pdf
+            //https://ubc.org.nz/main.aspx?404;https://ubc.org.nz:80/people/reports/loginregister1.pdf
 
             //url = Request.QueryString["aspxerrorpath"].ToString(); 
             url = Request.Url.ToString(); //.Substring(54);

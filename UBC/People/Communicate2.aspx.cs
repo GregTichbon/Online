@@ -76,7 +76,7 @@ namespace UBC.People
                         string relationships = dr["relationships"].ToString();
 
 
-                        string person = "<a href=\"http://ubc.org.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
+                        string person = "<a href=\"https://ubc.org.nz/people/maint.aspx?id=" + person_guid + "\" target=\"link\">" + name + "</a>";
                         string image = "<img src=\"Images/" + id + ".jpg\" style=\"height: 50px\" />";
 
                         string sendemail = "";
@@ -267,7 +267,7 @@ namespace UBC.People
                             string textmessage = "";
                             string facebookmessage = "";
 
-                            string link = "<a href=\"http://ubc.org.nz/person/maint.aspx?id=" + person_guid + "\" target=\"link\">Link</a>";
+                            string link = "<a href=\"https://ubc.org.nz/person/maint.aspx?id=" + person_guid + "\" target=\"link\">Link</a>";
 
                             if (Request.Form["cb_email_" + id] + "" != "")
                             {

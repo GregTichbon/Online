@@ -429,7 +429,7 @@
                     ||username||<br />
                     ||tempphrase||<br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+                    ||folder|| as in https://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf<br />
                     ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />
@@ -460,7 +460,7 @@
                     ||username||<br />
                     ||tempphrase||<br />
                     ||attendance|| - requires Event ID<br />
-                    ||folder|| as in http://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf<br />
+                    ||folder|| as in https://ubc.org.nz/people/documents/||folder||/update5Dec2018.pdf<br />
                     ||redirect|| as in ||redirect||https://www.youtube.com/watch?v=sR7s-qlMfpA (||folder|| will be automatically included)<br />
                     ||personevent|| returns p=person_guid&amp;e=event_guid - requires Event ID<br />
                     <br />

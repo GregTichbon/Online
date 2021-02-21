@@ -399,8 +399,8 @@ namespace UBC.People.Signup
                 string messageresponse = gfunctions.SendRemoteMessage("0272495088", "'Interested in Rowing' registration: " + tb_firstname + " " + tb_lastname + " " + dd_school, "'Interested in Rowing' registration");
                 if (tb_mobilephone != "")
                 {
-                    //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
-                    string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
+                    //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"https://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
+                    string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: https://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
                     //message = HttpUtility.UrlEncode(message);
                     messageresponse = gfunctions.SendRemoteMessage(tb_mobilephone, message, "Interested in ");
                 }
@@ -422,7 +422,7 @@ namespace UBC.People.Signup
                     string[] attachments = new string[0];
                     Dictionary<string, string> emailoptions = new Dictionary<string, string>();
                     string emaildocument = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering your interest in rowing.</p>"; 
-                    //<p>Information can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
+                    //<p>Information can be found at: <a href=\"https://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
                     emaildocument = "<html><head></head><body>" + emaildocument + "</body></html>";
 
                     gfunctions.sendemailV5(host, port, enableSsl, emailfrom, emailfromname, password, emailSubject, emaildocument, emailRecipients, emailBCC, "", attachments, emailoptions);

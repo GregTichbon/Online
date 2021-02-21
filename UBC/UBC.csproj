@@ -541,6 +541,7 @@
     <Content Include="EmailTemplate\Full - Copy.html" />
     <Content Include="EmailTemplate\Full.html" />
     <Content Include="EmailTemplate\Standard.html" />
+    <Content Include="FacilityEnquiry.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -969,6 +970,13 @@
       <DependentUpon>Greg2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dependencies\functions.cs" />
+    <Compile Include="FacilityEnquiry.aspx.cs">
+      <DependentUpon>FacilityEnquiry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FacilityEnquiry.aspx.designer.cs">
+      <DependentUpon>FacilityEnquiry.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Go\Doc1\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

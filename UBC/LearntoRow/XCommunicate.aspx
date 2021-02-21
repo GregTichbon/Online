@@ -134,13 +134,13 @@
         Email Body (HTML):<br />
         <textarea class="tinymce" id="tb_htmlbody" name="tb_htmlbody" rows="10" style="width:100%">&lt;p&gt;Hi ||firstname||&lt;/p&gt;
 &lt;p&gt;
-&lt;/p&gt;<p>http://ubc.org.nz/learntorow?id=||guid|| </p></textarea><br />
+&lt;/p&gt;<p>https://ubc.org.nz/learntorow?id=||guid|| </p></textarea><br />
         &nbsp;<br />
         <br />
         Mobile
                     Text Body:<br />
         &nbsp;<textarea id="tb_txt" name="tb_txt" rows="5" style="width:100%">Hi ||firstname||
-            http://ubc.org.nz/learntorow?id=||guid||
+            https://ubc.org.nz/learntorow?id=||guid||
               </textarea>
         <br />
         <br />

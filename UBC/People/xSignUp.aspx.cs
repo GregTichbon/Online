@@ -369,8 +369,8 @@ namespace UBC.People
                 string messageresponse = gfunctions.SendRemoteMessage("0272495088", "Learn to Row registration: " + tb_firstname + " " + tb_lastname + " " + dd_school, "School Learn to Row registration");
                 if (tb_mobilephone != "")
                 {
-                    //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
-                    string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
+                    //string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: <a href=\"https://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a>";
+                    string message = "Hi " + tb_firstname + "\r\nThanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.\r\nInformation can be found at: https://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf";
                     //message = HttpUtility.UrlEncode(message);
                     messageresponse = gfunctions.SendRemoteMessage(tb_mobilephone, message, "School Learn to Row registration");
                 }
@@ -385,7 +385,7 @@ namespace UBC.People
                     string emailfromname = "Union Boat Club";
                     string password = "39%3Zxon";
 
-                    string emailhtml = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.</p><p>Information can be found at: <a href=\"http://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
+                    string emailhtml = "<p>Hi " + tb_firstname + "</p><p>Thanks for registering for the Union Boat Club Schools Learn to Row weekend on Friday 23 - Sunday 25 August.</p><p>Information can be found at: <a href=\"https://ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf\">ubc.org.nz/learntorow/SchoolLearntoRowAug2019.pdf</a></p><p>You can contact us on 0800 002 541 if you have any questions.</p>"; ;
 
                     emailhtml = "<html><head></head><body>" + emailhtml + "</body></html>";
                     gfunctions.sendemailV3(host, emailfrom, emailfromname, password, "School Learn to Row registration", emailhtml, tb_emailaddress, emailBCC, "");

@@ -314,7 +314,7 @@
         <table style="width: 100%">
             <tr>
                 <td style="width: 350px">
-                    <img src="http://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
+                    <img src="https://ubc.org.nz/dependencies/images/Logo-Page-Head.png" style="width: 100%" /></td>
                 <td style="text-align: center">
                     <h1>I'm interested in rowing!
                     </h1>We require parent/caregiver information for rowers aged under 18.<br />You will be prompted for this.

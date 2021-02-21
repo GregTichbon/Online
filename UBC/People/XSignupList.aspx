@@ -68,7 +68,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <a href="http://ubc.org.nz/people/signup.aspx">Add new person</a><br />
+        <a href="https://ubc.org.nz/people/signup.aspx">Add new person</a><br />
         <br />
         <table>
             <%= html %>
